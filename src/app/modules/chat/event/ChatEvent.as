@@ -14,5 +14,39 @@ package app.modules.chat.event
 		{
 			super(type, data, bubbles, cancelable);
 		}
+		
+		/**
+		 * 显示聊天窗口
+		 */
+		public static const SHOW_CHAT:String = "show_chat";
+		/**
+		 * 隐藏聊天窗口
+		 */
+		public static const HIDE_CHAT:String = "hide_chat";
+		/**
+		 * 发送消息到聊天窗口
+		 */
+		public static const SEND_MSG:String = "send_msg";
+		/**
+		 * 将消息发到服务器
+		 */
+		public static const PUSH_MSG:String = "push_msg";
+		/**
+		 * 聊天窗口更新
+		 */
+		public static const UPDATE_MSG:String = "update_msg";
+		/**
+		 * 更改频道
+		 */
+		public static const CHANGE_CHANNEL:String = "change_channel";
+		/**
+		 * 输入表情
+		 */
+		public static const INPUT_EMOTION:String = "input_emotion";
+		/**
+		 * 锁定聊天窗口信息
+		 */
+		public static const LOCK_CHAT:String = "lock_chat";
+		
 	}
 }

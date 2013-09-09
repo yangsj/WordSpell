@@ -4,7 +4,6 @@ package app.modules.panel.test
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
-	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
 	import flash.text.TextFormat;
 	
@@ -46,26 +45,11 @@ package app.modules.panel.test
 			super.onceInit();
 			
 			var funcNames:Array = [
-				 "滚动条测试"
-				,"富文本测试"
-				,"ComboBox"
-				,"Alert"
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
-				,""
+				 "滚动条测试" ,"富文本测试" ,"ComboBox" ,"Alert"
+				,"" ,"" ,"" ,""
+				,"" ,"" ,"" ,""
+				,"" ,"" ,"" ,""
+				,"" ,"" ,"" ,""
 				];
 			
 			container = new Sprite();
