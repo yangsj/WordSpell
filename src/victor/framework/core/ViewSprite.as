@@ -3,11 +3,12 @@ package victor.framework.core
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
-
+	
 	import app.managers.LoaderManager;
-
+	
 	import victor.framework.components.Reflection;
 	import victor.framework.interfaces.IView;
+	import victor.framework.utils.DisplayUtil;
 
 	/**
 	 * ……
@@ -73,8 +74,11 @@ package victor.framework.core
 
 		public function dispose():void
 		{
+			DisplayUtil.removedFromParent( _skin );
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			removeEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
+			_skin = null;
+			_data = null;
 		}
 
 		public function refresh():void

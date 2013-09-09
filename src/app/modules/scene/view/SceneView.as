@@ -1,7 +1,6 @@
 package app.modules.scene.view
 {
 	import flash.events.KeyboardEvent;
-	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
 	
 	import app.modules.scene.event.SceneEvent;
@@ -33,5 +32,11 @@ package app.modules.scene.view
 				dispatchEvent( new SceneEvent( SceneEvent.OPEN_TEST ));
 			}
 		}
+		
+		override protected function get skinName():String
+		{
+			return "ui_Skin_MainBackground";
+		}
+		
 	}
 }

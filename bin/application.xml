@@ -11,8 +11,79 @@
 	<item name="ui_login" url="assets/ui_login.swf" version="1" first="1" />
 	<item name="ui_register" url="assets/ui_register.swf" version="1" first="1" />
 	
+	<item name="ui_main" url="assets/ui_main.swf" version="1" first="2" />
+	<item name="ui_chat" url="assets/ui_chat.swf" version="1" first="2" />
+	<item name="ui_comp" url="assets/ui_component.swf" version="1" first="2" />
 	
-	<item name="ui_component" url="assets/ui_component.swf" version="1" first="2" />
+	<item name="world_map1" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map2" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map3" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map4" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map5" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map6" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map7" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map8" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map9" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map10" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map11" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map12" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map13" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map14" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map15" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map16" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map17" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map18" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map19" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map20" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map21" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map22" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map23" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map24" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map25" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map26" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map27" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map28" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map29" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map30" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map31" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map32" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map33" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map34" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map35" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map36" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map37" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map38" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map39" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map40" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map41" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map42" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map43" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map44" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map45" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map46" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map47" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map48" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map49" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map50" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map51" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map52" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map53" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map54" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map55" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map56" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map57" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map58" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map59" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map60" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map61" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map62" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map63" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map64" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map65" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map66" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map67" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map68" url="assets/test/world_map.swf" version="1" first="2" />
+	<item name="world_map69" url="assets/test/world_map.swf" version="1" first="2" />
 	
 	
 	<item name="testPanel" url="assets/panel/testPanel.swf" version="1" first="0" />

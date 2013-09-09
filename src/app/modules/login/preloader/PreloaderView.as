@@ -6,6 +6,8 @@ package app.modules.login.preloader
 	import app.utils.appStage;
 	
 	import victor.framework.core.BaseScene;
+	import victor.framework.core.ViewStruct;
+	import victor.framework.utils.DisplayUtil;
 	import victor.framework.utils.TextFiledUtil;
 	
 	
@@ -33,9 +35,21 @@ package app.modules.login.preloader
 			this.graphics.endFill();
 		}
 		
+		override public function dispose():void
+		{
+			super.dispose();
+			
+			if ( rollWord )
+			{
+				DisplayUtil.removedFromParent( rollWord );
+				rollWord.dispose();
+				rollWord = null;
+			}
+		}
+		
 		override public function show():void
 		{
-			super.show();
+			ViewStruct.addChild( this, ViewStruct.LOADING );
 			
 			if ( this.data == null )
 			{

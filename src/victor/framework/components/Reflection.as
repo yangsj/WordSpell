@@ -17,10 +17,9 @@ package victor.framework.components
 		public static function reflection( target:Object, skin:DisplayObject ):void
 		{
 			var skinContainer:DisplayObjectContainer = skin as DisplayObjectContainer;
-			if ( skinContainer == null )
-			{
+			if ( target == null || skinContainer == null )
 				return;
-			}
+			
 			var xml:XML = describeType( target );
 			var variables:XMLList = xml.child( "variable" );
 			var name:String;
@@ -31,10 +30,7 @@ package victor.framework.components
 				try
 				{
 					tmp = skinContainer.getChildByName( name );
-					if ( tmp )
-					{
-						target[ name ] = tmp;
-					}
+					if ( tmp ) target[ name ] = tmp;
 				}
 				catch ( e:Error )
 				{
