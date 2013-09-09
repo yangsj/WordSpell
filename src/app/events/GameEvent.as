@@ -15,5 +15,25 @@ package app.events
 			super(type, data, bubbles, cancelable);
 		}
 		
+		/**
+		 * 资源application管理数据初始化完成
+		 */
+		public static const DATA_INIT_COMPLETE:String = "data_init_complete";
+		
+		/**
+		 * 第一阶段资源加载完成
+		 */
+		public static const FIRST_LOAD_COMPLETE:String = "first_load_complete";
+		
+		/**
+		 * 主资源加载完成
+		 */
+		public static const MAIN_LOAD_COMPLETE:String = "main_load_complete";
+		
+		/**
+		 * 登陆成功的
+		 */
+		public static const LOGIN_SUCCESSED:String = "login_successed";
+		
 	}
 }

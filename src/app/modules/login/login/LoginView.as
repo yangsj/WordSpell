@@ -10,7 +10,6 @@ package app.modules.login.login
 	import app.modules.login.login.event.LoginEvent;
 	import app.modules.login.login.vo.LoginVo;
 	
-	import victor.framework.components.Reflection;
 	import victor.framework.core.BaseScene;
 	
 	
@@ -39,11 +38,6 @@ package app.modules.login.login
 		override protected function onceInit():void
 		{
 			super.onceInit();
-			
-			_skin = new ui_SkinLoginUI();
-			addChild( _skin );
-			
-			Reflection.reflection( this, _skin );
 			
 			btnLogin.addEventListener(MouseEvent.CLICK, btnLoginHandler );
 			btnRegister.addEventListener(MouseEvent.CLICK, btnRegisterHandler );
@@ -113,6 +107,11 @@ package app.modules.login.login
 			_loginVo.accountNumber = txtAccountNumber.text;
 			_loginVo.passwrod = txtPassword.text;
 			return _loginVo;
+		}
+		
+		override protected function get skinName():String
+		{
+			return "ui_SkinLoginUI";
 		}
 		
 	}

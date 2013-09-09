@@ -17,7 +17,7 @@ package app.core.components.controls.combo
 	 */
 	public class ComboItem extends Sprite implements IDisposable
 	{
-		private var skin:ui_SkinComboBox_Item;
+		private var skin:ui_Skin_ComboBox_Item;
 		
 		private var upSkin:Sprite;
 		private var overSkin:Sprite;
@@ -31,7 +31,7 @@ package app.core.components.controls.combo
 		public function ComboItem( itemVo:ComboItemVo, skinWidth:Number = 150 )
 		{
 			
-			skin = new ui_SkinComboBox_Item();
+			skin = new ui_Skin_ComboBox_Item();
 			addChild( skin );
 			
 			upSkin = skin.upSkin;

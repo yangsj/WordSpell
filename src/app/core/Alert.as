@@ -1,6 +1,5 @@
 package app.core
 {
-	import flash.display.DisplayObjectContainer;
 	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -120,7 +119,7 @@ package app.core
 		{
 			_container ||= ViewStruct.getContainer( ViewStruct.ALERT ) as Sprite;
 			
-			_skin = new ui_AlertSkin();
+			_skin = LoaderManager.getObj( "ui_Skin_Alert" ) as Sprite;
 			addChild( _skin );
 			
 			Reflection.reflection( this, _skin );

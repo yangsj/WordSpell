@@ -1,5 +1,6 @@
 package app.modules.login.preloader
 {
+	import flash.display.Sprite;
 	import flash.text.TextField;
 	
 	import app.utils.appStage;
@@ -15,31 +16,51 @@ package app.modules.login.preloader
 	 */
 	public class PreloaderView extends BaseScene
 	{
-		public var txtValue:TextField;
+		public var mcProgressBar:Sprite;
+		public var txtProgressValue:TextField;
+		
+		private var rollWord:PreloaderRollWordLine;
 		
 		public function PreloaderView()
 		{
 			super();
 			
+			// 引用资源
+			ui_Skin_Preloader;
+			
 			this.graphics.beginFill( 0 );
 			this.graphics.drawRect( 0, 0, appStage.stageWidth, appStage.stageHeight);
 			this.graphics.endFill();
+		}
+		
+		override public function show():void
+		{
+			super.show();
 			
-			var rollWord:PreloaderRollWordLine = new PreloaderRollWordLine();
-			rollWord.x = ( width - rollWord.width ) >> 1;
-			rollWord.y = ( height - 50 );
-			addChild( rollWord );
+			if ( this.data == null )
+			{
+				if ( rollWord == null )
+				{
+					rollWord = new PreloaderRollWordLine();
+					rollWord.x = ( width - rollWord.width ) >> 1;
+					rollWord.y = ( height - 50 );
+					addChild( rollWord );
+				}
+				rollWord.initialize();
+			}
 		}
 		
 		public function setProgressValue( value:Number ):void
 		{
-			txtValue ||= TextFiledUtil.create( "", 45, 0xffffff );
-			txtValue.text = ( value * 100 ).toFixed( 2 ) + "%";
-			txtValue.width = txtValue.textWidth + 15;
-			txtValue.height = txtValue.textHeight + 5;
-			txtValue.x = ( width - txtValue.textWidth ) >> 1;
-			txtValue.y = ( height - txtValue.textHeight ) >> 1;
-			addChild( txtValue );
+			txtProgressValue ||= TextFiledUtil.create( "", 45, 0xffffff );
+			txtProgressValue.text = ( value * 100 ).toFixed( 2 ) + "%";
+			mcProgressBar.scaleX = Math.min( value, 1 );
+			addChild( txtProgressValue );
+		}
+		
+		override protected function get skinName():String
+		{
+			return "ui_Skin_Preloader";
 		}
 		
 	}

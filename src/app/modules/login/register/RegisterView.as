@@ -8,9 +8,7 @@ package app.modules.login.register
 	import app.core.Tips;
 	import app.modules.login.register.event.RegisterEvent;
 	import app.modules.login.register.vo.RegisterVo;
-	import app.utils.appStage;
 	
-	import victor.framework.components.Reflection;
 	import victor.framework.core.BaseScene;
 	
 	
@@ -47,10 +45,6 @@ package app.modules.login.register
 		override protected function onceInit():void
 		{
 			super.onceInit();
-			
-			_skin = new ui_SkinRegisterUI();
-			addChild( _skin );
-			Reflection.reflection( this, _skin );
 			
 			btnLogin.addEventListener(MouseEvent.CLICK, btnLoginHandler );
 			btnRegister.addEventListener(MouseEvent.CLICK, btnRegisterHandler );
@@ -149,6 +143,11 @@ package app.modules.login.register
 			_registerVo.QQ = txtQQ.text;
 			
 			return _registerVo;
+		}
+		
+		override protected function get skinName():String
+		{
+			return "ui_SkinRegisterUI";
 		}
 		
 	}

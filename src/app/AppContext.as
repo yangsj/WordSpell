@@ -2,12 +2,17 @@ package app
 {
 	import flash.display.DisplayObjectContainer;
 	
+	import app.events.GameEvent;
 	import app.events.LoadEvent;
+	import app.modules.login.command.FirstLoadCommand;
+	import app.modules.login.command.MainLoadCommand;
 	import app.startup.EnterGameCommand;
 	import app.startup.FlashVarsCommand;
 	import app.startup.InitCommand;
+	import app.startup.InitDataCommand;
 	import app.startup.InitServiceCommand;
 	import app.startup.LoadCommand;
+	import app.startup.ShowLoginCommand;
 	
 	import org.robotlegs.base.ContextEvent;
 	
@@ -52,11 +57,20 @@ package app
 			// 初始化command
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitCommand, ContextEvent, true);
 			
-			// 加载
-			commandMap.mapEvent(LoadEvent.LOAD_START, LoadCommand, LoadEvent, true);
+			// 初始化application资源数据
+			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitDataCommand, ContextEvent, true);
+			
+			// 开始第一阶段资源加载
+			commandMap.mapEvent(GameEvent.DATA_INIT_COMPLETE, FirstLoadCommand, GameEvent, true );
+			
+			// 进入登陆/注册界面
+			commandMap.mapEvent(GameEvent.FIRST_LOAD_COMPLETE, ShowLoginCommand, GameEvent, true );
+			
+			// 登陆成功后加载进入游戏主资源
+			commandMap.mapEvent(GameEvent.LOGIN_SUCCESSED, MainLoadCommand, GameEvent, true );
 			
 			// 进入游戏场景
-			commandMap.mapEvent(LoadEvent.LOAD_COMPLETE, EnterGameCommand, LoadEvent, true);
+			commandMap.mapEvent(GameEvent.MAIN_LOAD_COMPLETE, EnterGameCommand, GameEvent, true);
 			
 		}
 		

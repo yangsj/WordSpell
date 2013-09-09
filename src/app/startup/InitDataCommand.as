@@ -5,24 +5,24 @@ package app.startup
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
-	import app.events.LoadEvent;
+	import app.Global;
+	import app.events.GameEvent;
 	import app.events.ViewEvent;
 	import app.managers.LoaderManager;
 	import app.modules.ViewName;
+	import app.utils.log;
 	
 	import victor.framework.core.BaseCommand;
-	import app.utils.log;
-	import app.Global;
 	
 	
 	/**
 	 * ……
 	 * @author 	yangsj 
-	 * 			2013-8-28
+	 * 			2013-9-9
 	 */
-	public class LoadCommand extends BaseCommand
+	public class InitDataCommand extends BaseCommand
 	{
-		public function LoadCommand()
+		public function InitDataCommand()
 		{
 			super();
 		}
@@ -34,8 +34,6 @@ package app.startup
 			loader.addEventListener(Event.COMPLETE, completeHandler );
 			loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler );
 			loader.load( new URLRequest( url ));
-			
-			log ( url );
 		}
 		
 		protected function completeHandler(event:Event):void
@@ -43,12 +41,10 @@ package app.startup
 			var loader:URLLoader = event.target as URLLoader;
 			removeEvent( loader );
 			
-			
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Preloader ));
-			
 			LoaderManager.instance.setApplicationConfig( new XML(loader.data));
 			
-			LoaderManager.instance.startMainLoad( loaderCompleteCallBack, loaderProgressCallBack );
+			// 资源初始化完成
+			dispatch( new GameEvent( GameEvent.DATA_INIT_COMPLETE ));
 		}
 		
 		protected function errorHandler(event:IOErrorEvent):void
@@ -64,18 +60,6 @@ package app.startup
 				loader.removeEventListener(Event.COMPLETE, completeHandler );
 				loader.removeEventListener(IOErrorEvent.IO_ERROR, errorHandler );
 			}
-		}
-		
-		private function loaderCompleteCallBack():void
-		{
-			log( "登陆资源加载完毕！！！" );
-			dispatch( new LoadEvent( LoadEvent.LOAD_COMPLETE ));
-		}
-		
-		private function loaderProgressCallBack( perent:Number ):void
-		{
-			log ( "loaderProgressCallBack: " + perent );
-			dispatch( new LoadEvent( LoadEvent.LOAD_PROGRESS, perent ));
 		}
 		
 	}

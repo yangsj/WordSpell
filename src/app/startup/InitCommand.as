@@ -63,10 +63,6 @@ package app.startup
 					commandMap.mapEvent( INIT_COMMAND, initCommandClass, Event, true );
 			}
 			dispatch( new Event( INIT_COMMAND ));
-			
-			// 打开登陆界面
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Login ));
-			
 		}
 		
 	}

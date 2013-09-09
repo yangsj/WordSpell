@@ -1,5 +1,6 @@
 package app.modules.login.service
 {
+	import app.events.GameEvent;
 	import app.events.LoadEvent;
 	import app.modules.login.login.vo.LoginVo;
 	import app.modules.login.register.vo.RegisterVo;
@@ -22,14 +23,19 @@ package app.modules.login.service
 		
 		public function login( loginVo:LoginVo, callBack:Function = null ):void
 		{
-			dispatch( new LoadEvent( LoadEvent.LOAD_START ));
+			loginSuccessed();
 			safetyCall( callBack );
 		}
 		
 		public function register( registerVo:RegisterVo, callBack:Function = null ):void
 		{
-			dispatch( new LoadEvent( LoadEvent.LOAD_START ));
+			loginSuccessed();
 			safetyCall( callBack );
+		}
+		
+		private function loginSuccessed():void
+		{
+			dispatch( new GameEvent( GameEvent.LOGIN_SUCCESSED ));
 		}
 		
 	}

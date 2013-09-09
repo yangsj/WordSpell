@@ -10,12 +10,12 @@ package app.managers
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
+	import app.Global;
 	import app.utils.error;
 	import app.utils.log;
 	import app.utils.safetyCall;
 	
 	import victor.framework.utils.ArrayUtil;
-	import app.Global;
 
 
 	/**
@@ -31,6 +31,16 @@ package app.managers
 		{
 			return _instance ||= new LoaderManager;
 		}
+		
+		public static function getObj( linkName:String, domainName:String = "" ):Object
+		{
+			return instance.getObj( linkName, domainName );
+		}
+		
+		public static function getClass( linkName:String, domainName:String = "" ):Class
+		{
+			return instance.getClass( linkName, domainName );
+		}
 
 		///////////////////////////////////////////////////////
 
@@ -39,6 +49,7 @@ package app.managers
 		private static const dictContext:Dictionary = new Dictionary();
 		private static const dictLoaderContext:Dictionary = new Dictionary();
 		private static const loginLoad:Array = [];
+		private static const firstLoad:Array = [];
 
 		private static const context:LoaderContext = new LoaderContext( false, ApplicationDomain.currentDomain );
 
@@ -56,17 +67,25 @@ package app.managers
 				var name:String = String( xml.@name );
 				var url:String = String( xml.@url );
 				var version:String = String( xml.@version );
+				var first:int = int( xml.@first );
 				var path:String = Global.serverURL + url + "?t=" + version;
 				dictResList[ name ] = path;
-				if ( int( xml.@first ) == 1 )
-				{
+				
+				if ( first == 1 )
+					firstLoad.push( name );
+				else if ( first == 2 )
 					loginLoad.push( name );
-				}
+				
 				log( name + ":" + path );
 			}
 		}
+		
+		public function startFirstLoad( completeCallBack:Function = null, progressCallBack:Function = null, domainName:String = ""  ):void
+		{
+			load( firstLoad, completeCallBack, progressCallBack, domainName );
+		}
 
-		public function startLoadLogin( completeCallBack:Function = null, progressCallBack:Function = null, domainName:String = ""  ):void
+		public function startMainLoad( completeCallBack:Function = null, progressCallBack:Function = null, domainName:String = ""  ):void
 		{
 			load( loginLoad, completeCallBack, progressCallBack, domainName );
 		}
@@ -131,6 +150,7 @@ package app.managers
 
 			function errorHandler( event:IOErrorEvent ):void
 			{
+				error( event.text );
 				completeHandler( null );
 			}
 		}
