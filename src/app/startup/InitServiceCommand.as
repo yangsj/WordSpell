@@ -6,7 +6,7 @@ package app.startup
 	import victor.framework.socket.ISocketManager;
 	import victor.framework.socket.MessageSocket;
 	import victor.framework.socket.SocketEvent;
-	import app.Global;
+	import app.GameConfig;
 	
 	
 	/**
@@ -23,7 +23,7 @@ package app.startup
 		
 		override public function execute():void
 		{
-			var socket : MessageSocket = new  MessageSocket( Global.isDebug );
+			var socket : MessageSocket = new  MessageSocket( GameConfig.isDebug );
 			injector.mapValue(ISocketManager, socket);
 			socket.addEventListener(SocketEvent.CLOSE, onSocketClose);
 			

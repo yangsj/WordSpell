@@ -42,6 +42,7 @@ package victor.framework.core
 		{
 			if ( event.type == MouseEvent.MOUSE_DOWN )
 			{
+				parent.setChildIndex(this, parent.numChildren - 1 );
 				dragTarget.buttonMode = true;
 				startDrag( false, new Rectangle(-rectangle.x, -rectangle.y, appStage.stageWidth - dragTarget.width, appStage.stageHeight - dragTarget.height));
 				appStage.addEventListener(MouseEvent.MOUSE_UP, dragTargetMouseHandler );
@@ -107,7 +108,7 @@ package victor.framework.core
 			hideX = x;
 			hideY = y;
 			TweenMax.killTweensOf( this );
-			TweenMax.to( this, 0.3, { scaleX: 0.6, scaleY: 0.6, alpha: 0, ease: Back.easeIn, onUpdate: changePosAtHide, onComplete: ViewStruct.removePanel, onCompleteParams: [ this ]});
+			TweenMax.to( this, 0.3, { scaleX: 0.2, scaleY: 0.2, alpha: 0, ease: Back.easeIn, onUpdate: changePosAtHide, onComplete: ViewStruct.removePanel, onCompleteParams: [ this ]});
 		}
 
 ////////////// private functions //////////////////////////////////

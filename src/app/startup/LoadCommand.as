@@ -12,7 +12,7 @@ package app.startup
 	
 	import victor.framework.core.BaseCommand;
 	import app.utils.log;
-	import app.Global;
+	import app.GameConfig;
 	
 	
 	/**
@@ -29,7 +29,7 @@ package app.startup
 		
 		override public function execute():void
 		{
-			var url:String = Global.serverURL + "application.xml?t=" + new Date().time;
+			var url:String = GameConfig.deployPath + "application.xml?t=" + new Date().time;
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, completeHandler );
 			loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler );

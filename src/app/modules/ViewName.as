@@ -32,7 +32,7 @@ package app.modules
 		/**
 		 * 好友系统
 		 */
-		public static const Friend:String = "FriendView";
+		public static const Friend:String = "friendPanel";
 		
 		/**
 		 * 聊天系统
@@ -42,7 +42,12 @@ package app.modules
 		/**
 		 * 任务系统
 		 */
-		public static const Task:String = "TaskView";
+		public static const Task:String = "taskPanel";
+		
+		/**
+		 * 主界面ui
+		 */
+		public static const MainUI:String = "MainUIView";
 		
 	}
 }

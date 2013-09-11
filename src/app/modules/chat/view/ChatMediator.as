@@ -4,6 +4,11 @@ package app.modules.chat.view
 	import app.modules.chat.model.ChatModel;
 	import app.modules.chat.model.ChatVo;
 	
+	import app.modules.chat.event.ChatEvent;
+	import app.modules.chat.model.ChatModel;
+	import app.modules.chat.model.ChatVo;
+	import app.modules.chat.service.ChatService;
+	
 	import victor.framework.core.BaseMediator;
 	
 	
@@ -18,6 +23,8 @@ package app.modules.chat.view
 		public var view:ChatView;
 		[Inject]
 		public var chatModel:ChatModel;
+		[Inject]
+		public var chatService:ChatService;
 		
 		public function ChatMediator()
 		{
@@ -43,27 +50,33 @@ package app.modules.chat.view
 			addViewListener( ChatEvent.CHANGE_CHANNEL, changeChannelHandler, ChatEvent );
 			//
 			addViewListener( ChatEvent.PUSH_MSG, pushMsgHandler, ChatEvent );
+			//
+			addViewListener( ChatEvent.LOCK_CHAT, lockChatHandler, ChatEvent );
+			
+			// 选中世界频道
+			view.selectedWorld();
+		}
+		
+		private function lockChatHandler( event:ChatEvent ):void
+		{
+			chatModel.isLocked = Boolean(event.data);
 		}
 		
 		private function pushMsgHandler( event:ChatEvent ):void
 		{
-			var data:Object = event.data;
-			var chatVo:ChatVo = new ChatVo();
-			chatVo.channel = chatModel.currentChannel;
-			chatVo.emoticons = data.emoticons;
-			chatVo.msg = data.msg;
-			chatVo.playerName = "PlayerName";
-			chatVo.playerUid = "123456";
+			chatService.sendRequestMsg( event.data as ChatVo );
 		}
 		
 		private function changeChannelHandler( event:ChatEvent ):void
 		{
 			chatModel.currentChannel = int( event.data );
+			var vecList:Vector.<ChatVo> = chatModel.getCurrentChannelList();
+			view.setChannelData( vecList );
 		}
 		
 		private function updateMsgHandler( event:ChatEvent ):void
 		{
-			
+			view.addMsg( event.data as ChatVo );
 		}
 		
 		private function showViewHandler( event:ChatEvent ):void

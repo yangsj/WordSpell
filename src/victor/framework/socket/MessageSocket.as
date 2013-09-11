@@ -5,8 +5,8 @@ package victor.framework.socket {
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
-	import app.utils.log;
-	import app.Global;
+	
+	import victor.framework.log.Logger;
 	
 
 	/**
@@ -80,7 +80,6 @@ package victor.framework.socket {
 				isNotify = true;
 				list = _notifyCallbackList[api];
 			}
-			var channelStr : String = getChannel(api);
 			if (list) {
 				callback = list[0];
 				respPorc = list[1];
@@ -90,15 +89,15 @@ package victor.framework.socket {
 				msg.mergeFrom(data);
 				respObj.data = msg;
 				if (_isDebug)
-					log(channelStr, getTimer()+"|服务器返回数据[" + respObj.seq + "](" + PacketParse.printApi(api) + "):", respObj.data.toString());
+					Logger.printData(getTimer()+"|服务器返回数据[" + respObj.seq + "](" + PacketParse.printApi(api) + "):", respObj.data.toString());
 			} else {
 				if (_isDebug)
-					log(channelStr, getTimer()+"|没有数据解包[" + respObj.seq + "]:" + PacketParse.printApi(api) + "\n\t------");
+					Logger.printData( getTimer()+"|没有数据解包[" + respObj.seq + "]:" + PacketParse.printApi(api) + "\n\t------");
 			}
 			if (!isNotify) {
 				if (callback == null) {
 					if (_isDebug)
-						log("响应没有指定回调:" + PacketParse.printApi(api) + ",type:" + respObj.type);
+						Logger.printData("响应没有指定回调:" + PacketParse.printApi(api) + ",type:" + respObj.type);
 					return;
 				}
 				// 一次请求
@@ -118,22 +117,13 @@ package victor.framework.socket {
 					callback(respObj);
 				} else {
 					// throw new Error("\n\t" + "没有注册接口回调方法:" + api + "\n\t------");
-					log("没有注册接口回调方法:" + api + "\n\t------");
+					Logger.printData("没有注册接口回调方法:" + api + "\n\t------");
 				}
 				dispatch(api);
 				// removeNotAllow(api);
 			}
 			// 销毁返回对象
 			SocketResp.disposeResp(respObj);
-		}
-
-		private function getChannel(api : int) : String {
-			var channelStr : String = "";
-			if (Global.isDebug) {
-				var action : uint = PacketParse.getAction(api);
-				
-			}
-			return channelStr;
 		}
 
 		/**
@@ -200,8 +190,7 @@ package victor.framework.socket {
 		 */
 		private function netCall(req : SocketReq) : void {
 			// 序列化
-			var channelStr : String = getChannel(req.api);
-			log(channelStr, getTimer()+"|发送数据内容[" + req.seq + "](" + PacketParse.printApi(req.api) + "):", req.obj.toString());
+			Logger.printData( getTimer()+"|发送数据内容[" + req.seq + "](" + PacketParse.printApi(req.api) + "):", req.obj.toString());
 			var sendData : ByteArray = PacketParse.synthesize(req);
 			SocketReq.disposeReq(req);
 			// FYLogger.debug("发送数据",sendData.length);

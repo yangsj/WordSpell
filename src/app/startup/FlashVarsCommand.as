@@ -2,10 +2,12 @@ package app.startup
 {
 	import flash.events.MouseEvent;
 	
+	import app.GameConfig;
+	
 	import net.hires.debug.Stats;
 	
 	import victor.framework.core.BaseCommand;
-	import app.Global;
+	import victor.framework.log.Logger;
 	
 	
 	/**
@@ -24,14 +26,28 @@ package app.startup
 		{
 			var parameters:Object = contextView.stage.loaderInfo.parameters;
 			
+			// 环境部署地址
+			if ( parameters.hasOwnProperty( "deployPath" ))
+				GameConfig.deployPath = parameters.deployPath;
 			
+			// debug
+			if ( parameters.hasOwnProperty( "isDebug" ))
+				GameConfig.isDebug = parameters.isDebug == "debug";
+			
+			// 主机地址
+			if ( parameters.hasOwnProperty( "ip" ))
+				GameConfig.serverHost = parameters["ip"];
+			
+			// 主机端口号
+			if ( parameters.hasOwnProperty( "port" ))
+				GameConfig.serverPort = parameters["port"];
 			
 			setDebug();
 		}
 		
 		private function setDebug():void
 		{
-			if ( Global.isDebug )
+			if ( GameConfig.isDebug )
 			{
 				var status:Stats = new Stats();
 				contextView.addChild( status );
@@ -48,6 +64,9 @@ package app.startup
 						status.stopDrag();
 					}
 				}
+				
+				// 
+				Logger.initStage( contextView.stage );
 			}
 		}
 		

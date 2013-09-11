@@ -10,11 +10,10 @@ package app.managers
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
-	import app.Global;
-	import app.utils.error;
-	import app.utils.log;
+	import app.GameConfig;
 	import app.utils.safetyCall;
 	
+	import victor.framework.log.Logger;
 	import victor.framework.utils.ArrayUtil;
 
 
@@ -68,15 +67,13 @@ package app.managers
 				var url:String = String( xml.@url );
 				var version:String = String( xml.@version );
 				var first:int = int( xml.@first );
-				var path:String = Global.serverURL + url + "?t=" + version;
+				var path:String = GameConfig.deployPath + url + "?t=" + version;
 				dictResList[ name ] = path;
 				
 				if ( first == 1 )
 					firstLoad.push( name );
 				else if ( first == 2 )
 					loginLoad.push( name );
-				
-				log( name + ":" + path );
 			}
 		}
 		
@@ -150,7 +147,7 @@ package app.managers
 
 			function errorHandler( event:IOErrorEvent ):void
 			{
-				error( event.text );
+				Logger.error( event.text );
 				completeHandler( null );
 			}
 		}
@@ -163,7 +160,7 @@ package app.managers
 			}
 			catch ( e:Error )
 			{
-				error("LoaderManager.instance.getObj: [" + linkName + "]=" + linkName + "/[" + domainName + "]=" + domainName);
+				Logger.error("LoaderManager.instance.getObj: [" + linkName + "]=" + linkName + "/[" + domainName + "]=" + domainName);
 			}
 			return null;
 		}
@@ -182,7 +179,7 @@ package app.managers
 			}
 			catch ( e:Error )
 			{
-				error("LoaderManager.instance.getClass: [" + linkName + "]=" + linkName + "/[" + domainName + "]=" + domainName);
+				Logger.error("LoaderManager.instance.getClass: [" + linkName + "]=" + linkName + "/[" + domainName + "]=" + domainName);
 			}
 			return null;
 		}

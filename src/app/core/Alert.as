@@ -119,7 +119,7 @@ package app.core
 		{
 			_container ||= ViewStruct.getContainer( ViewStruct.ALERT ) as Sprite;
 			
-			_skin = LoaderManager.getObj( "ui_Skin_Alert" ) as Sprite;
+			_skin = new ui_Skin_Alert();
 			addChild( _skin );
 			
 			Reflection.reflection( this, _skin );

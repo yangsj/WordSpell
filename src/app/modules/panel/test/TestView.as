@@ -12,11 +12,12 @@ package app.modules.panel.test
 	import app.core.components.controls.combo.ComboData;
 	import app.core.components.controls.combo.ComboItemVo;
 	import app.managers.LoaderManager;
-	import app.utils.log;
+	import app.utils.safetyCall;
 	
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.components.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
+	import victor.framework.log.Logger;
 	import victor.framework.utils.HtmlText;
 	
 	/**
@@ -45,55 +46,43 @@ package app.modules.panel.test
 			super.onceInit();
 			
 			var funcNames:Array = [
-				 "滚动条测试" ,"富文本测试" ,"ComboBox" ,"Alert"
-				,"" ,"" ,"" ,""
-				,"" ,"" ,"" ,""
-				,"" ,"" ,"" ,""
-				,"" ,"" ,"" ,""
+				 ["滚动条测试", testScrollPanel],["富文本测试", testRichTextField] ,["ComboBox",testComboBox] ,["Alert", testAlert]
 				];
 			
 			container = new Sprite();
 			container.y = 30;
-			addChild( container );
+			_skin.addChild( container );
 			
+			var tabContainer:Sprite = new Sprite();			
 			var tabControl:TabButtonControl = new TabButtonControl( tabButtonControl );
 			for (var i:int = 0; i < funcNames.length; i++)
 			{
+				var data:Array = funcNames[ i ];
 				var mc:MovieClip = LoaderManager.instance.getObj( "test_ui_SkinTabTest", domainName ) as MovieClip;
 				mc.x = -170 + 85 * (i % 11);
 				mc.y = -30 * int(i/11);
-				mc.txtLabel.text = funcNames[ i ] + "";
-				addChild( mc );
-				tabControl.addTarget( mc );
+				mc.txtLabel.text = data[0] + "";
+				tabContainer.addChild( mc );
+				tabControl.addTarget( mc, {index:i, func:data[ 1 ]} );
 				container.addChild( new Sprite() );
 			}
 			tabControl.setTargetByIndex( 0 );
+			
+			tabContainer.x = rectangle.x + (( rectangle.width - tabContainer.width ) >> 1);
+			tabContainer.y = 30 - tabContainer.height;
+			_skin.addChild( tabContainer );
 		}
 		
-		private function tabButtonControl( target:MovieClip, tabName:* ):void
+		private function tabButtonControl( target:MovieClip, tabData:Object ):void
 		{
 			for (var i:int = 0; i < container.numChildren;i++)
 				container.getChildAt( i ).visible = false;
 			
-			var temp:Sprite = container.getChildAt( int( tabName ) ) as Sprite;
+			var temp:Sprite = container.getChildAt( int( tabData.index ) ) as Sprite;
 			temp.visible = true;
 			if ( temp.numChildren == 0 )
 			{
-				switch ( tabName )
-				{
-					case 0:
-						testScrollPanel( temp );
-						break;
-					case 1:
-						testRichTextField( temp );
-						break;
-					case 2:
-						testComboBox( temp );
-						break;
-					case 3:
-						testAlert( temp );
-						break;
-				}
+				safetyCall( tabData.func, temp );
 			}
 		}
 		
@@ -105,7 +94,7 @@ package app.modules.panel.test
 			con.addChild( itemContainer );
 			var gameScroll:GameScrollPanel = new GameScrollPanel();
 			gameScroll.setTargetShow(itemContainer, 0, 0, 440, 330);
-			
+			gameScroll.changeBarPos( -20, 0);
 			for (var i:int = 0; i < 24; i++)
 			{
 				var item:TestItem = new TestItem();
@@ -140,7 +129,7 @@ package app.modules.panel.test
 			trace( rtf.exportXML() );
 			function linkHandler(event:TextEvent):void
 			{
-				log( event.text );
+				Logger.printData( event.text );
 			}
 		}
 		
@@ -164,7 +153,7 @@ package app.modules.panel.test
 		
 		protected function testAlert( con:Sprite ):void
 		{
-			Alert.show( "希望每个单身的人都能够相信爱情，一爱再爱不要低下头，最终有情人终成眷属。", function abc( type:uint ):void{ log( type )}, "下一关" );
+			Alert.show( "希望每个单身的人都能够相信爱情，一爱再爱不要低下头，最终有情人终成眷属。", function abc( type:uint ):void{ Logger.printData( type )}, "下一关" );
 		}
 		
 		override protected function openComplete():void

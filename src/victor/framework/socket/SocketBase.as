@@ -9,7 +9,8 @@ package victor.framework.socket {
 	import flash.utils.ByteArray;
 	import flash.utils.Endian;
 	import flash.utils.getTimer;
-	import app.utils.log;
+	
+	import victor.framework.log.Logger;
 
 	/**
 	 * @author fireyang
@@ -39,7 +40,7 @@ package victor.framework.socket {
 		public function connect(host : String, port : int) : void {
 			_host = host;
 			_port = port;
-			log("开始连接服务器:", host, port);
+			Logger.error("开始连接服务器:", host, port);
 			close();
 			addListener();
 			_sock.connect(_host, _port);
@@ -64,7 +65,7 @@ package victor.framework.socket {
 				reContent();
 			} else {
 				dispatchEvent(new SocketEvent(SocketEvent.ERROR_SECURITY));
-				log("安全沙箱冲突!", "安全沙箱冲突: 不能从" + this._host + ":" + this._port + "加载数据。");
+				Logger.error("安全沙箱冲突!", "安全沙箱冲突: 不能从" + this._host + ":" + this._port + "加载数据。");
 				// Helper.backtrace("onSecurityErrorHandler");
 				// this._view.alert.socketClosed("安全沙箱冲突!", "安全沙箱冲突: 不能从" + this._host + ":" + this._port + "加载数据。");
 				// this._view.resetHost();
@@ -113,10 +114,10 @@ package victor.framework.socket {
 		 */
         protected function onCloseHandler(event : Event) : void {
 			// Helper.backtrace("onCloseHandler");
-			log(getTimer()+"|连接关闭！", "连接地址：" + this._host + ":" + this._port);
+			Logger.error(getTimer()+"|连接关闭！", "连接地址：" + this._host + ":" + this._port);
             if(_sock.bytesAvailable>0){
                 var str:String = _sock.readUTFBytes(_sock.bytesAvailable);
-			    log("连接关闭打印:", str);
+				Logger.error("连接关闭打印:", str);
             }
 			// this._view.tip2.showAlert(DataBaseLang.connected);
 			// this._view.resetHost();
@@ -128,7 +129,7 @@ package victor.framework.socket {
 		 */
 		private function onConnectHandler(event : Event) : void {
 			_connectSucceed = true;
-			log("连接成功!", "连接地址：" + this._host + ":" + this._port);
+			Logger.debug("连接成功!", "连接地址：" + this._host + ":" + this._port);
 			dispatchEvent(new SocketEvent(SocketEvent.CONNECTED));
 		}
 
@@ -139,7 +140,7 @@ package victor.framework.socket {
 			if (_reTry == false) {
 				reContent();
 			} else {
-				log("连接失败!", "不能连接" + this._host + ":" + this._port);
+				Logger.error("连接失败!", "不能连接" + this._host + ":" + this._port);
 				dispatchEvent(new SocketEvent(SocketEvent.IO_ERROR));
 			}
 		}
@@ -201,14 +202,12 @@ package victor.framework.socket {
 		 */
 		protected function hasNotAllow(api : uint) : Boolean {
 			var time : int = this._notAllowList[api] || 0;
-			// trace("hasNotAllow",)
 			if (time == 0 || getTimer() - time > 900) {
 				return false;
 			} else {
 				// TODO:  处理请求间隔短
-				log("接口请求间隔太短:", PacketParse.getModule(api) + "-" + PacketParse.getAction(api));
+				Logger.debug("接口请求间隔太短:", PacketParse.getModule(api) + "-" + PacketParse.getAction(api));
 			}
-			// Helper.alert(Protocol.getProtocolDescription(_loc_4["request"]) + " 请求间隔太短。");
 			return true;
 		}
 	}

@@ -3,8 +3,6 @@ package app.modules.panel.test
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.utils.log;
-	
 	import victor.framework.drag.DragItem;
 	import victor.framework.drag.DragManager;
 	import victor.framework.utils.DisplayUtil;
@@ -50,20 +48,5 @@ package app.modules.panel.test
 			addChild( txt );
 		}
 		
-		override public function onDragFailed():void
-		{
-			super.onDragFailed();
-			log( "onDragFailed" );
-		}
-		
-		override public function onDragStart():void
-		{
-			log( "onDragStart" );
-		}
-		
-		override public function onDragSuccess():void
-		{
-			log( "onDragSuccess" );
-		}
 	}
 }

@@ -5,14 +5,13 @@ package app.startup
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
-	import app.Global;
+	import app.GameConfig;
+	import app.core.Tips;
 	import app.events.GameEvent;
-	import app.events.ViewEvent;
 	import app.managers.LoaderManager;
-	import app.modules.ViewName;
-	import app.utils.log;
 	
 	import victor.framework.core.BaseCommand;
+	import victor.framework.log.Logger;
 	
 	
 	/**
@@ -29,7 +28,7 @@ package app.startup
 		
 		override public function execute():void
 		{
-			var url:String = Global.serverURL + "application.xml?t=" + new Date().time;
+			var url:String = GameConfig.deployPath + "application.xml?t=" + new Date().time;
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, completeHandler );
 			loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler );
@@ -50,7 +49,8 @@ package app.startup
 		protected function errorHandler(event:IOErrorEvent):void
 		{
 			removeEvent( event.target as URLLoader );
-			log( event.text );
+			Logger.error( event.text );
+			Tips.showCenter( "application.xml load error" );
 		}
 		
 		private function removeEvent( loader:URLLoader ):void

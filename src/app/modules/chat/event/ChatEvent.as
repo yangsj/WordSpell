@@ -15,6 +15,7 @@ package app.modules.chat.event
 			super(type, data, bubbles, cancelable);
 		}
 		
+		
 		/**
 		 * 显示聊天窗口
 		 */
@@ -43,6 +44,10 @@ package app.modules.chat.event
 		 * 输入表情
 		 */
 		public static const INPUT_EMOTION:String = "input_emotion";
+		/**
+		 * 锁定聊天窗口信息
+		 */
+		public static const LOCK_CHAT:String = "lock_chat";
 		
 	}
 }

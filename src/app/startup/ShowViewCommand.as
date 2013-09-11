@@ -1,10 +1,10 @@
 package app.startup
 {
 	import app.events.ViewEvent;
-	import app.utils.error;
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.interfaces.IView;
+	import victor.framework.log.Logger;
 
 
 	/**
@@ -52,12 +52,12 @@ package app.startup
 					}
 					else
 					{
-						error( "找不到[" + viewName + "]绑定的类" );
+						Logger.error( "找不到[" + viewName + "]绑定的类" );
 					}
 				}
 				else
 				{
-					error( "viewName不存在！" );
+					Logger.error( "viewName不存在！" );
 				}
 			}
 		}
