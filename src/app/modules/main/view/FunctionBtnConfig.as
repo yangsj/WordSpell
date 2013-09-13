@@ -13,7 +13,7 @@ package app.modules.main.view
 		{
 		}
 		
-		public static const functionBtnsList:Array = [ FRIEND, TASK ];
+		public static const functionBtnsList:Array = [ FRIEND, TASK, PERSONAL ];
 		
 		/**
 		 * 好友
@@ -25,6 +25,10 @@ package app.modules.main.view
 		 */
 		public static const TASK:String = ViewName.Task;
 		
+		/**
+		 * 个人信息
+		 */
+		public static const PERSONAL:String = ViewName.Personal;
 		
 	}
 }
