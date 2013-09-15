@@ -16,6 +16,11 @@ package app.events
 		}
 		
 		/**
+		 * 参数解析完成
+		 */
+		public static const ANALYTIC_WEB_PARAMS_COMMPLETE:String = "analytic_web_params_commplete";
+		
+		/**
 		 * 资源application管理数据初始化完成
 		 */
 		public static const DATA_INIT_COMPLETE:String = "data_init_complete";

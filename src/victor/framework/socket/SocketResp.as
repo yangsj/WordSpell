@@ -6,10 +6,6 @@ package victor.framework.socket {
         // 响应
         public var data : * ;
         private var _api : uint;
-        // 返回数据类型
-        public var type : uint;
-        // 请求seq
-        public var seq : uint;
         // 响应
         private static var _pool : Array = [];
 

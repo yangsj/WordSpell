@@ -3,6 +3,7 @@ package app.startup
 	import flash.events.MouseEvent;
 	
 	import app.GameConfig;
+	import app.events.GameEvent;
 	
 	import net.hires.debug.Stats;
 	
@@ -37,10 +38,14 @@ package app.startup
 			// 主机地址
 			if ( parameters.hasOwnProperty( "ip" ))
 				GameConfig.serverHost = parameters["ip"];
+			else GameConfig.serverHost = "112.124.57.159";
 			
 			// 主机端口号
 			if ( parameters.hasOwnProperty( "port" ))
 				GameConfig.serverPort = parameters["port"];
+			else GameConfig.serverPort = 10242;
+			
+			dispatch( new GameEvent( GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE ));
 			
 			setDebug();
 		}

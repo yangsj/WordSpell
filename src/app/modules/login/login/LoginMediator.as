@@ -42,7 +42,7 @@ package app.modules.login.login
 		
 		private function actionLoginHandler( event:LoginEvent ):void
 		{
-			loginService.login( view.loginVo, view.hide );
+			loginService.login( view.loginVo, view.hide  );
 		}		
 		
 	}

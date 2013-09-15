@@ -1,5 +1,7 @@
 package app.core
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -48,7 +50,7 @@ package app.core
 		private var _txtBtnCancel:TextField;
 		
 		private var _rectangle:Rectangle;
-	
+		
 ////// params vars
 		private var _container:Sprite;
 		private var _complete:Function;
@@ -56,6 +58,8 @@ package app.core
 		private var _btnName1:String = "";
 		private var _btnName2:String = "";
 		private var _title:String = "";
+		
+		private var _bitmap:Bitmap;
 		
 		public function Alert()
 		{
@@ -72,7 +76,18 @@ package app.core
 		private function setTxtMsg( msg:String ):void
 		{
 			if ( msg != _msg ) 
+			{
 				txtMsg.htmlText = msg;
+				txtMsg.visible = false;
+				
+				DisplayUtil.removedFromParent( _bitmap );
+				var bitmapdata:BitmapData = new BitmapData( txtMsg.textWidth, txtMsg.textHeight + 5, true, 0 );
+				bitmapdata.draw( txtMsg );
+				_bitmap = new Bitmap( bitmapdata, "auto", true );
+				_bitmap.x = txtMsg.x + (( txtMsg.width - _bitmap.width ) >> 1);
+				_bitmap.y = txtMsg.y + (( txtMsg.height - _bitmap.height ) >> 1);
+				addChild( _bitmap );
+			}
 			
 			_msg = msg;
 		}

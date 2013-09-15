@@ -3,7 +3,7 @@ package app
 	import flash.display.DisplayObjectContainer;
 	
 	import app.events.GameEvent;
-	import app.events.LoadEvent;
+	import app.events.ServiceEvent;
 	import app.modules.login.command.FirstLoadCommand;
 	import app.modules.login.command.MainLoadCommand;
 	import app.startup.EnterGameCommand;
@@ -11,7 +11,6 @@ package app
 	import app.startup.InitCommand;
 	import app.startup.InitDataCommand;
 	import app.startup.InitServiceCommand;
-	import app.startup.LoadCommand;
 	import app.startup.ShowLoginCommand;
 	
 	import org.robotlegs.base.ContextEvent;
@@ -52,13 +51,13 @@ package app
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, FlashVarsCommand, ContextEvent, true);
 			
 			// 初始化网络
-			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitServiceCommand, ContextEvent, true);
+			commandMap.mapEvent(GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE, InitServiceCommand, GameEvent, true);
 			
 			// 初始化command
-			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitCommand, ContextEvent, true);
+			commandMap.mapEvent(GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE, InitCommand, GameEvent, true);
 			
 			// 初始化application资源数据
-			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitDataCommand, ContextEvent, true);
+			commandMap.mapEvent(ServiceEvent.CONNECTED, InitDataCommand, ServiceEvent, true);
 			
 			// 开始第一阶段资源加载
 			commandMap.mapEvent(GameEvent.DATA_INIT_COMPLETE, FirstLoadCommand, GameEvent, true );

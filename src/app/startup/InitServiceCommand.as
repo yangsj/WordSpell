@@ -1,12 +1,13 @@
 package app.startup
 {
+	import app.GameConfig;
+	import app.core.Alert;
 	import app.events.ServiceEvent;
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.socket.ISocketManager;
 	import victor.framework.socket.MessageSocket;
 	import victor.framework.socket.SocketEvent;
-	import app.GameConfig;
 	
 	
 	/**
@@ -26,11 +27,13 @@ package app.startup
 			var socket : MessageSocket = new  MessageSocket( GameConfig.isDebug );
 			injector.mapValue(ISocketManager, socket);
 			socket.addEventListener(SocketEvent.CLOSE, onSocketClose);
+			socket.addEventListener(SocketEvent.CONNECTED, onSocketConnected );
+			socket.addEventListener(SocketEvent.IO_ERROR, onIoError );
 			
-			connected();
+			socket.connect( GameConfig.serverHost, GameConfig.serverPort );
 		}
 		
-		private function connected():void
+		private function onSocketConnected( event:SocketEvent ):void
 		{
 			dispatch( new ServiceEvent( ServiceEvent.CONNECTED ));
 		}
@@ -38,8 +41,8 @@ package app.startup
 		private function failed():void
 		{
 			dispatch( new ServiceEvent( ServiceEvent.FAILED ));
+			Alert.show( "连接失败！" );
 		}
-		
 		
 		/**
 		 * 连接关闭
@@ -47,6 +50,13 @@ package app.startup
 		private function onSocketClose(event : SocketEvent) : void 
 		{
 			dispatch( new ServiceEvent( ServiceEvent.CLOSED ));
+			Alert.show( "连接关闭！" );
 		}
+		
+		private function onIoError( event:SocketEvent ):void
+		{
+			Alert.show( "连接错误！" );
+		}
+		
 	}
 }

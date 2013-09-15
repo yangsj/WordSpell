@@ -1,9 +1,9 @@
 package victor.framework.core {
+	import org.apache.thrift.TBase;
 	import org.robotlegs.mvcs.Actor;
 	
 	import victor.framework.socket.IService;
 	import victor.framework.socket.ISocketManager;
-	import victor.framework.socket.PacketParse;
 	import victor.framework.socket.SocketReq;
 
     /**
@@ -32,10 +32,9 @@ package victor.framework.core {
          * @param model 数据模型
          * 
          */
-        protected function call(module : uint, action : uint, msg : *, callBack : Function = null, noTimeAllow : Boolean = true) : void {
+		protected function call(cmd : uint, msg : TBase, callBack : Function = null, noTimeAllow : Boolean = true) : void {
             var req : SocketReq =SocketReq.creatReq();
-            var api : int = PacketParse.getApi(module, action);
-            req.api = api;
+            req.cmd = cmd;
             req.obj = msg;
             socket.call(req, callBack, noTimeAllow);
         }
@@ -43,10 +42,9 @@ package victor.framework.core {
         /**
          * 单次请求
          */
-        protected function onceCall(module : uint, action : uint, msg : *, callBack : Function, respCla : Class) : void {
+		protected function onceCall(cmd : uint, msg : *, callBack : Function, respCla : Class) : void {
             var req : SocketReq = SocketReq.creatReq();
-            var api : int = PacketParse.getApi(module, action);
-            req.api = api;
+			req.cmd = cmd;
             req.obj = msg;
             socket.onceCall(req, callBack, respCla);
         }
@@ -57,9 +55,8 @@ package victor.framework.core {
          * @param action 接口动作
          * @param dataCallBack 接口数据回调
          */
-        protected function regist(module : uint, action : uint, dataCallBack : Function, respProc : Class) : void {
-            var api : uint = PacketParse.getApi(module, action);
-            socket.registerDataCallback(api, dataCallBack, respProc);
+		protected function regist(cmd : uint, dataCallBack : Function, respProc : Class) : void {
+			socket.registerDataCallback( cmd, dataCallBack, respProc);
         }
 		
 		/**

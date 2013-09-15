@@ -1,6 +1,8 @@
 package victor.framework.socket {
 
 	import flash.utils.ByteArray;
+	
+	import ff.FFUtil;
 
 	/**
 	 * @author fireyang
@@ -34,36 +36,30 @@ package victor.framework.socket {
 		 * 发请求压包
 		 * @param req 请求对象
 		 */
-		public static function synthesize(req : SocketReq) : ByteArray {
+		public static function synthesize(req : SocketReq) : ByteArray
+		{
+			
+			var api : uint = req.cmd;
 			var msg : * = req.obj;
+			
 			var mData : ByteArray = new ByteArray();
-			// 1.请求api
-			var api : uint = req.api;
-			// 2.type
-			api = api << 2;
-			// 2字节的msgId
-			mData.writeShort(api);
-			// 3.代码（2字节）
-			var code : uint = 0;
-			mData.writeShort(code);
-			// 4.保留(2字节)
-			var reserved : uint = _checkKey;
-			mData.writeShort(reserved);
-			// 5.顺序(4字节)
-			mData.writeUnsignedInt(req.seq);
+			
 			// 请求数据
 			var msgData : ByteArray = new ByteArray();
-			msg.writeTo(msgData);
-			msgData.position = 0;
+			FFUtil.EncodeMsg( msg, msgData );
+			// body length
+			mData.writeInt( msgData.length );
+			// cmd
+			mData.writeShort( api );
+			// 保留
+			mData.writeShort( 0 );
 			// 写入数据体
+			msgData.position = 0;
+			
 			mData.writeBytes(msgData, 0, msgData.length);
-			// 包头
-			var data : ByteArray = new ByteArray();
-			// 包长度（2字节）
-			data.writeShort(mData.length + 2);
-			mData.position = 0;
-			data.writeBytes(mData, 0, mData.length);
-			return data;
+			msgData.position = 0;
+			
+			return mData;
 		}
 
 		/**
@@ -74,35 +70,16 @@ package victor.framework.socket {
 		public static function analyze(buffer : ByteArray) : SocketResp {
 			// 解析数据
 			buffer.position = 0;
-			// 读取api(2字节)
-			var api : uint = buffer.readShort();
-			var type : uint = api & 3;
-			api = api >> 2;
+			// 读取长度
+			var length : int = buffer.readInt();
+			// 读取cmd
+			var cmd : uint = buffer.readShort();
+			// 保留字节
+			var code : uint = buffer.readShort();
+			
 			var res : SocketResp = SocketResp.creat();
-			res.api = api;
-			res.type = type;
-			var seq : uint = 0;
-			// trace("api2:",PacketParse.getModule(api),PacketParse.getAction(api),type);
-			if (type == 1) {
-				// 3.代码
-				var code : uint = buffer.readShort();
-				// 保留
-				var reserved : uint = buffer.readShort();
-				// 时序
-				seq = buffer.readUnsignedInt();
-				// var msg : Message = new cla();
-				// msg.mergeFrom(buffer);
-				// res.data = msg;
-			} else if (type == 2) {
-				// 通知消息
-				// var msg : Message = new cla();
-				// res.data = buffer.readBytes(bytes);
-			}
-			// var data:ByteArray = new ByteArray();
-			// buffer.readBytes(data,buffer.position,buffer.length-buffer.position);
-			// trace("analyze2:",data.length,data.position);
-			// FYLogger.debug("analyze", PacketParse.printApi(api), type, seq, buffer.position, buffer.length);
-			res.seq = seq;
+			res.api = cmd;
+			
 			var data : ByteArray = new ByteArray();
 			var pos : uint = buffer.position;
 			var len : uint = buffer.length - pos;
