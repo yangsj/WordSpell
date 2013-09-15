@@ -11,12 +11,14 @@ import flash.utils.Dictionary;
   public class server_cmd_e   {
     public static const LOGIN_RET:int = 1;
     public static const CHAT_RET:int = 2;
+    public static const ERROR_CODE_RET:int = 3;
 
-    public static const VALID_VALUES:Set = new Set(LOGIN_RET, CHAT_RET);
+    public static const VALID_VALUES:Set = new Set(LOGIN_RET, CHAT_RET, ERROR_CODE_RET);
     public static const VALUES_TO_NAMES:Dictionary = new Dictionary();
     {
       VALUES_TO_NAMES[LOGIN_RET] = "LOGIN_RET";
       VALUES_TO_NAMES[CHAT_RET] = "CHAT_RET";
+      VALUES_TO_NAMES[ERROR_CODE_RET] = "ERROR_CODE_RET";
 
     }
   }

@@ -10,17 +10,17 @@ package app.modules.chat
 	{
 		
 		/**
-		 * 系统消息
+		 * 私聊
 		 */
-		public static const SYSTEM:uint = 0;
+		public static const PRIVATE:uint = 0;
 		/**
 		 * 世界
 		 */
 		public static const WORLD:uint = 1;
 		/**
-		 * 私聊
+		 * 系统消息
 		 */
-		public static const PRIVATE:uint = 2;
+		public static const SYSTEM:uint = 2;
 		
 	}
 }

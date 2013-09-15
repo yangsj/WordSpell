@@ -1,9 +1,9 @@
 package app.modules.login.service
 {
+	import app.data.GameData;
 	import app.events.GameEvent;
 	import app.modules.login.login.vo.LoginVo;
 	import app.modules.login.register.vo.RegisterVo;
-	import app.utils.safetyCall;
 	
 	import ff.account_req_t;
 	import ff.client_cmd_e;
@@ -33,7 +33,10 @@ package app.modules.login.service
 		
 		private function loginSuccessedNotify( res:SocketResp ):void
 		{
+			var data:user_login_ret_t = res.data as user_login_ret_t;
 			loginSuccessed();
+			
+			GameData.instance
 		}
 		
 		public function login( loginVo:LoginVo, callBack:Function ):void
@@ -47,8 +50,18 @@ package app.modules.login.service
 		
 		public function register( registerVo:RegisterVo, callBack:Function = null ):void
 		{
-			loginSuccessed();
-			safetyCall( callBack );
+			var req:account_req_t = new account_req_t();
+			req.nick_name = registerVo.nickName;
+			req.password = registerVo.password;
+			req.age = registerVo.playerAge;
+			req.email = registerVo.email;
+			req.grade = registerVo.className;
+			req.phone = registerVo.phone;
+			req.qq = registerVo.QQ;
+			req.school = registerVo.schoolName;
+			req.real_name = registerVo.playerName;
+			req.register_flag = true;
+			call( client_cmd_e.LOGIN_REQ, req, callBack );
 		}
 		
 		private function loginSuccessed():void

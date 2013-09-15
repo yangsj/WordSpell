@@ -28,12 +28,12 @@ package app.modules.chat.model
 		/**
 		 * 玩家名称
 		 */
-		public var playerName:String = "";
+		public var playerName:String = "玩家名称";
 
 		/**
 		 * 玩家id
 		 */
-		public var playerUid:String = "";
+		public var playerUid:int = 0;
 
 		/**
 		 * 发送的信息

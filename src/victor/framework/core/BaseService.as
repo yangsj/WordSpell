@@ -1,4 +1,10 @@
 package victor.framework.core {
+	import app.GameConfig;
+	import app.core.Alert;
+	import app.core.Tips;
+	
+	import ff.msg_defConstants;
+	
 	import org.apache.thrift.TBase;
 	import org.robotlegs.mvcs.Actor;
 	
@@ -64,9 +70,19 @@ package victor.framework.core {
 		 * @param errorCode
 		 * 
 		 */		
-		protected function errorHandler(errorCode:int,isShowTips:Boolean=false):void
+		protected function errorHandler(errorCode:int,isShowTips:Boolean=false):Boolean
 		{
-			
+			if ( errorCode > 0 )
+			{
+				var msg:String = msg_defConstants.error_code_desc[errorCode];
+				if ( GameConfig.isDebug )
+					msg += "[错误代码：" + errorCode + "]";
+				if ( isShowTips )
+					Tips.showCenter( msg );
+				else Alert.show( msg );
+				return false;
+			}
+			return true;
 		}
     }
 }

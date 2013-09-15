@@ -21,6 +21,12 @@ import org.apache.thrift.protocol.*;
     private static const PASSWORD_FIELD_DESC:TField = new TField("password", TType.STRING, 2);
     private static const REGISTER_FLAG_FIELD_DESC:TField = new TField("register_flag", TType.BOOL, 3);
     private static const EMAIL_FIELD_DESC:TField = new TField("email", TType.STRING, 4);
+    private static const REAL_NAME_FIELD_DESC:TField = new TField("real_name", TType.STRING, 5);
+    private static const AGE_FIELD_DESC:TField = new TField("age", TType.I16, 6);
+    private static const SCHOOL_FIELD_DESC:TField = new TField("school", TType.STRING, 7);
+    private static const GRADE_FIELD_DESC:TField = new TField("grade", TType.STRING, 8);
+    private static const QQ_FIELD_DESC:TField = new TField("qq", TType.STRING, 9);
+    private static const PHONE_FIELD_DESC:TField = new TField("phone", TType.STRING, 10);
 
     private var _nick_name:String;
     public static const NICK_NAME:int = 1;
@@ -30,8 +36,21 @@ import org.apache.thrift.protocol.*;
     public static const REGISTER_FLAG:int = 3;
     private var _email:String;
     public static const EMAIL:int = 4;
+    private var _real_name:String;
+    public static const REAL_NAME:int = 5;
+    private var _age:int;
+    public static const AGE:int = 6;
+    private var _school:String;
+    public static const SCHOOL:int = 7;
+    private var _grade:String;
+    public static const GRADE:int = 8;
+    private var _qq:String;
+    public static const QQ:int = 9;
+    private var _phone:String;
+    public static const PHONE:int = 10;
 
     private var __isset_register_flag:Boolean = false;
+    private var __isset_age:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -43,6 +62,18 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.BOOL));
       metaDataMap[EMAIL] = new FieldMetaData("email", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
+      metaDataMap[REAL_NAME] = new FieldMetaData("real_name", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[AGE] = new FieldMetaData("age", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
+      metaDataMap[SCHOOL] = new FieldMetaData("school", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[GRADE] = new FieldMetaData("grade", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[QQ] = new FieldMetaData("qq", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[PHONE] = new FieldMetaData("phone", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
     }
     {
       FieldMetaData.addStructMetaDataMap(account_req_t, metaDataMap);
@@ -50,6 +81,7 @@ import org.apache.thrift.protocol.*;
 
     public function account_req_t() {
       this._register_flag = 0;
+      this._age = 0;
     }
 
     public function get nick_name():String {
@@ -121,6 +153,109 @@ import org.apache.thrift.protocol.*;
       return this.email != null;
     }
 
+    public function get real_name():String {
+      return this._real_name;
+    }
+
+    public function set real_name(real_name:String):void {
+      this._real_name = real_name;
+    }
+
+    public function unsetReal_name():void {
+      this.real_name = null;
+    }
+
+    // Returns true if field real_name is set (has been assigned a value) and false otherwise
+    public function isSetReal_name():Boolean {
+      return this.real_name != null;
+    }
+
+    public function get age():int {
+      return this._age;
+    }
+
+    public function set age(age:int):void {
+      this._age = age;
+      this.__isset_age = true;
+    }
+
+    public function unsetAge():void {
+      this.__isset_age = false;
+    }
+
+    // Returns true if field age is set (has been assigned a value) and false otherwise
+    public function isSetAge():Boolean {
+      return this.__isset_age;
+    }
+
+    public function get school():String {
+      return this._school;
+    }
+
+    public function set school(school:String):void {
+      this._school = school;
+    }
+
+    public function unsetSchool():void {
+      this.school = null;
+    }
+
+    // Returns true if field school is set (has been assigned a value) and false otherwise
+    public function isSetSchool():Boolean {
+      return this.school != null;
+    }
+
+    public function get grade():String {
+      return this._grade;
+    }
+
+    public function set grade(grade:String):void {
+      this._grade = grade;
+    }
+
+    public function unsetGrade():void {
+      this.grade = null;
+    }
+
+    // Returns true if field grade is set (has been assigned a value) and false otherwise
+    public function isSetGrade():Boolean {
+      return this.grade != null;
+    }
+
+    public function get qq():String {
+      return this._qq;
+    }
+
+    public function set qq(qq:String):void {
+      this._qq = qq;
+    }
+
+    public function unsetQq():void {
+      this.qq = null;
+    }
+
+    // Returns true if field qq is set (has been assigned a value) and false otherwise
+    public function isSetQq():Boolean {
+      return this.qq != null;
+    }
+
+    public function get phone():String {
+      return this._phone;
+    }
+
+    public function set phone(phone:String):void {
+      this._phone = phone;
+    }
+
+    public function unsetPhone():void {
+      this.phone = null;
+    }
+
+    // Returns true if field phone is set (has been assigned a value) and false otherwise
+    public function isSetPhone():Boolean {
+      return this.phone != null;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case NICK_NAME:
@@ -155,6 +290,54 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case REAL_NAME:
+        if (value == null) {
+          unsetReal_name();
+        } else {
+          this.real_name = value;
+        }
+        break;
+
+      case AGE:
+        if (value == null) {
+          unsetAge();
+        } else {
+          this.age = value;
+        }
+        break;
+
+      case SCHOOL:
+        if (value == null) {
+          unsetSchool();
+        } else {
+          this.school = value;
+        }
+        break;
+
+      case GRADE:
+        if (value == null) {
+          unsetGrade();
+        } else {
+          this.grade = value;
+        }
+        break;
+
+      case QQ:
+        if (value == null) {
+          unsetQq();
+        } else {
+          this.qq = value;
+        }
+        break;
+
+      case PHONE:
+        if (value == null) {
+          unsetPhone();
+        } else {
+          this.phone = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -170,6 +353,18 @@ import org.apache.thrift.protocol.*;
         return this.register_flag;
       case EMAIL:
         return this.email;
+      case REAL_NAME:
+        return this.real_name;
+      case AGE:
+        return this.age;
+      case SCHOOL:
+        return this.school;
+      case GRADE:
+        return this.grade;
+      case QQ:
+        return this.qq;
+      case PHONE:
+        return this.phone;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -186,6 +381,18 @@ import org.apache.thrift.protocol.*;
         return isSetRegister_flag();
       case EMAIL:
         return isSetEmail();
+      case REAL_NAME:
+        return isSetReal_name();
+      case AGE:
+        return isSetAge();
+      case SCHOOL:
+        return isSetSchool();
+      case GRADE:
+        return isSetGrade();
+      case QQ:
+        return isSetQq();
+      case PHONE:
+        return isSetPhone();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -231,6 +438,49 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case REAL_NAME:
+            if (field.type == TType.STRING) {
+              this.real_name = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case AGE:
+            if (field.type == TType.I16) {
+              this.age = iprot.readI16();
+              this.__isset_age = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case SCHOOL:
+            if (field.type == TType.STRING) {
+              this.school = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case GRADE:
+            if (field.type == TType.STRING) {
+              this.grade = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case QQ:
+            if (field.type == TType.STRING) {
+              this.qq = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case PHONE:
+            if (field.type == TType.STRING) {
+              this.phone = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -266,6 +516,34 @@ import org.apache.thrift.protocol.*;
         oprot.writeString(this.email);
         oprot.writeFieldEnd();
       }
+      if (this.real_name != null) {
+        oprot.writeFieldBegin(REAL_NAME_FIELD_DESC);
+        oprot.writeString(this.real_name);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldBegin(AGE_FIELD_DESC);
+      oprot.writeI16(this.age);
+      oprot.writeFieldEnd();
+      if (this.school != null) {
+        oprot.writeFieldBegin(SCHOOL_FIELD_DESC);
+        oprot.writeString(this.school);
+        oprot.writeFieldEnd();
+      }
+      if (this.grade != null) {
+        oprot.writeFieldBegin(GRADE_FIELD_DESC);
+        oprot.writeString(this.grade);
+        oprot.writeFieldEnd();
+      }
+      if (this.qq != null) {
+        oprot.writeFieldBegin(QQ_FIELD_DESC);
+        oprot.writeString(this.qq);
+        oprot.writeFieldEnd();
+      }
+      if (this.phone != null) {
+        oprot.writeFieldBegin(PHONE_FIELD_DESC);
+        oprot.writeString(this.phone);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -299,6 +577,50 @@ import org.apache.thrift.protocol.*;
         ret += "null";
       } else {
         ret += this.email;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "real_name:";
+      if (this.real_name == null) {
+        ret += "null";
+      } else {
+        ret += this.real_name;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "age:";
+      ret += this.age;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "school:";
+      if (this.school == null) {
+        ret += "null";
+      } else {
+        ret += this.school;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "grade:";
+      if (this.grade == null) {
+        ret += "null";
+      } else {
+        ret += this.grade;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "qq:";
+      if (this.qq == null) {
+        ret += "null";
+      } else {
+        ret += this.qq;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "phone:";
+      if (this.phone == null) {
+        ret += "null";
+      } else {
+        ret += this.phone;
       }
       first = false;
       ret += ")";

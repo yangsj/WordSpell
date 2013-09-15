@@ -1,55 +1,56 @@
 package app.modules.chat.model
 {
-	import app.modules.chat.event.ChatEvent;
-	
 	import flash.utils.Dictionary;
-	
+
+	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
-	
+
 	import org.robotlegs.mvcs.Actor;
-	
-	
+
+
 	/**
 	 * ……
-	 * @author 	yangsj 
+	 * @author 	yangsj
 	 * 			2013-9-6
 	 */
 	public class ChatModel extends Actor
 	{
 		private const MAX_LENGTH:int = 100;
-		
+
 		private var _currentChannel:uint;
 		private var _isLocked:Boolean = false;
-		
+
 		private var _historyMsg:Dictionary = new Dictionary();
-		
+
 		public function ChatModel()
 		{
 			super();
 		}
-		
-		public function addMsg(chatVo:ChatVo):void
+
+		public function addMsg( chatVo:ChatVo ):void
 		{
 			if ( isLocked )
-				return ;
-			
-			var array:Vector.<ChatVo> = _historyMsg[ chatVo.channel ] ||= new Vector.<ChatVo>();
+				return;
+
+			var isSystem:Boolean = chatVo.channel == ChatChannelType.SYSTEM;
+
+			var array:Vector.<ChatVo> = _historyMsg[ isSystem ? ChatChannelType.WORLD : chatVo.channel ] ||= new Vector.<ChatVo>();
 			array.push( chatVo );
 			if ( array.length > MAX_LENGTH )
 			{
 				array.shift();
 			}
-			if ( _currentChannel == chatVo.channel )
+			if ( _currentChannel == chatVo.channel || ( isSystem && _currentChannel == ChatChannelType.WORLD ))
 			{
 				dispatch( new ChatEvent( ChatEvent.UPDATE_MSG, chatVo ));
 			}
 		}
-		
+
 		public function getCurrentChannelList():Vector.<ChatVo>
 		{
-			return _historyMsg[_currentChannel];
+			return _historyMsg[ _currentChannel ];
 		}
-		
+
 		/**
 		 * 当前聊天频道
 		 */
@@ -61,7 +62,7 @@ package app.modules.chat.model
 		/**
 		 * @private
 		 */
-		public function set currentChannel(value:uint):void
+		public function set currentChannel( value:uint ):void
 		{
 			_currentChannel = value;
 		}
@@ -77,7 +78,7 @@ package app.modules.chat.model
 		/**
 		 * @private
 		 */
-		public function set isLocked(value:Boolean):void
+		public function set isLocked( value:Boolean ):void
 		{
 			_isLocked = value;
 		}

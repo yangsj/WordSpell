@@ -17,81 +17,176 @@ import org.apache.thrift.protocol.*;
 
   public class chat_msg_ret_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("chat_msg_ret_t");
-    private static const FROM_UID_FIELD_DESC:TField = new TField("from_uid", TType.I32, 1);
-    private static const VALUE_FIELD_DESC:TField = new TField("value", TType.STRING, 2);
+    private static const CHANNEL_FIELD_DESC:TField = new TField("channel", TType.I32, 1);
+    private static const FROM_PLAYER_UID_FIELD_DESC:TField = new TField("from_player_uid", TType.I32, 2);
+    private static const FROM_PLAYER_NAME_FIELD_DESC:TField = new TField("from_player_name", TType.STRING, 3);
+    private static const MSG_FIELD_DESC:TField = new TField("msg", TType.STRING, 6);
+    private static const EMOTIONS_FIELD_DESC:TField = new TField("emotions", TType.MAP, 7);
 
-    private var _from_uid:int;
-    public static const FROM_UID:int = 1;
-    private var _value:String;
-    public static const VALUE:int = 2;
+    private var _channel:int;
+    public static const CHANNEL:int = 1;
+    private var _from_player_uid:int;
+    public static const FROM_PLAYER_UID:int = 2;
+    private var _from_player_name:String;
+    public static const FROM_PLAYER_NAME:int = 3;
+    private var _msg:String;
+    public static const MSG:int = 6;
+    private var _emotions:Dictionary;
+    public static const EMOTIONS:int = 7;
 
-    private var __isset_from_uid:Boolean = false;
+    private var __isset_channel:Boolean = false;
+    private var __isset_from_player_uid:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[FROM_UID] = new FieldMetaData("from_uid", TFieldRequirementType.DEFAULT, 
+      metaDataMap[CHANNEL] = new FieldMetaData("channel", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
-      metaDataMap[VALUE] = new FieldMetaData("value", TFieldRequirementType.DEFAULT, 
+      metaDataMap[FROM_PLAYER_UID] = new FieldMetaData("from_player_uid", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
+      metaDataMap[FROM_PLAYER_NAME] = new FieldMetaData("from_player_name", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
+      metaDataMap[MSG] = new FieldMetaData("msg", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[EMOTIONS] = new FieldMetaData("emotions", TFieldRequirementType.DEFAULT, 
+          new MapMetaData(TType.MAP, 
+              new FieldValueMetaData(TType.I32), 
+              new FieldValueMetaData(TType.I32)));
     }
     {
       FieldMetaData.addStructMetaDataMap(chat_msg_ret_t, metaDataMap);
     }
 
     public function chat_msg_ret_t() {
-      this._from_uid = 0;
+      this._channel = 0;
+      this._from_player_uid = 0;
     }
 
-    public function get from_uid():int {
-      return this._from_uid;
+    public function get channel():int {
+      return this._channel;
     }
 
-    public function set from_uid(from_uid:int):void {
-      this._from_uid = from_uid;
-      this.__isset_from_uid = true;
+    public function set channel(channel:int):void {
+      this._channel = channel;
+      this.__isset_channel = true;
     }
 
-    public function unsetFrom_uid():void {
-      this.__isset_from_uid = false;
+    public function unsetChannel():void {
+      this.__isset_channel = false;
     }
 
-    // Returns true if field from_uid is set (has been assigned a value) and false otherwise
-    public function isSetFrom_uid():Boolean {
-      return this.__isset_from_uid;
+    // Returns true if field channel is set (has been assigned a value) and false otherwise
+    public function isSetChannel():Boolean {
+      return this.__isset_channel;
     }
 
-    public function get value():String {
-      return this._value;
+    public function get from_player_uid():int {
+      return this._from_player_uid;
     }
 
-    public function set value(value:String):void {
-      this._value = value;
+    public function set from_player_uid(from_player_uid:int):void {
+      this._from_player_uid = from_player_uid;
+      this.__isset_from_player_uid = true;
     }
 
-    public function unsetValue():void {
-      this.value = null;
+    public function unsetFrom_player_uid():void {
+      this.__isset_from_player_uid = false;
     }
 
-    // Returns true if field value is set (has been assigned a value) and false otherwise
-    public function isSetValue():Boolean {
-      return this.value != null;
+    // Returns true if field from_player_uid is set (has been assigned a value) and false otherwise
+    public function isSetFrom_player_uid():Boolean {
+      return this.__isset_from_player_uid;
+    }
+
+    public function get from_player_name():String {
+      return this._from_player_name;
+    }
+
+    public function set from_player_name(from_player_name:String):void {
+      this._from_player_name = from_player_name;
+    }
+
+    public function unsetFrom_player_name():void {
+      this.from_player_name = null;
+    }
+
+    // Returns true if field from_player_name is set (has been assigned a value) and false otherwise
+    public function isSetFrom_player_name():Boolean {
+      return this.from_player_name != null;
+    }
+
+    public function get msg():String {
+      return this._msg;
+    }
+
+    public function set msg(msg:String):void {
+      this._msg = msg;
+    }
+
+    public function unsetMsg():void {
+      this.msg = null;
+    }
+
+    // Returns true if field msg is set (has been assigned a value) and false otherwise
+    public function isSetMsg():Boolean {
+      return this.msg != null;
+    }
+
+    public function get emotions():Dictionary {
+      return this._emotions;
+    }
+
+    public function set emotions(emotions:Dictionary):void {
+      this._emotions = emotions;
+    }
+
+    public function unsetEmotions():void {
+      this.emotions = null;
+    }
+
+    // Returns true if field emotions is set (has been assigned a value) and false otherwise
+    public function isSetEmotions():Boolean {
+      return this.emotions != null;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case FROM_UID:
+      case CHANNEL:
         if (value == null) {
-          unsetFrom_uid();
+          unsetChannel();
         } else {
-          this.from_uid = value;
+          this.channel = value;
         }
         break;
 
-      case VALUE:
+      case FROM_PLAYER_UID:
         if (value == null) {
-          unsetValue();
+          unsetFrom_player_uid();
         } else {
-          this.value = value;
+          this.from_player_uid = value;
+        }
+        break;
+
+      case FROM_PLAYER_NAME:
+        if (value == null) {
+          unsetFrom_player_name();
+        } else {
+          this.from_player_name = value;
+        }
+        break;
+
+      case MSG:
+        if (value == null) {
+          unsetMsg();
+        } else {
+          this.msg = value;
+        }
+        break;
+
+      case EMOTIONS:
+        if (value == null) {
+          unsetEmotions();
+        } else {
+          this.emotions = value;
         }
         break;
 
@@ -102,10 +197,16 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case FROM_UID:
-        return this.from_uid;
-      case VALUE:
-        return this.value;
+      case CHANNEL:
+        return this.channel;
+      case FROM_PLAYER_UID:
+        return this.from_player_uid;
+      case FROM_PLAYER_NAME:
+        return this.from_player_name;
+      case MSG:
+        return this.msg;
+      case EMOTIONS:
+        return this.emotions;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -114,10 +215,16 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case FROM_UID:
-        return isSetFrom_uid();
-      case VALUE:
-        return isSetValue();
+      case CHANNEL:
+        return isSetChannel();
+      case FROM_PLAYER_UID:
+        return isSetFrom_player_uid();
+      case FROM_PLAYER_NAME:
+        return isSetFrom_player_name();
+      case MSG:
+        return isSetMsg();
+      case EMOTIONS:
+        return isSetEmotions();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -134,17 +241,51 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case FROM_UID:
+          case CHANNEL:
             if (field.type == TType.I32) {
-              this.from_uid = iprot.readI32();
-              this.__isset_from_uid = true;
+              this.channel = iprot.readI32();
+              this.__isset_channel = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
-          case VALUE:
+          case FROM_PLAYER_UID:
+            if (field.type == TType.I32) {
+              this.from_player_uid = iprot.readI32();
+              this.__isset_from_player_uid = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case FROM_PLAYER_NAME:
             if (field.type == TType.STRING) {
-              this.value = iprot.readString();
+              this.from_player_name = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case MSG:
+            if (field.type == TType.STRING) {
+              this.msg = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case EMOTIONS:
+            if (field.type == TType.MAP) {
+              {
+                var _map31:TMap = iprot.readMapBegin();
+                this.emotions = new Dictionary();
+                for (var _i32:int = 0; _i32 < _map31.size; ++_i32)
+                {
+                  var _key33:int;
+                  var _val34:int;
+                  _key33 = iprot.readI32();
+                  _val34 = iprot.readI32();
+                  this.emotions[_key33] = _val34;
+                }
+                iprot.readMapEnd();
+              }
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -166,12 +307,36 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(FROM_UID_FIELD_DESC);
-      oprot.writeI32(this.from_uid);
+      oprot.writeFieldBegin(CHANNEL_FIELD_DESC);
+      oprot.writeI32(this.channel);
       oprot.writeFieldEnd();
-      if (this.value != null) {
-        oprot.writeFieldBegin(VALUE_FIELD_DESC);
-        oprot.writeString(this.value);
+      oprot.writeFieldBegin(FROM_PLAYER_UID_FIELD_DESC);
+      oprot.writeI32(this.from_player_uid);
+      oprot.writeFieldEnd();
+      if (this.from_player_name != null) {
+        oprot.writeFieldBegin(FROM_PLAYER_NAME_FIELD_DESC);
+        oprot.writeString(this.from_player_name);
+        oprot.writeFieldEnd();
+      }
+      if (this.msg != null) {
+        oprot.writeFieldBegin(MSG_FIELD_DESC);
+        oprot.writeString(this.msg);
+        oprot.writeFieldEnd();
+      }
+      if (this.emotions != null) {
+        oprot.writeFieldBegin(EMOTIONS_FIELD_DESC);
+        {
+          var _sizeCounter36:int = 0;
+          for (var _key35:* in this.emotions) {
+            _sizeCounter36++;
+          }
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter36));
+          for (var elem37:* in this.emotions)          {
+            oprot.writeI32(elem37);
+            oprot.writeI32(this.emotions[elem37]);
+          }
+          oprot.writeMapEnd();
+        }
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -182,15 +347,35 @@ import org.apache.thrift.protocol.*;
       var ret:String = new String("chat_msg_ret_t(");
       var first:Boolean = true;
 
-      ret += "from_uid:";
-      ret += this.from_uid;
+      ret += "channel:";
+      ret += this.channel;
       first = false;
       if (!first) ret +=  ", ";
-      ret += "value:";
-      if (this.value == null) {
+      ret += "from_player_uid:";
+      ret += this.from_player_uid;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "from_player_name:";
+      if (this.from_player_name == null) {
         ret += "null";
       } else {
-        ret += this.value;
+        ret += this.from_player_name;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "msg:";
+      if (this.msg == null) {
+        ret += "null";
+      } else {
+        ret += this.msg;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "emotions:";
+      if (this.emotions == null) {
+        ret += "null";
+      } else {
+        ret += this.emotions;
       }
       first = false;
       ret += ")";

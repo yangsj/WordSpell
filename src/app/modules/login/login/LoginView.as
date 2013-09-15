@@ -2,13 +2,16 @@ package app.modules.login.login
 {
 	import flash.display.InteractiveObject;
 	import flash.events.FocusEvent;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import flash.ui.Keyboard;
 	
 	import app.Language;
 	import app.core.Tips;
 	import app.modules.login.login.event.LoginEvent;
 	import app.modules.login.login.vo.LoginVo;
+	import app.utils.appStage;
 	
 	import victor.framework.core.BaseScene;
 	
@@ -35,9 +38,26 @@ package app.modules.login.login
 			super();
 		}
 		
+		override public function show():void
+		{
+			super.show();
+			appStage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler );
+		}
+		
+		override public function hide():void
+		{
+			super.hide();
+			appStage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler );
+		}
+		
 		override protected function onceInit():void
 		{
 			super.onceInit();
+			
+			txtAccountNumber.tabEnabled = true;
+			txtPassword.tabEnabled = true;
+			txtAccountNumber.tabIndex = 0;
+			txtPassword.tabIndex = 1;
 			
 			btnLogin.addEventListener(MouseEvent.CLICK, btnLoginHandler );
 			btnRegister.addEventListener(MouseEvent.CLICK, btnRegisterHandler );
@@ -89,7 +109,13 @@ package app.modules.login.login
 			dispatchEvent( new LoginEvent( LoginEvent.ACTION_REGISTER ));
 		}
 		
-		protected function btnLoginHandler(event:MouseEvent):void
+		protected function keyDownHandler( event:KeyboardEvent ):void
+		{
+			if ( event.keyCode == Keyboard.ENTER )
+				btnLoginHandler( null );
+		}
+		
+		protected function btnLoginHandler( event:MouseEvent = null ):void
 		{
 			if ( txtAccountNumber.text && txtPassword.text )
 			{

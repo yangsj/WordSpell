@@ -131,7 +131,7 @@ package app.modules.login.register
 		{
 			_registerVo ||= new RegisterVo();
 			_registerVo.playerName = txtName.text;
-			_registerVo.playerAge = txtAge.text;
+			_registerVo.playerAge = int( txtAge.text );
 			_registerVo.nickName = txtAccount.text;
 			_registerVo.password = txtPw1.text;
 			_registerVo.passwordConfirm = txtPw2.text;

@@ -32,7 +32,7 @@ package app.modules.login.register.vo
 		/**
 		 * 年龄
 		 */
-		public var playerAge:String;
+		public var playerAge:int;
 		/**
 		 * 昵称
 		 */

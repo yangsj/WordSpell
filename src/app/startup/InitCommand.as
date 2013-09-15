@@ -2,6 +2,7 @@ package app.startup
 {
 	import flash.events.Event;
 	
+	import app.data.GameData;
 	import app.events.ViewEvent;
 	import app.modules.chat.command.ChatInitCommand;
 	import app.modules.friend.command.FriendInitComand;
@@ -10,6 +11,7 @@ package app.startup
 	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.test.TestInitCommand;
 	import app.modules.scene.command.SceneInitCommand;
+	import app.modules.serivce.CommonService;
 	import app.modules.task.command.TaskInitCommand;
 	
 	import victor.framework.core.BaseCommand;
@@ -54,6 +56,12 @@ package app.startup
 			//////////////
 			
 			injector.mapValue( DragManager, DragManager.instance );
+			
+			injector.mapValue( GameData, GameData.instance );
+			
+			//////////////
+			
+			injectActor( CommonService );
 			
 			//************  initlialize commands ************************************************//
 			// 初始化 command

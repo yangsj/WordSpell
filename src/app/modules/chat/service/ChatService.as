@@ -1,5 +1,7 @@
 package app.modules.chat.service
 {
+	import flash.utils.Dictionary;
+	
 	import app.modules.chat.model.ChatModel;
 	import app.modules.chat.model.ChatVo;
 	
@@ -33,19 +35,67 @@ package app.modules.chat.service
 		
 		private function chatNotify(  res:SocketResp ):void
 		{
-			trace( res.data );
 			var data:chat_msg_ret_t = res.data as chat_msg_ret_t;
 			var chatVo:ChatVo = new ChatVo();
-			chatVo.channel = 1;
-			chatVo.msg = data.value;
+			chatVo.msg = data.msg;
+			chatVo.channel = data.channel;
+			chatVo.emoticons = decode( data.emotions );
+			chatVo.playerUid = data.from_player_uid;
+			chatVo.playerName = data.from_player_name;
 			chatModel.addMsg( chatVo );
 		}
 		
 		public function sendRequestMsg(chatVo:ChatVo):void
 		{
 			var req:chat_msg_req_t = new chat_msg_req_t();
-			req.value = chatVo.msg;
+			req.msg = chatVo.msg;
+			req.channel = chatVo.channel;
+			req.emotions = encode( chatVo.emoticons );
+			req.player_uid = chatVo.playerUid;
+			req.player_name = chatVo.playerName;
 			call( client_cmd_e.CHAT_REQ, req );
+			
+			// 发送到自己聊天窗口
+			chatVo.emoticons = decode( req.emotions );
+			chatModel.addMsg( chatVo );
+		}
+		
+		/**
+		 * 编码
+		 * @param emoticons
+		 * @return 
+		 */
+		private function encode( emoticons:Array ):Dictionary
+		{
+			var dict:Dictionary = new Dictionary();
+			if ( emoticons )
+			{
+				for each ( var obj:Object in emoticons )
+				{
+					var index:int = obj.index;
+					var src:String = "1" + String(obj.src);
+					dict[src] = index;
+				}
+			}
+			return dict;
+		}
+		
+		/**
+		 * 解码
+		 * @param emoticons
+		 * @return 
+		 */
+		private function decode( emoticons:Dictionary ):Array
+		{
+			var array:Array = [];
+			if ( emoticons )
+			{
+				for ( var key:* in emoticons )
+				{
+					array.push({index:int(emoticons[key]), src:"ui.chat.emotion_" + String( key ).substr(1) });
+				}
+			}
+			return array;
 		}
 		
 	}

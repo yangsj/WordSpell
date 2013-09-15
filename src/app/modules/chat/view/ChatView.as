@@ -239,7 +239,7 @@ package app.modules.chat.view
 				for each ( var item:XML in list )
 				{
 					src = String( item.@src );
-					src = "ui.chat.emotion_" + src.substr( src.length - 2 );
+					src = src.substr( src.length - 2 );
 					arr.push({ src: src, index: int( item.@index )});
 				}
 				chatVo.channel = curChannel;
