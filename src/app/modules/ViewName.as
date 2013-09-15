@@ -30,14 +30,21 @@ package app.modules
 		public static const Register:String = "RegisterView";
 		
 		/**
-		 * 好友系统
-		 */
-		public static const Friend:String = "friendPanel";
-		
-		/**
 		 * 聊天系统
 		 */
 		public static const Chat:String = "ChatView";
+		
+		/**
+		 * 主界面ui
+		 */
+		public static const MainUI:String = "MainUIView";
+		
+		
+		
+		/**
+		 * 好友系统
+		 */
+		public static const Friend:String = "friendPanel";
 		
 		/**
 		 * 任务系统
@@ -45,9 +52,9 @@ package app.modules
 		public static const Task:String = "taskPanel";
 		
 		/**
-		 * 主界面ui
+		 * 个人信息
 		 */
-		public static const MainUI:String = "MainUIView";
+		public static const Personal:String = "personalPanel";
 		
 	}
 }

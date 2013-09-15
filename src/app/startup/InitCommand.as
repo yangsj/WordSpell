@@ -7,6 +7,7 @@ package app.startup
 	import app.modules.friend.command.FriendInitComand;
 	import app.modules.login.command.LoginInitCommand;
 	import app.modules.main.command.MainUIInitCommand;
+	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.test.TestInitCommand;
 	import app.modules.scene.command.SceneInitCommand;
 	import app.modules.task.command.TaskInitCommand;
@@ -34,6 +35,7 @@ package app.startup
 				, ChatInitCommand		// 聊天系统
 				, FriendInitComand		// 好友系统
 				, LoginInitCommand		// 登陆游戏
+				, PersonalInitCommand	// 个人信息
 			];
 		
 		public function InitCommand()

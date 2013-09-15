@@ -2,7 +2,6 @@ package app.modules.main.view
 {
 	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import app.events.ViewEvent;
@@ -18,8 +17,6 @@ package app.modules.main.view
 	 */
 	public class MainUIView extends ViewSprite
 	{
-		public var friendPanel:InteractiveObject;
-		public var taskPanel:InteractiveObject;
 		
 		public function MainUIView()
 		{
@@ -30,7 +27,7 @@ package app.modules.main.view
 			var list:Array = FunctionBtnConfig.functionBtnsList;
 			for each (var btnName:String in list )
 			{
-				var dis:InteractiveObject = this[ btnName ] as Sprite;
+				var dis:InteractiveObject = _skin[ btnName ] as Sprite;
 				if ( dis )
 				{
 					if ( dis.hasOwnProperty("mouseChildren"))
