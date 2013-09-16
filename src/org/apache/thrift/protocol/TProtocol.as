@@ -29,7 +29,7 @@ package org.apache.thrift.protocol {
    */
   public interface TProtocol {
   
-    function TProtocol(trans:TTransport);
+//    function TProtocol(trans:TTransport);
 
     function getTransport():TTransport;
 
