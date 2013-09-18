@@ -34,6 +34,16 @@ package app.modules.chat.model
 		 * 玩家id
 		 */
 		public var playerUid:int = 0;
+		
+		/**
+		 * 好友名字
+		 */
+		public var friendName:String = "";
+		
+		/**
+		 * 好友id
+		 */
+		public var friendUid:int = 0;
 
 		/**
 		 * 发送的信息
