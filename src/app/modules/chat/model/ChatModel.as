@@ -2,7 +2,7 @@ package app.modules.chat.model
 {
 	import flash.utils.Dictionary;
 	
-	import app.data.PlayerVo;
+	import app.data.PlayerBaseVo;
 	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
 	
@@ -18,7 +18,7 @@ package app.modules.chat.model
 	{
 		private const MAX_LENGTH:int = 200;
 
-		private var _privateChatFriendVo:PlayerVo;
+		private var _privateChatFriendVo:PlayerBaseVo;
 		private var _currentChannel:uint;
 		private var _isLocked:Boolean = false;
 		private var _historyMsg:Dictionary = new Dictionary();
@@ -95,7 +95,7 @@ package app.modules.chat.model
 		/**
 		 * 私聊好友信息
 		 */
-		public function get privateChatFriendVo():PlayerVo
+		public function get privateChatFriendVo():PlayerBaseVo
 		{
 			return _privateChatFriendVo;
 		}
@@ -103,9 +103,10 @@ package app.modules.chat.model
 		/**
 		 * @private
 		 */
-		public function set privateChatFriendVo(value:PlayerVo):void
+		public function set privateChatFriendVo(value:PlayerBaseVo):void
 		{
 			_privateChatFriendVo = value;
+			dispatch( new ChatEvent( ChatEvent.CHAT_TO_FRIEND ) );
 		}
 
 

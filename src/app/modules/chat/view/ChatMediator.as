@@ -40,6 +40,8 @@ package app.modules.chat.view
 			addContextListener( ChatEvent.HIDE_CHAT, hideViewHandler, ChatEvent );
 			// 显示信息
 			addContextListener( ChatEvent.UPDATE_MSG, updateMsgHandler, ChatEvent );
+			// 与好友私聊
+			addContextListener( ChatEvent.CHAT_TO_FRIEND, chatToFriendHandler, ChatEvent );
 			
 			/////////// 本地
 			
@@ -52,6 +54,11 @@ package app.modules.chat.view
 			
 			// 选中世界频道
 			view.selectedWorld();
+		}
+		
+		private function chatToFriendHandler( event:ChatEvent ):void
+		{
+			view.selectedPrivate();
 		}
 		
 		private function lockChatHandler( event:ChatEvent ):void

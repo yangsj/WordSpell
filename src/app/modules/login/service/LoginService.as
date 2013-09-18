@@ -1,7 +1,8 @@
 package app.modules.login.service
 {
 	import app.data.GameData;
-	import app.data.PlayerVo;
+	import app.data.PlayerBaseVo;
+	import app.data.PlayerSelfVo;
 	import app.events.GameEvent;
 	import app.modules.login.login.vo.LoginVo;
 	import app.modules.login.register.vo.RegisterVo;
@@ -40,11 +41,10 @@ package app.modules.login.service
 			/////////// set player data ////////////
 			////////////////////////////////////////
 			
-			var selfVo:PlayerVo = new PlayerVo();
+			var selfVo:PlayerSelfVo = GameData.instance.selfVo ||= new PlayerSelfVo();
 			selfVo.uid = data.uid;
 			selfVo.exp = data.exp;
 			selfVo.level = data.level;
-			GameData.instance.selfVo = selfVo;
 			
 			////////////////////////////////////////
 			/////////// set player data ////////////

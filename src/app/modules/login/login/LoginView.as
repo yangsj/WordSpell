@@ -9,6 +9,8 @@ package app.modules.login.login
 	
 	import app.Language;
 	import app.core.Tips;
+	import app.modules.friend.view.rightMenu.RightMenu;
+	import app.modules.friend.view.rightMenu.RightMenuType;
 	import app.modules.login.login.event.LoginEvent;
 	import app.modules.login.login.vo.LoginVo;
 	import app.utils.appStage;
@@ -66,6 +68,15 @@ package app.modules.login.login
 			txtPassword.addEventListener(FocusEvent.FOCUS_IN, focusInOutHandler );
 			txtPassword.addEventListener(FocusEvent.FOCUS_OUT, focusInOutHandler );
 			forgetPassword.addEventListener(MouseEvent.CLICK, txtForgetPasswordHandler );
+			
+			addEventListener(MouseEvent.MOUSE_DOWN, downHandler );
+		}
+		
+		protected function downHandler(event:MouseEvent):void
+		{
+			event.stopPropagation();
+			
+			RightMenu.instance.setList( RightMenuType.testRightMenu );
 		}
 		
 		override public function dispose():void

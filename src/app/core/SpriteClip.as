@@ -38,7 +38,7 @@ package app.core
 
 		public function dispose():void
 		{
-			TickManager.instance.clearDoTime( loop );
+			stop();
 			if ( _bitmapList )
 			{
 				while ( _bitmapList.length > 0 )

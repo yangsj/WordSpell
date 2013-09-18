@@ -8,9 +8,9 @@ package app.data
 	 * @author 	yangsj 
 	 * 			2013-9-18
 	 */
-	public class PlayerVo extends Actor
+	public class PlayerBaseVo extends Actor
 	{
-		public function PlayerVo()
+		public function PlayerBaseVo()
 		{
 			super();
 		}

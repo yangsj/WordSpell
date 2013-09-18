@@ -6,6 +6,8 @@ package app.startup
 	import app.events.ViewEvent;
 	import app.modules.chat.command.ChatInitCommand;
 	import app.modules.friend.command.FriendInitComand;
+	import app.modules.friend.view.rightMenu.RightMenu;
+	import app.modules.friend.view.rightMenu.RightMenuMediator;
 	import app.modules.login.command.LoginInitCommand;
 	import app.modules.main.command.MainUIInitCommand;
 	import app.modules.panel.personal.command.PersonalInitCommand;
@@ -74,6 +76,10 @@ package app.startup
 					commandMap.mapEvent( INIT_COMMAND, initCommandClass, Event, true );
 			}
 			dispatch( new Event( INIT_COMMAND ));
+			
+			//////////////
+			
+			addView( "", RightMenu, RightMenuMediator );
 		}
 		
 	}

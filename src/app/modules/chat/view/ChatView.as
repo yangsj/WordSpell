@@ -13,7 +13,7 @@ package app.modules.chat.view
 	import app.Language;
 	import app.core.Tips;
 	import app.data.GameData;
-	import app.data.PlayerVo;
+	import app.data.PlayerBaseVo;
 	import app.managers.LoaderManager;
 	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
@@ -62,7 +62,7 @@ package app.modules.chat.view
 		private var txtFriendName:TextField;
 		private var emotionPanel:ChatEmotionPanel;
 		private var curChannel:uint = 0;
-		private var chatFriendVo:PlayerVo;
+		private var chatFriendVo:PlayerBaseVo;
 
 		private var _isExpand:Boolean = true;
 		private var _scrollBar:ScrollBar;
@@ -90,31 +90,36 @@ package app.modules.chat.view
 
 		public function addMsg( chatVo:ChatVo ):void
 		{
-			var emoticons:Array = chatVo.emoticons;
-			var msgIndex:int = chatVo.addIndex;
-			for each ( var obj:Object in emoticons )
+			if ( _isExpand )
 			{
-				if ( obj )
-					obj.index = ( msgIndex + obj.index );
+				var emoticons:Array = chatVo.emoticons;
+				var msgIndex:int = chatVo.addIndex;
+				for each ( var obj:Object in emoticons )
+				{
+					if ( obj )
+						obj.index = ( msgIndex + obj.index );
+				}
+				txtOutput.append( chatVo.htmlText, emoticons );
+				updateBar();
 			}
-			txtOutput.append( chatVo.htmlText, emoticons );
-			updateBar();
 		}
 
 		public function setChannelData( list:Vector.<ChatVo> ):void
 		{
-			txtOutput.clear();
-			for each ( var chatVo:ChatVo in list )
+			if ( _isExpand )
+			{
+				txtOutput.clear();
+				for each ( var chatVo:ChatVo in list )
 				addMsg( chatVo );
+			}
 		}
 
 		/**
 		 * 设置频道状态
 		 * @param isPrivateChatChannel 是否是私聊频道
 		 * @param chatFriendVo 私聊数据
-		 *
 		 */
-		public function setChannelStatus( isPrivateChatChannel:Boolean, chatFriendVo:PlayerVo ):void
+		public function setChannelStatus( isPrivateChatChannel:Boolean, chatFriendVo:PlayerBaseVo ):void
 		{
 			if ( isPrivateChatChannel )
 			{

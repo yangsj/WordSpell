@@ -48,6 +48,10 @@ package app.modules.chat.event
 		 * 锁定聊天窗口信息
 		 */
 		public static const LOCK_CHAT:String = "lock_chat";
+		/**
+		 * 跟好友私聊
+		 */
+		public static const CHAT_TO_FRIEND:String = "chat_to_friend";
 		
 	}
 }

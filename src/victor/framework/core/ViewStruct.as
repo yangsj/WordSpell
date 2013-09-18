@@ -26,6 +26,7 @@ package victor.framework.core
 		public static const EFFECT:uint = numCount++;//特效播放层
 		public static const DRAG:uint = numCount++;//对象拖拽层
 		public static const LOADING:uint = numCount++;//loading层
+		public static const RIGHT_MENU:uint = numCount++;//类右键菜单相爱你是层
 
 		private static var container:Sprite;
 
