@@ -31,16 +31,26 @@ package app.modules.chat.view
 	 */
 	public class ChatView extends ViewSprite
 	{
-		
+		//底图
 		public var mcBg:Sprite;
+		//容器
 		public var chatMc:Sprite;
+		//锁频
 		public var mcLock:MovieClip;
+		//世界
 		public var tabWorld:MovieClip;
+		//私聊
 		public var tabPrivate:MovieClip;
+		//发送
 		public var btnSend:InteractiveObject;
+		//世界
 		public var btnWorld:InteractiveObject;
+		//私聊
 		public var btnPrivate:InteractiveObject;
+		//表情
 		public var btnExpression:InteractiveObject;
+		//隐藏展开
+		public var btnExpandHide:InteractiveObject;
 		
 		private var tabControl:TabButtonControl;
 		
