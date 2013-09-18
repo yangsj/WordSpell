@@ -15,7 +15,7 @@ package app.modules.login.login.vo
 		/**
 		 * 帐号
 		 */
-		public var accountNumber:String = "";
+		public var accountName:String = "";
 		/**
 		 * 密码
 		 */

@@ -1,10 +1,11 @@
 package app.modules.chat.model
 {
 	import flash.utils.Dictionary;
-
+	
+	import app.data.PlayerVo;
 	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
-
+	
 	import org.robotlegs.mvcs.Actor;
 
 
@@ -15,11 +16,11 @@ package app.modules.chat.model
 	 */
 	public class ChatModel extends Actor
 	{
-		private const MAX_LENGTH:int = 100;
+		private const MAX_LENGTH:int = 200;
 
+		private var _privateChatFriendVo:PlayerVo;
 		private var _currentChannel:uint;
 		private var _isLocked:Boolean = false;
-
 		private var _historyMsg:Dictionary = new Dictionary();
 
 		public function ChatModel()
@@ -49,6 +50,14 @@ package app.modules.chat.model
 		public function getCurrentChannelList():Vector.<ChatVo>
 		{
 			return _historyMsg[ _currentChannel ];
+		}
+		
+		/**
+		 * 当前频道是否是私聊平道
+		 */
+		public function get isPrivateChatChannel():Boolean
+		{
+			return _currentChannel == ChatChannelType.PRIVATE;
 		}
 
 		/**
@@ -81,6 +90,22 @@ package app.modules.chat.model
 		public function set isLocked( value:Boolean ):void
 		{
 			_isLocked = value;
+		}
+
+		/**
+		 * 私聊好友信息
+		 */
+		public function get privateChatFriendVo():PlayerVo
+		{
+			return _privateChatFriendVo;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set privateChatFriendVo(value:PlayerVo):void
+		{
+			_privateChatFriendVo = value;
 		}
 
 

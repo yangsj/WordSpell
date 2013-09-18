@@ -12,11 +12,13 @@ package app
 	import app.startup.InitDataCommand;
 	import app.startup.InitServiceCommand;
 	import app.startup.ShowLoginCommand;
+	import app.utils.appStage;
 	
 	import org.robotlegs.base.ContextEvent;
 	
 	import victor.framework.core.BaseContext;
 	import victor.framework.core.ViewStruct;
+	import victor.framework.manager.TickManager;
 	
 	
 	/**
@@ -43,6 +45,9 @@ package app
 		{
 			// 初始化视图结构管理器
 			ViewStruct.initialize( contextView );
+			
+			// 计时器管理器
+			TickManager.instance.init( appStage.frameRate );
 		}
 		
 		private function addStartupCommand() : void

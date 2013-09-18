@@ -1,9 +1,6 @@
 package app.modules.chat.view
 {
-	import app.modules.chat.event.ChatEvent;
-	import app.modules.chat.model.ChatModel;
-	import app.modules.chat.model.ChatVo;
-	
+	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.chat.model.ChatModel;
 	import app.modules.chat.model.ChatVo;
@@ -64,12 +61,16 @@ package app.modules.chat.view
 		
 		private function pushMsgHandler( event:ChatEvent ):void
 		{
-			chatService.sendRequestMsg( event.data as ChatVo );
+			var chatVo:ChatVo = event.data as ChatVo;
+			chatService.sendRequestMsg( chatVo );
 		}
 		
 		private function changeChannelHandler( event:ChatEvent ):void
 		{
-			chatModel.currentChannel = int( event.data );
+			var currentChannel:int = int( event.data );
+			chatModel.currentChannel = currentChannel;
+			view.setChannelStatus( chatModel.isPrivateChatChannel, chatModel.privateChatFriendVo);
+			
 			var vecList:Vector.<ChatVo> = chatModel.getCurrentChannelList();
 			view.setChannelData( vecList );
 		}

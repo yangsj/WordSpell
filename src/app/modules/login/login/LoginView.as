@@ -118,19 +118,14 @@ package app.modules.login.login
 		protected function btnLoginHandler( event:MouseEvent = null ):void
 		{
 			if ( txtAccountNumber.text && txtPassword.text )
-			{
 				dispatchEvent( new LoginEvent( LoginEvent.ACTION_LOGIN ));
-			}
-			else 
-			{
-				Tips.showMouse( Language.lang( Language.LoginView_0 ) );
-			}
+			else Tips.showMouse( Language.lang( Language.LoginView_0 ) );
 		}
 		
 		public function get loginVo():LoginVo
 		{
 			_loginVo ||= new LoginVo();
-			_loginVo.accountNumber = txtAccountNumber.text;
+			_loginVo.accountName = txtAccountNumber.text;
 			_loginVo.passwrod = txtPassword.text;
 			return _loginVo;
 		}

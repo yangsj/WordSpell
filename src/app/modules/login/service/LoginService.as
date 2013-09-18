@@ -1,6 +1,7 @@
 package app.modules.login.service
 {
 	import app.data.GameData;
+	import app.data.PlayerVo;
 	import app.events.GameEvent;
 	import app.modules.login.login.vo.LoginVo;
 	import app.modules.login.register.vo.RegisterVo;
@@ -34,15 +35,28 @@ package app.modules.login.service
 		private function loginSuccessedNotify( res:SocketResp ):void
 		{
 			var data:user_login_ret_t = res.data as user_login_ret_t;
-			loginSuccessed();
 			
-			GameData.instance
+			////////////////////////////////////////
+			/////////// set player data ////////////
+			////////////////////////////////////////
+			
+			var selfVo:PlayerVo = new PlayerVo();
+			selfVo.uid = data.uid;
+			selfVo.exp = data.exp;
+			selfVo.level = data.level;
+			GameData.instance.selfVo = selfVo;
+			
+			////////////////////////////////////////
+			/////////// set player data ////////////
+			////////////////////////////////////////
+				
+			loginSuccessed();
 		}
 		
 		public function login( loginVo:LoginVo, callBack:Function ):void
 		{
 			var req:account_req_t = new account_req_t();
-			req.nick_name = loginVo.accountNumber;
+			req.nick_name = loginVo.accountName;
 			req.password = loginVo.passwrod;
 			req.register_flag = false;
 			call( client_cmd_e.LOGIN_REQ, req, callBack );
@@ -51,6 +65,7 @@ package app.modules.login.service
 		public function register( registerVo:RegisterVo, callBack:Function = null ):void
 		{
 			var req:account_req_t = new account_req_t();
+			req.real_name = registerVo.playerName;
 			req.nick_name = registerVo.nickName;
 			req.password = registerVo.password;
 			req.age = registerVo.playerAge;
@@ -59,7 +74,6 @@ package app.modules.login.service
 			req.phone = registerVo.phone;
 			req.qq = registerVo.QQ;
 			req.school = registerVo.schoolName;
-			req.real_name = registerVo.playerName;
 			req.register_flag = true;
 			call( client_cmd_e.LOGIN_REQ, req, callBack );
 		}

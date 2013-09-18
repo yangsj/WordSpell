@@ -27,6 +27,7 @@ import org.apache.thrift.protocol.*;
     private static const GRADE_FIELD_DESC:TField = new TField("grade", TType.STRING, 8);
     private static const QQ_FIELD_DESC:TField = new TField("qq", TType.STRING, 9);
     private static const PHONE_FIELD_DESC:TField = new TField("phone", TType.STRING, 10);
+    private static const ADDRESS_FIELD_DESC:TField = new TField("address", TType.STRING, 11);
 
     private var _nick_name:String;
     public static const NICK_NAME:int = 1;
@@ -48,6 +49,8 @@ import org.apache.thrift.protocol.*;
     public static const QQ:int = 9;
     private var _phone:String;
     public static const PHONE:int = 10;
+    private var _address:String;
+    public static const ADDRESS:int = 11;
 
     private var __isset_register_flag:Boolean = false;
     private var __isset_age:Boolean = false;
@@ -73,6 +76,8 @@ import org.apache.thrift.protocol.*;
       metaDataMap[QQ] = new FieldMetaData("qq", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
       metaDataMap[PHONE] = new FieldMetaData("phone", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[ADDRESS] = new FieldMetaData("address", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
     }
     {
@@ -256,6 +261,23 @@ import org.apache.thrift.protocol.*;
       return this.phone != null;
     }
 
+    public function get address():String {
+      return this._address;
+    }
+
+    public function set address(address:String):void {
+      this._address = address;
+    }
+
+    public function unsetAddress():void {
+      this.address = null;
+    }
+
+    // Returns true if field address is set (has been assigned a value) and false otherwise
+    public function isSetAddress():Boolean {
+      return this.address != null;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case NICK_NAME:
@@ -338,6 +360,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case ADDRESS:
+        if (value == null) {
+          unsetAddress();
+        } else {
+          this.address = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -365,6 +395,8 @@ import org.apache.thrift.protocol.*;
         return this.qq;
       case PHONE:
         return this.phone;
+      case ADDRESS:
+        return this.address;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -393,6 +425,8 @@ import org.apache.thrift.protocol.*;
         return isSetQq();
       case PHONE:
         return isSetPhone();
+      case ADDRESS:
+        return isSetAddress();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -481,6 +515,13 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case ADDRESS:
+            if (field.type == TType.STRING) {
+              this.address = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -542,6 +583,11 @@ import org.apache.thrift.protocol.*;
       if (this.phone != null) {
         oprot.writeFieldBegin(PHONE_FIELD_DESC);
         oprot.writeString(this.phone);
+        oprot.writeFieldEnd();
+      }
+      if (this.address != null) {
+        oprot.writeFieldBegin(ADDRESS_FIELD_DESC);
+        oprot.writeString(this.address);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -621,6 +667,14 @@ import org.apache.thrift.protocol.*;
         ret += "null";
       } else {
         ret += this.phone;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "address:";
+      if (this.address == null) {
+        ret += "null";
+      } else {
+        ret += this.address;
       }
       first = false;
       ret += ")";
