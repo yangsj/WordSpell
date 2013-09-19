@@ -68,15 +68,6 @@ package app.modules.login.login
 			txtPassword.addEventListener(FocusEvent.FOCUS_IN, focusInOutHandler );
 			txtPassword.addEventListener(FocusEvent.FOCUS_OUT, focusInOutHandler );
 			forgetPassword.addEventListener(MouseEvent.CLICK, txtForgetPasswordHandler );
-			
-			addEventListener(MouseEvent.MOUSE_DOWN, downHandler );
-		}
-		
-		protected function downHandler(event:MouseEvent):void
-		{
-			event.stopPropagation();
-			
-			RightMenu.instance.setList( RightMenuType.testRightMenu );
 		}
 		
 		override public function dispose():void
@@ -95,6 +86,9 @@ package app.modules.login.login
 		protected function txtForgetPasswordHandler(event:MouseEvent):void
 		{
 			// 忘记密码
+			// test
+			event.stopPropagation();
+			RightMenu.instance.setList( RightMenuType.testRightMenu );
 		}
 		
 		protected function focusInOutHandler(event:FocusEvent):void
