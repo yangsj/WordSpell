@@ -46,14 +46,10 @@ package app.modules.chat.view
 		public var tabPrivate:MovieClip;
 		//发送
 		public var btnSend:InteractiveObject;
-		//世界
-		public var btnWorld:InteractiveObject;
-		//私聊
-		public var btnPrivate:InteractiveObject;
 		//表情
 		public var btnExpression:InteractiveObject;
-		//隐藏展开
-		public var btnExpandHide:InteractiveObject;
+		//隐藏展开(1帧收藏、2帧展开
+		public var btnExpandHide:MovieClip;
 
 		private var tabControl:TabButtonControl;
 
@@ -127,13 +123,13 @@ package app.modules.chat.view
 				txtInput.clear();
 				txtFriendName.text = "/" + ( chatFriendVo ? chatFriendVo.name : " " ) + " ";
 				txtInput.x = txtFriendName.x + txtFriendName.textWidth;
-				txtInput.setSize( 215 - txtFriendName.textWidth, 30 );
+				txtInput.setSize( 165 - txtFriendName.textWidth, 23 );
 			}
 			else
 			{
 				this.chatFriendVo = null;
 				txtInput.x = txtFriendName.x;
-				txtInput.setSize( 215, 30 );
+				txtInput.setSize( 165, 23 );
 			}
 		}
 
@@ -141,9 +137,7 @@ package app.modules.chat.view
 
 		private function channelChangeHandler( target:MovieClip, data:* = null ):void
 		{
-			btnWorld.visible = target == tabWorld;
-			btnPrivate.visible = target == tabPrivate;
-			txtFriendName.visible = btnPrivate.visible;
+			txtFriendName.visible = target == tabPrivate.visible;
 			switch ( target )
 			{
 				case tabWorld:
@@ -161,11 +155,11 @@ package app.modules.chat.view
 		 */
 		private function initBar():void
 		{
-			var skin:Sprite = LoaderManager.getObj( "ui_scrollBar5" ) as Sprite;
+			var skin:Sprite = LoaderManager.getObj( "ui_Skin_ScrollBar_Chat" ) as Sprite;
 			_scrollBar = new ScrollBar( skin );
-			_scrollBar.init( 145 );
-			_scrollBar.x = 7;
-			_scrollBar.y = -195;
+			_scrollBar.init( 110 );
+			_scrollBar.x = 416;
+			_scrollBar.y = -159;
 			_scrollBar.setSpeed( 10 );
 			_scrollBar.onChange = onBarChange;
 			_skin.addChild( _scrollBar );
@@ -203,14 +197,18 @@ package app.modules.chat.view
 			if ( _isExpand )
 			{
 				mcBg.y = -mcBg.height;
+				btnExpandHide.y = -172;
 			}
 			else
 			{
-				mcBg.y = mcBg.height * 0.25;
+				mcBg.y = -66;
+				btnExpandHide.y = -61;
 			}
 			chatMc.visible = _isExpand;
 			mcLock.visible = _isExpand;
 			_scrollBar.visible = _isExpand;
+
+			btnExpandHide.gotoAndStop( _isExpand ? 1 : 2 );
 		}
 
 		//////////////// override 
@@ -237,7 +235,7 @@ package app.modules.chat.view
 
 			txtOutput = new RichTextField();
 			txtOutput.html = true;
-			txtOutput.setSize( 300, 150 );
+			txtOutput.setSize( 400, 115 );
 			txtOutput.defaultTextFormat = txtFormat;
 			txtOutput.autoScroll = true;
 			txtOutput.textfield.selectable = false;
@@ -246,24 +244,27 @@ package app.modules.chat.view
 			txtOutput.lineHeight = 16;
 			chatMc.addChild( txtOutput );
 
+			txtFormat = new TextFormat( "宋体", 12, 0xFFFFFF, false, false, false );
+			txtFormat.size = 18;
+			txtFormat.color = 0x0;
+			
 			txtInput = new RichTextField();
-			txtInput.x = 40;
-			txtInput.y = -24;
-			txtInput.setSize( 215, 30 );
+			txtInput.x = 148;
+			txtInput.y = -34;
+			txtInput.setSize( 165, 23 );
 			txtInput.spriteOffsetY( -2 );
-			txtInput.lineHeight = 25;
-			txtInput.textHeight = 14;
+			txtInput.lineHeight = 29;
+			txtInput.textHeight = 18;
 			txtInput.type = RichTextField.INPUT;
 			txtInput.textfield.multiline = false;
 			txtInput.defaultTextFormat = txtFormat;
 			_skin.addChild( txtInput );
 
-			txtFormat.size = 12;
 			txtFriendName = new TextField();
 			txtFriendName.defaultTextFormat = txtFormat;
 			txtFriendName.mouseEnabled = false;
-			txtFriendName.x = 40;
-			txtFriendName.y = -24;
+			txtFriendName.x = 148;
+			txtFriendName.y = -34;
 			_skin.addChild( txtFriendName );
 
 			initBar();
@@ -271,7 +272,7 @@ package app.modules.chat.view
 			mcLock.mouseChildren = false;
 			mcLock.buttonMode = true;
 
-			emotionPanel = new ChatEmotionPanel( _skin, 90, -163 );
+			emotionPanel = new ChatEmotionPanel( _skin, 123, -163 );
 
 			btnSend.addEventListener( MouseEvent.CLICK, btnSendClickHandler );
 			btnExpression.addEventListener( MouseEvent.CLICK, btnExpressionClickHandler );

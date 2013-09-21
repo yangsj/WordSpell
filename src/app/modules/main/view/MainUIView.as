@@ -1,5 +1,6 @@
 package app.modules.main.view
 {
+	import flash.display.DisplayObject;
 	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -27,7 +28,7 @@ package app.modules.main.view
 			var list:Array = FunctionBtnConfig.functionBtnsList;
 			for each (var btnName:String in list )
 			{
-				var dis:InteractiveObject = _skin[ btnName ] as Sprite;
+				var dis:DisplayObject = _skin[ btnName ] as DisplayObject;
 				if ( dis )
 				{
 					if ( dis.hasOwnProperty("mouseChildren"))

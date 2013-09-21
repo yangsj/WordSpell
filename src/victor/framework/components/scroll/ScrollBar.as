@@ -24,7 +24,6 @@ package victor.framework.components.scroll
 		private var _UpBtn:SimpleButton;
 		private var _DownBtn:SimpleButton;
 		private var _ScrollMc:MovieClip;
-		private var _ScrollIcon:Sprite;
 		// 背景
 		private var _ListBack:Sprite;
 		private var _barHeight:int;
@@ -53,13 +52,11 @@ package victor.framework.components.scroll
 			_UpBtn = _skin.getChildByName( "_UpBtn" ) as SimpleButton;
 			_DownBtn = _skin.getChildByName( "_DownBtn" ) as SimpleButton;
 			_ScrollMc = _skin.getChildByName( "_ScrollBtn" ) as MovieClip;
-			_ScrollIcon = _skin.getChildByName( "_ScrollIcon" ) as Sprite;
 			_ListBack = _skin.getChildByName( "_back" ) as Sprite;
 			_ScrollMc.y = 0;
 			_ScrollMc.stop();
 			_ScrollMc.visible = false;
 			// _moveNum = 0;
-			_ScrollIcon.mouseEnabled = false;
 			addChild( _skin );
 		}
 
