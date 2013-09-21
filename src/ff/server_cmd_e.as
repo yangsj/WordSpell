@@ -12,13 +12,19 @@ import flash.utils.Dictionary;
     public static const LOGIN_RET:int = 1;
     public static const CHAT_RET:int = 2;
     public static const ERROR_CODE_RET:int = 3;
+    public static const START_ROUND_RET:int = 4;
+    public static const INPUT_RET:int = 5;
+    public static const END_ROUND_RET:int = 6;
 
-    public static const VALID_VALUES:Set = new Set(LOGIN_RET, CHAT_RET, ERROR_CODE_RET);
+    public static const VALID_VALUES:Set = new Set(LOGIN_RET, CHAT_RET, ERROR_CODE_RET, START_ROUND_RET, INPUT_RET, END_ROUND_RET);
     public static const VALUES_TO_NAMES:Dictionary = new Dictionary();
     {
       VALUES_TO_NAMES[LOGIN_RET] = "LOGIN_RET";
       VALUES_TO_NAMES[CHAT_RET] = "CHAT_RET";
       VALUES_TO_NAMES[ERROR_CODE_RET] = "ERROR_CODE_RET";
+      VALUES_TO_NAMES[START_ROUND_RET] = "START_ROUND_RET";
+      VALUES_TO_NAMES[INPUT_RET] = "INPUT_RET";
+      VALUES_TO_NAMES[END_ROUND_RET] = "END_ROUND_RET";
 
     }
   }
