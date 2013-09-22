@@ -6,9 +6,10 @@ package
 	import flash.events.Event;
 	
 	import app.AppContext;
+	import app.GameConfig;
 	import app.utils.appStage;
 	
-	[SWF( width = "960", height = "560", frameRate = "30" )]
+	[SWF( width = "960", height = "560", frameRate = "60" )]
 	/**
 	 * ……
 	 * @author 	yangsj 
@@ -31,6 +32,8 @@ package
 			appStage.align = StageAlign.TOP_LEFT;
 			appStage.scaleMode = StageScaleMode.NO_SCALE;
 			appStage.color = 0;
+			
+//			GameConfig.isDebug = true;
 			
 			new AppContext( this );
 		}

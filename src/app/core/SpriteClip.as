@@ -7,9 +7,9 @@ package app.core
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-
+	
 	import app.managers.LoaderManager;
-
+	
 	import victor.framework.interfaces.IDisposable;
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
@@ -27,6 +27,7 @@ package app.core
 		private var _bitmap:Bitmap;
 		private var _frameIndex:int;
 		private var _totalFrames:int;
+		private var _linkage:String;
 
 		public function SpriteClip( linkage:String, domainName:String = "", frameRate:int = 24 )
 		{
@@ -57,7 +58,10 @@ package app.core
 		public function setLinkage( linkage:String, domainName:String = "" ):void
 		{
 			if ( linkage )
+			{
+				this.linkage = linkage;
 				setClip( LoaderManager.getObj( linkage, domainName ) as MovieClip );
+			}
 		}
 
 		public function setClip( clip:MovieClip ):void
@@ -79,8 +83,11 @@ package app.core
 
 		public function start():void
 		{
-			TickManager.instance.clearDoTime( loop );
-			TickManager.instance.doInterval( loop, 1000 / _frameRate );
+			if ( _totalFrames > 1 )
+			{
+				TickManager.instance.clearDoTime( loop );
+				TickManager.instance.doInterval( loop, 1000 / _frameRate );
+			}
 			loop()
 		}
 
@@ -125,6 +132,17 @@ package app.core
 			_bitmap.bitmapData = frameVo.bitmapData;
 			_frameIndex++;
 		}
+
+		public function get linkage():String
+		{
+			return _linkage;
+		}
+
+		public function set linkage(value:String):void
+		{
+			_linkage = value;
+		}
+
 
 		/////////////////////// getters/setters ///////////////
 

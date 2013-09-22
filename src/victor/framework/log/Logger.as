@@ -49,6 +49,14 @@ package victor.framework.log
 				trace( "[printData]" + msg );
 			}
 		}
+		
+		public static function Trace( ...args ):void
+		{
+			if ( _ccInstance )
+			{
+				trace("[trace][" + args.join(",") + "]");
+			}
+		}
 
 		/**
 		 * 初始化舞台
@@ -99,7 +107,7 @@ class CcInstance
 		Cc.memoryMonitor = true;
 		Cc.config.commandLineAllowed = true;
 		Cc.config.alwaysOnTop = true;
-		Cc.visible = false;
+		Cc.visible = true;
 		Cc.width = stage.stageWidth - 50;
 	}
 

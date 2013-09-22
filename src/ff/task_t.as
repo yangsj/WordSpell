@@ -387,25 +387,25 @@ import org.apache.thrift.protocol.*;
           case PROGRESS:
             if (field.type == TType.MAP) {
               {
-                var _map53:TMap = iprot.readMapBegin();
+                var _map61:TMap = iprot.readMapBegin();
                 this.progress = new Dictionary();
-                for (var _i54:int = 0; _i54 < _map53.size; ++_i54)
+                for (var _i62:int = 0; _i62 < _map61.size; ++_i62)
                 {
-                  var _key55:int;
-                  var _val56:Array;
-                  _key55 = iprot.readI32();
+                  var _key63:int;
+                  var _val64:Array;
+                  _key63 = iprot.readI32();
                   {
-                    var _list57:TList = iprot.readListBegin();
-                    _val56 = new Array();
-                    for (var _i58:int = 0; _i58 < _list57.size; ++_i58)
+                    var _list65:TList = iprot.readListBegin();
+                    _val64 = new Array();
+                    for (var _i66:int = 0; _i66 < _list65.size; ++_i66)
                     {
-                      var _elem59:int;
-                      _elem59 = iprot.readI32();
-                      _val56.push(_elem59);
+                      var _elem67:int;
+                      _elem67 = iprot.readI32();
+                      _val64.push(_elem67);
                     }
                     iprot.readListEnd();
                   }
-                  this.progress[_key55] = _val56;
+                  this.progress[_key63] = _val64;
                 }
                 iprot.readMapEnd();
               }
@@ -432,15 +432,15 @@ import org.apache.thrift.protocol.*;
           case ITEM_AWARD:
             if (field.type == TType.MAP) {
               {
-                var _map60:TMap = iprot.readMapBegin();
+                var _map68:TMap = iprot.readMapBegin();
                 this.item_award = new Dictionary();
-                for (var _i61:int = 0; _i61 < _map60.size; ++_i61)
+                for (var _i69:int = 0; _i69 < _map68.size; ++_i69)
                 {
-                  var _key62:int;
-                  var _val63:int;
-                  _key62 = iprot.readI32();
-                  _val63 = iprot.readI32();
-                  this.item_award[_key62] = _val63;
+                  var _key70:int;
+                  var _val71:int;
+                  _key70 = iprot.readI32();
+                  _val71 = iprot.readI32();
+                  this.item_award[_key70] = _val71;
                 }
                 iprot.readMapEnd();
               }
@@ -482,17 +482,17 @@ import org.apache.thrift.protocol.*;
       if (this.progress != null) {
         oprot.writeFieldBegin(PROGRESS_FIELD_DESC);
         {
-          var _sizeCounter65:int = 0;
-          for (var _key64:* in this.progress) {
-            _sizeCounter65++;
+          var _sizeCounter73:int = 0;
+          for (var _key72:* in this.progress) {
+            _sizeCounter73++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.LIST, _sizeCounter65));
-          for (var elem66:* in this.progress)          {
-            oprot.writeI32(elem66);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.LIST, _sizeCounter73));
+          for (var elem74:* in this.progress)          {
+            oprot.writeI32(elem74);
             {
-              oprot.writeListBegin(new TList(TType.I32, this.progress[elem66].length));
-              for each (var elem67:* in this.progress[elem66])              {
-                oprot.writeI32(elem67);
+              oprot.writeListBegin(new TList(TType.I32, this.progress[elem74].length));
+              for each (var elem75:* in this.progress[elem74])              {
+                oprot.writeI32(elem75);
               }
               oprot.writeListEnd();
             }
@@ -510,14 +510,14 @@ import org.apache.thrift.protocol.*;
       if (this.item_award != null) {
         oprot.writeFieldBegin(ITEM_AWARD_FIELD_DESC);
         {
-          var _sizeCounter69:int = 0;
-          for (var _key68:* in this.item_award) {
-            _sizeCounter69++;
+          var _sizeCounter77:int = 0;
+          for (var _key76:* in this.item_award) {
+            _sizeCounter77++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter69));
-          for (var elem70:* in this.item_award)          {
-            oprot.writeI32(elem70);
-            oprot.writeI32(this.item_award[elem70]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter77));
+          for (var elem78:* in this.item_award)          {
+            oprot.writeI32(elem78);
+            oprot.writeI32(this.item_award[elem78]);
           }
           oprot.writeMapEnd();
         }

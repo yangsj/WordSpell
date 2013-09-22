@@ -138,7 +138,7 @@ package app.modules.login.register
 			_registerVo.email = txtEmail.text;
 			
 			_registerVo.playerName = txtName.text;
-			_registerVo.playerAge = int( txtArea.text );
+			_registerVo.playerAddress = txtArea.text;
 			_registerVo.schoolName = txtSchool.text;
 			_registerVo.className = txtClass.text;
 			_registerVo.QQ = txtQQ.text;

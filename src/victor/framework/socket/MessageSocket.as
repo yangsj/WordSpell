@@ -104,10 +104,13 @@ package victor.framework.socket
 			// 检查是否有函数回调
 			dispatch( api );
 			// 响应
-			if ( callback.length > 0 )
-				callback( respObj );
-			else
-				callback();
+			if ( callback )
+			{
+				if ( callback.length > 0 )
+					callback( respObj );
+				else
+					callback();
+			}
 
 			// 销毁返回对象
 			SocketResp.disposeResp( respObj );

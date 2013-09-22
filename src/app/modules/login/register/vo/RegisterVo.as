@@ -29,9 +29,9 @@ package app.modules.login.register.vo
 		 */
 		public var playerName:String;
 		/**
-		 * 年龄
+		 * 地址
 		 */
-		public var playerAge:int;
+		public var playerAddress:String;
 		/**
 		 * 昵称
 		 */

@@ -146,15 +146,15 @@ import org.apache.thrift.protocol.*;
           case AREA_INFO:
             if (field.type == TType.MAP) {
               {
-                var _map78:TMap = iprot.readMapBegin();
+                var _map86:TMap = iprot.readMapBegin();
                 this.area_info = new Dictionary();
-                for (var _i79:int = 0; _i79 < _map78.size; ++_i79)
+                for (var _i87:int = 0; _i87 < _map86.size; ++_i87)
                 {
-                  var _key80:int;
-                  var _val81:int;
-                  _key80 = iprot.readI32();
-                  _val81 = iprot.readI32();
-                  this.area_info[_key80] = _val81;
+                  var _key88:int;
+                  var _val89:int;
+                  _key88 = iprot.readI32();
+                  _val89 = iprot.readI32();
+                  this.area_info[_key88] = _val89;
                 }
                 iprot.readMapEnd();
               }
@@ -185,14 +185,14 @@ import org.apache.thrift.protocol.*;
       if (this.area_info != null) {
         oprot.writeFieldBegin(AREA_INFO_FIELD_DESC);
         {
-          var _sizeCounter83:int = 0;
-          for (var _key82:* in this.area_info) {
-            _sizeCounter83++;
+          var _sizeCounter91:int = 0;
+          for (var _key90:* in this.area_info) {
+            _sizeCounter91++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter83));
-          for (var elem84:* in this.area_info)          {
-            oprot.writeI32(elem84);
-            oprot.writeI32(this.area_info[elem84]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter91));
+          for (var elem92:* in this.area_info)          {
+            oprot.writeI32(elem92);
+            oprot.writeI32(this.area_info[elem92]);
           }
           oprot.writeMapEnd();
         }

@@ -37,7 +37,7 @@ package app.modules.login.command
 		
 		private function loaderProgressCallBack( perent:Number ):void
 		{
-			Logger.debug( "加载: " + perent );
+			Logger.Trace( "加载: " + perent );
 			dispatch( new LoadEvent( LoadEvent.LOAD_PROGRESS, perent ));
 		}
 		

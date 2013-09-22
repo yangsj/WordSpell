@@ -18,9 +18,19 @@ package app.data
 		///////////////////////////////////////////////////////
 		
 		private var _name:String = "凌云";
+		private var _realName:String;
 		private var _uid:int;
 		private var _exp:int;
 		private var _level:int;
+		private var _money:int;
+		private var _rightWordsNum:int;
+		private var _wrongWordsNum:int;
+		private var _phone:String;
+		private var _email:String;
+		private var _address:String;
+		private var _school:String;
+		private var _grade:String;
+		private var _qq:String;
 		
 		////////////////////////////////////////////////////////
 		
@@ -38,6 +48,22 @@ package app.data
 		public function set name(value:String):void
 		{
 			_name = value;
+		}
+		
+		/**
+		 * 真实名字
+		 */
+		public function get realName():String
+		{
+			return _realName;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set realName(value:String):void
+		{
+			_realName = value;
 		}
 		
 		/**
@@ -87,5 +113,151 @@ package app.data
 		{
 			_level = value;
 		}
+
+		/**
+		 * 货币
+		 */
+		public function get money():int
+		{
+			return _money;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set money(value:int):void
+		{
+			_money = value;
+		}
+
+		/**
+		 * 答对的单词数量
+		 */
+		public function get rightWordsNum():int
+		{
+			return _rightWordsNum;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set rightWordsNum(value:int):void
+		{
+			_rightWordsNum = value;
+		}
+
+		/**
+		 * 答错的单词数量
+		 */
+		public function get wrongWordsNum():int
+		{
+			return _wrongWordsNum;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set wrongWordsNum(value:int):void
+		{
+			_wrongWordsNum = value;
+		}
+
+		/**
+		 * 电话号码
+		 */
+		public function get phone():String
+		{
+			return _phone;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set phone(value:String):void
+		{
+			_phone = value;
+		}
+
+		/**
+		 * 邮箱地址
+		 */
+		public function get email():String
+		{
+			return _email;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set email(value:String):void
+		{
+			_email = value;
+		}
+
+		/**
+		 * 地址
+		 */
+		public function get address():String
+		{
+			return _address;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set address(value:String):void
+		{
+			_address = value;
+		}
+
+		/**
+		 * 学校
+		 */
+		public function get school():String
+		{
+			return _school;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set school(value:String):void
+		{
+			_school = value;
+		}
+
+		/**
+		 * 年级
+		 */
+		public function get grade():String
+		{
+			return _grade;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set grade(value:String):void
+		{
+			_grade = value;
+		}
+
+		/**
+		 * qq号码
+		 */
+		public function get qq():String
+		{
+			return _qq;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set qq(value:String):void
+		{
+			_qq = value;
+		}
+
+
 	}
 }

@@ -32,7 +32,7 @@ package app
 		 */
 		public static function get isDebug():Boolean
 		{
-			if ( Capabilities.isDebugger )
+			if ( Capabilities.playerType == "StandAlone" )
 				return true;
 			return _isDebug;
 		}

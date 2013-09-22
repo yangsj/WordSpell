@@ -18,59 +18,21 @@ import org.apache.thrift.protocol.*;
   public class user_login_ret_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("user_login_ret_t");
     private static const UID_FIELD_DESC:TField = new TField("uid", TType.I32, 1);
-    private static const LEVEL_FIELD_DESC:TField = new TField("level", TType.I32, 2);
-    private static const EXP_FIELD_DESC:TField = new TField("exp", TType.I32, 3);
-    private static const REGISTER_FLAG_FIELD_DESC:TField = new TField("register_flag", TType.I16, 4);
-    private static const PROPERTY_INFO_FIELD_DESC:TField = new TField("property_info", TType.STRUCT, 5);
-    private static const PACK_INFO_FIELD_DESC:TField = new TField("pack_info", TType.STRUCT, 6);
-    private static const TASK_INFO_FIELD_DESC:TField = new TField("task_info", TType.STRUCT, 7);
-    private static const FRIEND_INFO_FIELD_DESC:TField = new TField("friend_info", TType.STRUCT, 8);
-    private static const GAME_INFO_FIELD_DESC:TField = new TField("game_info", TType.STRUCT, 9);
+    private static const PROPERTY_INFO_FIELD_DESC:TField = new TField("property_info", TType.STRUCT, 2);
 
     private var _uid:int;
     public static const UID:int = 1;
-    private var _level:int;
-    public static const LEVEL:int = 2;
-    private var _exp:int;
-    public static const EXP:int = 3;
-    private var _register_flag:int;
-    public static const REGISTER_FLAG:int = 4;
     private var _property_info:property_info_t;
-    public static const PROPERTY_INFO:int = 5;
-    private var _pack_info:pack_info_t;
-    public static const PACK_INFO:int = 6;
-    private var _task_info:task_info_t;
-    public static const TASK_INFO:int = 7;
-    private var _friend_info:friend_info_t;
-    public static const FRIEND_INFO:int = 8;
-    private var _game_info:game_info_t;
-    public static const GAME_INFO:int = 9;
+    public static const PROPERTY_INFO:int = 2;
 
     private var __isset_uid:Boolean = false;
-    private var __isset_level:Boolean = false;
-    private var __isset_exp:Boolean = false;
-    private var __isset_register_flag:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
       metaDataMap[UID] = new FieldMetaData("uid", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
-      metaDataMap[LEVEL] = new FieldMetaData("level", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I32));
-      metaDataMap[EXP] = new FieldMetaData("exp", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I32));
-      metaDataMap[REGISTER_FLAG] = new FieldMetaData("register_flag", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I16));
       metaDataMap[PROPERTY_INFO] = new FieldMetaData("property_info", TFieldRequirementType.DEFAULT, 
           new StructMetaData(TType.STRUCT, property_info_t));
-      metaDataMap[PACK_INFO] = new FieldMetaData("pack_info", TFieldRequirementType.DEFAULT, 
-          new StructMetaData(TType.STRUCT, pack_info_t));
-      metaDataMap[TASK_INFO] = new FieldMetaData("task_info", TFieldRequirementType.DEFAULT, 
-          new StructMetaData(TType.STRUCT, task_info_t));
-      metaDataMap[FRIEND_INFO] = new FieldMetaData("friend_info", TFieldRequirementType.DEFAULT, 
-          new StructMetaData(TType.STRUCT, friend_info_t));
-      metaDataMap[GAME_INFO] = new FieldMetaData("game_info", TFieldRequirementType.DEFAULT, 
-          new StructMetaData(TType.STRUCT, game_info_t));
     }
     {
       FieldMetaData.addStructMetaDataMap(user_login_ret_t, metaDataMap);
@@ -78,9 +40,6 @@ import org.apache.thrift.protocol.*;
 
     public function user_login_ret_t() {
       this._uid = 0;
-      this._level = 0;
-      this._exp = 0;
-      this._register_flag = 0;
     }
 
     public function get uid():int {
@@ -101,60 +60,6 @@ import org.apache.thrift.protocol.*;
       return this.__isset_uid;
     }
 
-    public function get level():int {
-      return this._level;
-    }
-
-    public function set level(level:int):void {
-      this._level = level;
-      this.__isset_level = true;
-    }
-
-    public function unsetLevel():void {
-      this.__isset_level = false;
-    }
-
-    // Returns true if field level is set (has been assigned a value) and false otherwise
-    public function isSetLevel():Boolean {
-      return this.__isset_level;
-    }
-
-    public function get exp():int {
-      return this._exp;
-    }
-
-    public function set exp(exp:int):void {
-      this._exp = exp;
-      this.__isset_exp = true;
-    }
-
-    public function unsetExp():void {
-      this.__isset_exp = false;
-    }
-
-    // Returns true if field exp is set (has been assigned a value) and false otherwise
-    public function isSetExp():Boolean {
-      return this.__isset_exp;
-    }
-
-    public function get register_flag():int {
-      return this._register_flag;
-    }
-
-    public function set register_flag(register_flag:int):void {
-      this._register_flag = register_flag;
-      this.__isset_register_flag = true;
-    }
-
-    public function unsetRegister_flag():void {
-      this.__isset_register_flag = false;
-    }
-
-    // Returns true if field register_flag is set (has been assigned a value) and false otherwise
-    public function isSetRegister_flag():Boolean {
-      return this.__isset_register_flag;
-    }
-
     public function get property_info():property_info_t {
       return this._property_info;
     }
@@ -172,74 +77,6 @@ import org.apache.thrift.protocol.*;
       return this.property_info != null;
     }
 
-    public function get pack_info():pack_info_t {
-      return this._pack_info;
-    }
-
-    public function set pack_info(pack_info:pack_info_t):void {
-      this._pack_info = pack_info;
-    }
-
-    public function unsetPack_info():void {
-      this.pack_info = null;
-    }
-
-    // Returns true if field pack_info is set (has been assigned a value) and false otherwise
-    public function isSetPack_info():Boolean {
-      return this.pack_info != null;
-    }
-
-    public function get task_info():task_info_t {
-      return this._task_info;
-    }
-
-    public function set task_info(task_info:task_info_t):void {
-      this._task_info = task_info;
-    }
-
-    public function unsetTask_info():void {
-      this.task_info = null;
-    }
-
-    // Returns true if field task_info is set (has been assigned a value) and false otherwise
-    public function isSetTask_info():Boolean {
-      return this.task_info != null;
-    }
-
-    public function get friend_info():friend_info_t {
-      return this._friend_info;
-    }
-
-    public function set friend_info(friend_info:friend_info_t):void {
-      this._friend_info = friend_info;
-    }
-
-    public function unsetFriend_info():void {
-      this.friend_info = null;
-    }
-
-    // Returns true if field friend_info is set (has been assigned a value) and false otherwise
-    public function isSetFriend_info():Boolean {
-      return this.friend_info != null;
-    }
-
-    public function get game_info():game_info_t {
-      return this._game_info;
-    }
-
-    public function set game_info(game_info:game_info_t):void {
-      this._game_info = game_info;
-    }
-
-    public function unsetGame_info():void {
-      this.game_info = null;
-    }
-
-    // Returns true if field game_info is set (has been assigned a value) and false otherwise
-    public function isSetGame_info():Boolean {
-      return this.game_info != null;
-    }
-
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case UID:
@@ -250,67 +87,11 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
-      case LEVEL:
-        if (value == null) {
-          unsetLevel();
-        } else {
-          this.level = value;
-        }
-        break;
-
-      case EXP:
-        if (value == null) {
-          unsetExp();
-        } else {
-          this.exp = value;
-        }
-        break;
-
-      case REGISTER_FLAG:
-        if (value == null) {
-          unsetRegister_flag();
-        } else {
-          this.register_flag = value;
-        }
-        break;
-
       case PROPERTY_INFO:
         if (value == null) {
           unsetProperty_info();
         } else {
           this.property_info = value;
-        }
-        break;
-
-      case PACK_INFO:
-        if (value == null) {
-          unsetPack_info();
-        } else {
-          this.pack_info = value;
-        }
-        break;
-
-      case TASK_INFO:
-        if (value == null) {
-          unsetTask_info();
-        } else {
-          this.task_info = value;
-        }
-        break;
-
-      case FRIEND_INFO:
-        if (value == null) {
-          unsetFriend_info();
-        } else {
-          this.friend_info = value;
-        }
-        break;
-
-      case GAME_INFO:
-        if (value == null) {
-          unsetGame_info();
-        } else {
-          this.game_info = value;
         }
         break;
 
@@ -323,22 +104,8 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case UID:
         return this.uid;
-      case LEVEL:
-        return this.level;
-      case EXP:
-        return this.exp;
-      case REGISTER_FLAG:
-        return this.register_flag;
       case PROPERTY_INFO:
         return this.property_info;
-      case PACK_INFO:
-        return this.pack_info;
-      case TASK_INFO:
-        return this.task_info;
-      case FRIEND_INFO:
-        return this.friend_info;
-      case GAME_INFO:
-        return this.game_info;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -349,22 +116,8 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case UID:
         return isSetUid();
-      case LEVEL:
-        return isSetLevel();
-      case EXP:
-        return isSetExp();
-      case REGISTER_FLAG:
-        return isSetRegister_flag();
       case PROPERTY_INFO:
         return isSetProperty_info();
-      case PACK_INFO:
-        return isSetPack_info();
-      case TASK_INFO:
-        return isSetTask_info();
-      case FRIEND_INFO:
-        return isSetFriend_info();
-      case GAME_INFO:
-        return isSetGame_info();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -389,66 +142,10 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
-          case LEVEL:
-            if (field.type == TType.I32) {
-              this.level = iprot.readI32();
-              this.__isset_level = true;
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case EXP:
-            if (field.type == TType.I32) {
-              this.exp = iprot.readI32();
-              this.__isset_exp = true;
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case REGISTER_FLAG:
-            if (field.type == TType.I16) {
-              this.register_flag = iprot.readI16();
-              this.__isset_register_flag = true;
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
           case PROPERTY_INFO:
             if (field.type == TType.STRUCT) {
               this.property_info = new property_info_t();
               this.property_info.read(iprot);
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case PACK_INFO:
-            if (field.type == TType.STRUCT) {
-              this.pack_info = new pack_info_t();
-              this.pack_info.read(iprot);
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case TASK_INFO:
-            if (field.type == TType.STRUCT) {
-              this.task_info = new task_info_t();
-              this.task_info.read(iprot);
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case FRIEND_INFO:
-            if (field.type == TType.STRUCT) {
-              this.friend_info = new friend_info_t();
-              this.friend_info.read(iprot);
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case GAME_INFO:
-            if (field.type == TType.STRUCT) {
-              this.game_info = new game_info_t();
-              this.game_info.read(iprot);
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -473,38 +170,9 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(UID_FIELD_DESC);
       oprot.writeI32(this.uid);
       oprot.writeFieldEnd();
-      oprot.writeFieldBegin(LEVEL_FIELD_DESC);
-      oprot.writeI32(this.level);
-      oprot.writeFieldEnd();
-      oprot.writeFieldBegin(EXP_FIELD_DESC);
-      oprot.writeI32(this.exp);
-      oprot.writeFieldEnd();
-      oprot.writeFieldBegin(REGISTER_FLAG_FIELD_DESC);
-      oprot.writeI16(this.register_flag);
-      oprot.writeFieldEnd();
       if (this.property_info != null) {
         oprot.writeFieldBegin(PROPERTY_INFO_FIELD_DESC);
         this.property_info.write(oprot);
-        oprot.writeFieldEnd();
-      }
-      if (this.pack_info != null) {
-        oprot.writeFieldBegin(PACK_INFO_FIELD_DESC);
-        this.pack_info.write(oprot);
-        oprot.writeFieldEnd();
-      }
-      if (this.task_info != null) {
-        oprot.writeFieldBegin(TASK_INFO_FIELD_DESC);
-        this.task_info.write(oprot);
-        oprot.writeFieldEnd();
-      }
-      if (this.friend_info != null) {
-        oprot.writeFieldBegin(FRIEND_INFO_FIELD_DESC);
-        this.friend_info.write(oprot);
-        oprot.writeFieldEnd();
-      }
-      if (this.game_info != null) {
-        oprot.writeFieldBegin(GAME_INFO_FIELD_DESC);
-        this.game_info.write(oprot);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -519,55 +187,11 @@ import org.apache.thrift.protocol.*;
       ret += this.uid;
       first = false;
       if (!first) ret +=  ", ";
-      ret += "level:";
-      ret += this.level;
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "exp:";
-      ret += this.exp;
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "register_flag:";
-      ret += this.register_flag;
-      first = false;
-      if (!first) ret +=  ", ";
       ret += "property_info:";
       if (this.property_info == null) {
         ret += "null";
       } else {
         ret += this.property_info;
-      }
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "pack_info:";
-      if (this.pack_info == null) {
-        ret += "null";
-      } else {
-        ret += this.pack_info;
-      }
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "task_info:";
-      if (this.task_info == null) {
-        ret += "null";
-      } else {
-        ret += this.task_info;
-      }
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "friend_info:";
-      if (this.friend_info == null) {
-        ret += "null";
-      } else {
-        ret += this.friend_info;
-      }
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "game_info:";
-      if (this.game_info == null) {
-        ret += "null";
-      } else {
-        ret += this.game_info;
       }
       first = false;
       ret += ")";

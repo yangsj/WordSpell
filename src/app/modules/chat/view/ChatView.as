@@ -6,9 +6,12 @@ package app.modules.chat.view
 	import flash.display.InteractiveObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.FocusEvent;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	import flash.ui.Keyboard;
 	
 	import app.Language;
 	import app.core.Tips;
@@ -188,7 +191,9 @@ package app.modules.chat.view
 				radio = 1;
 			else radio = ( tf.numLines - tf.maxScrollV ) / tf.numLines;
 			
-			_scrollBar.radio = radio;
+			_scrollBar.radio = Math.max( radio, 0.3 );
+			
+			onWheelHandler( null );
 		}
 		
 		private function setExpandHide():void
@@ -197,8 +202,6 @@ package app.modules.chat.view
 			chatMc.visible = _isExpand;
 			mcLock.visible = _isExpand;
 			_scrollBar.visible = _isExpand;
-			
-//			mcBg.y = _isExpand ? -mcBg.height : -66;
 			btnExpandHide.y = _isExpand ? -172 : -61;
 			mcBg.gotoAndStop( _isExpand ? 1 : 2 );
 			btnExpandHide.gotoAndStop( _isExpand ? 1 : 2 );
@@ -273,9 +276,26 @@ package app.modules.chat.view
 			mcLock.addEventListener( MouseEvent.CLICK, mcLockClickHandler );
 			txtOutput.textfield.addEventListener( MouseEvent.MOUSE_WHEEL, onWheelHandler );
 			btnExpandHide.addEventListener(MouseEvent.CLICK, btnExpandHideClickHandler );
+			txtInput.addEventListener(FocusEvent.FOCUS_IN, txtInputFocusHandler );
+			txtInput.addEventListener(FocusEvent.FOCUS_OUT, txtInputFocusHandler );
 
 			selectedWorld();
 
+		}
+		
+		protected function txtInputFocusHandler(event:FocusEvent):void
+		{
+			if ( event.type == FocusEvent.FOCUS_IN )
+				appStage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownEnterHandler );
+			else appStage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownEnterHandler );
+		}
+		
+		protected function keyDownEnterHandler(event:KeyboardEvent):void
+		{
+			if ( event.keyCode == Keyboard.ENTER )
+			{
+				sendChat();
+			}
 		}
 		
 		protected function btnExpandHideClickHandler(event:MouseEvent):void

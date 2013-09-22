@@ -22,6 +22,14 @@ import org.apache.thrift.protocol.*;
     private static const COIN_FIELD_DESC:TField = new TField("coin", TType.I32, 3);
     private static const RIGHT_WORDS_NUM_FIELD_DESC:TField = new TField("right_words_num", TType.I32, 4);
     private static const WRONG_WORDS_NUM_FIELD_DESC:TField = new TField("wrong_words_num", TType.I32, 5);
+    private static const NICK_NAME_FIELD_DESC:TField = new TField("nick_name", TType.STRING, 6);
+    private static const PHONE_FIELD_DESC:TField = new TField("phone", TType.STRING, 7);
+    private static const EMAIL_FIELD_DESC:TField = new TField("email", TType.STRING, 8);
+    private static const ADRESS_FIELD_DESC:TField = new TField("adress", TType.STRING, 9);
+    private static const SCHOOL_FIELD_DESC:TField = new TField("school", TType.STRING, 10);
+    private static const GRADE_FIELD_DESC:TField = new TField("grade", TType.STRING, 11);
+    private static const QQ_FIELD_DESC:TField = new TField("qq", TType.STRING, 12);
+    private static const REAL_NAME_FIELD_DESC:TField = new TField("real_name", TType.STRING, 13);
 
     private var _level:int;
     public static const LEVEL:int = 1;
@@ -33,6 +41,22 @@ import org.apache.thrift.protocol.*;
     public static const RIGHT_WORDS_NUM:int = 4;
     private var _wrong_words_num:int;
     public static const WRONG_WORDS_NUM:int = 5;
+    private var _nick_name:String;
+    public static const NICK_NAME:int = 6;
+    private var _phone:String;
+    public static const PHONE:int = 7;
+    private var _email:String;
+    public static const EMAIL:int = 8;
+    private var _adress:String;
+    public static const ADRESS:int = 9;
+    private var _school:String;
+    public static const SCHOOL:int = 10;
+    private var _grade:String;
+    public static const GRADE:int = 11;
+    private var _qq:String;
+    public static const QQ:int = 12;
+    private var _real_name:String;
+    public static const REAL_NAME:int = 13;
 
     private var __isset_level:Boolean = false;
     private var __isset_exp:Boolean = false;
@@ -52,6 +76,22 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.I32));
       metaDataMap[WRONG_WORDS_NUM] = new FieldMetaData("wrong_words_num", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
+      metaDataMap[NICK_NAME] = new FieldMetaData("nick_name", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[PHONE] = new FieldMetaData("phone", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[EMAIL] = new FieldMetaData("email", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[ADRESS] = new FieldMetaData("adress", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[SCHOOL] = new FieldMetaData("school", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[GRADE] = new FieldMetaData("grade", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[QQ] = new FieldMetaData("qq", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[REAL_NAME] = new FieldMetaData("real_name", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
     }
     {
       FieldMetaData.addStructMetaDataMap(property_info_t, metaDataMap);
@@ -155,6 +195,142 @@ import org.apache.thrift.protocol.*;
       return this.__isset_wrong_words_num;
     }
 
+    public function get nick_name():String {
+      return this._nick_name;
+    }
+
+    public function set nick_name(nick_name:String):void {
+      this._nick_name = nick_name;
+    }
+
+    public function unsetNick_name():void {
+      this.nick_name = null;
+    }
+
+    // Returns true if field nick_name is set (has been assigned a value) and false otherwise
+    public function isSetNick_name():Boolean {
+      return this.nick_name != null;
+    }
+
+    public function get phone():String {
+      return this._phone;
+    }
+
+    public function set phone(phone:String):void {
+      this._phone = phone;
+    }
+
+    public function unsetPhone():void {
+      this.phone = null;
+    }
+
+    // Returns true if field phone is set (has been assigned a value) and false otherwise
+    public function isSetPhone():Boolean {
+      return this.phone != null;
+    }
+
+    public function get email():String {
+      return this._email;
+    }
+
+    public function set email(email:String):void {
+      this._email = email;
+    }
+
+    public function unsetEmail():void {
+      this.email = null;
+    }
+
+    // Returns true if field email is set (has been assigned a value) and false otherwise
+    public function isSetEmail():Boolean {
+      return this.email != null;
+    }
+
+    public function get adress():String {
+      return this._adress;
+    }
+
+    public function set adress(adress:String):void {
+      this._adress = adress;
+    }
+
+    public function unsetAdress():void {
+      this.adress = null;
+    }
+
+    // Returns true if field adress is set (has been assigned a value) and false otherwise
+    public function isSetAdress():Boolean {
+      return this.adress != null;
+    }
+
+    public function get school():String {
+      return this._school;
+    }
+
+    public function set school(school:String):void {
+      this._school = school;
+    }
+
+    public function unsetSchool():void {
+      this.school = null;
+    }
+
+    // Returns true if field school is set (has been assigned a value) and false otherwise
+    public function isSetSchool():Boolean {
+      return this.school != null;
+    }
+
+    public function get grade():String {
+      return this._grade;
+    }
+
+    public function set grade(grade:String):void {
+      this._grade = grade;
+    }
+
+    public function unsetGrade():void {
+      this.grade = null;
+    }
+
+    // Returns true if field grade is set (has been assigned a value) and false otherwise
+    public function isSetGrade():Boolean {
+      return this.grade != null;
+    }
+
+    public function get qq():String {
+      return this._qq;
+    }
+
+    public function set qq(qq:String):void {
+      this._qq = qq;
+    }
+
+    public function unsetQq():void {
+      this.qq = null;
+    }
+
+    // Returns true if field qq is set (has been assigned a value) and false otherwise
+    public function isSetQq():Boolean {
+      return this.qq != null;
+    }
+
+    public function get real_name():String {
+      return this._real_name;
+    }
+
+    public function set real_name(real_name:String):void {
+      this._real_name = real_name;
+    }
+
+    public function unsetReal_name():void {
+      this.real_name = null;
+    }
+
+    // Returns true if field real_name is set (has been assigned a value) and false otherwise
+    public function isSetReal_name():Boolean {
+      return this.real_name != null;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case LEVEL:
@@ -197,6 +373,70 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case NICK_NAME:
+        if (value == null) {
+          unsetNick_name();
+        } else {
+          this.nick_name = value;
+        }
+        break;
+
+      case PHONE:
+        if (value == null) {
+          unsetPhone();
+        } else {
+          this.phone = value;
+        }
+        break;
+
+      case EMAIL:
+        if (value == null) {
+          unsetEmail();
+        } else {
+          this.email = value;
+        }
+        break;
+
+      case ADRESS:
+        if (value == null) {
+          unsetAdress();
+        } else {
+          this.adress = value;
+        }
+        break;
+
+      case SCHOOL:
+        if (value == null) {
+          unsetSchool();
+        } else {
+          this.school = value;
+        }
+        break;
+
+      case GRADE:
+        if (value == null) {
+          unsetGrade();
+        } else {
+          this.grade = value;
+        }
+        break;
+
+      case QQ:
+        if (value == null) {
+          unsetQq();
+        } else {
+          this.qq = value;
+        }
+        break;
+
+      case REAL_NAME:
+        if (value == null) {
+          unsetReal_name();
+        } else {
+          this.real_name = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -214,6 +454,22 @@ import org.apache.thrift.protocol.*;
         return this.right_words_num;
       case WRONG_WORDS_NUM:
         return this.wrong_words_num;
+      case NICK_NAME:
+        return this.nick_name;
+      case PHONE:
+        return this.phone;
+      case EMAIL:
+        return this.email;
+      case ADRESS:
+        return this.adress;
+      case SCHOOL:
+        return this.school;
+      case GRADE:
+        return this.grade;
+      case QQ:
+        return this.qq;
+      case REAL_NAME:
+        return this.real_name;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -232,6 +488,22 @@ import org.apache.thrift.protocol.*;
         return isSetRight_words_num();
       case WRONG_WORDS_NUM:
         return isSetWrong_words_num();
+      case NICK_NAME:
+        return isSetNick_name();
+      case PHONE:
+        return isSetPhone();
+      case EMAIL:
+        return isSetEmail();
+      case ADRESS:
+        return isSetAdress();
+      case SCHOOL:
+        return isSetSchool();
+      case GRADE:
+        return isSetGrade();
+      case QQ:
+        return isSetQq();
+      case REAL_NAME:
+        return isSetReal_name();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -288,6 +560,62 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case NICK_NAME:
+            if (field.type == TType.STRING) {
+              this.nick_name = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case PHONE:
+            if (field.type == TType.STRING) {
+              this.phone = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case EMAIL:
+            if (field.type == TType.STRING) {
+              this.email = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case ADRESS:
+            if (field.type == TType.STRING) {
+              this.adress = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case SCHOOL:
+            if (field.type == TType.STRING) {
+              this.school = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case GRADE:
+            if (field.type == TType.STRING) {
+              this.grade = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case QQ:
+            if (field.type == TType.STRING) {
+              this.qq = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case REAL_NAME:
+            if (field.type == TType.STRING) {
+              this.real_name = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -320,6 +648,46 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(WRONG_WORDS_NUM_FIELD_DESC);
       oprot.writeI32(this.wrong_words_num);
       oprot.writeFieldEnd();
+      if (this.nick_name != null) {
+        oprot.writeFieldBegin(NICK_NAME_FIELD_DESC);
+        oprot.writeString(this.nick_name);
+        oprot.writeFieldEnd();
+      }
+      if (this.phone != null) {
+        oprot.writeFieldBegin(PHONE_FIELD_DESC);
+        oprot.writeString(this.phone);
+        oprot.writeFieldEnd();
+      }
+      if (this.email != null) {
+        oprot.writeFieldBegin(EMAIL_FIELD_DESC);
+        oprot.writeString(this.email);
+        oprot.writeFieldEnd();
+      }
+      if (this.adress != null) {
+        oprot.writeFieldBegin(ADRESS_FIELD_DESC);
+        oprot.writeString(this.adress);
+        oprot.writeFieldEnd();
+      }
+      if (this.school != null) {
+        oprot.writeFieldBegin(SCHOOL_FIELD_DESC);
+        oprot.writeString(this.school);
+        oprot.writeFieldEnd();
+      }
+      if (this.grade != null) {
+        oprot.writeFieldBegin(GRADE_FIELD_DESC);
+        oprot.writeString(this.grade);
+        oprot.writeFieldEnd();
+      }
+      if (this.qq != null) {
+        oprot.writeFieldBegin(QQ_FIELD_DESC);
+        oprot.writeString(this.qq);
+        oprot.writeFieldEnd();
+      }
+      if (this.real_name != null) {
+        oprot.writeFieldBegin(REAL_NAME_FIELD_DESC);
+        oprot.writeString(this.real_name);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -346,6 +714,70 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "wrong_words_num:";
       ret += this.wrong_words_num;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "nick_name:";
+      if (this.nick_name == null) {
+        ret += "null";
+      } else {
+        ret += this.nick_name;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "phone:";
+      if (this.phone == null) {
+        ret += "null";
+      } else {
+        ret += this.phone;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "email:";
+      if (this.email == null) {
+        ret += "null";
+      } else {
+        ret += this.email;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "adress:";
+      if (this.adress == null) {
+        ret += "null";
+      } else {
+        ret += this.adress;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "school:";
+      if (this.school == null) {
+        ret += "null";
+      } else {
+        ret += this.school;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "grade:";
+      if (this.grade == null) {
+        ret += "null";
+      } else {
+        ret += this.grade;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "qq:";
+      if (this.qq == null) {
+        ret += "null";
+      } else {
+        ret += this.qq;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "real_name:";
+      if (this.real_name == null) {
+        ret += "null";
+      } else {
+        ret += this.real_name;
+      }
       first = false;
       ret += ")";
       return ret;

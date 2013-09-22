@@ -14,6 +14,8 @@ package com.riaidea.text {
     import flash.text.TextFormat;
     import flash.text.TextLineMetrics;
     import flash.utils.getDefinitionByName;
+    
+    import app.core.SpriteClip;
 
     /**
      * <p>RichTextField是一个基于TextField的图文混编的组件。</p>
@@ -296,8 +298,9 @@ package com.riaidea.text {
 
         private function getSpriteFromObject(obj : Object) : DisplayObject {
             if (obj is String) {
-                var clazz : Class = getDefinitionByName(String(obj)) as Class;
-                return new clazz() as DisplayObject;
+//				var clazz : Class = getDefinitionByName(String(obj)) as Class;
+//				return new clazz() as DisplayObject;
+				return new SpriteClip(String(obj));
             } else if (obj is Class) {
                 return new obj() as DisplayObject;
             } else {

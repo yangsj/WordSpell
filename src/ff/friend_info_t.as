@@ -101,14 +101,14 @@ import org.apache.thrift.protocol.*;
           case FRIEND_LIST:
             if (field.type == TType.LIST) {
               {
-                var _list41:TList = iprot.readListBegin();
+                var _list49:TList = iprot.readListBegin();
                 this.friend_list = new Array();
-                for (var _i42:int = 0; _i42 < _list41.size; ++_i42)
+                for (var _i50:int = 0; _i50 < _list49.size; ++_i50)
                 {
-                  var _elem43:friend_t;
-                  _elem43 = new friend_t();
-                  _elem43.read(iprot);
-                  this.friend_list.push(_elem43);
+                  var _elem51:friend_t;
+                  _elem51 = new friend_t();
+                  _elem51.read(iprot);
+                  this.friend_list.push(_elem51);
                 }
                 iprot.readListEnd();
               }
@@ -137,8 +137,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(FRIEND_LIST_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRUCT, this.friend_list.length));
-          for each (var elem44:* in this.friend_list)          {
-            elem44.write(oprot);
+          for each (var elem52:* in this.friend_list)          {
+            elem52.write(oprot);
           }
           oprot.writeListEnd();
         }
