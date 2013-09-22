@@ -2,7 +2,6 @@ package app.startup
 {
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
-	import app.modules.scene.event.SceneEvent;
 	
 	import victor.framework.core.BaseCommand;
 	
@@ -21,12 +20,11 @@ package app.startup
 		
 		override public function execute():void
 		{
-			// 显示场景
-			dispatch( new SceneEvent( SceneEvent.SHOW ));
-			// 显示主界面ui
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.MainUI ));
-			// 显示聊天窗口
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Chat ));
+			var displayView:Array = [ ViewName.MainUI, ViewName.MapWorld, ViewName.Chat ];
+			
+			for each (var viewName:String in displayView )
+				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName ));
+				
 			// 关闭Preloader
 			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Preloader ));
 			

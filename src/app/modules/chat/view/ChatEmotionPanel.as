@@ -25,6 +25,7 @@ package app.modules.chat.view
 			y = posY;
 			_parentTarget = parentTarget;
 			super();
+			alpha = 0;
 		}
 		
 		override protected function onceInit():void

@@ -10,9 +10,9 @@ package app.startup
 	import app.modules.friend.view.rightMenu.RightMenuMediator;
 	import app.modules.login.command.LoginInitCommand;
 	import app.modules.main.command.MainUIInitCommand;
+	import app.modules.map.command.MapInitCommand;
 	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.test.TestInitCommand;
-	import app.modules.scene.command.SceneInitCommand;
 	import app.modules.serivce.CommonService;
 	import app.modules.task.command.TaskInitCommand;
 	
@@ -32,9 +32,9 @@ package app.startup
 		
 		private static var commands:Array = 
 			[
-				  SceneInitCommand
 				, TestInitCommand
 				, MainUIInitCommand		// 主界面UI
+				, MapInitCommand		// 世界地圖
 				, TaskInitCommand		// 任务系统
 				, ChatInitCommand		// 聊天系统
 				, FriendInitComand		// 好友系统

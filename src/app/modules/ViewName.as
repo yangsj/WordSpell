@@ -39,6 +39,11 @@ package app.modules
 		 */
 		public static const MainUI:String = "MainUIView";
 		
+		/**
+		 * 世界地图
+		 */
+		public static const MapWorld:String = "worldMapMain";
+		
 		
 		
 		/**
