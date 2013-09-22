@@ -35,7 +35,7 @@ package app.modules.chat.view
 	public class ChatView extends ViewSprite
 	{
 		//底图
-		public var mcBg:Sprite;
+		public var mcBg:MovieClip;
 		//容器
 		public var chatMc:Sprite;
 		//锁频
@@ -194,20 +194,13 @@ package app.modules.chat.view
 		private function setExpandHide():void
 		{
 			_isExpand = !_isExpand;
-			if ( _isExpand )
-			{
-				mcBg.y = -mcBg.height;
-				btnExpandHide.y = -172;
-			}
-			else
-			{
-				mcBg.y = -66;
-				btnExpandHide.y = -61;
-			}
 			chatMc.visible = _isExpand;
 			mcLock.visible = _isExpand;
 			_scrollBar.visible = _isExpand;
-
+			
+//			mcBg.y = _isExpand ? -mcBg.height : -66;
+			btnExpandHide.y = _isExpand ? -172 : -61;
+			mcBg.gotoAndStop( _isExpand ? 1 : 2 );
 			btnExpandHide.gotoAndStop( _isExpand ? 1 : 2 );
 		}
 

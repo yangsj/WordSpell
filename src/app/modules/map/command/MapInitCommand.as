@@ -3,6 +3,8 @@ package app.modules.map.command
 	import app.modules.ViewName;
 	import app.modules.map.main.MapWorldMediator;
 	import app.modules.map.main.MapWorldView;
+	import app.modules.map.panel.SelectedRoundMediator;
+	import app.modules.map.panel.SelectedRoundView;
 	
 	import victor.framework.core.BaseCommand;
 	
@@ -22,7 +24,11 @@ package app.modules.map.command
 		override public function execute():void
 		{
 			
+			//地图
 			addView( ViewName.MapWorld, MapWorldView, MapWorldMediator );
+			
+			//关卡选择面板
+			addView( ViewName.SelectedRoundPanel, SelectedRoundView, SelectedRoundMediator );
 			
 		}
 		

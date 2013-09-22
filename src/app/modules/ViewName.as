@@ -44,6 +44,10 @@ package app.modules
 		 */
 		public static const MapWorld:String = "worldMapMain";
 		
+		/**
+		 * 选择关卡面板
+		 */
+		public static const SelectedRoundPanel:String = "SelectedRoundPanel";
 		
 		
 		/**

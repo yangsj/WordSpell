@@ -2,6 +2,7 @@ package app.modules.chat.service
 {
 	import flash.utils.Dictionary;
 	
+	import app.modules.LoadingEffect;
 	import app.modules.chat.model.ChatModel;
 	import app.modules.chat.model.ChatVo;
 	
@@ -58,6 +59,9 @@ package app.modules.chat.service
 			// 发送到自己聊天窗口
 			chatVo.emoticons = decode( req.emotions );
 			chatModel.addMsg( chatVo );
+			
+			// 关闭loading
+			LoadingEffect.hide();
 		}
 		
 		/**
@@ -91,9 +95,7 @@ package app.modules.chat.service
 			if ( emoticons )
 			{
 				for ( var key:* in emoticons )
-				{
 					array.push({index:int(emoticons[key]), src:"ui.chat.emotion_" + String( key ).substr(1) });
-				}
 			}
 			return array;
 		}

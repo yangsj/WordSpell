@@ -63,16 +63,22 @@ package app.modules.login.register
 		{
 			var msg:String = "";
 			var array:Array = Language.lang(Language.RegisterView_0).split("|");
-//			if ( !registerVo.playerName )
-//				msg = array[0];
-//			else if ( !registerVo.playerAge )
-//				msg = array[1];
-			/*else */if ( !registerVo.nickName )
-				msg = array[2];
+			
+			if ( !registerVo.nickName )
+				msg = array[0];
+			
 			else if ( !registerVo.password )
-				msg = array[3];
+				msg = array[1];
+			
 			else if (　!registerVo.passwordConfirm )
+				msg = array[2];
+			
+			else if ( !registerVo.phone )
+				msg = array[3];
+			
+			else if ( !registerVo.email )
 				msg = array[4];
+			
 			if ( !msg )
 			{
 				if ( registerVo.password != registerVo.passwordConfirm )
@@ -82,21 +88,16 @@ package app.modules.login.register
 				}
 				else
 				{
-					if ( registerVo.phone && !validatePhoneNumber( registerVo.phone ))
+					if ( !validatePhoneNumber( registerVo.phone ))
 						msg = array[6];
-					else if ( registerVo.email && !validateEmail( registerVo.email ))
+					else if ( !validateEmail( registerVo.email ))
 						msg = array[7];
 				}
 			}
 			
-			if ( msg )
-			{
-				Tips.showMouse( msg );
-			}
-			else
-			{
-				dispatchEvent( new RegisterEvent( RegisterEvent.REGISTER ));
-			}
+			if ( msg ) Tips.showMouse( msg );
+			
+			else dispatchEvent( new RegisterEvent( RegisterEvent.REGISTER ));
 		}
 		
 		/**
@@ -130,15 +131,15 @@ package app.modules.login.register
 		public function get registerVo():RegisterVo
 		{
 			_registerVo ||= new RegisterVo();
-			_registerVo.playerName = txtName.text;
-			_registerVo.playerAge = int( txtArea.text );
 			_registerVo.nickName = txtAccount.text;
 			_registerVo.password = txtPw1.text;
 			_registerVo.passwordConfirm = txtPw2.text;
-			
-			_registerVo.schoolName = txtSchool.text;
 			_registerVo.phone = txtPhone.text;
 			_registerVo.email = txtEmail.text;
+			
+			_registerVo.playerName = txtName.text;
+			_registerVo.playerAge = int( txtArea.text );
+			_registerVo.schoolName = txtSchool.text;
 			_registerVo.className = txtClass.text;
 			_registerVo.QQ = txtQQ.text;
 			

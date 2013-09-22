@@ -12,8 +12,7 @@ package app.modules.login.register.vo
 		{
 		}
 		/*
-		玩家姓名
-		年龄
+		帐号
 		昵称
 		密码
 		

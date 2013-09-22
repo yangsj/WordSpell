@@ -58,10 +58,13 @@ package app.modules.login.login
 		private function check():void
 		{
 			txtAccountNumber.text = loginVo.accountName;
-			txtAccountNumber.text = loginVo.password;
+			txtPassword.text = loginVo.password;
+			txtTips1.visible = !txtAccountNumber.text;
+			txtTips2.visible = !txtPassword.text;
 			checkRememberStatus();
-			if ( loginVo.isAutoLogin )
-				btnLoginHandler( null );
+			// 自动登陆
+//			if ( loginVo.isAutoLogin )
+//				btnLoginHandler( null );
 		}
 		
 		private function checkRememberStatus():void

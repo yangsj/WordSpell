@@ -31,7 +31,7 @@ package app
 		
 		public static const LoginView_0:String = "请输入登陆帐号或密码！";
 		
-		public static const RegisterView_0:String = "姓名为必填项|年龄为必填项|昵称为必填项|密码为必填项|请再次确认密码|两次输入的密码不一致|输入的电话号码不正确|输入的邮箱格式不正确";
+		public static const RegisterView_0:String = "帐号为必填项|密码为必填项|请再次确认密码|电话为必填项|邮箱为必填项|两次输入的密码不一致|输入的电话号码不正确|输入的邮箱格式不正确";
 		
 		public static const ChatView_0:String = "不能发送空内容";
 		
