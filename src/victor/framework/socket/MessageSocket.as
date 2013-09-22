@@ -6,9 +6,9 @@ package victor.framework.socket
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
-
+	
 	import ff.FFUtil;
-
+	
 	import victor.framework.log.Logger;
 
 
@@ -111,6 +111,9 @@ package victor.framework.socket
 
 			// 销毁返回对象
 			SocketResp.disposeResp( respObj );
+			
+			// 結束請求
+			dispatchEvent(new SocketEvent( SocketEvent.CALL_END ));
 		}
 
 		/**
@@ -185,6 +188,9 @@ package victor.framework.socket
 		 */
 		private function netCall( req:SocketReq ):void
 		{
+			//開始請求
+			dispatchEvent( new SocketEvent( SocketEvent.CALL_START ));
+			
 			// 序列化
 			Logger.printData( getTimer() + "|发送数据内容(" + req.cmd + "):", req.obj.toString());
 			var byteArray:ByteArray = PacketParse.synthesize( req );

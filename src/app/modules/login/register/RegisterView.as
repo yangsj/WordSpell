@@ -20,15 +20,15 @@ package app.modules.login.register
 	public class RegisterView extends BaseScene
 	{
 		// required
-		public var txtName:TextField;
-		public var txtAge:TextField;
 		public var txtAccount:TextField;
 		public var txtPw1:TextField;
 		public var txtPw2:TextField;
-		// optional
-		public var txtSchool:TextField;
 		public var txtPhone:TextField;
 		public var txtEmail:TextField;
+		// optional
+		public var txtName:TextField;
+		public var txtArea:TextField;
+		public var txtSchool:TextField;
 		public var txtClass:TextField;
 		public var txtQQ:TextField;
 		
@@ -49,7 +49,7 @@ package app.modules.login.register
 			btnLogin.addEventListener(MouseEvent.CLICK, btnLoginHandler );
 			btnRegister.addEventListener(MouseEvent.CLICK, btnRegisterHandler );
 			
-			txtAge.restrict = "0-9";
+			txtPhone.maxChars = 11;
 			txtPhone.restrict = "0-9";
 			txtQQ.restrict = "0-9";
 		}
@@ -63,11 +63,11 @@ package app.modules.login.register
 		{
 			var msg:String = "";
 			var array:Array = Language.lang(Language.RegisterView_0).split("|");
-			if ( !registerVo.playerName )
-				msg = array[0];
-			else if ( !registerVo.playerAge )
-				msg = array[1];
-			else if ( !registerVo.nickName )
+//			if ( !registerVo.playerName )
+//				msg = array[0];
+//			else if ( !registerVo.playerAge )
+//				msg = array[1];
+			/*else */if ( !registerVo.nickName )
 				msg = array[2];
 			else if ( !registerVo.password )
 				msg = array[3];
@@ -131,7 +131,7 @@ package app.modules.login.register
 		{
 			_registerVo ||= new RegisterVo();
 			_registerVo.playerName = txtName.text;
-			_registerVo.playerAge = int( txtAge.text );
+			_registerVo.playerAge = int( txtArea.text );
 			_registerVo.nickName = txtAccount.text;
 			_registerVo.password = txtPw1.text;
 			_registerVo.passwordConfirm = txtPw2.text;

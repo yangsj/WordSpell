@@ -1,6 +1,8 @@
 package app.modules.login.login
 {
 	import flash.display.InteractiveObject;
+	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
@@ -29,9 +31,10 @@ package app.modules.login.login
 		public var txtPassword:TextField;
 		public var txtTips1:TextField;
 		public var txtTips2:TextField;
-		public var forgetPassword:InteractiveObject;
 		public var btnLogin:InteractiveObject;
 		public var btnRegister:InteractiveObject;
+		public var radioRememberName:MovieClip;
+		public var radioRememberPwd:MovieClip;
 		
 		private var _loginVo:LoginVo;
 		
@@ -52,6 +55,21 @@ package app.modules.login.login
 			appStage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler );
 		}
 		
+		private function check():void
+		{
+			txtAccountNumber.text = loginVo.accountName;
+			txtAccountNumber.text = loginVo.password;
+			checkRememberStatus();
+			if ( loginVo.isAutoLogin )
+				btnLoginHandler( null );
+		}
+		
+		private function checkRememberStatus():void
+		{
+			radioRememberName.gotoAndStop( loginVo.isRememberName ? 2 : 1 );
+			radioRememberPwd.gotoAndStop( loginVo.isRememberPwd ? 2 : 1 );
+		}
+		
 		override protected function onceInit():void
 		{
 			super.onceInit();
@@ -61,13 +79,19 @@ package app.modules.login.login
 			txtAccountNumber.tabIndex = 0;
 			txtPassword.tabIndex = 1;
 			
+			radioRememberName.buttonMode = true
+			radioRememberPwd.buttonMode = true
+			
 			btnLogin.addEventListener(MouseEvent.CLICK, btnLoginHandler );
 			btnRegister.addEventListener(MouseEvent.CLICK, btnRegisterHandler );
 			txtAccountNumber.addEventListener(FocusEvent.FOCUS_IN, focusInOutHandler );
 			txtAccountNumber.addEventListener(FocusEvent.FOCUS_OUT, focusInOutHandler );
 			txtPassword.addEventListener(FocusEvent.FOCUS_IN, focusInOutHandler );
 			txtPassword.addEventListener(FocusEvent.FOCUS_OUT, focusInOutHandler );
-			forgetPassword.addEventListener(MouseEvent.CLICK, txtForgetPasswordHandler );
+			radioRememberName.addEventListener(MouseEvent.CLICK, checkBoxForRememberNameHandler );
+			radioRememberPwd.addEventListener(MouseEvent.CLICK, checkBoxForRememberPwdHandler );
+			
+			check();
 		}
 		
 		override public function dispose():void
@@ -80,15 +104,24 @@ package app.modules.login.login
 			txtAccountNumber.removeEventListener(FocusEvent.FOCUS_OUT, focusInOutHandler );
 			txtPassword.removeEventListener(FocusEvent.FOCUS_IN, focusInOutHandler );
 			txtPassword.removeEventListener(FocusEvent.FOCUS_OUT, focusInOutHandler );
-			forgetPassword.removeEventListener(MouseEvent.CLICK, txtForgetPasswordHandler );
+			radioRememberName.removeEventListener(MouseEvent.CLICK, checkBoxForRememberNameHandler );
+			radioRememberPwd.removeEventListener(MouseEvent.CLICK, checkBoxForRememberPwdHandler );
 		}
 		
-		protected function txtForgetPasswordHandler(event:MouseEvent):void
+		protected function checkBoxForRememberPwdHandler(event:MouseEvent):void
 		{
-			// 忘记密码
-			// test
-			event.stopPropagation();
-			RightMenu.instance.setList( RightMenuType.testRightMenu );
+			loginVo.isRememberPwd = !loginVo.isRememberPwd;
+			if ( loginVo.isRememberPwd )
+				loginVo.isRememberName = true;
+			checkRememberStatus();
+		}
+		
+		protected function checkBoxForRememberNameHandler(event:MouseEvent):void
+		{
+			loginVo.isRememberName = !loginVo.isRememberName;
+			if ( loginVo.isRememberName == false )
+				loginVo.isRememberPwd = false;
+			checkRememberStatus();
 		}
 		
 		protected function focusInOutHandler(event:FocusEvent):void
@@ -117,21 +150,27 @@ package app.modules.login.login
 		protected function keyDownHandler( event:KeyboardEvent ):void
 		{
 			if ( event.keyCode == Keyboard.ENTER )
-				btnLoginHandler( null );
+				btnLoginHandler( event );
 		}
 		
-		protected function btnLoginHandler( event:MouseEvent = null ):void
+		protected function btnLoginHandler( event:Event ):void
 		{
 			if ( txtAccountNumber.text && txtPassword.text )
+			{
+				_loginVo.accountName = txtAccountNumber.text;
+				_loginVo.password = txtPassword.text;
+				
 				dispatchEvent( new LoginEvent( LoginEvent.ACTION_LOGIN ));
-			else Tips.showMouse( Language.lang( Language.LoginView_0 ) );
+			}
+			else if ( event)
+			{
+				Tips.showMouse( Language.lang( Language.LoginView_0 ) );
+			}
 		}
 		
 		public function get loginVo():LoginVo
 		{
 			_loginVo ||= new LoginVo();
-			_loginVo.accountName = txtAccountNumber.text;
-			_loginVo.passwrod = txtPassword.text;
 			return _loginVo;
 		}
 		

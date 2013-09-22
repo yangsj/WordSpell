@@ -57,7 +57,7 @@ package app.modules.login.service
 		{
 			var req:account_req_t = new account_req_t();
 			req.nick_name = loginVo.accountName;
-			req.password = loginVo.passwrod;
+			req.password = loginVo.password;
 			req.register_flag = false;
 			call( client_cmd_e.LOGIN_REQ, req, callBack );
 		}

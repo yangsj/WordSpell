@@ -11,6 +11,8 @@ package victor.framework.socket {
         public static const ERROR_SECURITY : String = "ERROR_SECURITY";
         public static const RECONNECT : String = "RECONNECT";
 		public static const IO_ERROR:String = "io_error";
+		public static const CALL_START:String = "call_start";//開始請求
+		public static const CALL_END:String = "call_end";//請求結束
 
         /**
          * Construct a <code>SocketEvent</code>.

@@ -3,6 +3,7 @@ package app.startup
 	import app.GameConfig;
 	import app.core.Alert;
 	import app.events.ServiceEvent;
+	import app.modules.LoadingEffect;
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.socket.ISocketManager;
@@ -29,8 +30,20 @@ package app.startup
 			socket.addEventListener(SocketEvent.CLOSE, onSocketClose);
 			socket.addEventListener(SocketEvent.CONNECTED, onSocketConnected );
 			socket.addEventListener(SocketEvent.IO_ERROR, onIoError );
+			socket.addEventListener(SocketEvent.CALL_START, onStartCall );
+			socket.addEventListener(SocketEvent.CALL_END, onEndCall );
 			
 			socket.connect( GameConfig.serverHost, GameConfig.serverPort );
+		}
+		
+		private function onStartCall( event:SocketEvent ):void
+		{
+			LoadingEffect.show();
+		}
+		
+		private function onEndCall( event:SocketEvent ):void
+		{
+			LoadingEffect.hide();
 		}
 		
 		private function onSocketConnected( event:SocketEvent ):void
@@ -42,6 +55,7 @@ package app.startup
 		{
 			dispatch( new ServiceEvent( ServiceEvent.FAILED ));
 			Alert.show( "连接失败！" );
+			LoadingEffect.hide();
 		}
 		
 		/**
@@ -51,11 +65,13 @@ package app.startup
 		{
 			dispatch( new ServiceEvent( ServiceEvent.CLOSED ));
 			Alert.show( "连接关闭！" );
+			LoadingEffect.hide();
 		}
 		
 		private function onIoError( event:SocketEvent ):void
 		{
 			Alert.show( "连接错误！" );
+			LoadingEffect.hide();
 		}
 		
 	}
