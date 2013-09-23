@@ -1,5 +1,7 @@
 package app.modules.friend.view
 {
+	import app.modules.friend.event.FriendEvent;
+	
 	import victor.framework.core.BaseMediator;
 	
 	
@@ -14,5 +16,18 @@ package app.modules.friend.view
 		{
 			super();
 		}
+		
+		override public function onRegister():void
+		{
+			super.onRegister();
+			
+			addContextListener( FriendEvent.UPDATE_LIST, updateListHandler, FriendEvent );
+		}
+		
+		private function updateListHandler( event:FriendEvent ):void
+		{
+			
+		}
+		
 	}
 }

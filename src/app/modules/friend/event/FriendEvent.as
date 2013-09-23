@@ -14,5 +14,11 @@ package app.modules.friend.event
 		{
 			super(type, data, bubbles, cancelable);
 		}
+		
+		/**
+		 * 更新列表
+		 */
+		public static const UPDATE_LIST:String = "update_list";
+		
 	}
 }

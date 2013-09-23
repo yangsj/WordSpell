@@ -12,11 +12,14 @@ package app.modules.map.model
 	{
 		private var _currentMapVo:MapVo;
 		private var _currentRoundVo:RoundVo;
+		private var _mapList:Vector.<MapVo>;
 		
 		public function MapModel()
 		{
 			super();
 		}
+		
+		
 
 		public function get currentMapVo():MapVo
 		{

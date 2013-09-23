@@ -29,7 +29,6 @@ package app.modules.chat.view
 			y = posY;
 			_parentTarget = parentTarget;
 			super();
-//			alpha = 0;
 		}
 		
 		override protected function onceInit():void
@@ -51,16 +50,6 @@ package app.modules.chat.view
 				clip.mouseChildren = false;
 				_skin.addChild( clip );
 			}
-			
-//			var length:int = _skin.numChildren;
-//			for (var i:int = 0; i < length; i++)
-//			{
-//				var dis:Sprite = _skin.getChildByName("emotion_" + (i < 10 ? "0" : "") + i ) as Sprite;
-//				if ( dis == null )
-//					break;
-//				else
-//					dis.mouseChildren = false;
-//			}
 		}
 		
 		protected function onClickHandler(event:MouseEvent):void
