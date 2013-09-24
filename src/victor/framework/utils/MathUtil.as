@@ -12,6 +12,14 @@ package victor.framework.utils
 		{
 		}
 		
+		/**
+		 * 获取指定值在指定区间内
+		 * @param value
+		 * @param min
+		 * @param max
+		 * @return 
+		 * 
+		 */
 		public static function range(value : Number, min : int, max : int) : Number
 		{
 			if (value < min)
@@ -21,6 +29,22 @@ package victor.framework.utils
 				value = max;
 			
 			return value;
+		}
+		
+		/**
+		 * 指定的值是否在指定范围内
+		 * @param value
+		 * @param min
+		 * @param max
+		 * @return 
+		 * 
+		 */
+		public static function isRange(value : Number, min : int, max : int) : Boolean
+		{
+			if ( value < min || value > max )
+				return false;
+			
+			return true;
 		}
 	}
 }

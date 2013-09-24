@@ -13,6 +13,11 @@ package app
 	{
 		
 		/**
+		 * 最大等级
+		 */
+		public static const maxLevel:int = 60;
+		
+		/**
 		 * 主机地址
 		 */
 		public static var serverHost:String = "";

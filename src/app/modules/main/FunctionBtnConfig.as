@@ -1,4 +1,4 @@
-package app.modules.main.view
+package app.modules.main
 {
 	import app.modules.ViewName;
 	
