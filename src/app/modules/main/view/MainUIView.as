@@ -43,6 +43,7 @@ package app.modules.main.view
 		
 		public function MainUIView()
 		{
+			addedToStageHandler( null );
 		}
 		
 		public function updateLevelExp( level:int, exp:int ):void

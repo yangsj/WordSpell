@@ -31,6 +31,8 @@ package app.modules.main.view
 			
 			// 经验条进度更新
 			addContextListener( MainUIEvent.UPDATE_EXP, updateExpHandler, MainUIEvent );
+			
+			initData();
 		}
 		
 		private function initData():void
