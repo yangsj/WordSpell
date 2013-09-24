@@ -20,6 +20,11 @@ package app.modules.map.event
 		 */
 		public static const OPEN_SELECTED_ROUND:String = "open_selected_round";
 		
+		/**
+		 * 更新地图数据
+		 */
+		public static const UPDATE_MAP_DATA:String = "update_map_data";
+		
 		
 	}
 }

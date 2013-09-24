@@ -5,6 +5,7 @@ package victor.framework.core
 	
 	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
@@ -62,9 +63,9 @@ package victor.framework.core
 
 ///////////// override functions ///////////////////////////
 		
-		override protected function onceInit():void
+		override protected function addedToStageHandler(event:Event):void
 		{
-			super.onceInit();
+			super.addedToStageHandler( event );
 			
 			if ( btnClose )
 			{
@@ -79,15 +80,20 @@ package victor.framework.core
 				dragTarget.addEventListener(MouseEvent.MOUSE_DOWN, dragTargetMouseHandler );
 		}
 		
-		override public function dispose():void
+		override protected function removedFromStageHandler(event:Event):void
 		{
-			super.dispose();
+			super.removedFromStageHandler( event );
 			
 			if ( btnClose )
 				btnClose.removeEventListener(MouseEvent.CLICK, btnCloseClickHandler );
 			
 			if ( dragTarget )
 				dragTarget.removeEventListener(MouseEvent.MOUSE_DOWN, dragTargetMouseHandler );
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
 			
 			btnClose = null;
 			dragTarget = null;

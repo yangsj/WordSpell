@@ -22,6 +22,11 @@ package app.modules.map.model
 		public var mapName:String;
 		
 		/**
+		 * 地图是否开启
+		 */
+		public var isOpen:Boolean;
+		
+		/**
 		 * 关卡列表
 		 */
 		public var roundList:Vector.<RoundVo>;

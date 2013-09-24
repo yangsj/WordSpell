@@ -17,4 +17,11 @@
 	
 	<item name="testPanel" url="assets/panel/testPanel.swf" version="1" first="0" />
 	
+	<item name="map_chapter_0" url="assets/chapters/map_chapter_0.swf" version="1" first="0" />
+	<item name="map_chapter_1" url="assets/chapters/map_chapter_1.swf" version="1" first="0" />
+	<item name="map_chapter_2" url="assets/chapters/map_chapter_2.swf" version="1" first="0" />
+	<item name="map_chapter_3" url="assets/chapters/map_chapter_3.swf" version="1" first="0" />
+	<item name="map_chapter_4" url="assets/chapters/map_chapter_4.swf" version="1" first="0" />
+	<item name="map_chapter_5" url="assets/chapters/map_chapter_5.swf" version="1" first="0" />
+	
 </data>

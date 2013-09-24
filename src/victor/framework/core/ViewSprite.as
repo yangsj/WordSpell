@@ -23,7 +23,7 @@ package victor.framework.core
 
 		protected var rectangle:Rectangle;
 
-		private var _isInit:Boolean = false;
+		protected var _isInit:Boolean = false;
 
 
 
