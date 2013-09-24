@@ -19,14 +19,18 @@ import org.apache.thrift.protocol.*;
     private static const STRUCT_DESC:TStruct = new TStruct("item_t");
     private static const ITEM_ID_FIELD_DESC:TField = new TField("item_id", TType.I32, 1);
     private static const ITEM_TYPE_FIELD_DESC:TField = new TField("item_type", TType.I32, 2);
+    private static const ITEM_NUM_FIELD_DESC:TField = new TField("item_num", TType.I32, 3);
 
     private var _item_id:int;
     public static const ITEM_ID:int = 1;
     private var _item_type:int;
     public static const ITEM_TYPE:int = 2;
+    private var _item_num:int;
+    public static const ITEM_NUM:int = 3;
 
     private var __isset_item_id:Boolean = false;
     private var __isset_item_type:Boolean = false;
+    private var __isset_item_num:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -34,12 +38,17 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.I32));
       metaDataMap[ITEM_TYPE] = new FieldMetaData("item_type", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
+      metaDataMap[ITEM_NUM] = new FieldMetaData("item_num", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(item_t, metaDataMap);
     }
 
     public function item_t() {
+      this._item_id = 0;
+      this._item_type = 0;
+      this._item_num = 0;
     }
 
     public function get item_id():int {
@@ -78,6 +87,24 @@ import org.apache.thrift.protocol.*;
       return this.__isset_item_type;
     }
 
+    public function get item_num():int {
+      return this._item_num;
+    }
+
+    public function set item_num(item_num:int):void {
+      this._item_num = item_num;
+      this.__isset_item_num = true;
+    }
+
+    public function unsetItem_num():void {
+      this.__isset_item_num = false;
+    }
+
+    // Returns true if field item_num is set (has been assigned a value) and false otherwise
+    public function isSetItem_num():Boolean {
+      return this.__isset_item_num;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case ITEM_ID:
@@ -96,6 +123,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case ITEM_NUM:
+        if (value == null) {
+          unsetItem_num();
+        } else {
+          this.item_num = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -107,6 +142,8 @@ import org.apache.thrift.protocol.*;
         return this.item_id;
       case ITEM_TYPE:
         return this.item_type;
+      case ITEM_NUM:
+        return this.item_num;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -119,6 +156,8 @@ import org.apache.thrift.protocol.*;
         return isSetItem_id();
       case ITEM_TYPE:
         return isSetItem_type();
+      case ITEM_NUM:
+        return isSetItem_num();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -151,6 +190,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case ITEM_NUM:
+            if (field.type == TType.I32) {
+              this.item_num = iprot.readI32();
+              this.__isset_item_num = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -174,6 +221,9 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(ITEM_TYPE_FIELD_DESC);
       oprot.writeI32(this.item_type);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(ITEM_NUM_FIELD_DESC);
+      oprot.writeI32(this.item_num);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -188,6 +238,10 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "item_type:";
       ret += this.item_type;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "item_num:";
+      ret += this.item_num;
       first = false;
       ret += ")";
       return ret;

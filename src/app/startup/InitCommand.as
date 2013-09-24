@@ -11,9 +11,12 @@ package app.startup
 	import app.modules.login.command.LoginInitCommand;
 	import app.modules.main.command.MainUIInitCommand;
 	import app.modules.map.command.MapInitCommand;
+	import app.modules.model.CommonModel;
+	import app.modules.model.PackModel;
 	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.test.TestInitCommand;
 	import app.modules.serivce.CommonService;
+	import app.modules.serivce.PackService;
 	import app.modules.task.command.TaskInitCommand;
 	
 	import victor.framework.core.BaseCommand;
@@ -61,9 +64,15 @@ package app.startup
 			
 			injector.mapValue( GameData, GameData.instance );
 			
+			/////////////
+			
+			injectActor( CommonModel );
+			injectActor( PackModel );
+			
 			//////////////
 			
 			injectActor( CommonService );
+			injectActor( PackService );
 			
 			//************  initlialize commands ************************************************//
 			// 初始化 command

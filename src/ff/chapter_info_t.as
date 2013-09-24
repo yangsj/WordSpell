@@ -41,6 +41,7 @@ import org.apache.thrift.protocol.*;
     }
 
     public function chapter_info_t() {
+      this._is_open = 0;
     }
 
     public function get is_open():Boolean {
@@ -146,15 +147,15 @@ import org.apache.thrift.protocol.*;
           case AREA_INFO:
             if (field.type == TType.MAP) {
               {
-                var _map86:TMap = iprot.readMapBegin();
+                var _map87:TMap = iprot.readMapBegin();
                 this.area_info = new Dictionary();
-                for (var _i87:int = 0; _i87 < _map86.size; ++_i87)
+                for (var _i88:int = 0; _i88 < _map87.size; ++_i88)
                 {
-                  var _key88:int;
-                  var _val89:int;
-                  _key88 = iprot.readI32();
-                  _val89 = iprot.readI32();
-                  this.area_info[_key88] = _val89;
+                  var _key89:int;
+                  var _val90:int;
+                  _key89 = iprot.readI32();
+                  _val90 = iprot.readI32();
+                  this.area_info[_key89] = _val90;
                 }
                 iprot.readMapEnd();
               }
@@ -185,14 +186,14 @@ import org.apache.thrift.protocol.*;
       if (this.area_info != null) {
         oprot.writeFieldBegin(AREA_INFO_FIELD_DESC);
         {
-          var _sizeCounter91:int = 0;
-          for (var _key90:* in this.area_info) {
-            _sizeCounter91++;
+          var _sizeCounter92:int = 0;
+          for (var _key91:* in this.area_info) {
+            _sizeCounter92++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter91));
-          for (var elem92:* in this.area_info)          {
-            oprot.writeI32(elem92);
-            oprot.writeI32(this.area_info[elem92]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter92));
+          for (var elem93:* in this.area_info)          {
+            oprot.writeI32(elem93);
+            oprot.writeI32(this.area_info[elem93]);
           }
           oprot.writeMapEnd();
         }
