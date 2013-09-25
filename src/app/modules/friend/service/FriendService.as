@@ -1,12 +1,13 @@
 package app.modules.friend.service
 {
+	import app.events.GameEvent;
 	import app.modules.friend.model.FriendModel;
 	import app.modules.friend.model.FriendVo;
-
+	
 	import ff.friend_info_t;
 	import ff.friend_t;
 	import ff.server_cmd_e;
-
+	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
 
@@ -46,6 +47,13 @@ package app.modules.friend.service
 				friendVo.status = friend.status;
 
 				friendModel.friendList.push( friendVo );
+			}
+			
+			// 检查是否进入游戏（登陆时检查一次）
+			if (friendModel.hasFriendList == false )
+			{
+				friendModel.hasFriendList = true;
+				dispatch( new GameEvent( GameEvent.ACQUIRE_FRIEND_DATA ));
 			}
 		}
 

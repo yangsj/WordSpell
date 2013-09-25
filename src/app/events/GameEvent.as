@@ -15,6 +15,7 @@ package app.events
 			super(type, data, bubbles, cancelable);
 		}
 		
+///************* Login	events	
 		/**
 		 * 参数解析完成
 		 */
@@ -31,14 +32,41 @@ package app.events
 		public static const FIRST_LOAD_COMPLETE:String = "first_load_complete";
 		
 		/**
+		 * 登陆成功的
+		 */
+		public static const LOGIN_SUCCESSED:String = "login_successed";
+		
+		/**
 		 * 主资源加载完成
 		 */
 		public static const MAIN_LOAD_COMPLETE:String = "main_load_complete";
 		
 		/**
-		 * 登陆成功的
+		 * 登陆时获取到玩家数据
 		 */
-		public static const LOGIN_SUCCESSED:String = "login_successed";
+		public static const ACQUIRE_PLAYER_DATA:String = "acquire_player_data";
+		
+		/**
+		 * 登陆是获取到地图数据
+		 */
+		public static const ACQUIRE_MAP_DATA:String = "acquire_map_data";
+		
+		/**
+		 * 登陆时获取到好友列表数据
+		 */
+		public static const ACQUIRE_FRIEND_DATA:String = "acquire_friend_data";
+		
+		/**
+		 * 登陆时获取到任务数据
+		 */
+		public static const ACQUIRE_TASK_DATA:String = "acquire_task_data";
+		
+///******************* in game
+		
+		/**
+		 * 背包物品有更新
+		 */
+		public static const UPDATE_PACK_ITEMS:String = "update_pack_items";
 		
 	}
 }

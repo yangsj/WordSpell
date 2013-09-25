@@ -10,6 +10,11 @@ package app.modules.task.model
 	 */
 	public class TaskModel extends Actor
 	{
+		/**
+		 * 是否获得任务列表数据
+		 */
+		public var hasTaskList:Boolean;
+		
 		private var _taskList:Vector.<TaskVo>;
 		
 		public function TaskModel()

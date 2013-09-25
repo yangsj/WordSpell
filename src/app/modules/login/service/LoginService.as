@@ -25,6 +25,9 @@ package app.modules.login.service
 	 */
 	public class LoginService extends BaseService
 	{
+		[Inject]
+		public var gameDb:GameData;
+		
 		public function LoginService()
 		{
 			super();
@@ -43,6 +46,13 @@ package app.modules.login.service
 			var data:property_info_t = res.data as property_info_t;
 
 			setPlayerInfo( data );
+			
+			// 检查是否能进入游戏（登陆时检查一次）
+			if ( gameDb.hasSelfVo == false )
+			{
+				gameDb.hasSelfVo = true;
+				dispatch( new GameEvent( GameEvent.ACQUIRE_PLAYER_DATA ));
+			}
 		}
 
 		private function loginSuccessedNotify( res:SocketResp ):void

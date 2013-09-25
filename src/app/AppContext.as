@@ -73,9 +73,22 @@ package app
 			// 登陆成功后加载进入游戏主资源
 			commandMap.mapEvent(GameEvent.LOGIN_SUCCESSED, MainLoadCommand, GameEvent, true );
 			
-			// 进入游戏场景
+			//********** 以下几个条件检查是否进入游戏
+			
+			// 资源加载完成进入游戏场景检查
 			commandMap.mapEvent(GameEvent.MAIN_LOAD_COMPLETE, EnterGameCommand, GameEvent, true);
 			
+			// 玩家数据获取到进入游戏检查
+			commandMap.mapEvent(GameEvent.ACQUIRE_PLAYER_DATA, EnterGameCommand, GameEvent, true);
+			
+			// 地图数据获取到进入游戏检查
+			commandMap.mapEvent(GameEvent.ACQUIRE_MAP_DATA, EnterGameCommand, GameEvent, true);
+			
+			// 获取到好友列表数据进入游戏检查
+			commandMap.mapEvent(GameEvent.ACQUIRE_FRIEND_DATA, EnterGameCommand, GameEvent, true);
+			
+			// 获取到任务数据进入游戏检查
+			commandMap.mapEvent(GameEvent.ACQUIRE_TASK_DATA, EnterGameCommand, GameEvent, true);
 		}
 		
 	}

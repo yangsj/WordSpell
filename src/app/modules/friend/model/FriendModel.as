@@ -12,6 +12,11 @@ package app.modules.friend.model
 	 */
 	public class FriendModel extends Actor
 	{
+		/**
+		 * 是否已获得好友列表数据
+		 */
+		public var hasFriendList:Boolean;
+		
 		private var _friendList:Vector.<FriendVo>;
 
 		public function FriendModel()

@@ -10,6 +10,7 @@ package app.startup
 	import app.modules.friend.view.rightMenu.RightMenuMediator;
 	import app.modules.login.command.LoginInitCommand;
 	import app.modules.main.command.MainUIInitCommand;
+	import app.modules.main.model.MainModel;
 	import app.modules.map.command.MapInitCommand;
 	import app.modules.model.CommonModel;
 	import app.modules.model.PackModel;
@@ -66,6 +67,7 @@ package app.startup
 			
 			/////////////
 			
+			injectActor( MainModel );
 			injectActor( CommonModel );
 			injectActor( PackModel );
 			

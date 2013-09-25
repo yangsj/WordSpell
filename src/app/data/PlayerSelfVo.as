@@ -13,9 +13,7 @@ package app.data
 		{
 			super();
 			if ( isInit )
-			{
 				throw new Error("PlayerSelfVo不能重复创建");
-			}
 			isInit = true;
 		}
 	}

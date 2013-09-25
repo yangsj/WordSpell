@@ -5,6 +5,7 @@ package app.modules.login.command
 	import app.events.ViewEvent;
 	import app.managers.LoaderManager;
 	import app.modules.ViewName;
+	import app.modules.main.model.MainModel;
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.log.Logger;
@@ -17,6 +18,9 @@ package app.modules.login.command
 	 */
 	public class MainLoadCommand extends BaseCommand
 	{
+		[Inject]
+		public var mainModel:MainModel;
+		
 		public function MainLoadCommand()
 		{
 			super();
@@ -31,6 +35,7 @@ package app.modules.login.command
 		private function loaderCompleteCallBack():void
 		{
 			Logger.debug( "登陆资源加载完毕！！！" );
+			mainModel.hasLoadCompleted = true;
 			dispatch( new GameEvent( GameEvent.MAIN_LOAD_COMPLETE ));
 		}
 		

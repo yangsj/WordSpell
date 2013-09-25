@@ -18,6 +18,7 @@ package app.data
 				new GameData();
 			return _instance;
 		}
+
 		
 		////////////////////////////////////////////////////////
 		
@@ -30,9 +31,32 @@ package app.data
 		
 		////////////////////////////////////////////////////////
 		
+		/**
+		 * 玩家自己的数据
+		 */
 		public var selfVo:PlayerSelfVo;
 		
 		////////////////////////////////////////////////////////
+		
+		private var _hasSelfVo:Boolean;
+		
+		///////////////////////////////////////////////////////
+		
+		/**
+		 * 是否获取到玩家自己的数据
+		 */
+		public function get hasSelfVo():Boolean
+		{
+			return _hasSelfVo;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set hasSelfVo(value:Boolean):void
+		{
+			_hasSelfVo = _hasSelfVo ? true : value;
+		}
 
 	}
 }

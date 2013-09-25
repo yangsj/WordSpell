@@ -1,5 +1,6 @@
 package app.modules.model
 {
+	import app.events.GameEvent;
 	import app.modules.model.vo.ItemVo;
 	
 	import org.robotlegs.mvcs.Actor;
@@ -12,11 +13,19 @@ package app.modules.model
 	 */
 	public class PackModel extends Actor
 	{
+		private var _hasPackItems:Boolean;
+		private var _itemList:Vector.<ItemVo>;
+		
 		public function PackModel()
 		{
 			super();
 		}
 		
+		/**
+		 * 添加指定物品的数量
+		 * @param itemId
+		 * @param addNum
+		 */
 		public function addNum( itemId:int, addNum:int ):void
 		{
 			var index:int = getIndexById( itemId );
@@ -29,6 +38,10 @@ package app.modules.model
 			}
 		}
 		
+		/**
+		 * 更新指定物品的数据
+		 * @param itemVo
+		 */
 		public function updateItem( itemVo:ItemVo ):void
 		{
 			var index:int = getIndexById( itemVo.id );
@@ -39,6 +52,11 @@ package app.modules.model
 			updateItems();
 		}
 		
+		/**
+		 * 通过id获取指定物品在背包里的排序
+		 * @param id
+		 * @return 
+		 */
 		public function getIndexById( id:int ):int
 		{
 			var itemVo:ItemVo;
@@ -53,17 +71,35 @@ package app.modules.model
 		
 		private function updateItems():void
 		{
-			
+			dispatch( new GameEvent( GameEvent.UPDATE_PACK_ITEMS ));
 		}
 		
 		///////////// getters/setters 
 		
-		private var _itemList:Vector.<ItemVo>;
-		
+		/**
+		 * 物品列表数据
+		 */
 		public function get itemList():Vector.<ItemVo>
 		{
 			return _itemList ||= new Vector.<ItemVo>();
 		}
+
+		/**
+		 * 是否获取过背包物品数据
+		 */
+		public function get hasPackItems():Boolean
+		{
+			return _hasPackItems;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set hasPackItems(value:Boolean):void
+		{
+			_hasPackItems = _hasPackItems ? true : value;
+		}
+
 
 	}
 }
