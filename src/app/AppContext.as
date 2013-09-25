@@ -89,6 +89,10 @@ package app
 			
 			// 获取到任务数据进入游戏检查
 			commandMap.mapEvent(GameEvent.ACQUIRE_TASK_DATA, EnterGameCommand, GameEvent, true);
+			
+			//*********** 登陆数据拉取及加载进度检查
+			
+			
 		}
 		
 	}

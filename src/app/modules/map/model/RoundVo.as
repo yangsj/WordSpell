@@ -17,13 +17,13 @@ package app.modules.map.model
 		 */
 		public var mapId:int;
 		/**
+		 * 章节id
+		 */
+		public var chapterId:int;
+		/**
 		 * 当前关卡id
 		 */
 		public var roundId:int;
-		/**
-		 * 当前关卡名称
-		 */
-		public var roundName:String;
 		/**
 		 * 星级评分
 		 */

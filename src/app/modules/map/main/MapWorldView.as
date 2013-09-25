@@ -1,12 +1,9 @@
 package app.modules.map.main
 {
 	import flash.display.MovieClip;
-	import flash.events.MouseEvent;
 	
-	import app.modules.map.event.MapEvent;
 	import app.modules.map.main.item.MapItem;
 	import app.modules.map.model.MapVo;
-	import app.utils.appStage;
 	
 	import victor.framework.core.BaseScene;
 	

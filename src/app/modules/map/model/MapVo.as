@@ -29,11 +29,11 @@ package app.modules.map.model
 		/**
 		 * 关卡列表
 		 */
-		public var roundList:Vector.<RoundVo>;
+		public var roundList:Vector.<ChapterVo>;
 		
-		public function addRoundVo( roundVo:RoundVo ):void
+		public function addRoundVo( roundVo:ChapterVo ):void
 		{
-			roundList ||= new Vector.<RoundVo>();
+			roundList ||= new Vector.<ChapterVo>();
 			roundList.push( roundVo );
 		}
 		
