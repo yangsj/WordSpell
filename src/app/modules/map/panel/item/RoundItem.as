@@ -3,6 +3,7 @@ package app.modules.map.panel.item
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
+	import app.core.Tips;
 	import app.modules.map.main.item.MapItemBase;
 	import app.modules.map.model.RoundVo;
 	import app.modules.map.panel.event.SelectedRoundEvent;
@@ -33,6 +34,7 @@ package app.modules.map.panel.item
 		{
 			if ( roundVo.isOpen )
 				skin.dispatchEvent( new SelectedRoundEvent( SelectedRoundEvent.SELECTED_ROUND, roundVo, true ));
+			else Tips.showMouse( "未开启！" );
 		}
 		
 		public function setData( roundVo:RoundVo ):void
@@ -49,7 +51,6 @@ package app.modules.map.panel.item
 			
 			mcTarget.gotoAndStop( roundVo.isOpen ? 1 : 2 );
 			
-			skin.mouseEnabled = roundVo.isOpen;
 		}
 		
 		override public function dispose():void

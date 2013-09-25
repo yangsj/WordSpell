@@ -107,7 +107,7 @@ class CcInstance
 		Cc.memoryMonitor = true;
 		Cc.config.commandLineAllowed = true;
 		Cc.config.alwaysOnTop = true;
-		Cc.visible = true;
+		Cc.visible = false;
 		Cc.width = stage.stageWidth - 50;
 	}
 

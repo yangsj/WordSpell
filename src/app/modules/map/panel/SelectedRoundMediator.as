@@ -5,6 +5,7 @@ package app.modules.map.panel
 	import app.modules.map.service.MapService;
 	
 	import victor.framework.core.BaseMediator;
+	import app.core.Tips;
 	
 	
 	/**
@@ -48,6 +49,7 @@ package app.modules.map.panel
 		private function selectedRoundhandler( event:SelectedRoundEvent ):void
 		{
 			trace( event.data );
+			Tips.showMouse( "准备闯关！功能开发中，敬请期待" );
 		}
 		
 	}
