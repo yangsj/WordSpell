@@ -3,11 +3,11 @@ package app.modules.map.service
 	import flash.utils.Dictionary;
 	
 	import app.events.GameEvent;
-	import app.modules.map.event.MapEvent;
 	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapModel;
 	import app.modules.map.model.MapVo;
 	import app.modules.map.model.RoundVo;
+	import app.modules.map.panel.event.SelectedRoundEvent;
 	
 	import ff.chapter_detail_req_t;
 	import ff.chapter_detail_ret_t;
@@ -89,22 +89,24 @@ package app.modules.map.service
 				groupList = new Vector.<RoundVo>();
 				chapterVo.roundList = groupList;
 				chapterList.push( chapterVo );
-				for ( var index:String in info.round_info )
+				var len:int = info.round_info.length;
+				for ( var index:int = 0;index < 5; index++ )
 				{
-					var roundInfo:round_info_t = info.round_info[ index ];
+					var roundInfo:round_info_t = index < len ? info.round_info[ index ] : new round_info_t();
 					roundVo = new RoundVo();
 					roundVo.mapId = mapVo.mapId;
 					roundVo.chapterId = chapterVo.chapterId;
-					roundVo.roundId = roundInfo.round_id;
+					roundVo.roundId = index;
 					roundVo.type = roundInfo.rount_type;
 					roundVo.starNum = roundInfo.star_num;
+					roundVo.status = roundInfo.status;
 					groupList.push( roundVo );
 				}
 			}
 			mapVo.roundList = chapterList;
 			mapModel.currentMapVo = mapVo;
 			
-			dispatch( new MapEvent( MapEvent.CHAPTER_DETAIL ));
+			dispatch( new SelectedRoundEvent( SelectedRoundEvent.CHAPTER_DETAIL ));
 			
 		}
 		

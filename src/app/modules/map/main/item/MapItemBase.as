@@ -3,12 +3,14 @@ package app.modules.map.main.item
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
+	import victor.framework.interfaces.IDisposable;
+	
 	/**
 	 * ……
 	 * @author 	yangsj 
 	 * 			2013-9-25
 	 */
-	public class MapItemBase
+	public class MapItemBase implements IDisposable
 	{
 		// 开启状态帧
 		protected const FRAME_OPEN:String = "frame_open";
@@ -30,6 +32,12 @@ package app.modules.map.main.item
 		{
 		}
 		
+		public function dispose():void
+		{
+			if ( skin )
+				skin.removeEventListener(MouseEvent.CLICK, onClickHandler );
+			skin = null;
+		}
 		
 	}
 }

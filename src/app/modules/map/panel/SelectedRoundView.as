@@ -1,12 +1,13 @@
 package app.modules.map.panel
 {
-	import flash.display.Sprite;
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
 	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapVo;
+	import app.modules.map.panel.item.GroupItem;
 	
 	import victor.framework.components.Reflection;
 	import victor.framework.core.BasePanel;
@@ -22,11 +23,11 @@ package app.modules.map.panel
 	{
 		private static const names:Array = ["加拿大大熊湖Great Bear Lake","西澳大利亚沙漠（Western Desert）","澳大利亚凯恩斯热带雨林","美国雷尼尔山Mt. Rainier","埃尔斯米尔岛","Ellesmere Island 天空"];
 		
-		public var mapVo:MapVo;
-		
 		private var skinDict:Dictionary = new Dictionary();
+		private var vecList:Vector.<GroupItem>;
 		
 		public var txtName:TextField;
+		public var mapVo:MapVo;
 		
 		public function SelectedRoundView()
 		{
@@ -39,6 +40,13 @@ package app.modules.map.panel
 			txtName.y =3;
 			txtName.text = names[ mapVo.mapId ];
 			_skin.addChild( txtName );
+			
+		}
+		
+		override protected function removedFromStageHandler(event:Event):void
+		{
+			super.removedFromStageHandler( event );
+			clearGroupItems();
 		}
 		
 		override protected function loadComplete():void
@@ -56,10 +64,44 @@ package app.modules.map.panel
 			}
 		}
 		
+		private function clearGroupItems():void
+		{
+			if ( vecList )
+			{
+				while ( vecList.length > 0 )
+					vecList.pop().dispose();
+				vecList = null;
+			}
+		}
+		
+		private function createGroupItems():void
+		{
+			clearGroupItems();
+			vecList = new Vector.<GroupItem>();
+			var mcGroup:MovieClip;
+			var groupItem:GroupItem;
+			for (var i:int = 0; i < 10; i++ )
+			{
+				mcGroup = _skin.getChildByName( "c" + i ) as MovieClip;
+				groupItem = new GroupItem( mcGroup );
+				vecList.push( groupItem );
+			}
+		}
+		
 		public function setData( list:Vector.<ChapterVo> ):void
 		{
+			if ( vecList == null || _skin == null )
+			{
+				createGroupItems();
+			}
+
 			mapVo.roundList = list;
-			
+			var groupItem:GroupItem;
+			for ( var i:int = 0; i < 10; i++ )
+			{
+				groupItem = vecList[ i ];
+				groupItem.setData( list[ i ] );
+			}
 		}
 		
 		override public function set data(value:Object):void

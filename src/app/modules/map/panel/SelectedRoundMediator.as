@@ -1,7 +1,7 @@
 package app.modules.map.panel
 {
-	import app.modules.map.event.MapEvent;
 	import app.modules.map.model.MapModel;
+	import app.modules.map.panel.event.SelectedRoundEvent;
 	import app.modules.map.service.MapService;
 	
 	import victor.framework.core.BaseMediator;
@@ -31,16 +31,23 @@ package app.modules.map.panel
 			super.onRegister();
 			
 			// 获取详息数据
-			 addContextListener( MapEvent.CHAPTER_DETAIL, chapterDetailNotify, MapEvent );
+			 addContextListener( SelectedRoundEvent.CHAPTER_DETAIL, chapterDetailNotify, SelectedRoundEvent );
 			 
+			 // 选择关卡
+			 addViewListener( SelectedRoundEvent.SELECTED_ROUND, selectedRoundhandler, SelectedRoundEvent );
 			 
 			 // 获取数据请求
 			 mapService.getChapterDetailInfo( view.mapVo.mapId );
 		}
 		
-		private function chapterDetailNotify( event:MapEvent ):void
+		private function chapterDetailNotify( event:SelectedRoundEvent ):void
 		{
 			view.setData( mapModel.currentMapVo.roundList );
+		}
+		
+		private function selectedRoundhandler( event:SelectedRoundEvent ):void
+		{
+			trace( event.data );
 		}
 		
 	}
