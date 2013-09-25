@@ -17,25 +17,23 @@ package app.modules.map.model
 		 */
 		public var mapId:int;
 		/**
-		 * 地图名称
+		 * 开启状态（0未开启，1已开启）
 		 */
-		public var mapName:String;
-		
-		/**
-		 * 地图是否开启
-		 */
-		public var isOpen:Boolean;
+		public var status:int;
 		
 		/**
 		 * 关卡列表
 		 */
 		public var roundList:Vector.<ChapterVo>;
-		
-		public function addRoundVo( roundVo:ChapterVo ):void
+
+		/**
+		 * 地图是否开启
+		 */
+		public function get isOpen():Boolean
 		{
-			roundList ||= new Vector.<ChapterVo>();
-			roundList.push( roundVo );
+			return status == 1;
 		}
+
 		
 	}
 }

@@ -15,8 +15,8 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class game_info_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("game_info_t");
+  public class game_info_ret_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("game_info_ret_t");
     private static const ALL_CHAPTER_INFO_FIELD_DESC:TField = new TField("all_chapter_info", TType.MAP, 1);
 
     private var _all_chapter_info:Dictionary;
@@ -31,10 +31,10 @@ import org.apache.thrift.protocol.*;
               new StructMetaData(TType.STRUCT, chapter_info_t)));
     }
     {
-      FieldMetaData.addStructMetaDataMap(game_info_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(game_info_ret_t, metaDataMap);
     }
 
-    public function game_info_t() {
+    public function game_info_ret_t() {
     }
 
     public function get all_chapter_info():Dictionary {
@@ -102,16 +102,16 @@ import org.apache.thrift.protocol.*;
           case ALL_CHAPTER_INFO:
             if (field.type == TType.MAP) {
               {
-                var _map95:TMap = iprot.readMapBegin();
+                var _map87:TMap = iprot.readMapBegin();
                 this.all_chapter_info = new Dictionary();
-                for (var _i96:int = 0; _i96 < _map95.size; ++_i96)
+                for (var _i88:int = 0; _i88 < _map87.size; ++_i88)
                 {
-                  var _key97:int;
-                  var _val98:chapter_info_t;
-                  _key97 = iprot.readI32();
-                  _val98 = new chapter_info_t();
-                  _val98.read(iprot);
-                  this.all_chapter_info[_key97] = _val98;
+                  var _key89:int;
+                  var _val90:chapter_info_t;
+                  _key89 = iprot.readI32();
+                  _val90 = new chapter_info_t();
+                  _val90.read(iprot);
+                  this.all_chapter_info[_key89] = _val90;
                 }
                 iprot.readMapEnd();
               }
@@ -139,14 +139,14 @@ import org.apache.thrift.protocol.*;
       if (this.all_chapter_info != null) {
         oprot.writeFieldBegin(ALL_CHAPTER_INFO_FIELD_DESC);
         {
-          var _sizeCounter100:int = 0;
-          for (var _key99:* in this.all_chapter_info) {
-            _sizeCounter100++;
+          var _sizeCounter92:int = 0;
+          for (var _key91:* in this.all_chapter_info) {
+            _sizeCounter92++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.STRUCT, _sizeCounter100));
-          for (var elem101:* in this.all_chapter_info)          {
-            oprot.writeI32(elem101);
-            this.all_chapter_info[elem101].write(oprot);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.STRUCT, _sizeCounter92));
+          for (var elem93:* in this.all_chapter_info)          {
+            oprot.writeI32(elem93);
+            this.all_chapter_info[elem93].write(oprot);
           }
           oprot.writeMapEnd();
         }
@@ -157,7 +157,7 @@ import org.apache.thrift.protocol.*;
     }
 
     public function toString():String {
-      var ret:String = new String("game_info_t(");
+      var ret:String = new String("game_info_ret_t(");
       var first:Boolean = true;
 
       ret += "all_chapter_info:";

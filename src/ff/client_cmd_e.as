@@ -13,14 +13,16 @@ import flash.utils.Dictionary;
     public static const CHAT_REQ:int = 2;
     public static const START_ROUND_REQ:int = 3;
     public static const INPUT_REQ:int = 4;
+    public static const CHAPTER_DETAIL_REQ:int = 5;
 
-    public static const VALID_VALUES:Set = new Set(LOGIN_REQ, CHAT_REQ, START_ROUND_REQ, INPUT_REQ);
+    public static const VALID_VALUES:Set = new Set(LOGIN_REQ, CHAT_REQ, START_ROUND_REQ, INPUT_REQ, CHAPTER_DETAIL_REQ);
     public static const VALUES_TO_NAMES:Dictionary = new Dictionary();
     {
       VALUES_TO_NAMES[LOGIN_REQ] = "LOGIN_REQ";
       VALUES_TO_NAMES[CHAT_REQ] = "CHAT_REQ";
       VALUES_TO_NAMES[START_ROUND_REQ] = "START_ROUND_REQ";
       VALUES_TO_NAMES[INPUT_REQ] = "INPUT_REQ";
+      VALUES_TO_NAMES[CHAPTER_DETAIL_REQ] = "CHAPTER_DETAIL_REQ";
 
     }
   }

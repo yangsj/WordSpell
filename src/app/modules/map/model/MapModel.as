@@ -24,7 +24,10 @@ package app.modules.map.model
 			super();
 		}
 		
-		
+		public function updateMapVo( mapVo:MapVo ):void
+		{
+			
+		}
 
 		public function get currentMapVo():MapVo
 		{
@@ -44,6 +47,16 @@ package app.modules.map.model
 		public function set currentRoundVo(value:RoundVo):void
 		{
 			_currentRoundVo = value;
+		}
+
+		public function get mapList():Vector.<MapVo>
+		{
+			return _mapList;
+		}
+
+		public function set mapList(value:Vector.<MapVo>):void
+		{
+			_mapList = value;
 		}
 		
 

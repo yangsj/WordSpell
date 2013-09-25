@@ -7,7 +7,7 @@ package victor.framework.socket
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
 	
-	import ff.FFUtil;
+	import org.apache.thrift.FFUtil;
 	
 	import victor.framework.log.Logger;
 

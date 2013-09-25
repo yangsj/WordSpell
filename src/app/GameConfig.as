@@ -15,7 +15,7 @@ package app
 		/**
 		 * 最大等级
 		 */
-		public static const maxLevel:int = 60;
+		public static const MAX_LEVEL:int = 60;
 		
 		/**
 		 * 主机地址

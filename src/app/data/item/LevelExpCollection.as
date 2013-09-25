@@ -38,7 +38,7 @@ package app.data.item
 		
 		public function getItemByLevel( level:int ):LevelExpItemVo
 		{
-			level = MathUtil.range( level, 1, GameConfig.maxLevel );
+			level = MathUtil.range( level, 1, GameConfig.MAX_LEVEL );
 			return dict[ level ] as LevelExpItemVo;
 		}
 		
@@ -50,7 +50,7 @@ package app.data.item
 				if ( MathUtil.isRange( exp, itemVo.curExp, itemVo.nextExp - 1 ))
 					return itemVo;
 			}
-			return getItemByLevel( GameConfig.maxLevel );
+			return getItemByLevel( GameConfig.MAX_LEVEL );
 		}
 		
 	}

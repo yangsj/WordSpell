@@ -15,53 +15,53 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class chapter_info_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("chapter_info_t");
-    private static const STATUS_FIELD_DESC:TField = new TField("status", TType.I16, 1);
+  public class chapter_detail_req_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("chapter_detail_req_t");
+    private static const CHAPTER_ID_FIELD_DESC:TField = new TField("chapter_id", TType.I32, 1);
 
-    private var _status:int;
-    public static const STATUS:int = 1;
+    private var _chapter_id:int;
+    public static const CHAPTER_ID:int = 1;
 
-    private var __isset_status:Boolean = false;
+    private var __isset_chapter_id:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[STATUS] = new FieldMetaData("status", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I16));
+      metaDataMap[CHAPTER_ID] = new FieldMetaData("chapter_id", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
-      FieldMetaData.addStructMetaDataMap(chapter_info_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(chapter_detail_req_t, metaDataMap);
     }
 
-    public function chapter_info_t() {
-      this._status = 0;
+    public function chapter_detail_req_t() {
+      this._chapter_id = 0;
     }
 
-    public function get status():int {
-      return this._status;
+    public function get chapter_id():int {
+      return this._chapter_id;
     }
 
-    public function set status(status:int):void {
-      this._status = status;
-      this.__isset_status = true;
+    public function set chapter_id(chapter_id:int):void {
+      this._chapter_id = chapter_id;
+      this.__isset_chapter_id = true;
     }
 
-    public function unsetStatus():void {
-      this.__isset_status = false;
+    public function unsetChapter_id():void {
+      this.__isset_chapter_id = false;
     }
 
-    // Returns true if field status is set (has been assigned a value) and false otherwise
-    public function isSetStatus():Boolean {
-      return this.__isset_status;
+    // Returns true if field chapter_id is set (has been assigned a value) and false otherwise
+    public function isSetChapter_id():Boolean {
+      return this.__isset_chapter_id;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case STATUS:
+      case CHAPTER_ID:
         if (value == null) {
-          unsetStatus();
+          unsetChapter_id();
         } else {
-          this.status = value;
+          this.chapter_id = value;
         }
         break;
 
@@ -72,8 +72,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case STATUS:
-        return this.status;
+      case CHAPTER_ID:
+        return this.chapter_id;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -82,8 +82,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case STATUS:
-        return isSetStatus();
+      case CHAPTER_ID:
+        return isSetChapter_id();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -100,10 +100,10 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case STATUS:
-            if (field.type == TType.I16) {
-              this.status = iprot.readI16();
-              this.__isset_status = true;
+          case CHAPTER_ID:
+            if (field.type == TType.I32) {
+              this.chapter_id = iprot.readI32();
+              this.__isset_chapter_id = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -125,19 +125,19 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(STATUS_FIELD_DESC);
-      oprot.writeI16(this.status);
+      oprot.writeFieldBegin(CHAPTER_ID_FIELD_DESC);
+      oprot.writeI32(this.chapter_id);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
 
     public function toString():String {
-      var ret:String = new String("chapter_info_t(");
+      var ret:String = new String("chapter_detail_req_t(");
       var first:Boolean = true;
 
-      ret += "status:";
-      ret += this.status;
+      ret += "chapter_id:";
+      ret += this.chapter_id;
       first = false;
       ret += ")";
       return ret;

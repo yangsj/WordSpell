@@ -37,23 +37,23 @@ package app.modules.login.service
 		{
 			// 登陆或注册成功通知
 			regist( server_cmd_e.LOGIN_RET, loginSuccessedNotify, user_login_ret_t );
-			// 玩家数据通知
-			regist( server_cmd_e.USER_PROPERTY_RET, userDataNotify, property_info_t );
+//			// 玩家数据通知
+//			regist( server_cmd_e.USER_PROPERTY_RET, userDataNotify, property_info_t );
 		}
 
-		private function userDataNotify( res:SocketResp ):void
-		{
-			var data:property_info_t = res.data as property_info_t;
-
-			setPlayerInfo( data );
-			
-			// 检查是否能进入游戏（登陆时检查一次）
-			if ( gameDb.hasSelfVo == false )
-			{
-				gameDb.hasSelfVo = true;
-				dispatch( new GameEvent( GameEvent.ACQUIRE_PLAYER_DATA ));
-			}
-		}
+//		private function userDataNotify( res:SocketResp ):void
+//		{
+//			var data:property_info_t = res.data as property_info_t;
+//
+//			setPlayerInfo( data );
+//			
+//			// 检查是否能进入游戏（登陆时检查一次）
+//			if ( gameDb.hasSelfVo == false )
+//			{
+//				gameDb.hasSelfVo = true;
+//				dispatch( new GameEvent( GameEvent.ACQUIRE_PLAYER_DATA ));
+//			}
+//		}
 
 		private function loginSuccessedNotify( res:SocketResp ):void
 		{
@@ -65,8 +65,9 @@ package app.modules.login.service
 
 			var selfVo:PlayerSelfVo = GameData.instance.selfVo ||= new PlayerSelfVo();
 			selfVo.uid = data.uid;
-
 			setPlayerInfo( data.property_info );
+			
+			gameDb.hasSelfVo = true;
 
 			////////////////////////////////////////
 			/////////// set player data ////////////

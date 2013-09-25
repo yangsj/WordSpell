@@ -29,8 +29,19 @@ package app.modules.map.model
 		 */
 		public var starNum:int = 0;
 		/**
+		 * 开启状态(0标号不开启，1表示开启)
+		 */
+		public var status:int = 0;
+		/**
+		 * 类型，（0简单、1进阶、2达人）
+		 */
+		public var type:int;
+		/**
 		 * 是否开启
 		 */
-		public var isOpen:Boolean;
+		public function get isOpen():Boolean
+		{
+			return status == 1;
+		}
 	}
 }

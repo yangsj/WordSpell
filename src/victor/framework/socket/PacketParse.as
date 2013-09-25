@@ -2,7 +2,7 @@ package victor.framework.socket {
 
 	import flash.utils.ByteArray;
 	
-	import ff.FFUtil;
+	import org.apache.thrift.FFUtil;
 
 	/**
 	 * @author fireyang

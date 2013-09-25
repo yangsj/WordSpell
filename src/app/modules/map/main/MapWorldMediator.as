@@ -4,7 +4,6 @@ package app.modules.map.main
 	import app.modules.ViewName;
 	import app.modules.map.event.MapEvent;
 	import app.modules.map.model.MapModel;
-	import app.modules.map.model.MapVo;
 	
 	import victor.framework.core.BaseMediator;
 	
@@ -46,15 +45,7 @@ package app.modules.map.main
 		
 		private function updateMapDataHandler( event:MapEvent = null ):void
 		{
-			var temp:Vector.<MapVo> = new Vector.<MapVo>();
-			for (var i:int = 0; i < 6; i++)
-			{
-				var mapVo:MapVo = new MapVo();
-				mapVo.mapId = i;
-				mapVo.isOpen = i != 5;
-				temp.push( mapVo );
-			}
-			view.setAndUpdateMap( temp );
+			view.setAndUpdateMap( mapModel.mapList );
 		}
 		
 		private function openSelectedRoundHandler( event:MapEvent ):void

@@ -25,6 +25,11 @@ package app.modules.map.event
 		 */
 		public static const UPDATE_MAP_DATA:String = "update_map_data";
 		
+		/**
+		 * 获取到地图章节的详细数据
+		 */
+		public static const CHAPTER_DETAIL:String = "chapter_detail";
+		
 		
 	}
 }

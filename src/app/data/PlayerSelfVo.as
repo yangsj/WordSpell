@@ -8,7 +8,7 @@ package app.data
 	 */
 	public class PlayerSelfVo extends PlayerBaseVo
 	{
-		public static var isInit:Boolean = false;
+		private static var isInit:Boolean = false;
 		public function PlayerSelfVo()
 		{
 			super();

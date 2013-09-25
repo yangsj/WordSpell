@@ -5,6 +5,7 @@ package app.modules.map.panel
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
+	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapVo;
 	
 	import victor.framework.components.Reflection;
@@ -21,7 +22,7 @@ package app.modules.map.panel
 	{
 		private static const names:Array = ["加拿大大熊湖Great Bear Lake","西澳大利亚沙漠（Western Desert）","澳大利亚凯恩斯热带雨林","美国雷尼尔山Mt. Rainier","埃尔斯米尔岛","Ellesmere Island 天空"];
 		
-		private var mapVo:MapVo;
+		public var mapVo:MapVo;
 		
 		private var skinDict:Dictionary = new Dictionary();
 		
@@ -53,6 +54,12 @@ package app.modules.map.panel
 				Reflection.reflection( this, _skin );
 				addChild( _skin );
 			}
+		}
+		
+		public function setData( list:Vector.<ChapterVo> ):void
+		{
+			mapVo.roundList = list;
+			
 		}
 		
 		override public function set data(value:Object):void

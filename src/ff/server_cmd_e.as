@@ -20,8 +20,9 @@ import flash.utils.Dictionary;
     public static const FRIEND_INFO_RET:int = 9;
     public static const GAME_INFO_RET:int = 10;
     public static const TASK_INFO_RET:int = 11;
+    public static const CHAPTER_DETAIL_RET:int = 12;
 
-    public static const VALID_VALUES:Set = new Set(LOGIN_RET, CHAT_RET, ERROR_CODE_RET, START_ROUND_RET, INPUT_RET, END_ROUND_RET, USER_PROPERTY_RET, PACK_INFO_RET, FRIEND_INFO_RET, GAME_INFO_RET, TASK_INFO_RET);
+    public static const VALID_VALUES:Set = new Set(LOGIN_RET, CHAT_RET, ERROR_CODE_RET, START_ROUND_RET, INPUT_RET, END_ROUND_RET, USER_PROPERTY_RET, PACK_INFO_RET, FRIEND_INFO_RET, GAME_INFO_RET, TASK_INFO_RET, CHAPTER_DETAIL_RET);
     public static const VALUES_TO_NAMES:Dictionary = new Dictionary();
     {
       VALUES_TO_NAMES[LOGIN_RET] = "LOGIN_RET";
@@ -35,6 +36,7 @@ import flash.utils.Dictionary;
       VALUES_TO_NAMES[FRIEND_INFO_RET] = "FRIEND_INFO_RET";
       VALUES_TO_NAMES[GAME_INFO_RET] = "GAME_INFO_RET";
       VALUES_TO_NAMES[TASK_INFO_RET] = "TASK_INFO_RET";
+      VALUES_TO_NAMES[CHAPTER_DETAIL_RET] = "CHAPTER_DETAIL_RET";
 
     }
   }

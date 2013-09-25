@@ -34,7 +34,7 @@ package app.data.vo
 		 */
 		public function get isMax():Boolean
 		{
-			return level >= GameConfig.maxLevel;
+			return level >= GameConfig.MAX_LEVEL;
 		}
 		
 		public function toString():String

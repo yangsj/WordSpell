@@ -265,6 +265,8 @@ package app.modules.chat.view
 
 			initBar();
 
+			mcLock.alpha = 0;
+			mcLock.mouseEnabled = false;
 			mcLock.mouseChildren = false;
 			mcLock.buttonMode = true;
 

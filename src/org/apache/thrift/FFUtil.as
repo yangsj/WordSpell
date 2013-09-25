@@ -1,5 +1,5 @@
 ﻿
-package ff {
+package org.apache.thrift {
 
 import org.apache.thrift.Set;
 import flash.utils.ByteArray;

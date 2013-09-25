@@ -1,6 +1,10 @@
 package app.data
 {
+	import app.GameConfig;
+	
 	import org.robotlegs.mvcs.Actor;
+	
+	import victor.framework.utils.MathUtil;
 	
 	
 	/**
@@ -21,7 +25,7 @@ package app.data
 		private var _realName:String;
 		private var _uid:int;
 		private var _exp:int;
-		private var _level:int;
+		private var _level:int = 1;
 		private var _money:int;
 		private var _rightWordsNum:int;
 		private var _wrongWordsNum:int;
@@ -111,7 +115,7 @@ package app.data
 		 */
 		public function set level(value:int):void
 		{
-			_level = value;
+			_level = MathUtil.range( value, 1, GameConfig.MAX_LEVEL );
 		}
 
 		/**
