@@ -24,4 +24,6 @@
 	<item name="map_chapter_4" url="assets/chapters/map_chapter_4.swf" version="1" first="0" />
 	<item name="map_chapter_5" url="assets/chapters/map_chapter_5.swf" version="1" first="0" />
 	
+	<item name="ui_round" url="assets/round/ui_round.swf" version="1" first="0" />
+	
 </data>

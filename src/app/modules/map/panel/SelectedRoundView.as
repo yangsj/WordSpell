@@ -11,8 +11,6 @@ package app.modules.map.panel
 	
 	import victor.framework.components.Reflection;
 	import victor.framework.core.BasePanel;
-	import victor.framework.utils.DisplayUtil;
-	
 	
 	/**
 	 * ……
@@ -40,7 +38,6 @@ package app.modules.map.panel
 			txtName.y =3;
 			txtName.text = names[ mapVo.mapId ];
 			_skin.addChild( txtName );
-			
 		}
 		
 		override protected function removedFromStageHandler(event:Event):void
@@ -49,19 +46,30 @@ package app.modules.map.panel
 			clearGroupItems();
 		}
 		
-		override protected function loadComplete():void
+		override protected function createSkin():void
 		{
-			DisplayUtil.removedAll( this, false );
 			_skin = skinDict[ skinName ];
 			if ( _skin == null )
 			{
 				_isInit = false;
+				super.createSkin();
+				skinDict[ skinName ] = _skin;
 			}
-			else
+			else 
 			{
-				Reflection.reflection( this, _skin );
 				addChild( _skin );
+				Reflection.reflection( this, _skin );
 			}
+			createGroupItems();
+		}
+		
+		override protected function transitionIn():void
+		{
+		}
+		
+		override protected function transitionOut( delay:Number = 0.3 ):void
+		{
+			super.transitionOut( 0 );
 		}
 		
 		private function clearGroupItems():void
@@ -90,11 +98,6 @@ package app.modules.map.panel
 		
 		public function setData( list:Vector.<ChapterVo> ):void
 		{
-			if ( vecList == null || _skin == null )
-			{
-				createGroupItems();
-			}
-
 			mapVo.roundList = list;
 			var groupItem:GroupItem;
 			for ( var i:int = 0; i < 10; i++ )

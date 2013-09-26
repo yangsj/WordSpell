@@ -44,18 +44,21 @@ package app.modules.main.view
 		private var levelNumCreate:NumCreate;
 		private var levelNumSprite:Shape;
 		
+		private var expNumString:String = "0/0";
+		private var expPercent:String = "0.00%";
+		
 		public function MainUIView()
 		{
 			addedToStageHandler( null );
 			txtExp ||= new TextField();
 			txtExp.mouseEnabled = false;
-			expBar.addEventListener(MouseEvent.MOUSE_OVER, expBarMouseHandler );
-			expBar.addEventListener(MouseEvent.MOUSE_OUT,  expBarMouseHandler );
+			expBar.addEventListener(MouseEvent.ROLL_OVER, expBarMouseHandler );
+			expBar.addEventListener(MouseEvent.ROLL_OUT,  expBarMouseHandler );
 		}
 		
 		protected function expBarMouseHandler(event:MouseEvent):void
 		{
-			
+			txtExp.text = event.type == MouseEvent.ROLL_OUT ? expPercent : expNumString;
 		}
 		
 		public function updateLevelExp( level:int, exp:int ):void
@@ -66,14 +69,20 @@ package app.modules.main.view
 				var levelExpItemVo:LevelExpItemVo = BaseConfig.levelExp.getItemByExp( exp );
 				var curExp:int = levelExpItemVo.curExp;
 				var nextExp:int = levelExpItemVo.nextExp;
-				var percent:int;
+				var percent:Number;
+				expNumString = exp + "/" + nextExp;
 				if ( !MathUtil.isRange( exp, curExp, nextExp ))
+				{
 					percent = 100;
+					expPercent = "100.00%";
+				}
 				else
 				{
-					percent = int(((exp - curExp )/(nextExp - curExp)) * 100);
+					percent = ((exp - curExp )/(nextExp - curExp)) * 100;
+					expPercent = percent.toFixed( 2 ) + "%";
 				}
-				expBar.gotoAndStop( percent );
+				expBar.gotoAndStop( int(percent) );
+				txtExp.text = expPercent;
 			}
 			if ( level != levelCache )
 			{

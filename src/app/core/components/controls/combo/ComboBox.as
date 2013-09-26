@@ -74,6 +74,12 @@ package app.core.components.controls.combo
 			}
 		}
 		
+		protected function stageMouseHandler(event:MouseEvent):void
+		{
+			appStage.removeEventListener(MouseEvent.MOUSE_UP, stageMouseHandler );
+			container1.visible = false;
+		}
+		
 		protected function skinMouseHandler( event:MouseEvent ):void
 		{
 			var type:String = event.type;
@@ -89,9 +95,14 @@ package app.core.components.controls.combo
 			{
 				setSkinStatus( ControlFrameType.FRAME_DOWN );
 				container1.visible = !container1.visible;
+				if ( container1.visible )
+					appStage.addEventListener(MouseEvent.MOUSE_UP, stageMouseHandler );
 			}
 			else if ( type == MouseEvent.MOUSE_UP )
 			{
+				if ( container1.visible == false )
+					appStage.removeEventListener(MouseEvent.MOUSE_UP, stageMouseHandler );
+				event.stopPropagation();
 				setSkinStatus( ControlFrameType.FRAME_OVER );
 			}
 		}

@@ -46,11 +46,6 @@ package app.modules.map.main
 			}
 		}
 		
-		override protected function onceInit():void
-		{
-			super.onceInit();
-		}
-		
 		override protected function get skinName():String
 		{
 			return "ui_Skin_MainBackground";

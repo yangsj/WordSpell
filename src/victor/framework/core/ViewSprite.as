@@ -8,6 +8,8 @@ package victor.framework.core
 	
 	import victor.framework.components.Reflection;
 	import victor.framework.interfaces.IView;
+	import victor.framework.manager.ITickManager;
+	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
 
 	/**
@@ -31,15 +33,26 @@ package victor.framework.core
 		{
 			super();
 
-			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
+			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler, false, int.MAX_VALUE );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
+			
+			firstRun();
 		}
-
+		
+		protected function firstRun():void
+		{
+			createSkin();
+		}
+		
 		protected function removedFromStageHandler( event:Event ):void
 		{
 		}
 
 		protected function addedToStageHandler( event:Event ):void
+		{
+		}
+		
+		protected function createSkin():void
 		{
 			if ( _isInit == false )
 			{
@@ -49,26 +62,24 @@ package victor.framework.core
 				rectangle = new Rectangle( rect.x, rect.y, rect.width, rect.height );
 				onceInit();
 			}
-
-			initialize();
-
-			_isInit = true;
+		}
+		
+		protected function getObj( skinName:String, domainName:String = "" ):Object
+		{
+			return LoaderManager.instance.getObj( skinName, domainName );
 		}
 
 		protected function setSkinWithName( skinName:String ):void
 		{
 			if ( skinName )
 			{
-				_skin = LoaderManager.instance.getObj( skinName, domainName ) as Sprite;
+				DisplayUtil.removedAll( this, false );
+				_skin = getObj( skinName, domainName ) as Sprite;
 				addChild( _skin );
 			}
 		}
 
 		protected function onceInit():void
-		{
-		}
-
-		public function initialize():void
 		{
 		}
 
@@ -79,10 +90,6 @@ package victor.framework.core
 			removeEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
 			_skin = null;
 			_data = null;
-		}
-
-		public function refresh():void
-		{
 		}
 
 		public function hide():void
@@ -105,6 +112,9 @@ package victor.framework.core
 			_data = value;
 		}
 
+		/**
+		 * 皮肤名称
+		 */
 		protected function get skinName():String
 		{
 			return "";
@@ -116,6 +126,14 @@ package victor.framework.core
 		protected function get domainName():String
 		{
 			return "";
+		}
+		
+		/**
+		 * 计时器
+		 */
+		protected function get tickManager():ITickManager
+		{
+			return TickManager.instance;
 		}
 
 

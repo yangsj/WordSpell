@@ -20,6 +20,7 @@ package victor.framework.core
 		public static const BACKGROUND:uint = numCount++;//背景层
 		public static const SCENE:uint = numCount++;//场景层
 		public static const MAIN:uint = numCount++;//主ui层
+		public static const SCENE2:uint = numCount++;//场景层2
 		public static const CHAT:uint = numCount++;//聊天层
 		public static const PANEL:uint = numCount++;//面板弹出层
 		public static const ALERT:uint = numCount++;//警告提示层

@@ -28,6 +28,8 @@ package app.modules.login.command
 		
 		override public function execute():void
 		{
+			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Register ));
+			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Login ));
 			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Preloader ));
 			LoaderManager.instance.startMainLoad( loaderCompleteCallBack, loaderProgressCallBack );
 		}

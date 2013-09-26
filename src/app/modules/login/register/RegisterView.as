@@ -9,9 +9,9 @@ package app.modules.login.register
 	import app.core.components.controls.combo.ComboBox;
 	import app.modules.login.register.event.RegisterEvent;
 	import app.modules.login.register.vo.RegisterVo;
+	import app.utils.appStage;
 	
-	import victor.framework.core.BaseScene;
-	
+	import victor.framework.core.BasePanel;
 	
 	/**
 	 * ……
@@ -43,7 +43,7 @@ package app.modules.login.register
 	 * @author 	yangsj 
 	 * 			2013-9-4
 	 */
-	public class RegisterView extends BaseScene
+	public class RegisterView extends BasePanel
 	{
 		// required
 		public var txtAccount:TextField;
@@ -69,6 +69,9 @@ package app.modules.login.register
 		public function RegisterView()
 		{
 			super();
+			this.graphics.beginFill( 0, 0.4 );
+			this.graphics.drawRect(0, 0, appStage.stageWidth, appStage.stageHeight );
+			this.graphics.endFill();
 		}
 		
 		override protected function onceInit():void
@@ -90,11 +93,20 @@ package app.modules.login.register
 			gradeComboBox.x = txtClass.x;
 			gradeComboBox.y = txtClass.y;
 			
-			addChild( areaComboBox );
 			addChild( gradeComboBox );
+			addChild( areaComboBox );
 			
 			txtArea.visible = false;
 			txtClass.visible = false;
+		}
+		
+		override protected function transitionIn():void
+		{
+		}
+		
+		override protected function transitionOut( delay:Number = 0.3 ):void
+		{
+			super.transitionOut( 0 );
 		}
 		
 		protected function btnLoginHandler(event:MouseEvent):void

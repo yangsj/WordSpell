@@ -41,7 +41,6 @@ package app.modules.login.register
 		
 		private function loginHandler( event:RegisterEvent ):void
 		{
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Login ));
 			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Register ));
 		}
 		

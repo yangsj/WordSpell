@@ -1,5 +1,6 @@
 package app.modules.login.login
 {
+	import flash.display.DisplayObject;
 	import flash.display.InteractiveObject;
 	import flash.display.MovieClip;
 	import flash.events.Event;
@@ -11,13 +12,12 @@ package app.modules.login.login
 	
 	import app.Language;
 	import app.core.Tips;
-	import app.modules.friend.view.rightMenu.RightMenu;
-	import app.modules.friend.view.rightMenu.RightMenuType;
 	import app.modules.login.login.event.LoginEvent;
 	import app.modules.login.login.vo.LoginVo;
 	import app.utils.appStage;
 	
-	import victor.framework.core.BaseScene;
+	import victor.framework.core.BasePanel;
+	import victor.framework.core.ViewStruct;
 	
 	
 	/**
@@ -25,7 +25,7 @@ package app.modules.login.login
 	 * @author 	yangsj 
 	 * 			2013-9-6
 	 */
-	public class LoginView extends BaseScene
+	public class LoginView extends BasePanel
 	{
 		public var txtAccountNumber:TextField;
 		public var txtPassword:TextField;
@@ -43,9 +43,8 @@ package app.modules.login.login
 			super();
 		}
 		
-		override public function show():void
+		override protected function transitionIn():void
 		{
-			super.show();
 			appStage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler );
 		}
 		
@@ -76,6 +75,8 @@ package app.modules.login.login
 		override protected function onceInit():void
 		{
 			super.onceInit();
+			
+			this.addChildAt( getObj( "ui_Skin_LoginBackground" ) as DisplayObject, 0 );
 			
 			txtAccountNumber.tabEnabled = true;
 			txtPassword.tabEnabled = true;

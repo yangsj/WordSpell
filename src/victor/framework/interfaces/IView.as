@@ -13,11 +13,6 @@ package victor.framework.interfaces
 	{
 		
 		/**
-		 * 初始化
-		 */
-		function initialize():void;
-		
-		/**
 		 * 在显示列表显示
 		 */
 		function show():void;
@@ -27,9 +22,8 @@ package victor.framework.interfaces
 		 */
 		function hide():void;
 		
-		function refresh():void;
 		/**
-		 * 刷新
+		 * 数据
 		 */		
 		function get data():Object;
 		function set data(value:Object):void;

@@ -9,8 +9,6 @@ package victor.framework.core
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
-	import app.managers.LoaderManager;
-	import app.modules.panel.PanelLoading;
 	import app.utils.appStage;
 	
 	/**
@@ -18,7 +16,7 @@ package victor.framework.core
 	 * @author 	yangsj
 	 * 			2013-8-5
 	 */
-	public class BasePanel extends ViewSprite
+	public class BasePanel extends LoadViewBase
 	{
 		
 		/**
@@ -65,7 +63,7 @@ package victor.framework.core
 		
 		override protected function addedToStageHandler(event:Event):void
 		{
-			super.addedToStageHandler( event );
+			super.addedToStageHandler( event ); 
 			
 			if ( btnClose )
 			{
@@ -91,6 +89,50 @@ package victor.framework.core
 				dragTarget.removeEventListener(MouseEvent.MOUSE_DOWN, dragTargetMouseHandler );
 		}
 		
+		override final protected function addToParent():void
+		{
+			ViewStruct.addPanel( this );
+			transitionIn();
+		}
+		
+		protected function transitionIn():void
+		{
+			mouseChildren = true;
+			this.scaleX = 0.1;
+			this.scaleY = 0.1;
+			changePosAtOpen();
+			TweenMax.killTweensOf( this );
+			TweenMax.to( this, 0.5, { 	scaleX: 1, 
+				scaleY: 1, 
+				alpha: 1, 
+				onUpdate: changePosAtOpen, 
+				ease: Back.easeOut, 
+				onComplete:openComplete 
+			});
+		}
+		
+		protected function transitionOut( delay:Number = 0.3 ):void
+		{
+			if ( delay > 0 )
+			{
+				mouseChildren = false;
+				hideX = x;
+				hideY = y;
+				TweenMax.killTweensOf( this );
+				TweenMax.to( this, delay, { scaleX: 0.2, 
+					scaleY: 0.2, 
+					alpha: 0, 
+					ease: Back.easeIn, 
+					onUpdate: changePosAtHide,
+					onComplete:closeComplete
+				});
+			}
+			else 
+			{
+				closeComplete();
+			}
+		}
+		
 		override public function dispose():void
 		{
 			super.dispose();
@@ -98,23 +140,10 @@ package victor.framework.core
 			btnClose = null;
 			dragTarget = null;
 		}
-		
-		override public function show():void
-		{
-			if ( resNames && resNames.length == 0 )
-				addDisplayList();
-			
-			else startLoadResource();
-		}
 
 		override public function hide():void
 		{
-			mouseChildren = false;
-			
-			hideX = x;
-			hideY = y;
-			TweenMax.killTweensOf( this );
-			TweenMax.to( this, 0.3, { scaleX: 0.2, scaleY: 0.2, alpha: 0, ease: Back.easeIn, onUpdate: changePosAtHide, onComplete: ViewStruct.removePanel, onCompleteParams: [ this ]});
+			transitionOut( 0.3 );
 		}
 
 ////////////// private functions //////////////////////////////////
@@ -131,34 +160,9 @@ package victor.framework.core
 			y = hideY + (( rectangle.height - rectangle.height * scaleX ) >> 1 );
 		}
 		
-		private function addDisplayList():void
+		private function closeComplete():void
 		{
-			mouseChildren = true;
-			
-			PanelLoading.instance.hide();
-			
-			loadComplete();
-			
-			ViewStruct.addPanel( this );
-			
-			this.scaleX = 0.1;
-			this.scaleY = 0.1;
-			
-			changePosAtOpen();
-			
-			TweenMax.killTweensOf( this );
-			TweenMax.to( this, 0.5, { scaleX: 1, scaleY: 1, alpha: 1, onUpdate: changePosAtOpen, ease: Back.easeOut, onComplete:openComplete });
-		}
-		
-		private function startLoadResource():void
-		{
-			PanelLoading.instance.show();
-			LoaderManager.instance.load( resNames, addDisplayList, loadProgress, domainName );
-		}
-		
-		private function loadProgress( perent:Number ):void
-		{
-			PanelLoading.instance.setProgressValue( perent );
+			ViewStruct.removeChild( this );
 		}
 		
 ///////////////// protected functions //////////////////////////////
@@ -166,20 +170,8 @@ package victor.framework.core
 		protected function openComplete():void
 		{
 		}
-		
-		protected function loadComplete():void
-		{
-		}
 
 ///////////////// getters/setters ////////////////////////////////
-		
-		/**
-		 * 需要加载的资源在配置文件中名称清单，若是该数组的长度是0，则默认不加载
-		 */
-		protected function get resNames():Array
-		{
-			return [];
-		}
 
 	}
 }

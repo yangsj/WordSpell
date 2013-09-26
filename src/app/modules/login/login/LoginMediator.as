@@ -37,7 +37,6 @@ package app.modules.login.login
 		private function actionRegisterHandler( event:LoginEvent ):void
 		{
 			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Register ));
-			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Login ));
 		}
 		
 		private function actionLoginHandler( event:LoginEvent ):void

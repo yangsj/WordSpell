@@ -41,7 +41,6 @@ package app.startup
 								view.data = event.data;
 								if ( view.parent == null )
 									view.show();
-								else view.refresh();
 							}
 							else if ( event.type == ViewEvent.HIDE_VIEW )
 							{
