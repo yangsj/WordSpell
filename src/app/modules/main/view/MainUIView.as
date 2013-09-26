@@ -7,18 +7,19 @@ package app.modules.main.view
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	import app.data.BaseConfig;
 	import app.data.vo.LevelExpItemVo;
 	import app.events.ViewEvent;
 	import app.managers.LoaderManager;
+	import app.modules.main.FunctionBtnConfig;
 	import app.utils.NumCreate;
 	
 	import victor.framework.core.ViewSprite;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.utils.DisplayUtil;
 	import victor.framework.utils.MathUtil;
-	import app.modules.main.FunctionBtnConfig;
 	
 	
 	/**
@@ -32,6 +33,8 @@ package app.modules.main.view
 		public var levelContainer:Sprite;
 		// 经验条
 		public var expBar:MovieClip;
+		// 经验值显示文本
+		public var txtExp:TextField;
 		
 		// 上一次更新的经验值
 		private var expCache:int = -1;
@@ -44,6 +47,15 @@ package app.modules.main.view
 		public function MainUIView()
 		{
 			addedToStageHandler( null );
+			txtExp ||= new TextField();
+			txtExp.mouseEnabled = false;
+			expBar.addEventListener(MouseEvent.MOUSE_OVER, expBarMouseHandler );
+			expBar.addEventListener(MouseEvent.MOUSE_OUT,  expBarMouseHandler );
+		}
+		
+		protected function expBarMouseHandler(event:MouseEvent):void
+		{
+			
 		}
 		
 		public function updateLevelExp( level:int, exp:int ):void

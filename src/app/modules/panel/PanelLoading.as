@@ -29,16 +29,20 @@ package app.modules.panel
 			txt.text = "已加载";
 			txt.width = 104;
 			txt.height = 33;
-			txt.x = 328;
-			txt.y = 287;
 			addChild( txt );
 			
 			txtProgress = TextFiledUtil.create( "Verdana", 35, 0xffffff, TextFormatAlign.CENTER );
-			txtProgress.x = 284;
-			txtProgress.y = 335;
 			txtProgress.width = 191;
 			txtProgress.height = 46;
 			addChild( txtProgress );
+			
+			txt.x = ( width - txt.width ) >> 1;
+			txt.y = ( height - ( txt.height + txtProgress.height )) >> 1;
+			txtProgress.x = ( width - txtProgress.width ) >> 1;
+			txtProgress.y = txt.y + txt.height;
+			
+			x = ( appStage.stageWidth - width ) >> 1;
+			y = ( appStage.stageHeight -height ) >> 1;
 		}
 		
 		public function setProgressValue( perent:Number ):void

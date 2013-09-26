@@ -25,6 +25,14 @@ package app.modules.chat.event
 		 */
 		public static const HIDE_CHAT:String = "hide_chat";
 		/**
+		 * 展开聊天日志
+		 */
+		public static const EXPAND_CHAT:String = "expand_chat";
+		/**
+		 * 折叠聊天日志
+		 */
+		public static const FOLD_CHAT:String = "fold_chat";
+		/**
 		 * 发送消息到聊天窗口
 		 */
 		public static const SEND_MSG:String = "send_msg";

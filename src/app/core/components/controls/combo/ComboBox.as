@@ -197,6 +197,12 @@ package app.core.components.controls.combo
 			return _selectedItem;
 		}
 
+		public function get label():String
+		{
+			if ( _selectedItem && _selectedItem.data )
+				return _selectedItem.label;
+			return "";
+		}
 		
 	}
 }

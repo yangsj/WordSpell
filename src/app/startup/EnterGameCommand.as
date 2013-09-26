@@ -42,8 +42,8 @@ package app.startup
 			if　( mainModel.hasEnterGame )
 				return ;
 			
-			// 主资源是否加载完成|是否有玩家数据|是否有地图数据|是否有好友数据|是否有任务数据|是否有背包数据
-			if ( mainModel.hasLoadCompleted && gameDb.hasSelfVo && mapModel.hasMapList )
+			// 主资源是否加载完成|是否有地图数据|是否有好友数据|是否有任务数据|是否有背包数据
+			if ( mainModel.hasLoadCompleted && mapModel.hasMapList )
 			{
 				mainModel.hasEnterGame = true;
 				enterGame();

@@ -38,25 +38,11 @@ package app.data
 		
 		////////////////////////////////////////////////////////
 		
-		private var _hasSelfVo:Boolean = true;
+		
 		
 		///////////////////////////////////////////////////////
 		
-		/**
-		 * 是否获取到玩家自己的数据
-		 */
-		public function get hasSelfVo():Boolean
-		{
-			return _hasSelfVo;
-		}
 		
-		/**
-		 * @private
-		 */
-		public function set hasSelfVo(value:Boolean):void
-		{
-			_hasSelfVo = _hasSelfVo ? true : value;
-		}
 
 	}
 }

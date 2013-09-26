@@ -106,6 +106,11 @@ package app.core.components.controls.combo
 			downSkin = null;
 			txtLabel = null;
 		}
+		
+		public function get label():String
+		{
+			return _data.label;
+		}
 
 		public function get data():ComboItemVo
 		{

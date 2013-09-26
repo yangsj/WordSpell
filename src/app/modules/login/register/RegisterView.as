@@ -6,6 +6,7 @@ package app.modules.login.register
 	
 	import app.Language;
 	import app.core.Tips;
+	import app.core.components.controls.combo.ComboBox;
 	import app.modules.login.register.event.RegisterEvent;
 	import app.modules.login.register.vo.RegisterVo;
 	
@@ -14,6 +15,31 @@ package app.modules.login.register
 	
 	/**
 	 * ……
+	 * 区县：
+	 * 黄浦区
+	 * 卢湾区
+	 * 金山区
+	 * 徐汇区
+	 * 长宁区
+	 * 静安区
+	 * 普陀区
+	 * 闸北区
+	 * 虹口区
+	 * 杨浦区
+	 * 闵行区
+	 * 宝山区
+	 * 嘉定区
+	 * 浦东新区
+	 * 松江区
+	 * 青浦区
+	 * 南汇区
+	 * 奉贤区
+	 * 崇明县
+	 * 
+	 * 年级：
+	 * 一年级-六年级（预初）
+	 * 初一到初三
+	 * 高一到高三
 	 * @author 	yangsj 
 	 * 			2013-9-4
 	 */
@@ -35,6 +61,9 @@ package app.modules.login.register
 		public var btnRegister:InteractiveObject;
 		public var btnLogin:InteractiveObject;
 		
+		private var areaComboBox:ComboBox;
+		private var gradeComboBox:ComboBox;
+		
 		private var _registerVo:RegisterVo;
 		
 		public function RegisterView()
@@ -52,6 +81,20 @@ package app.modules.login.register
 			txtPhone.maxChars = 11;
 			txtPhone.restrict = "0-9";
 			txtQQ.restrict = "0-9";
+			
+			areaComboBox = new ComboBox( RegisterConfig.areaComboData );
+			gradeComboBox = new ComboBox( RegisterConfig.gradeComboData );
+			
+			areaComboBox.x = txtArea.x;
+			areaComboBox.y = txtArea.y;
+			gradeComboBox.x = txtClass.x;
+			gradeComboBox.y = txtClass.y;
+			
+			addChild( areaComboBox );
+			addChild( gradeComboBox );
+			
+			txtArea.visible = false;
+			txtClass.visible = false;
 		}
 		
 		protected function btnLoginHandler(event:MouseEvent):void
@@ -138,9 +181,9 @@ package app.modules.login.register
 			_registerVo.email = txtEmail.text;
 			
 			_registerVo.playerName = txtName.text;
-			_registerVo.playerAddress = txtArea.text;
+			_registerVo.playerAddress = areaComboBox.label;//txtArea.text;
 			_registerVo.schoolName = txtSchool.text;
-			_registerVo.className = txtClass.text;
+			_registerVo.className = gradeComboBox.label;//txtClass.text;
 			_registerVo.QQ = txtQQ.text;
 			
 			return _registerVo;

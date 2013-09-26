@@ -71,6 +71,7 @@ package app.modules.chat.view
 		{
 			super();
 			mouseEnabled = false;
+			addedToStageHandler( null );
 		}
 
 		////////////// public 
@@ -135,6 +136,20 @@ package app.modules.chat.view
 				txtInput.setSize( 165, 23 );
 			}
 		}
+		
+		/**
+		 * 设置聊天日志展开和折叠
+		 */
+		public function setExpandHide():void
+		{
+			_isExpand = !_isExpand;
+			chatMc.visible = _isExpand;
+			mcLock.visible = _isExpand;
+			_scrollBar.visible = _isExpand;
+			btnExpandHide.y = _isExpand ? -172 : -61;
+			mcBg.gotoAndStop( _isExpand ? 1 : 2 );
+			btnExpandHide.gotoAndStop( _isExpand ? 1 : 2 );
+		}
 
 		/////////////// private 
 
@@ -194,17 +209,6 @@ package app.modules.chat.view
 			_scrollBar.radio = Math.max( radio, 0.3 );
 			
 			onWheelHandler( null );
-		}
-		
-		private function setExpandHide():void
-		{
-			_isExpand = !_isExpand;
-			chatMc.visible = _isExpand;
-			mcLock.visible = _isExpand;
-			_scrollBar.visible = _isExpand;
-			btnExpandHide.y = _isExpand ? -172 : -61;
-			mcBg.gotoAndStop( _isExpand ? 1 : 2 );
-			btnExpandHide.gotoAndStop( _isExpand ? 1 : 2 );
 		}
 
 		//////////////// override 
@@ -385,6 +389,23 @@ package app.modules.chat.view
 		{
 			return "ui_Skin_ChatView";
 		}
+
+		/**
+		 * 聊天日志是否展开
+		 */
+		public function get isExpand():Boolean
+		{
+			return _isExpand;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isExpand(value:Boolean):void
+		{
+			_isExpand = value;
+		}
+
 
 	}
 }

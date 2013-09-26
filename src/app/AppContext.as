@@ -78,9 +78,6 @@ package app
 			// 资源加载完成进入游戏场景检查
 			commandMap.mapEvent(GameEvent.MAIN_LOAD_COMPLETE, EnterGameCommand, GameEvent, true);
 			
-			// 玩家数据获取到进入游戏检查
-			commandMap.mapEvent(GameEvent.ACQUIRE_PLAYER_DATA, EnterGameCommand, GameEvent, true);
-			
 			// 地图数据获取到进入游戏检查
 			commandMap.mapEvent(GameEvent.ACQUIRE_MAP_DATA, EnterGameCommand, GameEvent, true);
 			

@@ -34,6 +34,10 @@ package app.modules.chat.view
 			
 			/////////// 全局
 			
+			// 展开聊天日志
+			addContextListener( ChatEvent.EXPAND_CHAT, expandLogHandler, ChatEvent );
+			// 折叠聊天日志
+			addContextListener( ChatEvent.FOLD_CHAT, foldLogHandler, ChatEvent );
 			// 显示窗口
 			addContextListener( ChatEvent.SHOW_CHAT, showViewHandler, ChatEvent );
 			// 隐藏窗口
@@ -54,6 +58,20 @@ package app.modules.chat.view
 			
 			// 选中世界频道
 			view.selectedWorld();
+		}
+		
+		// 展开聊天日志
+		private function expandLogHandler( event:ChatEvent ):void
+		{
+			view.isExpand = false;
+			view.setExpandHide();
+		}
+		
+		// 折叠聊天日志
+		private function foldLogHandler( event:ChatEvent ):void
+		{
+			view.isExpand = true;
+			view.setExpandHide();
 		}
 		
 		private function chatToFriendHandler( event:ChatEvent ):void

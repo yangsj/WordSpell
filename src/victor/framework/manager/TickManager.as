@@ -20,14 +20,14 @@ package victor.framework.manager
 		private static var _instance:ITickManager;
 
 		// = new Vector.<TimeVO>();
-		public function init( time:int ):void
+		public function init( frameRate:int ):void
 		{
 			if ( _ticker )
 			{
 				return;
 			}
 			_timeQueue = new Vector.<TimeVO>();
-			_stepTime = time;
+			_stepTime = int( 1000 / frameRate );
 			_ticker = new Shape();
 			_lastTime = getTimer();
 			var _timer:Timer = new Timer( 10 );
