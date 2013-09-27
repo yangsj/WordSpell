@@ -33,8 +33,6 @@ package app.modules.model
 			{
 				var itemVo:ItemVo = itemList[ index ];
 				itemVo.num += addNum;
-				
-				updateItems();
 			}
 		}
 		
@@ -48,8 +46,6 @@ package app.modules.model
 			if ( index == -1 )
 				itemList.push( itemVo );
 			else itemList[ index ] = itemVo;
-			
-			updateItems();
 		}
 		
 		/**
@@ -69,10 +65,23 @@ package app.modules.model
 			return -1;
 		}
 		
-		private function updateItems():void
+		/**
+		 * 获取item
+		 * @param id
+		 * @return 
+		 */
+		public function getItemById( id:int ):ItemVo
 		{
-			dispatch( new GameEvent( GameEvent.UPDATE_PACK_ITEMS ));
+			var index:int = getIndexById( id );
+			if ( index != -1 )
+			{
+				return itemList[ index ];
+			}
+			return null;
 		}
+		
+		//////////////////////////////
+		
 		
 		///////////// getters/setters 
 		

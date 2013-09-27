@@ -1,6 +1,5 @@
 package victor.framework.manager
 {
-	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -11,48 +10,61 @@ package victor.framework.manager
 	 */
 	public class TickManager implements ITickManager
 	{
-		private var _ticker:Shape;
+		private var _timer:Timer;
 		// 上一次时间
 		private var _lastTime:int;
 		private var _stepTime:int;
 		private var _correctTime:int;
 		private var _timeQueue:Vector.<TimeVO>;
+
 		private static var _instance:ITickManager;
 
 		// = new Vector.<TimeVO>();
 		public function init( frameRate:int ):void
 		{
-			if ( _ticker )
-			{
+			if ( _timer )
 				return;
-			}
+
 			_timeQueue = new Vector.<TimeVO>();
 			_stepTime = int( 1000 / frameRate );
-			_ticker = new Shape();
 			_lastTime = getTimer();
-			var _timer:Timer = new Timer( 10 );
+			_timer = new Timer( 10 );
 			_timer.addEventListener( TimerEvent.TIMER, onTick );
 			_timer.start();
-			// _ticker.addEventListener(Event.ENTER_FRAME, onTick);
 		}
 
 		public static function get instance():ITickManager
 		{
-			if ( _instance == null )
-			{
-				_instance = new TickManager();
-			}
-			return _instance;
+			return _instance ||= new TickManager();
 		}
 
-		public function doTimeout( func:Function, delay:int = 20, ... args ):void
+		////////////////////////////////////////////
+
+		public static function doTimeout( func:Function, delay:int = 20, ... args ):void
+		{
+			instance.doTimeout( func, delay, args );
+		}
+
+		public static function doInterval( func:Function, delay:int = 20, ... args ):void
+		{
+			instance.doInterval( func, delay, args );
+		}
+
+		public static function clearDoTime( func:Function ):void
+		{
+			instance.clearDoTime( func );
+		}
+
+		////////////////////////////
+
+		public function doTimeout( func:Function, delay:int = 20, args:Array = null ):void
 		{
 			clearDoTime( func );
 			var t:TimeVO = new TimeVO( func, Math.max( delay, 20 ), args, _correctTime || getTimer(), 1, false );
 			_timeQueue.push( t );
 		}
 
-		public function doInterval( func:Function, delay:int = 20, ... args ):void
+		public function doInterval( func:Function, delay:int = 20, args:Array = null ):void
 		{
 			clearDoTime( func );
 			var t:TimeVO = new TimeVO( func, Math.max( delay, 20 ), args, _correctTime || getTimer(), 1, true );

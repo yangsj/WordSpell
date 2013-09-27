@@ -1,14 +1,17 @@
-package victor.framework.manager {
-    /**
-     * @author fireyang
-     */
-    public interface ITickManager {
-        function init(frameRate : int) : void;
+package victor.framework.manager
+{
 
-        function doTimeout(func : Function, delay : int = 20, ... args) : void;
+	/**
+	 * @author fireyang
+	 */
+	public interface ITickManager
+	{
+		function init( frameRate:int ):void;
 
-        function doInterval(func : Function, delay : int = 20, ... args) : void;
+		function doTimeout( func:Function, delay:int = 20, args:Array = null ):void;
 
-        function clearDoTime(func : Function) : void;
-    }
+		function doInterval( func:Function, delay:int = 20, args:Array = null ):void;
+
+		function clearDoTime( func:Function ):void;
+	}
 }

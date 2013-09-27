@@ -5,6 +5,7 @@ package app.startup
 	import app.data.GameData;
 	import app.events.ViewEvent;
 	import app.modules.chat.command.ChatInitCommand;
+	import app.modules.fight.command.FightInitCommand;
 	import app.modules.friend.command.FriendInitComand;
 	import app.modules.friend.view.rightMenu.RightMenu;
 	import app.modules.friend.view.rightMenu.RightMenuMediator;
@@ -44,6 +45,7 @@ package app.startup
 				, FriendInitComand		// 好友系统
 				, LoginInitCommand		// 登陆游戏
 				, PersonalInitCommand	// 个人信息
+				, FightInitCommand		// 对战闯关系统
 			];
 		
 		public function InitCommand()

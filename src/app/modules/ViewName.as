@@ -65,5 +65,19 @@ package app.modules
 		 */
 		public static const Personal:String = "personalPanel";
 		
+		//// fight
+		
+		/**
+		 * 闯关或练习
+		 */
+		public static const FightAlone:String = "FightAloneView";
+		
+		/**
+		 * 在线对战
+		 */
+		public static const FightOnline:String = "FightOnlineView";
+		
+		//// fight
+		
 	}
 }

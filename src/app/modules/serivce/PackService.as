@@ -1,5 +1,6 @@
 package app.modules.serivce
 {
+	import app.events.PackEvent;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	
@@ -28,9 +29,16 @@ package app.modules.serivce
 		
 		override protected function initRegist():void
 		{
+			// 背包物品list数据
 			regist( server_cmd_e.PACK_INFO_RET, packInfoNotify, pack_info_t );
+			// 使用物品成功
+//			regist( 0, useItemSuccessNotify, null );
 		}
 		
+		/**
+		 * 背包列表通知
+		 * @param resp
+		 */
 		private function packInfoNotify( resp:SocketResp ):void
 		{
 			var data:pack_info_t = resp.data as pack_info_t;
@@ -45,6 +53,29 @@ package app.modules.serivce
 				
 				packModel.updateItem( itemVo );
 			}
+			dispatch( new PackEvent( PackEvent.UPDATE_ITEMS ));
+		}
+		
+		/**
+		 * 物品使用成功通知
+		 * @param resp
+		 */
+		private function useItemSuccessNotify( resp:SocketResp ):void
+		{
+			var itemVo:ItemVo = new ItemVo();
+			
+			dispatch( new PackEvent( PackEvent.USE_SUCCESS, itemVo ));
+		}
+		
+		////////////////////////////
+		
+		/**
+		 * 使用物品
+		 * @param itemId
+		 */
+		public function useItem( itemId:int ):void
+		{
+			
 		}
 		
 		

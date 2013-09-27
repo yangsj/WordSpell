@@ -20,11 +20,15 @@ package victor.framework.core
 		
 		protected function addView( viewName:String, view:Class, mediator:Class ):void
 		{
-			mediatorMap.mapView( view, mediator );
-			injector.mapSingleton( view );
-			
+			mapView( view, mediator );
 			if ( viewName )
 				dictViews[ viewName ] = view;
+		}
+		
+		protected function mapView( view:Class, mediator:Class ):void
+		{
+			mediatorMap.mapView( view, mediator );
+			injector.mapSingleton( view );
 		}
 		
 		protected function injectActor( clazz:Class ):void
