@@ -45,16 +45,30 @@ package app.modules.fight.view.prop
 		
 		private function setData():void
 		{
-			view.setData( packModel.itemList );
+//			view.setData( packModel.itemList );
+			
+			var _itemList:Vector.<ItemVo> = new Vector.<ItemVo>();1
+			var itemVo:ItemVo;
+			for (var i:int = 1; i < 5; i++ )
+			{
+				itemVo = new ItemVo();
+				itemVo.id = i;
+				itemVo.num = 0;
+				_itemList.push( itemVo );
+			}
+			view.setData( _itemList );
 		}
 		
 		// 物品使用
 		private function useItemHandler( event:PackEvent ):void
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
-			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
-				packService.useItem( itemVo.id );
-			else Tips.showMouse( "钻石不足！" );
+//			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
+//				packService.useItem( itemVo.id );
+//			else Tips.showMouse( "钻石不足！" );
+			
+			//test
+			view.refreshItem( itemVo );
 		}
 		
 		// 物品使用成功

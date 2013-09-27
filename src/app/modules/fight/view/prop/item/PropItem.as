@@ -37,8 +37,8 @@ package app.modules.fight.view.prop.item
 		public function PropItem()
 		{
 			super();
-			this.mouseChildren = false;
-			this.buttonMode = true;
+//			this.mouseChildren = false;
+//			this.buttonMode = true;
 			addEventListener( MouseEvent.CLICK, onClickHandler );
 		}
 		
@@ -85,6 +85,9 @@ package app.modules.fight.view.prop.item
 				_skin = LoaderManager.getObj( itemVo.skinId ) as Sprite;
 				addChild( _skin );
 				Reflection.reflection( this, _skin );
+				txtCost.mouseEnabled = false;
+				txtNum.mouseEnabled = false;
+				txtTime.mouseEnabled = false;
 			}
 			_itemVo = itemVo;
 			clearTimeout();

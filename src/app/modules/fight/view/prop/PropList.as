@@ -29,7 +29,7 @@ package app.modules.fight.view.prop
 			for (var i:int = 0; i < 4; i++ )
 			{
 				item = new PropItem();
-				item.x = 110 * i;
+				item.x = 74 * i;
 				addChild( item );
 				vecItemSkin[ i ] = item;
 			}

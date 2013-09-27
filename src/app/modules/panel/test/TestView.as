@@ -34,13 +34,6 @@ package app.modules.panel.test
 			
 		}
 		
-		override protected function setSkinWithName(skinName:String):void
-		{
-			super.setSkinWithName( skinName );
-			
-			
-		}
-		
 		override protected function onceInit():void
 		{
 			super.onceInit();

@@ -39,7 +39,7 @@ package app.modules.model.vo
 		 */
 		public function get skinId():String
 		{
-			return "ui_Skin_PropItem_" + id;
+			return "ui_Skin_Round_PropItem_" + id;
 		}
 		
 	}

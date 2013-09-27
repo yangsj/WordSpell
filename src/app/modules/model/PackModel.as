@@ -1,6 +1,5 @@
 package app.modules.model
 {
-	import app.events.GameEvent;
 	import app.modules.model.vo.ItemVo;
 	
 	import org.robotlegs.mvcs.Actor;

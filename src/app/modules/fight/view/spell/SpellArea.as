@@ -3,6 +3,8 @@ package app.modules.fight.view.spell
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
+	import app.managers.LoaderManager;
+	
 	
 	/**
 	 * ……
@@ -18,10 +20,19 @@ package app.modules.fight.view.spell
 		public function SpellArea()
 		{
 			super();
+			createSkin();
+		}
+		
+		private function createSkin():void
+		{
+			_skin = LoaderManager.getObj( "ui_Skin_Round_SpellArea" ) as Sprite;
+			addChild( _skin );
+			txtChinese = _skin.getChildByName( "txtChinese" ) as TextField;
 		}
 		
 		public function setInitData( spellVo:SpellVo ):void
 		{
+			txtChinese.text = spellVo.chinese;
 			
 		}
 		

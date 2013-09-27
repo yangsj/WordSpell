@@ -8,7 +8,7 @@ package victor.framework.manager
 	/**
 	 * @author fireyang
 	 */
-	public class TickManager implements ITickManager
+	public class TickManager
 	{
 		private var _timer:Timer;
 		// 上一次时间
@@ -17,9 +17,8 @@ package victor.framework.manager
 		private var _correctTime:int;
 		private var _timeQueue:Vector.<TimeVO>;
 
-		private static var _instance:ITickManager;
+		private static var _instance:TickManager;
 
-		// = new Vector.<TimeVO>();
 		public function init( frameRate:int ):void
 		{
 			if ( _timer )
@@ -33,7 +32,7 @@ package victor.framework.manager
 			_timer.start();
 		}
 
-		public static function get instance():ITickManager
+		public static function get instance():TickManager
 		{
 			return _instance ||= new TickManager();
 		}
@@ -76,7 +75,6 @@ package victor.framework.manager
 		 */
 		public function clearDoTime( func:Function ):void
 		{
-			// trace("clearDoTime");
 			var index:int = 0;
 			while ( index < _timeQueue.length )
 			{

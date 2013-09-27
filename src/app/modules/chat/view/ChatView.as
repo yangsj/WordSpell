@@ -213,7 +213,7 @@ package app.modules.chat.view
 
 		//////////////// override 
 
-		override protected function setSkinWithName( skinName:String ):void
+		override protected function setSkinWithName(skinName:String, domainName:String=""):void
 		{
 			super.setSkinWithName( skinName );
 			if ( _skin )

@@ -1,15 +1,11 @@
 package victor.framework.core
 {
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	import app.managers.LoaderManager;
+	import app.modules.TempleteSprite;
 	
-	import victor.framework.components.Reflection;
 	import victor.framework.interfaces.IView;
-	import victor.framework.manager.ITickManager;
-	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
 
 	/**
@@ -17,17 +13,11 @@ package victor.framework.core
 	 * @author 	yangsj
 	 * 			2013-8-5
 	 */
-	public class ViewSprite extends Sprite implements IView
+	public class ViewSprite extends TempleteSprite implements IView
 	{
 		protected var _data:Object;
-
-		protected var _skin:Sprite;
-
 		protected var rectangle:Rectangle;
-
 		protected var _isInit:Boolean = false;
-
-
 
 		public function ViewSprite()
 		{
@@ -57,25 +47,9 @@ package victor.framework.core
 			if ( _isInit == false )
 			{
 				setSkinWithName( skinName );
-				Reflection.reflection( this, _skin );
 				var rect:Rectangle = this.getBounds( this );
 				rectangle = new Rectangle( rect.x, rect.y, rect.width, rect.height );
 				onceInit();
-			}
-		}
-		
-		protected function getObj( skinName:String, domainName:String = "" ):Object
-		{
-			return LoaderManager.instance.getObj( skinName, domainName );
-		}
-
-		protected function setSkinWithName( skinName:String ):void
-		{
-			if ( skinName )
-			{
-				DisplayUtil.removedAll( this, false );
-				_skin = getObj( skinName, domainName ) as Sprite;
-				addChild( _skin );
 			}
 		}
 
@@ -126,14 +100,6 @@ package victor.framework.core
 		protected function get domainName():String
 		{
 			return "";
-		}
-		
-		/**
-		 * 计时器
-		 */
-		protected function get tickManager():ITickManager
-		{
-			return TickManager.instance;
 		}
 
 
