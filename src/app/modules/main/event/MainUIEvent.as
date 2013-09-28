@@ -20,5 +20,10 @@ package app.modules.main.event
 		 */
 		public static const UPDATE_EXP:String = "update_exp";
 		
+		/**
+		 * 更新金币值
+		 */
+		public static const UPDATE_MONEY:String = "update_money";
+		
 	}
 }

@@ -13,7 +13,7 @@ package app.modules.main
 		{
 		}
 		
-		public static const functionBtnsList:Array = [ FRIEND, TASK, PERSONAL ];
+		public static const functionBtnsList:Array = [ FRIEND, TASK, PERSONAL, RANK, PRACTICE, FIGHT, EXIT ];
 		
 		/**
 		 * 好友
@@ -29,6 +29,26 @@ package app.modules.main
 		 * 个人信息
 		 */
 		public static const PERSONAL:String = ViewName.Personal;
+		
+		/**
+		 * 排行
+		 */
+		public static const RANK:String = ViewName.Rank;
+		
+		/**
+		 * 练习
+		 */
+		public static const PRACTICE:String = "btnPractice";
+		
+		/**
+		 * 对战
+		 */
+		public static const FIGHT:String = "btnFight";
+		
+		/**
+		 * 退出
+		 */
+		public static const EXIT:String = "btnExit";
 		
 	}
 }

@@ -119,7 +119,7 @@ package app.modules.map.service
 		public function getChapterDetailInfo( mapId:int ):void
 		{
 			var req:chapter_detail_req_t = new chapter_detail_req_t();
-			req.chapter_id = mapId;
+			req.chapter_type = mapId;
 			call( client_cmd_e.CHAPTER_DETAIL_REQ, req );
 		}
 		

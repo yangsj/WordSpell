@@ -4,6 +4,7 @@ package app.modules.map.panel
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.map.model.MapModel;
+	import app.modules.map.model.RoundVo;
 	import app.modules.map.panel.event.SelectedRoundEvent;
 	import app.modules.map.service.MapService;
 	
@@ -52,7 +53,8 @@ package app.modules.map.panel
 		{
 			trace( event.data );
 //			Tips.showMouse( "准备闯关！功能开发中，敬请期待" );
-			
+			var roundVo:RoundVo = event.data as RoundVo;
+			mapModel.currentRoundVo = roundVo;
 			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.SelectedRoundPanel ));			
 			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightAlone ));
 		}

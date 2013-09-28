@@ -22,6 +22,14 @@ package app.modules.fight.view.prop
 			createListItems();
 		}
 		
+		public function clear():void
+		{
+			for each ( var item:PropItem in vecItemSkin )
+			{
+				if ( item ) item.clearTimeout();
+			}
+		}
+		
 		private function createListItems():void
 		{
 			var item:PropItem;

@@ -65,6 +65,11 @@ package app.modules
 		 */
 		public static const Personal:String = "personalPanel";
 		
+		/**
+		 * 排行系统
+		 */
+		public static const Rank:String = "rankPanel";
+		
 		//// fight
 		
 		/**

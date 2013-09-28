@@ -17,26 +17,32 @@ import org.apache.thrift.protocol.*;
 
   public class end_round_ret_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("end_round_ret_t");
-    private static const INC_STAR_FIELD_DESC:TField = new TField("inc_star", TType.I32, 1);
-    private static const INC_EXP_FIELD_DESC:TField = new TField("inc_exp", TType.I32, 2);
-    private static const CUR_LEVEL_FIELD_DESC:TField = new TField("cur_level", TType.I32, 3);
-    private static const INC_ITEMS_FIELD_DESC:TField = new TField("inc_items", TType.MAP, 4);
+    private static const WIN_FIELD_DESC:TField = new TField("win", TType.BOOL, 1);
+    private static const INC_STAR_FIELD_DESC:TField = new TField("inc_star", TType.I32, 2);
+    private static const INC_EXP_FIELD_DESC:TField = new TField("inc_exp", TType.I32, 3);
+    private static const CUR_LEVEL_FIELD_DESC:TField = new TField("cur_level", TType.I32, 4);
+    private static const INC_ITEMS_FIELD_DESC:TField = new TField("inc_items", TType.MAP, 5);
 
+    private var _win:Boolean;
+    public static const WIN:int = 1;
     private var _inc_star:int;
-    public static const INC_STAR:int = 1;
+    public static const INC_STAR:int = 2;
     private var _inc_exp:int;
-    public static const INC_EXP:int = 2;
+    public static const INC_EXP:int = 3;
     private var _cur_level:int;
-    public static const CUR_LEVEL:int = 3;
+    public static const CUR_LEVEL:int = 4;
     private var _inc_items:Dictionary;
-    public static const INC_ITEMS:int = 4;
+    public static const INC_ITEMS:int = 5;
 
+    private var __isset_win:Boolean = false;
     private var __isset_inc_star:Boolean = false;
     private var __isset_inc_exp:Boolean = false;
     private var __isset_cur_level:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
+      metaDataMap[WIN] = new FieldMetaData("win", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.BOOL));
       metaDataMap[INC_STAR] = new FieldMetaData("inc_star", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
       metaDataMap[INC_EXP] = new FieldMetaData("inc_exp", TFieldRequirementType.DEFAULT, 
@@ -53,9 +59,28 @@ import org.apache.thrift.protocol.*;
     }
 
     public function end_round_ret_t() {
+      this._win = 0;
       this._inc_star = 0;
       this._inc_exp = 0;
       this._cur_level = 0;
+    }
+
+    public function get win():Boolean {
+      return this._win;
+    }
+
+    public function set win(win:Boolean):void {
+      this._win = win;
+      this.__isset_win = true;
+    }
+
+    public function unsetWin():void {
+      this.__isset_win = false;
+    }
+
+    // Returns true if field win is set (has been assigned a value) and false otherwise
+    public function isSetWin():Boolean {
+      return this.__isset_win;
     }
 
     public function get inc_star():int {
@@ -131,6 +156,14 @@ import org.apache.thrift.protocol.*;
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
+      case WIN:
+        if (value == null) {
+          unsetWin();
+        } else {
+          this.win = value;
+        }
+        break;
+
       case INC_STAR:
         if (value == null) {
           unsetInc_star();
@@ -170,6 +203,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
+      case WIN:
+        return this.win;
       case INC_STAR:
         return this.inc_star;
       case INC_EXP:
@@ -186,6 +221,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
+      case WIN:
+        return isSetWin();
       case INC_STAR:
         return isSetInc_star();
       case INC_EXP:
@@ -210,6 +247,14 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
+          case WIN:
+            if (field.type == TType.BOOL) {
+              this.win = iprot.readBool();
+              this.__isset_win = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           case INC_STAR:
             if (field.type == TType.I32) {
               this.inc_star = iprot.readI32();
@@ -237,15 +282,15 @@ import org.apache.thrift.protocol.*;
           case INC_ITEMS:
             if (field.type == TType.MAP) {
               {
-                var _map162:TMap = iprot.readMapBegin();
+                var _map160:TMap = iprot.readMapBegin();
                 this.inc_items = new Dictionary();
-                for (var _i163:int = 0; _i163 < _map162.size; ++_i163)
+                for (var _i161:int = 0; _i161 < _map160.size; ++_i161)
                 {
-                  var _key164:int;
-                  var _val165:int;
-                  _key164 = iprot.readI32();
-                  _val165 = iprot.readI32();
-                  this.inc_items[_key164] = _val165;
+                  var _key162:int;
+                  var _val163:int;
+                  _key162 = iprot.readI32();
+                  _val163 = iprot.readI32();
+                  this.inc_items[_key162] = _val163;
                 }
                 iprot.readMapEnd();
               }
@@ -270,6 +315,9 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
+      oprot.writeFieldBegin(WIN_FIELD_DESC);
+      oprot.writeBool(this.win);
+      oprot.writeFieldEnd();
       oprot.writeFieldBegin(INC_STAR_FIELD_DESC);
       oprot.writeI32(this.inc_star);
       oprot.writeFieldEnd();
@@ -282,14 +330,14 @@ import org.apache.thrift.protocol.*;
       if (this.inc_items != null) {
         oprot.writeFieldBegin(INC_ITEMS_FIELD_DESC);
         {
-          var _sizeCounter167:int = 0;
-          for (var _key166:* in this.inc_items) {
-            _sizeCounter167++;
+          var _sizeCounter165:int = 0;
+          for (var _key164:* in this.inc_items) {
+            _sizeCounter165++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter167));
-          for (var elem168:* in this.inc_items)          {
-            oprot.writeI32(elem168);
-            oprot.writeI32(this.inc_items[elem168]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter165));
+          for (var elem166:* in this.inc_items)          {
+            oprot.writeI32(elem166);
+            oprot.writeI32(this.inc_items[elem166]);
           }
           oprot.writeMapEnd();
         }
@@ -303,6 +351,10 @@ import org.apache.thrift.protocol.*;
       var ret:String = new String("end_round_ret_t(");
       var first:Boolean = true;
 
+      ret += "win:";
+      ret += this.win;
+      first = false;
+      if (!first) ret +=  ", ";
       ret += "inc_star:";
       ret += this.inc_star;
       first = false;

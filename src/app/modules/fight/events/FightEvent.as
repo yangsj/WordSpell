@@ -26,6 +26,11 @@ package app.modules.fight.events
 		 */
 		public static const REMOVED_LETTER:String = "removed_letter";
 		
+		/**
+		 * 时间结束
+		 */
+		public static const TIME_OVER:String = "time_over";
+		
 		
 		/**
 		 * 更新显示单词信息
@@ -35,6 +40,21 @@ package app.modules.fight.events
 		 * 显示答案
 		 */
 		public static const SHOW_ANSWER:String = "show_answer";
+		
+		//////////////// notify
+		
+		/**
+		 * 关卡开始通知
+		 */
+		public static const NOTIFY_START_ROUND:String = "notify_start_round";
+		/**
+		 * 关卡结束通知
+		 */
+		public static const NOTIFY_END_ROUND:String = "notify_end_round";
+		/**
+		 * 下一个单词通知
+		 */
+		public static const NOTIFY_NEXT_WORD:String = "notify_next_word";
 		
 	}
 }

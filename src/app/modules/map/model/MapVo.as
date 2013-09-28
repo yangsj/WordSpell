@@ -34,6 +34,10 @@ package app.modules.map.model
 			return status == 1;
 		}
 
+		public function get mapName():String
+		{
+			return ["加拿大大熊湖","西澳大利亚沙漠","澳大利亚凯恩斯热带雨林","美国雷尼尔山","埃尔斯米尔岛","天空"][mapId];
+		}
 		
 	}
 }

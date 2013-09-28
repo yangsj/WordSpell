@@ -17,16 +17,16 @@ import org.apache.thrift.protocol.*;
 
   public class chapter_detail_req_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("chapter_detail_req_t");
-    private static const CHAPTER_ID_FIELD_DESC:TField = new TField("chapter_id", TType.I32, 1);
+    private static const CHAPTER_TYPE_FIELD_DESC:TField = new TField("chapter_type", TType.I32, 1);
 
-    private var _chapter_id:int;
-    public static const CHAPTER_ID:int = 1;
+    private var _chapter_type:int;
+    public static const CHAPTER_TYPE:int = 1;
 
-    private var __isset_chapter_id:Boolean = false;
+    private var __isset_chapter_type:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[CHAPTER_ID] = new FieldMetaData("chapter_id", TFieldRequirementType.DEFAULT, 
+      metaDataMap[CHAPTER_TYPE] = new FieldMetaData("chapter_type", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
     }
     {
@@ -34,34 +34,34 @@ import org.apache.thrift.protocol.*;
     }
 
     public function chapter_detail_req_t() {
-      this._chapter_id = 0;
+      this._chapter_type = 0;
     }
 
-    public function get chapter_id():int {
-      return this._chapter_id;
+    public function get chapter_type():int {
+      return this._chapter_type;
     }
 
-    public function set chapter_id(chapter_id:int):void {
-      this._chapter_id = chapter_id;
-      this.__isset_chapter_id = true;
+    public function set chapter_type(chapter_type:int):void {
+      this._chapter_type = chapter_type;
+      this.__isset_chapter_type = true;
     }
 
-    public function unsetChapter_id():void {
-      this.__isset_chapter_id = false;
+    public function unsetChapter_type():void {
+      this.__isset_chapter_type = false;
     }
 
-    // Returns true if field chapter_id is set (has been assigned a value) and false otherwise
-    public function isSetChapter_id():Boolean {
-      return this.__isset_chapter_id;
+    // Returns true if field chapter_type is set (has been assigned a value) and false otherwise
+    public function isSetChapter_type():Boolean {
+      return this.__isset_chapter_type;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case CHAPTER_ID:
+      case CHAPTER_TYPE:
         if (value == null) {
-          unsetChapter_id();
+          unsetChapter_type();
         } else {
-          this.chapter_id = value;
+          this.chapter_type = value;
         }
         break;
 
@@ -72,8 +72,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case CHAPTER_ID:
-        return this.chapter_id;
+      case CHAPTER_TYPE:
+        return this.chapter_type;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -82,8 +82,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case CHAPTER_ID:
-        return isSetChapter_id();
+      case CHAPTER_TYPE:
+        return isSetChapter_type();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -100,10 +100,10 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case CHAPTER_ID:
+          case CHAPTER_TYPE:
             if (field.type == TType.I32) {
-              this.chapter_id = iprot.readI32();
-              this.__isset_chapter_id = true;
+              this.chapter_type = iprot.readI32();
+              this.__isset_chapter_type = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -125,8 +125,8 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(CHAPTER_ID_FIELD_DESC);
-      oprot.writeI32(this.chapter_id);
+      oprot.writeFieldBegin(CHAPTER_TYPE_FIELD_DESC);
+      oprot.writeI32(this.chapter_type);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -136,8 +136,8 @@ import org.apache.thrift.protocol.*;
       var ret:String = new String("chapter_detail_req_t(");
       var first:Boolean = true;
 
-      ret += "chapter_id:";
-      ret += this.chapter_id;
+      ret += "chapter_type:";
+      ret += this.chapter_type;
       first = false;
       ret += ")";
       return ret;

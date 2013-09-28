@@ -18,28 +18,21 @@ import org.apache.thrift.protocol.*;
   public class bubble_info_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("bubble_info_t");
     private static const WORD_FIELD_DESC:TField = new TField("word", TType.STRING, 2);
-    private static const BUBBLE_TYPE_FIELD_DESC:TField = new TField("bubble_type", TType.I32, 3);
 
     private var _word:String;
     public static const WORD:int = 2;
-    private var _bubble_type:int;
-    public static const BUBBLE_TYPE:int = 3;
 
-    private var __isset_bubble_type:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
       metaDataMap[WORD] = new FieldMetaData("word", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
-      metaDataMap[BUBBLE_TYPE] = new FieldMetaData("bubble_type", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(bubble_info_t, metaDataMap);
     }
 
     public function bubble_info_t() {
-      this._bubble_type = 0;
     }
 
     public function get word():String {
@@ -59,24 +52,6 @@ import org.apache.thrift.protocol.*;
       return this.word != null;
     }
 
-    public function get bubble_type():int {
-      return this._bubble_type;
-    }
-
-    public function set bubble_type(bubble_type:int):void {
-      this._bubble_type = bubble_type;
-      this.__isset_bubble_type = true;
-    }
-
-    public function unsetBubble_type():void {
-      this.__isset_bubble_type = false;
-    }
-
-    // Returns true if field bubble_type is set (has been assigned a value) and false otherwise
-    public function isSetBubble_type():Boolean {
-      return this.__isset_bubble_type;
-    }
-
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case WORD:
@@ -84,14 +59,6 @@ import org.apache.thrift.protocol.*;
           unsetWord();
         } else {
           this.word = value;
-        }
-        break;
-
-      case BUBBLE_TYPE:
-        if (value == null) {
-          unsetBubble_type();
-        } else {
-          this.bubble_type = value;
         }
         break;
 
@@ -104,8 +71,6 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case WORD:
         return this.word;
-      case BUBBLE_TYPE:
-        return this.bubble_type;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -116,8 +81,6 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case WORD:
         return isSetWord();
-      case BUBBLE_TYPE:
-        return isSetBubble_type();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -137,14 +100,6 @@ import org.apache.thrift.protocol.*;
           case WORD:
             if (field.type == TType.STRING) {
               this.word = iprot.readString();
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case BUBBLE_TYPE:
-            if (field.type == TType.I32) {
-              this.bubble_type = iprot.readI32();
-              this.__isset_bubble_type = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -171,9 +126,6 @@ import org.apache.thrift.protocol.*;
         oprot.writeString(this.word);
         oprot.writeFieldEnd();
       }
-      oprot.writeFieldBegin(BUBBLE_TYPE_FIELD_DESC);
-      oprot.writeI32(this.bubble_type);
-      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -188,10 +140,6 @@ import org.apache.thrift.protocol.*;
       } else {
         ret += this.word;
       }
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "bubble_type:";
-      ret += this.bubble_type;
       first = false;
       ret += ")";
       return ret;

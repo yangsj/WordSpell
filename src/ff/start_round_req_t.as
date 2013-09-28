@@ -17,117 +17,117 @@ import org.apache.thrift.protocol.*;
 
   public class start_round_req_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("start_round_req_t");
-    private static const LEVEL_FIELD_DESC:TField = new TField("level", TType.I32, 1);
-    private static const MODE_FIELD_DESC:TField = new TField("mode", TType.I16, 2);
-    private static const DEST_UID_FIELD_DESC:TField = new TField("dest_uid", TType.I32, 3);
+    private static const ROUND_TYPE_FIELD_DESC:TField = new TField("round_type", TType.I16, 1);
+    private static const ROUND_GROUP_ID_FIELD_DESC:TField = new TField("round_group_id", TType.I16, 2);
+    private static const ROUND_ID_FIELD_DESC:TField = new TField("round_id", TType.I16, 3);
 
-    private var _level:int;
-    public static const LEVEL:int = 1;
-    private var _mode:int;
-    public static const MODE:int = 2;
-    private var _dest_uid:int;
-    public static const DEST_UID:int = 3;
+    private var _round_type:int;
+    public static const ROUND_TYPE:int = 1;
+    private var _round_group_id:int;
+    public static const ROUND_GROUP_ID:int = 2;
+    private var _round_id:int;
+    public static const ROUND_ID:int = 3;
 
-    private var __isset_level:Boolean = false;
-    private var __isset_mode:Boolean = false;
-    private var __isset_dest_uid:Boolean = false;
+    private var __isset_round_type:Boolean = false;
+    private var __isset_round_group_id:Boolean = false;
+    private var __isset_round_id:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[LEVEL] = new FieldMetaData("level", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I32));
-      metaDataMap[MODE] = new FieldMetaData("mode", TFieldRequirementType.DEFAULT, 
+      metaDataMap[ROUND_TYPE] = new FieldMetaData("round_type", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I16));
-      metaDataMap[DEST_UID] = new FieldMetaData("dest_uid", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I32));
+      metaDataMap[ROUND_GROUP_ID] = new FieldMetaData("round_group_id", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
+      metaDataMap[ROUND_ID] = new FieldMetaData("round_id", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
     }
     {
       FieldMetaData.addStructMetaDataMap(start_round_req_t, metaDataMap);
     }
 
     public function start_round_req_t() {
-      this._level = 0;
-      this._mode = 0;
-      this._dest_uid = 0;
+      this._round_type = 0;
+      this._round_group_id = 0;
+      this._round_id = 0;
     }
 
-    public function get level():int {
-      return this._level;
+    public function get round_type():int {
+      return this._round_type;
     }
 
-    public function set level(level:int):void {
-      this._level = level;
-      this.__isset_level = true;
+    public function set round_type(round_type:int):void {
+      this._round_type = round_type;
+      this.__isset_round_type = true;
     }
 
-    public function unsetLevel():void {
-      this.__isset_level = false;
+    public function unsetRound_type():void {
+      this.__isset_round_type = false;
     }
 
-    // Returns true if field level is set (has been assigned a value) and false otherwise
-    public function isSetLevel():Boolean {
-      return this.__isset_level;
+    // Returns true if field round_type is set (has been assigned a value) and false otherwise
+    public function isSetRound_type():Boolean {
+      return this.__isset_round_type;
     }
 
-    public function get mode():int {
-      return this._mode;
+    public function get round_group_id():int {
+      return this._round_group_id;
     }
 
-    public function set mode(mode:int):void {
-      this._mode = mode;
-      this.__isset_mode = true;
+    public function set round_group_id(round_group_id:int):void {
+      this._round_group_id = round_group_id;
+      this.__isset_round_group_id = true;
     }
 
-    public function unsetMode():void {
-      this.__isset_mode = false;
+    public function unsetRound_group_id():void {
+      this.__isset_round_group_id = false;
     }
 
-    // Returns true if field mode is set (has been assigned a value) and false otherwise
-    public function isSetMode():Boolean {
-      return this.__isset_mode;
+    // Returns true if field round_group_id is set (has been assigned a value) and false otherwise
+    public function isSetRound_group_id():Boolean {
+      return this.__isset_round_group_id;
     }
 
-    public function get dest_uid():int {
-      return this._dest_uid;
+    public function get round_id():int {
+      return this._round_id;
     }
 
-    public function set dest_uid(dest_uid:int):void {
-      this._dest_uid = dest_uid;
-      this.__isset_dest_uid = true;
+    public function set round_id(round_id:int):void {
+      this._round_id = round_id;
+      this.__isset_round_id = true;
     }
 
-    public function unsetDest_uid():void {
-      this.__isset_dest_uid = false;
+    public function unsetRound_id():void {
+      this.__isset_round_id = false;
     }
 
-    // Returns true if field dest_uid is set (has been assigned a value) and false otherwise
-    public function isSetDest_uid():Boolean {
-      return this.__isset_dest_uid;
+    // Returns true if field round_id is set (has been assigned a value) and false otherwise
+    public function isSetRound_id():Boolean {
+      return this.__isset_round_id;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case LEVEL:
+      case ROUND_TYPE:
         if (value == null) {
-          unsetLevel();
+          unsetRound_type();
         } else {
-          this.level = value;
+          this.round_type = value;
         }
         break;
 
-      case MODE:
+      case ROUND_GROUP_ID:
         if (value == null) {
-          unsetMode();
+          unsetRound_group_id();
         } else {
-          this.mode = value;
+          this.round_group_id = value;
         }
         break;
 
-      case DEST_UID:
+      case ROUND_ID:
         if (value == null) {
-          unsetDest_uid();
+          unsetRound_id();
         } else {
-          this.dest_uid = value;
+          this.round_id = value;
         }
         break;
 
@@ -138,12 +138,12 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case LEVEL:
-        return this.level;
-      case MODE:
-        return this.mode;
-      case DEST_UID:
-        return this.dest_uid;
+      case ROUND_TYPE:
+        return this.round_type;
+      case ROUND_GROUP_ID:
+        return this.round_group_id;
+      case ROUND_ID:
+        return this.round_id;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -152,12 +152,12 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case LEVEL:
-        return isSetLevel();
-      case MODE:
-        return isSetMode();
-      case DEST_UID:
-        return isSetDest_uid();
+      case ROUND_TYPE:
+        return isSetRound_type();
+      case ROUND_GROUP_ID:
+        return isSetRound_group_id();
+      case ROUND_ID:
+        return isSetRound_id();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -174,26 +174,26 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case LEVEL:
-            if (field.type == TType.I32) {
-              this.level = iprot.readI32();
-              this.__isset_level = true;
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case MODE:
+          case ROUND_TYPE:
             if (field.type == TType.I16) {
-              this.mode = iprot.readI16();
-              this.__isset_mode = true;
+              this.round_type = iprot.readI16();
+              this.__isset_round_type = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
-          case DEST_UID:
-            if (field.type == TType.I32) {
-              this.dest_uid = iprot.readI32();
-              this.__isset_dest_uid = true;
+          case ROUND_GROUP_ID:
+            if (field.type == TType.I16) {
+              this.round_group_id = iprot.readI16();
+              this.__isset_round_group_id = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case ROUND_ID:
+            if (field.type == TType.I16) {
+              this.round_id = iprot.readI16();
+              this.__isset_round_id = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -215,14 +215,14 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(LEVEL_FIELD_DESC);
-      oprot.writeI32(this.level);
+      oprot.writeFieldBegin(ROUND_TYPE_FIELD_DESC);
+      oprot.writeI16(this.round_type);
       oprot.writeFieldEnd();
-      oprot.writeFieldBegin(MODE_FIELD_DESC);
-      oprot.writeI16(this.mode);
+      oprot.writeFieldBegin(ROUND_GROUP_ID_FIELD_DESC);
+      oprot.writeI16(this.round_group_id);
       oprot.writeFieldEnd();
-      oprot.writeFieldBegin(DEST_UID_FIELD_DESC);
-      oprot.writeI32(this.dest_uid);
+      oprot.writeFieldBegin(ROUND_ID_FIELD_DESC);
+      oprot.writeI16(this.round_id);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -232,16 +232,16 @@ import org.apache.thrift.protocol.*;
       var ret:String = new String("start_round_req_t(");
       var first:Boolean = true;
 
-      ret += "level:";
-      ret += this.level;
+      ret += "round_type:";
+      ret += this.round_type;
       first = false;
       if (!first) ret +=  ", ";
-      ret += "mode:";
-      ret += this.mode;
+      ret += "round_group_id:";
+      ret += this.round_group_id;
       first = false;
       if (!first) ret +=  ", ";
-      ret += "dest_uid:";
-      ret += this.dest_uid;
+      ret += "round_id:";
+      ret += this.round_id;
       first = false;
       ret += ")";
       return ret;

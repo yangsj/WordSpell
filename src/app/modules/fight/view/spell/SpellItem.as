@@ -5,8 +5,8 @@ package app.modules.fight.view.spell
 	import flash.text.TextField;
 	
 	import app.modules.fight.events.FightEvent;
+	import app.modules.fight.model.LetterBubbleVo;
 	
-	import victor.framework.components.Reflection;
 	import victor.framework.interfaces.IDisposable;
 	
 	/**
@@ -22,8 +22,7 @@ package app.modules.fight.view.spell
 		private var skin:MovieClip;
 		public var txtLetter:TextField;
 		
-		private var _data:SpellItemVo;
-		private var _isOpen:Boolean = false;
+		private var _data:LetterBubbleVo;
 		
 		public function SpellItem( skin:MovieClip )
 		{
@@ -32,7 +31,7 @@ package app.modules.fight.view.spell
 			this.skin.buttonMode = true;
 			this.skin.stop();
 			this.skin.addEventListener( MouseEvent.CLICK, onClickHandler );
-			Reflection.reflection( this, skin );
+			this.txtLetter = skin.getChildByName( "txtLetter" ) as TextField;
 		}
 		
 		protected function onClickHandler(event:MouseEvent):void
@@ -41,19 +40,15 @@ package app.modules.fight.view.spell
 				this.skin.dispatchEvent( new FightEvent( FightEvent.REMOVED_LETTER, _data ));
 		}
 		
-		private function setStatus():void
+		public function initialize():void
 		{
-			this.skin.mouseEnabled = _isOpen;
-			this.skin.gotoAndStop( _isOpen ? FRAME_OPEN : FRAME_CLOSE );
-			this.txtLetter.visible = _isOpen;
+			txtLetter.text = "";
 		}
 		
-		public function setData( itemVo:SpellItemVo ):void
+		public function setData( itemVo:LetterBubbleVo ):void
 		{
 			_data = itemVo;
-			
 			if ( _data ) txtLetter.text = _data.letter;
-			this.skin.mouseEnabled = _isOpen && _data;
 		}
 		
 		public function dispose():void
@@ -64,26 +59,19 @@ package app.modules.fight.view.spell
 			_data = null;
 		}
 		
-		public function get data():SpellItemVo
+		public function get data():LetterBubbleVo
 		{
 			return _data;
 		}
-
-		/**
-		 * 是否开启状态
-		 */
-		public function get isOpen():Boolean
+		
+		public function get visible():Boolean
 		{
-			return _isOpen;
+			return skin.visible;
 		}
-
-		/**
-		 * @private
-		 */
-		public function set isOpen(value:Boolean):void
+		
+		public function set visible( value:Boolean ):void
 		{
-			_isOpen = value;
-			setStatus();
+			skin.visible = value;
 		}
 
 	}

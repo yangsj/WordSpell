@@ -19,8 +19,6 @@ package app.modules.map.panel
 	 */
 	public class SelectedRoundView extends BasePanel
 	{
-		private static const names:Array = ["加拿大大熊湖Great Bear Lake","西澳大利亚沙漠（Western Desert）","澳大利亚凯恩斯热带雨林","美国雷尼尔山Mt. Rainier","埃尔斯米尔岛","Ellesmere Island 天空"];
-		
 		private var skinDict:Dictionary = new Dictionary();
 		private var vecList:Vector.<GroupItem>;
 		
@@ -36,7 +34,7 @@ package app.modules.map.panel
 			super.addedToStageHandler( event );
 			
 			txtName.y =3;
-			txtName.text = names[ mapVo.mapId ];
+			txtName.text = mapVo.mapName;
 			_skin.addChild( txtName );
 		}
 		

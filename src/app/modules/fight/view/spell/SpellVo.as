@@ -1,5 +1,6 @@
 package app.modules.fight.view.spell
 {
+	import app.modules.fight.model.LetterBubbleVo;
 	
 	/**
 	 * ……
@@ -23,19 +24,16 @@ package app.modules.fight.view.spell
 		public var english:String = "english";
 		
 		/**
-		 * 单词的字母列表
+		 * 显示的字母数据
 		 */
-		public function get letters():Array
-		{
-			return english.split( "" );
-		}
+		public var items:Vector.<LetterBubbleVo>;
 		
 		/**
 		 * 字符长度
 		 */
 		public function get charsLength():int
 		{
-			return letters.length;
+			return items.length;
 		}
 		
 	}

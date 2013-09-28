@@ -10,6 +10,7 @@ package app.modules.fight.view.item
 	
 	import app.modules.TempleteSprite;
 	import app.modules.fight.events.FightEvent;
+	import app.modules.fight.model.LetterBubbleVo;
 	
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
@@ -26,6 +27,8 @@ package app.modules.fight.view.item
 		private static const moveArea:Rectangle = new Rectangle(41, 41, 808, 298 );
 		
 		public var txtLetter:TextField;
+		
+		private var _data:LetterBubbleVo;
 		
 		public function LetterBubble()
 		{
@@ -88,14 +91,10 @@ package app.modules.fight.view.item
 			removeEventListener( MouseEvent.CLICK, mouseHandler );
 		}
 		
-		public function setLabel( letter:String ):void
+		public function setData( vo:LetterBubbleVo ):void
 		{
-			txtLetter.text = letter.toLocaleUpperCase();
-		}
-		
-		public function get letter():String
-		{
-			return txtLetter.text.toLocaleLowerCase();
+			_data = vo;
+			txtLetter.text = vo.letter;
 		}
 		
 		public function selected( value:Boolean ):void
@@ -104,7 +103,7 @@ package app.modules.fight.view.item
 			if ( value )
 			{
 				mouseEnabled = false;
-				dispatchEvent( new FightEvent( FightEvent.SELECTED_LETTER, letter, true ));
+				dispatchEvent( new FightEvent( FightEvent.SELECTED_LETTER, _data, true ));
 				TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
 				TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });
 			}
@@ -115,6 +114,12 @@ package app.modules.fight.view.item
 			TweenMax.killTweensOf( this );
 			DisplayUtil.removedFromParent( this );
 		}
+
+		public function get data():LetterBubbleVo
+		{
+			return _data;
+		}
+
 		
 	}
 }

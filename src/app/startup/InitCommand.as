@@ -16,6 +16,7 @@ package app.startup
 	import app.modules.model.CommonModel;
 	import app.modules.model.PackModel;
 	import app.modules.panel.personal.command.PersonalInitCommand;
+	import app.modules.panel.rank.command.RankInitCommand;
 	import app.modules.panel.test.TestInitCommand;
 	import app.modules.serivce.CommonService;
 	import app.modules.serivce.PackService;
@@ -46,6 +47,7 @@ package app.startup
 				, LoginInitCommand		// 登陆游戏
 				, PersonalInitCommand	// 个人信息
 				, FightInitCommand		// 对战闯关系统
+				, RankInitCommand		// 排行系统
 			];
 		
 		public function InitCommand()

@@ -13,7 +13,7 @@ import flash.utils.Dictionary;
     public static const CHAT_RET:int = 2;
     public static const ERROR_CODE_RET:int = 3;
     public static const START_ROUND_RET:int = 4;
-    public static const INPUT_RET:int = 5;
+    public static const NEXT_WORD_RET:int = 5;
     public static const END_ROUND_RET:int = 6;
     public static const USER_PROPERTY_RET:int = 7;
     public static const PACK_INFO_RET:int = 8;
@@ -22,14 +22,14 @@ import flash.utils.Dictionary;
     public static const TASK_INFO_RET:int = 11;
     public static const CHAPTER_DETAIL_RET:int = 12;
 
-    public static const VALID_VALUES:Set = new Set(LOGIN_RET, CHAT_RET, ERROR_CODE_RET, START_ROUND_RET, INPUT_RET, END_ROUND_RET, USER_PROPERTY_RET, PACK_INFO_RET, FRIEND_INFO_RET, GAME_INFO_RET, TASK_INFO_RET, CHAPTER_DETAIL_RET);
+    public static const VALID_VALUES:Set = new Set(LOGIN_RET, CHAT_RET, ERROR_CODE_RET, START_ROUND_RET, NEXT_WORD_RET, END_ROUND_RET, USER_PROPERTY_RET, PACK_INFO_RET, FRIEND_INFO_RET, GAME_INFO_RET, TASK_INFO_RET, CHAPTER_DETAIL_RET);
     public static const VALUES_TO_NAMES:Dictionary = new Dictionary();
     {
       VALUES_TO_NAMES[LOGIN_RET] = "LOGIN_RET";
       VALUES_TO_NAMES[CHAT_RET] = "CHAT_RET";
       VALUES_TO_NAMES[ERROR_CODE_RET] = "ERROR_CODE_RET";
       VALUES_TO_NAMES[START_ROUND_RET] = "START_ROUND_RET";
-      VALUES_TO_NAMES[INPUT_RET] = "INPUT_RET";
+      VALUES_TO_NAMES[NEXT_WORD_RET] = "NEXT_WORD_RET";
       VALUES_TO_NAMES[END_ROUND_RET] = "END_ROUND_RET";
       VALUES_TO_NAMES[USER_PROPERTY_RET] = "USER_PROPERTY_RET";
       VALUES_TO_NAMES[PACK_INFO_RET] = "PACK_INFO_RET";

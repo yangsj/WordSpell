@@ -37,8 +37,6 @@ package app.modules.fight.view.prop.item
 		public function PropItem()
 		{
 			super();
-//			this.mouseChildren = false;
-//			this.buttonMode = true;
 			addEventListener( MouseEvent.CLICK, onClickHandler );
 		}
 		
