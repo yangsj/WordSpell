@@ -7,6 +7,10 @@ package app.modules.fight.command
 	import app.modules.fight.view.alone.FightAloneView;
 	import app.modules.fight.view.online.FightOnlineMediator;
 	import app.modules.fight.view.online.FightOnlineView;
+	import app.modules.fight.view.panel.FightLoseMediator;
+	import app.modules.fight.view.panel.FightLosePanel;
+	import app.modules.fight.view.panel.FightWinMediator;
+	import app.modules.fight.view.panel.FightWinPanel;
 	import app.modules.fight.view.prop.PropList;
 	import app.modules.fight.view.prop.PropListMediator;
 	import app.modules.fight.view.spell.SpellArea;
@@ -31,6 +35,9 @@ package app.modules.fight.command
 		{
 			addView( ViewName.FightAlone, FightAloneView, FightAloneMediator );
 			addView( ViewName.FightOnline, FightOnlineView, FightOnlineMediator );
+			
+			addView( ViewName.FightWinPanel, FightWinPanel, FightWinMediator );
+			addView( ViewName.FightLosePanel, FightLosePanel, FightLoseMediator );
 			
 			mapView( PropList, PropListMediator );
 			mapView( SpellArea, SpellAreaMediator );

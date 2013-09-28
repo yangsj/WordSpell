@@ -103,7 +103,7 @@ package app.modules.map.service
 					groupList.push( roundVo );
 				}
 			}
-			mapVo.roundList = chapterList;
+			mapVo.chapterList = chapterList;
 			mapModel.currentMapVo = mapVo;
 			
 			dispatch( new SelectedRoundEvent( SelectedRoundEvent.CHAPTER_DETAIL ));

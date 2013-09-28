@@ -48,7 +48,7 @@ import org.apache.thrift.protocol.*;
     public function item_t() {
       this._item_id = 0;
       this._item_type = 0;
-      this._item_num = 0;
+      this._item_num = 1;
     }
 
     public function get item_id():int {

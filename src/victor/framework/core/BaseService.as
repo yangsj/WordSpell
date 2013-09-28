@@ -2,6 +2,7 @@ package victor.framework.core {
 	import app.GameConfig;
 	import app.core.Alert;
 	import app.core.Tips;
+	import app.events.ViewEvent;
 	
 	import ff.msg_defConstants;
 	
@@ -83,6 +84,16 @@ package victor.framework.core {
 				return false;
 			}
 			return true;
+		}
+		
+		protected function openView( viewName:String, data:Object = null ):void
+		{
+			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName, data ));
+		}
+		
+		protected function closeView( viewName:String ):void
+		{
+			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, viewName ));
 		}
     }
 }

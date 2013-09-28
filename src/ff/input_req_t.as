@@ -101,13 +101,13 @@ import org.apache.thrift.protocol.*;
           case INPUT:
             if (field.type == TType.LIST) {
               {
-                var _list149:TList = iprot.readListBegin();
+                var _list152:TList = iprot.readListBegin();
                 this.input = new Array();
-                for (var _i150:int = 0; _i150 < _list149.size; ++_i150)
+                for (var _i153:int = 0; _i153 < _list152.size; ++_i153)
                 {
-                  var _elem151:int;
-                  _elem151 = iprot.readI32();
-                  this.input.push(_elem151);
+                  var _elem154:int;
+                  _elem154 = iprot.readI32();
+                  this.input.push(_elem154);
                 }
                 iprot.readListEnd();
               }
@@ -136,8 +136,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(INPUT_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.I32, this.input.length));
-          for each (var elem152:* in this.input)          {
-            oprot.writeI32(elem152);
+          for each (var elem155:* in this.input)          {
+            oprot.writeI32(elem155);
           }
           oprot.writeListEnd();
         }

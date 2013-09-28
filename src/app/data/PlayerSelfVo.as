@@ -1,5 +1,6 @@
 package app.data
 {
+	import app.modules.main.event.MainUIEvent;
 	
 	/**
 	 * ……玩家自己的数据
@@ -16,5 +17,6 @@ package app.data
 				throw new Error("PlayerSelfVo不能重复创建");
 			isInit = true;
 		}
+		
 	}
 }

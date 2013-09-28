@@ -96,7 +96,7 @@ package app.modules.map.panel
 		
 		public function setData( list:Vector.<ChapterVo> ):void
 		{
-			mapVo.roundList = list;
+			mapVo.chapterList = list;
 			var groupItem:GroupItem;
 			for ( var i:int = 0; i < 10; i++ )
 			{

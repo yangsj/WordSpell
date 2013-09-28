@@ -8,10 +8,7 @@ package app.modules.fight.model
 	 */
 	public class LetterBubbleVo
 	{
-		public function LetterBubbleVo()
-		{
-		}
-		
+
 		/**
 		 * 字母id
 		 */
@@ -20,6 +17,11 @@ package app.modules.fight.model
 		 * 字母
 		 */
 		public var letter:String;
+		/**
+		 * 道具类型
+		 * @see app.modules.model.vo.ItemType
+		 */
+		public var itemType:int;
 		
 	}
 }

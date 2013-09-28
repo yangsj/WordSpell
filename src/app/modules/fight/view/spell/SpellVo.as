@@ -19,11 +19,6 @@ package app.modules.fight.view.spell
 		public var chinese:String = "中文";
 		
 		/**
-		 * 英文单词
-		 */
-		public var english:String = "english";
-		
-		/**
 		 * 显示的字母数据
 		 */
 		public var items:Vector.<LetterBubbleVo>;

@@ -1,5 +1,7 @@
 package app.data
 {
+	import app.modules.main.event.MainUIEvent;
+	
 	import org.robotlegs.mvcs.Actor;
 	
 	/**
@@ -39,6 +41,17 @@ package app.data
 		////////////////////////////////////////////////////////
 		
 		
+		public function updateAddMoney( money:int ):void
+		{
+			selfVo.money += money;
+			dispatch(  new MainUIEvent( MainUIEvent.UPDATE_MONEY, selfVo.money ));
+		}
+		
+		public function updateAddExp( exp:int ):void
+		{
+			selfVo.exp += exp;
+			dispatch(  new MainUIEvent( MainUIEvent.UPDATE_EXP, selfVo.exp ));
+		}
 		
 		///////////////////////////////////////////////////////
 		

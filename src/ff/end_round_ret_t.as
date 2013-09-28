@@ -22,6 +22,8 @@ import org.apache.thrift.protocol.*;
     private static const INC_EXP_FIELD_DESC:TField = new TField("inc_exp", TType.I32, 3);
     private static const CUR_LEVEL_FIELD_DESC:TField = new TField("cur_level", TType.I32, 4);
     private static const INC_ITEMS_FIELD_DESC:TField = new TField("inc_items", TType.MAP, 5);
+    private static const RIGHT_NUM_FIELD_DESC:TField = new TField("right_num", TType.I16, 6);
+    private static const WRONG_WORDS_FIELD_DESC:TField = new TField("wrong_words", TType.LIST, 7);
 
     private var _win:Boolean;
     public static const WIN:int = 1;
@@ -33,11 +35,16 @@ import org.apache.thrift.protocol.*;
     public static const CUR_LEVEL:int = 4;
     private var _inc_items:Dictionary;
     public static const INC_ITEMS:int = 5;
+    private var _right_num:int;
+    public static const RIGHT_NUM:int = 6;
+    private var _wrong_words:Array;
+    public static const WRONG_WORDS:int = 7;
 
     private var __isset_win:Boolean = false;
     private var __isset_inc_star:Boolean = false;
     private var __isset_inc_exp:Boolean = false;
     private var __isset_cur_level:Boolean = false;
+    private var __isset_right_num:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -53,6 +60,11 @@ import org.apache.thrift.protocol.*;
           new MapMetaData(TType.MAP, 
               new FieldValueMetaData(TType.I32), 
               new FieldValueMetaData(TType.I32)));
+      metaDataMap[RIGHT_NUM] = new FieldMetaData("right_num", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
+      metaDataMap[WRONG_WORDS] = new FieldMetaData("wrong_words", TFieldRequirementType.DEFAULT, 
+          new ListMetaData(TType.LIST, 
+              new FieldValueMetaData(TType.STRING)));
     }
     {
       FieldMetaData.addStructMetaDataMap(end_round_ret_t, metaDataMap);
@@ -63,6 +75,7 @@ import org.apache.thrift.protocol.*;
       this._inc_star = 0;
       this._inc_exp = 0;
       this._cur_level = 0;
+      this._right_num = 0;
     }
 
     public function get win():Boolean {
@@ -154,6 +167,41 @@ import org.apache.thrift.protocol.*;
       return this.inc_items != null;
     }
 
+    public function get right_num():int {
+      return this._right_num;
+    }
+
+    public function set right_num(right_num:int):void {
+      this._right_num = right_num;
+      this.__isset_right_num = true;
+    }
+
+    public function unsetRight_num():void {
+      this.__isset_right_num = false;
+    }
+
+    // Returns true if field right_num is set (has been assigned a value) and false otherwise
+    public function isSetRight_num():Boolean {
+      return this.__isset_right_num;
+    }
+
+    public function get wrong_words():Array {
+      return this._wrong_words;
+    }
+
+    public function set wrong_words(wrong_words:Array):void {
+      this._wrong_words = wrong_words;
+    }
+
+    public function unsetWrong_words():void {
+      this.wrong_words = null;
+    }
+
+    // Returns true if field wrong_words is set (has been assigned a value) and false otherwise
+    public function isSetWrong_words():Boolean {
+      return this.wrong_words != null;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case WIN:
@@ -196,6 +244,22 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case RIGHT_NUM:
+        if (value == null) {
+          unsetRight_num();
+        } else {
+          this.right_num = value;
+        }
+        break;
+
+      case WRONG_WORDS:
+        if (value == null) {
+          unsetWrong_words();
+        } else {
+          this.wrong_words = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -213,6 +277,10 @@ import org.apache.thrift.protocol.*;
         return this.cur_level;
       case INC_ITEMS:
         return this.inc_items;
+      case RIGHT_NUM:
+        return this.right_num;
+      case WRONG_WORDS:
+        return this.wrong_words;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -231,6 +299,10 @@ import org.apache.thrift.protocol.*;
         return isSetCur_level();
       case INC_ITEMS:
         return isSetInc_items();
+      case RIGHT_NUM:
+        return isSetRight_num();
+      case WRONG_WORDS:
+        return isSetWrong_words();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -282,17 +354,42 @@ import org.apache.thrift.protocol.*;
           case INC_ITEMS:
             if (field.type == TType.MAP) {
               {
-                var _map160:TMap = iprot.readMapBegin();
+                var _map166:TMap = iprot.readMapBegin();
                 this.inc_items = new Dictionary();
-                for (var _i161:int = 0; _i161 < _map160.size; ++_i161)
+                for (var _i167:int = 0; _i167 < _map166.size; ++_i167)
                 {
-                  var _key162:int;
-                  var _val163:int;
-                  _key162 = iprot.readI32();
-                  _val163 = iprot.readI32();
-                  this.inc_items[_key162] = _val163;
+                  var _key168:int;
+                  var _val169:int;
+                  _key168 = iprot.readI32();
+                  _val169 = iprot.readI32();
+                  this.inc_items[_key168] = _val169;
                 }
                 iprot.readMapEnd();
+              }
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case RIGHT_NUM:
+            if (field.type == TType.I16) {
+              this.right_num = iprot.readI16();
+              this.__isset_right_num = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case WRONG_WORDS:
+            if (field.type == TType.LIST) {
+              {
+                var _list170:TList = iprot.readListBegin();
+                this.wrong_words = new Array();
+                for (var _i171:int = 0; _i171 < _list170.size; ++_i171)
+                {
+                  var _elem172:String;
+                  _elem172 = iprot.readString();
+                  this.wrong_words.push(_elem172);
+                }
+                iprot.readListEnd();
               }
             } else { 
               TProtocolUtil.skip(iprot, field.type);
@@ -330,16 +427,30 @@ import org.apache.thrift.protocol.*;
       if (this.inc_items != null) {
         oprot.writeFieldBegin(INC_ITEMS_FIELD_DESC);
         {
-          var _sizeCounter165:int = 0;
-          for (var _key164:* in this.inc_items) {
-            _sizeCounter165++;
+          var _sizeCounter174:int = 0;
+          for (var _key173:* in this.inc_items) {
+            _sizeCounter174++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter165));
-          for (var elem166:* in this.inc_items)          {
-            oprot.writeI32(elem166);
-            oprot.writeI32(this.inc_items[elem166]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter174));
+          for (var elem175:* in this.inc_items)          {
+            oprot.writeI32(elem175);
+            oprot.writeI32(this.inc_items[elem175]);
           }
           oprot.writeMapEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldBegin(RIGHT_NUM_FIELD_DESC);
+      oprot.writeI16(this.right_num);
+      oprot.writeFieldEnd();
+      if (this.wrong_words != null) {
+        oprot.writeFieldBegin(WRONG_WORDS_FIELD_DESC);
+        {
+          oprot.writeListBegin(new TList(TType.STRING, this.wrong_words.length));
+          for each (var elem176:* in this.wrong_words)          {
+            oprot.writeString(elem176);
+          }
+          oprot.writeListEnd();
         }
         oprot.writeFieldEnd();
       }
@@ -372,6 +483,18 @@ import org.apache.thrift.protocol.*;
         ret += "null";
       } else {
         ret += this.inc_items;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "right_num:";
+      ret += this.right_num;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "wrong_words:";
+      if (this.wrong_words == null) {
+        ret += "null";
+      } else {
+        ret += this.wrong_words;
       }
       first = false;
       ret += ")";

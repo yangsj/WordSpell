@@ -1,12 +1,14 @@
 package app.modules.fight.view.alone
 {
-	import app.core.Tips;
+	import app.modules.ViewName;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.fight.events.FightEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
+	import app.modules.fight.service.FightService;
 	import app.modules.main.event.MainUIEvent;
 	import app.modules.map.model.MapModel;
+	import app.modules.model.vo.ItemType;
 	
 	import victor.framework.core.BaseMediator;
 
@@ -24,7 +26,9 @@ package app.modules.fight.view.alone
 		public var fightModel:FightModel;
 		[Inject]
 		public var mapModel:MapModel;
-
+		[Inject]
+		public var fightService:FightService;
+		
 		public function FightAloneMediator()
 		{
 			super();
@@ -46,29 +50,40 @@ package app.modules.fight.view.alone
 
 			// 选择字母
 			addViewListener( FightEvent.SELECTED_LETTER, selectedLetterHandler, FightEvent );
-			// 时间到
-			addViewListener( FightEvent.TIME_OVER, timeOverHandler, FightEvent );
 
+			// 开始通知
+			addContextListener( FightEvent.NOTIFY_START_ROUND, startRoundNotify, FightEvent );
+			// 结束通知
+			addContextListener( FightEvent.NOTIFY_END_ROUND, endRoundNotify, FightEvent );
 			// 更新金币值变化
-			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyHandler, MainUIEvent );
+			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
 			// 更新下一个词
-			addContextListener( FightEvent.NOTIFY_NEXT_WORD, nextWordUpdateHandler, FightEvent );
+			addContextListener( FightEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightEvent );
 
+			// 拉取数据
+			fightService.startRound();
+		}
+		
+		private function endRoundNotify( event:FightEvent ):void
+		{
+			view.clear();
+			if ( fightModel.fightEndVo.isWin )
+				openView( ViewName.FightWinPanel );
+			else openView( ViewName.FightLosePanel );
+		}
+		
+		private function startRoundNotify( event:FightEvent ):void
+		{
 			initData();
 		}
 		
-		private function timeOverHandler(event:FightEvent ):void
+		private function nextWordUpdateNotify( event:FightEvent ):void
 		{
-			Tips.showCenter( "答题时间结束！", 20 );
-			view.hide();
-		}
-		
-		private function nextWordUpdateHandler( event:FightEvent ):void
-		{
-			view.setLettersPool( fightModel.spellVo.items );
+			if ( fightModel.spellVo )
+				view.setLettersPool( fightModel.spellVo.items );
 		}
 
-		private function updateMoneyHandler( event:MainUIEvent ):void
+		private function updateMoneyNotify( event:MainUIEvent ):void
 		{
 			view.updateMoneyDisplay();
 		}
@@ -79,6 +94,12 @@ package app.modules.fight.view.alone
 			view.delLetterFromDict( vo.letter );
 
 			dispatch( new FightEvent( FightEvent.UPDATE_WORD, vo ));
+			
+			// 选中产生道具的字母泡泡
+			if ( vo.itemType != ItemType.DEFAULT )
+			{
+				fightService.inputProp( vo.id );
+			}
 		}
 
 		private function initData():void
@@ -86,7 +107,7 @@ package app.modules.fight.view.alone
 			view.initialize();
 			view.setLettersPool( fightModel.spellVo.items );
 			view.setRoundName( mapModel.currentMapVo.mapName );
-			updateMoneyHandler( null );
+			updateMoneyNotify( null );
 		}
 
 	}

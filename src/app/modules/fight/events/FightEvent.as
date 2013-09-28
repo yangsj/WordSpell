@@ -27,12 +27,6 @@ package app.modules.fight.events
 		public static const REMOVED_LETTER:String = "removed_letter";
 		
 		/**
-		 * 时间结束
-		 */
-		public static const TIME_OVER:String = "time_over";
-		
-		
-		/**
 		 * 更新显示单词信息
 		 */
 		public static const UPDATE_WORD:String = "update_word";

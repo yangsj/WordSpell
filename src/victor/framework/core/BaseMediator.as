@@ -1,5 +1,7 @@
 package victor.framework.core
 {
+	import app.events.ViewEvent;
+	
 	import org.robotlegs.mvcs.Mediator;
 	
 	
@@ -14,5 +16,16 @@ package victor.framework.core
 		{
 			super();
 		}
+		
+		protected function openView( viewName:String, data:Object = null ):void
+		{
+			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName, data ));
+		}
+		
+		protected function closeView( viewName:String ):void
+		{
+			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, viewName ));
+		}
+		
 	}
 }

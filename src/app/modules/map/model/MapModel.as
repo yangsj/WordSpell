@@ -17,6 +17,7 @@ package app.modules.map.model
 		
 		private var _currentMapVo:MapVo;
 		private var _currentRoundVo:RoundVo;
+		private var _currentChapterVo:ChapterVo;
 		private var _mapList:Vector.<MapVo>;
 		
 		public function MapModel()
@@ -57,6 +58,22 @@ package app.modules.map.model
 		public function set mapList(value:Vector.<MapVo>):void
 		{
 			_mapList = value;
+		}
+
+		/**
+		 * 选中章节数据
+		 */
+		public function get currentChapterVo():ChapterVo
+		{
+			return _currentChapterVo;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set currentChapterVo(value:ChapterVo):void
+		{
+			_currentChapterVo = value;
 		}
 		
 

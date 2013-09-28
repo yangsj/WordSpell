@@ -65,9 +65,8 @@ package app.startup
 			
 			//////////////
 			
-			injector.mapValue( DragManager, DragManager.instance );
-			
-			injector.mapValue( GameData, GameData.instance );
+			injectActor( DragManager );
+			injectActor( GameData );
 			
 			/////////////
 			

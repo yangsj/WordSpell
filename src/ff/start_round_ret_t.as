@@ -216,13 +216,13 @@ import org.apache.thrift.protocol.*;
           case CHINESE_WORDS:
             if (field.type == TType.LIST) {
               {
-                var _list136:TList = iprot.readListBegin();
+                var _list139:TList = iprot.readListBegin();
                 this.chinese_words = new Array();
-                for (var _i137:int = 0; _i137 < _list136.size; ++_i137)
+                for (var _i140:int = 0; _i140 < _list139.size; ++_i140)
                 {
-                  var _elem138:String;
-                  _elem138 = iprot.readString();
-                  this.chinese_words.push(_elem138);
+                  var _elem141:String;
+                  _elem141 = iprot.readString();
+                  this.chinese_words.push(_elem141);
                 }
                 iprot.readListEnd();
               }
@@ -233,13 +233,13 @@ import org.apache.thrift.protocol.*;
           case BLANK:
             if (field.type == TType.LIST) {
               {
-                var _list139:TList = iprot.readListBegin();
+                var _list142:TList = iprot.readListBegin();
                 this.blank = new Array();
-                for (var _i140:int = 0; _i140 < _list139.size; ++_i140)
+                for (var _i143:int = 0; _i143 < _list142.size; ++_i143)
                 {
-                  var _elem141:int;
-                  _elem141 = iprot.readI32();
-                  this.blank.push(_elem141);
+                  var _elem144:int;
+                  _elem144 = iprot.readI32();
+                  this.blank.push(_elem144);
                 }
                 iprot.readListEnd();
               }
@@ -250,14 +250,14 @@ import org.apache.thrift.protocol.*;
           case BUBBLE_INFO:
             if (field.type == TType.LIST) {
               {
-                var _list142:TList = iprot.readListBegin();
+                var _list145:TList = iprot.readListBegin();
                 this.bubble_info = new Array();
-                for (var _i143:int = 0; _i143 < _list142.size; ++_i143)
+                for (var _i146:int = 0; _i146 < _list145.size; ++_i146)
                 {
-                  var _elem144:bubble_info_t;
-                  _elem144 = new bubble_info_t();
-                  _elem144.read(iprot);
-                  this.bubble_info.push(_elem144);
+                  var _elem147:bubble_info_t;
+                  _elem147 = new bubble_info_t();
+                  _elem147.read(iprot);
+                  this.bubble_info.push(_elem147);
                 }
                 iprot.readListEnd();
               }
@@ -289,8 +289,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(CHINESE_WORDS_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRING, this.chinese_words.length));
-          for each (var elem145:* in this.chinese_words)          {
-            oprot.writeString(elem145);
+          for each (var elem148:* in this.chinese_words)          {
+            oprot.writeString(elem148);
           }
           oprot.writeListEnd();
         }
@@ -300,8 +300,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(BLANK_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.I32, this.blank.length));
-          for each (var elem146:* in this.blank)          {
-            oprot.writeI32(elem146);
+          for each (var elem149:* in this.blank)          {
+            oprot.writeI32(elem149);
           }
           oprot.writeListEnd();
         }
@@ -311,8 +311,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(BUBBLE_INFO_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRUCT, this.bubble_info.length));
-          for each (var elem147:* in this.bubble_info)          {
-            elem147.write(oprot);
+          for each (var elem150:* in this.bubble_info)          {
+            elem150.write(oprot);
           }
           oprot.writeListEnd();
         }

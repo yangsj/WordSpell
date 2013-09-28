@@ -22,9 +22,9 @@ package app.modules.map.model
 		public var status:int;
 		
 		/**
-		 * 关卡列表
+		 * 章节列表
 		 */
-		public var roundList:Vector.<ChapterVo>;
+		public var chapterList:Vector.<ChapterVo>;
 
 		/**
 		 * 地图是否开启

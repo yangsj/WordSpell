@@ -1,6 +1,5 @@
 package app.modules.map.panel
 {
-	import app.core.Tips;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.map.model.MapModel;
@@ -46,15 +45,14 @@ package app.modules.map.panel
 		
 		private function chapterDetailNotify( event:SelectedRoundEvent ):void
 		{
-			view.setData( mapModel.currentMapVo.roundList );
+			view.setData( mapModel.currentMapVo.chapterList );
 		}
 		
 		private function selectedRoundhandler( event:SelectedRoundEvent ):void
 		{
-			trace( event.data );
-//			Tips.showMouse( "准备闯关！功能开发中，敬请期待" );
 			var roundVo:RoundVo = event.data as RoundVo;
 			mapModel.currentRoundVo = roundVo;
+			
 			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.SelectedRoundPanel ));			
 			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightAlone ));
 		}

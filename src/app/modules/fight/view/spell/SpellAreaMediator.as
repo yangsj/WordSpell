@@ -36,7 +36,8 @@ package app.modules.fight.view.spell
 			// 
 			addViewListener( SpellEvent.INPUT_OVER, inputOverHandler, SpellEvent );
 			
-			
+			// 开始
+			addContextListener( FightEvent.NOTIFY_START_ROUND, nextWordNotify, FightEvent );
 			// 更新数据
 			addContextListener( FightEvent.UPDATE_WORD, updateWordHandler, FightEvent );
 			// 显示答案
@@ -44,7 +45,6 @@ package app.modules.fight.view.spell
 			// 更新下一个
 			addContextListener( FightEvent.NOTIFY_NEXT_WORD, nextWordNotify, FightEvent );
 			
-			nextWordNotify( null );
 		}
 		
 		private function inputOverHandler( event:SpellEvent ):void

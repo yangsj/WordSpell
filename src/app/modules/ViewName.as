@@ -82,6 +82,16 @@ package app.modules
 		 */
 		public static const FightOnline:String = "FightOnlineView";
 		
+		/**
+		 * 胜利面板
+		 */
+		public static const FightWinPanel:String = "FightWinPanel";
+		
+		/**
+		 * 失败面板
+		 */
+		public static const FightLosePanel:String = "FightLosePanel";
+		
 		//// fight
 		
 	}

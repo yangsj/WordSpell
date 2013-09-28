@@ -19,13 +19,17 @@ import org.apache.thrift.protocol.*;
     private static const STRUCT_DESC:TStruct = new TStruct("user_login_ret_t");
     private static const UID_FIELD_DESC:TField = new TField("uid", TType.I32, 1);
     private static const PROPERTY_INFO_FIELD_DESC:TField = new TField("property_info", TType.STRUCT, 2);
+    private static const SERVER_TIME_FIELD_DESC:TField = new TField("server_time", TType.I32, 3);
 
     private var _uid:int;
     public static const UID:int = 1;
     private var _property_info:property_info_t;
     public static const PROPERTY_INFO:int = 2;
+    private var _server_time:int;
+    public static const SERVER_TIME:int = 3;
 
     private var __isset_uid:Boolean = false;
+    private var __isset_server_time:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -33,6 +37,8 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.I32));
       metaDataMap[PROPERTY_INFO] = new FieldMetaData("property_info", TFieldRequirementType.DEFAULT, 
           new StructMetaData(TType.STRUCT, property_info_t));
+      metaDataMap[SERVER_TIME] = new FieldMetaData("server_time", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(user_login_ret_t, metaDataMap);
@@ -40,6 +46,7 @@ import org.apache.thrift.protocol.*;
 
     public function user_login_ret_t() {
       this._uid = 0;
+      this._server_time = 0;
     }
 
     public function get uid():int {
@@ -77,6 +84,24 @@ import org.apache.thrift.protocol.*;
       return this.property_info != null;
     }
 
+    public function get server_time():int {
+      return this._server_time;
+    }
+
+    public function set server_time(server_time:int):void {
+      this._server_time = server_time;
+      this.__isset_server_time = true;
+    }
+
+    public function unsetServer_time():void {
+      this.__isset_server_time = false;
+    }
+
+    // Returns true if field server_time is set (has been assigned a value) and false otherwise
+    public function isSetServer_time():Boolean {
+      return this.__isset_server_time;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case UID:
@@ -95,6 +120,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case SERVER_TIME:
+        if (value == null) {
+          unsetServer_time();
+        } else {
+          this.server_time = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -106,6 +139,8 @@ import org.apache.thrift.protocol.*;
         return this.uid;
       case PROPERTY_INFO:
         return this.property_info;
+      case SERVER_TIME:
+        return this.server_time;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -118,6 +153,8 @@ import org.apache.thrift.protocol.*;
         return isSetUid();
       case PROPERTY_INFO:
         return isSetProperty_info();
+      case SERVER_TIME:
+        return isSetServer_time();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -150,6 +187,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case SERVER_TIME:
+            if (field.type == TType.I32) {
+              this.server_time = iprot.readI32();
+              this.__isset_server_time = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -175,6 +220,9 @@ import org.apache.thrift.protocol.*;
         this.property_info.write(oprot);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(SERVER_TIME_FIELD_DESC);
+      oprot.writeI32(this.server_time);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -193,6 +241,10 @@ import org.apache.thrift.protocol.*;
       } else {
         ret += this.property_info;
       }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "server_time:";
+      ret += this.server_time;
       first = false;
       ret += ")";
       return ret;

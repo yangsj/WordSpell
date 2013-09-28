@@ -2,6 +2,8 @@ package victor.framework.core
 {
 	import flash.utils.Dictionary;
 	
+	import app.events.ViewEvent;
+	
 	import org.robotlegs.mvcs.Command;
 	
 	
@@ -40,6 +42,16 @@ package victor.framework.core
 		protected function getViewByName( viewName:String ):Class
 		{
 			return dictViews[ viewName ];
+		}
+		
+		protected function openView( viewName:String, data:Object = null ):void
+		{
+			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName, data ));
+		}
+		
+		protected function closeView( viewName:String ):void
+		{
+			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, viewName ));
 		}
 		
 	}

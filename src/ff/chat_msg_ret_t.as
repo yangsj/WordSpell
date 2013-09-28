@@ -274,15 +274,15 @@ import org.apache.thrift.protocol.*;
           case EMOTIONS:
             if (field.type == TType.MAP) {
               {
-                var _map119:TMap = iprot.readMapBegin();
+                var _map120:TMap = iprot.readMapBegin();
                 this.emotions = new Dictionary();
-                for (var _i120:int = 0; _i120 < _map119.size; ++_i120)
+                for (var _i121:int = 0; _i121 < _map120.size; ++_i121)
                 {
-                  var _key121:int;
-                  var _val122:int;
-                  _key121 = iprot.readI32();
-                  _val122 = iprot.readI32();
-                  this.emotions[_key121] = _val122;
+                  var _key122:int;
+                  var _val123:int;
+                  _key122 = iprot.readI32();
+                  _val123 = iprot.readI32();
+                  this.emotions[_key122] = _val123;
                 }
                 iprot.readMapEnd();
               }
@@ -326,14 +326,14 @@ import org.apache.thrift.protocol.*;
       if (this.emotions != null) {
         oprot.writeFieldBegin(EMOTIONS_FIELD_DESC);
         {
-          var _sizeCounter124:int = 0;
-          for (var _key123:* in this.emotions) {
-            _sizeCounter124++;
+          var _sizeCounter125:int = 0;
+          for (var _key124:* in this.emotions) {
+            _sizeCounter125++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter124));
-          for (var elem125:* in this.emotions)          {
-            oprot.writeI32(elem125);
-            oprot.writeI32(this.emotions[elem125]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter125));
+          for (var elem126:* in this.emotions)          {
+            oprot.writeI32(elem126);
+            oprot.writeI32(this.emotions[elem126]);
           }
           oprot.writeMapEnd();
         }
