@@ -67,11 +67,11 @@ package victor.framework.core
 		 * 添加到面板图层显示列表
 		 * @param panel
 		 */
-		public static function addPanel( panel:DisplayObject ):void
+		public static function addPanel( panel:BasePanel ):void
 		{
-			addChild( panel, PANEL );
-			
 			var con:Sprite = getContainer( PANEL ) as Sprite;
+			con.mouseEnabled = true;
+			con.addChild( panel );
 			if ( con.numChildren == 1 )
 			{
 				con.graphics.clear();
@@ -81,15 +81,12 @@ package victor.framework.core
 			}
 		}
 		
-		public static function removePanel( panel:DisplayObject ):void
+		public static function removePanel( panel:BasePanel ):void
 		{
-			removeChild( panel );
-			
 			var con:Sprite = getContainer( PANEL ) as Sprite;
+			con.removeChild( panel );
 			if ( con.numChildren == 0 )
-			{
 				con.graphics.clear();
-			}
 		}
 
 		/**
@@ -102,17 +99,24 @@ package victor.framework.core
 		{
 			if ( child )
 			{
-				try
+				if ( containerType == PANEL )
 				{
-					var spr:Sprite = container.getChildAt( containerType ) as Sprite;
+					addPanel( child as BasePanel );
 				}
-				catch ( e:Error )
+				else
 				{
-					throw e;
-				}
-				if ( spr )
-				{
-					spr.addChild( child );
+					try
+					{
+						var spr:Sprite = container.getChildAt( containerType ) as Sprite;
+					}
+					catch ( e:Error )
+					{
+						throw e;
+					}
+					if ( spr )
+					{
+						spr.addChild( child );
+					}
 				}
 			}
 		}
@@ -123,7 +127,12 @@ package victor.framework.core
 		 */
 		public static function removeChild( child:DisplayObject ):void
 		{
-			DisplayUtil.removedFromParent( child );
+			if ( child )
+			{
+				if ( child.parent == getContainer( PANEL ) )
+					removePanel( child as BasePanel );
+				else DisplayUtil.removedFromParent( child );
+			}
 		}
 
 		/**
@@ -142,6 +151,10 @@ package victor.framework.core
 			if ( sprite )
 			{
 				sprite.removeChildren();
+			}
+			if ( containerType == PANEL )
+			{
+				sprite.graphics.clear();
 			}
 		}
 		

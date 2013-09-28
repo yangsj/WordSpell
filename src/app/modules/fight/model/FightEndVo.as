@@ -34,6 +34,10 @@ package app.modules.fight.model
 		 */
 		public var addExp:int;
 		/**
+		 * 获得的钻石
+		 */
+		public var addMoney:int;
+		/**
 		 * 当前的等级
 		 */
 		public var currentLevel:int;

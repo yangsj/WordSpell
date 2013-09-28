@@ -26,6 +26,6 @@
 	
 	<item name="ui_round" url="assets/round/ui_round.swf" version="1" first="0" />
 	<item name="ui_round_losePanel" url="assets/round/ui_round_losePanel.swf" version="1" first="0" />
-	<item name="ui_round_winPanel" url="assets/round/ui_round_winPanel" version="1" first="0" />
+	<item name="ui_round_winPanel" url="assets/round/ui_round_winPanel.swf" version="1" first="0" />
 	
 </data>

@@ -162,7 +162,7 @@ package victor.framework.core
 		
 		private function closeComplete():void
 		{
-			ViewStruct.removeChild( this );
+			ViewStruct.removePanel( this );
 		}
 		
 ///////////////// protected functions //////////////////////////////

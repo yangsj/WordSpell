@@ -9,7 +9,7 @@ package app.modules.fight.service
 	import app.modules.fight.view.spell.SpellVo;
 	import app.modules.map.model.MapModel;
 	import app.modules.map.model.RoundVo;
-	
+
 	import ff.bubble_info_t;
 	import ff.client_cmd_e;
 	import ff.end_round_ret_t;
@@ -19,14 +19,14 @@ package app.modules.fight.service
 	import ff.server_cmd_e;
 	import ff.start_round_req_t;
 	import ff.start_round_ret_t;
-	
+
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
-	
-	
+
+
 	/**
 	 * ……
-	 * @author 	yangsj 
+	 * @author 	yangsj
 	 * 			2013-9-24
 	 */
 	public class FightService extends BaseService
@@ -35,12 +35,12 @@ package app.modules.fight.service
 		public var fightModel:FightModel;
 		[Inject]
 		public var mapModel:MapModel;
-		
+
 		public function FightService()
 		{
 			super();
 		}
-		
+
 		override protected function initRegist():void
 		{
 			// 开始关卡
@@ -50,7 +50,7 @@ package app.modules.fight.service
 			// 下一个单词
 			regist( server_cmd_e.NEXT_WORD_RET, nextWordNotify, next_word_t );
 		}
-		
+
 		// 开始
 		private function startRoundNotify( resp:SocketResp ):void
 		{
@@ -63,7 +63,7 @@ package app.modules.fight.service
 			var spellVo:SpellVo;
 			for ( var i:int = 0; i < length; i++ )
 			{
-				var index:int = int(blanks[ i ]);
+				var index:int = int( blanks[ i ]);
 				var tempBub:Array = bubbles.splice( 0, index );
 				var listBub:Vector.<LetterBubbleVo> = new Vector.<LetterBubbleVo>();
 				for each ( var info:bubble_info_t in tempBub )
@@ -81,20 +81,21 @@ package app.modules.fight.service
 			}
 			fightModel.spellList = spellList;
 			fightModel.modeType = data.mode;
-			
+
 			// 设置第一个单词信息
 			fightModel.spellVo = fightModel.spellList.shift();
-			
+
 			// 
 			dispatch( new FightEvent( FightEvent.NOTIFY_START_ROUND ));
 		}
-		
+
 		// 结束
 		private function endRoundNotify( resp:SocketResp ):void
 		{
 			var data:end_round_ret_t = resp.data as end_round_ret_t;
 			var endVo:FightEndVo = fightModel.fightEndVo || new FightEndVo();
 			endVo.addExp = data.inc_exp;
+//			endVo.addMoney = data.
 			endVo.currentLevel = data.cur_level;
 			endVo.isWin = data.win;
 			endVo.rightNum = data.right_num;
@@ -103,19 +104,20 @@ package app.modules.fight.service
 			// 
 			dispatch( new FightEvent( FightEvent.NOTIFY_END_ROUND ));
 		}
-		
+
 		// 下一个单词
 		private function nextWordNotify( resp:SocketResp ):void
 		{
 			var data:next_word_t = resp.data as next_word_t;
-			
+
 			if ( data.answer_flag )
 				Tips.showCenter( "恭喜您！答对了。" );
-			else Tips.showCenter( "答错了！继续加油哦。" );
-			
+			else
+				Tips.showCenter( "答错了！继续加油哦。" );
+
 			if ( data.inc_coin > 0 )
 				GameData.instance.updateAddMoney( data.inc_coin );
-			
+
 			// 设置下一个单词信息
 			if ( fightModel.isFinish == false )
 			{
@@ -124,9 +126,9 @@ package app.modules.fight.service
 				dispatch( new FightEvent( FightEvent.NOTIFY_NEXT_WORD ));
 			}
 		}
-		
+
 		////////////// request ///////////
-		
+
 		/**
 		 * 开始战斗
 		 * @param roundLevel 世界地图的类型
@@ -142,14 +144,14 @@ package app.modules.fight.service
 			req.round_id = roundVo.roundId;
 			call( client_cmd_e.START_ROUND_REQ, req );
 		}
-		
+
 		public function inputOver( sequence:Array ):void
 		{
 			var req:input_req_t = new input_req_t();
 			req.input = sequence;
 			call( client_cmd_e.INPUT_REQ, req );
 		}
-		
+
 		/**
 		 * 点击到道具
 		 * @param id
@@ -160,6 +162,6 @@ package app.modules.fight.service
 			req.bubble_id = id;
 			call( client_cmd_e.SELECT_ITEM_BUBBLE_REQ, req );
 		}
-		
+
 	}
 }

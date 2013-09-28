@@ -71,8 +71,10 @@ package app.modules.fight.view.alone
 		
 		public function clear():void
 		{
-			totalTime = 0;
 			appStage.removeEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
+			totalTime = 0;
+			spellArea.clear();
+			propList.clear();
 		}
 
 		public function delLetterFromDict( letter:String ):void
@@ -108,7 +110,7 @@ package app.modules.fight.view.alone
 		{
 			totalTime--;
 			if ( totalTime >= 0 )
-				txtTime.text = HtmlText.color( "00:" + ( totalTime < 10 ? "0" + totalTime : totalTime ), totalTime <= 10 ? 0xff0000 : 0xffff00 );
+				txtTime.htmlText = HtmlText.color( "00:" + ( totalTime < 10 ? "0" + totalTime : totalTime ), totalTime <= 10 ? 0xff0000 : 0xffff00 );
 		}
 
 		public function setRoundName( roundName:String ):void
@@ -124,10 +126,7 @@ package app.modules.fight.view.alone
 		override public function hide():void
 		{
 			super.hide();
-			appStage.removeEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
-			spellArea.clear();
-			propList.clear();
-			totalTime = 60;
+			clear();
 		}
 
 		override protected function addToParent():void
@@ -146,7 +145,6 @@ package app.modules.fight.view.alone
 				if ( bubble )
 				{
 					bubble.selected( true );
-					trace( bubble.data.letter );
 				}
 				else
 					Tips.showCenter( "按键无效" );

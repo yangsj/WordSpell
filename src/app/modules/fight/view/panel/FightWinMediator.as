@@ -1,32 +1,25 @@
 package app.modules.fight.view.panel
 {
-	import app.modules.ViewName;
-	
-	import victor.framework.core.BaseMediator;
-	
-	
+
 	/**
 	 * ……
-	 * @author 	yangsj 
+	 * @author 	yangsj
 	 * 			2013-9-28
 	 */
-	public class FightWinMediator extends BaseMediator
+	public class FightWinMediator extends FightResultBaseMediator
 	{
+		[Inject]
+		public var view:FightWinPanel;
+
 		public function FightWinMediator()
 		{
 			super();
 		}
-		
-		override public function onRemove():void
-		{
-			super.onRemove();
-			closeView( ViewName.FightAlone );
-		}
-		
+
 		override public function onRegister():void
 		{
 			super.onRegister();
-			
+			view.setData( fightModel.fightEndVo );
 		}
 	}
 }
