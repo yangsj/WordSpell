@@ -78,13 +78,21 @@ package victor.framework.components
 		 */
 		public function dispose():void
 		{
-			for each ( var mc:MovieClip in listManager )
+			if( listManager )
+			{
+				for each ( var mc:MovieClip in listManager )
 				removeEventForTarget( mc );
-			
+			}
+			if ( dictTarget )
+			{
+				for ( var key:String in dictTarget )
+					delete dictTarget[ key ];
+			}
 			selectdCallBack = null;
 			defaultTarget = null;
 			listManager = null;
 			lastClickTarget = null;
+			dictTarget = null;
 		}
 		
 		/**

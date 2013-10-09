@@ -6,7 +6,6 @@ package app.modules.login.register
 	
 	import app.Language;
 	import app.core.Tips;
-	import app.core.components.controls.combo.ComboBox;
 	import app.modules.login.register.event.RegisterEvent;
 	import app.modules.login.register.vo.RegisterVo;
 	import app.utils.appStage;
@@ -61,8 +60,11 @@ package app.modules.login.register
 		public var btnRegister:InteractiveObject;
 		public var btnLogin:InteractiveObject;
 		
-		private var areaComboBox:ComboBox;
-		private var gradeComboBox:ComboBox;
+		public var checkboxArea:InteractiveObject;
+		public var checkboxGrade:InteractiveObject;
+		
+		private var areaPanel:CheckboxPanel;
+		private var gradePanel:CheckboxPanel;
 		
 		private var _registerVo:RegisterVo;
 		
@@ -80,24 +82,54 @@ package app.modules.login.register
 			
 			btnLogin.addEventListener(MouseEvent.CLICK, btnLoginHandler );
 			btnRegister.addEventListener(MouseEvent.CLICK, btnRegisterHandler );
+			checkboxArea.addEventListener(MouseEvent.CLICK, checkboxAreaHandler );
+			checkboxGrade.addEventListener(MouseEvent.CLICK, checkboxGradeHandler );
 			
 			txtPhone.maxChars = 11;
 			txtPhone.restrict = "0-9";
 			txtQQ.restrict = "0-9";
 			
-			areaComboBox = new ComboBox( RegisterConfig.areaComboData );
-			gradeComboBox = new ComboBox( RegisterConfig.gradeComboData );
+			areaPanel = new CheckboxPanel();
+			areaPanel.x = checkboxArea.x + 15;
+			areaPanel.y = checkboxArea.y + checkboxArea.height * 0.5 + 5;
+			_skin.addChild( areaPanel );
+			areaPanel.callBackFun = areaCallBackFun;
+			areaPanel.setData( RegisterConfig.AREA_NAME, true );
 			
-			areaComboBox.x = txtArea.x;
-			areaComboBox.y = txtArea.y;
-			gradeComboBox.x = txtClass.x;
-			gradeComboBox.y = txtClass.y;
-			
-			addChild( gradeComboBox );
-			addChild( areaComboBox );
-			
-			txtArea.visible = false;
-			txtClass.visible = false;
+			gradePanel = new CheckboxPanel();
+			gradePanel.x = checkboxGrade.x + 15;
+			gradePanel.y = checkboxGrade.y + checkboxGrade.height * 0.5 + 5;
+			_skin.addChild( gradePanel );
+			gradePanel.callBackFun = gradeCallBackFun;
+			gradePanel.setData( RegisterConfig.GRADE_NAME, false );
+		}
+		
+		private function areaCallBackFun( data:Array ):void
+		{
+			txtArea.text = data[0] + "";
+		}
+		
+		private function gradeCallBackFun( data:Array ):void
+		{
+			txtClass.text = data[0] + "";
+		}
+		
+		protected function checkboxAreaHandler(event:MouseEvent):void
+		{
+			event.stopPropagation();
+			gradePanel.tweenClose();
+			if ( areaPanel.isOpen )
+				areaPanel.tweenClose();
+			else areaPanel.tweenOpen();
+		}
+		
+		protected function checkboxGradeHandler(event:MouseEvent):void
+		{
+			event.stopPropagation();
+			areaPanel.tweenClose();
+			if ( gradePanel.isOpen )
+				gradePanel.tweenClose();
+			else gradePanel.tweenOpen();
 		}
 		
 		override protected function transitionIn():void
@@ -193,9 +225,9 @@ package app.modules.login.register
 			_registerVo.email = txtEmail.text;
 			
 			_registerVo.playerName = txtName.text;
-			_registerVo.playerAddress = areaComboBox.label;//txtArea.text;
+			_registerVo.playerAddress = txtArea.text;
 			_registerVo.schoolName = txtSchool.text;
-			_registerVo.className = gradeComboBox.label;//txtClass.text;
+			_registerVo.className = txtClass.text;
 			_registerVo.QQ = txtQQ.text;
 			
 			return _registerVo;
