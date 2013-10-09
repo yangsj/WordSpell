@@ -1,7 +1,6 @@
 package app.modules.fight.view.prop
 {
 	import app.core.Tips;
-	import app.data.GameData;
 	import app.events.PackEvent;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
@@ -69,6 +68,8 @@ package app.modules.fight.view.prop
 			
 			//test
 			view.refreshItem( itemVo );
+			
+			dispatch( new PackEvent( PackEvent.USE_SUCCESS, itemVo ));
 		}
 		
 		// 物品使用成功

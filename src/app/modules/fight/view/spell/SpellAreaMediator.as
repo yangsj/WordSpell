@@ -33,7 +33,7 @@ package app.modules.fight.view.spell
 			
 			// 移除字母
 			addViewListener( FightEvent.REMOVED_LETTER, removedLetterHandler, FightEvent );
-			// 
+			// 输入结束
 			addViewListener( SpellEvent.INPUT_OVER, inputOverHandler, SpellEvent );
 			
 			// 开始
@@ -74,7 +74,6 @@ package app.modules.fight.view.spell
 		
 		private function removedLetterHandler( evnt:FightEvent ):void
 		{
-			
 		}
 		
 	}

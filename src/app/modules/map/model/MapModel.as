@@ -29,6 +29,11 @@ package app.modules.map.model
 		{
 			
 		}
+		
+		public function nextRound():void
+		{
+			
+		}
 
 		public function get currentMapVo():MapVo
 		{

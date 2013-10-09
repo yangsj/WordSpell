@@ -90,14 +90,14 @@ package app.modules.login.register
 			txtQQ.restrict = "0-9";
 			
 			areaPanel = new CheckboxPanel();
-			areaPanel.x = checkboxArea.x + 15;
+			areaPanel.x = checkboxArea.x + 25;
 			areaPanel.y = checkboxArea.y + checkboxArea.height * 0.5 + 5;
 			_skin.addChild( areaPanel );
 			areaPanel.callBackFun = areaCallBackFun;
 			areaPanel.setData( RegisterConfig.AREA_NAME, true );
 			
 			gradePanel = new CheckboxPanel();
-			gradePanel.x = checkboxGrade.x + 15;
+			gradePanel.x = checkboxGrade.x + 25;
 			gradePanel.y = checkboxGrade.y + checkboxGrade.height * 0.5 + 5;
 			_skin.addChild( gradePanel );
 			gradePanel.callBackFun = gradeCallBackFun;

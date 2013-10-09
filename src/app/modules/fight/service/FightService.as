@@ -9,7 +9,7 @@ package app.modules.fight.service
 	import app.modules.fight.view.spell.SpellVo;
 	import app.modules.map.model.MapModel;
 	import app.modules.map.model.RoundVo;
-
+	
 	import ff.bubble_info_t;
 	import ff.client_cmd_e;
 	import ff.end_round_ret_t;
@@ -19,7 +19,7 @@ package app.modules.fight.service
 	import ff.server_cmd_e;
 	import ff.start_round_req_t;
 	import ff.start_round_ret_t;
-
+	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
 
@@ -95,7 +95,7 @@ package app.modules.fight.service
 			var data:end_round_ret_t = resp.data as end_round_ret_t;
 			var endVo:FightEndVo = fightModel.fightEndVo || new FightEndVo();
 			endVo.addExp = data.inc_exp;
-//			endVo.addMoney = data.
+			endVo.addMoney = data.inc_coin;
 			endVo.currentLevel = data.cur_level;
 			endVo.isWin = data.win;
 			endVo.rightNum = data.right_num;
@@ -130,18 +130,19 @@ package app.modules.fight.service
 		////////////// request ///////////
 
 		/**
-		 * 开始战斗
+		 * 开始战斗 [type: 0 表示普通闯关，1表示练习这一关, 2 表示进行下一关]
 		 * @param roundLevel 世界地图的类型
 		 * @param roundType 0-9 哪一组
 		 * @param destUid 对手的uid，只在对战时有效
 		 */
-		public function startRound():void
+		public function startRound( type:int = 0 ):void
 		{
 			var roundVo:RoundVo = mapModel.currentRoundVo;
 			var req:start_round_req_t = new start_round_req_t();
 			req.round_type = roundVo.mapId;
 			req.round_group_id = roundVo.chapterId;
 			req.round_id = roundVo.roundId;
+			req.mode = type;
 			call( client_cmd_e.START_ROUND_REQ, req );
 		}
 

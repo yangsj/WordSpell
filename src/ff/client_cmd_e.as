@@ -15,8 +15,12 @@ import flash.utils.Dictionary;
     public static const INPUT_REQ:int = 4;
     public static const CHAPTER_DETAIL_REQ:int = 5;
     public static const SELECT_ITEM_BUBBLE_REQ:int = 6;
+    public static const TASK_INFO_REQ:int = 7;
+    public static const ADD_FRIEND_REQ:int = 8;
+    public static const CONFIRM_ADD_FRIEND_REQ:int = 9;
+    public static const DEL_FRIEND_REQ:int = 10;
 
-    public static const VALID_VALUES:Set = new Set(LOGIN_REQ, CHAT_REQ, START_ROUND_REQ, INPUT_REQ, CHAPTER_DETAIL_REQ, SELECT_ITEM_BUBBLE_REQ);
+    public static const VALID_VALUES:Set = new Set(LOGIN_REQ, CHAT_REQ, START_ROUND_REQ, INPUT_REQ, CHAPTER_DETAIL_REQ, SELECT_ITEM_BUBBLE_REQ, TASK_INFO_REQ, ADD_FRIEND_REQ, CONFIRM_ADD_FRIEND_REQ, DEL_FRIEND_REQ);
     public static const VALUES_TO_NAMES:Dictionary = new Dictionary();
     {
       VALUES_TO_NAMES[LOGIN_REQ] = "LOGIN_REQ";
@@ -25,6 +29,10 @@ import flash.utils.Dictionary;
       VALUES_TO_NAMES[INPUT_REQ] = "INPUT_REQ";
       VALUES_TO_NAMES[CHAPTER_DETAIL_REQ] = "CHAPTER_DETAIL_REQ";
       VALUES_TO_NAMES[SELECT_ITEM_BUBBLE_REQ] = "SELECT_ITEM_BUBBLE_REQ";
+      VALUES_TO_NAMES[TASK_INFO_REQ] = "TASK_INFO_REQ";
+      VALUES_TO_NAMES[ADD_FRIEND_REQ] = "ADD_FRIEND_REQ";
+      VALUES_TO_NAMES[CONFIRM_ADD_FRIEND_REQ] = "CONFIRM_ADD_FRIEND_REQ";
+      VALUES_TO_NAMES[DEL_FRIEND_REQ] = "DEL_FRIEND_REQ";
 
     }
   }

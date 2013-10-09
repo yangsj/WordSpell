@@ -13,6 +13,12 @@ package app.modules.fight.view.panel
 		{
 			super();
 		}
+		
+		override protected function onceInit():void
+		{
+			super.onceInit();
+			btnNext.visible = false;
+		}
 
 		override protected function get skinName():String
 		{

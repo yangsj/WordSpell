@@ -4,15 +4,17 @@ package app.modules.fight.view.alone
 	import flash.events.KeyboardEvent;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
-
+	
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.fight.view.prop.PropList;
 	import app.modules.fight.view.spell.SpellArea;
+	import app.modules.model.vo.ItemType;
+	import app.modules.model.vo.ItemVo;
 	import app.utils.appStage;
-
+	
 	import victor.framework.core.LoadViewBase;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.manager.TickManager;
@@ -112,6 +114,26 @@ package app.modules.fight.view.alone
 			if ( totalTime >= 0 )
 				txtTime.htmlText = HtmlText.color( "00:" + ( totalTime < 10 ? "0" + totalTime : totalTime ), totalTime <= 10 ? 0xff0000 : 0xffff00 );
 		}
+		
+		/**
+		 * 使用时间道具
+		 */
+		public function useExtraTimeProp():void
+		{
+			totalTime += 5;
+		}
+		
+		/**
+		 * 使用 扫帚
+		 */
+		public function useBroomProp():void
+		{
+		}
+		
+		public function useHintProp( key:String ):void
+		{
+			downKey( key );
+		}
 
 		public function setRoundName( roundName:String ):void
 		{
@@ -138,6 +160,11 @@ package app.modules.fight.view.alone
 		{
 			var charCode:int = event.charCode;
 			var key:String = String.fromCharCode( charCode ).toLocaleLowerCase();
+			downKey( key );
+		}
+		
+		private function downKey( key:String ):void
+		{
 			if ( dict )
 			{
 				var ary:Array = dict[ key ];

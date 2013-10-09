@@ -24,6 +24,7 @@ import org.apache.thrift.protocol.*;
     private static const INC_ITEMS_FIELD_DESC:TField = new TField("inc_items", TType.MAP, 5);
     private static const RIGHT_NUM_FIELD_DESC:TField = new TField("right_num", TType.I16, 6);
     private static const WRONG_WORDS_FIELD_DESC:TField = new TField("wrong_words", TType.LIST, 7);
+    private static const INC_COIN_FIELD_DESC:TField = new TField("inc_coin", TType.I32, 8);
 
     private var _win:Boolean;
     public static const WIN:int = 1;
@@ -39,12 +40,15 @@ import org.apache.thrift.protocol.*;
     public static const RIGHT_NUM:int = 6;
     private var _wrong_words:Array;
     public static const WRONG_WORDS:int = 7;
+    private var _inc_coin:int;
+    public static const INC_COIN:int = 8;
 
     private var __isset_win:Boolean = false;
     private var __isset_inc_star:Boolean = false;
     private var __isset_inc_exp:Boolean = false;
     private var __isset_cur_level:Boolean = false;
     private var __isset_right_num:Boolean = false;
+    private var __isset_inc_coin:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -65,6 +69,8 @@ import org.apache.thrift.protocol.*;
       metaDataMap[WRONG_WORDS] = new FieldMetaData("wrong_words", TFieldRequirementType.DEFAULT, 
           new ListMetaData(TType.LIST, 
               new FieldValueMetaData(TType.STRING)));
+      metaDataMap[INC_COIN] = new FieldMetaData("inc_coin", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(end_round_ret_t, metaDataMap);
@@ -76,6 +82,7 @@ import org.apache.thrift.protocol.*;
       this._inc_exp = 0;
       this._cur_level = 0;
       this._right_num = 0;
+      this._inc_coin = 0;
     }
 
     public function get win():Boolean {
@@ -202,6 +209,24 @@ import org.apache.thrift.protocol.*;
       return this.wrong_words != null;
     }
 
+    public function get inc_coin():int {
+      return this._inc_coin;
+    }
+
+    public function set inc_coin(inc_coin:int):void {
+      this._inc_coin = inc_coin;
+      this.__isset_inc_coin = true;
+    }
+
+    public function unsetInc_coin():void {
+      this.__isset_inc_coin = false;
+    }
+
+    // Returns true if field inc_coin is set (has been assigned a value) and false otherwise
+    public function isSetInc_coin():Boolean {
+      return this.__isset_inc_coin;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case WIN:
@@ -260,6 +285,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case INC_COIN:
+        if (value == null) {
+          unsetInc_coin();
+        } else {
+          this.inc_coin = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -281,6 +314,8 @@ import org.apache.thrift.protocol.*;
         return this.right_num;
       case WRONG_WORDS:
         return this.wrong_words;
+      case INC_COIN:
+        return this.inc_coin;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -303,6 +338,8 @@ import org.apache.thrift.protocol.*;
         return isSetRight_num();
       case WRONG_WORDS:
         return isSetWrong_words();
+      case INC_COIN:
+        return isSetInc_coin();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -354,15 +391,15 @@ import org.apache.thrift.protocol.*;
           case INC_ITEMS:
             if (field.type == TType.MAP) {
               {
-                var _map166:TMap = iprot.readMapBegin();
+                var _map188:TMap = iprot.readMapBegin();
                 this.inc_items = new Dictionary();
-                for (var _i167:int = 0; _i167 < _map166.size; ++_i167)
+                for (var _i189:int = 0; _i189 < _map188.size; ++_i189)
                 {
-                  var _key168:int;
-                  var _val169:int;
-                  _key168 = iprot.readI32();
-                  _val169 = iprot.readI32();
-                  this.inc_items[_key168] = _val169;
+                  var _key190:int;
+                  var _val191:int;
+                  _key190 = iprot.readI32();
+                  _val191 = iprot.readI32();
+                  this.inc_items[_key190] = _val191;
                 }
                 iprot.readMapEnd();
               }
@@ -381,16 +418,24 @@ import org.apache.thrift.protocol.*;
           case WRONG_WORDS:
             if (field.type == TType.LIST) {
               {
-                var _list170:TList = iprot.readListBegin();
+                var _list192:TList = iprot.readListBegin();
                 this.wrong_words = new Array();
-                for (var _i171:int = 0; _i171 < _list170.size; ++_i171)
+                for (var _i193:int = 0; _i193 < _list192.size; ++_i193)
                 {
-                  var _elem172:String;
-                  _elem172 = iprot.readString();
-                  this.wrong_words.push(_elem172);
+                  var _elem194:String;
+                  _elem194 = iprot.readString();
+                  this.wrong_words.push(_elem194);
                 }
                 iprot.readListEnd();
               }
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case INC_COIN:
+            if (field.type == TType.I32) {
+              this.inc_coin = iprot.readI32();
+              this.__isset_inc_coin = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -427,14 +472,14 @@ import org.apache.thrift.protocol.*;
       if (this.inc_items != null) {
         oprot.writeFieldBegin(INC_ITEMS_FIELD_DESC);
         {
-          var _sizeCounter174:int = 0;
-          for (var _key173:* in this.inc_items) {
-            _sizeCounter174++;
+          var _sizeCounter196:int = 0;
+          for (var _key195:* in this.inc_items) {
+            _sizeCounter196++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter174));
-          for (var elem175:* in this.inc_items)          {
-            oprot.writeI32(elem175);
-            oprot.writeI32(this.inc_items[elem175]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter196));
+          for (var elem197:* in this.inc_items)          {
+            oprot.writeI32(elem197);
+            oprot.writeI32(this.inc_items[elem197]);
           }
           oprot.writeMapEnd();
         }
@@ -447,13 +492,16 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(WRONG_WORDS_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRING, this.wrong_words.length));
-          for each (var elem176:* in this.wrong_words)          {
-            oprot.writeString(elem176);
+          for each (var elem198:* in this.wrong_words)          {
+            oprot.writeString(elem198);
           }
           oprot.writeListEnd();
         }
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(INC_COIN_FIELD_DESC);
+      oprot.writeI32(this.inc_coin);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -496,6 +544,10 @@ import org.apache.thrift.protocol.*;
       } else {
         ret += this.wrong_words;
       }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "inc_coin:";
+      ret += this.inc_coin;
       first = false;
       ret += ")";
       return ret;

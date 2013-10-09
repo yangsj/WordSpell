@@ -1,5 +1,6 @@
 package app.modules.fight.view.alone
 {
+	import app.events.PackEvent;
 	import app.modules.ViewName;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.fight.events.FightEvent;
@@ -9,6 +10,7 @@ package app.modules.fight.view.alone
 	import app.modules.main.event.MainUIEvent;
 	import app.modules.map.model.MapModel;
 	import app.modules.model.vo.ItemType;
+	import app.modules.model.vo.ItemVo;
 	
 	import victor.framework.core.BaseMediator;
 
@@ -28,6 +30,8 @@ package app.modules.fight.view.alone
 		public var mapModel:MapModel;
 		[Inject]
 		public var fightService:FightService;
+		
+		private var letterIndex:int = 0;
 		
 		public function FightAloneMediator()
 		{
@@ -59,6 +63,9 @@ package app.modules.fight.view.alone
 			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
 			// 更新下一个词
 			addContextListener( FightEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightEvent );
+			
+			// 物品使用成功
+			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
 
 			// 拉取数据
 			fightService.startRound();
@@ -79,6 +86,7 @@ package app.modules.fight.view.alone
 		
 		private function nextWordUpdateNotify( event:FightEvent ):void
 		{
+			letterIndex = 0;
 			if ( fightModel.spellVo )
 				view.setLettersPool( fightModel.spellVo.items );
 		}
@@ -92,6 +100,8 @@ package app.modules.fight.view.alone
 		{
 			var vo:LetterBubbleVo = event.data as LetterBubbleVo;
 			view.delLetterFromDict( vo.letter );
+			
+			letterIndex++;
 
 			dispatch( new FightEvent( FightEvent.UPDATE_WORD, vo ));
 			
@@ -101,9 +111,33 @@ package app.modules.fight.view.alone
 				fightService.inputProp( vo.id );
 			}
 		}
+		
+		// 物品使用成功
+		private function useItemSuccessHandler( event:PackEvent ):void
+		{
+			var itemVo:ItemVo = event.data as ItemVo;
+			if ( itemVo.type == ItemType.EXTRA_TIME )
+			{
+				view.useExtraTimeProp();
+			}
+			else if ( itemVo.type == ItemType.BROOM )
+			{
+				view.useBroomProp();
+			}
+			else if ( itemVo.type == ItemType.HINT )
+			{
+				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
+				if ( letterIndex < items.length )
+				{
+					var key:String = items[ letterIndex ].letter;
+					view.useHintProp( key );
+				}
+			}
+		}
 
 		private function initData():void
 		{
+			letterIndex = 0;
 			view.initialize();
 			view.setLettersPool( fightModel.spellVo.items );
 			view.setRoundName( mapModel.currentMapVo.mapName );

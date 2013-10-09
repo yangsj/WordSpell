@@ -15,51 +15,53 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class task_info_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("task_info_t");
-    private static const TASK_LIST_FIELD_DESC:TField = new TField("task_list", TType.LIST, 1);
+  public class del_friend_ret_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("del_friend_ret_t");
+    private static const UID_FIELD_DESC:TField = new TField("uid", TType.I32, 1);
 
-    private var _task_list:Array;
-    public static const TASK_LIST:int = 1;
+    private var _uid:int;
+    public static const UID:int = 1;
 
+    private var __isset_uid:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[TASK_LIST] = new FieldMetaData("task_list", TFieldRequirementType.DEFAULT, 
-          new ListMetaData(TType.LIST, 
-              new StructMetaData(TType.STRUCT, task_t)));
+      metaDataMap[UID] = new FieldMetaData("uid", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
-      FieldMetaData.addStructMetaDataMap(task_info_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(del_friend_ret_t, metaDataMap);
     }
 
-    public function task_info_t() {
+    public function del_friend_ret_t() {
+      this._uid = 0;
     }
 
-    public function get task_list():Array {
-      return this._task_list;
+    public function get uid():int {
+      return this._uid;
     }
 
-    public function set task_list(task_list:Array):void {
-      this._task_list = task_list;
+    public function set uid(uid:int):void {
+      this._uid = uid;
+      this.__isset_uid = true;
     }
 
-    public function unsetTask_list():void {
-      this.task_list = null;
+    public function unsetUid():void {
+      this.__isset_uid = false;
     }
 
-    // Returns true if field task_list is set (has been assigned a value) and false otherwise
-    public function isSetTask_list():Boolean {
-      return this.task_list != null;
+    // Returns true if field uid is set (has been assigned a value) and false otherwise
+    public function isSetUid():Boolean {
+      return this.__isset_uid;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case TASK_LIST:
+      case UID:
         if (value == null) {
-          unsetTask_list();
+          unsetUid();
         } else {
-          this.task_list = value;
+          this.uid = value;
         }
         break;
 
@@ -70,8 +72,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case TASK_LIST:
-        return this.task_list;
+      case UID:
+        return this.uid;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -80,8 +82,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case TASK_LIST:
-        return isSetTask_list();
+      case UID:
+        return isSetUid();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -98,20 +100,10 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case TASK_LIST:
-            if (field.type == TType.LIST) {
-              {
-                var _list90:TList = iprot.readListBegin();
-                this.task_list = new Array();
-                for (var _i91:int = 0; _i91 < _list90.size; ++_i91)
-                {
-                  var _elem92:task_t;
-                  _elem92 = new task_t();
-                  _elem92.read(iprot);
-                  this.task_list.push(_elem92);
-                }
-                iprot.readListEnd();
-              }
+          case UID:
+            if (field.type == TType.I32) {
+              this.uid = iprot.readI32();
+              this.__isset_uid = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -133,31 +125,19 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (this.task_list != null) {
-        oprot.writeFieldBegin(TASK_LIST_FIELD_DESC);
-        {
-          oprot.writeListBegin(new TList(TType.STRUCT, this.task_list.length));
-          for each (var elem93:* in this.task_list)          {
-            elem93.write(oprot);
-          }
-          oprot.writeListEnd();
-        }
-        oprot.writeFieldEnd();
-      }
+      oprot.writeFieldBegin(UID_FIELD_DESC);
+      oprot.writeI32(this.uid);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
 
     public function toString():String {
-      var ret:String = new String("task_info_t(");
+      var ret:String = new String("del_friend_ret_t(");
       var first:Boolean = true;
 
-      ret += "task_list:";
-      if (this.task_list == null) {
-        ret += "null";
-      } else {
-        ret += this.task_list;
-      }
+      ret += "uid:";
+      ret += this.uid;
       first = false;
       ret += ")";
       return ret;

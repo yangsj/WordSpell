@@ -42,7 +42,7 @@ package app.modules.fight.view.panel
 		
 		protected function againHandler( event:FightResultEvent ):void
 		{
-			
+			fightService.startRound( 0 );
 		}
 		
 		protected function closeHandler( event:FightResultEvent ):void
@@ -52,12 +52,12 @@ package app.modules.fight.view.panel
 		
 		protected function nextHandler( event:FightResultEvent ):void
 		{
-			
+			fightService.startRound( 2 );
 		}
 		
 		protected function practiceHandler( event:FightResultEvent ):void
 		{
-			
+			fightService.startRound( 1 );
 		}
 		
 	}

@@ -20,6 +20,7 @@ import org.apache.thrift.protocol.*;
     private static const ROUND_TYPE_FIELD_DESC:TField = new TField("round_type", TType.I16, 1);
     private static const ROUND_GROUP_ID_FIELD_DESC:TField = new TField("round_group_id", TType.I16, 2);
     private static const ROUND_ID_FIELD_DESC:TField = new TField("round_id", TType.I16, 3);
+    private static const MODE_FIELD_DESC:TField = new TField("mode", TType.I16, 4);
 
     private var _round_type:int;
     public static const ROUND_TYPE:int = 1;
@@ -27,10 +28,13 @@ import org.apache.thrift.protocol.*;
     public static const ROUND_GROUP_ID:int = 2;
     private var _round_id:int;
     public static const ROUND_ID:int = 3;
+    private var _mode:int;
+    public static const MODE:int = 4;
 
     private var __isset_round_type:Boolean = false;
     private var __isset_round_group_id:Boolean = false;
     private var __isset_round_id:Boolean = false;
+    private var __isset_mode:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -39,6 +43,8 @@ import org.apache.thrift.protocol.*;
       metaDataMap[ROUND_GROUP_ID] = new FieldMetaData("round_group_id", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I16));
       metaDataMap[ROUND_ID] = new FieldMetaData("round_id", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
+      metaDataMap[MODE] = new FieldMetaData("mode", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I16));
     }
     {
@@ -49,6 +55,7 @@ import org.apache.thrift.protocol.*;
       this._round_type = 0;
       this._round_group_id = 0;
       this._round_id = 0;
+      this._mode = 0;
     }
 
     public function get round_type():int {
@@ -105,6 +112,24 @@ import org.apache.thrift.protocol.*;
       return this.__isset_round_id;
     }
 
+    public function get mode():int {
+      return this._mode;
+    }
+
+    public function set mode(mode:int):void {
+      this._mode = mode;
+      this.__isset_mode = true;
+    }
+
+    public function unsetMode():void {
+      this.__isset_mode = false;
+    }
+
+    // Returns true if field mode is set (has been assigned a value) and false otherwise
+    public function isSetMode():Boolean {
+      return this.__isset_mode;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case ROUND_TYPE:
@@ -131,6 +156,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case MODE:
+        if (value == null) {
+          unsetMode();
+        } else {
+          this.mode = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -144,6 +177,8 @@ import org.apache.thrift.protocol.*;
         return this.round_group_id;
       case ROUND_ID:
         return this.round_id;
+      case MODE:
+        return this.mode;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -158,6 +193,8 @@ import org.apache.thrift.protocol.*;
         return isSetRound_group_id();
       case ROUND_ID:
         return isSetRound_id();
+      case MODE:
+        return isSetMode();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -198,6 +235,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case MODE:
+            if (field.type == TType.I16) {
+              this.mode = iprot.readI16();
+              this.__isset_mode = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -224,6 +269,9 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(ROUND_ID_FIELD_DESC);
       oprot.writeI16(this.round_id);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(MODE_FIELD_DESC);
+      oprot.writeI16(this.mode);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -242,6 +290,10 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "round_id:";
       ret += this.round_id;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "mode:";
+      ret += this.mode;
       first = false;
       ret += ")";
       return ret;
