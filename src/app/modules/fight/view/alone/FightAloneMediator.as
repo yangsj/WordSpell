@@ -1,5 +1,6 @@
 package app.modules.fight.view.alone
 {
+	import app.core.Tips;
 	import app.events.PackEvent;
 	import app.modules.ViewName;
 	import app.modules.chat.event.ChatEvent;
@@ -119,6 +120,7 @@ package app.modules.fight.view.alone
 			if ( itemVo.type == ItemType.EXTRA_TIME )
 			{
 				view.useExtraTimeProp();
+				Tips.showMouse( "时间 +5s" );
 			}
 			else if ( itemVo.type == ItemType.BROOM )
 			{

@@ -1,6 +1,5 @@
 package app.modules.fight.view.prop
 {
-	import app.core.Tips;
 	import app.events.PackEvent;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
@@ -52,7 +51,8 @@ package app.modules.fight.view.prop
 			{
 				itemVo = new ItemVo();
 				itemVo.id = i;
-				itemVo.num = 0;
+				itemVo.num = 4;
+				itemVo.type = i;
 				_itemList.push( itemVo );
 			}
 			view.setData( _itemList );

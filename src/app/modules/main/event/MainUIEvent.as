@@ -25,5 +25,10 @@ package app.modules.main.event
 		 */
 		public static const UPDATE_MONEY:String = "update_money";
 		
+		/**
+		 * 更新属性
+		 */
+		public static const UPDATE_PROPERTY:String = "update_property";
+		
 	}
 }

@@ -132,7 +132,12 @@ package app.modules.fight.view.alone
 		
 		public function useHintProp( key:String ):void
 		{
-			downKey( key );
+			if ( dict )
+			{
+				var ary:Array = dict[ key ];
+				var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+				if ( bubble ) bubble.hint();
+			}
 		}
 
 		public function setRoundName( roundName:String ):void
@@ -160,11 +165,6 @@ package app.modules.fight.view.alone
 		{
 			var charCode:int = event.charCode;
 			var key:String = String.fromCharCode( charCode ).toLocaleLowerCase();
-			downKey( key );
-		}
-		
-		private function downKey( key:String ):void
-		{
 			if ( dict )
 			{
 				var ary:Array = dict[ key ];

@@ -2,9 +2,6 @@ package app.modules.fight.view.panel
 {
 	import app.modules.fight.model.FightEndVo;
 
-	import victor.framework.utils.UtilsFilter;
-
-
 	/**
 	 * ……
 	 * @author 	yangsj
@@ -22,7 +19,7 @@ package app.modules.fight.view.panel
 		{
 			super.setData( endVo );
 			mcStar.gotoAndStop( Math.max( endVo.starNum, 1 ));
-			mcStar.filters = endVo.starNum == 0 ? [ UtilsFilter.COLOR_GREW ] : [];
+//			mcStar.filters = endVo.starNum == 0 ? [ UtilsFilter.COLOR_GREW ] : [];
 		}
 
 		override protected function get skinName():String

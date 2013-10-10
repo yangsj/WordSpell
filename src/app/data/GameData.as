@@ -40,6 +40,10 @@ package app.data
 		
 		////////////////////////////////////////////////////////
 		
+		public function updateLevel( level:int ):void
+		{
+			selfVo.level = level;
+		}
 		
 		public function updateAddMoney( money:int ):void
 		{

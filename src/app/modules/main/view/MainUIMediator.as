@@ -33,6 +33,10 @@ package app.modules.main.view
 			
 			// 经验条进度更新
 			addContextListener( MainUIEvent.UPDATE_EXP, updateExpHandler, MainUIEvent );
+			// 经验条进度更新
+			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyHandler, MainUIEvent );
+			// 经验条进度更新
+			addContextListener( MainUIEvent.UPDATE_PROPERTY, updatePropertyHandler, MainUIEvent );
 			
 			initData();
 		}
@@ -40,6 +44,21 @@ package app.modules.main.view
 		private function initData():void
 		{
 			updateExpHandler();
+		}
+		
+		private function updateExpHandler( event:MainUIEvent = null ):void
+		{
+			view.updateLevelExp( GameData.instance.selfVo.level, GameData.instance.selfVo.exp );
+		}
+		
+		private function updatePropertyHandler( event:MainUIEvent = null ):void
+		{
+			updateExpHandler( null );
+		}
+		
+		private function updateMoneyHandler( event:MainUIEvent = null ):void
+		{
+			updateExpHandler( null );
 		}
 		
 		private function showViewHandler( event:ViewEvent ):void
@@ -58,11 +77,6 @@ package app.modules.main.view
 			{
 				Tips.showMouse( "功能开发中敬请期待！" );
 			}
-		}
-		
-		private function updateExpHandler( event:MainUIEvent = null ):void
-		{
-			view.updateLevelExp( GameData.instance.selfVo.level, GameData.instance.selfVo.exp );
 		}
 		
 	}

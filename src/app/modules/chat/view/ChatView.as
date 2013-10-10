@@ -90,8 +90,8 @@ package app.modules.chat.view
 
 		public function addMsg( chatVo:ChatVo ):void
 		{
-			if ( _isExpand )
-			{
+//			if ( _isExpand )
+//			{
 				var emoticons:Array = chatVo.emoticons;
 				var msgIndex:int = chatVo.addIndex;
 				for each ( var obj:Object in emoticons )
@@ -101,17 +101,17 @@ package app.modules.chat.view
 				}
 				txtOutput.append( chatVo.htmlText, emoticons );
 				updateBar();
-			}
+//			}
 		}
 
 		public function setChannelData( list:Vector.<ChatVo> ):void
 		{
-			if ( _isExpand )
-			{
+//			if ( _isExpand )
+//			{
 				txtOutput.clear();
 				for each ( var chatVo:ChatVo in list )
 				addMsg( chatVo );
-			}
+//			}
 		}
 
 		/**

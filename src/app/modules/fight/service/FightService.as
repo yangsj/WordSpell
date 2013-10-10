@@ -66,6 +66,7 @@ package app.modules.fight.service
 				var index:int = int( blanks[ i ]);
 				var tempBub:Array = bubbles.splice( 0, index );
 				var listBub:Vector.<LetterBubbleVo> = new Vector.<LetterBubbleVo>();
+				var str:String = "";
 				for each ( var info:bubble_info_t in tempBub )
 				{
 					var letterBubbleVo:LetterBubbleVo = new LetterBubbleVo();
@@ -73,11 +74,13 @@ package app.modules.fight.service
 					letterBubbleVo.letter = info.word;
 					letterBubbleVo.itemType = info.item_type;
 					listBub.push( letterBubbleVo );
+					str += letterBubbleVo.letter;
 				}
 				spellVo = new SpellVo();
 				spellVo.chinese = cnAry[ i ];
 				spellVo.items = listBub;
 				spellList[ i ] = spellVo;
+				trace( spellVo.chinese, str );
 			}
 			fightModel.spellList = spellList;
 			fightModel.modeType = data.mode;
@@ -101,6 +104,14 @@ package app.modules.fight.service
 			endVo.rightNum = data.right_num;
 			endVo.wrongList = data.wrong_words;
 			fightModel.fightEndVo = endVo;
+			
+			//更新等级
+			if ( endVo.currentLevel != GameData.instance.selfVo.level )
+				GameData.instance.updateLevel( endVo.currentLevel );
+			
+			//更新经验值
+			if ( endVo.addExp > 0 )
+				GameData.instance.updateAddExp( endVo.addExp );
 			// 
 			dispatch( new FightEvent( FightEvent.NOTIFY_END_ROUND ));
 		}
@@ -113,7 +124,7 @@ package app.modules.fight.service
 			if ( data.answer_flag )
 				Tips.showCenter( "恭喜您！答对了。" );
 			else
-				Tips.showCenter( "答错了！继续加油哦。" );
+				Tips.showCenter( "答错了！骚年，继续加油。" );
 
 			if ( data.inc_coin > 0 )
 				GameData.instance.updateAddMoney( data.inc_coin );

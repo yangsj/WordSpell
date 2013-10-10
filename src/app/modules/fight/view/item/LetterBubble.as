@@ -4,13 +4,16 @@ package app.modules.fight.view.item
 	import com.greensock.easing.Back;
 	
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.filters.GlowFilter;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	
 	import app.modules.TempleteSprite;
 	import app.modules.fight.events.FightEvent;
 	import app.modules.fight.model.LetterBubbleVo;
+	import app.utils.appStage;
 	
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
@@ -97,6 +100,11 @@ package app.modules.fight.view.item
 			txtLetter.text = vo.letter;
 		}
 		
+		/**
+		 * 选择
+		 * @param value
+		 * 
+		 */
 		public function selected( value:Boolean ):void
 		{
 			TickManager.clearDoTime( selected );
@@ -107,6 +115,23 @@ package app.modules.fight.view.item
 				TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
 				TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });
 			}
+		}
+		
+		/**
+		 * 提示
+		 */
+		public function hint():void
+		{
+			this.scaleX = this.scaleY = 1.5;
+			appStage.addEventListener(MouseEvent.MOUSE_DOWN, onStageHandler );
+			appStage.addEventListener(KeyboardEvent.KEY_DOWN, onStageHandler );
+		}
+		
+		private function onStageHandler( event:Event ):void
+		{
+			this.scaleX = this.scaleY = 1.0;
+			appStage.removeEventListener(MouseEvent.CLICK, onStageHandler );
+			appStage.removeEventListener(KeyboardEvent.KEY_DOWN, onStageHandler );
 		}
 		
 		private function effectComplete():void
