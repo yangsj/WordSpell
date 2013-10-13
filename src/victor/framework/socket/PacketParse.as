@@ -86,6 +86,7 @@ package victor.framework.socket {
 			data.writeBytes(buffer, pos, len);
 			data.position = 0;
 			res.data = data;
+			buffer.position = 0;
 			return res;
 		}
 

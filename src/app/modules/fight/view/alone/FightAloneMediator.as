@@ -102,6 +102,9 @@ package app.modules.fight.view.alone
 			var vo:LetterBubbleVo = event.data as LetterBubbleVo;
 			view.delLetterFromDict( vo.letter );
 			
+			if ( vo.id == -1 )
+				return ;
+			
 			letterIndex++;
 
 			dispatch( new FightEvent( FightEvent.UPDATE_WORD, vo ));

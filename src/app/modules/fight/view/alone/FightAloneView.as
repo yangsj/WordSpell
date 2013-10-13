@@ -1,6 +1,7 @@
 package app.modules.fight.view.alone
 {
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
@@ -11,15 +12,15 @@ package app.modules.fight.view.alone
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.fight.view.prop.PropList;
 	import app.modules.fight.view.spell.SpellArea;
-	import app.modules.model.vo.ItemType;
-	import app.modules.model.vo.ItemVo;
 	import app.utils.appStage;
 	
 	import victor.framework.core.LoadViewBase;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
+	import victor.framework.utils.HitTestUtils;
 	import victor.framework.utils.HtmlText;
+	import victor.framework.utils.MathUtil;
 
 
 	/**
@@ -69,11 +70,13 @@ package app.modules.fight.view.alone
 			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
 			appStage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
+			TickManager.doInterval( enterFrameHandler, 40 );
 		}
 		
 		public function clear():void
 		{
 			appStage.removeEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
+			TickManager.clearDoTime( enterFrameHandler );
 			totalTime = 0;
 			spellArea.clear();
 			propList.clear();
@@ -95,6 +98,24 @@ package app.modules.fight.view.alone
 
 		public function setLettersPool( list:Vector.<LetterBubbleVo> ):void
 		{
+//			var items:Vector.<LetterBubbleVo> = new Vector.<LetterBubbleVo>();
+//			for ( var i:int = 0; i < 15; i ++ )
+//			{
+//				if ( i < list.length )
+//				{
+//					items.push( list[i] );
+//				}
+//				else
+//				{
+//					var letterBubbleVo:LetterBubbleVo = new LetterBubbleVo();
+//					letterBubbleVo.id = -1;
+//					letterBubbleVo.letter = "A";
+//					letterBubbleVo.itemType = 0;
+//					items.push( letterBubbleVo );
+//				}
+//			}
+//			list = items;
+			
 			dict = new Dictionary();
 			DisplayUtil.removedAll( container, false );
 			for each ( var vo:LetterBubbleVo in list )
@@ -175,6 +196,54 @@ package app.modules.fight.view.alone
 				}
 				else
 					Tips.showCenter( "按键无效" );
+			}
+		}
+		
+		protected function enterFrameHandler( event:Event = null ):void
+		{
+			var mc1:LetterBubble, mc2:LetterBubble;
+			for ( var i:int = 0; i < container.numChildren; i++ )
+			{
+				mc1 = container.getChildAt( i ) as LetterBubble;
+				if ( mc1 )
+				{
+					for ( var j:int = 0; j < container.numChildren; j++ )
+					{
+						mc2 = container.getChildAt( j ) as LetterBubble;
+						if ( mc2 && mc1 != mc2 &&  HitTestUtils.pixelsHitTest2( mc1.point, mc1.bitmapData, mc2.point, mc2.bitmapData) )
+						{
+							var dist0:Number = LetterBubble.WH;
+							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
+							if ( dist1 < dist0 )
+							{
+								var rate:Number = ( dist0 / dist1 );
+								var movex:Number = Math.abs( mc1.x - mc2.x ) * rate;
+								var movey:Number = Math.abs( mc1.y - mc2.y ) * rate;
+								if ( mc1.x < mc2.x )
+								{
+									if ( mc2.isEdgeRight )
+										mc1.x = mc2.x - movex;
+									else mc2.x = mc1.x + movex;
+								}
+								else if ( mc2.isEdgeLeft )
+									mc1.x = mc2.x + movex;
+								else mc2.x = mc1.x - movex;
+								
+								if ( mc1.y < mc2.y )
+								{
+									if ( mc2.isEdgeDown )
+										mc1.y = mc2.y - movey;
+									else mc2.y = mc1.y + movey;
+								}
+								else if ( mc2.isEdgeUp )
+									mc1.y = mc2.y + movey;
+								else mc2.y = mc1.y - movey;
+							}
+							mc1.changeDirection( true );
+							mc2.changeDirection( true );
+						}
+					}
+				}
 			}
 		}
 

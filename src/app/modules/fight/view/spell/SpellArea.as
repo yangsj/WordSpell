@@ -64,8 +64,8 @@ package app.modules.fight.view.spell
 			}
 			
 			// 计时
-			TickManager.instance.clearDoTime( inputOver );
-			TickManager.instance.doTimeout( inputOver, 10000 );
+//			TickManager.instance.clearDoTime( inputOver );
+//			TickManager.instance.doTimeout( inputOver, 10000 );
 		}
 
 		/**

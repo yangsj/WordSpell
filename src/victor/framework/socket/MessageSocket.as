@@ -28,6 +28,8 @@ package victor.framework.socket
 		private var _wired:Dictionary;
 //		private var _onceCallList : Dictionary;
 		private var _beatTime:int;
+		//! 负责处理粘包的缓存
+		private var _buffPacket:ByteArray;
 
 		// private var _notAllowList : Array;
 		public function MessageSocket( isDebug:Boolean = false )
@@ -37,6 +39,7 @@ package victor.framework.socket
 			_ignoreList = {};
 			_wired = new Dictionary();
 			_event = new EventDispatcher();
+			_buffPacket = new ByteArray();
 			super( isDebug );
 		}
 
@@ -72,51 +75,99 @@ package victor.framework.socket
 		/**
 		 * 解析事件回调
 		 */
-		override protected function parseSocketData( buffer:ByteArray ):void
+		override protected function parseSocketData( bufferNew:ByteArray ):void
 		{
-			var respObj:SocketResp = PacketParse.analyze( buffer );
-			var callback:Function;
-			var list:Array;
-			var respPorc:Class;
-			var api:uint = respObj.api;
-
-			list = _notifyCallbackList[ api ];
-
-			if ( list )
+			bufferNew.position = 0;
+			if (_buffPacket.length == 0)
 			{
-
-				callback = list[ 0 ];
-				respPorc = list[ 1 ];
-
-				var data:ByteArray = respObj.data;
-				var msg:* = new respPorc();
-				FFUtil.DecodeMsg( msg, data );
-				respObj.data = msg;
-
-				if ( _isDebug )
-					Logger.printData( getTimer() + "|服务器返回数据(" + api + "):", respObj.data.toString());
+				_buffPacket.position = 0;
 			}
 			else
 			{
-				if ( _isDebug )
-					Logger.printData( getTimer() + "|没有数据解包:" + api + "\n\t------" );
+				_buffPacket.position = _buffPacket.length;
 			}
-			// 检查是否有函数回调
-			dispatch( api );
-			// 响应
-			if ( callback )
-			{
-				if ( callback.length > 0 )
-					callback( respObj );
-				else
-					callback();
-			}
-
-			// 销毁返回对象
-			SocketResp.disposeResp( respObj );
+			_buffPacket.writeBytes(bufferNew, 0, bufferNew.length);
+			_buffPacket.position = 0;
 			
-			// 結束請求
-			dispatchEvent(new SocketEvent( SocketEvent.CALL_END ));
+			var packetOk:Boolean = true;
+			
+			//!如果足够一个包，那么处理
+			while (true)
+			{
+				if (_buffPacket.length < 4)//!不能读取包头
+				{
+					return;
+				}
+				// 读取长度
+				var length : int = _buffPacket.readInt();
+				var total_len : int = length + 8;
+				if (_buffPacket.length < total_len)//!算上包头
+				{
+					_buffPacket.position = 0;
+					return;
+				}
+				_buffPacket.position = 0;
+				var buffer:ByteArray = new ByteArray();//!收到一个新包
+				buffer.writeBytes(_buffPacket, 0, total_len);
+				buffer.position = 0;
+				
+				if (_buffPacket.length > total_len)
+				{
+					_buffPacket.position = 0;
+					var tmpBuff:ByteArray = new ByteArray();
+					tmpBuff.writeBytes(_buffPacket, total_len, buffer.length - total_len);
+					_buffPacket = tmpBuff;
+					_buffPacket.position = 0;
+				}
+				else//!正好是一个包，处理完毕清空
+				{
+					_buffPacket = new ByteArray();
+				}
+				
+				var respObj:SocketResp = PacketParse.analyze( buffer );
+				var callback:Function;
+				var list:Array;
+				var respPorc:Class;
+				var api:uint = respObj.api;
+
+				list = _notifyCallbackList[ api ];
+
+				if ( list )
+				{
+
+					callback = list[ 0 ];
+					respPorc = list[ 1 ];
+
+					var data:ByteArray = respObj.data;
+					var msg:* = new respPorc();
+					FFUtil.DecodeMsg( msg, data );
+					respObj.data = msg;
+
+					if ( _isDebug )
+						Logger.printData( getTimer() + "|服务器返回数据(" + api + "):", respObj.data.toString());
+				}
+				else
+				{
+					if ( _isDebug )
+						Logger.printData( getTimer() + "|没有数据解包:" + api + "\n\t------" );
+				}
+				// 检查是否有函数回调
+				dispatch( api );
+				// 响应
+				if ( callback )
+				{
+					if ( callback.length > 0 )
+						callback( respObj );
+					else
+						callback();
+				}
+
+				// 销毁返回对象
+				SocketResp.disposeResp( respObj );
+				
+				// 結束請求
+				dispatchEvent(new SocketEvent( SocketEvent.CALL_END ));
+			}
 		}
 
 		/**

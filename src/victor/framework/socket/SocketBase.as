@@ -10,7 +10,7 @@ package victor.framework.socket
 	import flash.utils.ByteArray;
 	import flash.utils.Endian;
 	import flash.utils.getTimer;
-
+	
 	import victor.framework.log.Logger;
 
 	/**
@@ -85,6 +85,7 @@ package victor.framework.socket
 		{
 			// trace("socket Len:",_sock.bytesAvailable);
 			// 有足够的数据，才读取数据
+			Logger.debug( "_sock.bytesAvailable:" + _sock.bytesAvailable );
 			while ( _sock.connected && _sock.bytesAvailable >= _pack_len )
 			{
 				// 读取头长度

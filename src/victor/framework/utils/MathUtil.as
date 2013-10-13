@@ -46,5 +46,13 @@ package victor.framework.utils
 			
 			return true;
 		}
+		
+		public static function distance( x1:Number, y1:Number, x2:Number, y2:Number ):Number
+		{
+			var x:Number = x1 - x2;
+			var y:Number = y1 - y2;
+			return Math.sqrt( x * x + y * y );
+		}
+		
 	}
 }
