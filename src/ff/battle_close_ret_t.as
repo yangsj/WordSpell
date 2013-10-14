@@ -15,51 +15,53 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class input_req_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("input_req_t");
-    private static const INPUT_FIELD_DESC:TField = new TField("input", TType.LIST, 1);
+  public class battle_close_ret_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("battle_close_ret_t");
+    private static const WIN_FIELD_DESC:TField = new TField("win", TType.BOOL, 1);
 
-    private var _input:Array;
-    public static const INPUT:int = 1;
+    private var _win:Boolean;
+    public static const WIN:int = 1;
 
+    private var __isset_win:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[INPUT] = new FieldMetaData("input", TFieldRequirementType.DEFAULT, 
-          new ListMetaData(TType.LIST, 
-              new FieldValueMetaData(TType.I32)));
+      metaDataMap[WIN] = new FieldMetaData("win", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.BOOL));
     }
     {
-      FieldMetaData.addStructMetaDataMap(input_req_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(battle_close_ret_t, metaDataMap);
     }
 
-    public function input_req_t() {
+    public function battle_close_ret_t() {
+      this._win = 0;
     }
 
-    public function get input():Array {
-      return this._input;
+    public function get win():Boolean {
+      return this._win;
     }
 
-    public function set input(input:Array):void {
-      this._input = input;
+    public function set win(win:Boolean):void {
+      this._win = win;
+      this.__isset_win = true;
     }
 
-    public function unsetInput():void {
-      this.input = null;
+    public function unsetWin():void {
+      this.__isset_win = false;
     }
 
-    // Returns true if field input is set (has been assigned a value) and false otherwise
-    public function isSetInput():Boolean {
-      return this.input != null;
+    // Returns true if field win is set (has been assigned a value) and false otherwise
+    public function isSetWin():Boolean {
+      return this.__isset_win;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case INPUT:
+      case WIN:
         if (value == null) {
-          unsetInput();
+          unsetWin();
         } else {
-          this.input = value;
+          this.win = value;
         }
         break;
 
@@ -70,8 +72,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case INPUT:
-        return this.input;
+      case WIN:
+        return this.win;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -80,8 +82,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case INPUT:
-        return isSetInput();
+      case WIN:
+        return isSetWin();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -98,19 +100,10 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case INPUT:
-            if (field.type == TType.LIST) {
-              {
-                var _list185:TList = iprot.readListBegin();
-                this.input = new Array();
-                for (var _i186:int = 0; _i186 < _list185.size; ++_i186)
-                {
-                  var _elem187:int;
-                  _elem187 = iprot.readI32();
-                  this.input.push(_elem187);
-                }
-                iprot.readListEnd();
-              }
+          case WIN:
+            if (field.type == TType.BOOL) {
+              this.win = iprot.readBool();
+              this.__isset_win = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -132,31 +125,19 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (this.input != null) {
-        oprot.writeFieldBegin(INPUT_FIELD_DESC);
-        {
-          oprot.writeListBegin(new TList(TType.I32, this.input.length));
-          for each (var elem188:* in this.input)          {
-            oprot.writeI32(elem188);
-          }
-          oprot.writeListEnd();
-        }
-        oprot.writeFieldEnd();
-      }
+      oprot.writeFieldBegin(WIN_FIELD_DESC);
+      oprot.writeBool(this.win);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
 
     public function toString():String {
-      var ret:String = new String("input_req_t(");
+      var ret:String = new String("battle_close_ret_t(");
       var first:Boolean = true;
 
-      ret += "input:";
-      if (this.input == null) {
-        ret += "null";
-      } else {
-        ret += this.input;
-      }
+      ret += "win:";
+      ret += this.win;
       first = false;
       ret += ")";
       return ret;

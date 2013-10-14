@@ -16,14 +16,6 @@ package app.modules.friend.view
 		{
 			super();
 			var sprite:Sprite = new Sprite();
-			sprite.graphics.beginFill(0xff0000, 0.8);
-			sprite.graphics.drawRect( 0, 0, 200, 400 );
-			sprite.graphics.endFill();
-			dragTarget = sprite;
-			addChild( sprite );
-			mouseEnabled = false;
-			
-			sprite = new Sprite();
 			sprite.graphics.beginFill(0);
 			sprite.graphics.drawRect(0,0,30,30);
 			sprite.graphics.endFill();
@@ -33,5 +25,22 @@ package app.modules.friend.view
 			btnClose = sprite;
 			addChild( btnClose );
 		}
+		
+		override protected function onceInit():void
+		{
+			super.onceInit();
+			addChild( btnClose );
+		}
+		
+		override protected function get resNames():Array
+		{
+			return ["ui_friend"];
+		}
+		
+		override protected function get skinName():String
+		{
+			return "ui_Skin_FriendMainView";
+		}
+		
 	}
 }

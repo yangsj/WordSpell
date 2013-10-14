@@ -4,9 +4,12 @@ package app.modules.serivce
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	
+	import ff.client_cmd_e;
 	import ff.item_t;
 	import ff.pack_info_t;
 	import ff.server_cmd_e;
+	import ff.use_item_req_t;
+	import ff.use_item_ret_t;
 	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
@@ -32,7 +35,7 @@ package app.modules.serivce
 			// 背包物品list数据
 			regist( server_cmd_e.PACK_INFO_RET, packInfoNotify, pack_info_t );
 			// 使用物品成功
-//			regist( 0, useItemSuccessNotify, null );
+			regist( server_cmd_e.USE_ITEM_RET, useItemSuccessNotify, use_item_ret_t );
 		}
 		
 		/**
@@ -50,7 +53,6 @@ package app.modules.serivce
 				itemVo.id = item.item_id;
 				itemVo.type = item.item_type;
 				itemVo.num = item.item_num;
-				
 				packModel.updateItem( itemVo );
 			}
 			dispatch( new PackEvent( PackEvent.UPDATE_ITEMS ));
@@ -62,8 +64,8 @@ package app.modules.serivce
 		 */
 		private function useItemSuccessNotify( resp:SocketResp ):void
 		{
-			var itemVo:ItemVo = new ItemVo();
-			
+			var data:use_item_ret_t = resp.data as use_item_ret_t;
+			var itemVo:ItemVo = packModel.delNum( data.item_type );
 			dispatch( new PackEvent( PackEvent.USE_SUCCESS, itemVo ));
 		}
 		
@@ -75,6 +77,9 @@ package app.modules.serivce
 		 */
 		public function useItem( itemId:int ):void
 		{
+			var req:use_item_req_t = new use_item_req_t();
+			req.item_type = itemId;
+			call( client_cmd_e.USE_ITEM_REQ, req );
 		}
 		
 		

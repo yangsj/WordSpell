@@ -25,14 +25,34 @@ package app.modules.model
 		 * @param itemId
 		 * @param addNum
 		 */
-		public function addNum( itemId:int, addNum:int ):void
+		public function addNum( itemId:int, num:int = 1 ):ItemVo
 		{
 			var index:int = getIndexById( itemId );
 			if ( index != -1 )
 			{
 				var itemVo:ItemVo = itemList[ index ];
-				itemVo.num += addNum;
+				itemVo.num += num;
+				return itemVo;
 			}
+			return null;
+		}
+		
+		/**
+		 * 删除指定道具指定的数量
+		 * @param itemId
+		 * @param num
+		 * @return 
+		 */
+		public function delNum( itemId:int, num:int = 1 ):ItemVo
+		{
+			var index:int = getIndexById( itemId );
+			if ( index != -1 )
+			{
+				var itemVo:ItemVo = itemList[ index ];
+				itemVo.num -= num;
+				return itemVo;
+			}
+			return null;
 		}
 		
 		/**

@@ -10,6 +10,10 @@ package app.modules.fight.model
 	{
 
 		/**
+		 * 字母出现的顺序
+		 */
+		public var index:int;
+		/**
 		 * 字母id
 		 */
 		public var id:int;

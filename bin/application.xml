@@ -25,8 +25,14 @@
 	<item name="map_chapter_4" url="assets/chapters/map_chapter_4.swf" version="1" first="0" />
 	<item name="map_chapter_5" url="assets/chapters/map_chapter_5.swf" version="1" first="0" />
 	
-	<item name="ui_round" url="assets/round/ui_round.swf" version="1" first="0" />
-	<item name="ui_round_losePanel" url="assets/round/ui_round_losePanel.swf" version="1" first="0" />
-	<item name="ui_round_winPanel" url="assets/round/ui_round_winPanel.swf" version="1" first="0" />
+	<item name="ui_friend" url="assets/ui_friend.swf" version="1" first="0" />
+	
+	<item name="ui_round" url="assets/fight/ui_round.swf" version="1" first="0" />
+	<item name="ui_round_losePanel" url="assets/fight/ui_round_losePanel.swf" version="1" first="0" />
+	<item name="ui_round_winPanel" url="assets/fight/ui_round_winPanel.swf" version="1" first="0" />
+	<item name="ui_online" url="assets/fight/ui_online.swf" version="1" first="0" />
+	<item name="ui_ready" url="assets/fight/ui_ready.swf" version="1" first="0" />
+	<item name="ui_matching" url="assets/fight/ui_matching.swf" version="1" first="0" />
+	<item name="ui_fight_search" url="assets/fight/ui_fight_search.swf" version="1" first="0" />
 	
 </data>

@@ -26,6 +26,7 @@ package app.modules.fight.view.spell
 		private var _inputList:Vector.<LetterBubbleVo>;
 		private var _spellVo:SpellVo;
 		private var _spellItems:Vector.<SpellItem>;
+		private var _inputNum:int = 0;
 
 		public function SpellArea()
 		{
@@ -52,6 +53,7 @@ package app.modules.fight.view.spell
 		{
 			_spellVo = spellVo;
 			_inputList = new Vector.<LetterBubbleVo>();
+			_inputNum = 0;
 
 			txtChinese.text = spellVo.chinese;
 
@@ -77,11 +79,19 @@ package app.modules.fight.view.spell
 		{
 			if ( _inputList && _spellVo )
 			{
-				var item:SpellItem = _spellItems[ _inputList.length ];
-				item.setData( letterBubbleVo );
-				_inputList.push( letterBubbleVo );
-				if ( _inputList.length >= _spellVo.charsLength )
+				if ( _inputNum == letterBubbleVo.id )
+				{
+					var item:SpellItem = _spellItems[ _inputNum ];
+					item.setData( letterBubbleVo );
+					_inputList.push( letterBubbleVo );
+					_inputNum++;
+					if ( _inputNum >= _spellVo.charsLength )
+						inputOver();
+				}
+				else
+				{
 					inputOver();
+				}
 			}
 			else
 			{
@@ -103,7 +113,6 @@ package app.modules.fight.view.spell
 		public function clear():void
 		{
 			TickManager.instance.clearDoTime( inputOver );
-
 		}
 
 		public function showAnswer():void

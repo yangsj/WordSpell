@@ -15,51 +15,53 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class input_req_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("input_req_t");
-    private static const INPUT_FIELD_DESC:TField = new TField("input", TType.LIST, 1);
+  public class use_item_ret_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("use_item_ret_t");
+    private static const ITEM_TYPE_FIELD_DESC:TField = new TField("item_type", TType.I16, 1);
 
-    private var _input:Array;
-    public static const INPUT:int = 1;
+    private var _item_type:int;
+    public static const ITEM_TYPE:int = 1;
 
+    private var __isset_item_type:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[INPUT] = new FieldMetaData("input", TFieldRequirementType.DEFAULT, 
-          new ListMetaData(TType.LIST, 
-              new FieldValueMetaData(TType.I32)));
+      metaDataMap[ITEM_TYPE] = new FieldMetaData("item_type", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
     }
     {
-      FieldMetaData.addStructMetaDataMap(input_req_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(use_item_ret_t, metaDataMap);
     }
 
-    public function input_req_t() {
+    public function use_item_ret_t() {
+      this._item_type = 0;
     }
 
-    public function get input():Array {
-      return this._input;
+    public function get item_type():int {
+      return this._item_type;
     }
 
-    public function set input(input:Array):void {
-      this._input = input;
+    public function set item_type(item_type:int):void {
+      this._item_type = item_type;
+      this.__isset_item_type = true;
     }
 
-    public function unsetInput():void {
-      this.input = null;
+    public function unsetItem_type():void {
+      this.__isset_item_type = false;
     }
 
-    // Returns true if field input is set (has been assigned a value) and false otherwise
-    public function isSetInput():Boolean {
-      return this.input != null;
+    // Returns true if field item_type is set (has been assigned a value) and false otherwise
+    public function isSetItem_type():Boolean {
+      return this.__isset_item_type;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case INPUT:
+      case ITEM_TYPE:
         if (value == null) {
-          unsetInput();
+          unsetItem_type();
         } else {
-          this.input = value;
+          this.item_type = value;
         }
         break;
 
@@ -70,8 +72,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case INPUT:
-        return this.input;
+      case ITEM_TYPE:
+        return this.item_type;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -80,8 +82,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case INPUT:
-        return isSetInput();
+      case ITEM_TYPE:
+        return isSetItem_type();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -98,19 +100,10 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case INPUT:
-            if (field.type == TType.LIST) {
-              {
-                var _list185:TList = iprot.readListBegin();
-                this.input = new Array();
-                for (var _i186:int = 0; _i186 < _list185.size; ++_i186)
-                {
-                  var _elem187:int;
-                  _elem187 = iprot.readI32();
-                  this.input.push(_elem187);
-                }
-                iprot.readListEnd();
-              }
+          case ITEM_TYPE:
+            if (field.type == TType.I16) {
+              this.item_type = iprot.readI16();
+              this.__isset_item_type = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -132,31 +125,19 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (this.input != null) {
-        oprot.writeFieldBegin(INPUT_FIELD_DESC);
-        {
-          oprot.writeListBegin(new TList(TType.I32, this.input.length));
-          for each (var elem188:* in this.input)          {
-            oprot.writeI32(elem188);
-          }
-          oprot.writeListEnd();
-        }
-        oprot.writeFieldEnd();
-      }
+      oprot.writeFieldBegin(ITEM_TYPE_FIELD_DESC);
+      oprot.writeI16(this.item_type);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
 
     public function toString():String {
-      var ret:String = new String("input_req_t(");
+      var ret:String = new String("use_item_ret_t(");
       var first:Boolean = true;
 
-      ret += "input:";
-      if (this.input == null) {
-        ret += "null";
-      } else {
-        ret += this.input;
-      }
+      ret += "item_type:";
+      ret += this.item_type;
       first = false;
       ret += ")";
       return ret;

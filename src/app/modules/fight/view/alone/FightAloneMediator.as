@@ -100,19 +100,18 @@ package app.modules.fight.view.alone
 		private function selectedLetterHandler( event:FightEvent ):void
 		{
 			var vo:LetterBubbleVo = event.data as LetterBubbleVo;
-			view.delLetterFromDict( vo.letter );
-			
 			if ( vo.id == -1 )
 				return ;
-			
-			letterIndex++;
-
-			dispatch( new FightEvent( FightEvent.UPDATE_WORD, vo ));
-			
 			// 选中产生道具的字母泡泡
 			if ( vo.itemType != ItemType.DEFAULT )
 			{
 				fightService.inputProp( vo.id );
+			}
+			else // 字母泡泡
+			{
+				view.delLetterFromDict( vo.letter );
+				letterIndex++;
+				dispatch( new FightEvent( FightEvent.UPDATE_WORD, vo ));
 			}
 		}
 		

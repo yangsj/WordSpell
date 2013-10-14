@@ -14,8 +14,9 @@ import flash.utils.Dictionary;
     public static const ITEM_BROOM:int = 2;
     public static const ITEM_NEXT:int = 3;
     public static const ITEM_TIME:int = 4;
+    public static const ITEM_BOMB:int = 5;
 
-    public static const VALID_VALUES:Set = new Set(ITEM_NONE, ITEM_TIPS, ITEM_BROOM, ITEM_NEXT, ITEM_TIME);
+    public static const VALID_VALUES:Set = new Set(ITEM_NONE, ITEM_TIPS, ITEM_BROOM, ITEM_NEXT, ITEM_TIME, ITEM_BOMB);
     public static const VALUES_TO_NAMES:Dictionary = new Dictionary();
     {
       VALUES_TO_NAMES[ITEM_NONE] = "ITEM_NONE";
@@ -23,6 +24,7 @@ import flash.utils.Dictionary;
       VALUES_TO_NAMES[ITEM_BROOM] = "ITEM_BROOM";
       VALUES_TO_NAMES[ITEM_NEXT] = "ITEM_NEXT";
       VALUES_TO_NAMES[ITEM_TIME] = "ITEM_TIME";
+      VALUES_TO_NAMES[ITEM_BOMB] = "ITEM_BOMB";
 
     }
   }

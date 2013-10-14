@@ -19,6 +19,7 @@ package app.modules.fight.service
 	import ff.server_cmd_e;
 	import ff.start_round_req_t;
 	import ff.start_round_ret_t;
+	import ff.use_item_req_t;
 	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
@@ -61,20 +62,24 @@ package app.modules.fight.service
 			var length:int = cnAry.length;
 			var spellList:Vector.<SpellVo> = new Vector.<SpellVo>( length );
 			var spellVo:SpellVo;
+			data.bubble_item
 			for ( var i:int = 0; i < length; i++ )
 			{
 				var index:int = int( blanks[ i ]);
 				var tempBub:Array = bubbles.splice( 0, index );
 				var listBub:Vector.<LetterBubbleVo> = new Vector.<LetterBubbleVo>();
 				var str:String = "";
+				var order:int = 0;
 				for each ( var info:bubble_info_t in tempBub )
 				{
 					var letterBubbleVo:LetterBubbleVo = new LetterBubbleVo();
+					letterBubbleVo.index = order;
 					letterBubbleVo.id = info.bubble_id;
 					letterBubbleVo.letter = info.word;
 					letterBubbleVo.itemType = info.item_type;
 					listBub.push( letterBubbleVo );
 					str += letterBubbleVo.letter;
+					order++;
 				}
 				spellVo = new SpellVo();
 				spellVo.chinese = cnAry[ i ];
@@ -172,7 +177,7 @@ package app.modules.fight.service
 		{
 			var req:select_item_bubble_req_t = new select_item_bubble_req_t();
 			req.bubble_id = id;
-			call( client_cmd_e.SELECT_ITEM_BUBBLE_REQ, req );
+			call( client_cmd_e.USE_ITEM_REQ, req );
 		}
 
 	}
