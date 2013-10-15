@@ -20,14 +20,9 @@ package app.modules.model
 			super();
 		}
 		
-		/**
-		 * 添加指定物品的数量
-		 * @param itemId
-		 * @param addNum
-		 */
-		public function addNum( itemId:int, num:int = 1 ):ItemVo
+		public function addNumByType( type:int, num:int = 1 ):ItemVo
 		{
-			var index:int = getIndexById( itemId );
+			var index:int = getIndexByType( type );
 			if ( index != -1 )
 			{
 				var itemVo:ItemVo = itemList[ index ];
@@ -43,9 +38,9 @@ package app.modules.model
 		 * @param num
 		 * @return 
 		 */
-		public function delNum( itemId:int, num:int = 1 ):ItemVo
+		public function delNumByType( type:int, num:int = 1 ):ItemVo
 		{
-			var index:int = getIndexById( itemId );
+			var index:int = getIndexByType( type );
 			if ( index != -1 )
 			{
 				var itemVo:ItemVo = itemList[ index ];
@@ -61,24 +56,24 @@ package app.modules.model
 		 */
 		public function updateItem( itemVo:ItemVo ):void
 		{
-			var index:int = getIndexById( itemVo.id );
+			var index:int = getIndexByType( itemVo.type );
 			if ( index == -1 )
 				itemList.push( itemVo );
 			else itemList[ index ] = itemVo;
 		}
 		
 		/**
-		 * 通过id获取指定物品在背包里的排序
-		 * @param id
+		 * 通过type获取指定物品在背包里的排序
+		 * @param type
 		 * @return 
 		 */
-		public function getIndexById( id:int ):int
+		public function getIndexByType( type:int ):int
 		{
 			var itemVo:ItemVo;
 			for ( var key:String in itemList )
 			{
 				itemVo = itemList[key];
-				if ( itemVo && itemVo.id == id )
+				if ( itemVo && itemVo.type == type )
 					return int( key );
 			}
 			return -1;
@@ -86,12 +81,12 @@ package app.modules.model
 		
 		/**
 		 * 获取item
-		 * @param id
+		 * @param type
 		 * @return 
 		 */
-		public function getItemById( id:int ):ItemVo
+		public function getItemByType( type:int ):ItemVo
 		{
-			var index:int = getIndexById( id );
+			var index:int = getIndexByType( type );
 			if ( index != -1 )
 			{
 				return itemList[ index ];

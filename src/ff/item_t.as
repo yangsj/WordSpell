@@ -17,25 +17,19 @@ import org.apache.thrift.protocol.*;
 
   public class item_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("item_t");
-    private static const ITEM_ID_FIELD_DESC:TField = new TField("item_id", TType.I32, 1);
     private static const ITEM_TYPE_FIELD_DESC:TField = new TField("item_type", TType.I32, 2);
     private static const ITEM_NUM_FIELD_DESC:TField = new TField("item_num", TType.I32, 3);
 
-    private var _item_id:int;
-    public static const ITEM_ID:int = 1;
     private var _item_type:int;
     public static const ITEM_TYPE:int = 2;
     private var _item_num:int;
     public static const ITEM_NUM:int = 3;
 
-    private var __isset_item_id:Boolean = false;
     private var __isset_item_type:Boolean = false;
     private var __isset_item_num:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[ITEM_ID] = new FieldMetaData("item_id", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I32));
       metaDataMap[ITEM_TYPE] = new FieldMetaData("item_type", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
       metaDataMap[ITEM_NUM] = new FieldMetaData("item_num", TFieldRequirementType.DEFAULT, 
@@ -46,27 +40,8 @@ import org.apache.thrift.protocol.*;
     }
 
     public function item_t() {
-      this._item_id = 0;
       this._item_type = 0;
       this._item_num = 1;
-    }
-
-    public function get item_id():int {
-      return this._item_id;
-    }
-
-    public function set item_id(item_id:int):void {
-      this._item_id = item_id;
-      this.__isset_item_id = true;
-    }
-
-    public function unsetItem_id():void {
-      this.__isset_item_id = false;
-    }
-
-    // Returns true if field item_id is set (has been assigned a value) and false otherwise
-    public function isSetItem_id():Boolean {
-      return this.__isset_item_id;
     }
 
     public function get item_type():int {
@@ -107,14 +82,6 @@ import org.apache.thrift.protocol.*;
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case ITEM_ID:
-        if (value == null) {
-          unsetItem_id();
-        } else {
-          this.item_id = value;
-        }
-        break;
-
       case ITEM_TYPE:
         if (value == null) {
           unsetItem_type();
@@ -138,8 +105,6 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case ITEM_ID:
-        return this.item_id;
       case ITEM_TYPE:
         return this.item_type;
       case ITEM_NUM:
@@ -152,8 +117,6 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case ITEM_ID:
-        return isSetItem_id();
       case ITEM_TYPE:
         return isSetItem_type();
       case ITEM_NUM:
@@ -174,14 +137,6 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case ITEM_ID:
-            if (field.type == TType.I32) {
-              this.item_id = iprot.readI32();
-              this.__isset_item_id = true;
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
           case ITEM_TYPE:
             if (field.type == TType.I32) {
               this.item_type = iprot.readI32();
@@ -215,9 +170,6 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(ITEM_ID_FIELD_DESC);
-      oprot.writeI32(this.item_id);
-      oprot.writeFieldEnd();
       oprot.writeFieldBegin(ITEM_TYPE_FIELD_DESC);
       oprot.writeI32(this.item_type);
       oprot.writeFieldEnd();
@@ -232,10 +184,6 @@ import org.apache.thrift.protocol.*;
       var ret:String = new String("item_t(");
       var first:Boolean = true;
 
-      ret += "item_id:";
-      ret += this.item_id;
-      first = false;
-      if (!first) ret +=  ", ";
       ret += "item_type:";
       ret += this.item_type;
       first = false;

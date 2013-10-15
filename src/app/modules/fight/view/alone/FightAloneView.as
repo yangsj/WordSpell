@@ -42,7 +42,8 @@ package app.modules.fight.view.alone
 		private var spellArea:SpellArea;
 		private var propList:PropList;
 
-		private var dict:Dictionary;
+		private var dictLetter:Dictionary;
+		private var dictProps:Dictionary;
 
 		private var totalTime:int = 60;
 
@@ -66,6 +67,7 @@ package app.modules.fight.view.alone
 
 		public function initialize():void
 		{
+			dictProps = new Dictionary();
 			totalTime = 60;
 			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
@@ -80,19 +82,48 @@ package app.modules.fight.view.alone
 			totalTime = 0;
 			spellArea.clear();
 			propList.clear();
+			dictProps = null;
 		}
 
 		public function delLetterFromDict( letter:String ):void
 		{
-			var ary:Array = dict[ letter.toLocaleLowerCase()];
+			var ary:Array = dictLetter[ letter.toLocaleLowerCase()];
 			if ( ary && ary.length > 0 )
 			{
 				ary.shift();
-				dict[ letter.toLocaleLowerCase()] = ary;
+				dictLetter[ letter.toLocaleLowerCase()] = ary;
 			}
 			else
 			{
-				delete dict[ letter.toLocaleLowerCase()];
+				delete dictLetter[ letter.toLocaleLowerCase()];
+			}
+		}
+		
+		public function delPropItemFromDict( itemType:int ):void
+		{
+			delete dictProps[ itemType ];
+			delete dictProps[ itemType + "_data" ];
+		}
+		
+		public function addPropItem( lettetVo:LetterBubbleVo ):void
+		{
+			if ( lettetVo ) dictProps[ lettetVo.itemType + "_data" ] = lettetVo;
+		}
+		
+		public function displayPropItem():void
+		{
+			var bubble:LetterBubble;
+			var lettetVo:LetterBubbleVo;
+			for ( var key:String in dictProps )
+			{
+				if ( key.indexOf( "_data" ) != -1 )
+				{
+					lettetVo = dictProps[ key ];
+					bubble = new LetterBubble();
+					bubble.setData( lettetVo );
+					container.addChild( bubble );
+					dictProps[ lettetVo.itemType ] = bubble;
+				}
 			}
 		}
 
@@ -116,7 +147,7 @@ package app.modules.fight.view.alone
 //			}
 //			list = items;
 			
-			dict = new Dictionary();
+			dictLetter = new Dictionary();
 			DisplayUtil.removedAll( container, false );
 			for each ( var vo:LetterBubbleVo in list )
 			{
@@ -124,8 +155,8 @@ package app.modules.fight.view.alone
 				var bubble:LetterBubble = new LetterBubble();
 				bubble.setData( vo );
 				container.addChild( bubble );
-				dict[ key ] ||= [];
-				dict[ key ].push( bubble );
+				dictLetter[ key ] ||= [];
+				dictLetter[ key ].push( bubble );
 			}
 		}
 
@@ -153,9 +184,9 @@ package app.modules.fight.view.alone
 		
 		public function useHintProp( key:String ):void
 		{
-			if ( dict )
+			if ( dictLetter )
 			{
-				var ary:Array = dict[ key ];
+				var ary:Array = dictLetter[ key ];
 				var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
 				if ( bubble ) bubble.hint();
 			}
@@ -186,9 +217,9 @@ package app.modules.fight.view.alone
 		{
 			var charCode:int = event.charCode;
 			var key:String = String.fromCharCode( charCode ).toLocaleLowerCase();
-			if ( dict )
+			if ( dictLetter )
 			{
-				var ary:Array = dict[ key ];
+				var ary:Array = dictLetter[ key ];
 				var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
 				if ( bubble )
 				{
@@ -212,7 +243,7 @@ package app.modules.fight.view.alone
 						mc2 = container.getChildAt( j ) as LetterBubble;
 						if ( mc2 && mc1 != mc2 &&  HitTestUtils.pixelsHitTest2( mc1.point, mc1.bitmapData, mc2.point, mc2.bitmapData) )
 						{
-							var dist0:Number = LetterBubble.WH;
+							var dist0:Number = ( mc1.width + mc2.width + 5 ) >> 1;
 							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
 							if ( dist1 < dist0 )
 							{

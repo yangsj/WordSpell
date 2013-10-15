@@ -1,7 +1,10 @@
 package app.modules.serivce
 {
+	import flash.utils.Dictionary;
+	
 	import app.data.GameData;
 	import app.modules.main.event.MainUIEvent;
+	import app.modules.model.PackModel;
 	
 	import ff.error_code_ret_t;
 	import ff.server_cmd_e;
@@ -18,6 +21,9 @@ package app.modules.serivce
 	 */
 	public class CommonService extends BaseService
 	{
+		[Inject]
+		public var packModel:PackModel;
+		
 		public function CommonService()
 		{
 			super();
@@ -38,7 +44,11 @@ package app.modules.serivce
 			GameData.instance.selfVo.exp = data.exp;
 			GameData.instance.selfVo.level = data.level;
 			GameData.instance.selfVo.money = data.coin;
-			// 道具数量
+			
+//			// 道具数量
+//			var dict:Dictionary = data.items;
+//			for ( var key:* in dict )
+//				packModel.addNumByType( int( key ), dict[ key ] );
 			
 			dispatch( new MainUIEvent( MainUIEvent.UPDATE_PROPERTY ));
 		}

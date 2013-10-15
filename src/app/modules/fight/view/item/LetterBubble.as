@@ -30,9 +30,7 @@ package app.modules.fight.view.item
 	 */
 	public class LetterBubble extends TempleteSprite
 	{
-		private static const moveArea:Rectangle = new Rectangle(0, 0, 808, 298 );
-		public static const WH:Number = 82;
-		public static const HALF:Number = WH * 0.5;
+		private const moveArea:Rectangle = new Rectangle(41, 41, 808, 298 );
 		
 		public var txtLetter:TextField;
 		
@@ -46,6 +44,7 @@ package app.modules.fight.view.item
 			mouseChildren = false;
 			buttonMode = true;
 			setSkinWithName( "ui_Skin_Round_Bubble_" + int( Math.random() * 5 ) );
+			txtLetter.visible = false;
 			
 			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
@@ -85,12 +84,20 @@ package app.modules.fight.view.item
 		protected function addedToStageHandler(event:Event):void
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
+			
+//			var scale:Number = Math.random() * 0.5 + 0.6;
+//			scaleX = scaleY = scale;
+//			moveArea.width = moveArea.width + moveArea.x * 2 - width;
+//			moveArea.width = moveArea.height + moveArea.y * 2 - height;
+//			moveArea.x = moveArea.x * scale;
+//			moveArea.y = moveArea.y * scale;
+			
 			x = moveArea.x + moveArea.width * Math.random();
 			y = moveArea.y + moveArea.height * Math.random();
-//			dx = Math.random() < 0.5 ? int(Math.random() + 1) : -int(Math.random() + 1);
-//			dy = Math.random() < 0.5 ? int(Math.random() + 1) : -int(Math.random() + 1);
-			dx = Math.random() < 0.5 ? 1 : -1;
-			dy = Math.random() < 0.5 ? 1 : -1;
+			
+			var dxy:Number = 1;
+			dx = Math.random() < 0.5 ? dxy : -dxy;
+			dy = Math.random() < 0.5 ? dxy : -dxy;
 		}
 		
 		protected function removedFromStageHandler(event:Event):void
@@ -130,8 +137,7 @@ package app.modules.fight.view.item
 		public function setData( vo:LetterBubbleVo ):void
 		{
 			_data = vo;
-			txtLetter.visible = false;
-			txtLetter.text = vo.letter;
+			txtLetter.text = vo.itemType == 0 ? vo.letter : "道";
 			var bitmapData:BitmapData = new BitmapData(txtLetter.width, txtLetter.height, true, 0 );
 			var bitmap:Bitmap = new Bitmap( bitmapData, "auto", true );
 			bitmap.bitmapData.draw( txtLetter );
@@ -152,15 +158,9 @@ package app.modules.fight.view.item
 			{
 				mouseEnabled = false;
 				dispatchEvent( new FightEvent( FightEvent.SELECTED_LETTER, _data, true ));
-				TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn, onUpdate:effectUpdate });
-				TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onUpdate:effectUpdate, onComplete:effectComplete, delay: 0.15 });
+				TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
+				TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });
 			}
-		}
-		
-		private function effectUpdate():void
-		{
-			_skin.x = ( WH - _skin.width ) >> 1;
-			_skin.y = ( WH - _skin.height ) >> 1;
 		}
 		
 		private function effectComplete():void

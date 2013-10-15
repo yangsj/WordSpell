@@ -79,7 +79,7 @@ package app.modules.fight.view.spell
 		{
 			if ( _inputList && _spellVo )
 			{
-				if ( _inputNum == letterBubbleVo.id )
+				if ( _inputNum == letterBubbleVo.index )
 				{
 					var item:SpellItem = _spellItems[ _inputNum ];
 					item.setData( letterBubbleVo );

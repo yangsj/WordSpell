@@ -8,13 +8,14 @@
 	
 	<item name="ui_comp" url="assets/ui_component.swf" version="1" first="1" />
 	<item name="ui_test" url="assets/test/ui_test.swf" version="1" first="1" />
-	<!-- <item name="ui_font" url="assets/ui_font.swf" version="1" first="1" /> -->
 	<item name="ui_login" url="assets/ui_login.swf" version="1" first="1" />
 	<item name="ui_register" url="assets/ui_register.swf" version="1" first="1" />
 	
 	<item name="ui_map" url="assets/ui_map.swf" version="1" first="2" />
 	<item name="ui_main" url="assets/ui_main.swf" version="1" first="2" />
 	<item name="ui_chat" url="assets/ui_chat.swf" version="1" first="2" />
+	<!-- <item name="ui_font" url="assets/ui_font.swf" version="1" first="2" /> -->
+	<item name="ui_font" url="assets/ui_font.swf" version="1" first="2" />
 	
 	<item name="testPanel" url="assets/panel/testPanel.swf" version="1" first="0" />
 	

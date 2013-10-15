@@ -1,5 +1,7 @@
 package app.modules.fight.service
 {
+	import flash.utils.Dictionary;
+	
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.modules.fight.events.FightEvent;
@@ -19,7 +21,6 @@ package app.modules.fight.service
 	import ff.server_cmd_e;
 	import ff.start_round_req_t;
 	import ff.start_round_ret_t;
-	import ff.use_item_req_t;
 	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
@@ -62,17 +63,23 @@ package app.modules.fight.service
 			var length:int = cnAry.length;
 			var spellList:Vector.<SpellVo> = new Vector.<SpellVo>( length );
 			var spellVo:SpellVo;
-			data.bubble_item
+			var info:bubble_info_t;
+			var order:int;
+			var index:int;
+			var tempBub:Array;
+			var listBub:Vector.<LetterBubbleVo>;
+			var str:String = "";
+			var letterBubbleVo:LetterBubbleVo;
 			for ( var i:int = 0; i < length; i++ )
 			{
-				var index:int = int( blanks[ i ]);
-				var tempBub:Array = bubbles.splice( 0, index );
-				var listBub:Vector.<LetterBubbleVo> = new Vector.<LetterBubbleVo>();
-				var str:String = "";
-				var order:int = 0;
-				for each ( var info:bubble_info_t in tempBub )
+				index = int( blanks[ i ]);
+				tempBub = bubbles.splice( 0, index );
+				listBub = new Vector.<LetterBubbleVo>();
+				str = "";
+				order = 0;
+				for each ( info in tempBub )
 				{
-					var letterBubbleVo:LetterBubbleVo = new LetterBubbleVo();
+					letterBubbleVo = new LetterBubbleVo();
 					letterBubbleVo.index = order;
 					letterBubbleVo.id = info.bubble_id;
 					letterBubbleVo.letter = info.word;
@@ -87,11 +94,34 @@ package app.modules.fight.service
 				spellList[ i ] = spellVo;
 				trace( spellVo.chinese, str );
 			}
+			
+			var dict:Dictionary = new Dictionary();
+			for ( var key:* in data.bubble_item )
+			{
+				var ary:Array = data.bubble_item[key];
+				var temp:Array = [];
+				order = 0;
+				for each ( info in ary )
+				{
+					letterBubbleVo = new LetterBubbleVo();
+					letterBubbleVo.index = order;
+					letterBubbleVo.id = info.bubble_id;
+					letterBubbleVo.letter = info.word;
+					letterBubbleVo.itemType = info.item_type;
+					temp.push( letterBubbleVo );
+					order++;
+				}
+				dict[ key ] = temp;
+			}
+			fightModel.dictPropPos = dict;
+			
 			fightModel.spellList = spellList;
 			fightModel.modeType = data.mode;
 
 			// 设置第一个单词信息
 			fightModel.spellVo = fightModel.spellList.shift();
+			// 
+			fightModel.currentIndex = 0;
 
 			// 
 			dispatch( new FightEvent( FightEvent.NOTIFY_START_ROUND ));
@@ -137,6 +167,8 @@ package app.modules.fight.service
 			// 设置下一个单词信息
 			if ( fightModel.isFinish == false )
 			{
+				fightModel.currentIndex++;
+				
 				fightModel.spellVo = fightModel.spellList.shift();
 				//
 				dispatch( new FightEvent( FightEvent.NOTIFY_NEXT_WORD ));

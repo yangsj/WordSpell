@@ -56,16 +56,19 @@ package app.modules.fight.view.prop
 		
 		public function refreshItem( itemVo:ItemVo ):void
 		{
-			var item:PropItem = getItemById( itemVo.id );
-			if ( item )
-				item.update( itemVo );
+			if ( itemVo )
+			{
+				var item:PropItem = getItemByType( itemVo.type );
+				if ( item )
+					item.update( itemVo );
+			}
 		}
 		
-		private function getItemById( id:int ):PropItem
+		private function getItemByType( type:int ):PropItem
 		{
 			for each ( var item:PropItem in vecItemSkin )
 			{
-				if ( item.itemVo && item.itemVo.id == id )
+				if ( item.itemVo && item.itemVo.type == type )
 				{
 					return item;
 				}

@@ -50,7 +50,6 @@ package app.modules.serivce
 			for each ( var item:item_t in itemList )
 			{
 				itemVo = new ItemVo();
-				itemVo.id = item.item_id;
 				itemVo.type = item.item_type;
 				itemVo.num = item.item_num;
 				packModel.updateItem( itemVo );
@@ -65,7 +64,7 @@ package app.modules.serivce
 		private function useItemSuccessNotify( resp:SocketResp ):void
 		{
 			var data:use_item_ret_t = resp.data as use_item_ret_t;
-			var itemVo:ItemVo = packModel.delNum( data.item_type );
+			var itemVo:ItemVo = packModel.delNumByType( data.item_type );
 			dispatch( new PackEvent( PackEvent.USE_SUCCESS, itemVo ));
 		}
 		
@@ -75,10 +74,10 @@ package app.modules.serivce
 		 * 使用物品
 		 * @param itemId
 		 */
-		public function useItem( itemId:int ):void
+		public function useItem( itemType:int ):void
 		{
 			var req:use_item_req_t = new use_item_req_t();
-			req.item_type = itemId;
+			req.item_type = itemType;
 			call( client_cmd_e.USE_ITEM_REQ, req );
 		}
 		

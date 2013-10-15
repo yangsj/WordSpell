@@ -101,14 +101,14 @@ import org.apache.thrift.protocol.*;
           case TASK_LIST:
             if (field.type == TType.LIST) {
               {
-                var _list90:TList = iprot.readListBegin();
+                var _list89:TList = iprot.readListBegin();
                 this.task_list = new Array();
-                for (var _i91:int = 0; _i91 < _list90.size; ++_i91)
+                for (var _i90:int = 0; _i90 < _list89.size; ++_i90)
                 {
-                  var _elem92:task_t;
-                  _elem92 = new task_t();
-                  _elem92.read(iprot);
-                  this.task_list.push(_elem92);
+                  var _elem91:task_t;
+                  _elem91 = new task_t();
+                  _elem91.read(iprot);
+                  this.task_list.push(_elem91);
                 }
                 iprot.readListEnd();
               }
@@ -137,8 +137,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(TASK_LIST_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRUCT, this.task_list.length));
-          for each (var elem93:* in this.task_list)          {
-            elem93.write(oprot);
+          for each (var elem92:* in this.task_list)          {
+            elem92.write(oprot);
           }
           oprot.writeListEnd();
         }

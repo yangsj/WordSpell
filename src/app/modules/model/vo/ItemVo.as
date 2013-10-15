@@ -15,9 +15,9 @@ package app.modules.model.vo
 		/**
 		 * 
 		 */
-		public var id:int;
 		public var type:int;
-		public var num:int;
+		
+		private var _num:int;
 		
 		/**
 		 * 使用间隔时间( 秒 )
@@ -31,7 +31,7 @@ package app.modules.model.vo
 		 */
 		public function get contMoney():int
 		{
-			return [ 0, 500, 600, 1000, 500 ][ id ];
+			return [ 0, 500, 600, 1000, 500 ][ type ];
 		}
 		
 		/**
@@ -39,8 +39,19 @@ package app.modules.model.vo
 		 */
 		public function get skinId():String
 		{
-			return "ui_Skin_Round_PropItem_" + id;
+			return "ui_Skin_Round_PropItem_" + type;
 		}
+
+		public function get num():int
+		{
+			return _num;
+		}
+
+		public function set num(value:int):void
+		{
+			_num = Math.max( 0, value );
+		}
+
 		
 	}
 }

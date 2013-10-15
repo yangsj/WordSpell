@@ -191,14 +191,14 @@ import org.apache.thrift.protocol.*;
           case ROUND_INFO:
             if (field.type == TType.LIST) {
               {
-                var _list121:TList = iprot.readListBegin();
+                var _list120:TList = iprot.readListBegin();
                 this.round_info = new Array();
-                for (var _i122:int = 0; _i122 < _list121.size; ++_i122)
+                for (var _i121:int = 0; _i121 < _list120.size; ++_i121)
                 {
-                  var _elem123:round_info_t;
-                  _elem123 = new round_info_t();
-                  _elem123.read(iprot);
-                  this.round_info.push(_elem123);
+                  var _elem122:round_info_t;
+                  _elem122 = new round_info_t();
+                  _elem122.read(iprot);
+                  this.round_info.push(_elem122);
                 }
                 iprot.readListEnd();
               }
@@ -233,8 +233,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(ROUND_INFO_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRUCT, this.round_info.length));
-          for each (var elem124:* in this.round_info)          {
-            elem124.write(oprot);
+          for each (var elem123:* in this.round_info)          {
+            elem123.write(oprot);
           }
           oprot.writeListEnd();
         }

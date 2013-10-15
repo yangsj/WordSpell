@@ -1,8 +1,12 @@
 package app.modules.fight.model
 {
+	import flash.utils.Dictionary;
+	
 	import app.modules.fight.view.spell.SpellVo;
 	
 	import org.robotlegs.mvcs.Actor;
+	
+	import victor.framework.utils.MathUtil;
 	
 	
 	/**
@@ -16,6 +20,8 @@ package app.modules.fight.model
 		private var _spellList:Vector.<SpellVo>;
 		private var _modeType:int;
 		private var _fightEndVo:FightEndVo;
+		private var _dictPropPos:Dictionary;
+		private var _currentIndex:int = 0;
 		
 		public function FightModel()
 		{
@@ -86,6 +92,26 @@ package app.modules.fight.model
 		public function set fightEndVo(value:FightEndVo):void
 		{
 			_fightEndVo = value;
+		}
+		
+		public function get currentIndex():int
+		{
+			return _currentIndex;
+		}
+		
+		public function set currentIndex(value:int):void
+		{
+			_currentIndex = value;
+		}
+
+		public function get dictPropPos():Dictionary
+		{
+			return _dictPropPos;
+		}
+
+		public function set dictPropPos(value:Dictionary):void
+		{
+			_dictPropPos = value;
 		}
 
 

@@ -88,8 +88,7 @@ package app.modules.fight.view.alone
 		private function nextWordUpdateNotify( event:FightEvent ):void
 		{
 			letterIndex = 0;
-			if ( fightModel.spellVo )
-				view.setLettersPool( fightModel.spellVo.items );
+			setLetters();
 		}
 
 		private function updateMoneyNotify( event:MainUIEvent ):void
@@ -100,12 +99,16 @@ package app.modules.fight.view.alone
 		private function selectedLetterHandler( event:FightEvent ):void
 		{
 			var vo:LetterBubbleVo = event.data as LetterBubbleVo;
+			
+			// 测试泡泡
 			if ( vo.id == -1 )
 				return ;
+			
 			// 选中产生道具的字母泡泡
 			if ( vo.itemType != ItemType.DEFAULT )
 			{
 				fightService.inputProp( vo.id );
+				view.delPropItemFromDict( vo.itemType );
 			}
 			else // 字母泡泡
 			{
@@ -119,22 +122,25 @@ package app.modules.fight.view.alone
 		private function useItemSuccessHandler( event:PackEvent ):void
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
-			if ( itemVo.type == ItemType.EXTRA_TIME )
+			if ( itemVo )
 			{
-				view.useExtraTimeProp();
-				Tips.showMouse( "时间 +5s" );
-			}
-			else if ( itemVo.type == ItemType.BROOM )
-			{
-				view.useBroomProp();
-			}
-			else if ( itemVo.type == ItemType.HINT )
-			{
-				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
-				if ( letterIndex < items.length )
+				if ( itemVo.type == ItemType.EXTRA_TIME )
 				{
-					var key:String = items[ letterIndex ].letter;
-					view.useHintProp( key );
+					view.useExtraTimeProp();
+					Tips.showMouse( "时间 +5s" );
+				}
+				else if ( itemVo.type == ItemType.BROOM )
+				{
+					view.useBroomProp();
+				}
+				else if ( itemVo.type == ItemType.HINT )
+				{
+					var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
+					if ( letterIndex < items.length )
+					{
+						var key:String = items[ letterIndex ].letter;
+						view.useHintProp( key );
+					}
 				}
 			}
 		}
@@ -143,9 +149,26 @@ package app.modules.fight.view.alone
 		{
 			letterIndex = 0;
 			view.initialize();
-			view.setLettersPool( fightModel.spellVo.items );
 			view.setRoundName( mapModel.currentMapVo.mapName );
 			updateMoneyNotify( null );
+			setLetters();
+		}
+		
+		private function setLetters():void
+		{
+			if ( fightModel.spellVo )
+			{
+				view.setLettersPool( fightModel.spellVo.items );
+				trace( " fightModel.currentIndex *********************************************" +  fightModel.currentIndex );
+				var array:Array = fightModel.dictPropPos[ fightModel.currentIndex ] as Array;
+				if ( array )
+				{
+					var letterVo:LetterBubbleVo;
+					for each ( letterVo in array )
+						view.addPropItem( letterVo );
+				}
+				view.displayPropItem();
+			}
 		}
 
 	}

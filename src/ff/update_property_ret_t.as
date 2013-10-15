@@ -20,7 +20,6 @@ import org.apache.thrift.protocol.*;
     private static const EXP_FIELD_DESC:TField = new TField("exp", TType.I32, 1);
     private static const LEVEL_FIELD_DESC:TField = new TField("level", TType.I32, 2);
     private static const COIN_FIELD_DESC:TField = new TField("coin", TType.I32, 3);
-    private static const ITEMS_FIELD_DESC:TField = new TField("items", TType.MAP, 4);
 
     private var _exp:int;
     public static const EXP:int = 1;
@@ -28,8 +27,6 @@ import org.apache.thrift.protocol.*;
     public static const LEVEL:int = 2;
     private var _coin:int;
     public static const COIN:int = 3;
-    private var _items:Dictionary;
-    public static const ITEMS:int = 4;
 
     private var __isset_exp:Boolean = false;
     private var __isset_level:Boolean = false;
@@ -43,10 +40,6 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.I32));
       metaDataMap[COIN] = new FieldMetaData("coin", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
-      metaDataMap[ITEMS] = new FieldMetaData("items", TFieldRequirementType.DEFAULT, 
-          new MapMetaData(TType.MAP, 
-              new FieldValueMetaData(TType.I32), 
-              new FieldValueMetaData(TType.I32)));
     }
     {
       FieldMetaData.addStructMetaDataMap(update_property_ret_t, metaDataMap);
@@ -112,23 +105,6 @@ import org.apache.thrift.protocol.*;
       return this.__isset_coin;
     }
 
-    public function get items():Dictionary {
-      return this._items;
-    }
-
-    public function set items(items:Dictionary):void {
-      this._items = items;
-    }
-
-    public function unsetItems():void {
-      this.items = null;
-    }
-
-    // Returns true if field items is set (has been assigned a value) and false otherwise
-    public function isSetItems():Boolean {
-      return this.items != null;
-    }
-
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case EXP:
@@ -155,14 +131,6 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
-      case ITEMS:
-        if (value == null) {
-          unsetItems();
-        } else {
-          this.items = value;
-        }
-        break;
-
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -176,8 +144,6 @@ import org.apache.thrift.protocol.*;
         return this.level;
       case COIN:
         return this.coin;
-      case ITEMS:
-        return this.items;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -192,8 +158,6 @@ import org.apache.thrift.protocol.*;
         return isSetLevel();
       case COIN:
         return isSetCoin();
-      case ITEMS:
-        return isSetItems();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -234,25 +198,6 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
-          case ITEMS:
-            if (field.type == TType.MAP) {
-              {
-                var _map215:TMap = iprot.readMapBegin();
-                this.items = new Dictionary();
-                for (var _i216:int = 0; _i216 < _map215.size; ++_i216)
-                {
-                  var _key217:int;
-                  var _val218:int;
-                  _key217 = iprot.readI32();
-                  _val218 = iprot.readI32();
-                  this.items[_key217] = _val218;
-                }
-                iprot.readMapEnd();
-              }
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -279,22 +224,6 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(COIN_FIELD_DESC);
       oprot.writeI32(this.coin);
       oprot.writeFieldEnd();
-      if (this.items != null) {
-        oprot.writeFieldBegin(ITEMS_FIELD_DESC);
-        {
-          var _sizeCounter220:int = 0;
-          for (var _key219:* in this.items) {
-            _sizeCounter220++;
-          }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter220));
-          for (var elem221:* in this.items)          {
-            oprot.writeI32(elem221);
-            oprot.writeI32(this.items[elem221]);
-          }
-          oprot.writeMapEnd();
-        }
-        oprot.writeFieldEnd();
-      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -313,14 +242,6 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "coin:";
       ret += this.coin;
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "items:";
-      if (this.items == null) {
-        ret += "null";
-      } else {
-        ret += this.items;
-      }
       first = false;
       ret += ")";
       return ret;

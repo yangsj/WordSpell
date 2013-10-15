@@ -1,6 +1,9 @@
 package app.modules.fight.view.prop
 {
+	import app.core.Tips;
+	import app.data.GameData;
 	import app.events.PackEvent;
+	import app.modules.main.event.MainUIEvent;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.serivce.PackService;
@@ -37,39 +40,24 @@ package app.modules.fight.view.prop
 			
 			// 物品使用成功
 			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
+			// 物品更新
+			addContextListener( PackEvent.UPDATE_ITEMS, updatePackItemsHandler, MainUIEvent );
 			
 			setData();
 		}
 		
 		private function setData():void
 		{
-//			view.setData( packModel.itemList );
-			
-			var _itemList:Vector.<ItemVo> = new Vector.<ItemVo>();1
-			var itemVo:ItemVo;
-			for (var i:int = 1; i < 5; i++ )
-			{
-				itemVo = new ItemVo();
-				itemVo.id = i;
-				itemVo.num = 4;
-				itemVo.type = i;
-				_itemList.push( itemVo );
-			}
-			view.setData( _itemList );
+			view.setData( packModel.itemList );
 		}
 		
 		// 物品使用
 		private function useItemHandler( event:PackEvent ):void
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
-//			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
-//				packService.useItem( itemVo.id );
-//			else Tips.showMouse( "钻石不足！" );
-			
-			//test
-			view.refreshItem( itemVo );
-			
-			dispatch( new PackEvent( PackEvent.USE_SUCCESS, itemVo ));
+			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
+				packService.useItem( itemVo.type );
+			else Tips.showMouse( "钻石不足！" );
 		}
 		
 		// 物品使用成功
@@ -77,6 +65,11 @@ package app.modules.fight.view.prop
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
 			view.refreshItem( itemVo );
+		}
+		
+		private function updatePackItemsHandler( event:PackEvent ):void
+		{
+			setData();
 		}
 		
 	}

@@ -77,7 +77,7 @@ package app.modules.fight.view.prop.item
 		
 		public function setData( itemVo:ItemVo ):void
 		{
-			if ( _itemVo == null || _itemVo.id != itemVo.id )
+			if ( _itemVo == null || _itemVo.type != itemVo.type )
 			{
 				DisplayUtil.removedFromParent( _skin );
 				_skin = LoaderManager.getObj( itemVo.skinId ) as Sprite;
