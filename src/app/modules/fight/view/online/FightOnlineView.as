@@ -113,17 +113,17 @@ package app.modules.fight.view.online
 //			}
 //			list = items;
 			
-			dict = new Dictionary();
-			DisplayUtil.removedAll( container, false );
-			for each ( var vo:LetterBubbleVo in list )
-			{
-				var key:String = vo.letter.toLocaleLowerCase();
-				var bubble:LetterBubble = new LetterBubble();
-				bubble.setData( vo );
-				container.addChild( bubble );
-				dict[ key ] ||= [];
-				dict[ key ].push( bubble );
-			}
+//			dict = new Dictionary();
+//			DisplayUtil.removedAll( container, false );
+//			for each ( var vo:LetterBubbleVo in list )
+//			{
+//				var key:String = vo.letter.toLocaleLowerCase();
+//				var bubble:LetterBubble = new LetterBubble();
+//				bubble.setData( vo );
+//				container.addChild( bubble );
+//				dict[ key ] ||= [];
+//				dict[ key ].push( bubble );
+//			}
 		}
 		
 		private function timerHandler():void
@@ -199,50 +199,50 @@ package app.modules.fight.view.online
 		
 		protected function enterFrameHandler( event:Event = null ):void
 		{
-			var mc1:LetterBubble, mc2:LetterBubble;
-			for ( var i:int = 0; i < container.numChildren; i++ )
-			{
-				mc1 = container.getChildAt( i ) as LetterBubble;
-				if ( mc1 )
-				{
-					for ( var j:int = 0; j < container.numChildren; j++ )
-					{
-						mc2 = container.getChildAt( j ) as LetterBubble;
-						if ( mc2 && mc1 != mc2 &&  HitTestUtils.pixelsHitTest2( mc1.point, mc1.bitmapData, mc2.point, mc2.bitmapData) )
-						{
-							var dist0:Number = LetterBubble.WH;
-							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
-							if ( dist1 < dist0 )
-							{
-								var rate:Number = ( dist0 / dist1 );
-								var movex:Number = Math.abs( mc1.x - mc2.x ) * rate;
-								var movey:Number = Math.abs( mc1.y - mc2.y ) * rate;
-								if ( mc1.x < mc2.x )
-								{
-									if ( mc2.isEdgeRight )
-										mc1.x = mc2.x - movex;
-									else mc2.x = mc1.x + movex;
-								}
-								else if ( mc2.isEdgeLeft )
-									mc1.x = mc2.x + movex;
-								else mc2.x = mc1.x - movex;
-								
-								if ( mc1.y < mc2.y )
-								{
-									if ( mc2.isEdgeDown )
-										mc1.y = mc2.y - movey;
-									else mc2.y = mc1.y + movey;
-								}
-								else if ( mc2.isEdgeUp )
-									mc1.y = mc2.y + movey;
-								else mc2.y = mc1.y - movey;
-							}
-							mc1.changeDirection( true );
-							mc2.changeDirection( true );
-						}
-					}
-				}
-			}
+//			var mc1:LetterBubble, mc2:LetterBubble;
+//			for ( var i:int = 0; i < container.numChildren; i++ )
+//			{
+//				mc1 = container.getChildAt( i ) as LetterBubble;
+//				if ( mc1 )
+//				{
+//					for ( var j:int = 0; j < container.numChildren; j++ )
+//					{
+//						mc2 = container.getChildAt( j ) as LetterBubble;
+//						if ( mc2 && mc1 != mc2 &&  HitTestUtils.pixelsHitTest2( mc1.point, mc1.bitmapData, mc2.point, mc2.bitmapData) )
+//						{
+//							var dist0:Number = LetterBubble.WH;
+//							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
+//							if ( dist1 < dist0 )
+//							{
+//								var rate:Number = ( dist0 / dist1 );
+//								var movex:Number = Math.abs( mc1.x - mc2.x ) * rate;
+//								var movey:Number = Math.abs( mc1.y - mc2.y ) * rate;
+//								if ( mc1.x < mc2.x )
+//								{
+//									if ( mc2.isEdgeRight )
+//										mc1.x = mc2.x - movex;
+//									else mc2.x = mc1.x + movex;
+//								}
+//								else if ( mc2.isEdgeLeft )
+//									mc1.x = mc2.x + movex;
+//								else mc2.x = mc1.x - movex;
+//								
+//								if ( mc1.y < mc2.y )
+//								{
+//									if ( mc2.isEdgeDown )
+//										mc1.y = mc2.y - movey;
+//									else mc2.y = mc1.y + movey;
+//								}
+//								else if ( mc2.isEdgeUp )
+//									mc1.y = mc2.y + movey;
+//								else mc2.y = mc1.y - movey;
+//							}
+//							mc1.changeDirection( true );
+//							mc2.changeDirection( true );
+//						}
+//					}
+//				}
+//			}
 		}
 		
 		override protected function get resNames():Array
