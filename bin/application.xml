@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
 	
-	<!-- name:用于获取资源url的名称 -->
-	<!-- url:资源路径 -->
+	<!-- id:用于获取资源src的名称 -->
+	<!-- src:资源路径 -->
 	<!-- version:资源版本控制 -->
 	<!-- first:是否登陆加载（1第1阶段加载/2登陆加载/0非登陆加载用时加载） -->
 	
-	<item name="ui_comp" url="assets/ui_component.swf" version="1" first="1" />
-	<item name="ui_test" url="assets/test/ui_test.swf" version="1" first="1" />
-	<item name="ui_login" url="assets/ui_login.swf" version="1" first="1" />
-	<item name="ui_register" url="assets/ui_register.swf" version="1" first="1" />
 	
-	<item name="ui_map" url="assets/ui_map.swf" version="1" first="2" />
-	<item name="ui_main" url="assets/ui_main.swf" version="1" first="2" />
-	<item name="ui_chat" url="assets/ui_chat.swf" version="1" first="2" />
-	<!-- <item name="ui_font" url="assets/ui_font.swf" version="1" first="2" /> -->
-	<item name="ui_font" url="assets/ui_font.swf" version="1" first="2" />
+	<!-- 第一阶段加载 -->
+	<asset id="ui_test" src="assets/test/ui_test.swf" version="1" first="1"/>
 	
-	<item name="testPanel" url="assets/panel/testPanel.swf" version="1" first="0" />
+	<asset id="ui_comp" src="assets/ui_component.swf" version="1" first="1"/>
+	<asset id="ui_login" src="assets/ui_login.swf" version="1" first="1"/>
+	<asset id="ui_register" src="assets/ui_register.swf" version="1" first="1"/>
 	
-	<item name="map_chapter_0" url="assets/chapters/map_chapter_0.swf" version="1" first="0" />
-	<item name="map_chapter_1" url="assets/chapters/map_chapter_1.swf" version="1" first="0" />
-	<item name="map_chapter_2" url="assets/chapters/map_chapter_2.swf" version="1" first="0" />
-	<item name="map_chapter_3" url="assets/chapters/map_chapter_3.swf" version="1" first="0" />
-	<item name="map_chapter_4" url="assets/chapters/map_chapter_4.swf" version="1" first="0" />
-	<item name="map_chapter_5" url="assets/chapters/map_chapter_5.swf" version="1" first="0" />
+	<!-- 第二阶段加载 -->
+	<asset id="ui_map" src="assets/ui_map.swf" version="1" first="2"/>
+	<asset id="ui_main" src="assets/ui_main.swf" version="1" first="2"/>
+	<asset id="ui_chat" src="assets/ui_chat.swf" version="1" first="2"/>
+	<asset id="ui_font" src="assets/ui_font.swf" version="1" first="2"/>
 	
-	<item name="ui_friend" url="assets/ui_friend.swf" version="1" first="0" />
+	<!-- 以下部分为用时加载 -->
 	
-	<item name="ui_round" url="assets/fight/ui_round.swf" version="1" first="0" />
-	<item name="ui_round_losePanel" url="assets/fight/ui_round_losePanel.swf" version="1" first="0" />
-	<item name="ui_round_winPanel" url="assets/fight/ui_round_winPanel.swf" version="1" first="0" />
-	<item name="ui_online" url="assets/fight/ui_online.swf" version="1" first="0" />
-	<item name="ui_ready" url="assets/fight/ui_ready.swf" version="1" first="0" />
-	<item name="ui_matching" url="assets/fight/ui_matching.swf" version="1" first="0" />
-	<item name="ui_fight_search" url="assets/fight/ui_fight_search.swf" version="1" first="0" />
+	<asset id="testPanel" src="assets/panel/testPanel.swf" version="1" first="0"/>
+	
+	<!-- 地图资源 -->
+	<asset id="map_chapter_0" src="assets/map_chapter_0.swf" version="1" first="0"/>
+	<asset id="map_chapter_1" src="assets/map_chapter_1.swf" version="1" first="0"/>
+	<asset id="map_chapter_2" src="assets/map_chapter_2.swf" version="1" first="0"/>
+	<asset id="map_chapter_3" src="assets/map_chapter_3.swf" version="1" first="0"/>
+	<asset id="map_chapter_4" src="assets/map_chapter_4.swf" version="1" first="0"/>
+	<asset id="map_chapter_5" src="assets/map_chapter_5.swf" version="1" first="0"/>
+	
+	<!-- 好友 -->
+	<asset id="ui_friend" src="assets/ui_friend.swf" version="1" first="0"/>
+	
+	<!-- 战斗部分 -->
+	<asset id="ui_round" src="assets/ui_round.swf" version="1" first="0"/>
+	<asset id="ui_round_losePanel" src="assets/ui_round_losePanel.swf" version="1" first="0"/>
+	<asset id="ui_round_winPanel" src="assets/ui_round_winPanel.swf" version="1" first="0"/>
+	<asset id="ui_online" src="assets/ui_online.swf" version="1" first="0"/>
+	<asset id="ui_ready" src="assets/ui_ready.swf" version="1" first="0"/>
+	<asset id="ui_matching" src="assets/ui_matching.swf" version="1" first="0"/>
+	<asset id="ui_fight_search" src="assets/ui_fight_search.swf" version="1" first="0"/>
 	
 </data>

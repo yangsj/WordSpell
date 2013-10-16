@@ -63,11 +63,11 @@ package app.managers
 			var xmllist:XMLList = applicationXml.children();
 			for each ( var xml:XML in xmllist )
 			{
-				var name:String = String( xml.@name );
-				var url:String = String( xml.@url );
+				var name:String = String( xml.@id );
+				var url:String = String( xml.@src );
 				var version:String = String( xml.@version );
 				var first:int = int( xml.@first );
-				var path:String = GameConfig.deployPath + url + "?t=" + version + (new Date().time).toString();
+				var path:String = GameConfig.deployPath + url + "?t=" + version;
 				dictResList[ name ] = path;
 				
 				if ( first == 1 )
