@@ -11,6 +11,7 @@ package app.modules.fight.view.item
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	
 	import app.modules.TempleteSprite;
@@ -45,6 +46,8 @@ package app.modules.fight.view.item
 			buttonMode = true;
 			setSkinWithName( "ui_Skin_Round_Bubble_" + int( Math.random() * 5 ) );
 			txtLetter.visible = false;
+			txtLetter.embedFonts = true;
+			txtLetter.antiAliasType = AntiAliasType.ADVANCED;
 			
 			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
