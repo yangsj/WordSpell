@@ -56,8 +56,7 @@ package app.startup
 		private function failed():void
 		{
 			dispatch( new ServiceEvent( ServiceEvent.FAILED ));
-			Alert.show( "连接失败！" );
-			LoadingEffect.hide();
+			alert( "连接失败！" );
 		}
 		
 		/**
@@ -66,17 +65,17 @@ package app.startup
 		private function onSocketClose(event : SocketEvent) : void 
 		{
 			dispatch( new ServiceEvent( ServiceEvent.CLOSED ));
-			Alert.show( "连接关闭！" );
-			LoadingEffect.hide();
+			alert( "连接关闭！" );
 		}
 		
 		private function onIoError( event:SocketEvent ):void
 		{
-			LoadingEffect.hide();
+			alert("连接错误！");
 		}
 		
 		private function alert( msg:String ):void
 		{
+			LoadingEffect.hide();
 			Alert.show( msg, callBack, "刷新" );
 			function callBack( type:int ):void
 			{

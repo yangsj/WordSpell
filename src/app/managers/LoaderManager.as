@@ -113,6 +113,7 @@ package app.managers
 						else
 						{
 							var url:String = dictResList[ name ];
+							Logger.debug( "加载url=" + url );
 							dictResLoaded[ name ] = url;
 							loader.load( new URLRequest( url ), getLoaderContext( domainName ) );
 						}
