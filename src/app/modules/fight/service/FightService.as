@@ -209,7 +209,7 @@ package app.modules.fight.service
 		{
 			var req:select_item_bubble_req_t = new select_item_bubble_req_t();
 			req.bubble_id = id;
-			call( client_cmd_e.USE_ITEM_REQ, req );
+			call( client_cmd_e.SELECT_ITEM_BUBBLE_REQ , req );
 		}
 
 	}

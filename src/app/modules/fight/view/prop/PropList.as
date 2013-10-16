@@ -1,6 +1,9 @@
 package app.modules.fight.view.prop
 {
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.geom.Point;
 	
 	import app.modules.fight.view.prop.item.PropItem;
 	import app.modules.model.vo.ItemVo;
@@ -13,6 +16,8 @@ package app.modules.fight.view.prop
 	 */
 	public class PropList extends Sprite
 	{
+		private static var _itemPoints:Vector.<Point>;
+		
 		private var vecItemSkin:Vector.<PropItem>;
 		
 		public function PropList()
@@ -20,6 +25,22 @@ package app.modules.fight.view.prop
 			super();
 			
 			createListItems();
+			
+			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
+		}
+		
+		protected function addedToStageHandler(event:Event):void
+		{
+			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
+			if ( _itemPoints == null )
+			{
+				_itemPoints = new Vector.<Point>();
+				for (var i:int = 0; i < numChildren; i++ )
+				{
+					var dis:DisplayObject = this.getChildAt( i );
+					_itemPoints[ i ] = dis.localToGlobal( new Point( dis.width >> 1, dis.height>> 1));
+				}
+			}
 		}
 		
 		public function clear():void
@@ -41,6 +62,7 @@ package app.modules.fight.view.prop
 				addChild( item );
 				vecItemSkin[ i ] = item;
 			}
+			
 		}
 		
 		public function setData( itemList:Vector.<ItemVo> ):void
@@ -75,6 +97,12 @@ package app.modules.fight.view.prop
 			}
 			return null;
 		}
+
+		public static function get itemPoints():Vector.<Point>
+		{
+			return _itemPoints;
+		}
+
 		
 	}
 }

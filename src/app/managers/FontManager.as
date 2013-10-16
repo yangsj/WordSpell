@@ -1,5 +1,6 @@
 package app.managers
 {
+	import flash.text.Font;
 	
 	/**
 	 * ……
@@ -8,13 +9,33 @@ package app.managers
 	 */
 	public class FontManager
 	{
-		[Embed(systemFont="assets/DFPHaiBaoW12-GB.ttf", fontName="MyFont", unicodeRange="U+4e2d,U+6587,U+5b57,U+578b", mimeType="application/x-font")]
-		public static var MyClass : Class;
+		private static var _font:Font;
+		private static var _fontName:String;
 		
 		public function FontManager()
 		{
 		}
 		
+		public static function init():void
+		{
+			var myClass:Class = LoaderManager.getClass( "gamewordspellfont" );
+			Font.registerFont( myClass );
+			var array:Array = Font.enumerateFonts( false );
+			_font = array[ 0 ];
+			_fontName = _font.fontName;
+			trace( array.length );
+		}
+
+		public static function get font():Font
+		{
+			return _font;
+		}
+
+		public static function get fontName():String
+		{
+			return _fontName;
+		}
+
 		
 	}
 }

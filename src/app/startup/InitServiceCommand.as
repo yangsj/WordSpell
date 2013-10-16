@@ -1,5 +1,7 @@
 package app.startup
 {
+	import flash.external.ExternalInterface;
+	
 	import app.GameConfig;
 	import app.core.Alert;
 	import app.events.ServiceEvent;
@@ -70,9 +72,21 @@ package app.startup
 		
 		private function onIoError( event:SocketEvent ):void
 		{
-			Alert.show( "连接错误！" );
 			LoadingEffect.hide();
 		}
+		
+		private function alert( msg:String ):void
+		{
+			Alert.show( msg, callBack, "刷新" );
+			function callBack( type:int ):void
+			{
+				if ( ExternalInterface.available )
+				{
+					
+				}
+			}
+		}
+		
 		
 	}
 }

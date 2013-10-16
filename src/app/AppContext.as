@@ -10,6 +10,7 @@ package app
 	import app.startup.FlashVarsCommand;
 	import app.startup.InitCommand;
 	import app.startup.InitDataCommand;
+	import app.startup.InitFontCommand;
 	import app.startup.InitServiceCommand;
 	import app.startup.ShowLoginCommand;
 	import app.utils.appStage;
@@ -74,6 +75,9 @@ package app
 			commandMap.mapEvent(GameEvent.LOGIN_SUCCESSED, MainLoadCommand, GameEvent, true );
 			
 			//********** 以下几个条件检查是否进入游戏
+			
+			// 初始化字体
+			commandMap.mapEvent(GameEvent.MAIN_LOAD_COMPLETE, InitFontCommand, GameEvent, true);
 			
 			// 资源加载完成进入游戏场景检查
 			commandMap.mapEvent(GameEvent.MAIN_LOAD_COMPLETE, EnterGameCommand, GameEvent, true);

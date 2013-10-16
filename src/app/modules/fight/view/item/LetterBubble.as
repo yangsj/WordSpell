@@ -8,15 +8,15 @@ package app.modules.fight.view.item
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	
 	import app.modules.TempleteSprite;
 	import app.modules.fight.events.FightEvent;
 	import app.modules.fight.model.LetterBubbleVo;
+	import app.modules.model.vo.ItemType;
+	import app.utils.TextUtil;
 	import app.utils.appStage;
 	
 	import victor.framework.manager.TickManager;
@@ -45,9 +45,11 @@ package app.modules.fight.view.item
 			mouseChildren = false;
 			buttonMode = true;
 			setSkinWithName( "ui_Skin_Round_Bubble_" + int( Math.random() * 5 ) );
-			txtLetter.visible = false;
-			txtLetter.embedFonts = true;
-			txtLetter.antiAliasType = AntiAliasType.ADVANCED;
+			var fiter:Array = txtLetter.filters;
+			DisplayUtil.removedFromParent( txtLetter );
+			txtLetter = TextUtil.getText( 50, 0x00FFFF, -22, -27, 44, 54, "center");
+			txtLetter.filters = fiter;
+			_skin.addChild( txtLetter );
 			
 			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
@@ -160,9 +162,12 @@ package app.modules.fight.view.item
 			if ( value )
 			{
 				mouseEnabled = false;
-				dispatchEvent( new FightEvent( FightEvent.SELECTED_LETTER, _data, true ));
-				TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
-				TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });
+				dispatchEvent( new FightEvent( FightEvent.SELECTED_LETTER, this, true ));
+				if ( _data.itemType == ItemType.DEFAULT )
+				{
+					TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
+					TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });
+				}
 			}
 		}
 		

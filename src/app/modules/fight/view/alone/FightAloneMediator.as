@@ -8,10 +8,13 @@ package app.modules.fight.view.alone
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.service.FightService;
+	import app.modules.fight.view.item.LetterBubble;
+	import app.modules.fight.view.prop.PropList;
 	import app.modules.main.event.MainUIEvent;
 	import app.modules.map.model.MapModel;
 	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
+	import app.utils.appStage;
 	
 	import victor.framework.core.BaseMediator;
 
@@ -33,6 +36,11 @@ package app.modules.fight.view.alone
 		public var fightService:FightService;
 		
 		private var letterIndex:int = 0;
+		
+		/**
+		 * 是否点击道具泡泡
+		 */
+		private var clickPropBubble:Array;
 		
 		public function FightAloneMediator()
 		{
@@ -67,6 +75,10 @@ package app.modules.fight.view.alone
 			
 			// 物品使用成功
 			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
+			// 物品更新
+			addContextListener( PackEvent.UPDATE_ITEMS, updateItemsHandler, PackEvent );
+			
+			clickPropBubble = [];
 
 			// 拉取数据
 			fightService.startRound();
@@ -98,7 +110,8 @@ package app.modules.fight.view.alone
 
 		private function selectedLetterHandler( event:FightEvent ):void
 		{
-			var vo:LetterBubbleVo = event.data as LetterBubbleVo;
+			var letterBublle:LetterBubble = event.data as LetterBubble;
+			var vo:LetterBubbleVo = letterBublle.data;
 			
 			// 测试泡泡
 			if ( vo.id == -1 )
@@ -107,14 +120,28 @@ package app.modules.fight.view.alone
 			// 选中产生道具的字母泡泡
 			if ( vo.itemType != ItemType.DEFAULT )
 			{
+				clickPropBubble.push( letterBublle );
 				fightService.inputProp( vo.id );
-				view.delPropItemFromDict( vo.itemType );
 			}
 			else // 字母泡泡
 			{
 				view.delLetterFromDict( vo.letter );
 				letterIndex++;
 				dispatch( new FightEvent( FightEvent.UPDATE_WORD, vo ));
+			}
+		}
+		
+		private function updateItemsHandler( event:PackEvent ):void
+		{
+			if ( clickPropBubble )
+			{
+				var bubble:LetterBubble = ( clickPropBubble.length > 0 ) ? clickPropBubble.shift() : null;
+				if ( bubble )
+				{
+					var itemType:int = bubble.data.itemType;
+					view.delPropItemFromDict( itemType );
+					view.playAddPropEffect( bubble, PropList.itemPoints[ itemType - 1 ] );
+				}
 			}
 		}
 		

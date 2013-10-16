@@ -1,0 +1,42 @@
+package app.utils
+{
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+	
+	import app.managers.FontManager;
+	
+	/**
+	 * ……
+	 * @author 	yangsj 
+	 * 			2013-10-16
+	 */
+	public class TextUtil
+	{
+		public function TextUtil()
+		{
+		}
+		
+		public static function getFormat( size:int = 50, color:uint = 0, align:String = "center" ):TextFormat
+		{
+			var tf:TextFormat = new TextFormat();
+			tf.font = FontManager.fontName;
+			tf.color = color;
+			tf.size = size;
+			tf.align = align;
+			return tf;
+		}
+		
+		public static function getText( size:int, color:uint, x:Number = 0, y:Number = 0, w:Number = 100, h:Number = 22, aglin:String = "center" ):TextField
+		{
+			var text:TextField = new TextField();
+			text.defaultTextFormat = getFormat( size, color );
+			text.embedFonts = true;
+			text.x = x;
+			text.y = y;
+			text.width = w;
+			text.height = h;
+			return text;
+		}
+		
+	}
+}

@@ -1,8 +1,13 @@
 package app.modules.fight.view.alone
 {
+	import com.greensock.TweenMax;
+	
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
@@ -12,6 +17,7 @@ package app.modules.fight.view.alone
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.fight.view.prop.PropList;
 	import app.modules.fight.view.spell.SpellArea;
+	import app.utils.TextUtil;
 	import app.utils.appStage;
 	
 	import victor.framework.core.LoadViewBase;
@@ -41,6 +47,7 @@ package app.modules.fight.view.alone
 
 		private var spellArea:SpellArea;
 		private var propList:PropList;
+		private var effectContainer:Sprite;
 
 		private var dictLetter:Dictionary;
 		private var dictProps:Dictionary;
@@ -63,6 +70,20 @@ package app.modules.fight.view.alone
 			propList.x = 665;
 			propList.y = 469;
 			addChild( propList );
+			
+			effectContainer = new Sprite();
+			addChild( effectContainer );
+			
+			var fiter1:Array = txtName.filters;
+			var fiter2:Array = txtTime.filters;
+			DisplayUtil.removedFromParent( txtName );
+			DisplayUtil.removedFromParent( txtTime );
+			txtTime = TextUtil.getText(26, 0xffff00, 452,6,120,30, "left");
+			txtName = TextUtil.getText( 18, 0x006699, 15, 11, 300, 25, "left");
+			txtName.filters = fiter1;
+			txtTime.filters = fiter2;
+			_skin.addChild( txtName );
+			_skin.addChild( txtTime );
 		}
 
 		public function initialize():void
@@ -83,6 +104,19 @@ package app.modules.fight.view.alone
 			spellArea.clear();
 			propList.clear();
 			dictProps = null;
+		}
+		
+		public function playAddPropEffect( bubble:LetterBubble, point:Point ):void
+		{
+			var pos:Point = bubble.localToGlobal( new Point());
+			bubble.x = pos.x;
+			bubble.y = pos.y;
+			effectContainer.addChild( bubble );
+			TweenMax.to( bubble, 0.3, {x:point.x, y:point.y, onComplete: complete, onCompleteParams:[bubble]});
+			function complete( bubble:DisplayObject ):void
+			{
+				TweenMax.to( bubble, 0.2, {scaleX:0.3, scaleY:0.3, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[bubble]});
+			}
 		}
 
 		public function delLetterFromDict( letter:String ):void

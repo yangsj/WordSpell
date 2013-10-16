@@ -3,7 +3,6 @@ package app.modules.fight.view.prop
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.PackEvent;
-	import app.modules.main.event.MainUIEvent;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.serivce.PackService;
@@ -41,7 +40,7 @@ package app.modules.fight.view.prop
 			// 物品使用成功
 			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
 			// 物品更新
-			addContextListener( PackEvent.UPDATE_ITEMS, updatePackItemsHandler, MainUIEvent );
+			addContextListener( PackEvent.UPDATE_ITEMS, updatePackItemsHandler, PackEvent );
 			
 			setData();
 		}
