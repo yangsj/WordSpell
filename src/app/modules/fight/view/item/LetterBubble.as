@@ -99,7 +99,7 @@ package app.modules.fight.view.item
 			x = moveArea.x + moveArea.width * Math.random();
 			y = moveArea.y + moveArea.height * Math.random();
 			
-			var dxy:Number = 1;
+			var dxy:Number = 0.5 + Math.random() * 0.5;
 			dx = Math.random() < 0.5 ? dxy : -dxy;
 			dy = Math.random() < 0.5 ? dxy : -dxy;
 		}

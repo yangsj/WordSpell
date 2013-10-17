@@ -18,7 +18,7 @@
 	<asset id="ui_map" src="assets/ui_map.swf" version="1_1" first="2"/>
 	<asset id="ui_main" src="assets/ui_main.swf" version="1_1" first="2"/>
 	<asset id="ui_chat" src="assets/ui_chat.swf" version="1_1" first="2"/>
-	<asset id="ui_font" src="assets/ui_font.swf" version="1_1" first="2"/>
+	<asset id="ui_font" src="assets/ui_font.swf" version="1_29" first="2"/>
 	
 	<!-- 以下部分为用时加载 -->
 	
