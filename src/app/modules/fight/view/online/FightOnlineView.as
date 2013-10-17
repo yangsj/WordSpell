@@ -131,7 +131,7 @@ package app.modules.fight.view.online
 		
 		override protected function get skinName():String
 		{
-			return "ui_Skin_Round_MainPanel";
+			return "ui_Skin_FightOnlineView";
 		}
 	}
 }
