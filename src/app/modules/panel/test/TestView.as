@@ -168,10 +168,5 @@ package app.modules.panel.test
 			return [ "testPanel"];
 		}
 		
-		override protected function get domainName():String
-		{
-			return "testPanel";
-		}
-		
 	}
 }

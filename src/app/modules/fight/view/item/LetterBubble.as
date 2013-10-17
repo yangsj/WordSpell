@@ -53,8 +53,8 @@ package app.modules.fight.view.item
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
 //			addEventListener( MouseEvent.MOUSE_OVER, mouseHandler );
 			addEventListener( MouseEvent.CLICK, mouseHandler );
-//			TickManager.doInterval( enterFrameHandler, 40 );
-			addEventListener(Event.ENTER_FRAME, enterFrameHandler );
+			TickManager.doInterval( enterFrameHandler, 30 );
+//			addEventListener(Event.ENTER_FRAME, enterFrameHandler );
 		}
 		
 		protected function mouseHandler(event:MouseEvent):void
@@ -128,6 +128,8 @@ package app.modules.fight.view.item
 				{
 					dx *= -1;
 					dy *= -1;
+					x += dx;
+					y += dy;
 				}
 				else // 到达边缘
 				{

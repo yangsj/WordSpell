@@ -1,8 +1,13 @@
 package app.modules.main.view
 {
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
+	
+	import app.GameConfig;
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.ViewEvent;
+	import app.modules.ViewName;
 	import app.modules.main.FunctionBtnConfig;
 	import app.modules.main.event.MainUIEvent;
 	
@@ -39,6 +44,19 @@ package app.modules.main.view
 			addContextListener( MainUIEvent.UPDATE_PROPERTY, updatePropertyHandler, MainUIEvent );
 			
 			initData();
+			
+//			if ( GameConfig.isDebug )
+//			{
+//				contextView.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler );
+//			}
+		}
+		
+		protected function keyHandler(event:KeyboardEvent):void
+		{
+			if ( event.keyCode == Keyboard.D )
+			{
+				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Test ));
+			}
 		}
 		
 		private function initData():void
@@ -67,7 +85,8 @@ package app.modules.main.view
 			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName ) );
 			if ( viewName == FunctionBtnConfig.FIGHT )
 			{
-				Tips.showMouse( "功能开发中敬请期待！" );
+//				Tips.showMouse( "功能开发中敬请期待！" );
+				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightSearchPanel ));
 			}
 			else if ( viewName == FunctionBtnConfig.PRACTICE )
 			{

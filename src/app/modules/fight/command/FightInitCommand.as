@@ -2,12 +2,16 @@ package app.modules.fight.command
 {
 	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
+	import app.modules.fight.panel.friend.FightFriendMediator;
+	import app.modules.fight.panel.friend.FightFriendPanel;
 	import app.modules.fight.panel.matching.FightMatchingMediator;
 	import app.modules.fight.panel.matching.FightMatchingPanel;
 	import app.modules.fight.panel.ready.FightReadyMediator;
 	import app.modules.fight.panel.ready.FightReadyPanel;
 	import app.modules.fight.panel.result.FightOnlineResultMediator;
 	import app.modules.fight.panel.result.FightOnlineResultPanel;
+	import app.modules.fight.panel.search.FightSearchMediator;
+	import app.modules.fight.panel.search.FightSearchPanel;
 	import app.modules.fight.service.FightService;
 	import app.modules.fight.view.alone.FightAloneMediator;
 	import app.modules.fight.view.alone.FightAloneView;
@@ -48,6 +52,8 @@ package app.modules.fight.command
 			addView( ViewName.FightMatchingPanel, FightMatchingPanel, FightMatchingMediator );
 			addView( ViewName.FightReadyPanel, FightReadyPanel, FightReadyMediator );
 			addView( ViewName.FightOnlineResultPanel, FightOnlineResultPanel, FightOnlineResultMediator );
+			addView( ViewName.FightFriendPanel, FightFriendPanel, FightFriendMediator );
+			addView( ViewName.FightSearchPanel, FightSearchPanel, FightSearchMediator );
 			
 			mapView( PropList, PropListMediator );
 			mapView( SpellArea, SpellAreaMediator );

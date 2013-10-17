@@ -112,6 +112,11 @@ package app.modules
 		 */
 		public static const FightSearchPanel:String = "FightSearchPanel";
 		
+		/**
+		 * 好友对战列表
+		 */
+		public static const FightFriendPanel:String = "FightFriendPanel";
+		
 		//// fight
 		
 	}

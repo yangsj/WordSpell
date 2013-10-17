@@ -84,7 +84,7 @@ package app.modules.fight.view
 			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
 			appStage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
-			TickManager.doInterval( enterFrameHandler, 40 );
+			TickManager.doInterval( enterFrameHandler, 20 );
 		}
 		
 		public function clear():void
@@ -205,7 +205,7 @@ package app.modules.fight.view
 						mc2 = container.getChildAt( j ) as LetterBubble;
 						if ( mc2 && mc1 != mc2 &&  HitTestUtils.pixelsHitTest2( mc1.point, mc1.bitmapData, mc2.point, mc2.bitmapData) )
 						{
-							var dist0:Number = ( mc1.width + mc2.width + 5 ) >> 1;
+							var dist0:Number = 82;//( mc1.width + mc2.width ) >> 1;
 							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
 							if ( dist1 < dist0 )
 							{

@@ -81,7 +81,7 @@ package app.core
 				txtMsg.visible = false;
 				
 				DisplayUtil.removedFromParent( _bitmap );
-				var bitmapdata:BitmapData = new BitmapData( txtMsg.textWidth, txtMsg.textHeight + 5, true, 0 );
+				var bitmapdata:BitmapData = new BitmapData( txtMsg.width, txtMsg.height, true, 0 );
 				bitmapdata.draw( txtMsg );
 				_bitmap = new Bitmap( bitmapdata, "auto", true );
 				_bitmap.x = txtMsg.x + (( txtMsg.width - _bitmap.width ) >> 1);
