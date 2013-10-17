@@ -45,15 +45,15 @@ package app.modules.fight.service
 
 		override protected function initRegist():void
 		{
-			// 开始关卡
+			// 闯关练习开始关卡
 			regist( server_cmd_e.START_ROUND_RET, startRoundNotify, start_round_ret_t );
 			// 关卡结束
 			regist( server_cmd_e.END_ROUND_RET, endRoundNotify, end_round_ret_t );
-			// 下一个单词
+			// 闯关练习下一个单词
 			regist( server_cmd_e.NEXT_WORD_RET, nextWordNotify, next_word_t );
 		}
 
-		// 开始
+		// 闯关练习开始
 		private function startRoundNotify( resp:SocketResp ):void
 		{
 			var data:start_round_ret_t = resp.data as start_round_ret_t;
@@ -70,6 +70,7 @@ package app.modules.fight.service
 			var listBub:Vector.<LetterBubbleVo>;
 			var str:String = "";
 			var letterBubbleVo:LetterBubbleVo;
+			var allLetterList:Vector.<LetterBubbleVo> = new Vector.<LetterBubbleVo>();
 			for ( var i:int = 0; i < length; i++ )
 			{
 				index = int( blanks[ i ]);
@@ -87,6 +88,8 @@ package app.modules.fight.service
 					listBub.push( letterBubbleVo );
 					str += letterBubbleVo.letter;
 					order++;
+					
+					allLetterList.push( letterBubbleVo );
 				}
 				spellVo = new SpellVo();
 				spellVo.chinese = cnAry[ i ];
@@ -114,12 +117,12 @@ package app.modules.fight.service
 				dict[ key ] = temp;
 			}
 			fightModel.dictPropPos = dict;
-			
+			fightModel.allLetterList = allLetterList;
 			fightModel.spellList = spellList;
 			fightModel.modeType = data.mode;
 
 			// 设置第一个单词信息
-			fightModel.spellVo = fightModel.spellList.shift();
+			updateLetterInfoList();
 			// 
 			fightModel.currentIndex = 0;
 
@@ -168,11 +171,16 @@ package app.modules.fight.service
 			if ( fightModel.isFinish == false )
 			{
 				fightModel.currentIndex++;
-				
-				fightModel.spellVo = fightModel.spellList.shift();
+				updateLetterInfoList();
 				//
 				dispatch( new FightEvent( FightEvent.NOTIFY_NEXT_WORD ));
 			}
+		}
+		
+		private function updateLetterInfoList():void
+		{
+			fightModel.spellVo = fightModel.spellList.shift();
+			fightModel.allLetterList.splice(0, fightModel.spellVo.charsLength );
 		}
 
 		////////////// request ///////////

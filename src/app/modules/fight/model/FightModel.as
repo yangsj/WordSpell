@@ -6,9 +6,6 @@ package app.modules.fight.model
 	
 	import org.robotlegs.mvcs.Actor;
 	
-	import victor.framework.utils.MathUtil;
-	
-	
 	/**
 	 * ……
 	 * @author 	yangsj 
@@ -22,6 +19,7 @@ package app.modules.fight.model
 		private var _fightEndVo:FightEndVo;
 		private var _dictPropPos:Dictionary;
 		private var _currentIndex:int = 0;
+		private var _allLetterList:Vector.<LetterBubbleVo>;
 		
 		public function FightModel()
 		{
@@ -112,6 +110,22 @@ package app.modules.fight.model
 		public function set dictPropPos(value:Dictionary):void
 		{
 			_dictPropPos = value;
+		}
+
+		/**
+		 * 所有字母泡泡信息
+		 */
+		public function get allLetterList():Vector.<LetterBubbleVo>
+		{
+			return _allLetterList;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set allLetterList(value:Vector.<LetterBubbleVo>):void
+		{
+			_allLetterList = value;
 		}
 
 

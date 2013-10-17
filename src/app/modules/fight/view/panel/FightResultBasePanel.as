@@ -4,9 +4,10 @@ package app.modules.fight.view.panel
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
-
+	
 	import app.modules.fight.model.FightEndVo;
-
+	import app.utils.TextUtil;
+	
 	import victor.framework.core.BasePanel;
 
 
@@ -50,6 +51,10 @@ package app.modules.fight.view.panel
 		override protected function onceInit():void
 		{
 			super.onceInit();
+			
+			txtExp = TextUtil.cloneText( txtExp );
+			txtMoney = TextUtil.cloneText( txtMoney );
+			
 			btnAgain.addEventListener( MouseEvent.CLICK, btnAgainHandler );
 			btnNext.addEventListener( MouseEvent.CLICK, btnNextHandler );
 			btnPractice.addEventListener( MouseEvent.CLICK, btnPracticeHandler );

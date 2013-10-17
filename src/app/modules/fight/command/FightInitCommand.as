@@ -2,6 +2,12 @@ package app.modules.fight.command
 {
 	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
+	import app.modules.fight.panel.matching.FightMatchingMediator;
+	import app.modules.fight.panel.matching.FightMatchingPanel;
+	import app.modules.fight.panel.ready.FightReadyMediator;
+	import app.modules.fight.panel.ready.FightReadyPanel;
+	import app.modules.fight.panel.result.FightOnlineResultMediator;
+	import app.modules.fight.panel.result.FightOnlineResultPanel;
 	import app.modules.fight.service.FightService;
 	import app.modules.fight.view.alone.FightAloneMediator;
 	import app.modules.fight.view.alone.FightAloneView;
@@ -39,11 +45,14 @@ package app.modules.fight.command
 			addView( ViewName.FightWinPanel, FightWinPanel, FightWinMediator );
 			addView( ViewName.FightLosePanel, FightLosePanel, FightLoseMediator );
 			
+			addView( ViewName.FightMatchingPanel, FightMatchingPanel, FightMatchingMediator );
+			addView( ViewName.FightReadyPanel, FightReadyPanel, FightReadyMediator );
+			addView( ViewName.FightOnlineResultPanel, FightOnlineResultPanel, FightOnlineResultMediator );
+			
 			mapView( PropList, PropListMediator );
 			mapView( SpellArea, SpellAreaMediator );
 			
 			injectActor( FightModel );
-			
 			injectActor( FightService );
 		}
 		

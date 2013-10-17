@@ -14,9 +14,9 @@ package app.modules.fight.view.alone
 	import app.modules.map.model.MapModel;
 	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
-	import app.utils.appStage;
 	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.log.Logger;
 
 
 	/**
@@ -185,16 +185,32 @@ package app.modules.fight.view.alone
 		{
 			if ( fightModel.spellVo )
 			{
-				view.setLettersPool( fightModel.spellVo.items );
-				trace( " fightModel.currentIndex *********************************************" +  fightModel.currentIndex );
-				var array:Array = fightModel.dictPropPos[ fightModel.currentIndex ] as Array;
-				if ( array )
+				var modeType:int = fightModel.modeType;
+				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items.slice();
+				if ( modeType > 1 )
 				{
-					var letterVo:LetterBubbleVo;
-					for each ( letterVo in array )
-						view.addPropItem( letterVo );
+					var length:int = fightModel.allLetterList.length;
+					var index:int = 0;
+					for ( index = 0; index < 20; index++ )
+					{
+						if ( index < length ) items.push( fightModel.allLetterList[ index ] );
+						else break;
+						if ( items.length > 20 )
+							break;
+					}
 				}
-				view.displayPropItem();
+				view.setLettersPool( items );
+				Logger.debug( " fightModel.currentIndex *********************************************" +  fightModel.currentIndex );
+				if ( modeType > 1 )
+				{
+					var array:Array = fightModel.dictPropPos[ fightModel.currentIndex ] as Array;
+					if ( array ) {
+						var letterVo:LetterBubbleVo;
+						for each ( letterVo in array )
+						view.addPropItem( letterVo );
+					}
+					view.displayPropItem();
+				}
 			}
 		}
 

@@ -31,7 +31,7 @@ package app.modules.fight.view.item
 	 */
 	public class LetterBubble extends TempleteSprite
 	{
-		private const moveArea:Rectangle = new Rectangle(41, 41, 808, 298 );
+		private var moveArea:Rectangle = new Rectangle(41, 41, 808, 298 );
 		
 		public var txtLetter:TextField;
 		
@@ -42,20 +42,19 @@ package app.modules.fight.view.item
 		public function LetterBubble()
 		{
 			super();
+			setMoveArea();
 			mouseChildren = false;
 			buttonMode = true;
 			setSkinWithName( "ui_Skin_Round_Bubble_" + int( Math.random() * 5 ) );
-			var fiter:Array = txtLetter.filters;
-			DisplayUtil.removedFromParent( txtLetter );
-			txtLetter = TextUtil.getText( 50, 0x00FFFF, -22, -27, 44, 54, "center");
-			txtLetter.filters = fiter;
-			_skin.addChild( txtLetter );
+			
+			txtLetter = TextUtil.cloneText( txtLetter );
 			
 			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
-			addEventListener( MouseEvent.MOUSE_OVER, mouseHandler );
+//			addEventListener( MouseEvent.MOUSE_OVER, mouseHandler );
 			addEventListener( MouseEvent.CLICK, mouseHandler );
-			TickManager.doInterval( enterFrameHandler, 40 );
+//			TickManager.doInterval( enterFrameHandler, 40 );
+			addEventListener(Event.ENTER_FRAME, enterFrameHandler );
 		}
 		
 		protected function mouseHandler(event:MouseEvent):void
@@ -113,6 +112,11 @@ package app.modules.fight.view.item
 			TickManager.clearDoTime( enterFrameHandler );
 		}
 		
+		public function setMoveArea( isAlone:Boolean = true ):void
+		{
+			moveArea.width = isAlone ? 808 : 404;
+		}
+		
 		/**
 		 * 改变运动方向
 		 */
@@ -120,16 +124,10 @@ package app.modules.fight.view.item
 		{
 			if ( parent )
 			{
-				if ( reverse )
+				if ( reverse )// 泡泡相碰
 				{
-					var a:Number = dx;
-					var b:Number = dy;
 					dx *= -1;
 					dy *= -1;
-					if ( a == dx || b == dy )
-					{
-						trace("************************************");
-					}
 				}
 				else // 到达边缘
 				{

@@ -92,6 +92,26 @@ package app.modules
 		 */
 		public static const FightLosePanel:String = "FightLosePanel";
 		
+		/**
+		 * 匹配界面
+		 */
+		public static const FightMatchingPanel:String = "FightMatchingPanel";
+		
+		/**
+		 * 准备界面
+		 */
+		public static const FightReadyPanel:String = "FightReadyPanel";
+		
+		/**
+		 * 在线对战结束界面
+		 */
+		public static const FightOnlineResultPanel:String = "FightOnlineResultPanel";
+		
+		/**
+		 * 对战玩家查找界面
+		 */
+		public static const FightSearchPanel:String = "FightSearchPanel";
+		
 		//// fight
 		
 	}
