@@ -5,6 +5,7 @@ package app.startup
 	import app.GameConfig;
 	import app.core.Alert;
 	import app.events.ServiceEvent;
+	import app.managers.ExternalManager;
 	import app.modules.LoadingEffect;
 	
 	import victor.framework.core.BaseCommand;
@@ -76,13 +77,10 @@ package app.startup
 		private function alert( msg:String ):void
 		{
 			LoadingEffect.hide();
-			Alert.show( msg, callBack, "刷新" );
+			Alert.show( msg, callBack, "刷新", "" );
 			function callBack( type:int ):void
 			{
-				if ( ExternalInterface.available )
-				{
-					
-				}
+				ExternalManager.reload();
 			}
 		}
 		

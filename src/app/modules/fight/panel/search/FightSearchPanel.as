@@ -16,6 +16,12 @@ package app.modules.fight.panel.search
 			super();
 		}
 		
+		override protected function beforeRender():void
+		{
+			super.beforeRender();
+			createScroll( 264, 290 );
+		}
+		
 		override protected function get skinName():String
 		{
 			return "ui_Skin_FightSearchPanel";

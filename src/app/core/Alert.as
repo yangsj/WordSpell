@@ -81,7 +81,7 @@ package app.core
 				txtMsg.visible = false;
 				
 				DisplayUtil.removedFromParent( _bitmap );
-				var bitmapdata:BitmapData = new BitmapData( txtMsg.width, txtMsg.height, true, 0 );
+				var bitmapdata:BitmapData = new BitmapData( txtMsg.textWidth + 5, txtMsg.textHeight + 5, true, 0 );
 				bitmapdata.draw( txtMsg );
 				_bitmap = new Bitmap( bitmapdata, "auto", true );
 				_bitmap.x = txtMsg.x + (( txtMsg.width - _bitmap.width ) >> 1);
@@ -109,7 +109,7 @@ package app.core
 			if ( btnName1 != _btnName1 )
 			{
 				_txtBtnConfirm1.text = btnName1;
-				_txtBtnConfirm2.text = btnName2;
+				_txtBtnConfirm2.text = btnName1;
 			}
 			if ( btnName2 != _btnName2 )
 				_txtBtnCancel.text = btnName2;

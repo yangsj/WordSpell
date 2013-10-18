@@ -1,10 +1,14 @@
 package app.modules.fight.panel.friend
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
 	import app.modules.TempleteSprite;
+	
+	import victor.framework.utils.DisplayUtil;
 	
 	
 	/**
@@ -20,6 +24,7 @@ package app.modules.fight.panel.friend
 		public var mcSelected:MovieClip;
 		
 		private var _selected:Boolean = false;
+		private var _nameBitmap:Bitmap;
 		
 		public static var selectedItem:FightFriendItem;
 		
@@ -54,6 +59,18 @@ package app.modules.fight.panel.friend
 				selectedItem = this
 				selected = true;
 			}
+		}
+		
+		public function setData():void
+		{
+			
+			DisplayUtil.removedFromParent( _nameBitmap );
+			txtName.visible = false;
+			_nameBitmap = new Bitmap( new BitmapData( txtName.width, txtName.height, true, 0 ));
+			_nameBitmap.bitmapData.draw( txtName );
+			_nameBitmap.x = txtName.x;
+			_nameBitmap.y = txtName.y;
+			_skin.addChild( _nameBitmap );
 		}
 		
 		public function setBg( frame:int ):void

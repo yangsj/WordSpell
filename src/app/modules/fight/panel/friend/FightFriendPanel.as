@@ -1,11 +1,6 @@
 package app.modules.fight.panel.friend
 {
-	import flash.events.Event;
-	
 	import app.modules.fight.panel.search.FightSearchBasePanel;
-	
-	import victor.framework.components.scroll.GameScrollPanel;
-	
 	
 	/**
 	 * ……
@@ -20,9 +15,10 @@ package app.modules.fight.panel.friend
 			super();
 		}
 		
-		override protected function onceInit():void
+		override protected function beforeRender():void
 		{
-			super.onceInit();
+			super.beforeRender();
+			createScroll( 264, 332 );
 		}
 		
 		override protected function get skinName():String

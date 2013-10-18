@@ -75,7 +75,7 @@ package app.modules
 		/**
 		 * 闯关或练习
 		 */
-		public static const FightAlone:String = "FightAloneView";
+		public static const FightAlone:String = "fightAloneView";
 		
 		/**
 		 * 在线对战
@@ -85,37 +85,37 @@ package app.modules
 		/**
 		 * 胜利面板
 		 */
-		public static const FightWinPanel:String = "FightWinPanel";
+		public static const FightWinPanel:String = "fightWinPanel";
 		
 		/**
 		 * 失败面板
 		 */
-		public static const FightLosePanel:String = "FightLosePanel";
+		public static const FightLosePanel:String = "fightLosePanel";
 		
 		/**
 		 * 匹配界面
 		 */
-		public static const FightMatchingPanel:String = "FightMatchingPanel";
+		public static const FightMatchingPanel:String = "fightMatchingPanel";
 		
 		/**
 		 * 准备界面
 		 */
-		public static const FightReadyPanel:String = "FightReadyPanel";
+		public static const FightReadyPanel:String = "fightReadyPanel";
 		
 		/**
 		 * 在线对战结束界面
 		 */
-		public static const FightOnlineResultPanel:String = "FightOnlineResultPanel";
+		public static const FightOnlineResultPanel:String = "fightOnlineResultPanel";
 		
 		/**
 		 * 对战玩家查找界面
 		 */
-		public static const FightSearchPanel:String = "FightSearchPanel";
+		public static const FightSearchPanel:String = "fightSearchPanel";
 		
 		/**
 		 * 好友对战列表
 		 */
-		public static const FightFriendPanel:String = "FightFriendPanel";
+		public static const FightFriendPanel:String = "fightFriendPanel";
 		
 		//// fight
 		

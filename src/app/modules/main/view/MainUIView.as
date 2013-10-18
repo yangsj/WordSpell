@@ -1,8 +1,6 @@
 package app.modules.main.view
 {
-	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
-	import flash.display.InteractiveObject;
 	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -15,6 +13,7 @@ package app.modules.main.view
 	import app.managers.LoaderManager;
 	import app.modules.main.FunctionBtnConfig;
 	import app.utils.NumCreate;
+	import app.utils.appStage;
 	
 	import victor.framework.core.ViewSprite;
 	import victor.framework.core.ViewStruct;
@@ -47,6 +46,8 @@ package app.modules.main.view
 		private var expNumString:String = "0/0";
 		private var expPercent:String = "0.00%";
 		
+		private var fightMenu:FightButtonMenu;
+		
 		public function MainUIView()
 		{
 			addedToStageHandler( null );
@@ -59,6 +60,12 @@ package app.modules.main.view
 		protected function expBarMouseHandler(event:MouseEvent):void
 		{
 			txtExp.text = event.type == MouseEvent.ROLL_OUT ? expPercent : expNumString;
+		}
+		
+		public function displayFightMenu():void
+		{
+			fightMenu ||= new FightButtonMenu();
+			addChild( fightMenu );
 		}
 		
 		public function updateLevelExp( level:int, exp:int ):void

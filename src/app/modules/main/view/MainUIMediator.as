@@ -12,6 +12,7 @@ package app.modules.main.view
 	import app.modules.main.event.MainUIEvent;
 	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.log.Logger;
 	
 	
 	/**
@@ -82,19 +83,20 @@ package app.modules.main.view
 		private function showViewHandler( event:ViewEvent ):void
 		{
 			var viewName:String = event.viewName;
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName ) );
-			if ( viewName == FunctionBtnConfig.FIGHT )
+			Logger.debug( "open Function name:" + viewName );
+			switch ( viewName )
 			{
-//				Tips.showMouse( "功能开发中敬请期待！" );
-				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightSearchPanel ));
-			}
-			else if ( viewName == FunctionBtnConfig.PRACTICE )
-			{
-				Tips.showMouse( "功能开发中敬请期待！" );
-			}
-			else if ( viewName == FunctionBtnConfig.EXIT )
-			{
-				Tips.showMouse( "功能开发中敬请期待！" );
+				case FunctionBtnConfig.FIGHT:
+////					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightSearchPanel ));
+//					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightFriendPanel ));
+					view.displayFightMenu();
+					break;
+				case FunctionBtnConfig.PRACTICE:
+				case FunctionBtnConfig.EXIT:
+					Tips.showMouse( "功能开发中敬请期待！" );
+					break;
+				default :
+					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName ) );
 			}
 		}
 		

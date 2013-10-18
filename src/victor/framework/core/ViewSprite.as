@@ -42,14 +42,18 @@ package victor.framework.core
 		{
 		}
 		
+		/**
+		 * 创建资源
+		 */
 		protected function createSkin():void
 		{
 			if ( _isInit == false )
 			{
-				setSkinWithName( skinName );
-				var rect:Rectangle = this.getBounds( this );
-				rectangle = new Rectangle( rect.x, rect.y, rect.width, rect.height );
+				setSkinWithName( skinName, domainName );
+				rectangle = this.getBounds( this );
+				rectangle = new Rectangle( rectangle.x, rectangle.y, rectangle.width, rectangle.height );
 				onceInit();
+				_isInit = true;
 			}
 		}
 

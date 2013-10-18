@@ -17,12 +17,8 @@ package victor.framework.components.scroll
 
 		public function GameScrollPanel( skinName:String = null )
 		{
-			if ( skinName == null )
-			{
-				skinName = "ui_scrollBar5";
-			}
-			var skin:Sprite = LoaderManager.instance.getObj( skinName ) as Sprite;
-			super( skin );
+			skinName ||= "ui_scrollBar5";
+			super( LoaderManager.instance.getObj( skinName ) as Sprite );
 		}
 
 		public function get bar():ScrollBar

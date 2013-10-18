@@ -2,7 +2,6 @@ package app.modules.fight.panel.search
 {
 	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import app.core.Alert;
@@ -11,6 +10,7 @@ package app.modules.fight.panel.search
 	
 	import victor.framework.components.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
+	import victor.framework.utils.DisplayUtil;
 	
 	
 	/**
@@ -29,21 +29,22 @@ package app.modules.fight.panel.search
 			super();
 		}
 		
-		override protected function addedToStageHandler(event:Event):void
+		protected function createScroll( scrollWidth, scrollHeight ):void
 		{
-			super.addedToStageHandler( event );
-			
 			if ( gameScroll == null )
 			{
-				gameScroll = new GameScrollPanel( "ui_Skin_ScrollBar_FightFriend" );
-				gameScroll.setTargetAndHeight(listContainer,285);
+				DisplayUtil.removedAll( listContainer );
+				gameScroll = new GameScrollPanel();
+				gameScroll.setTargetAndHeight( listContainer,scrollHeight, scrollWidth );
 				// test
-				for ( var i:int = 0; i < 15; i++ )
+				for ( var i:int = 0; i < 35; i++ )
 				{
 					var item:FightFriendItem = new FightFriendItem();
 					item.y = 40 * i;
 					item.setBg( i );
 					item.setStatus( i );
+					item.txtName.appendText( i + "" );
+					item.setData();
 					listContainer.addChild( item );
 				}
 				gameScroll.updateMainHeight( listContainer.height );
@@ -81,7 +82,11 @@ package app.modules.fight.panel.search
 		override public function hide():void
 		{
 			super.hide();
-			FightFriendItem.selectedItem = null;
+			if ( FightFriendItem.selectedItem )
+			{
+				FightFriendItem.selectedItem.selected = false;
+				FightFriendItem.selectedItem = null;
+			}
 		}
 		
 		public function setList( list:Array ):void
@@ -91,7 +96,7 @@ package app.modules.fight.panel.search
 		
 		override protected function get resNames():Array
 		{
-			return [ "ui_fight_friend" ];
+			return [ "ui_fight_friend_search" ];
 		}
 	}
 }

@@ -126,7 +126,7 @@ package app.modules.fight.view.online
 		
 		override protected function get resNames():Array
 		{
-			return [ "ui_round" ];
+			return [ "ui_fight" ];
 		}
 		
 		override protected function get skinName():String

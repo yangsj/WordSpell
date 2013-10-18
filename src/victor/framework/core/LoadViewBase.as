@@ -23,7 +23,6 @@ package victor.framework.core
 		{
 			if ( resNames && resNames.length == 0 )
 				addDisplayList();
-				
 			else startLoadResource();
 		}
 		
@@ -40,22 +39,35 @@ package victor.framework.core
 		
 		private function addDisplayList():void
 		{
-			mouseChildren = true;
-			
 			PanelLoading.instance.hide();
 			
 			createSkin();
 			
-			loadComplete();
+			beforeRender();
 			
 			addToParent();
+			
+			afterRender();
 		}
 		
+		/**
+		 * 添加到显示列表前
+		 */
+		protected function beforeRender():void
+		{
+		}
+		
+		/**
+		 * 添加到显示列表
+		 */
 		protected function addToParent():void
 		{
 		}
 		
-		protected function loadComplete():void
+		/**
+		 * 添加到显示列表后
+		 */
+		protected function afterRender():void
 		{
 		}
 		
