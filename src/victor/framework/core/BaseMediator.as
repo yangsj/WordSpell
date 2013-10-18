@@ -20,8 +20,15 @@ package victor.framework.core
 		override public function onRegister():void
 		{
 			super.onRegister();
-			// 打开功能面板
+			// 打开view
 			addViewListener( ViewEvent.SHOW_VIEW, showViewHandler, ViewEvent );
+			// 关闭view
+			addViewListener( ViewEvent.HIDE_VIEW, hideViewHandler, ViewEvent );
+		}
+		
+		protected function hideViewHandler( event:ViewEvent ):void
+		{
+			closeView( event.viewName );
 		}
 		
 		protected function showViewHandler( event:ViewEvent ):void

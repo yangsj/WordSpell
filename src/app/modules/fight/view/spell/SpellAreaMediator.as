@@ -52,7 +52,9 @@ package app.modules.fight.view.spell
 			var sequence:Array = [];
 			for each ( var vo:LetterBubbleVo in view.inputList )
 			{
-				sequence.push( vo.id );
+				if ( vo == null )
+					break;
+				sequence.push( vo );
 			}
 			fightService.inputOver( sequence );
 		}

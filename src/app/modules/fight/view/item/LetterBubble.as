@@ -51,10 +51,7 @@ package app.modules.fight.view.item
 			
 			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
-//			addEventListener( MouseEvent.MOUSE_OVER, mouseHandler );
 			addEventListener( MouseEvent.CLICK, mouseHandler );
-			TickManager.doInterval( enterFrameHandler, 30 );
-//			addEventListener(Event.ENTER_FRAME, enterFrameHandler );
 		}
 		
 		protected function mouseHandler(event:MouseEvent):void
@@ -89,18 +86,23 @@ package app.modules.fight.view.item
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			
-//			var scale:Number = Math.random() * 0.5 + 0.6;
+			TickManager.doInterval( enterFrameHandler, 20 );
+			
+////		var scale:Number = 1;//Math.random() * 0.5 + 0.6;
+//			var scale:Number = Math.random() * 0.3 + 0.8;
 //			scaleX = scaleY = scale;
 //			moveArea.width = moveArea.width + moveArea.x * 2 - width;
-//			moveArea.width = moveArea.height + moveArea.y * 2 - height;
-//			moveArea.x = moveArea.x * scale;
-//			moveArea.y = moveArea.y * scale;
+//			moveArea.height = moveArea.height + moveArea.y * 2 - height;
+//			moveArea.x = width >> 1;
+//			moveArea.y = height >> 1;
+//			trace( moveArea );
 			
 			x = moveArea.x + moveArea.width * Math.random();
 			y = moveArea.y + moveArea.height * Math.random();
 			
-			var dxy:Number = 0.5 + Math.random() * 0.5;
-			dx = Math.random() < 0.5 ? dxy : -dxy;
+			var dxx:Number = 0.3 + Math.random() * 0.3;
+			var dxy:Number = 0.3 + Math.random() * 0.3;
+			dx = Math.random() < 0.5 ? dxx : -dxx;
 			dy = Math.random() < 0.5 ? dxy : -dxy;
 		}
 		
@@ -120,21 +122,21 @@ package app.modules.fight.view.item
 		/**
 		 * 改变运动方向
 		 */
-		public function changeDirection( reverse:Boolean = false ):void
+		public function changeDirection( direx:int = 0, direy:int = 0 ):void
 		{
 			if ( parent )
 			{
-				if ( reverse )// 泡泡相碰
-				{
-					dx *= -1;
-					dy *= -1;
-					x += dx;
-					y += dy;
-				}
-				else // 到达边缘
+				if ( direx == direx && direx == 0 )// 到达边缘
 				{
 					dx *= Math.random() < 0.5 ? -1 : 1;
 					dy *= Math.random() < 0.5 ? -1 : 1;
+				}
+				else // 泡泡相碰
+				{
+					dx *= direx;
+					dy *= direy;
+					x += dx;
+					y += dy;
 				}
 			}
 		}

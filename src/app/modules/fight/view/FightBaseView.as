@@ -22,7 +22,6 @@ package app.modules.fight.view
 	import victor.framework.core.ViewStruct;
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.HitTestUtils;
 	import victor.framework.utils.HtmlText;
 	import victor.framework.utils.MathUtil;
 	
@@ -78,12 +77,17 @@ package app.modules.fight.view
 			ViewStruct.addChild( this, ViewStruct.SCENE2 );
 		}
 		
+		override protected function afterRender():void
+		{
+			super.afterRender();
+			appStage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
+		}
+		
 		public function initialize():void
 		{
 			selfTotalTime = 60;
 			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
-			appStage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
 			TickManager.doInterval( enterFrameHandler, 20 );
 		}
 		
@@ -203,37 +207,60 @@ package app.modules.fight.view
 					for ( var j:int = 0; j < container.numChildren; j++ )
 					{
 						mc2 = container.getChildAt( j ) as LetterBubble;
-						if ( mc2 && mc1 != mc2 &&  HitTestUtils.pixelsHitTest2( mc1.point, mc1.bitmapData, mc2.point, mc2.bitmapData) )
+						if ( mc2 && mc1 != mc2 )
 						{
-							var dist0:Number = 82;//( mc1.width + mc2.width ) >> 1;
+							var dist0:Number = 41 * ( mc1.scaleX + mc2.scaleX );
 							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
-							if ( dist1 < dist0 )
+							if ( dist1 <= dist0 )
 							{
-								var rate:Number = ( dist0 / dist1 );
-								var movex:Number = Math.abs( mc1.x - mc2.x ) * rate;
-								var movey:Number = Math.abs( mc1.y - mc2.y ) * rate;
-								if ( mc1.x < mc2.x )
+								if ( dist1 < dist0 )
 								{
-									if ( mc2.isEdgeRight )
-										mc1.x = mc2.x - movex;
-									else mc2.x = mc1.x + movex;
+									var rate:Number = ( dist0 / dist1 );
+									var absx:Number = Math.abs( mc1.x - mc2.x );
+									var absy:Number = Math.abs( mc1.y - mc2.y );
+									var movex:Number = absx * rate;
+									var movey:Number = absy * rate;
+									if ( mc1.x < mc2.x )
+									{
+										if ( mc2.isEdgeRight )
+											mc1.x = mc2.x - movex;
+										else mc2.x = mc1.x + movex;
+									}
+									else
+									{
+										if ( mc2.isEdgeLeft )
+											mc1.x = mc2.x + movex;
+										else mc2.x = mc1.x - movex;
+									}
+									if ( mc1.y < mc2.y )
+									{
+										if ( mc2.isEdgeDown )
+											mc1.y = mc2.y - movey;
+										else mc2.y = mc1.y + movey;
+									}
+									else if ( mc2.isEdgeUp )
+										mc1.y = mc2.y + movey;
+									else mc2.y = mc1.y - movey;
 								}
-								else if ( mc2.isEdgeLeft )
-									mc1.x = mc2.x + movex;
-								else mc2.x = mc1.x - movex;
-								
-								if ( mc1.y < mc2.y )
+								if ( absx == absy )
 								{
-									if ( mc2.isEdgeDown )
-										mc1.y = mc2.y - movey;
-									else mc2.y = mc1.y + movey;
+									mc1.changeDirection( -1, -1 );
+									mc2.changeDirection( -1, -1 );
 								}
-								else if ( mc2.isEdgeUp )
-									mc1.y = mc2.y + movey;
-								else mc2.y = mc1.y - movey;
+								else
+								{
+									if ( absx > absy )
+									{
+										mc1.changeDirection( -1, 1 );
+										mc2.changeDirection( -1, 1 );
+									}
+									else
+									{
+										mc1.changeDirection( 1, -1 );
+										mc2.changeDirection( 1, -1 );
+									}
+								}
 							}
-							mc1.changeDirection( true );
-							mc2.changeDirection( true );
 						}
 					}
 				}
