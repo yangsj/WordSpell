@@ -119,7 +119,7 @@ package app.modules.fight.service
 			fightModel.dictPropPos = dict;
 			fightModel.allLetterList = allLetterList;
 			fightModel.spellList = spellList;
-			fightModel.modeType = 1;//data.mode;
+			fightModel.modeType = data.mode;
 
 			// 设置第一个单词信息
 			updateLetterInfoList();

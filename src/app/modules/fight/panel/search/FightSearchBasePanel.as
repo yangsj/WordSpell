@@ -6,6 +6,8 @@ package app.modules.fight.panel.search
 	
 	import app.core.Alert;
 	import app.core.Tips;
+	import app.events.ViewEvent;
+	import app.modules.ViewName;
 	import app.modules.fight.panel.friend.FightFriendItem;
 	
 	import victor.framework.components.scroll.GameScrollPanel;
@@ -74,7 +76,9 @@ package app.modules.fight.panel.search
 			{
 				if ( type == Alert.YES )
 				{
-					Tips.showCenter( "开始匹配" );
+//					Tips.showCenter( "开始匹配" );
+					dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightMatchingPanel, null ));
+					hide();
 				}
 			}
 		}

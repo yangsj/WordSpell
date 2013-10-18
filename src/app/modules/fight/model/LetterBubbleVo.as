@@ -10,7 +10,7 @@ package app.modules.fight.model
 	{
 
 		/**
-		 * 字母出现的顺序
+		 * 字母出现的顺序( 0开始
 		 */
 		public var index:int;
 		/**
@@ -26,6 +26,22 @@ package app.modules.fight.model
 		 * @see app.modules.model.vo.ItemType
 		 */
 		public var itemType:int;
+		
+		/**
+		 * 小写字母
+		 */
+		public function get lowerCase():String
+		{
+			return letter.toLocaleLowerCase();
+		}
+		
+		/**
+		 * 大写字母
+		 */
+		public function get upperCase():String
+		{
+			return letter.toLocaleUpperCase();
+		}
 		
 	}
 }

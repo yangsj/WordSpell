@@ -23,10 +23,12 @@ package app.modules.fight.view.spell
 		public var txtLetter:TextField;
 		
 		private var _data:LetterBubbleVo;
+		private var _index:int;
 		
-		public function SpellItem( skin:MovieClip )
+		public function SpellItem( skin:MovieClip, index:int = 0 )
 		{
 			this.skin = skin;
+			this.index = index;
 			this.skin.mouseChildren = false;
 			this.skin.buttonMode = true;
 			this.skin.stop();
@@ -73,6 +75,17 @@ package app.modules.fight.view.spell
 		{
 			skin.visible = value;
 		}
+
+		public function get index():int
+		{
+			return _index;
+		}
+
+		public function set index(value:int):void
+		{
+			_index = value;
+		}
+
 
 	}
 }

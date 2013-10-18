@@ -46,13 +46,13 @@ package app.modules.fight.view.spell
 		{
 			_spellItems = new Vector.<SpellItem>( MAX );
 			for ( var i:int = 0; i < MAX; i++ )
-				_spellItems[ i ] = ( new SpellItem( _skin.getChildByName( "pos" + i ) as MovieClip ));
+				_spellItems[ i ] = ( new SpellItem( _skin.getChildByName( "pos" + i ) as MovieClip, i ));
 		}
-
+		
 		public function setInitData( spellVo:SpellVo ):void
 		{
 			_spellVo = spellVo;
-			_inputList = new Vector.<LetterBubbleVo>();
+			_inputList = new Vector.<LetterBubbleVo>( _spellVo.charsLength );
 			_inputNum = 0;
 
 			txtChinese.text = spellVo.chinese;
@@ -69,6 +69,18 @@ package app.modules.fight.view.spell
 //			TickManager.instance.clearDoTime( inputOver );
 //			TickManager.instance.doTimeout( inputOver, 10000 );
 		}
+		
+		/**
+		 * 删除已选的字母
+		 * @param index
+		 * 
+		 */
+		public function delLetter( index:int ):void
+		{
+			var item:SpellItem = _spellItems[ index ];
+			item.initialize();
+			_inputList[ index ] = null;
+		}
 
 		/**
 		 * 设置单个字母显示
@@ -79,13 +91,14 @@ package app.modules.fight.view.spell
 		{
 			if ( _inputList && _spellVo )
 			{
-				if ( _inputNum == letterBubbleVo.index )
+				_inputNum = getEmptyIndex;
+				var current:LetterBubbleVo = _spellVo.items[ _inputNum ];
+				if ( letterBubbleVo && current.lowerCase == letterBubbleVo.lowerCase ) // 输入的字母顺序是否正确
 				{
 					var item:SpellItem = _spellItems[ _inputNum ];
 					item.setData( letterBubbleVo );
-					_inputList.push( letterBubbleVo );
-					_inputNum++;
-					if ( _inputNum >= _spellVo.charsLength )
+					_inputList[_inputNum] = letterBubbleVo;
+					if ( getEmptyIndex == -1 )
 						inputOver();
 				}
 				else
@@ -97,6 +110,20 @@ package app.modules.fight.view.spell
 			{
 				throw new Error( "setSingleLetter没有初始化" );
 			}
+		}
+		
+		/**
+		 * 没有空位置时返回-1
+		 */
+		private function get getEmptyIndex():int
+		{
+			var leng:int = _inputList.length;
+			for ( var i:int = 0; i < leng; i++ )
+			{
+				if ( _inputList[ i ] == null )
+					return i;
+			}
+			return -1;
 		}
 
 		public function get inputList():Vector.<LetterBubbleVo>

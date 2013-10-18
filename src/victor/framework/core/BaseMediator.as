@@ -17,6 +17,18 @@ package victor.framework.core
 			super();
 		}
 		
+		override public function onRegister():void
+		{
+			super.onRegister();
+			// 打开功能面板
+			addViewListener( ViewEvent.SHOW_VIEW, showViewHandler, ViewEvent );
+		}
+		
+		protected function showViewHandler( event:ViewEvent ):void
+		{
+			openView( event.viewName, event.data );
+		}
+		
 		protected function openView( viewName:String, data:Object = null ):void
 		{
 			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName, data ));

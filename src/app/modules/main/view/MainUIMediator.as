@@ -34,9 +34,6 @@ package app.modules.main.view
 		{
 			super.onRegister();
 			
-			// 打开功能面板
-			addViewListener( ViewEvent.SHOW_VIEW, showViewHandler, ViewEvent );
-			
 			// 经验条进度更新
 			addContextListener( MainUIEvent.UPDATE_EXP, updateExpHandler, MainUIEvent );
 			// 经验条进度更新
@@ -80,15 +77,13 @@ package app.modules.main.view
 			updateExpHandler( null );
 		}
 		
-		private function showViewHandler( event:ViewEvent ):void
+		override protected function showViewHandler( event:ViewEvent ):void
 		{
 			var viewName:String = event.viewName;
 			Logger.debug( "open Function name:" + viewName );
 			switch ( viewName )
 			{
 				case FunctionBtnConfig.FIGHT:
-////					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightSearchPanel ));
-//					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightFriendPanel ));
 					view.displayFightMenu();
 					break;
 				case FunctionBtnConfig.PRACTICE:
