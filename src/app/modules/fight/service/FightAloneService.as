@@ -31,14 +31,14 @@ package app.modules.fight.service
 	 * @author 	yangsj
 	 * 			2013-9-24
 	 */
-	public class FightService extends BaseService
+	public class FightAloneService extends BaseService
 	{
 		[Inject]
 		public var fightModel:FightModel;
 		[Inject]
 		public var mapModel:MapModel;
 
-		public function FightService()
+		public function FightAloneService()
 		{
 			super();
 		}

@@ -14,6 +14,12 @@ package app.modules.fight.panel.ready
 	 */
 	public class FightReadyPanel extends BasePanel
 	{
+		private var itemLeft:FightReadyItem;
+		private var itemRight:FightReadyItem;
+		
+		public var player1:Sprite;
+		public var player2:Sprite;
+		
 		public function FightReadyPanel()
 		{
 			super();
@@ -22,16 +28,17 @@ package app.modules.fight.panel.ready
 		override protected function onceInit():void
 		{
 			super.onceInit();
-			if ( btnClose == null )
-			{
-				var sprite:Sprite = new Sprite();
-				sprite.graphics.beginFill(0);
-				sprite.graphics.drawRect(-100,0,100,100);
-				sprite.graphics.endFill();
-				sprite.x = appStage.stageWidth;
-				addChild( sprite );
-				btnClose = sprite;
-			}
+			
+			itemLeft = new FightReadyItem( player1 );
+			itemRight = new FightReadyItem( player2 );
+			player2.mouseChildren = false;
+			player2.mouseEnabled = false;
+		}
+		
+		public function setAndRefresh( ):void
+		{
+			itemLeft.setData();
+			itemRight.setData();
 		}
 		
 		override protected function get resNames():Array

@@ -1,7 +1,5 @@
 package app.data
 {
-	import app.modules.main.event.MainUIEvent;
-	
 	/**
 	 * ……玩家自己的数据
 	 * @author 	yangsj 

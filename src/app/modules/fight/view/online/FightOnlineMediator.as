@@ -4,7 +4,7 @@ package app.modules.fight.view.online
 	import app.modules.fight.events.FightEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
-	import app.modules.fight.service.FightService;
+	import app.modules.fight.service.FightAloneService;
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.map.model.MapModel;
 	import app.modules.model.vo.ItemType;
@@ -26,7 +26,7 @@ package app.modules.fight.view.online
 		[Inject]
 		public var mapModel:MapModel;
 		[Inject]
-		public var fightService:FightService;
+		public var fightService:FightAloneService;
 		
 		private var letterIndex:int = 0;
 		

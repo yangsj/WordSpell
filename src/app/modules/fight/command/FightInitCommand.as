@@ -2,6 +2,7 @@ package app.modules.fight.command
 {
 	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
+	import app.modules.fight.model.FightReadyModel;
 	import app.modules.fight.panel.friend.FightFriendMediator;
 	import app.modules.fight.panel.friend.FightFriendPanel;
 	import app.modules.fight.panel.matching.FightMatchingMediator;
@@ -12,7 +13,7 @@ package app.modules.fight.command
 	import app.modules.fight.panel.result.FightOnlineResultPanel;
 	import app.modules.fight.panel.search.FightSearchMediator;
 	import app.modules.fight.panel.search.FightSearchPanel;
-	import app.modules.fight.service.FightService;
+	import app.modules.fight.service.FightAloneService;
 	import app.modules.fight.view.alone.FightAloneMediator;
 	import app.modules.fight.view.alone.FightAloneView;
 	import app.modules.fight.view.online.FightOnlineMediator;
@@ -59,7 +60,8 @@ package app.modules.fight.command
 			mapView( SpellArea, SpellAreaMediator );
 			
 			injectActor( FightModel );
-			injectActor( FightService );
+			injectActor( FightReadyModel );
+			injectActor( FightAloneService );
 		}
 		
 	}

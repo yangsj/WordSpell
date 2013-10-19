@@ -1,11 +1,12 @@
 package app.modules.fight.panel.matching
 {
-	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	import app.utils.appStage;
+	import app.data.GameData;
+	import app.modules.model.GenderType;
 	
 	import victor.framework.core.BasePanel;
+	import victor.framework.utils.HtmlText;
 	
 	
 	/**
@@ -15,26 +16,33 @@ package app.modules.fight.panel.matching
 	 */
 	public class FightMatchingPanel extends BasePanel
 	{
-		public var txtPlayerSelf:TextField;
+		public var txtPlayer1:TextField;
+		public var txtPlayer2:TextField;
 		
 		public function FightMatchingPanel()
 		{
 			super();
 		}
 		
-		override protected function onceInit():void
+		override protected function afterRender():void
 		{
-			super.onceInit();
-			if ( btnClose == null )
-			{
-				var sprite:Sprite = new Sprite();
-				sprite.graphics.beginFill(0);
-				sprite.graphics.drawRect(-100,0,100,100);
-				sprite.graphics.endFill();
-				sprite.x = appStage.stageWidth;
-				addChild( sprite );
-				btnClose = sprite;
-			}
+			super.afterRender();
+			var color:uint = GenderType.getColor(GameData.instance.selfVo.sex);
+			txtPlayer1.htmlText = HtmlText.color( GameData.instance.selfVo.name, color );
+		}
+		
+		override protected function openComplete():void
+		{
+			super.openComplete();
+			if ( btnClose )
+				btnClose.visible = true;
+		}
+		
+		override public function hide():void
+		{
+			super.hide();
+			if ( btnClose )
+				btnClose.visible = false;
 		}
 		
 		override protected function get resNames():Array

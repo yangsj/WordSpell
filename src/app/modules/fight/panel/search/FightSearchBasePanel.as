@@ -65,7 +65,7 @@ package app.modules.fight.panel.search
 		{
 			if ( FightFriendItem.selectedItem )
 			{
-				Alert.show( "确定邀请加入对战", callBackFun, "确定", "取消", "玩家" );
+				Alert.show( "确定邀请加入对战", callBackFun, "确定", "取消" );
 			}
 			else
 			{
@@ -77,7 +77,7 @@ package app.modules.fight.panel.search
 				if ( type == Alert.YES )
 				{
 //					Tips.showCenter( "开始匹配" );
-					dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightMatchingPanel, null ));
+					dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel, null ));
 					hide();
 				}
 			}

@@ -2,7 +2,7 @@ package app.modules.fight.view.panel
 {
 	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
-	import app.modules.fight.service.FightService;
+	import app.modules.fight.service.FightAloneService;
 	
 	import victor.framework.core.BaseMediator;
 	
@@ -17,7 +17,7 @@ package app.modules.fight.view.panel
 		[Inject]
 		public var fightModel:FightModel;
 		[Inject]
-		public var fightService:FightService;
+		public var fightService:FightAloneService;
 		
 		public function FightResultBaseMediator()
 		{
