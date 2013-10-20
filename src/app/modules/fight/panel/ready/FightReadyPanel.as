@@ -2,8 +2,6 @@ package app.modules.fight.panel.ready
 {
 	import flash.display.Sprite;
 	
-	import app.utils.appStage;
-	
 	import victor.framework.core.BasePanel;
 	
 	

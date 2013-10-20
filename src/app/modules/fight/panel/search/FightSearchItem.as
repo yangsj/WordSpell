@@ -16,7 +16,7 @@ package app.modules.fight.panel.search
 	 * @author 	yangsj 
 	 * 			2013-10-18
 	 */
-	public class FightFriendItem extends TempleteSprite
+	public class FightSearchItem extends TempleteSprite
 	{
 		public var txtName:TextField;
 		public var mcStatus:MovieClip; // 1:在线  2:闯关中 3:对战中
@@ -26,9 +26,9 @@ package app.modules.fight.panel.search
 		private var _selected:Boolean = false;
 		private var _nameBitmap:Bitmap;
 		
-		public static var selectedItem:FightFriendItem;
+		public static var selectedItem:FightSearchItem;
 		
-		public function FightFriendItem()
+		public function FightSearchItem()
 		{
 			super();
 			setSkinWithName( "ui_Skin_FightFriendItem" );

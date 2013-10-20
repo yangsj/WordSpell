@@ -8,7 +8,6 @@ package app.modules.fight.panel.search
 	import app.core.Tips;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
-	import app.modules.fight.panel.friend.FightFriendItem;
 	
 	import victor.framework.components.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
@@ -41,7 +40,7 @@ package app.modules.fight.panel.search
 				// test
 				for ( var i:int = 0; i < 35; i++ )
 				{
-					var item:FightFriendItem = new FightFriendItem();
+					var item:FightSearchItem = new FightSearchItem();
 					item.y = 40 * i;
 					item.setBg( i );
 					item.setStatus( i );
@@ -63,7 +62,7 @@ package app.modules.fight.panel.search
 		
 		protected function onBtnConfirmClickHandler(event:MouseEvent):void
 		{
-			if ( FightFriendItem.selectedItem )
+			if ( FightSearchItem.selectedItem )
 			{
 				Alert.show( "确定邀请加入对战", callBackFun, "确定", "取消" );
 			}
@@ -86,10 +85,10 @@ package app.modules.fight.panel.search
 		override public function hide():void
 		{
 			super.hide();
-			if ( FightFriendItem.selectedItem )
+			if ( FightSearchItem.selectedItem )
 			{
-				FightFriendItem.selectedItem.selected = false;
-				FightFriendItem.selectedItem = null;
+				FightSearchItem.selectedItem.selected = false;
+				FightSearchItem.selectedItem = null;
 			}
 		}
 		

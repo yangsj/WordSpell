@@ -10,7 +10,7 @@ package app.modules.fight.panel.matching
 	
 	
 	/**
-	 * ……
+	 * ……自动匹配
 	 * @author 	yangsj 
 	 * 			2013-10-17
 	 */
@@ -29,20 +29,6 @@ package app.modules.fight.panel.matching
 			super.afterRender();
 			var color:uint = GenderType.getColor(GameData.instance.selfVo.sex);
 			txtPlayer1.htmlText = HtmlText.color( GameData.instance.selfVo.name, color );
-		}
-		
-		override protected function openComplete():void
-		{
-			super.openComplete();
-			if ( btnClose )
-				btnClose.visible = true;
-		}
-		
-		override public function hide():void
-		{
-			super.hide();
-			if ( btnClose )
-				btnClose.visible = false;
 		}
 		
 		override protected function get resNames():Array

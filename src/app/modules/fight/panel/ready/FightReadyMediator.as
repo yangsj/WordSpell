@@ -40,7 +40,7 @@ package app.modules.fight.panel.ready
 		
 		private function readyHandler( event:FightReadyEvent ):void
 		{
-			
+			trace( "ready");
 		}
 		
 	}

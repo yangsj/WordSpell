@@ -54,7 +54,7 @@ package app.modules.fight.panel.ready
 		
 		protected function onBtnReadingHandler(event:MouseEvent):void
 		{
-			btnReadying.dispatchEvent( new FightReadyEvent( FightReadyEvent.READY, null ));
+			btnReadying.dispatchEvent( new FightReadyEvent( FightReadyEvent.READY, null, true ));
 		}
 		
 		public function dispose():void
