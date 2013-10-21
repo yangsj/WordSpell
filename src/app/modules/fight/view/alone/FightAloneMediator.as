@@ -4,7 +4,7 @@ package app.modules.fight.view.alone
 	import app.events.PackEvent;
 	import app.modules.ViewName;
 	import app.modules.chat.event.ChatEvent;
-	import app.modules.fight.events.FightEvent;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.service.FightAloneService;
@@ -62,16 +62,16 @@ package app.modules.fight.view.alone
 			dispatch( new ChatEvent( ChatEvent.FOLD_CHAT ));
 
 			// 选择字母
-			addViewListener( FightEvent.SELECTED_LETTER, selectedLetterHandler, FightEvent );
+			addViewListener( FightAloneEvent.SELECTED_LETTER, selectedLetterHandler, FightAloneEvent );
 
 			// 开始通知
-			addContextListener( FightEvent.NOTIFY_START_ROUND, startRoundNotify, FightEvent );
+			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, startRoundNotify, FightAloneEvent );
 			// 结束通知
-			addContextListener( FightEvent.NOTIFY_END_ROUND, endRoundNotify, FightEvent );
+			addContextListener( FightAloneEvent.NOTIFY_END_ROUND, endRoundNotify, FightAloneEvent );
 			// 更新金币值变化
 			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
 			// 更新下一个词
-			addContextListener( FightEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightEvent );
+			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
 			
 			// 物品使用成功
 			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
@@ -84,7 +84,7 @@ package app.modules.fight.view.alone
 			fightService.startRound();
 		}
 		
-		private function endRoundNotify( event:FightEvent ):void
+		private function endRoundNotify( event:FightAloneEvent ):void
 		{
 			view.clear();
 			if ( fightModel.fightEndVo.isWin )
@@ -92,12 +92,12 @@ package app.modules.fight.view.alone
 			else openView( ViewName.FightLosePanel );
 		}
 		
-		private function startRoundNotify( event:FightEvent ):void
+		private function startRoundNotify( event:FightAloneEvent ):void
 		{
 			initData();
 		}
 		
-		private function nextWordUpdateNotify( event:FightEvent ):void
+		private function nextWordUpdateNotify( event:FightAloneEvent ):void
 		{
 			letterIndex = 0;
 			setLetters();
@@ -108,7 +108,7 @@ package app.modules.fight.view.alone
 			view.updateMoneyDisplay();
 		}
 
-		private function selectedLetterHandler( event:FightEvent ):void
+		private function selectedLetterHandler( event:FightAloneEvent ):void
 		{
 			var letterBublle:LetterBubble = event.data as LetterBubble;
 			var vo:LetterBubbleVo = letterBublle.data;
@@ -127,7 +127,7 @@ package app.modules.fight.view.alone
 			{
 				view.delLetterFromDict( vo.letter );
 				letterIndex++;
-				dispatch( new FightEvent( FightEvent.UPDATE_WORD, vo ));
+				dispatch( new FightAloneEvent( FightAloneEvent.UPDATE_WORD, vo ));
 			}
 		}
 		

@@ -13,7 +13,7 @@ package app.modules.fight.view.item
 	import flash.text.TextField;
 	
 	import app.modules.TempleteSprite;
-	import app.modules.fight.events.FightEvent;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.model.vo.ItemType;
 	import app.utils.TextUtil;
@@ -164,7 +164,7 @@ package app.modules.fight.view.item
 			if ( value )
 			{
 				mouseEnabled = false;
-				dispatchEvent( new FightEvent( FightEvent.SELECTED_LETTER, this, true ));
+				dispatchEvent( new FightAloneEvent( FightAloneEvent.SELECTED_LETTER, this, true ));
 				if ( _data.itemType == ItemType.DEFAULT )
 				{
 					TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });

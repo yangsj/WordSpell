@@ -2,6 +2,8 @@ package app.modules.fight.panel.ready
 {
 	import flash.display.Sprite;
 	
+	import app.modules.fight.model.FightMatchingVo;
+	
 	import victor.framework.core.BasePanel;
 	
 	
@@ -33,10 +35,15 @@ package app.modules.fight.panel.ready
 			player2.mouseEnabled = false;
 		}
 		
-		public function setAndRefresh( ):void
+		public function setData( self:FightMatchingVo, deatVo:FightMatchingVo ):void
 		{
-			itemLeft.setData();
-			itemRight.setData();
+			itemLeft.setData( self );
+			itemRight.setData( deatVo );
+		}
+		
+		public function refreshStatus( isOk:Boolean = true ):void
+		{
+			itemRight.refreshStatus( isOk );
 		}
 		
 		override protected function get resNames():Array

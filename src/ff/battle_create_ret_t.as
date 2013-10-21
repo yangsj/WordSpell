@@ -21,6 +21,8 @@ import org.apache.thrift.protocol.*;
     private static const DEST_NAME_FIELD_DESC:TField = new TField("dest_name", TType.STRING, 2);
     private static const DEST_GRADE_FIELD_DESC:TField = new TField("dest_grade", TType.STRING, 3);
     private static const DEST_LEVEL_FIELD_DESC:TField = new TField("dest_level", TType.I32, 4);
+    private static const GENDER_FIELD_DESC:TField = new TField("gender", TType.I16, 5);
+    private static const RESULT_FIELD_DESC:TField = new TField("result", TType.I16, 6);
 
     private var _dest_id:int;
     public static const DEST_ID:int = 1;
@@ -30,9 +32,15 @@ import org.apache.thrift.protocol.*;
     public static const DEST_GRADE:int = 3;
     private var _dest_level:int;
     public static const DEST_LEVEL:int = 4;
+    private var _gender:int;
+    public static const GENDER:int = 5;
+    private var _result:int;
+    public static const RESULT:int = 6;
 
     private var __isset_dest_id:Boolean = false;
     private var __isset_dest_level:Boolean = false;
+    private var __isset_gender:Boolean = false;
+    private var __isset_result:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -44,6 +52,10 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.STRING));
       metaDataMap[DEST_LEVEL] = new FieldMetaData("dest_level", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
+      metaDataMap[GENDER] = new FieldMetaData("gender", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
+      metaDataMap[RESULT] = new FieldMetaData("result", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
     }
     {
       FieldMetaData.addStructMetaDataMap(battle_create_ret_t, metaDataMap);
@@ -51,6 +63,8 @@ import org.apache.thrift.protocol.*;
 
     public function battle_create_ret_t() {
       this._dest_id = 0;
+      this._gender = 0;
+      this._result = 0;
     }
 
     public function get dest_id():int {
@@ -123,6 +137,42 @@ import org.apache.thrift.protocol.*;
       return this.__isset_dest_level;
     }
 
+    public function get gender():int {
+      return this._gender;
+    }
+
+    public function set gender(gender:int):void {
+      this._gender = gender;
+      this.__isset_gender = true;
+    }
+
+    public function unsetGender():void {
+      this.__isset_gender = false;
+    }
+
+    // Returns true if field gender is set (has been assigned a value) and false otherwise
+    public function isSetGender():Boolean {
+      return this.__isset_gender;
+    }
+
+    public function get result():int {
+      return this._result;
+    }
+
+    public function set result(result:int):void {
+      this._result = result;
+      this.__isset_result = true;
+    }
+
+    public function unsetResult():void {
+      this.__isset_result = false;
+    }
+
+    // Returns true if field result is set (has been assigned a value) and false otherwise
+    public function isSetResult():Boolean {
+      return this.__isset_result;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case DEST_ID:
@@ -157,6 +207,22 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case GENDER:
+        if (value == null) {
+          unsetGender();
+        } else {
+          this.gender = value;
+        }
+        break;
+
+      case RESULT:
+        if (value == null) {
+          unsetResult();
+        } else {
+          this.result = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -172,6 +238,10 @@ import org.apache.thrift.protocol.*;
         return this.dest_grade;
       case DEST_LEVEL:
         return this.dest_level;
+      case GENDER:
+        return this.gender;
+      case RESULT:
+        return this.result;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -188,6 +258,10 @@ import org.apache.thrift.protocol.*;
         return isSetDest_grade();
       case DEST_LEVEL:
         return isSetDest_level();
+      case GENDER:
+        return isSetGender();
+      case RESULT:
+        return isSetResult();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -234,6 +308,22 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case GENDER:
+            if (field.type == TType.I16) {
+              this.gender = iprot.readI16();
+              this.__isset_gender = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case RESULT:
+            if (field.type == TType.I16) {
+              this.result = iprot.readI16();
+              this.__isset_result = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -267,6 +357,12 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(DEST_LEVEL_FIELD_DESC);
       oprot.writeI32(this.dest_level);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(GENDER_FIELD_DESC);
+      oprot.writeI16(this.gender);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(RESULT_FIELD_DESC);
+      oprot.writeI16(this.result);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -297,6 +393,14 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "dest_level:";
       ret += this.dest_level;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "gender:";
+      ret += this.gender;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "result:";
+      ret += this.result;
       first = false;
       ret += ")";
       return ret;

@@ -4,7 +4,9 @@ package app.modules.fight.service
 	
 	import app.core.Tips;
 	import app.data.GameData;
-	import app.modules.fight.events.FightEvent;
+	import app.events.ViewEvent;
+	import app.modules.ViewName;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightEndVo;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
@@ -24,6 +26,7 @@ package app.modules.fight.service
 	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
+	import victor.framework.utils.ArrayUtil;
 
 
 	/**
@@ -126,8 +129,19 @@ package app.modules.fight.service
 			// 
 			fightModel.currentIndex = 0;
 
-			// 
-			dispatch( new FightEvent( FightEvent.NOTIFY_START_ROUND ));
+			if ( fightModel.modeType == 5 ) // 在线对战
+			{
+				var arr:Vector.<SpellVo> = new Vector.<SpellVo>();
+				for each (spellVo in spellList )
+					arr.push( spellVo );
+				fightModel.spellListCopy = arr;
+				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightReadyPanel ));
+				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightOnline ));
+			}
+			else // 闯关和练习
+			{
+				dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_START_ROUND ));
+			}
 		}
 
 		// 结束
@@ -151,7 +165,7 @@ package app.modules.fight.service
 			if ( endVo.addExp > 0 )
 				GameData.instance.updateAddExp( endVo.addExp );
 			// 
-			dispatch( new FightEvent( FightEvent.NOTIFY_END_ROUND ));
+			dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_END_ROUND ));
 		}
 
 		// 下一个单词
@@ -173,7 +187,7 @@ package app.modules.fight.service
 				fightModel.currentIndex++;
 				updateLetterInfoList();
 				//
-				dispatch( new FightEvent( FightEvent.NOTIFY_NEXT_WORD ));
+				dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD ));
 			}
 		}
 		

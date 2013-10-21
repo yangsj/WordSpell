@@ -8,9 +8,9 @@ package app.modules.fight.events
 	 * @author 	yangsj 
 	 * 			2013-9-27
 	 */
-	public class FightEvent extends BaseEvent
+	public class FightAloneEvent extends BaseEvent
 	{
-		public function FightEvent(type:String, data:Object=null, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function FightAloneEvent(type:String, data:Object=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, data, bubbles, cancelable);
 		}

@@ -1,15 +1,21 @@
 package app.modules.fight.view.online
 {
+	import app.core.Tips;
+	import app.events.PackEvent;
 	import app.modules.chat.event.ChatEvent;
-	import app.modules.fight.events.FightEvent;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.service.FightAloneService;
 	import app.modules.fight.view.item.LetterBubble;
+	import app.modules.fight.view.prop.PropList;
+	import app.modules.main.event.MainUIEvent;
 	import app.modules.map.model.MapModel;
 	import app.modules.model.vo.ItemType;
+	import app.modules.model.vo.ItemVo;
 	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.log.Logger;
 	
 	
 	/**
@@ -29,6 +35,10 @@ package app.modules.fight.view.online
 		public var fightService:FightAloneService;
 		
 		private var letterIndex:int = 0;
+		/**
+		 * 是否点击道具泡泡
+		 */
+		private var clickPropBubble:Array;
 		
 		public function FightOnlineMediator()
 		{
@@ -50,11 +60,118 @@ package app.modules.fight.view.online
 			dispatch( new ChatEvent( ChatEvent.FOLD_CHAT ));
 			
 			// 选择字母
-			addViewListener( FightEvent.SELECTED_LETTER, selectedLetterHandler, FightEvent );
+			addViewListener( FightAloneEvent.SELECTED_LETTER, selectedLetterHandler, FightAloneEvent );
 			
+			// 更新金币值变化
+			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
+			// 更新下一个词
+			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
+			
+			// 物品使用成功
+			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
+			// 物品更新
+			addContextListener( PackEvent.UPDATE_ITEMS, updateItemsHandler, PackEvent );
+			
+			
+			clickPropBubble = [];
+			initData();
 		}
 		
-		private function selectedLetterHandler( event:FightEvent ):void
+		private function nextWordUpdateNotify( event:FightAloneEvent ):void
+		{
+			letterIndex = 0;
+			setLetters();
+		}
+		
+		private function updateMoneyNotify( event:MainUIEvent ):void
+		{
+			view.updateMoneyDisplay();
+		}
+		
+		private function updateItemsHandler( event:PackEvent ):void
+		{
+			if ( clickPropBubble )
+			{
+				var bubble:LetterBubble = ( clickPropBubble.length > 0 ) ? clickPropBubble.shift() : null;
+				if ( bubble )
+				{
+					var itemType:int = bubble.data.itemType;
+//					view.delPropItemFromDict( itemType );
+					view.playAddPropEffect( bubble, PropList.itemPoints[ itemType - 1 ] );
+				}
+			}
+		}
+		
+		// 物品使用成功
+		private function useItemSuccessHandler( event:PackEvent ):void
+		{
+			var itemVo:ItemVo = event.data as ItemVo;
+			if ( itemVo )
+			{
+				if ( itemVo.type == ItemType.EXTRA_TIME )
+				{
+					view.useExtraTimeProp();
+					Tips.showMouse( "时间 +5s" );
+				}
+				else if ( itemVo.type == ItemType.BROOM )
+				{
+					view.useBroomProp();
+				}
+				else if ( itemVo.type == ItemType.HINT )
+				{
+					var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
+					if ( letterIndex < items.length )
+					{
+						var key:String = items[ letterIndex ].letter;
+						view.useHintProp( key );
+					}
+				}
+			}
+		}
+		
+		private function initData():void
+		{
+			letterIndex = 0;
+			view.initialize();
+//			view.setRoundName( mapModel.currentMapVo.mapName );
+			updateMoneyNotify( null );
+			setLetters();
+		}
+		
+		private function setLetters():void
+		{
+			if ( fightModel.spellVo )
+			{
+				var modeType:int = fightModel.modeType;
+				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items.slice();
+				if ( modeType > 1 )
+				{
+					var length:int = fightModel.allLetterList.length;
+					var index:int = 0;
+					for ( index = 0; index < 20; index++ )
+					{
+						if ( index < length ) items.push( fightModel.allLetterList[ index ] );
+						else break;
+						if ( items.length > 20 )
+							break;
+					}
+				}
+				view.setLettersPool( items );
+				Logger.debug( " fightModel.currentIndex *********************************************" +  fightModel.currentIndex );
+				if ( modeType > 1 )
+				{
+					var array:Array = fightModel.dictPropPos[ fightModel.currentIndex ] as Array;
+					if ( array ) {
+						var letterVo:LetterBubbleVo;
+//						for each ( letterVo in array )
+//						view.addPropItem( letterVo );
+					}
+//					view.displayPropItem();
+				}
+			}
+		}
+		
+		private function selectedLetterHandler( event:FightAloneEvent ):void
 		{
 			var letterBublle:LetterBubble = event.data as LetterBubble;
 			var vo:LetterBubbleVo = letterBublle.data;
@@ -73,7 +190,7 @@ package app.modules.fight.view.online
 			{
 				view.delLetterFromDict( vo.letter );
 				letterIndex++;
-				dispatch( new FightEvent( FightEvent.UPDATE_WORD, vo ));
+				dispatch( new FightAloneEvent( FightAloneEvent.UPDATE_WORD, vo ));
 			}
 		}
 	}

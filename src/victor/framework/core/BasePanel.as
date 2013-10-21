@@ -11,6 +11,8 @@ package victor.framework.core
 	
 	import app.utils.appStage;
 	
+	import victor.framework.events.PanelEvent;
+	
 	/**
 	 * ……
 	 * @author 	yangsj
@@ -57,6 +59,7 @@ package victor.framework.core
 		private function btnCloseClickHandler(event:MouseEvent):void
 		{
 			hide();
+			dispatchEvent( new PanelEvent( PanelEvent.CLOSE ));
 		}
 
 ///////////// override functions ///////////////////////////
@@ -169,6 +172,7 @@ package victor.framework.core
 		
 		protected function openComplete():void
 		{
+			dispatchEvent( new PanelEvent( PanelEvent.OPENED ));
 		}
 
 ///////////////// getters/setters ////////////////////////////////

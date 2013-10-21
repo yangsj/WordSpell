@@ -1,6 +1,9 @@
 package app.modules.fight.panel.matching
 {
+	import app.modules.fight.service.FightOnlineService;
+	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.events.PanelEvent;
 	
 	
 	/**
@@ -10,9 +13,27 @@ package app.modules.fight.panel.matching
 	 */
 	public class FightMatchingMediator extends BaseMediator
 	{
+		[Inject]
+		public var onlineService:FightOnlineService;
+		
 		public function FightMatchingMediator()
 		{
 			super();
+		}
+		
+		override public function onRegister():void
+		{
+			super.onRegister();
+			
+			// 退出
+			addViewListener( PanelEvent.CLOSE, closeQuitHandler, PanelEvent );
+			
+			onlineService.matching();
+		}
+		
+		private function closeQuitHandler( event:PanelEvent ):void
+		{
+			onlineService.quit();
 		}
 	}
 }

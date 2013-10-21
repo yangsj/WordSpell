@@ -15,6 +15,7 @@ package app.modules.fight.model
 	{
 		private var _spellVo:SpellVo;
 		private var _spellList:Vector.<SpellVo>;
+		private var _spellListCopy:Vector.<SpellVo>;
 		private var _modeType:int;
 		private var _fightEndVo:FightEndVo;
 		private var _dictPropPos:Dictionary;
@@ -53,7 +54,7 @@ package app.modules.fight.model
 		}
 
 		/**
-		 * 选择的模式 ( 模式 1简单、2进阶、3达人 )
+		 * 选择的模式 ( 模式 1简单、2进阶、3达人、4练习、5对战 )
 		 */
 		public function get modeType():int
 		{
@@ -126,6 +127,22 @@ package app.modules.fight.model
 		public function set allLetterList(value:Vector.<LetterBubbleVo>):void
 		{
 			_allLetterList = value;
+		}
+
+		/**
+		 * 单词列表副本信息
+		 */
+		public function get spellListCopy():Vector.<SpellVo>
+		{
+			return _spellListCopy;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set spellListCopy(value:Vector.<SpellVo>):void
+		{
+			_spellListCopy = value;
 		}
 
 

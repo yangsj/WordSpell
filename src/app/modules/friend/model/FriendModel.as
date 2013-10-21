@@ -112,7 +112,7 @@ package app.modules.friend.model
 			var vecList:Vector.<FriendVo> = new Vector.<FriendVo>();
 			for each (var friendVo:FriendVo in friendList )
 			{
-				if ( friendVo.onLine )
+				if ( !friendVo.offLine )
 					vecList.push( friendVo );
 			}
 			return vecList;

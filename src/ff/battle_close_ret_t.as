@@ -18,16 +18,22 @@ import org.apache.thrift.protocol.*;
   public class battle_close_ret_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("battle_close_ret_t");
     private static const WIN_FIELD_DESC:TField = new TField("win", TType.BOOL, 1);
+    private static const FLAG_FIELD_DESC:TField = new TField("flag", TType.I16, 2);
 
     private var _win:Boolean;
     public static const WIN:int = 1;
+    private var _flag:int;
+    public static const FLAG:int = 2;
 
     private var __isset_win:Boolean = false;
+    private var __isset_flag:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
       metaDataMap[WIN] = new FieldMetaData("win", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.BOOL));
+      metaDataMap[FLAG] = new FieldMetaData("flag", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
     }
     {
       FieldMetaData.addStructMetaDataMap(battle_close_ret_t, metaDataMap);
@@ -35,6 +41,7 @@ import org.apache.thrift.protocol.*;
 
     public function battle_close_ret_t() {
       this._win = 0;
+      this._flag = 0;
     }
 
     public function get win():Boolean {
@@ -55,6 +62,24 @@ import org.apache.thrift.protocol.*;
       return this.__isset_win;
     }
 
+    public function get flag():int {
+      return this._flag;
+    }
+
+    public function set flag(flag:int):void {
+      this._flag = flag;
+      this.__isset_flag = true;
+    }
+
+    public function unsetFlag():void {
+      this.__isset_flag = false;
+    }
+
+    // Returns true if field flag is set (has been assigned a value) and false otherwise
+    public function isSetFlag():Boolean {
+      return this.__isset_flag;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case WIN:
@@ -62,6 +87,14 @@ import org.apache.thrift.protocol.*;
           unsetWin();
         } else {
           this.win = value;
+        }
+        break;
+
+      case FLAG:
+        if (value == null) {
+          unsetFlag();
+        } else {
+          this.flag = value;
         }
         break;
 
@@ -74,6 +107,8 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case WIN:
         return this.win;
+      case FLAG:
+        return this.flag;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -84,6 +119,8 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case WIN:
         return isSetWin();
+      case FLAG:
+        return isSetFlag();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -108,6 +145,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case FLAG:
+            if (field.type == TType.I16) {
+              this.flag = iprot.readI16();
+              this.__isset_flag = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -128,6 +173,9 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(WIN_FIELD_DESC);
       oprot.writeBool(this.win);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(FLAG_FIELD_DESC);
+      oprot.writeI16(this.flag);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -138,6 +186,10 @@ import org.apache.thrift.protocol.*;
 
       ret += "win:";
       ret += this.win;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "flag:";
+      ret += this.flag;
       first = false;
       ret += ")";
       return ret;

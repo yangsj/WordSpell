@@ -27,7 +27,7 @@ package app.modules.fight.panel.matching
 		override protected function afterRender():void
 		{
 			super.afterRender();
-			var color:uint = GenderType.getColor(GameData.instance.selfVo.sex);
+			var color:uint = GenderType.getColor(GameData.instance.selfVo.gender);
 			txtPlayer1.htmlText = HtmlText.color( GameData.instance.selfVo.name, color );
 		}
 		

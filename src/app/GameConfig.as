@@ -26,6 +26,16 @@ package app
 		 */
 		public static var serverPort:int = 1024;
 		
+		/**
+		 * 用户id
+		 */
+		public static var uid:int;
+		
+		/**
+		 * 登陆key
+		 */
+		public static var key:String;
+		
 		
 		public function GameConfig()
 		{

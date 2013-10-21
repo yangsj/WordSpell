@@ -6,6 +6,8 @@ package app.modules.fight.panel.ready
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import app.modules.fight.model.FightMatchingVo;
+	
 	import victor.framework.components.Reflection;
 	import victor.framework.interfaces.IDisposable;
 	
@@ -48,6 +50,7 @@ package app.modules.fight.panel.ready
 		public function FightReadyItem( skin:Sprite )
 		{
 			Reflection.reflection( this, skin );
+			refreshStatus( false );
 			setSex( 0 );
 			btnReadying.addEventListener(MouseEvent.CLICK, onBtnReadingHandler );
 		}
@@ -55,29 +58,39 @@ package app.modules.fight.panel.ready
 		protected function onBtnReadingHandler(event:MouseEvent):void
 		{
 			btnReadying.dispatchEvent( new FightReadyEvent( FightReadyEvent.READY, null, true ));
+			refreshStatus( true );
 		}
 		
 		public function dispose():void
 		{
-			
-			btnReadyed = null;
-			btnReadying = null;
-			mcSex = null;
-			txtPlayer = null;
-			txtGrade = null;
-			txtLevel = null;
-			mcBg = null;
+//			btnReadying.removeEventListener(MouseEvent.CLICK, onBtnReadingHandler );
+//			btnReadyed = null;
+//			btnReadying = null;
+//			mcSex = null;
+//			txtPlayer = null;
+//			txtGrade = null;
+//			txtLevel = null;
+//			mcBg = null;
 		}
 		
-		public function setData():void
+		public function refreshStatus( isOk:Boolean = true ):void
 		{
-			
+			btnReadyed.visible = isOk;
+			btnReadying.visible = !isOk;
 		}
 		
-		private function setSex( sex:int ):void
+		public function setData( matchingVo:FightMatchingVo ):void
 		{
-			mcBg.gotoAndStop( sex + 1 );
-			mcSex.gotoAndStop( sex + 1 );
+			txtPlayer.text = matchingVo.name;
+			txtGrade.text = matchingVo.grade;
+			txtLevel.text = "Lv " + matchingVo.level;
+			setSex( matchingVo.gender );
+		}
+		
+		private function setSex( gender:int ):void
+		{
+			mcBg.gotoAndStop( gender + 1 );
+			mcSex.gotoAndStop( gender + 1 );
 		}
 		
 	}

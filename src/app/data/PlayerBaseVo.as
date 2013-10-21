@@ -35,7 +35,7 @@ package app.data
 		private var _school:String;
 		private var _grade:String;
 		private var _qq:String;
-		private var _sex:int;
+		private var _gender:int;
 		
 		////////////////////////////////////////////////////////
 		
@@ -266,17 +266,17 @@ package app.data
 		/**
 		 * 性别
 		 */
-		public function get sex():int
+		public function get gender():int
 		{
-			return _sex;
+			return _gender;
 		}
 
 		/**
 		 * @private
 		 */
-		public function set sex(value:int):void
+		public function set gender(value:int):void
 		{
-			_sex = value;
+			_gender = value;
 		}
 
 

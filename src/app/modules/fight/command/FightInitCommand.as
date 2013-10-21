@@ -14,6 +14,7 @@ package app.modules.fight.command
 	import app.modules.fight.panel.search.FightSearchMediator;
 	import app.modules.fight.panel.search.FightSearchPanel;
 	import app.modules.fight.service.FightAloneService;
+	import app.modules.fight.service.FightOnlineService;
 	import app.modules.fight.view.alone.FightAloneMediator;
 	import app.modules.fight.view.alone.FightAloneView;
 	import app.modules.fight.view.online.FightOnlineMediator;
@@ -62,6 +63,7 @@ package app.modules.fight.command
 			injectActor( FightModel );
 			injectActor( FightReadyModel );
 			injectActor( FightAloneService );
+			injectActor( FightOnlineService );
 		}
 		
 	}

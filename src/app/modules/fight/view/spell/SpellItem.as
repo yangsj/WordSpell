@@ -4,7 +4,7 @@ package app.modules.fight.view.spell
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.modules.fight.events.FightEvent;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	
 	import victor.framework.interfaces.IDisposable;
@@ -39,7 +39,7 @@ package app.modules.fight.view.spell
 		protected function onClickHandler(event:MouseEvent):void
 		{
 			if ( _data )
-				this.skin.dispatchEvent( new FightEvent( FightEvent.REMOVED_LETTER, _data ));
+				this.skin.dispatchEvent( new FightAloneEvent( FightAloneEvent.REMOVED_LETTER, _data ));
 		}
 		
 		public function initialize():void

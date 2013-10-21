@@ -1,6 +1,7 @@
 package app.modules.fight.view.spell
 {
-	import app.modules.fight.events.FightEvent;
+	import app.modules.fight.events.FightAloneEvent;
+	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.service.FightAloneService;
@@ -32,18 +33,21 @@ package app.modules.fight.view.spell
 			super.onRegister();
 			
 			// 移除字母
-			addViewListener( FightEvent.REMOVED_LETTER, removedLetterHandler, FightEvent );
+			addViewListener( FightAloneEvent.REMOVED_LETTER, removedLetterHandler, FightAloneEvent );
 			// 输入结束
 			addViewListener( SpellEvent.INPUT_OVER, inputOverHandler, SpellEvent );
 			
-			// 开始
-			addContextListener( FightEvent.NOTIFY_START_ROUND, nextWordNotify, FightEvent );
+			// 
+			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
 			// 更新数据
-			addContextListener( FightEvent.UPDATE_WORD, updateWordHandler, FightEvent );
+			addContextListener( FightAloneEvent.UPDATE_WORD, updateWordHandler, FightAloneEvent );
 			// 显示答案
-			addContextListener( FightEvent.SHOW_ANSWER, showAnswerHandler, FightEvent );
+			addContextListener( FightAloneEvent.SHOW_ANSWER, showAnswerHandler, FightAloneEvent );
 			// 更新下一个
-			addContextListener( FightEvent.NOTIFY_NEXT_WORD, nextWordNotify, FightEvent );
+			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordNotify, FightAloneEvent );
+			
+			if ( fightModel.modeType == 5 )
+				view.setInitData( fightModel.spellVo );
 			
 		}
 		
@@ -54,27 +58,27 @@ package app.modules.fight.view.spell
 			{
 				if ( vo == null )
 					break;
-				sequence.push( vo );
+				sequence.push( vo.id );
 			}
 			fightService.inputOver( sequence );
 		}
 		
-		private function nextWordNotify( event:FightEvent ):void
+		private function nextWordNotify( event:* ):void
 		{
 			view.setInitData( fightModel.spellVo );
 		}
 		
-		private function showAnswerHandler( event:FightEvent ):void
+		private function showAnswerHandler( event:FightAloneEvent ):void
 		{
 			view.showAnswer();
 		}
 		
-		private function updateWordHandler( event:FightEvent ):void
+		private function updateWordHandler( event:FightAloneEvent ):void
 		{
 			view.setSingleLetter( event.data as LetterBubbleVo );
 		}
 		
-		private function removedLetterHandler( evnt:FightEvent ):void
+		private function removedLetterHandler( evnt:FightAloneEvent ):void
 		{
 		}
 		
