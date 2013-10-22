@@ -42,6 +42,7 @@ package app.modules.fight.view
 		protected var effectContainer:Sprite;
 		protected var dictLetterSelf:Dictionary;
 		protected var selfTotalTime:int = 60;
+		protected var dictProps:Dictionary;
 		
 		public function FightBaseView()
 		{
@@ -77,18 +78,17 @@ package app.modules.fight.view
 			ViewStruct.addChild( this, ViewStruct.SCENE2 );
 		}
 		
-		override protected function afterRender():void
-		{
-			super.afterRender();
-			appStage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
-		}
-		
 		public function initialize():void
 		{
+			dictProps = new Dictionary();
 			selfTotalTime = 60;
 			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
 			TickManager.doInterval( enterFrameHandler, 20 );
+			
+			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
+			appStage.dispatchEvent( new Event( Event.ACTIVATE ));
+			trace( "appStage.focus:" + appStage.focus );
 		}
 		
 		public function clear():void
@@ -109,6 +109,34 @@ package app.modules.fight.view
 			function complete( bubble:DisplayObject ):void
 			{
 				TweenMax.to( bubble, 0.2, {scaleX:0.3, scaleY:0.3, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[bubble]});
+			}
+		}
+		
+		public function delPropItemFromDict( itemType:int ):void
+		{
+			delete dictProps[ itemType ];
+			delete dictProps[ itemType + "_data" ];
+		}
+		
+		public function addPropItem( lettetVo:LetterBubbleVo ):void
+		{
+			if ( lettetVo ) dictProps[ lettetVo.itemType + "_data" ] = lettetVo;
+		}
+		
+		public function displayPropItem():void
+		{
+			var bubble:LetterBubble;
+			var lettetVo:LetterBubbleVo;
+			for ( var key:String in dictProps )
+			{
+				if ( key.indexOf( "_data" ) != -1 )
+				{
+					lettetVo = dictProps[ key ];
+					bubble = new LetterBubble();
+					bubble.setData( lettetVo );
+					container.addChild( bubble );
+					dictProps[ lettetVo.itemType ] = bubble;
+				}
 			}
 		}
 		
@@ -158,13 +186,16 @@ package app.modules.fight.view
 			}
 		}
 		
-		protected function setTimeText( text:TextField, seconds:int ):void
+		protected function setTimeText( text:TextField, seconds:int, isAlone:Boolean = true ):void
 		{
 			if ( seconds >= 0 )
 				text.htmlText = txtTime.htmlText = getTimeString( seconds );
 			
 			function getTimeString( seconds:int ):String
 			{
+				if ( isAlone == false )
+					return HtmlText.color( seconds + "", seconds <= 10 ? 0xff0000 : 0xffff00 );
+				
 				var min:int = int(seconds/60);
 				var sec:int = seconds%60;
 				return HtmlText.color( (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), seconds <= 10 ? 0xff0000 : 0xffff00 );
@@ -209,7 +240,7 @@ package app.modules.fight.view
 						mc2 = container.getChildAt( j ) as LetterBubble;
 						if ( mc2 && mc1 != mc2 )
 						{
-							var dist0:Number = 41 * ( mc1.scaleX + mc2.scaleX );
+							var dist0:Number = 41 * ( mc1.scale + mc2.scale );
 							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
 							if ( dist1 <= dist0 )
 							{

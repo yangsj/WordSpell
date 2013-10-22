@@ -92,19 +92,21 @@ package app.modules.fight.view.spell
 			if ( _inputList && _spellVo )
 			{
 				_inputNum = getEmptyIndex;
-				var current:LetterBubbleVo = _spellVo.items[ _inputNum ];
-				if ( letterBubbleVo && current.lowerCase == letterBubbleVo.lowerCase ) // 输入的字母顺序是否正确
+				var isOver:Boolean = false;
+				if ( _inputNum != -1 )
 				{
-					var item:SpellItem = _spellItems[ _inputNum ];
-					item.setData( letterBubbleVo );
-					_inputList[_inputNum] = letterBubbleVo;
-					if ( getEmptyIndex == -1 )
-						inputOver();
+					var current:LetterBubbleVo = _spellVo.items[ _inputNum ];
+					if ( letterBubbleVo && current.lowerCase == letterBubbleVo.lowerCase ) // 输入的字母顺序是否正确
+					{
+						var item:SpellItem = _spellItems[ _inputNum ];
+						item.setData( letterBubbleVo );
+						_inputList[_inputNum] = letterBubbleVo;
+						isOver = ( getEmptyIndex == -1 )
+					}
+					else isOver = true;
 				}
-				else
-				{
+				if ( isOver )
 					inputOver();
-				}
 			}
 			else
 			{

@@ -36,13 +36,13 @@
 	<asset id="ui_friend" src="assets/ui_friend.swf" version="1_1" first="0"/>
 	
 	<!-- 战斗部分 -->
-	<asset id="ui_fight" src="assets/ui_fight.swf" version="1_33" first="0"/>
+	<asset id="ui_fight" src="assets/ui_fight.swf" version="1_36" first="0"/>
 	<asset id="ui_round_losePanel" src="assets/ui_round_losePanel.swf" version="1_1" first="0"/>
 	<asset id="ui_round_winPanel" src="assets/ui_round_winPanel.swf" version="1_1" first="0"/>
 	<asset id="ui_ready" src="assets/ui_ready.swf" version="1_34" first="0"/>
-	<asset id="ui_matching" src="assets/ui_matching.swf" version="1_34" first="0"/>
+	<asset id="ui_matching" src="assets/ui_matching.swf" version="1_36" first="0"/>
 	<asset id="ui_fight_search" src="assets/ui_fight_search.swf" version="1_32" first="0"/>
 	<asset id="ui_fight_friend_search" src="assets/ui_fight_friend_search.swf" version="1_31" first="0"/>
-	<asset id="ui_fight_online_result" src="assets/ui_fight_online_result.swf" version="1_34" first="0"/>
+	<asset id="ui_fight_online_result" src="assets/ui_fight_online_result.swf" version="1_36" first="0"/>
 	
 </data>

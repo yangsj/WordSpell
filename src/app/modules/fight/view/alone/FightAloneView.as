@@ -36,13 +36,6 @@ package app.modules.fight.view.alone
 			txtName = TextUtil.cloneText( txtName );
 			txtTime = TextUtil.cloneText( txtTime );
 		}
-
-		override public function initialize():void
-		{
-			dictProps = new Dictionary();
-			
-			super.initialize();
-		}
 		
 		override public function clear():void
 		{
@@ -62,34 +55,6 @@ package app.modules.fight.view.alone
 			else
 			{
 				delete dictLetterSelf[ letter.toLocaleLowerCase()];
-			}
-		}
-		
-		public function delPropItemFromDict( itemType:int ):void
-		{
-			delete dictProps[ itemType ];
-			delete dictProps[ itemType + "_data" ];
-		}
-		
-		public function addPropItem( lettetVo:LetterBubbleVo ):void
-		{
-			if ( lettetVo ) dictProps[ lettetVo.itemType + "_data" ] = lettetVo;
-		}
-		
-		public function displayPropItem():void
-		{
-			var bubble:LetterBubble;
-			var lettetVo:LetterBubbleVo;
-			for ( var key:String in dictProps )
-			{
-				if ( key.indexOf( "_data" ) != -1 )
-				{
-					lettetVo = dictProps[ key ];
-					bubble = new LetterBubble();
-					bubble.setData( lettetVo );
-					container.addChild( bubble );
-					dictProps[ lettetVo.itemType ] = bubble;
-				}
 			}
 		}
 

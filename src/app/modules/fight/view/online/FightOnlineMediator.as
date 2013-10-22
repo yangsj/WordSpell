@@ -1,20 +1,17 @@
 package app.modules.fight.view.online
 {
 	import app.core.Tips;
+	import app.data.GameData;
 	import app.events.PackEvent;
-	import app.modules.chat.event.ChatEvent;
+	import app.modules.ViewName;
 	import app.modules.fight.events.FightAloneEvent;
-	import app.modules.fight.model.FightModel;
+	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.LetterBubbleVo;
-	import app.modules.fight.service.FightAloneService;
-	import app.modules.fight.view.item.LetterBubble;
-	import app.modules.fight.view.prop.PropList;
-	import app.modules.main.event.MainUIEvent;
-	import app.modules.map.model.MapModel;
+	import app.modules.fight.view.FightBaseMediator;
+	import app.modules.fight.view.spell.SpellVo;
 	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
 	
-	import victor.framework.core.BaseMediator;
 	import victor.framework.log.Logger;
 	
 	
@@ -23,58 +20,32 @@ package app.modules.fight.view.online
 	 * @author 	yangsj 
 	 * 			2013-9-27
 	 */
-	public class FightOnlineMediator extends BaseMediator
+	public class FightOnlineMediator extends FightBaseMediator
 	{
 		[Inject]
 		public var view:FightOnlineView;
-		[Inject]
-		public var fightModel:FightModel;
-		[Inject]
-		public var mapModel:MapModel;
-		[Inject]
-		public var fightService:FightAloneService;
-		
-		private var letterIndex:int = 0;
-		/**
-		 * 是否点击道具泡泡
-		 */
-		private var clickPropBubble:Array;
 		
 		public function FightOnlineMediator()
 		{
 			super();
 		}
 		
-		override public function onRemove():void
-		{
-			super.onRemove();
-			// 展开聊天窗口
-			dispatch( new ChatEvent( ChatEvent.EXPAND_CHAT ));
-		}
-		
 		override public function onRegister():void
 		{
 			super.onRegister();
 			
-			// 折叠聊天窗口
-			dispatch( new ChatEvent( ChatEvent.FOLD_CHAT ));
-			
-			// 选择字母
-			addViewListener( FightAloneEvent.SELECTED_LETTER, selectedLetterHandler, FightAloneEvent );
-			
-			// 更新金币值变化
-			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
 			// 更新下一个词
 			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
+			// 结束通知
+			addContextListener( FightOnlineEvent.BATTLE_END, endBattleNotify, FightOnlineEvent );
 			
-			// 物品使用成功
-			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
-			// 物品更新
-			addContextListener( PackEvent.UPDATE_ITEMS, updateItemsHandler, PackEvent );
-			
-			
-			clickPropBubble = [];
 			initData();
+		}
+		
+		private function endBattleNotify( event:FightOnlineEvent ):void
+		{
+			view.clear();
+			openView( ViewName.FightOnlineResultPanel );
 		}
 		
 		private function nextWordUpdateNotify( event:FightAloneEvent ):void
@@ -83,27 +54,8 @@ package app.modules.fight.view.online
 			setLetters();
 		}
 		
-		private function updateMoneyNotify( event:MainUIEvent ):void
-		{
-			view.updateMoneyDisplay();
-		}
-		
-		private function updateItemsHandler( event:PackEvent ):void
-		{
-			if ( clickPropBubble )
-			{
-				var bubble:LetterBubble = ( clickPropBubble.length > 0 ) ? clickPropBubble.shift() : null;
-				if ( bubble )
-				{
-					var itemType:int = bubble.data.itemType;
-//					view.delPropItemFromDict( itemType );
-					view.playAddPropEffect( bubble, PropList.itemPoints[ itemType - 1 ] );
-				}
-			}
-		}
-		
 		// 物品使用成功
-		private function useItemSuccessHandler( event:PackEvent ):void
+		override protected function useItemSuccessHandler( event:PackEvent ):void
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
 			if ( itemVo )
@@ -111,7 +63,7 @@ package app.modules.fight.view.online
 				if ( itemVo.type == ItemType.EXTRA_TIME )
 				{
 					view.useExtraTimeProp();
-					Tips.showMouse( "时间 +5s" );
+					Tips.showMouse( "时间 +8s" );
 				}
 				else if ( itemVo.type == ItemType.BROOM )
 				{
@@ -133,65 +85,31 @@ package app.modules.fight.view.online
 		{
 			letterIndex = 0;
 			view.initialize();
-//			view.setRoundName( mapModel.currentMapVo.mapName );
+			view.setPlayerName( GameData.instance.selfVo.name, readyModel.destVo.name );
 			updateMoneyNotify( null );
 			setLetters();
+			setOtherLetters();
 		}
 		
-		private function setLetters():void
+		private function setOtherLetters():void
 		{
-			if ( fightModel.spellVo )
+			if ( fightModel.spellListCopy && fightModel.spellListCopy.length )
 			{
-				var modeType:int = fightModel.modeType;
-				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items.slice();
-				if ( modeType > 1 )
+				var spellVo:SpellVo = fightModel.spellListCopy.shift();
+				var items:Vector.<LetterBubbleVo> = spellVo.items.slice();
+				var length:int = fightModel.allLetterList.length;
+				var index:int = 0;
+				fightModel.allLetterListCopy.splice(0, spellVo.charsLength );
+				for ( index = 0; index < 15; index++ )
 				{
-					var length:int = fightModel.allLetterList.length;
-					var index:int = 0;
-					for ( index = 0; index < 20; index++ )
-					{
-						if ( index < length ) items.push( fightModel.allLetterList[ index ] );
-						else break;
-						if ( items.length > 20 )
-							break;
-					}
+					if ( index < length ) items.push( fightModel.allLetterListCopy[ index ] );
+					else break;
+					if ( items.length > 15 )
+						break;
 				}
-				view.setLettersPool( items );
-				Logger.debug( " fightModel.currentIndex *********************************************" +  fightModel.currentIndex );
-				if ( modeType > 1 )
-				{
-					var array:Array = fightModel.dictPropPos[ fightModel.currentIndex ] as Array;
-					if ( array ) {
-						var letterVo:LetterBubbleVo;
-//						for each ( letterVo in array )
-//						view.addPropItem( letterVo );
-					}
-//					view.displayPropItem();
-				}
+				view.setLettersPool( items, false );
 			}
 		}
 		
-		private function selectedLetterHandler( event:FightAloneEvent ):void
-		{
-			var letterBublle:LetterBubble = event.data as LetterBubble;
-			var vo:LetterBubbleVo = letterBublle.data;
-			
-			// 测试泡泡
-			if ( vo.id == -1 )
-				return ;
-			
-			// 选中产生道具的字母泡泡
-			if ( vo.itemType != ItemType.DEFAULT )
-			{
-//				clickPropBubble.push( letterBublle );
-				fightService.inputProp( vo.id );
-			}
-			else // 字母泡泡
-			{
-				view.delLetterFromDict( vo.letter );
-				letterIndex++;
-				dispatch( new FightAloneEvent( FightAloneEvent.UPDATE_WORD, vo ));
-			}
-		}
 	}
 }

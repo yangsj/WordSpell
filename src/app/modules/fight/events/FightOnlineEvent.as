@@ -21,9 +21,9 @@ package app.modules.fight.events
 		public static const UPDATE_READY:String = "update_ready";
 		
 		/**
-		 * 退出（邀请）
+		 * 对战结束
 		 */
-		public static const QUIT_BATTLE:String = "quit_invite";
+		public static const BATTLE_END:String = "battle_end";
 		
 		/**
 		 * 开始

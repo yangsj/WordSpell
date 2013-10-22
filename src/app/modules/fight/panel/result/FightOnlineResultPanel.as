@@ -1,7 +1,11 @@
 package app.modules.fight.panel.result
 {
 	import flash.display.SimpleButton;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	
+	import app.modules.fight.model.FightEndVo;
 	
 	import victor.framework.core.BasePanel;
 	
@@ -58,9 +62,36 @@ package app.modules.fight.panel.result
 			super();
 		}
 		
-		public function setData():void
+		override protected function onceInit():void
 		{
+			super.onceInit();
+			btnCancel.addEventListener( MouseEvent.CLICK, btnCancelHandler );
+			btnAgain.addEventListener( MouseEvent.CLICK, btnAgainHandler );
+		}
+		
+		protected function btnAgainHandler(event:MouseEvent):void
+		{
+			dispatchEvent( new Event( "again" ));
+		}
+		
+		protected function btnCancelHandler(event:MouseEvent):void
+		{
+			btnClose.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
+		}
+		
+		public function setPlayer( winName:String, loseName:String ):void
+		{
+			txtPlayerName1.text = winName;
+			txtPlayerName2.text = loseName;
+		}
+		
+		public function setData( winVo:FightEndVo, loseVo:FightEndVo ):void
+		{
+			txtExp1.text = winVo.addExp + "";
+			txtMoney1.text = winVo.addMoney + "";
 			
+			txtExp2.text = loseVo.addExp + "";
+			txtMoney2.text = loseVo.addMoney + "";
 		}
 		
 		override protected function get resNames():Array

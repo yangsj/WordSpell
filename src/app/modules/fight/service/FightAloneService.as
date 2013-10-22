@@ -5,6 +5,7 @@ package app.modules.fight.service
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.ViewEvent;
+	import app.modules.LoadingEffect;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightEndVo;
@@ -26,8 +27,6 @@ package app.modules.fight.service
 	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
-	import victor.framework.utils.ArrayUtil;
-
 
 	/**
 	 * ……
@@ -121,6 +120,7 @@ package app.modules.fight.service
 			}
 			fightModel.dictPropPos = dict;
 			fightModel.allLetterList = allLetterList;
+			fightModel.allLetterListCopy = allLetterList.slice();
 			fightModel.spellList = spellList;
 			fightModel.modeType = data.mode;
 
@@ -221,6 +221,7 @@ package app.modules.fight.service
 			var req:input_req_t = new input_req_t();
 			req.input = sequence;
 			call( client_cmd_e.INPUT_REQ, req );
+			LoadingEffect.hide();
 		}
 
 		/**
@@ -232,6 +233,7 @@ package app.modules.fight.service
 			var req:select_item_bubble_req_t = new select_item_bubble_req_t();
 			req.bubble_id = id;
 			call( client_cmd_e.SELECT_ITEM_BUBBLE_REQ , req );
+			LoadingEffect.hide();
 		}
 
 	}

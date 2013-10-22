@@ -19,11 +19,17 @@ import org.apache.thrift.protocol.*;
     private static const STRUCT_DESC:TStruct = new TStruct("battle_close_ret_t");
     private static const WIN_FIELD_DESC:TField = new TField("win", TType.BOOL, 1);
     private static const FLAG_FIELD_DESC:TField = new TField("flag", TType.I16, 2);
+    private static const SELF_RESULT_FIELD_DESC:TField = new TField("self_result", TType.STRUCT, 3);
+    private static const DEST_RESULT_FIELD_DESC:TField = new TField("dest_result", TType.STRUCT, 4);
 
     private var _win:Boolean;
     public static const WIN:int = 1;
     private var _flag:int;
     public static const FLAG:int = 2;
+    private var _self_result:end_round_ret_t;
+    public static const SELF_RESULT:int = 3;
+    private var _dest_result:end_round_ret_t;
+    public static const DEST_RESULT:int = 4;
 
     private var __isset_win:Boolean = false;
     private var __isset_flag:Boolean = false;
@@ -34,6 +40,10 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.BOOL));
       metaDataMap[FLAG] = new FieldMetaData("flag", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I16));
+      metaDataMap[SELF_RESULT] = new FieldMetaData("self_result", TFieldRequirementType.DEFAULT, 
+          new StructMetaData(TType.STRUCT, end_round_ret_t));
+      metaDataMap[DEST_RESULT] = new FieldMetaData("dest_result", TFieldRequirementType.DEFAULT, 
+          new StructMetaData(TType.STRUCT, end_round_ret_t));
     }
     {
       FieldMetaData.addStructMetaDataMap(battle_close_ret_t, metaDataMap);
@@ -80,6 +90,40 @@ import org.apache.thrift.protocol.*;
       return this.__isset_flag;
     }
 
+    public function get self_result():end_round_ret_t {
+      return this._self_result;
+    }
+
+    public function set self_result(self_result:end_round_ret_t):void {
+      this._self_result = self_result;
+    }
+
+    public function unsetSelf_result():void {
+      this.self_result = null;
+    }
+
+    // Returns true if field self_result is set (has been assigned a value) and false otherwise
+    public function isSetSelf_result():Boolean {
+      return this.self_result != null;
+    }
+
+    public function get dest_result():end_round_ret_t {
+      return this._dest_result;
+    }
+
+    public function set dest_result(dest_result:end_round_ret_t):void {
+      this._dest_result = dest_result;
+    }
+
+    public function unsetDest_result():void {
+      this.dest_result = null;
+    }
+
+    // Returns true if field dest_result is set (has been assigned a value) and false otherwise
+    public function isSetDest_result():Boolean {
+      return this.dest_result != null;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case WIN:
@@ -98,6 +142,22 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case SELF_RESULT:
+        if (value == null) {
+          unsetSelf_result();
+        } else {
+          this.self_result = value;
+        }
+        break;
+
+      case DEST_RESULT:
+        if (value == null) {
+          unsetDest_result();
+        } else {
+          this.dest_result = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -109,6 +169,10 @@ import org.apache.thrift.protocol.*;
         return this.win;
       case FLAG:
         return this.flag;
+      case SELF_RESULT:
+        return this.self_result;
+      case DEST_RESULT:
+        return this.dest_result;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -121,6 +185,10 @@ import org.apache.thrift.protocol.*;
         return isSetWin();
       case FLAG:
         return isSetFlag();
+      case SELF_RESULT:
+        return isSetSelf_result();
+      case DEST_RESULT:
+        return isSetDest_result();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -153,6 +221,22 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case SELF_RESULT:
+            if (field.type == TType.STRUCT) {
+              this.self_result = new end_round_ret_t();
+              this.self_result.read(iprot);
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case DEST_RESULT:
+            if (field.type == TType.STRUCT) {
+              this.dest_result = new end_round_ret_t();
+              this.dest_result.read(iprot);
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -176,6 +260,16 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(FLAG_FIELD_DESC);
       oprot.writeI16(this.flag);
       oprot.writeFieldEnd();
+      if (this.self_result != null) {
+        oprot.writeFieldBegin(SELF_RESULT_FIELD_DESC);
+        this.self_result.write(oprot);
+        oprot.writeFieldEnd();
+      }
+      if (this.dest_result != null) {
+        oprot.writeFieldBegin(DEST_RESULT_FIELD_DESC);
+        this.dest_result.write(oprot);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -190,6 +284,22 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "flag:";
       ret += this.flag;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "self_result:";
+      if (this.self_result == null) {
+        ret += "null";
+      } else {
+        ret += this.self_result;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "dest_result:";
+      if (this.dest_result == null) {
+        ret += "null";
+      } else {
+        ret += this.dest_result;
+      }
       first = false;
       ret += ")";
       return ret;

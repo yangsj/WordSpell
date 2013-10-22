@@ -21,6 +21,11 @@ package app.modules.fight.model
 		private var _dictPropPos:Dictionary;
 		private var _currentIndex:int = 0;
 		private var _allLetterList:Vector.<LetterBubbleVo>;
+		private var _allLetterListCopy:Vector.<LetterBubbleVo>;
+		private var _battleEndSelfVo:FightEndVo;
+		private var _battleEndDestVo:FightEndVo;
+		private var _battleResult:Boolean = false;
+		private var _battleResultFlag:int;
 		
 		public function FightModel()
 		{
@@ -143,6 +148,80 @@ package app.modules.fight.model
 		public function set spellListCopy(value:Vector.<SpellVo>):void
 		{
 			_spellListCopy = value;
+		}
+
+		public function get allLetterListCopy():Vector.<LetterBubbleVo>
+		{
+			return _allLetterListCopy;
+		}
+
+		public function set allLetterListCopy(value:Vector.<LetterBubbleVo>):void
+		{
+			_allLetterListCopy = value;
+		}
+
+		/**
+		 * 对战结束玩家自己的数据
+		 */
+		public function get battleEndSelfVo():FightEndVo
+		{
+			return _battleEndSelfVo ||= new FightEndVo();
+		}
+
+		/**
+		 * @private
+		 */
+		public function set battleEndSelfVo(value:FightEndVo):void
+		{
+			_battleEndSelfVo = value;
+		}
+
+		/**
+		 * 对战结束对手数据
+		 */
+		public function get battleEndDestVo():FightEndVo
+		{
+			return _battleEndDestVo ||= new FightEndVo();
+		}
+
+		/**
+		 * @private
+		 */
+		public function set battleEndDestVo(value:FightEndVo):void
+		{
+			_battleEndDestVo = value;
+		}
+
+		/**
+		 * 对战结果
+		 */
+		public function get battleResult():Boolean
+		{
+			return _battleResult;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set battleResult(value:Boolean):void
+		{
+			_battleResult = value;
+		}
+
+		/**
+		 * 0标识比赛正常结束|1标识对方放弃
+		 */
+		public function get battleResultFlag():int
+		{
+			return _battleResultFlag;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set battleResultFlag(value:int):void
+		{
+			_battleResultFlag = value;
 		}
 
 

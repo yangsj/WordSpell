@@ -34,17 +34,15 @@ package app.modules.fight.view.online
 		override protected function onceInit():void
 		{
 			super.onceInit();
+			container2.mouseChildren = false;
+			container2.mouseEnabled = false;
 		}
 		
 		override public function initialize():void
 		{
-			otherTotalTime = 60;
+			selfTotalTime = 300;
+			otherTotalTime = 300;
 			super.initialize();
-		}
-		
-		override public function clear():void
-		{
-			super.clear();
 		}
 		
 		override public function delLetterFromDict( letter:String, isSelf:Boolean = true ):void
@@ -86,13 +84,13 @@ package app.modules.fight.view.online
 			else if ( type == 2 ) dictLetterOther = dict;
 		}
 		
-		private function timerHandler():void
+		override protected function timerHandler():void
 		{
 			selfTotalTime--;
-			setTimeText( txtTime, selfTotalTime );
+			setTimeText( txtTime, selfTotalTime, false );
 			
 			otherTotalTime--;
-			setTimeText( txtTime2, otherTotalTime );
+			setTimeText( txtTime2, otherTotalTime, false );
 		}
 		
 		/**
@@ -101,8 +99,8 @@ package app.modules.fight.view.online
 		override public function useExtraTimeProp( isSelf:Boolean = true ):void
 		{
 			if ( isSelf )
-				selfTotalTime += 5;
-			else otherTotalTime += 5;
+				selfTotalTime += 8;
+			else otherTotalTime += 8;
 		}
 		
 		/**

@@ -1,11 +1,14 @@
 package app.modules.fight.panel.matching
 {
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import app.core.Tips;
 	import app.data.GameData;
 	import app.modules.model.GenderType;
 	
 	import victor.framework.core.BasePanel;
+	import victor.framework.manager.TickManager;
 	import victor.framework.utils.HtmlText;
 	
 	
@@ -24,11 +27,25 @@ package app.modules.fight.panel.matching
 			super();
 		}
 		
+		override public function hide():void
+		{
+			super.hide();
+			TickManager.clearDoTime( doTimeout );
+		}
+		
 		override protected function afterRender():void
 		{
 			super.afterRender();
 			var color:uint = GenderType.getColor(GameData.instance.selfVo.gender);
 			txtPlayer1.htmlText = HtmlText.color( GameData.instance.selfVo.name, color );
+			
+			TickManager.doTimeout( doTimeout, 15000 );
+		}
+		
+		private function doTimeout():void
+		{
+			btnClose.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
+			Tips.showCenter( "自动匹配超时！！！" );
 		}
 		
 		override protected function get resNames():Array

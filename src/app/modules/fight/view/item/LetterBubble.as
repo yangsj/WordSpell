@@ -38,6 +38,7 @@ package app.modules.fight.view.item
 		private var _data:LetterBubbleVo;
 		private var _bitmapData:BitmapData;
 		private var _point:Point = new Point();
+		private var _scale:Number = 1;
 		
 		public function LetterBubble()
 		{
@@ -47,7 +48,7 @@ package app.modules.fight.view.item
 			buttonMode = true;
 			setSkinWithName( "ui_Skin_Round_Bubble_" + int( Math.random() * 5 ) );
 			
-			txtLetter = TextUtil.cloneText( txtLetter );
+//			txtLetter = TextUtil.cloneText( txtLetter );
 			
 			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
@@ -56,25 +57,18 @@ package app.modules.fight.view.item
 		
 		protected function mouseHandler(event:MouseEvent):void
 		{
-			var type:String = event.type;
-			if ( type == MouseEvent.MOUSE_OVER )
-			{
-				parent.setChildIndex( this, parent.numChildren - 1 );
-			}
-			else if ( type == MouseEvent.CLICK )
-			{
-				selected( true );
-			}
+			selected( true );
 		}
 		
 		private var dx:Number = 1;
 		private var dy:Number = 1;
 		protected function enterFrameHandler(event:Event = null):void
 		{
-			if ( x <= moveArea.x || x >= moveArea.x + moveArea.width ||  y <= moveArea.y || y >= moveArea.y + moveArea.height )
-			{
-				changeDirection();
-			}
+			if ( x <= moveArea.x || x >= moveArea.x + moveArea.width )
+				changeDirection( -1, Math.random() < 0.5 ? -1 : 1 );
+			else if ( y <= moveArea.y || y >= moveArea.y + moveArea.height )
+				changeDirection( Math.random() < 0.5 ? -1 : 1, -1 );
+			
 			x += dx;
 			y += dy;
 			
@@ -88,20 +82,19 @@ package app.modules.fight.view.item
 			
 			TickManager.doInterval( enterFrameHandler, 20 );
 			
-////		var scale:Number = 1;//Math.random() * 0.5 + 0.6;
-//			var scale:Number = Math.random() * 0.3 + 0.8;
-//			scaleX = scaleY = scale;
-//			moveArea.width = moveArea.width + moveArea.x * 2 - width;
-//			moveArea.height = moveArea.height + moveArea.y * 2 - height;
-//			moveArea.x = width >> 1;
-//			moveArea.y = height >> 1;
-//			trace( moveArea );
+			_scale = Number((0.7 + Math.random() * 0.3).toFixed(2));
+			_skin.scaleX = _skin.scaleY = _scale;
+			moveArea.width = moveArea.width + 82 * ( 1 - scale );
+			moveArea.height = moveArea.height + 82 * ( 1 - scale );
+			moveArea.x = 41 * scale;
+			moveArea.y = 41 * scale;
+			trace( moveArea );
 			
 			x = moveArea.x + moveArea.width * Math.random();
 			y = moveArea.y + moveArea.height * Math.random();
 			
-			var dxx:Number = 0.3 + Math.random() * 0.3;
-			var dxy:Number = 0.3 + Math.random() * 0.3;
+			var dxx:Number = Number((0.3 + Math.random() * 0.3).toFixed(2));
+			var dxy:Number =Number((0.3 + Math.random() * 0.3).toFixed(2));
 			dx = Math.random() < 0.5 ? dxx : -dxx;
 			dy = Math.random() < 0.5 ? dxy : -dxy;
 		}
@@ -116,7 +109,14 @@ package app.modules.fight.view.item
 		
 		public function setMoveArea( isAlone:Boolean = true ):void
 		{
-			moveArea.width = isAlone ? 808 : 404;
+			if (isAlone)
+			{
+				moveArea.width = 808;
+			}
+			else
+			{
+				moveArea.width = 333;
+			}
 		}
 		
 		/**
@@ -126,19 +126,12 @@ package app.modules.fight.view.item
 		{
 			if ( parent )
 			{
-				if ( direx == direx && direx == 0 )// 到达边缘
-				{
-					dx *= Math.random() < 0.5 ? -1 : 1;
-					dy *= Math.random() < 0.5 ? -1 : 1;
-				}
-				else // 泡泡相碰
-				{
-					dx *= direx;
-					dy *= direy;
-					x += dx;
-					y += dy;
-				}
+				dx *= direx;
+				dy *= direy;
+				x += dx;
+				y += dy;
 			}
+//			trace( txtLetter.text + " : " + dx + "|" + dy + "_____" + x + "|" + y );
 		}
 		
 		public function setData( vo:LetterBubbleVo ):void
@@ -235,6 +228,16 @@ package app.modules.fight.view.item
 		public function get isEdgeDown():Boolean
 		{
 			return y > moveArea.height - moveArea.x - 15;
+		}
+
+		public function get scale():Number
+		{
+			return _scale;
+		}
+
+		public function set scale(value:Number):void
+		{
+			_scale = value;
 		}
 
 		

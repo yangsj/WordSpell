@@ -39,7 +39,7 @@ package app.modules.fight.panel.ready
 			// 更新
 			addContextListener( FightReadyEvent.UPDATE, updateHandler, FightReadyEvent );
 			// 对方退出
-			addContextListener( FightOnlineEvent.QUIT_BATTLE, quitBattleHandler, FightOnlineEvent );
+			addContextListener( FightOnlineEvent.BATTLE_END, quitBattleHandler, FightOnlineEvent );
 			
 			view.setData( readyModel.selfVo, readyModel.destVo );
 		}

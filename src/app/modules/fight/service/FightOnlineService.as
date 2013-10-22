@@ -1,9 +1,11 @@
 package app.modules.fight.service
 {
+	import app.data.GameData;
 	import app.events.ViewEvent;
 	import app.modules.LoadingEffect;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightOnlineEvent;
+	import app.modules.fight.model.FightEndVo;
 	import app.modules.fight.model.FightMatchingVo;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.FightReadyModel;
@@ -15,6 +17,7 @@ package app.modules.fight.service
 	import ff.battle_quit_req_t;
 	import ff.battle_ready_req_t;
 	import ff.client_cmd_e;
+	import ff.end_round_ret_t;
 	import ff.server_cmd_e;
 	
 	import victor.framework.core.BaseService;
@@ -42,8 +45,8 @@ package app.modules.fight.service
 		{
 			// 准备通知
 			regist( server_cmd_e.BATTLE_READY_RET , readyNotify, battle_ready_req_t );
-			// 取消准备通知
-			regist( server_cmd_e.BATTLE_CLOSE_RET, quitNotify, battle_close_ret_t );
+			// 对战结束通知
+			regist( server_cmd_e.BATTLE_CLOSE_RET, battleEndNotify, battle_close_ret_t );
 			// 匹配成功
 			regist( server_cmd_e.BATTLE_CREATE_RET, matchingSuccessNotify, battle_create_ret_t );
 		}
@@ -51,9 +54,24 @@ package app.modules.fight.service
 //*************************** Notify *************************//
 		
 		// 取消准备通知
-		private function quitNotify( resp:SocketResp ):void
+		private function battleEndNotify( resp:SocketResp ):void
 		{
-			dispatch( new FightOnlineEvent( FightOnlineEvent.QUIT_BATTLE ));
+			var data:battle_close_ret_t = resp.data as battle_close_ret_t;
+			
+			fightModel.battleResult = data.win;
+			fightModel.battleResultFlag = data.flag;
+			fightModel.battleEndSelfVo = getBattleEndVo( data.self_result );
+			fightModel.battleEndDestVo = getBattleEndVo( data.dest_result );
+			
+			//更新等级
+			if ( fightModel.battleEndSelfVo.currentLevel != GameData.instance.selfVo.level )
+				GameData.instance.updateLevel( fightModel.battleEndSelfVo.currentLevel );
+			
+			//更新经验值
+			if ( fightModel.battleEndSelfVo.addExp > 0 )
+				GameData.instance.updateAddExp( fightModel.battleEndSelfVo.addExp );
+			
+			dispatch( new FightOnlineEvent( FightOnlineEvent.BATTLE_END ));
 		}
 		
 		// 准备通知
@@ -82,6 +100,22 @@ package app.modules.fight.service
 			{
 				
 			}
+		}
+		
+		private function getBattleEndVo( battleData:end_round_ret_t ):FightEndVo
+		{
+			var endVo:FightEndVo = new FightEndVo();
+			if ( battleData )
+			{
+				endVo.addExp = battleData.inc_exp;
+				endVo.addMoney = battleData.inc_coin;
+				endVo.currentLevel = battleData.cur_level;
+				endVo.isWin = battleData.win;
+				endVo.rightNum = battleData.right_num;
+				endVo.starNum = battleData.inc_star;
+				endVo.wrongList = battleData.wrong_words;
+			}
+			return endVo;
 		}
 		
 //*************************** Request *************************//
