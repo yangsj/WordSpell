@@ -17,7 +17,7 @@ package app.modules.friend.model
 		
 		
 		/**
-		 * // 0表示不在线，1表示在线， 2 表示闯关中 3 表示对战中
+		 * // 1表示在线 | 2 表示闯关中 | 3 表示对战中 | 4表示不在线
 		 */
 		public var status:int;
 		
@@ -27,7 +27,7 @@ package app.modules.friend.model
 		 */
 		public function get offLine():Boolean
 		{
-			return status == 0;
+			return status == 4;
 		}
 		
 		/**

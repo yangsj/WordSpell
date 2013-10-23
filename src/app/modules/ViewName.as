@@ -49,11 +49,20 @@ package app.modules
 		 */
 		public static const SelectedRoundPanel:String = "SelectedRoundPanel";
 		
-		
+		////////// friend///////////////
 		/**
 		 * 好友系统
 		 */
 		public static const Friend:String = "friendPanel";
+		/**
+		 * 添加好友
+		 */
+		public static const FriendAddView:String = "FriendAddView";
+		/**
+		 * 在线好友列表
+		 */		
+		public static const FriendOnline:String = "FriendOnline";
+		
 		
 		/**
 		 * 任务系统

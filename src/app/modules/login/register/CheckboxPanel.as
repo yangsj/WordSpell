@@ -37,7 +37,7 @@ package app.modules.login.register
 			addEventListener( MouseEvent.CLICK, onClickHandler );
 		}
 		
-		public function dispose():void
+		override public function dispose():void
 		{
 			removeEventListener( MouseEvent.CLICK, onClickHandler );
 			appStage.removeEventListener(MouseEvent.CLICK, onStageClickHandler );

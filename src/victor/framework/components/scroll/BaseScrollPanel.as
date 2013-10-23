@@ -184,7 +184,7 @@ package victor.framework.components.scroll {
         }
 
         private function setMask() : void {
-            if (_target && _target.parent) {
+            if (_target && _target.parent ) {
                 _maskSp.width = _contentRect.width;
                 _maskSp.height = _contentRect.height;
                 _maskSp.x = _target.x + _contentRect.x;

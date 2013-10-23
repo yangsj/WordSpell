@@ -61,7 +61,7 @@ package victor.framework.core
 		{
 		}
 
-		public function dispose():void
+		override public function dispose():void
 		{
 			DisplayUtil.removedFromParent( _skin );
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );

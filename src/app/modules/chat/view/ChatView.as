@@ -125,12 +125,14 @@ package app.modules.chat.view
 			{
 				this.chatFriendVo = chatFriendVo;
 				txtInput.clear();
+				txtFriendName.visible = true;
 				txtFriendName.text = "/" + ( chatFriendVo ? chatFriendVo.name : " " ) + " ";
 				txtInput.x = txtFriendName.x + txtFriendName.textWidth;
 				txtInput.setSize( 165 - txtFriendName.textWidth, 23 );
 			}
 			else
 			{
+				txtFriendName.visible = false;
 				this.chatFriendVo = null;
 				txtInput.x = txtFriendName.x;
 				txtInput.setSize( 165, 23 );

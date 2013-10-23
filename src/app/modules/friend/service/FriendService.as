@@ -1,5 +1,6 @@
 package app.modules.friend.service
 {
+	import app.core.Tips;
 	import app.events.GameEvent;
 	import app.modules.friend.model.FriendModel;
 	import app.modules.friend.model.FriendVo;
@@ -56,6 +57,14 @@ package app.modules.friend.service
 				dispatch( new GameEvent( GameEvent.ACQUIRE_FRIEND_DATA ));
 			}
 		}
+		
+		
+		public function addFriend( friendName:String ):void
+		{
+			
+			Tips.showMouse( "申请消息已发送！" );
+		}
+		
 
 	}
 }

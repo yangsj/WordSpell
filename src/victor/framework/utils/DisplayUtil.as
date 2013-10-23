@@ -34,7 +34,7 @@ package victor.framework.utils
 		 * @param target 容器对象
 		 * @param isStopAllFrame 是否循环子级
 		 */
-		public static function removedAll( target:DisplayObjectContainer, isChildren:Boolean = true ):void
+		public static function removedAll( target:DisplayObjectContainer, isChildren:Boolean = false ):void
 		{
 			if ( target )
 			{

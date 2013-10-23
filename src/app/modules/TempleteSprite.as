@@ -5,6 +5,7 @@ package app.modules
 	import app.managers.LoaderManager;
 	
 	import victor.framework.components.Reflection;
+	import victor.framework.interfaces.IDisposable;
 	import victor.framework.utils.DisplayUtil;
 	
 	
@@ -13,13 +14,17 @@ package app.modules
 	 * @author 	yangsj 
 	 * 			2013-9-28
 	 */
-	public class TempleteSprite extends Sprite
+	public class TempleteSprite extends Sprite implements IDisposable
 	{
 		protected var _skin:Sprite;
 		
 		public function TempleteSprite()
 		{
 			super();
+		}
+		
+		public function dispose():void
+		{
 		}
 		
 		protected function setSkinWithName( skinName:String, domainName:String = "" ):void
