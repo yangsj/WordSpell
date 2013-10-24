@@ -5,6 +5,7 @@ package app.modules.fight.panel.result
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.FightEndVo;
 	
 	import victor.framework.core.BasePanel;
@@ -71,7 +72,7 @@ package app.modules.fight.panel.result
 		
 		protected function btnAgainHandler(event:MouseEvent):void
 		{
-			dispatchEvent( new Event( "again" ));
+			dispatchEvent( new Event( FightOnlineEvent.AGAIN_BATTLE ));
 		}
 		
 		protected function btnCancelHandler(event:MouseEvent):void
@@ -89,9 +90,11 @@ package app.modules.fight.panel.result
 		{
 			txtExp1.text = winVo.addExp + "";
 			txtMoney1.text = winVo.addMoney + "";
+			txtItems1.text = "";
 			
 			txtExp2.text = loseVo.addExp + "";
 			txtMoney2.text = loseVo.addMoney + "";
+			txtItems2.text = "";
 		}
 		
 		override protected function get resNames():Array

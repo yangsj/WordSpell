@@ -33,6 +33,11 @@ package victor.framework.core
 		private var hideX:Number;
 		private var hideY:Number;
 		
+		/**
+		 * 是否鼠标可以穿透
+		 */
+		protected var isPenetrate:Boolean = false;
+		
 		public function BasePanel()
 		{
 		}
@@ -94,7 +99,7 @@ package victor.framework.core
 		
 		override final protected function addToParent():void
 		{
-			ViewStruct.addPanel( this );
+			ViewStruct.addPanel( this, isPenetrate );
 			transitionIn();
 		}
 		

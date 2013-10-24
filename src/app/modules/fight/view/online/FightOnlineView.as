@@ -5,6 +5,7 @@ package app.modules.fight.view.online
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
+	import app.core.Tips;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseView;
 	import app.modules.fight.view.item.LetterBubble;
@@ -45,8 +46,31 @@ package app.modules.fight.view.online
 			super.initialize();
 		}
 		
+		/**
+		 * 删除对手屏幕泡泡
+		 * @param id
+		 * @return 
+		 */
+		public function delBubbleByIdForOther( id:int ):LetterBubble
+		{
+			var letter:LetterBubble;
+			for ( var i:int = 0; i < container2.numChildren; i++ )
+			{
+				letter = container.getChildAt( i ) as LetterBubble;
+				if ( letter && letter.data.id == id )
+				{
+					letter.selected( true, false );
+					break;
+				}
+			}
+			return letter;
+		}
+		
 		override public function delLetterFromDict( letter:String, isSelf:Boolean = true ):void
 		{
+			if ( isSelf == false )
+				return ;
+			
 			var key:String = letter.toLocaleLowerCase();
 			var dict:Dictionary = isSelf ? dictLetterSelf : dictLetterOther;
 			var ary:Array = dict[ key ];
@@ -81,7 +105,7 @@ package app.modules.fight.view.online
 				dict[ key ].push( bubble );
 			}
 			if ( type == 1 ) dictLetterSelf = dict;
-			else if ( type == 2 ) dictLetterOther = dict;
+//			else if ( type == 2 ) dictLetterOther = dict;
 		}
 		
 		override protected function timerHandler():void
@@ -98,9 +122,15 @@ package app.modules.fight.view.online
 		 */
 		override public function useExtraTimeProp( isSelf:Boolean = true ):void
 		{
-			if ( isSelf )
+			var tipsy:Number = container.y + 190;
+			var tipsx:Number = container.x + 207;
+			if ( isSelf ) {
 				selfTotalTime += 8;
-			else otherTotalTime += 8;
+			} else {
+				otherTotalTime += 8;
+				tipsx = container2.x + 207;
+			}
+			Tips.show( "时间 +8s", tipsx, tipsy );
 		}
 		
 		/**

@@ -1,6 +1,7 @@
 package app.modules.friend.view
 {
 	import app.core.Tips;
+	import app.modules.ViewName;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.service.FriendService;
 	
@@ -24,8 +25,18 @@ package app.modules.friend.view
 			super();
 		}
 		
+		override public function onRemove():void
+		{
+			openView( ViewName.Friend );
+			
+			super.onRemove();
+		}
+		
 		override public function onRegister():void
 		{
+			// 关闭
+			closeView( ViewName.Friend );
+			
 			super.onRegister();
 			addViewListener( FriendEvent.ADD_FRIEND, addFriendHandle, FriendEvent );
 		}

@@ -1,14 +1,15 @@
 package app.modules.fight.service
 {
+	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.ViewEvent;
 	import app.modules.LoadingEffect;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightOnlineEvent;
-	import app.modules.fight.model.FightEndVo;
 	import app.modules.fight.model.FightMatchingVo;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.FightReadyModel;
+	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.panel.ready.FightReadyEvent;
 	
 	import ff.battle_close_ret_t;
@@ -17,7 +18,6 @@ package app.modules.fight.service
 	import ff.battle_quit_req_t;
 	import ff.battle_ready_req_t;
 	import ff.client_cmd_e;
-	import ff.end_round_ret_t;
 	import ff.server_cmd_e;
 	
 	import victor.framework.core.BaseService;
@@ -35,6 +35,8 @@ package app.modules.fight.service
 		public var fightModel:FightModel;
 		[Inject]
 		public var readyModel:FightReadyModel;
+		[Inject]
+		public var aloneService:FightAloneService;
 		
 		public function FightOnlineService()
 		{
@@ -49,6 +51,10 @@ package app.modules.fight.service
 			regist( server_cmd_e.BATTLE_CLOSE_RET, battleEndNotify, battle_close_ret_t );
 			// 匹配成功
 			regist( server_cmd_e.BATTLE_CREATE_RET, matchingSuccessNotify, battle_create_ret_t );
+			// 对方邀请要来一局通知
+//			regist( server_cmd_e.BATTLE_CREATE_RET, againBattleInviteNotify, battle_create_ret_t );
+			// 对方消除泡泡通知
+//			regist( server_cmd_e.BATTLE_CREATE_RET, destBubbleNotify, battle_create_ret_t );
 		}
 		
 //*************************** Notify *************************//
@@ -60,8 +66,8 @@ package app.modules.fight.service
 			
 			fightModel.battleResult = data.win;
 			fightModel.battleResultFlag = data.flag;
-			fightModel.battleEndSelfVo = getBattleEndVo( data.self_result );
-			fightModel.battleEndDestVo = getBattleEndVo( data.dest_result );
+			fightModel.battleEndSelfVo = aloneService.getBattleEndVo( data.self_result );
+			fightModel.battleEndDestVo = aloneService.getBattleEndVo( data.dest_result );
 			
 			//更新等级
 			if ( fightModel.battleEndSelfVo.currentLevel != GameData.instance.selfVo.level )
@@ -80,6 +86,7 @@ package app.modules.fight.service
 			dispatch( new FightReadyEvent( FightReadyEvent.UPDATE ));
 		}
 		
+		// 匹配成功通知
 		private function matchingSuccessNotify( resp:SocketResp ):void
 		{
 			var data:battle_create_ret_t = resp.data as battle_create_ret_t;
@@ -96,26 +103,18 @@ package app.modules.fight.service
 				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightMatchingPanel ));
 				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel ));
 			}
-			else
-			{
-				
-			}
 		}
 		
-		private function getBattleEndVo( battleData:end_round_ret_t ):FightEndVo
+		// 对方邀请再来一局
+		private function againBattleInviteNotify( resp:SocketResp ):void
 		{
-			var endVo:FightEndVo = new FightEndVo();
-			if ( battleData )
-			{
-				endVo.addExp = battleData.inc_exp;
-				endVo.addMoney = battleData.inc_coin;
-				endVo.currentLevel = battleData.cur_level;
-				endVo.isWin = battleData.win;
-				endVo.rightNum = battleData.right_num;
-				endVo.starNum = battleData.inc_star;
-				endVo.wrongList = battleData.wrong_words;
-			}
-			return endVo;
+			
+		}
+		
+		// 对方泡泡消除通知
+		private function destBubbleNotify( resp:SocketResp ):void
+		{
+			
 		}
 		
 //*************************** Request *************************//
@@ -144,7 +143,7 @@ package app.modules.fight.service
 		
 		/**
 		 * 匹配, mode:0自动匹配，1好友或搜索对战
-		 * @params uid 如果=0则标识自动匹配，！=0则表示好友或搜索对战
+		 * @params uid 如果=0则标识自动匹配，!=0则表示好友或搜索对战
 		 */
 		public function matching( uid:int = 0 ):void
 		{
@@ -154,6 +153,34 @@ package app.modules.fight.service
 			call( client_cmd_e.BATTLE_CREATE_REQ, req );
 			
 			LoadingEffect.hide();
+		}
+		
+		/**
+		 * 对战中选择泡泡后发送到服务器
+		 * @param vo
+		 */
+		public function selectedBubble( vo:LetterBubbleVo ):void
+		{
+			
+			LoadingEffect.hide();
+		}
+		
+		/**
+		 * 再来一局
+		 */
+		public function againBattle():void
+		{
+			Tips.showCenter( "【再来一局】功能暂未开放！稍后放出" );
+		}
+		
+		/**
+		 * 是否同意再来一局
+		 * @param uid
+		 * @param isAgree
+		 */
+		public function agreeAgain( uid:int, isAgree:Boolean ):void
+		{
+			
 		}
 		
 	}

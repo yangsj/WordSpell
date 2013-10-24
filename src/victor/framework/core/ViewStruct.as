@@ -67,10 +67,10 @@ package victor.framework.core
 		 * 添加到面板图层显示列表
 		 * @param panel
 		 */
-		public static function addPanel( panel:BasePanel ):void
+		public static function addPanel( panel:BasePanel, isPenetrate:Boolean = false ):void
 		{
 			var con:Sprite = getContainer( PANEL ) as Sprite;
-			con.mouseEnabled = true;
+			con.mouseEnabled = !isPenetrate;
 			con.addChild( panel );
 			if ( con.numChildren == 1 )
 			{

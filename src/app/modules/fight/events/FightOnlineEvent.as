@@ -30,5 +30,15 @@ package app.modules.fight.events
 		 */
 		public static const START:String = "start";
 		
+		/**
+		 * 删除对手屏幕泡泡
+		 */
+		public static const DEL_DEST_BUBLLE:String = "del_dest_bublle";
+		
+		/**
+		 * 和对手再来一局
+		 */
+		public static const AGAIN_BATTLE:String = "again_battle";
+		
 	}
 }

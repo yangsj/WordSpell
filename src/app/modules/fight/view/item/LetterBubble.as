@@ -151,14 +151,16 @@ package app.modules.fight.view.item
 		 * @param value
 		 * 
 		 */
-		public function selected( value:Boolean ):void
+		public function selected( value:Boolean, isSelf:Boolean = true ):void
 		{
-			TickManager.clearDoTime( selected );
+			TickManager.clearDoTime( enterFrameHandler );
 			if ( value )
 			{
 				mouseEnabled = false;
-				dispatchEvent( new FightAloneEvent( FightAloneEvent.SELECTED_LETTER, this, true ));
-				if ( _data.itemType == ItemType.DEFAULT )
+				if ( isSelf ) {
+					dispatchEvent( new FightAloneEvent( FightAloneEvent.SELECTED_LETTER, this, true ));
+				}
+				if ( _data.itemType == ItemType.DEFAULT || isSelf == false )
 				{
 					TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
 					TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });

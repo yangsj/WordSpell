@@ -133,6 +133,8 @@ package app.modules.fight.view
 			if ( vo.id == -1 )
 				return ;
 			
+			selectedBubble( vo );
+			
 			// 选中产生道具的字母泡泡
 			if ( vo.itemType != ItemType.DEFAULT )
 			{
@@ -145,6 +147,10 @@ package app.modules.fight.view
 				letterIndex++;
 				dispatch( new FightAloneEvent( FightAloneEvent.UPDATE_WORD, vo ));
 			}
+		}
+		
+		protected function selectedBubble( vo:LetterBubbleVo ):void
+		{
 		}
 		
 		protected function setLetters():void

@@ -1,31 +1,39 @@
 package app.modules.friend.view
 {
-	import app.modules.friend.model.FriendModel;
-	
-	import victor.framework.core.BaseMediator;
-	
+	import app.modules.ViewName;
 	
 	/**
 	 * ……
 	 * @author 	yangsj 
 	 * 			2013-10-23
 	 */
-	public class FriendOnlineListMediator extends BaseMediator
+	public class FriendOnlineListMediator extends FriendMdiator
 	{
-		[Inject]
-		public var view:FriendOnlineListView;
-		[Inject]
-		public var friendModel:FriendModel;
 		
 		public function FriendOnlineListMediator()
 		{
 			super();
 		}
 		
+		override public function onRemove():void
+		{
+			openView( ViewName.Friend );
+			
+			super.onRemove();
+		}
+		
 		override public function onRegister():void
 		{
-			super.onRegister();
+			// 关闭
+			closeView( ViewName.Friend );
 			
+			view = this.viewComponent as FriendOnlineListView;
+			
+			super.onRegister();
+		}
+		
+		override protected function setFriendList():void
+		{
 			view.setData( friendModel.onLineList );
 		}
 		

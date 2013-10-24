@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../../override.css" type="text/css"><title>robotlegs.bender.framework.impl Details</title></head><body><script language="javascript" type="text/javascript" src="../../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'robotlegs.bender.framework.impl package - Robotlegs v2.1.0';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">Robotlegs v2.1.0</td><td class="titleTableTopNav" align="right"><a href="../../../../package-summary.html" onclick="loadClassListFrame('../../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../../class-summary.html" onclick="loadClassListFrame('../../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../../all-index-A.html" onclick="loadClassListFrame('../../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../../index.html?robotlegs/bender/framework/impl/package.html&amp;robotlegs/bender/framework/impl/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">Package</td><td class="titleTableSubNav" id="subNav" align="right"><a href="package.html#methodSummary">Functions</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Package"); titleBar_setSubNav(false,false,false,false,false,false,false,false,false,false,false	,false,true,false,false,false);}	
+				-->
+			</script><div class="MainContent"><br><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Function</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#applyHooks()" class="signatureLink">applyHooks</a>(hooks:Array, injector:<a href="../../../../robotlegs/bender/framework/api/IInjector.html">IInjector</a> = null):void</div><div class="summaryTableDescription">
+	 A hook can be a function, object or class.
+	 	 When an object is passed it is expected to expose a "hook" method.
+	 	 When a class is passed, an instance of that class will be instantiated and called.</div></td><td class="summaryTableOwnerCol">robotlegs.bender.framework.impl</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#guardsApprove()" class="signatureLink">guardsApprove</a>(guards:Array, injector:<a href="../../../../robotlegs/bender/framework/api/IInjector.html">IInjector</a> = null):Boolean</div><div class="summaryTableDescription">
+	 A guard can be a function, object or class.
+	 	 When a function is provided it is expected to return a Boolean when called.
+	 	 When an object is provided it is expected to expose an "approve" method
+	 that returns a Boolean.
+	 	 When a class is provided, an instance of that class will be instantiated and tested.</div></td><td class="summaryTableOwnerCol">robotlegs.bender.framework.impl</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#safelyCallBack()" class="signatureLink">safelyCallBack</a>(callback:Function, error:Object = null, message:Object = null):void</div><div class="summaryTableDescription">
+	 Helper function to call any of the 3 forms of eventual callback:
+	 	 (), (error) and (error, message)
+	 	 NOTE: This helper will not handle null callbacks.</div></td><td class="summaryTableOwnerCol">robotlegs.bender.framework.impl</td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader"> Function detail </div><a name="applyHooks()"></a><a name="applyHooks(Array,robotlegs.bender.framework.api.IInjector)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">applyHooks</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">function</td></tr></table><div class="detailBody"><code> public function applyHooks(hooks:Array, injector:<a href="../../../../robotlegs/bender/framework/api/IInjector.html">IInjector</a> = null):void</code><p></p><p></p><p>
+	 <p>A hook can be a function, object or class.</p>
+	 	 <p>When an object is passed it is expected to expose a "hook" method.</p>
+	 	 <p>When a class is passed, an instance of that class will be instantiated and called.
+	 If an injector is provided the instance will be created using that injector,
+	 otherwise the instance will be created manually.</p>
+	 	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">hooks</span>:Array</code> &mdash; An array of hooks
+	 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">injector</span>:<a href="../../../../robotlegs/bender/framework/api/IInjector.html">IInjector</a></code> (default = <code>null</code>)<code></code> &mdash; An optional Injector
+	 </td></tr></table></p></div><a name="guardsApprove()"></a><a name="guardsApprove(Array,robotlegs.bender.framework.api.IInjector)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">guardsApprove</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">function</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function guardsApprove(guards:Array, injector:<a href="../../../../robotlegs/bender/framework/api/IInjector.html">IInjector</a> = null):Boolean</code><p></p><p></p><p>
+	 <p>A guard can be a function, object or class.</p>
+	 	 <p>When a function is provided it is expected to return a Boolean when called.</p>
+	 	 <p>When an object is provided it is expected to expose an "approve" method
+	 that returns a Boolean.</p>
+	 	 <p>When a class is provided, an instance of that class will be instantiated and tested.
+	 If an injector is provided the instance will be created using that injector,
+	 otherwise the instance will be created manually.</p>
+	 	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">guards</span>:Array</code> &mdash; An array of guards
+	 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">injector</span>:<a href="../../../../robotlegs/bender/framework/api/IInjector.html">IInjector</a></code> (default = <code>null</code>)<code></code> &mdash; An optional Injector
+	 	 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; A Boolean value of false if any guard returns false
+	 </td></tr></table></div><a name="safelyCallBack()"></a><a name="safelyCallBack(Function,Object,Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">safelyCallBack</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">function</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function safelyCallBack(callback:Function, error:Object = null, message:Object = null):void</code><p></p><p></p><p>
+	 <p>Helper function to call any of the 3 forms of eventual callback:</p>
+	 	 <code>(), (error) and (error, message)</code>
+	 	 <p>NOTE: This helper will not handle null callbacks. You should check
+	 if the callback is null from the calling location:</p>
+	 	 <code>callback && safelyCallBack(callback, error, message);</code>
+	 	 <p>This prevents the overhead of calling safelyCallBack()
+	 when there is no callback to call. Likewise it reduces the overhead
+	 of a null check in safelyCallBack().</p>
+	 	 <p>QUESTION: Is this too harsh? Should we protect from null?</p>
+	 	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">callback</span>:Function</code> &mdash; The actual callback
+	 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">error</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; An optional error
+	 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">message</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; An optional message
+	 </td></tr></table></p></div><p></p><center class="copyright"><footer>Robotlegs - http://www.robotlegs.org/ - Documentation generated at: 06/29/2013 09:25 PM</footer><br/>Sat Jun 29 2013, 09:26 PM +01:00  </center></div></body></html>

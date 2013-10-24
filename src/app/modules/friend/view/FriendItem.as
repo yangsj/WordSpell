@@ -1,5 +1,6 @@
 package app.modules.friend.view
 {
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -39,6 +40,7 @@ package app.modules.friend.view
 		
 		private var _tips1:Sprite;
 		private var _tips2:MovieClip;
+		private var _isClick:Boolean = false;
 		
 		// 聊天
 		private const Chat:String = "btnChat";
@@ -47,6 +49,8 @@ package app.modules.friend.view
 		// 删除
 		private const Delete:String = "btnDel";
 		
+		private static var selectedItem:FriendItem;
+		
 		public function FriendItem()
 		{
 			setSkinWithName( "ui_Skin_FriendItem" );
@@ -54,25 +58,34 @@ package app.modules.friend.view
 			addEventListener( MouseEvent.MOUSE_OUT, mouseHandler );
 			addEventListener( MouseEvent.CLICK, mouseHandler );
 			mouseChildren = false;
+			buttonMode = true;
 			mcStatus.stop();
 			selected = false;
 			
 			_tips1 = getObj( "ui_Skin_FriendItemSuspendTips" ) as Sprite;
-			_tips1.addEventListener(MouseEvent.MOUSE_OVER, mouseHandler );
-			_tips1.addEventListener(MouseEvent.MOUSE_OUT, mouseHandler );
+			_tips1.addEventListener(MouseEvent.MOUSE_OVER, mouseTipsHandler );
+			_tips1.addEventListener(MouseEvent.MOUSE_OUT, mouseTipsHandler );
 			_tips1.addEventListener(MouseEvent.CLICK, mouseTips1ClickHandler );
+			_tips1.name = "addTips1";
 			
 			_tips2 = getObj( "ui_Skin_FriendItemClickTips" ) as MovieClip;
-			_tips2.addEventListener(MouseEvent.MOUSE_OVER, mouseTips2Handler );
-			_tips2.addEventListener(MouseEvent.MOUSE_OUT, mouseTips2Handler );
+			_tips2.addEventListener(MouseEvent.MOUSE_OVER, mouseTipsHandler );
+			_tips2.addEventListener(MouseEvent.MOUSE_OUT, mouseTipsHandler );
+			_tips2.name = "addTips2";
 			_tips2.mcBg.stop();
 		}
 		
-		protected function mouseTips2Handler(event:MouseEvent):void
+		protected function mouseTipsHandler(event:MouseEvent):void
 		{
+			var currentTarget:DisplayObject = event.currentTarget as DisplayObject;
 			if ( event.type == MouseEvent.MOUSE_OVER )
-				addTips2();
-			else DisplayUtil.removedFromParent( _tips2 );
+				this[currentTarget.name]();
+			else
+			{
+				DisplayUtil.removedFromParent( currentTarget );
+				selected = false;
+			}
+				
 		}
 		
 		protected function mouseTips1ClickHandler(event:MouseEvent):void
@@ -97,13 +110,17 @@ package app.modules.friend.view
 			var type:String = event.type;
 			if ( type == MouseEvent.CLICK )
 			{
+				_isClick = true;
 				selected = true;
-				addTips2();
+				addTips1();
 			}
 			if ( type == MouseEvent.MOUSE_OVER )
 			{
 				mcSelected.visible = true;
-				addTips1();
+				if ( _isClick )
+					addTips1();
+				else addTips2();
+				_isClick = false;
 			}
 			else if ( type == MouseEvent.MOUSE_OUT )
 			{
@@ -113,8 +130,28 @@ package app.modules.friend.view
 			}
 		}
 		
+		private function addTips1():void
+		{
+			selected = true;
+			DisplayUtil.removedFromParent( _tips2 );
+			if ( _tips1.parent == null )
+			{
+				var point:Point = this.localToGlobal( new Point());
+				if ( point.x - _tips1.width < 0 )
+					_tips1.x = point.x + width - 15;
+				else _tips1.x = point.x - _tips1.width + 2;
+				
+				_tips1.y = point.y - 5;
+				if ( point.y + _tips1.height > appStage.stageHeight )
+					_tips1.y = appStage.stageHeight - _tips1.height - 5;
+				
+				appStage.addChild( _tips1 );
+			}
+		}
+		
 		private function addTips2():void
 		{
+			selected = true;
 			DisplayUtil.removedFromParent( _tips1 );
 			if ( _tips2.parent == null )
 			{
@@ -128,23 +165,6 @@ package app.modules.friend.view
 					_tips2.y = appStage.stageHeight - _tips2.height - 30;
 				
 				appStage.addChild( _tips2 );
-			}
-		}
-		
-		private function addTips1():void
-		{
-			if ( _tips1.parent == null )
-			{
-				var point:Point = this.localToGlobal( new Point());
-				if ( point.x - _tips1.width < 0 )
-					_tips1.x = point.x + width - 15;
-				else _tips1.x = point.x - _tips1.width + 2;
-				
-				_tips1.y = point.y - 5;
-				if ( point.y + _tips1.height > appStage.stageHeight )
-					_tips1.y = appStage.stageHeight - _tips1.height - 5;
-				
-				appStage.addChild( _tips1 );
 			}
 		}
 		
@@ -177,6 +197,16 @@ package app.modules.friend.view
 		{
 			_selected = value;
 			mcSelected.visible = value;
+			if ( selectedItem != this )
+			{
+				_isClick = false;
+				if ( value )
+				{
+					if ( selectedItem )
+						selectedItem.selected = false;
+					selectedItem = this;
+				}
+			}
 		}
 
 		

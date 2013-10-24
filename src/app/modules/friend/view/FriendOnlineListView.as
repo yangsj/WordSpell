@@ -11,6 +11,7 @@ package app.modules.friend.view
 		
 		public function FriendOnlineListView()
 		{
+			isPenetrate = true;
 			super();
 		}
 		

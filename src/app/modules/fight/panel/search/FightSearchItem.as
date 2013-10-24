@@ -37,6 +37,8 @@ package app.modules.fight.panel.search
 			buttonMode = true;
 			selected = false;
 			
+			mcBg.alpha = 0;
+			
 			addEventListener( MouseEvent.MOUSE_OVER, mouseHandler );
 			addEventListener( MouseEvent.MOUSE_OUT, mouseHandler );
 			addEventListener( MouseEvent.CLICK, mouseHandler );

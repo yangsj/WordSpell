@@ -1,19 +1,13 @@
 package app.modules.fight.view.online
 {
-	import app.core.Tips;
 	import app.data.GameData;
-	import app.events.PackEvent;
+	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseMediator;
 	import app.modules.fight.view.spell.SpellVo;
-	import app.modules.model.vo.ItemType;
-	import app.modules.model.vo.ItemVo;
-	
-	import victor.framework.log.Logger;
-	
 	
 	/**
 	 * ……
@@ -34,51 +28,37 @@ package app.modules.fight.view.online
 		{
 			super.onRegister();
 			
-			// 更新下一个词
+			// 若是结果显示面板已打开则关闭
+			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightOnlineResultPanel ));
+			
+			// 更新自己下一个词
 			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
 			// 结束通知
 			addContextListener( FightOnlineEvent.BATTLE_END, endBattleNotify, FightOnlineEvent );
+			// 删除对手屏幕中的泡泡
+			addContextListener( FightOnlineEvent.DEL_DEST_BUBLLE, delDestBubbleHandler, FightOnlineEvent );
 			
 			initData();
 		}
 		
+		// 删除对手屏幕中的泡泡
+		private function delDestBubbleHandler( event:FightOnlineEvent ):void
+		{
+			view.delBubbleByIdForOther( int(event.data) );
+		}
+		
+		// 结束通知
 		private function endBattleNotify( event:FightOnlineEvent ):void
 		{
 			view.clear();
 			openView( ViewName.FightOnlineResultPanel );
 		}
 		
+		// 更新自己下一个词
 		private function nextWordUpdateNotify( event:FightAloneEvent ):void
 		{
 			letterIndex = 0;
 			setLetters();
-		}
-		
-		// 物品使用成功
-		override protected function useItemSuccessHandler( event:PackEvent ):void
-		{
-			var itemVo:ItemVo = event.data as ItemVo;
-			if ( itemVo )
-			{
-				if ( itemVo.type == ItemType.EXTRA_TIME )
-				{
-					view.useExtraTimeProp();
-					Tips.showMouse( "时间 +8s" );
-				}
-				else if ( itemVo.type == ItemType.BROOM )
-				{
-					view.useBroomProp();
-				}
-				else if ( itemVo.type == ItemType.HINT )
-				{
-					var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
-					if ( letterIndex < items.length )
-					{
-						var key:String = items[ letterIndex ].letter;
-						view.useHintProp( key );
-					}
-				}
-			}
 		}
 		
 		private function initData():void
@@ -109,6 +89,11 @@ package app.modules.fight.view.online
 				}
 				view.setLettersPool( items, false );
 			}
+		}
+		
+		override protected function selectedBubble(vo:LetterBubbleVo):void
+		{
+			view.delBubbleByIdForOther( vo.id );
 		}
 		
 	}

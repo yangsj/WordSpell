@@ -148,13 +148,7 @@ package app.modules.fight.service
 		private function endRoundNotify( resp:SocketResp ):void
 		{
 			var data:end_round_ret_t = resp.data as end_round_ret_t;
-			var endVo:FightEndVo = fightModel.fightEndVo || new FightEndVo();
-			endVo.addExp = data.inc_exp;
-			endVo.addMoney = data.inc_coin;
-			endVo.currentLevel = data.cur_level;
-			endVo.isWin = data.win;
-			endVo.rightNum = data.right_num;
-			endVo.wrongList = data.wrong_words;
+			var endVo:FightEndVo = getBattleEndVo( data );
 			fightModel.fightEndVo = endVo;
 			
 			//更新等级
@@ -198,6 +192,22 @@ package app.modules.fight.service
 		}
 
 		////////////// request ///////////
+		
+		public function getBattleEndVo( battleData:end_round_ret_t ):FightEndVo
+		{
+			var endVo:FightEndVo = new FightEndVo();
+			if ( battleData )
+			{
+				endVo.addExp = battleData.inc_exp;
+				endVo.addMoney = battleData.inc_coin;
+				endVo.currentLevel = battleData.cur_level;
+				endVo.isWin = battleData.win;
+				endVo.rightNum = battleData.right_num;
+				endVo.starNum = battleData.inc_star;
+				endVo.wrongList = battleData.wrong_words;
+			}
+			return endVo;
+		}
 
 		/**
 		 * 开始战斗 [type: 0 表示普通闯关，1表示练习这一关, 2 表示进行下一关]

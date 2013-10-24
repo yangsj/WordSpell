@@ -2,11 +2,12 @@ package app.modules.fight.panel.result
 {
 	import flash.events.Event;
 	
-	import app.core.Tips;
 	import app.data.GameData;
 	import app.modules.ViewName;
+	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.FightReadyModel;
+	import app.modules.fight.service.FightOnlineService;
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.events.PanelEvent;
@@ -25,6 +26,8 @@ package app.modules.fight.panel.result
 		public var fightModel:FightModel;
 		[Inject]
 		public var readyModel:FightReadyModel;
+		[Inject]
+		public var onlineService:FightOnlineService;
 		
 		public function FightOnlineResultMediator()
 		{
@@ -38,7 +41,7 @@ package app.modules.fight.panel.result
 			// 退出
 			addViewListener( PanelEvent.CLOSE, closeQuitHandler, PanelEvent );
 			// 再来一次
-			addViewListener( "again", againHandler, Event );
+			addViewListener( FightOnlineEvent.AGAIN_BATTLE, againBattleHandler, FightOnlineEvent );
 			
 			var iswin:Boolean = fightModel.battleResult;
 			var winPlayer:String = iswin ? GameData.instance.selfVo.name : readyModel.destVo.name;
@@ -48,10 +51,10 @@ package app.modules.fight.panel.result
 			
 		}
 		
-		private function againHandler( event:Event ):void
+		private function againBattleHandler( event:FightOnlineEvent ):void
 		{
 			// 再来一次
-			Tips.showCenter( "再来一局，功能暂未开放！" );
+			onlineService.againBattle();
 		}
 		
 		private function closeQuitHandler( event:PanelEvent ):void

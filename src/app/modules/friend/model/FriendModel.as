@@ -18,6 +18,7 @@ package app.modules.friend.model
 		public var hasFriendList:Boolean;
 		
 		private var _friendList:Vector.<FriendVo>;
+		private var _applyAddFriendList:Vector.<FriendApplyVo>;
 
 		public function FriendModel()
 		{
@@ -56,6 +57,7 @@ package app.modules.friend.model
 			var key:int = getIndexByUid( uid );
 			if ( key != -1 )
 				friendList.splice( key, 1 );
+			update();
 		}
 
 		/**
@@ -67,6 +69,7 @@ package app.modules.friend.model
 			var key:int = getIndexByUid( friendVo.uid );
 			if ( key != -1 )
 				friendList[ key ] = friendVo;
+			update();
 		}
 
 		/**
@@ -125,6 +128,28 @@ package app.modules.friend.model
 		public function get friendList():Vector.<FriendVo>
 		{
 			return _friendList ||= new Vector.<FriendVo>();
+		}
+		
+		public function get isEmptyApplyList():Boolean
+		{
+			return _applyAddFriendList == null || _applyAddFriendList.length == 0;
+		}
+
+		/**
+		 * 好友申请列表
+		 */
+		public function get applyAddFriendList():Vector.<FriendApplyVo>
+		{
+			return _applyAddFriendList;
+		}
+
+		/**
+		 * @private
+		 */
+		public function addApplyAddFriendList(applyVo:FriendApplyVo):void
+		{
+			_applyAddFriendList ||= new Vector.<FriendApplyVo>();
+			_applyAddFriendList.push( applyVo );
 		}
 
 		

@@ -5,6 +5,7 @@ package app.modules.friend.view
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.model.FriendModel;
 	import app.modules.friend.model.FriendVo;
+	import app.modules.friend.service.FriendService;
 	
 	import victor.framework.core.BaseMediator;
 	
@@ -20,6 +21,8 @@ package app.modules.friend.view
 		public var view:FriendView;
 		[Inject]
 		public var friendModel:FriendModel;
+		[Inject]
+		public var friendService:FriendService;
 		[Inject]
 		public var chatModel:ChatModel;
 		
@@ -38,28 +41,34 @@ package app.modules.friend.view
 			addViewListener( FriendEvent.BATTLE, battleHandler, FriendEvent );
 			addViewListener( FriendEvent.DELETE, deleteHandler, FriendEvent );
 			
+			setFriendList();
+		}
+		
+		protected function setFriendList():void
+		{
 			view.setData( friendModel.friendList );
 		}
 		
 		private function deleteHandler( event:FriendEvent ):void
 		{
-			Tips.showCenter( "删除好友" );
+			var friendVo:FriendVo = event.data as FriendVo;
+			friendService.delFriend( friendVo.uid );
 		}
 		
 		private function battleHandler( event:FriendEvent ):void
 		{
-			Tips.showCenter( "好友在线对战" );
+			Tips.showCenter( "好友在线对战, 功能开发中！" );
 		}
 		
 		private function chatHandler( event:FriendEvent ):void
 		{
-			Tips.showCenter( "好友聊天" );
+			Tips.showCenter( "好友私聊" );
 			chatModel.privateChatFriendVo = event.data as FriendVo;
 		}
 		
-		private function updateListHandler( event:FriendEvent ):void
+		protected function updateListHandler( event:FriendEvent ):void
 		{
-			
+			setFriendList();
 		}
 		
 	}
