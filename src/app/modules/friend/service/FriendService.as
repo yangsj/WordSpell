@@ -49,27 +49,25 @@ package app.modules.friend.service
 			regist( server_cmd_e.DEL_FRIEND_RET, delFriendNotify, del_friend_ret_t );
 		}
 		
+	////////////////////////////////// notify 
+		
 		// 好友列表
 		private function friendListNotify( resp:SocketResp ):void
 		{
 			var data:friend_info_t = resp.data as friend_info_t;
 			var list:Array = data.friend_list;
-			var friendVo:FriendVo;
+			
+			// 清除原有的列表数据
+			friendModel.clearZero();
+			
 			for each ( var friend:friend_t in list )
-			{
-				friendVo = new FriendVo();
-				friendVo.uid = friend.uid;
-				friendVo.name = friend.name;
-				friendVo.grade = friend.grade;
-				friendVo.level = friend.level;
-				friendVo.status = friend.status;
-
-				friendModel.friendList.push( friendVo );
-			}
+				friendModel.addFriend(getFriendVo( friend ), false );
+			
+			// 更新列表
+			friendModel.update();
 			
 			// 检查是否进入游戏（登陆时检查一次）
-			if (friendModel.hasFriendList == false )
-			{
+			if (friendModel.hasFriendList == false ) {
 				friendModel.hasFriendList = true;
 				dispatch( new GameEvent( GameEvent.ACQUIRE_FRIEND_DATA ));
 			}
@@ -79,6 +77,8 @@ package app.modules.friend.service
 		private function addFriendSuccessedNotify( resp:SocketResp ):void
 		{
 			var data:add_friends_success_ret_t = resp.data as add_friends_success_ret_t;
+			
+			Tips.showCenter( "成功添加好友[ " + data.name + " ]" );
 		}
 		
 		// 好友申请通知
@@ -92,11 +92,23 @@ package app.modules.friend.service
 			if ( friendModel.applyAddFriendList.length == 1 ) dealApplyList();
 		}
 		
-		// 好友申请通知处理
+		// 成功删除好友通知
+		private function delFriendNotify( resp:SocketResp ):void
+		{
+			var data:del_friend_ret_t = resp.data as del_friend_ret_t;
+			friendModel.delFriend( data.uid );
+			Tips.showCenter( "成功删除好友" );
+		}
+		
+	////////////////////////////////// private 
+		
+		/**
+		 * 好友申请通知处理
+		 */
 		private function dealApplyList():void
 		{
 			var applyVo:FriendApplyVo = friendModel.applyAddFriendList[0];
-			Alert.show( "", callBack, "同意", "拒绝", applyVo.name );
+			Alert.show( "[ " + applyVo.name + " ]申请和您成为好友，您是否同意？", callBack, "同意", "拒绝" );
 			function callBack( type:int ):void
 			{
 				var isAgree:Boolean = type == Alert.YES;
@@ -107,15 +119,31 @@ package app.modules.friend.service
 			}
 		}
 		
-		// 成功删除好友通知
-		private function delFriendNotify( resp:SocketResp ):void
+	////////////////////////////////// public 
+		
+		/**
+		 * 数据类型转换
+		 * @param friend 协议定义的好友数据结构
+		 * @return 
+		 */
+		public function getFriendVo( friend:friend_t ):FriendVo
 		{
-			var data:del_friend_ret_t = resp.data as del_friend_ret_t;
-			friendModel.delFriend( data.uid );
-			Tips.showCenter( "成功删除好友" );
+			var friendVo:FriendVo = new FriendVo();
+			friendVo.uid = friend.uid;
+			friendVo.name = friend.name;
+			friendVo.grade = friend.grade;
+			friendVo.level = friend.level;
+			friendVo.status = friend.status;
+			return friendVo;
 		}
 		
-	////////////////////////////////// public 
+		/**
+		 * 拉取好友列表数据
+		 */
+		public function getFriendListReq():void
+		{
+			
+		}
 		
 		/**
 		 * 添加好友

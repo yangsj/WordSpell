@@ -25,27 +25,36 @@ package app.modules.friend.model
 			super();
 		}
 		
-		////////// privates 
+		////////// publics 
 		
-		private function update():void
+		/**
+		 * 更新列表
+		 */
+		public function update():void
 		{
 			dispatch( new FriendEvent( FriendEvent.UPDATE_LIST ));
 		}
+		
+		/**
+		 * 清空列表长度
+		 */
+		public function clearZero():void
+		{
+			friendList.length = 0;
+		}
 
-		/////////// publics 
 		/**
 		 * 添加好友，若是添加的好友已存在列表中将会更新好友数据
 		 * @param friendVo
 		 */
-		public function addFriend( friendVo:FriendVo ):void
+		public function addFriend( friendVo:FriendVo, isUpdate:Boolean = true ):void
 		{
-			var key:int = getIndexByUid( friendVo.uid );
-			if ( key != -1 )
-				friendList[ key ] = friendVo;
-			else
+			if ( friendVo ) {
+				
 				friendList.push( friendVo );
-			
-			update();
+				
+				if ( isUpdate ) update();
+			}
 		}
 		
 		/**
@@ -55,8 +64,9 @@ package app.modules.friend.model
 		public function delFriend( uid:int ):void
 		{
 			var key:int = getIndexByUid( uid );
-			if ( key != -1 )
-				friendList.splice( key, 1 );
+			
+			if ( key != -1 ) friendList.splice( key, 1 );
+			
 			update();
 		}
 
@@ -66,10 +76,14 @@ package app.modules.friend.model
 		 */
 		public function updateFriend( friendVo:FriendVo ):void
 		{
-			var key:int = getIndexByUid( friendVo.uid );
-			if ( key != -1 )
-				friendList[ key ] = friendVo;
-			update();
+			if ( friendVo ) {
+				var key:int = getIndexByUid( friendVo.uid );
+				
+				if ( key != -1 ) friendList[ key ] = friendVo;
+				else friendList.push( friendVo );
+				
+				update();
+			}
 		}
 
 		/**
@@ -79,8 +93,8 @@ package app.modules.friend.model
 		 */
 		public function getFriendByUId( uid:int ):FriendVo
 		{
-			for each ( var friendVo:FriendVo in friendList )
-			{
+			for each ( var friendVo:FriendVo in friendList ) {
+				
 				if ( friendVo && friendVo.uid == uid )
 					return friendVo;
 			}
@@ -95,8 +109,9 @@ package app.modules.friend.model
 		public function getIndexByUid( uid:int ):int
 		{
 			var friendVo:FriendVo;
-			for ( var key:String in friendList )
-			{
+			
+			for ( var key:String in friendList ) {
+				
 				friendVo = friendVo[ key ];
 				if ( friendVo && friendVo.uid == uid )
 					return int( key );
@@ -104,17 +119,29 @@ package app.modules.friend.model
 			return -1;
 		}
 		
-		/////////// getters/setters
+		/**
+		 * 获取所有列表【按在线和离线排序，在线在前】
+		 */
+		public function get allList():Vector.<FriendVo>
+		{
+			friendList.sort( 
+				
+				function abc( vo1:FriendVo, vo2:FriendVo ):Number { 
+					return vo1.onLine ? -1 : 1;
+				}
+			);
+			return friendList;
+		}
 		
 		/**
 		 * 获取在线好友列表
-		 * @return 
 		 */
 		public function get onLineList():Vector.<FriendVo>
 		{
 			var vecList:Vector.<FriendVo> = new Vector.<FriendVo>();
-			for each (var friendVo:FriendVo in friendList )
-			{
+			
+			for each (var friendVo:FriendVo in friendList ) {
+				
 				if ( !friendVo.offLine )
 					vecList.push( friendVo );
 			}
@@ -123,13 +150,19 @@ package app.modules.friend.model
 
 		/**
 		 * 好友列表数据
-		 * @return 
 		 */
 		public function get friendList():Vector.<FriendVo>
 		{
 			return _friendList ||= new Vector.<FriendVo>();
 		}
 		
+		////////////////////////
+		///		好友申请数据	////
+		////////////////////////
+		
+		/**
+		 * 好友申请列表是否为空
+		 */
 		public function get isEmptyApplyList():Boolean
 		{
 			return _applyAddFriendList == null || _applyAddFriendList.length == 0;
@@ -140,7 +173,7 @@ package app.modules.friend.model
 		 */
 		public function get applyAddFriendList():Vector.<FriendApplyVo>
 		{
-			return _applyAddFriendList;
+			return _applyAddFriendList ||= new Vector.<FriendApplyVo>();
 		}
 
 		/**
@@ -148,8 +181,7 @@ package app.modules.friend.model
 		 */
 		public function addApplyAddFriendList(applyVo:FriendApplyVo):void
 		{
-			_applyAddFriendList ||= new Vector.<FriendApplyVo>();
-			_applyAddFriendList.push( applyVo );
+			applyAddFriendList.push( applyVo );
 		}
 
 		

@@ -8,6 +8,7 @@ package app.modules.fight.panel.search
 	import app.core.Tips;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
+	import app.modules.friend.model.FriendVo;
 	
 	import victor.framework.components.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
@@ -28,6 +29,11 @@ package app.modules.fight.panel.search
 		public function FightSearchBasePanel()
 		{
 			super();
+		}
+		
+		public function setDataList( list:Vector.<FriendVo> ):void
+		{
+			
 		}
 		
 		protected function createScroll( scrollWidth, scrollHeight ):void
