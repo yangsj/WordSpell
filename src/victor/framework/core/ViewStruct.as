@@ -23,15 +23,13 @@ package victor.framework.core
 		public static const SCENE2:uint = numCount++;//场景层2
 		public static const CHAT:uint = numCount++;//聊天层
 		public static const PANEL:uint = numCount++;//面板弹出层
+		public static const CHAT2:uint = numCount++;//聊天层
 		public static const ALERT:uint = numCount++;//警告提示层
 		public static const EFFECT:uint = numCount++;//特效播放层
 		public static const DRAG:uint = numCount++;//对象拖拽层
 		public static const LOADING:uint = numCount++;//loading层
-		public static const RIGHT_MENU:uint = numCount++;//类右键菜单相爱你是层
 
 		private static var container:Sprite;
-
-		private static var backWordEffect:Sprite;
 
 		public function ViewStruct()
 		{
@@ -71,7 +69,8 @@ package victor.framework.core
 		{
 			var con:Sprite = getContainer( PANEL ) as Sprite;
 			con.mouseEnabled = !isPenetrate;
-			con.addChild( panel );
+			if ( con != panel.parent )
+				con.addChild( panel );
 			if ( con.numChildren == 1 )
 			{
 				con.graphics.clear();
@@ -115,7 +114,8 @@ package victor.framework.core
 					}
 					if ( spr )
 					{
-						spr.addChild( child );
+						if ( child.parent != spr )
+							spr.addChild( child );
 					}
 				}
 			}

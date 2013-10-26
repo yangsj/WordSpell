@@ -9,9 +9,6 @@ package app.modules.fight.view.alone
 	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
 	
-	import victor.framework.log.Logger;
-
-
 	/**
 	 * ……
 	 * @author 	yangsj
@@ -29,14 +26,15 @@ package app.modules.fight.view.alone
 
 		override public function onRegister():void
 		{
+			isAlone = true;
+			maxCount = 20;
+			
 			super.onRegister();
 
 			// 开始通知
 			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, startRoundNotify, FightAloneEvent );
 			// 结束通知
 			addContextListener( FightAloneEvent.NOTIFY_END_ROUND, endRoundNotify, FightAloneEvent );
-			// 更新下一个词
-			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
 			
 			// 拉取数据
 			fightService.startRound();
@@ -53,12 +51,6 @@ package app.modules.fight.view.alone
 		private function startRoundNotify( event:FightAloneEvent ):void
 		{
 			initData();
-		}
-		
-		private function nextWordUpdateNotify( event:FightAloneEvent ):void
-		{
-			letterIndex = 0;
-			setLetters();
 		}
 
 		// 物品使用成功

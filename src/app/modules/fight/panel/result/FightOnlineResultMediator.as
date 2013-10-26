@@ -1,7 +1,5 @@
 package app.modules.fight.panel.result
 {
-	import flash.events.Event;
-	
 	import app.data.GameData;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightOnlineEvent;

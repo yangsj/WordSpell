@@ -105,6 +105,7 @@ package app.modules.login.service
 				selfVo.rightWordsNum = data.right_words_num;
 				selfVo.wrongWordsNum = data.wrong_words_num;
 				selfVo.school = data.school;
+//				selfVo.gender = data.gender;
 			}
 			else
 			{

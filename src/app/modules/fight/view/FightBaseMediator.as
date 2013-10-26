@@ -3,6 +3,7 @@ package app.modules.fight.view
 	import app.core.Tips;
 	import app.events.PackEvent;
 	import app.modules.chat.event.ChatEvent;
+	import app.modules.fight.FightType;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.FightReadyModel;
@@ -42,6 +43,14 @@ package app.modules.fight.view
 		 * 是否点击道具泡泡
 		 */
 		protected var clickPropBubble:Array;
+		/**
+		 * 是否一个人状态
+		 */
+		protected var isAlone:Boolean = true;
+		/**
+		 * 不是基础模式时出现泡泡的最大数量
+		 */
+		protected var maxCount:int = 20;
 		
 		
 		public function FightBaseMediator()
@@ -54,6 +63,8 @@ package app.modules.fight.view
 			super.onRemove();
 			// 展开聊天窗口
 			dispatch( new ChatEvent( ChatEvent.EXPAND_CHAT ));
+			
+			baseView.clear();
 		}
 		
 		override public function onRegister():void
@@ -74,6 +85,8 @@ package app.modules.fight.view
 			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
 			// 物品更新
 			addContextListener( PackEvent.UPDATE_ITEMS, updateItemsHandler, PackEvent );
+			// 更新下一个词
+			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
 
 			clickPropBubble = [];
 		}
@@ -95,6 +108,12 @@ package app.modules.fight.view
 					baseView.playAddPropEffect( bubble, PropList.itemPoints[ itemType - 1 ] );
 				}
 			}
+		}
+		
+		private function nextWordUpdateNotify( event:FightAloneEvent ):void
+		{
+			letterIndex = 0;
+			setLetters();
 		}
 		
 		// 物品使用成功
@@ -159,29 +178,29 @@ package app.modules.fight.view
 			{
 				var modeType:int = fightModel.modeType;
 				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items.slice();
-				if ( modeType > 1 )
+				if ( modeType != FightType.MODE_EASY && modeType != FightType.MODE_PRACTICE ) // 不为容易和练习
 				{
 					var length:int = fightModel.allLetterList.length;
 					var index:int = 0;
-					for ( index = 0; index < 20; index++ )
+					for ( index = 0; index < maxCount; index++ )
 					{
 						if ( index < length ) items.push( fightModel.allLetterList[ index ] );
 						else break;
-						if ( items.length > 20 )
+						if ( items.length > maxCount )
 							break;
 					}
 				}
 				baseView.setLettersPool( items );
-				Logger.debug( " fightModel.currentIndex *********************************************" +  fightModel.currentIndex );
+				Logger.debug( " fightModel.currentIndex *********************************************" +  fightModel.currentSelfIndex );
 				if ( modeType > 1 )
 				{
-					var array:Array = fightModel.dictPropPos[ fightModel.currentIndex ] as Array;
+					var array:Array = fightModel.dictPropPos[ fightModel.currentSelfIndex ] as Array;
 					if ( array ) {
 						var letterVo:LetterBubbleVo;
 						for each ( letterVo in array )
-						baseView.addPropItem( letterVo );
+							baseView.addPropItem( letterVo );
 					}
-					baseView.displayPropItem();
+					baseView.displayPropItem( isAlone );
 				}
 			}
 		}

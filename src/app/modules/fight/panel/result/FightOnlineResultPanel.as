@@ -1,7 +1,6 @@
 package app.modules.fight.panel.result
 {
 	import flash.display.SimpleButton;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
@@ -17,7 +16,8 @@ package app.modules.fight.panel.result
 	 * 			2013-10-17
 	 */
 	public class FightOnlineResultPanel extends BasePanel
-	{/**
+	{
+		/**
 		* btnAgain
 		*/
 		public var btnAgain:SimpleButton;
@@ -72,7 +72,7 @@ package app.modules.fight.panel.result
 		
 		protected function btnAgainHandler(event:MouseEvent):void
 		{
-			dispatchEvent( new Event( FightOnlineEvent.AGAIN_BATTLE ));
+			dispatchEvent( new FightOnlineEvent( FightOnlineEvent.AGAIN_BATTLE ));
 		}
 		
 		protected function btnCancelHandler(event:MouseEvent):void

@@ -85,6 +85,7 @@ package app.modules.fight.panel.ready
 			txtGrade.text = matchingVo.grade;
 			txtLevel.text = "Lv " + matchingVo.level;
 			setSex( matchingVo.gender );
+			refreshStatus( false );
 		}
 		
 		private function setSex( gender:int ):void

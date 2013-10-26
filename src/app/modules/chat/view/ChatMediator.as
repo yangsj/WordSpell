@@ -1,5 +1,7 @@
 package app.modules.chat.view
 {
+	import flash.events.MouseEvent;
+	
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.chat.model.ChatModel;
 	import app.modules.chat.model.ChatVo;
@@ -75,6 +77,7 @@ package app.modules.chat.view
 		
 		private function chatToFriendHandler( event:ChatEvent ):void
 		{
+			view.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
 			view.selectedPrivate();
 		}
 		

@@ -4,6 +4,7 @@ package app.modules.fight.view.alone
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
+	import app.core.Tips;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseView;
 	import app.modules.fight.view.item.LetterBubble;
@@ -22,8 +23,6 @@ package app.modules.fight.view.alone
 		// 所属地图名称
 		public var txtName:TextField;
 
-		private var dictProps:Dictionary;
-
 		public function FightAloneView()
 		{
 			super();
@@ -37,11 +36,10 @@ package app.modules.fight.view.alone
 			txtTime = TextUtil.cloneText( txtTime );
 		}
 		
-		override public function clear():void
+		override public function initialize():void
 		{
-			super.clear();
-			selfTotalTime = 0;
-			dictProps = null;
+			selfTotalTime = 60;
+			super.initialize();
 		}
 
 		override public function delLetterFromDict( letter:String, isSelf:Boolean = true ):void
@@ -79,7 +77,10 @@ package app.modules.fight.view.alone
 		override public function useExtraTimeProp( isSelf:Boolean = true ):void
 		{
 			if ( isSelf )
+			{
 				selfTotalTime += 5;
+				Tips.showCenter( "时间 +5s" );
+			}
 		}
 		
 		/**

@@ -22,6 +22,7 @@ import org.apache.thrift.protocol.*;
     private static const STATUS_FIELD_DESC:TField = new TField("status", TType.I16, 3);
     private static const GRADE_FIELD_DESC:TField = new TField("grade", TType.STRING, 4);
     private static const LEVEL_FIELD_DESC:TField = new TField("level", TType.I32, 5);
+    private static const GENDER_FIELD_DESC:TField = new TField("gender", TType.I16, 6);
 
     private var _uid:int;
     public static const UID:int = 1;
@@ -33,10 +34,13 @@ import org.apache.thrift.protocol.*;
     public static const GRADE:int = 4;
     private var _level:int;
     public static const LEVEL:int = 5;
+    private var _gender:int;
+    public static const GENDER:int = 6;
 
     private var __isset_uid:Boolean = false;
     private var __isset_status:Boolean = false;
     private var __isset_level:Boolean = false;
+    private var __isset_gender:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -50,6 +54,8 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.STRING));
       metaDataMap[LEVEL] = new FieldMetaData("level", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
+      metaDataMap[GENDER] = new FieldMetaData("gender", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
     }
     {
       FieldMetaData.addStructMetaDataMap(friend_t, metaDataMap);
@@ -59,6 +65,7 @@ import org.apache.thrift.protocol.*;
       this._uid = 0;
       this._status = 0;
       this._level = 0;
+      this._gender = 0;
     }
 
     public function get uid():int {
@@ -149,6 +156,24 @@ import org.apache.thrift.protocol.*;
       return this.__isset_level;
     }
 
+    public function get gender():int {
+      return this._gender;
+    }
+
+    public function set gender(gender:int):void {
+      this._gender = gender;
+      this.__isset_gender = true;
+    }
+
+    public function unsetGender():void {
+      this.__isset_gender = false;
+    }
+
+    // Returns true if field gender is set (has been assigned a value) and false otherwise
+    public function isSetGender():Boolean {
+      return this.__isset_gender;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case UID:
@@ -191,6 +216,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case GENDER:
+        if (value == null) {
+          unsetGender();
+        } else {
+          this.gender = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -208,6 +241,8 @@ import org.apache.thrift.protocol.*;
         return this.grade;
       case LEVEL:
         return this.level;
+      case GENDER:
+        return this.gender;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -226,6 +261,8 @@ import org.apache.thrift.protocol.*;
         return isSetGrade();
       case LEVEL:
         return isSetLevel();
+      case GENDER:
+        return isSetGender();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -280,6 +317,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case GENDER:
+            if (field.type == TType.I16) {
+              this.gender = iprot.readI16();
+              this.__isset_gender = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -316,6 +361,9 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(LEVEL_FIELD_DESC);
       oprot.writeI32(this.level);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(GENDER_FIELD_DESC);
+      oprot.writeI16(this.gender);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -350,6 +398,10 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "level:";
       ret += this.level;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "gender:";
+      ret += this.gender;
       first = false;
       ret += ")";
       return ret;

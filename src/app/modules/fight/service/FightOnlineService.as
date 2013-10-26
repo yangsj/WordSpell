@@ -17,6 +17,8 @@ package app.modules.fight.service
 	import ff.battle_create_ret_t;
 	import ff.battle_quit_req_t;
 	import ff.battle_ready_req_t;
+	import ff.click_bubble_req_t;
+	import ff.click_bubble_ret_t;
 	import ff.client_cmd_e;
 	import ff.server_cmd_e;
 	
@@ -54,7 +56,7 @@ package app.modules.fight.service
 			// 对方邀请要来一局通知
 //			regist( server_cmd_e.BATTLE_CREATE_RET, againBattleInviteNotify, battle_create_ret_t );
 			// 对方消除泡泡通知
-//			regist( server_cmd_e.BATTLE_CREATE_RET, destBubbleNotify, battle_create_ret_t );
+			regist( server_cmd_e.CLICK_BUBBLE_RET, destBubbleNotify, click_bubble_ret_t );
 		}
 		
 //*************************** Notify *************************//
@@ -103,6 +105,10 @@ package app.modules.fight.service
 				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightMatchingPanel ));
 				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel ));
 			}
+			else 
+			{
+				Tips.showCenter( readyModel.isRefuse ? "对方拒绝" : "对方离线" );
+			}
 		}
 		
 		// 对方邀请再来一局
@@ -114,7 +120,10 @@ package app.modules.fight.service
 		// 对方泡泡消除通知
 		private function destBubbleNotify( resp:SocketResp ):void
 		{
-			
+			var data:click_bubble_ret_t = resp.data as click_bubble_ret_t;
+			var letterVo:LetterBubbleVo = new LetterBubbleVo();
+			letterVo.id = data.bubble_id;
+			dispatch( new FightOnlineEvent( FightOnlineEvent.DEL_DEST_BUBLLE, letterVo ));
 		}
 		
 //*************************** Request *************************//
@@ -161,6 +170,9 @@ package app.modules.fight.service
 		 */
 		public function selectedBubble( vo:LetterBubbleVo ):void
 		{
+			var req:click_bubble_req_t = new click_bubble_req_t();
+			req.bubble_id = vo.id;
+			call( client_cmd_e.CLICK_BUBBLE_REQ, req );
 			
 			LoadingEffect.hide();
 		}

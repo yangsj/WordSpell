@@ -8,6 +8,7 @@ package app.modules.fight.service
 	import app.modules.LoadingEffect;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightAloneEvent;
+	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.FightEndVo;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
@@ -122,19 +123,19 @@ package app.modules.fight.service
 			fightModel.allLetterList = allLetterList;
 			fightModel.allLetterListCopy = allLetterList.slice();
 			fightModel.spellList = spellList;
+			fightModel.spellListCopy = spellList.slice();
 			fightModel.modeType = data.mode;
 
+			// 清零
+			fightModel.currentSelfIndex = 0;
+			fightModel.currentDestIndex = 0;
+			
 			// 设置第一个单词信息
-			updateLetterInfoList();
-			// 
-			fightModel.currentIndex = 0;
+			updateSelfWordList();
+			updateDestWordList();
 
 			if ( fightModel.modeType == 5 ) // 在线对战
 			{
-				var arr:Vector.<SpellVo> = new Vector.<SpellVo>();
-				for each (spellVo in spellList )
-					arr.push( spellVo );
-				fightModel.spellListCopy = arr;
 				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightReadyPanel ));
 				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightOnline ));
 			}
@@ -166,29 +167,44 @@ package app.modules.fight.service
 		private function nextWordNotify( resp:SocketResp ):void
 		{
 			var data:next_word_t = resp.data as next_word_t;
+			var isSelf:Boolean = data.uid == GameData.instance.selfVo.uid;
 
-			if ( data.answer_flag )
-				Tips.showCenter( "恭喜您！答对了。" );
-			else
-				Tips.showCenter( "答错了！骚年，继续加油。" );
-
-			if ( data.inc_coin > 0 )
-				GameData.instance.updateAddMoney( data.inc_coin );
-
-			// 设置下一个单词信息
-			if ( fightModel.isFinish == false )
+			if ( isSelf )
 			{
-				fightModel.currentIndex++;
-				updateLetterInfoList();
+				if ( data.answer_flag )
+					Tips.showCenter( "恭喜您！答对了。" );
+				else
+					Tips.showCenter( "答错了！骚年，继续加油。" );
+				
+				if ( data.inc_coin > 0 )
+					GameData.instance.updateAddMoney( data.inc_coin );
+				
+				// 设置下一个单词信息
+				if ( fightModel.isFinish == false )
+				{
+					fightModel.currentSelfIndex++;
+					updateSelfWordList();
+					//
+					dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD ));
+				}
+			}
+			else
+			{
+				fightModel.currentDestIndex++;
+				updateDestWordList();
 				//
-				dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD ));
+				dispatch( new FightOnlineEvent( FightOnlineEvent.DEST_UPDATE_NEXT ));
 			}
 		}
 		
-		private function updateLetterInfoList():void
+		private function updateSelfWordList():void
 		{
-			fightModel.spellVo = fightModel.spellList.shift();
-			fightModel.allLetterList.splice(0, fightModel.spellVo.charsLength );
+			fightModel.updateSelfWordList();
+		}
+		
+		private function updateDestWordList():void
+		{
+			fightModel.updateDestWordList();
 		}
 
 		////////////// request ///////////

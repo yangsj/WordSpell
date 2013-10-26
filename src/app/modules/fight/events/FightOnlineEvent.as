@@ -40,5 +40,10 @@ package app.modules.fight.events
 		 */
 		public static const AGAIN_BATTLE:String = "again_battle";
 		
+		/**
+		 * 对手更新下一个单词
+		 */
+		public static const DEST_UPDATE_NEXT:String = "dest_update_next";
+		
 	}
 }

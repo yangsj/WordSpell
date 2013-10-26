@@ -42,6 +42,7 @@ package app.modules.friend.view
 			addViewListener( FriendEvent.DELETE, deleteHandler, FriendEvent );
 			
 			setFriendList();
+			friendService.pullFriendListReq();
 		}
 		
 		protected function setFriendList():void

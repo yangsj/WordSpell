@@ -12,17 +12,27 @@ package app.modules.fight
 		}
 		
 		/**
-		 * 简单（难度）
+		 * 简单（难度）（闯关）
 		 */
-		public static const GRADE_EASY:uint = 1;
+		public static const MODE_EASY:uint = 1;
 		/**
-		 * 进阶（难度）
+		 * 进阶（难度）（闯关）
 		 */
-		public static const GRADE_MIDDLE:uint = 2;
+		public static const MODE_MIDDLE:uint = 2;
 		/**
-		 * 达人（难度）
+		 * 达人（难度）（闯关）
 		 */
-		public static const GRADE_ADVANCED:uint = 3;
+		public static const MODE_ADVANCED:uint = 3;
+		
+		/**
+		 * 练习
+		 */
+		public static const MODE_PRACTICE:int = 4;
+		
+		/**
+		 * 对战
+		 */
+		public static const MODE_BATTLE:int = 5;
 		
 		
 	}

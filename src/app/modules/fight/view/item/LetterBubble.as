@@ -31,7 +31,16 @@ package app.modules.fight.view.item
 	 */
 	public class LetterBubble extends TempleteSprite
 	{
-		private var moveArea:Rectangle = new Rectangle(41, 41, 808, 298 );
+		/**
+		 * 半径
+		 */
+		public static const RADIUS:int = 41;
+		/**
+		 * 直径
+		 */
+		public static const DIAMETER:int = 82;;
+		
+		public const moveArea:Rectangle = new Rectangle(RADIUS, RADIUS, 808, 298 );
 		
 		public var txtLetter:TextField;
 		
@@ -39,6 +48,7 @@ package app.modules.fight.view.item
 		private var _bitmapData:BitmapData;
 		private var _point:Point = new Point();
 		private var _scale:Number = 1;
+		private var _isAlone:Boolean = true;
 		
 		public function LetterBubble()
 		{
@@ -49,6 +59,7 @@ package app.modules.fight.view.item
 			setSkinWithName( "ui_Skin_Round_Bubble_" + int( Math.random() * 5 ) );
 			
 //			txtLetter = TextUtil.cloneText( txtLetter );
+			txtLetter.visible = false;
 			
 			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
@@ -66,14 +77,12 @@ package app.modules.fight.view.item
 		{
 			if ( x <= moveArea.x || x >= moveArea.x + moveArea.width )
 				changeDirection( -1, Math.random() < 0.5 ? -1 : 1 );
+			
 			else if ( y <= moveArea.y || y >= moveArea.y + moveArea.height )
 				changeDirection( Math.random() < 0.5 ? -1 : 1, -1 );
 			
 			x += dx;
 			y += dy;
-			
-			x = MathUtil.range( x, moveArea.x, moveArea.x + moveArea.width );
-			y = MathUtil.range( y, moveArea.y, moveArea.y + moveArea.height );
 		}
 		
 		protected function addedToStageHandler(event:Event):void
@@ -82,16 +91,18 @@ package app.modules.fight.view.item
 			
 			TickManager.doInterval( enterFrameHandler, 20 );
 			
-			_scale = Number((0.7 + Math.random() * 0.3).toFixed(2));
+			if ( _isAlone ) _scale = Number((0.7 + Math.random() * 0.3).toFixed(2));
+			else _scale = Number((0.5 + Math.random() * 0.3).toFixed(2));
+			
 			_skin.scaleX = _skin.scaleY = _scale;
-			moveArea.width = moveArea.width + 82 * ( 1 - scale );
-			moveArea.height = moveArea.height + 82 * ( 1 - scale );
-			moveArea.x = 41 * scale;
-			moveArea.y = 41 * scale;
-			trace( moveArea );
+			moveArea.width = moveArea.width + DIAMETER * ( 1 - scale );
+			moveArea.height = moveArea.height + DIAMETER * ( 1 - scale );
+			moveArea.x = RADIUS * scale;
+			moveArea.y = RADIUS * scale;
 			
 			x = moveArea.x + moveArea.width * Math.random();
 			y = moveArea.y + moveArea.height * Math.random();
+			adjustXY();
 			
 			var dxx:Number = Number((0.3 + Math.random() * 0.3).toFixed(2));
 			var dxy:Number =Number((0.3 + Math.random() * 0.3).toFixed(2));
@@ -107,16 +118,16 @@ package app.modules.fight.view.item
 			TickManager.clearDoTime( enterFrameHandler );
 		}
 		
+		protected function adjustXY():void
+		{
+			x = MathUtil.range( x, moveArea.x + 5, moveArea.x + moveArea.width - 5 );
+			y = MathUtil.range( y, moveArea.x + 5, moveArea.y + moveArea.height- 5 );
+		}
+		
 		public function setMoveArea( isAlone:Boolean = true ):void
 		{
-			if (isAlone)
-			{
-				moveArea.width = 808;
-			}
-			else
-			{
-				moveArea.width = 333;
-			}
+			_isAlone = isAlone;
+			moveArea.width = isAlone ? 808 : 333;
 		}
 		
 		/**
@@ -131,7 +142,6 @@ package app.modules.fight.view.item
 				x += dx;
 				y += dy;
 			}
-//			trace( txtLetter.text + " : " + dx + "|" + dy + "_____" + x + "|" + y );
 		}
 		
 		public function setData( vo:LetterBubbleVo ):void
@@ -157,6 +167,7 @@ package app.modules.fight.view.item
 			if ( value )
 			{
 				mouseEnabled = false;
+				TickManager.clearDoTime( enterFrameHandler );
 				if ( isSelf ) {
 					dispatchEvent( new FightAloneEvent( FightAloneEvent.SELECTED_LETTER, this, true ));
 				}
@@ -214,22 +225,22 @@ package app.modules.fight.view.item
 		
 		public function get isEdgeLeft():Boolean
 		{
-			return x < moveArea.x + 15;
+			return x < moveArea.x + 25;
 		}
 		
 		public function get isEdgeRight():Boolean
 		{
-			return x > moveArea.width - moveArea.x - 15;
+			return x > moveArea.width - moveArea.x - 25;
 		}
 		
 		public function get isEdgeUp():Boolean
 		{
-			return y < moveArea.x + 15;
+			return y < moveArea.x + 25;
 		}
 		
 		public function get isEdgeDown():Boolean
 		{
-			return y > moveArea.height - moveArea.x - 15;
+			return y > moveArea.height - moveArea.x - 25;
 		}
 
 		public function get scale():Number

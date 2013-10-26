@@ -7,8 +7,6 @@ package app.startup
 	import app.modules.chat.command.ChatInitCommand;
 	import app.modules.fight.command.FightInitCommand;
 	import app.modules.friend.command.FriendInitComand;
-	import app.modules.friend.view.rightMenu.RightMenu;
-	import app.modules.friend.view.rightMenu.RightMenuMediator;
 	import app.modules.login.command.LoginInitCommand;
 	import app.modules.main.command.MainUIInitCommand;
 	import app.modules.main.model.MainModel;
@@ -93,7 +91,6 @@ package app.startup
 			
 			//////////////
 			
-			addView( "", RightMenu, RightMenuMediator );
 		}
 		
 	}

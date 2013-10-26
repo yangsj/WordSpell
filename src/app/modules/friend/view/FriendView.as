@@ -53,12 +53,16 @@ package app.modules.friend.view
 				gameScroll = new GameScrollPanel();
 				gameScroll.setTargetAndHeight( container, scrollHeight, 264 );
 			}
-			
-			DisplayUtil.removedAll( container );
-			for ( var i:int = 0; i < 35; i++ )
+			if ( list )
 			{
-				var item:FriendItem = getItem( i );
-				container.addChild( item );
+				DisplayUtil.removedAll( container );
+				var length:int = list.length;
+				for ( var i:int = 0; i < length; i++ )
+				{
+					var item:FriendItem = getItem( i );
+					item.setData( list[i] );
+					container.addChild( item );
+				}
 			}
 			gameScroll.updateMainHeight( container.height );
 			gameScroll.setPos( 0 );

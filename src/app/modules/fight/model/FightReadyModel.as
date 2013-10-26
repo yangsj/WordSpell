@@ -69,9 +69,28 @@ package app.modules.fight.model
 			_result = value;
 		}
 		
+		/**
+		 * 匹配成功
+		 */
 		public function get isSuccessed():Boolean
 		{
 			return _result == 0;
+		}
+		
+		/**
+		 * 对方拒绝
+		 */
+		public function get isRefuse():Boolean
+		{
+			return _result == 1;
+		}
+		
+		/**
+		 * 对方离线
+		 */
+		public function get isOffline():Boolean
+		{
+			return _result == 2;
 		}
 
 

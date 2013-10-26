@@ -9,7 +9,9 @@ package app.modules.fight.view.online
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseView;
 	import app.modules.fight.view.item.LetterBubble;
+	import app.modules.model.vo.ItemType;
 	
+	import victor.framework.log.Logger;
 	import victor.framework.utils.DisplayUtil;
 	
 	/**
@@ -22,7 +24,6 @@ package app.modules.fight.view.online
 		public var txtPlayer1:TextField; // 玩家自己的名字
 		public var txtPlayer2:TextField; // 玩家对手的名字
 		public var txtTime2:TextField; // 时间显示
-		public var container2:Sprite; // 对手字母泡泡显示容器
 		
 		private var dictLetterOther:Dictionary;
 		private var otherTotalTime:int = 60;
@@ -41,9 +42,16 @@ package app.modules.fight.view.online
 		
 		override public function initialize():void
 		{
-			selfTotalTime = 300;
-			otherTotalTime = 300;
+			selfTotalTime = 60;
+			otherTotalTime = 60;
 			super.initialize();
+		}
+		
+		override public function clear():void
+		{
+			super.clear();
+			Logger.debug( "FightOnlineView.clear()" );
+			clearDict( dictLetterOther );
 		}
 		
 		/**
@@ -53,13 +61,22 @@ package app.modules.fight.view.online
 		 */
 		public function delBubbleByIdForOther( id:int ):LetterBubble
 		{
+			Logger.debug( "xiaochu bubble_id:" + id  );
 			var letter:LetterBubble;
 			for ( var i:int = 0; i < container2.numChildren; i++ )
 			{
-				letter = container.getChildAt( i ) as LetterBubble;
+				letter = container2.getChildAt( i ) as LetterBubble;
 				if ( letter && letter.data.id == id )
 				{
+					Logger.debug( "对手消除泡泡：" + letter.data.upperCase + "|" + letter.data.id );
 					letter.selected( true, false );
+					var itemType:int = letter.data.itemType;
+					if ( itemType != ItemType.DEFAULT )
+					{
+						if ( itemType == ItemType.EXTRA_TIME )
+							useExtraTimeProp( false );
+						delete dictProps[itemType+"_other"];
+					}
 					break;
 				}
 			}
@@ -87,10 +104,10 @@ package app.modules.fight.view.online
 		
 		override public function setLettersPool( list1:Vector.<LetterBubbleVo>, isSelf:Boolean = true ):void
 		{
-			setPool( list1, isSelf ? container : container2, isSelf ? 1 : 2 );
+			setPool( list1, isSelf ? container : container2, isSelf );
 		}
 		
-		private function setPool( list:Vector.<LetterBubbleVo>, container:Sprite, type:int ):void
+		private function setPool( list:Vector.<LetterBubbleVo>, container:Sprite, isSelf:Boolean = true ):void
 		{
 			var dict:Dictionary = new Dictionary();
 			DisplayUtil.removedAll( container, false );
@@ -103,9 +120,9 @@ package app.modules.fight.view.online
 				container.addChild( bubble );
 				dict[ key ] ||= [];
 				dict[ key ].push( bubble );
+				Logger.debug( (isSelf ? "自己屏幕：" : "对手屏幕：") + key );
 			}
-			if ( type == 1 ) dictLetterSelf = dict;
-//			else if ( type == 2 ) dictLetterOther = dict;
+			if ( isSelf ) dictLetterSelf = dict;
 		}
 		
 		override protected function timerHandler():void

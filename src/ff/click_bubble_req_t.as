@@ -15,51 +15,53 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class task_info_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("task_info_t");
-    private static const TASK_LIST_FIELD_DESC:TField = new TField("task_list", TType.LIST, 1);
+  public class click_bubble_req_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("click_bubble_req_t");
+    private static const BUBBLE_ID_FIELD_DESC:TField = new TField("bubble_id", TType.I32, 1);
 
-    private var _task_list:Array;
-    public static const TASK_LIST:int = 1;
+    private var _bubble_id:int;
+    public static const BUBBLE_ID:int = 1;
 
+    private var __isset_bubble_id:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[TASK_LIST] = new FieldMetaData("task_list", TFieldRequirementType.DEFAULT, 
-          new ListMetaData(TType.LIST, 
-              new StructMetaData(TType.STRUCT, task_t)));
+      metaDataMap[BUBBLE_ID] = new FieldMetaData("bubble_id", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
-      FieldMetaData.addStructMetaDataMap(task_info_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(click_bubble_req_t, metaDataMap);
     }
 
-    public function task_info_t() {
+    public function click_bubble_req_t() {
+      this._bubble_id = 0;
     }
 
-    public function get task_list():Array {
-      return this._task_list;
+    public function get bubble_id():int {
+      return this._bubble_id;
     }
 
-    public function set task_list(task_list:Array):void {
-      this._task_list = task_list;
+    public function set bubble_id(bubble_id:int):void {
+      this._bubble_id = bubble_id;
+      this.__isset_bubble_id = true;
     }
 
-    public function unsetTask_list():void {
-      this.task_list = null;
+    public function unsetBubble_id():void {
+      this.__isset_bubble_id = false;
     }
 
-    // Returns true if field task_list is set (has been assigned a value) and false otherwise
-    public function isSetTask_list():Boolean {
-      return this.task_list != null;
+    // Returns true if field bubble_id is set (has been assigned a value) and false otherwise
+    public function isSetBubble_id():Boolean {
+      return this.__isset_bubble_id;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case TASK_LIST:
+      case BUBBLE_ID:
         if (value == null) {
-          unsetTask_list();
+          unsetBubble_id();
         } else {
-          this.task_list = value;
+          this.bubble_id = value;
         }
         break;
 
@@ -70,8 +72,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case TASK_LIST:
-        return this.task_list;
+      case BUBBLE_ID:
+        return this.bubble_id;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -80,8 +82,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case TASK_LIST:
-        return isSetTask_list();
+      case BUBBLE_ID:
+        return isSetBubble_id();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -98,20 +100,10 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case TASK_LIST:
-            if (field.type == TType.LIST) {
-              {
-                var _list90:TList = iprot.readListBegin();
-                this.task_list = new Array();
-                for (var _i91:int = 0; _i91 < _list90.size; ++_i91)
-                {
-                  var _elem92:task_t;
-                  _elem92 = new task_t();
-                  _elem92.read(iprot);
-                  this.task_list.push(_elem92);
-                }
-                iprot.readListEnd();
-              }
+          case BUBBLE_ID:
+            if (field.type == TType.I32) {
+              this.bubble_id = iprot.readI32();
+              this.__isset_bubble_id = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -133,31 +125,19 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (this.task_list != null) {
-        oprot.writeFieldBegin(TASK_LIST_FIELD_DESC);
-        {
-          oprot.writeListBegin(new TList(TType.STRUCT, this.task_list.length));
-          for each (var elem93:* in this.task_list)          {
-            elem93.write(oprot);
-          }
-          oprot.writeListEnd();
-        }
-        oprot.writeFieldEnd();
-      }
+      oprot.writeFieldBegin(BUBBLE_ID_FIELD_DESC);
+      oprot.writeI32(this.bubble_id);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
 
     public function toString():String {
-      var ret:String = new String("task_info_t(");
+      var ret:String = new String("click_bubble_req_t(");
       var first:Boolean = true;
 
-      ret += "task_list:";
-      if (this.task_list == null) {
-        ret += "null";
-      } else {
-        ret += this.task_list;
-      }
+      ret += "bubble_id:";
+      ret += this.bubble_id;
       first = false;
       ret += ")";
       return ret;

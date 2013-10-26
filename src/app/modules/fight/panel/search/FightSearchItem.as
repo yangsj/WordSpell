@@ -7,6 +7,7 @@ package app.modules.fight.panel.search
 	import flash.text.TextField;
 	
 	import app.modules.TempleteSprite;
+	import app.modules.friend.model.FriendVo;
 	
 	import victor.framework.utils.DisplayUtil;
 	
@@ -25,6 +26,7 @@ package app.modules.fight.panel.search
 		
 		private var _selected:Boolean = false;
 		private var _nameBitmap:Bitmap;
+		private var _friendVo:FriendVo;
 		
 		public static var selectedItem:FightSearchItem;
 		
@@ -63,9 +65,9 @@ package app.modules.fight.panel.search
 			}
 		}
 		
-		public function setData():void
+		public function setData( friendVo:FriendVo ):void
 		{
-			
+			_friendVo =friendVo;
 			DisplayUtil.removedFromParent( _nameBitmap );
 			txtName.visible = false;
 			_nameBitmap = new Bitmap( new BitmapData( txtName.width, txtName.height, true, 0 ));
@@ -73,6 +75,9 @@ package app.modules.fight.panel.search
 			_nameBitmap.x = txtName.x;
 			_nameBitmap.y = txtName.y;
 			_skin.addChild( _nameBitmap );
+			
+			setBg( friendVo.gender );
+			setStatus( friendVo.status );
 		}
 		
 		public function setBg( frame:int ):void
@@ -101,6 +106,11 @@ package app.modules.fight.panel.search
 			_selected = value;
 			mcSelected.gotoAndStop( 1 );
 			mcSelected.visible = value;
+		}
+
+		public function get friendVo():FriendVo
+		{
+			return _friendVo;
 		}
 
 		

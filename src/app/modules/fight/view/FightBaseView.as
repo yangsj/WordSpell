@@ -36,6 +36,7 @@ package app.modules.fight.view
 		public var txtMoney:TextField; // 自己金钱数量显示
 		public var txtTime:TextField; // 时间显示
 		public var container:Sprite; // 自己字母泡泡显示容器
+		public var container2:Sprite;// 对手字母泡泡显示容器
 		
 		protected var spellArea:SpellArea;
 		protected var propList:PropList;
@@ -81,22 +82,22 @@ package app.modules.fight.view
 		public function initialize():void
 		{
 			dictProps = new Dictionary();
-			selfTotalTime = 60;
 			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
 			TickManager.doInterval( enterFrameHandler, 20 );
 			
 			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
-			appStage.dispatchEvent( new Event( Event.ACTIVATE ));
-			trace( "appStage.focus:" + appStage.focus );
 		}
 		
 		public function clear():void
 		{
-			appStage.removeEventListener( KeyboardEvent.KEY_DOWN, keyDownHandler );
+			appStage.removeEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
 			TickManager.clearDoTime( enterFrameHandler );
+			TickManager.clearDoTime( timerHandler );
 			spellArea.clear();
 			propList.clear();
+			clearDict( dictLetterSelf );
+			clearDict( dictProps );
 		}
 		
 		public function playAddPropEffect( bubble:LetterBubble, point:Point ):void
@@ -118,24 +119,33 @@ package app.modules.fight.view
 			delete dictProps[ itemType + "_data" ];
 		}
 		
-		public function addPropItem( lettetVo:LetterBubbleVo ):void
+		public function addPropItem( lettetVo:LetterBubbleVo, isSelf:Boolean = true ):void
 		{
-			if ( lettetVo ) dictProps[ lettetVo.itemType + "_data" ] = lettetVo;
+			if ( lettetVo ) 
+			{
+				if ( isSelf ) dictProps[ lettetVo.itemType + "_data" ] = lettetVo;
+				else dictProps[ lettetVo.itemType + "_other" ] = lettetVo;
+			}
 		}
 		
-		public function displayPropItem():void
+		public function displayPropItem( isAlone:Boolean = true, isSelf:Boolean = true ):void
 		{
 			var bubble:LetterBubble;
 			var lettetVo:LetterBubbleVo;
 			for ( var key:String in dictProps )
 			{
-				if ( key.indexOf( "_data" ) != -1 )
+				var selfKey:Boolean = key.indexOf( "_data" ) != -1;
+				var destKey:Boolean = key.indexOf( "_other" ) != -1;
+				if ( selfKey || destKey )
 				{
 					lettetVo = dictProps[ key ];
 					bubble = new LetterBubble();
+					bubble.setMoveArea( isAlone );
 					bubble.setData( lettetVo );
-					container.addChild( bubble );
-					dictProps[ lettetVo.itemType ] = bubble;
+					
+					if ( isSelf ) dictProps[ lettetVo.itemType ] = bubble;
+					if ( isSelf && selfKey ) container.addChild( bubble );
+					else if ( isSelf==false && destKey ) container2.addChild( bubble );
 				}
 			}
 		}
@@ -199,6 +209,15 @@ package app.modules.fight.view
 				var min:int = int(seconds/60);
 				var sec:int = seconds%60;
 				return HtmlText.color( (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), seconds <= 10 ? 0xff0000 : 0xffff00 );
+			}
+		}
+		
+		protected function clearDict( dict:Dictionary ):void
+		{
+			if ( dict )
+			{
+				for ( var key:String in dict )
+					delete dict[ key ];
 			}
 		}
 		

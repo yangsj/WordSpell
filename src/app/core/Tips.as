@@ -43,7 +43,7 @@ package app.core
 		 * @param size
 		 * @param borderColor
 		 */
-		public static function showMouse( msg:String, size:int = 15, borderColor:uint = 0 ):void
+		public static function showMouse( msg:String, size:int = 18, borderColor:uint = 0 ):void
 		{
 			show( msg, appStage.mouseX, appStage.mouseY, size, borderColor );
 		}
@@ -55,7 +55,7 @@ package app.core
 		 * @param offsetY
 		 * @param borderColor
 		 */
-		public static function showCenter( msg:String, size:int = 15, offsetY:int = 0, borderColor:uint = 0, removeOld : Boolean = true):void
+		public static function showCenter( msg:String, size:int = 18, offsetY:int = 0, borderColor:uint = 0, removeOld : Boolean = true):void
 		{
             if (removeOld && line) line.complete()
 			instance.showCenter( msg, size, offsetY, borderColor );
@@ -69,7 +69,7 @@ package app.core
 		 * @param size
 		 * @param borderColor
 		 */
-		public static function show( msg:String, x:int, y:int, size:int = 15, borderColor:uint = 0 ):void
+		public static function show( msg:String, x:int, y:int, size:int = 18, borderColor:uint = 0 ):void
 		{
 			instance.show( msg, x, y - 50, size, borderColor );
 		}
@@ -103,7 +103,7 @@ package app.core
 			return _tf;
 		}
 
-		public function showCenter( msg:String, size:int = 15, offsetY:int = 0, borderColor:uint = 0 ):void
+		public function showCenter( msg:String, size:int = 18, offsetY:int = 0, borderColor:uint = 0 ):void
 		{
 			if ( _container && _container.stage )
 			{
@@ -113,7 +113,7 @@ package app.core
 			}
 		}
 
-		public function show( msg:String, x:int, y:int, size:int = 15, borderColor:uint = 0 ):void
+		public function show( msg:String, x:int, y:int, size:int = 18, borderColor:uint = 0 ):void
 		{
 			if ( borderColor != 0 )
 				_txt.filters = [ new GlowFilter( borderColor, 1, 2, 2, 10, 1 )];

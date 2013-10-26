@@ -3,11 +3,13 @@ package app.modules.fight.view.online
 	import app.data.GameData;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
-	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.LetterBubbleVo;
+	import app.modules.fight.service.FightOnlineService;
 	import app.modules.fight.view.FightBaseMediator;
 	import app.modules.fight.view.spell.SpellVo;
+	
+	import victor.framework.log.Logger;
 	
 	/**
 	 * ……
@@ -18,6 +20,8 @@ package app.modules.fight.view.online
 	{
 		[Inject]
 		public var view:FightOnlineView;
+		[Inject]
+		public var onlineService:FightOnlineService;
 		
 		public function FightOnlineMediator()
 		{
@@ -26,17 +30,20 @@ package app.modules.fight.view.online
 		
 		override public function onRegister():void
 		{
+			isAlone = false;
+			maxCount = 20;
+			
 			super.onRegister();
 			
 			// 若是结果显示面板已打开则关闭
 			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightOnlineResultPanel ));
 			
-			// 更新自己下一个词
-			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
 			// 结束通知
 			addContextListener( FightOnlineEvent.BATTLE_END, endBattleNotify, FightOnlineEvent );
 			// 删除对手屏幕中的泡泡
 			addContextListener( FightOnlineEvent.DEL_DEST_BUBLLE, delDestBubbleHandler, FightOnlineEvent );
+			// 对手更新下一个单词
+			addContextListener( FightOnlineEvent.DEST_UPDATE_NEXT, destUpdateNextNotify, FightOnlineEvent );
 			
 			initData();
 		}
@@ -44,7 +51,13 @@ package app.modules.fight.view.online
 		// 删除对手屏幕中的泡泡
 		private function delDestBubbleHandler( event:FightOnlineEvent ):void
 		{
-			view.delBubbleByIdForOther( int(event.data) );
+			var letterVo:LetterBubbleVo = event.data as LetterBubbleVo;
+			view.delBubbleByIdForOther( letterVo.id );
+		}
+		
+		private function destUpdateNextNotify( event:FightOnlineEvent ):void
+		{
+			setOtherLetters();
 		}
 		
 		// 结束通知
@@ -52,13 +65,6 @@ package app.modules.fight.view.online
 		{
 			view.clear();
 			openView( ViewName.FightOnlineResultPanel );
-		}
-		
-		// 更新自己下一个词
-		private function nextWordUpdateNotify( event:FightAloneEvent ):void
-		{
-			letterIndex = 0;
-			setLetters();
 		}
 		
 		private function initData():void
@@ -75,25 +81,34 @@ package app.modules.fight.view.online
 		{
 			if ( fightModel.spellListCopy && fightModel.spellListCopy.length )
 			{
-				var spellVo:SpellVo = fightModel.spellListCopy.shift();
+				var spellVo:SpellVo = fightModel.spellCopyVo;
 				var items:Vector.<LetterBubbleVo> = spellVo.items.slice();
-				var length:int = fightModel.allLetterList.length;
+				var length:int = fightModel.allLetterListCopy.length;
 				var index:int = 0;
-				fightModel.allLetterListCopy.splice(0, spellVo.charsLength );
-				for ( index = 0; index < 15; index++ )
+				Logger.debug( "对手的单词：" + spellVo.chinese );
+				for ( index = 0; index < maxCount; index++ )
 				{
 					if ( index < length ) items.push( fightModel.allLetterListCopy[ index ] );
 					else break;
-					if ( items.length > 15 )
+					if ( items.length > maxCount )
 						break;
 				}
 				view.setLettersPool( items, false );
+				
+				var array:Array = fightModel.dictPropPos[ fightModel.currentDestIndex ] as Array;
+				if ( array ) {
+					var letterVo:LetterBubbleVo;
+					for each ( letterVo in array )
+						view.addPropItem( letterVo, false );
+				}
+				view.displayPropItem( isAlone, false );
 			}
 		}
 		
+		// 选择泡泡通知对方
 		override protected function selectedBubble(vo:LetterBubbleVo):void
 		{
-			view.delBubbleByIdForOther( vo.id );
+			onlineService.selectedBubble( vo );
 		}
 		
 	}

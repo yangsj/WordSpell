@@ -3,6 +3,7 @@ package app.modules.fight.panel.search
 	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.utils.Dictionary;
 	
 	import app.core.Alert;
 	import app.core.Tips;
@@ -25,6 +26,7 @@ package app.modules.fight.panel.search
 		public var listContainer:Sprite;
 		public var btnConfirm:InteractiveObject;
 		protected var gameScroll:GameScrollPanel;
+		protected var dictItems:Dictionary = new Dictionary();
 		
 		public function FightSearchBasePanel()
 		{
@@ -33,29 +35,40 @@ package app.modules.fight.panel.search
 		
 		public function setDataList( list:Vector.<FriendVo> ):void
 		{
-			
+			if ( list )
+			{
+				DisplayUtil.removedAll( listContainer );
+				var length:int = list.length;
+				var item:FightSearchItem;
+				for ( var i:int = 0; i < length; i++ )
+				{
+					item = getItem( i );
+					item.setData( list[ i ]);
+					listContainer.addChild( item );
+				}
+			}
+			gameScroll.updateMainHeight( listContainer.height );
+			gameScroll.setPos( 0 );
+		}
+		
+		protected function getItem( index:int ):FightSearchItem
+		{
+			var item:FightSearchItem = dictItems[index] as FightSearchItem;
+			if ( item == null )
+			{
+				item = new FightSearchItem();
+				item.y = 40 * index;
+				dictItems[index] = item;
+			}
+			return item;
 		}
 		
 		protected function createScroll( scrollWidth, scrollHeight ):void
 		{
 			if ( gameScroll == null )
 			{
-				DisplayUtil.removedAll( listContainer );
 				gameScroll = new GameScrollPanel();
 				gameScroll.setTargetAndHeight( listContainer,scrollHeight, scrollWidth );
-				// test
-				for ( var i:int = 0; i < 35; i++ )
-				{
-					var item:FightSearchItem = new FightSearchItem();
-					item.y = 40 * i;
-					item.setBg( i );
-					item.setStatus( i );
-					item.txtName.appendText( i + "" );
-					item.setData();
-					listContainer.addChild( item );
-				}
-				gameScroll.updateMainHeight( listContainer.height );
-				gameScroll.setPos( 0 );
 			}
 		}
 		
@@ -81,8 +94,7 @@ package app.modules.fight.panel.search
 			{
 				if ( type == Alert.YES )
 				{
-//					Tips.showCenter( "开始匹配" );
-					dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel, null ));
+					dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel, FightSearchItem.selectedItem.friendVo ));
 					hide();
 				}
 			}
@@ -96,11 +108,6 @@ package app.modules.fight.panel.search
 				FightSearchItem.selectedItem.selected = false;
 				FightSearchItem.selectedItem = null;
 			}
-		}
-		
-		public function setList( list:Array ):void
-		{
-			
 		}
 		
 		override protected function get resNames():Array

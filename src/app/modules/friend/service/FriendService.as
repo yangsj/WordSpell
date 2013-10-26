@@ -3,6 +3,7 @@ package app.modules.friend.service
 	import app.core.Alert;
 	import app.core.Tips;
 	import app.events.GameEvent;
+	import app.modules.LoadingEffect;
 	import app.modules.friend.model.FriendApplyVo;
 	import app.modules.friend.model.FriendModel;
 	import app.modules.friend.model.FriendVo;
@@ -15,6 +16,7 @@ package app.modules.friend.service
 	import ff.del_friend_ret_t;
 	import ff.friend_info_t;
 	import ff.friend_t;
+	import ff.get_friend_list_req_t;
 	import ff.notify_add_friend_ret_t;
 	import ff.server_cmd_e;
 	
@@ -134,15 +136,17 @@ package app.modules.friend.service
 			friendVo.grade = friend.grade;
 			friendVo.level = friend.level;
 			friendVo.status = friend.status;
+			friendVo.gender = friend.gender;
 			return friendVo;
 		}
 		
 		/**
 		 * 拉取好友列表数据
 		 */
-		public function getFriendListReq():void
+		public function pullFriendListReq():void
 		{
-			
+			var req:get_friend_list_req_t = new get_friend_list_req_t();
+			call( client_cmd_e.GET_FRIEND_LIST_REQ, req );
 		}
 		
 		/**
@@ -156,6 +160,8 @@ package app.modules.friend.service
 			call( client_cmd_e.ADD_FRIEND_REQ, req );
 			
 			Tips.showMouse( "申请消息已发送！" );
+			
+			LoadingEffect.hide();
 		}
 		
 		/**
@@ -180,6 +186,13 @@ package app.modules.friend.service
 			var req:del_friend_req_t = new del_friend_req_t();
 			req.uid = uid;
 			call( client_cmd_e.DEL_FRIEND_REQ, req );
+		}
+		
+		/**
+		 * 拉取所有在线玩家
+		 */
+		public function pullAllOnlineList():void
+		{
 		}
 
 	}

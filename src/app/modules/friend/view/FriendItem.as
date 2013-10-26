@@ -85,7 +85,6 @@ package app.modules.friend.view
 				DisplayUtil.removedFromParent( currentTarget );
 				selected = false;
 			}
-				
 		}
 		
 		protected function mouseTips1ClickHandler(event:MouseEvent):void

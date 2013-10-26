@@ -286,9 +286,24 @@ package app.modules.chat.view
 			btnExpandHide.addEventListener(MouseEvent.CLICK, btnExpandHideClickHandler );
 			txtInput.addEventListener(FocusEvent.FOCUS_IN, txtInputFocusHandler );
 			txtInput.addEventListener(FocusEvent.FOCUS_OUT, txtInputFocusHandler );
+			addEventListener( MouseEvent.CLICK, onClickHandler );
+			appStage.addEventListener(MouseEvent.CLICK, onClickHandler );
 
 			selectedWorld();
 
+		}
+		
+		protected function onClickHandler(event:MouseEvent):void
+		{
+			if ( event.currentTarget == this )
+			{
+				ViewStruct.addChild( this, ViewStruct.CHAT2 );
+				event.stopPropagation();
+			}
+			else
+			{
+				ViewStruct.addChild( this, ViewStruct.CHAT );
+			}
 		}
 		
 		protected function txtInputFocusHandler(event:FocusEvent):void

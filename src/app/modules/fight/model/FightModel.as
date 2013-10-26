@@ -14,12 +14,14 @@ package app.modules.fight.model
 	public class FightModel extends Actor
 	{
 		private var _spellVo:SpellVo;
+		private var _spellCopyVo:SpellVo;
 		private var _spellList:Vector.<SpellVo>;
 		private var _spellListCopy:Vector.<SpellVo>;
 		private var _modeType:int;
 		private var _fightEndVo:FightEndVo;
 		private var _dictPropPos:Dictionary;
-		private var _currentIndex:int = 0;
+		private var _currentSelfIndex:int = 0;
+		private var _currentDestIndex:int = 0;
 		private var _allLetterList:Vector.<LetterBubbleVo>;
 		private var _allLetterListCopy:Vector.<LetterBubbleVo>;
 		private var _battleEndSelfVo:FightEndVo;
@@ -32,14 +34,26 @@ package app.modules.fight.model
 			super();
 		}
 		
+		public function updateSelfWordList():void
+		{
+			_spellVo = spellList.shift();
+			allLetterList.splice(0, _spellVo.charsLength );
+		}
+		
+		public function updateDestWordList():void
+		{
+			_spellCopyVo = spellListCopy.shift();
+			allLetterListCopy.splice(0, _spellCopyVo.charsLength );
+		}
+		
 		public function get spellVo():SpellVo
 		{
 			return _spellVo;
 		}
 
-		public function set spellVo(value:SpellVo):void
+		public function get spellCopyVo():SpellVo
 		{
-			_spellVo = value;
+			return _spellCopyVo;
 		}
 
 		/**
@@ -98,14 +112,24 @@ package app.modules.fight.model
 			_fightEndVo = value;
 		}
 		
-		public function get currentIndex():int
+		public function get currentSelfIndex():int
 		{
-			return _currentIndex;
+			return _currentSelfIndex;
 		}
 		
-		public function set currentIndex(value:int):void
+		public function set currentSelfIndex(value:int):void
 		{
-			_currentIndex = value;
+			_currentSelfIndex = value;
+		}
+		
+		public function get currentDestIndex():int
+		{
+			return _currentDestIndex;
+		}
+		
+		public function set currentDestIndex(value:int):void
+		{
+			_currentDestIndex = value;
 		}
 
 		public function get dictPropPos():Dictionary

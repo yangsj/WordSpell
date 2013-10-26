@@ -19,14 +19,18 @@ import org.apache.thrift.protocol.*;
     private static const STRUCT_DESC:TStruct = new TStruct("next_word_t");
     private static const ANSWER_FLAG_FIELD_DESC:TField = new TField("answer_flag", TType.BOOL, 1);
     private static const INC_COIN_FIELD_DESC:TField = new TField("inc_coin", TType.I16, 2);
+    private static const UID_FIELD_DESC:TField = new TField("uid", TType.I32, 4);
 
     private var _answer_flag:Boolean;
     public static const ANSWER_FLAG:int = 1;
     private var _inc_coin:int;
     public static const INC_COIN:int = 2;
+    private var _uid:int;
+    public static const UID:int = 4;
 
     private var __isset_answer_flag:Boolean = false;
     private var __isset_inc_coin:Boolean = false;
+    private var __isset_uid:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -34,6 +38,8 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.BOOL));
       metaDataMap[INC_COIN] = new FieldMetaData("inc_coin", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I16));
+      metaDataMap[UID] = new FieldMetaData("uid", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(next_word_t, metaDataMap);
@@ -42,6 +48,7 @@ import org.apache.thrift.protocol.*;
     public function next_word_t() {
       this._answer_flag = 0;
       this._inc_coin = 0;
+      this._uid = 0;
     }
 
     public function get answer_flag():Boolean {
@@ -80,6 +87,24 @@ import org.apache.thrift.protocol.*;
       return this.__isset_inc_coin;
     }
 
+    public function get uid():int {
+      return this._uid;
+    }
+
+    public function set uid(uid:int):void {
+      this._uid = uid;
+      this.__isset_uid = true;
+    }
+
+    public function unsetUid():void {
+      this.__isset_uid = false;
+    }
+
+    // Returns true if field uid is set (has been assigned a value) and false otherwise
+    public function isSetUid():Boolean {
+      return this.__isset_uid;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case ANSWER_FLAG:
@@ -98,6 +123,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case UID:
+        if (value == null) {
+          unsetUid();
+        } else {
+          this.uid = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -109,6 +142,8 @@ import org.apache.thrift.protocol.*;
         return this.answer_flag;
       case INC_COIN:
         return this.inc_coin;
+      case UID:
+        return this.uid;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -121,6 +156,8 @@ import org.apache.thrift.protocol.*;
         return isSetAnswer_flag();
       case INC_COIN:
         return isSetInc_coin();
+      case UID:
+        return isSetUid();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -153,6 +190,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case UID:
+            if (field.type == TType.I32) {
+              this.uid = iprot.readI32();
+              this.__isset_uid = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -176,6 +221,9 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(INC_COIN_FIELD_DESC);
       oprot.writeI16(this.inc_coin);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(UID_FIELD_DESC);
+      oprot.writeI32(this.uid);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -190,6 +238,10 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "inc_coin:";
       ret += this.inc_coin;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "uid:";
+      ret += this.uid;
       first = false;
       ret += ")";
       return ret;
