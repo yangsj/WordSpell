@@ -2,6 +2,8 @@ package app.managers
 {
 	import flash.text.Font;
 	
+	import victor.framework.log.Logger;
+	
 	/**
 	 * ……
 	 * @author 	yangsj 
@@ -23,7 +25,7 @@ package app.managers
 			var array:Array = Font.enumerateFonts( false );
 			_font = array[ 0 ];
 			_fontName = _font.fontName;
-			trace( array.length );
+			Logger.debug( "字体嵌入数量：" + array.length );
 		}
 
 		public static function get font():Font

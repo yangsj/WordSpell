@@ -13,7 +13,6 @@ package app.modules.main.view
 	import app.managers.LoaderManager;
 	import app.modules.main.FunctionBtnConfig;
 	import app.utils.NumCreate;
-	import app.utils.appStage;
 	
 	import victor.framework.core.ViewSprite;
 	import victor.framework.core.ViewStruct;

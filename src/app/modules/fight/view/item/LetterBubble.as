@@ -16,7 +16,6 @@ package app.modules.fight.view.item
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.model.vo.ItemType;
-	import app.utils.TextUtil;
 	import app.utils.appStage;
 	
 	import victor.framework.manager.TickManager;
@@ -225,22 +224,22 @@ package app.modules.fight.view.item
 		
 		public function get isEdgeLeft():Boolean
 		{
-			return x < moveArea.x + 25;
+			return x < moveArea.x + RADIUS;
 		}
 		
 		public function get isEdgeRight():Boolean
 		{
-			return x > moveArea.width - moveArea.x - 25;
+			return x > moveArea.width - moveArea.x - RADIUS;
 		}
 		
 		public function get isEdgeUp():Boolean
 		{
-			return y < moveArea.x + 25;
+			return y < moveArea.x + RADIUS;
 		}
 		
 		public function get isEdgeDown():Boolean
 		{
-			return y > moveArea.height - moveArea.x - 25;
+			return y > moveArea.height - moveArea.x - RADIUS;
 		}
 
 		public function get scale():Number

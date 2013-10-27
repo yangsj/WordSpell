@@ -1,7 +1,6 @@
 package app.modules.fight.view.spell
 {
 	import app.modules.fight.events.FightAloneEvent;
-	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.service.FightAloneService;
@@ -23,6 +22,8 @@ package app.modules.fight.view.spell
 		[Inject]
 		public var fightService:FightAloneService;
 		
+		private var isSendInput:Boolean = false;
+		
 		public function SpellAreaMediator()
 		{
 			super();
@@ -37,7 +38,7 @@ package app.modules.fight.view.spell
 			// 输入结束
 			addViewListener( SpellEvent.INPUT_OVER, inputOverHandler, SpellEvent );
 			
-			// 
+			// start
 			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
 			// 更新数据
 			addContextListener( FightAloneEvent.UPDATE_WORD, updateWordHandler, FightAloneEvent );
@@ -46,6 +47,7 @@ package app.modules.fight.view.spell
 			// 更新下一个
 			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordNotify, FightAloneEvent );
 			
+			isSendInput = false;
 			if ( fightModel.modeType == 5 )
 				view.setInitData( fightModel.spellVo );
 			
@@ -53,18 +55,21 @@ package app.modules.fight.view.spell
 		
 		private function inputOverHandler( event:SpellEvent ):void
 		{
-			var sequence:Array = [];
-			for each ( var vo:LetterBubbleVo in view.inputList )
+			if ( isSendInput == false )
 			{
-				if ( vo == null )
-					break;
-				sequence.push( vo.id );
+				var sequence:Array = [];
+				for each ( var vo:LetterBubbleVo in view.inputList ) {
+					if ( vo == null ) break;
+					sequence.push( vo.id );
+				}
+				isSendInput = true;
+				fightService.inputOver( sequence );
 			}
-			fightService.inputOver( sequence );
 		}
 		
-		private function nextWordNotify( event:* ):void
+		private function nextWordNotify( event:FightAloneEvent ):void
 		{
+			isSendInput = false;
 			view.setInitData( fightModel.spellVo );
 		}
 		

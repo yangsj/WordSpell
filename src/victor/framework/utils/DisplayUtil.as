@@ -60,7 +60,7 @@ package victor.framework.utils
 		{
 			if ( target )
 			{
-				if ( target.hasOwnProperty( "" ))
+				if ( target.hasOwnProperty( "stopAllMovieClips" ))
 				{
 					target.stopAllMovieClips();
 				}

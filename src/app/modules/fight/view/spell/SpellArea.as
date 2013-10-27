@@ -40,6 +40,7 @@ package app.modules.fight.view.spell
 			_skin = LoaderManager.getObj( "ui_Skin_Round_SpellArea" ) as Sprite;
 			addChild( _skin );
 			txtChinese = _skin.getChildByName( "txtChinese" ) as TextField;
+			txtChinese.mouseEnabled = false;
 		}
 
 		private function createSpellItems():void

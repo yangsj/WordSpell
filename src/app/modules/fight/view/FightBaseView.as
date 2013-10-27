@@ -66,6 +66,8 @@ package app.modules.fight.view
 			
 			effectContainer = new Sprite();
 			addChild( effectContainer );
+			
+			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
 		}
 		
 		override public function hide():void
@@ -85,13 +87,11 @@ package app.modules.fight.view
 			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
 			TickManager.doInterval( enterFrameHandler, 20 );
-			
-			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
 		}
 		
 		public function clear():void
 		{
-			appStage.removeEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
+//			appStage.removeEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
 			TickManager.clearDoTime( enterFrameHandler );
 			TickManager.clearDoTime( timerHandler );
 			spellArea.clear();
@@ -229,16 +229,13 @@ package app.modules.fight.view
 		{
 			var charCode:int = event.charCode;
 			var key:String = String.fromCharCode( charCode ).toLocaleLowerCase();
-			if ( dictLetterSelf )
+			if ( dictLetterSelf && parent && !(event.target is TextField) )
 			{
 				var ary:Array = dictLetterSelf[ key ];
 				var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
-				if ( bubble )
-				{
-					bubble.selected( true );
-				}
-				else
-					Tips.showCenter( "按键无效" );
+				
+				if ( bubble ) bubble.selected( true );
+				else Tips.showCenter( "按键无效" );
 			}
 		}
 		

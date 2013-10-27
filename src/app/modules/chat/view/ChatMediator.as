@@ -40,9 +40,9 @@ package app.modules.chat.view
 			// 折叠聊天日志
 			addContextListener( ChatEvent.FOLD_CHAT, foldLogHandler, ChatEvent );
 			// 显示窗口
-			addContextListener( ChatEvent.SHOW_CHAT, showViewHandler, ChatEvent );
+			addContextListener( ChatEvent.SHOW_CHAT, showViewChatHandler, ChatEvent );
 			// 隐藏窗口
-			addContextListener( ChatEvent.HIDE_CHAT, hideViewHandler, ChatEvent );
+			addContextListener( ChatEvent.HIDE_CHAT, hideViewChatHandler, ChatEvent );
 			// 显示信息
 			addContextListener( ChatEvent.UPDATE_MSG, updateMsgHandler, ChatEvent );
 			// 与好友私聊
@@ -107,12 +107,12 @@ package app.modules.chat.view
 			view.addMsg( event.data as ChatVo );
 		}
 		
-		private function showViewHandler( event:ChatEvent ):void
+		private function showViewChatHandler( event:ChatEvent ):void
 		{
 			view.visible = true;
 		}
 		
-		private function hideViewHandler( event:ChatEvent ):void
+		private function hideViewChatHandler( event:ChatEvent ):void
 		{
 			view.visible = false;
 		}

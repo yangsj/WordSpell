@@ -20,11 +20,11 @@ package app
 		/**
 		 * 主机地址
 		 */
-		public static var serverHost:String = "";
+		public static var serverHost:String = "112.124.57.159";
 		/**
 		 * 主机端口
 		 */
-		public static var serverPort:int = 1024;
+		public static var serverPort:int = 10242;
 		
 		/**
 		 * 用户id

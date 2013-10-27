@@ -83,7 +83,6 @@ package victor.framework.socket
 		 */
 		private function onSocketDataHandler( event:ProgressEvent ):void
 		{
-			// trace("socket Len:",_sock.bytesAvailable);
 			// 有足够的数据，才读取数据
 			Logger.debug( "_sock.bytesAvailable:" + _sock.bytesAvailable );
 			while ( _sock.connected && _sock.bytesAvailable >= _pack_len )
