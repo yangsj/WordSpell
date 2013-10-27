@@ -1,5 +1,6 @@
 package app.modules.fight.service
 {
+	import app.core.Alert;
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.ViewEvent;
@@ -15,6 +16,8 @@ package app.modules.fight.service
 	import ff.battle_close_ret_t;
 	import ff.battle_create_req_t;
 	import ff.battle_create_ret_t;
+	import ff.battle_invite_accept_req_t;
+	import ff.battle_invite_ret_t;
 	import ff.battle_quit_req_t;
 	import ff.battle_ready_req_t;
 	import ff.click_bubble_req_t;
@@ -54,7 +57,7 @@ package app.modules.fight.service
 			// 匹配成功
 			regist( server_cmd_e.BATTLE_CREATE_RET, matchingSuccessNotify, battle_create_ret_t );
 			// 对方邀请要来一局通知
-//			regist( server_cmd_e.BATTLE_CREATE_RET, againBattleInviteNotify, battle_create_ret_t );
+			regist( server_cmd_e.BATTLE_INVITE_RET, operateBattleInviteNotify, battle_invite_ret_t );
 			// 对方消除泡泡通知
 			regist( server_cmd_e.CLICK_BUBBLE_RET, destBubbleNotify, click_bubble_ret_t );
 		}
@@ -102,19 +105,29 @@ package app.modules.fight.service
 			readyModel.result = data.result;
 			if ( readyModel.isSuccessed )
 			{
+				// 若是对战结束点击再来一局时关闭的界面
+				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightOnline ));
+				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightOnlineResultPanel ));
+				// 停留在自动匹配界面时自动关闭
 				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightMatchingPanel ));
+				// 进入ready 界面
 				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel ));
 			}
 			else 
 			{
-				Tips.showCenter( readyModel.isRefuse ? "对方拒绝" : "对方离线" );
+				Tips.showCenter( readyModel.isRefuse ? "对方拒绝邀请！" : "对方已离线！" );
 			}
 		}
 		
 		// 对方邀请再来一局
-		private function againBattleInviteNotify( resp:SocketResp ):void
+		private function operateBattleInviteNotify( resp:SocketResp ):void
 		{
-			
+			var data:battle_invite_ret_t = resp.data as battle_invite_ret_t;
+			Alert.show( "[" + data.dest_name + "]邀请你加入对战，是否接受？", callBack, "接受", "拒绝");
+			function callBack( type:int ):void
+			{
+				agreeOperateInvite( data.dest_id, type==Alert.YES );
+			}
 		}
 		
 		// 对方泡泡消除通知
@@ -180,9 +193,12 @@ package app.modules.fight.service
 		/**
 		 * 再来一局
 		 */
-		public function againBattle():void
+		public function againBattle(destUid:int):void
 		{
-			Tips.showCenter( "【再来一局】功能暂未开放！稍后放出" );
+//			Tips.showCenter( "【再来一局】功能暂未开放！稍后放出" );
+			matching( destUid );
+			
+			LoadingEffect.hide();
 		}
 		
 		/**
@@ -190,9 +206,14 @@ package app.modules.fight.service
 		 * @param uid
 		 * @param isAgree
 		 */
-		public function agreeAgain( uid:int, isAgree:Boolean ):void
+		public function agreeOperateInvite( uid:int, isAgree:Boolean ):void
 		{
+			var req:battle_invite_accept_req_t = new battle_invite_accept_req_t();
+			req.dest_id = uid;
+			req.accept_flag = isAgree;
+			call( client_cmd_e.BATTLE_INVITE_ACCEPT_REQ, req );
 			
+			LoadingEffect.hide();
 		}
 		
 	}

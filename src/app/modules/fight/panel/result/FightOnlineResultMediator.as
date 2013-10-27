@@ -43,7 +43,7 @@ package app.modules.fight.panel.result
 			
 			var iswin:Boolean = fightModel.battleResult;
 			var winPlayer:String = iswin ? GameData.instance.selfVo.name : readyModel.destVo.name;
-			var losePlayer:String = iswin ? GameData.instance.selfVo.name : readyModel.destVo.name;
+			var losePlayer:String = !iswin ? GameData.instance.selfVo.name : readyModel.destVo.name;
 			view.setPlayer( winPlayer, losePlayer );
 			view.setData( iswin ? fightModel.battleEndSelfVo : fightModel.battleEndDestVo, !iswin ? fightModel.battleEndSelfVo : fightModel.battleEndDestVo );
 			
@@ -52,7 +52,7 @@ package app.modules.fight.panel.result
 		private function againBattleHandler( event:FightOnlineEvent ):void
 		{
 			// 再来一次
-			onlineService.againBattle();
+			onlineService.againBattle( readyModel.destVo.uid );
 		}
 		
 		private function closeQuitHandler( event:PanelEvent ):void

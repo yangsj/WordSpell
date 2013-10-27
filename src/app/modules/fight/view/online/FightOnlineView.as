@@ -71,12 +71,7 @@ package app.modules.fight.view.online
 					Logger.debug( "对手消除泡泡：" + letter.data.upperCase + "|" + letter.data.id );
 					letter.selected( true, false );
 					var itemType:int = letter.data.itemType;
-					if ( itemType != ItemType.DEFAULT )
-					{
-						if ( itemType == ItemType.EXTRA_TIME )
-							useExtraTimeProp( false );
-						delete dictProps[itemType+"_other"];
-					}
+					if ( itemType != ItemType.DEFAULT ) delete dictProps[itemType+"_other"];
 					break;
 				}
 			}
