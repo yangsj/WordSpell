@@ -45,5 +45,10 @@ package app.modules.fight.events
 		 */
 		public static const DEST_UPDATE_NEXT:String = "dest_update_next";
 		
+		/**
+		 * 邀请玩家对战
+		 */
+		public static const INVITE_PLAYER_BATTLE:String = "invite_player_battle";
+		
 	}
 }

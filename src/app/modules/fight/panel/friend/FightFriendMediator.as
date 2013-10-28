@@ -1,7 +1,10 @@
 package app.modules.fight.panel.friend
 {
+	import app.modules.fight.events.FightOnlineEvent;
+	import app.modules.fight.service.FightOnlineService;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.model.FriendModel;
+	import app.modules.friend.model.FriendVo;
 	import app.modules.friend.service.FriendService;
 	
 	import victor.framework.core.BaseMediator;
@@ -20,6 +23,8 @@ package app.modules.fight.panel.friend
 		public var friendService:FriendService;
 		[Inject]
 		public var friendModel:FriendModel;
+		[Inject]
+		public var fightOnlineService:FightOnlineService;
 		
 		public function FightFriendMediator()
 		{
@@ -32,6 +37,8 @@ package app.modules.fight.panel.friend
 			
 			addContextListener( FriendEvent.UPDATE_LIST, updateListHandler, FriendEvent );
 			
+			addViewListener( FightOnlineEvent.INVITE_PLAYER_BATTLE, invitePlayerToBattleHandler, FightOnlineEvent );
+			
 			friendService.pullFriendListReq();
 		}
 		
@@ -39,6 +46,12 @@ package app.modules.fight.panel.friend
 		{
 			view.setDataList( friendModel.onLineList );
 		} 
+		
+		private function invitePlayerToBattleHandler( event:FightOnlineEvent ):void
+		{
+			var friendVo:FriendVo = event.data as FriendVo;
+			fightOnlineService.matching( friendVo.uid );
+		}
 		
 	}
 }

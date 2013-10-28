@@ -7,8 +7,7 @@ package app.modules.fight.panel.search
 	
 	import app.core.Alert;
 	import app.core.Tips;
-	import app.events.ViewEvent;
-	import app.modules.ViewName;
+	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.friend.model.FriendVo;
 	
 	import victor.framework.components.scroll.GameScrollPanel;
@@ -81,22 +80,16 @@ package app.modules.fight.panel.search
 		
 		protected function onBtnConfirmClickHandler(event:MouseEvent):void
 		{
-			if ( FightSearchItem.selectedItem )
-			{
-				Alert.show( "确定邀请加入对战", callBackFun, "确定", "取消" );
-			}
+			var selectedItem:FightSearchItem = FightSearchItem.selectedItem;
+			if ( selectedItem )
+				Alert.show( "确定邀请玩家【 "+ selectedItem.friendVo.name +" 】加入对战？", callBackFun, "确定", "取消" );
 			else
-			{
-				Tips.showMouse( "请选择一个玩家！" );
-			}
+				Tips.showMouse( "请先选择一个玩家！" );
 			
 			function callBackFun( type:int ):void
 			{
 				if ( type == Alert.YES )
-				{
-					dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel, FightSearchItem.selectedItem.friendVo ));
-					hide();
-				}
+					dispatchEvent( new FightOnlineEvent( FightOnlineEvent.INVITE_PLAYER_BATTLE, selectedItem.friendVo ));
 			}
 		}
 		

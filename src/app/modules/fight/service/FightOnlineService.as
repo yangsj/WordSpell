@@ -56,7 +56,7 @@ package app.modules.fight.service
 			regist( server_cmd_e.BATTLE_CLOSE_RET, battleEndNotify, battle_close_ret_t );
 			// 匹配成功
 			regist( server_cmd_e.BATTLE_CREATE_RET, matchingSuccessNotify, battle_create_ret_t );
-			// 对方邀请要来一局通知
+			// 对方邀请对战通知
 			regist( server_cmd_e.BATTLE_INVITE_RET, operateBattleInviteNotify, battle_invite_ret_t );
 			// 对方消除泡泡通知
 			regist( server_cmd_e.CLICK_BUBBLE_RET, destBubbleNotify, click_bubble_ret_t );
@@ -105,11 +105,17 @@ package app.modules.fight.service
 			readyModel.result = data.result;
 			if ( readyModel.isSuccessed )
 			{
-				// 若是对战结束点击再来一局时关闭的界面
-				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightOnline ));
-				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightOnlineResultPanel ));
-				// 停留在自动匹配界面时自动关闭
-				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightMatchingPanel ));
+				var needCloseView:Vector.<String> = new Vector.<String>();
+				needCloseView.push( ViewName.FightOnline, ViewName.FightOnlineResultPanel ); // 若是停留在对战结束界面
+				needCloseView.push( ViewName.FightMatchingPanel );// 若是从自动匹配界面
+				needCloseView.push( ViewName.FightOnline, ViewName.FriendOnline, ViewName.Friend ); // 若是从好友列表中发起对战
+				needCloseView.push( ViewName.FightFriendPanel ); // 若是从好友搜索列表发起对战
+				needCloseView.push( ViewName.FightSearchPanel ); // 若是从在线玩家搜索列表中发起对战
+				
+				// 关闭面板
+				for each ( var viewName:String in needCloseView )
+					dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, viewName ));
+				
 				// 进入ready 界面
 				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel ));
 			}

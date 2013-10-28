@@ -77,10 +77,10 @@ package app.modules.fight.view.item
 		protected function enterFrameHandler(event:Event = null):void
 		{
 			if ( x <= moveArea.x || x >= moveArea.x + moveArea.width )
-				changeDirection( -1, Math.random() < 0.5 ? -1 : 1 );
+				changeDirection( -1, 1 );
 			
 			else if ( y <= moveArea.y || y >= moveArea.y + moveArea.height )
-				changeDirection( Math.random() < 0.5 ? -1 : 1, -1 );
+				changeDirection( 1, -1 );
 			
 			x += dx;
 			y += dy;

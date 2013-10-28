@@ -7,6 +7,7 @@ package app.modules.friend.view
 	import flash.geom.Point;
 	import flash.text.TextField;
 	
+	import app.core.Alert;
 	import app.modules.TempleteSprite;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.model.FriendVo;
@@ -99,7 +100,11 @@ package app.modules.friend.view
 					dispatchEvent( new FriendEvent( FriendEvent.BATTLE, data, true ));
 					break;
 				case Delete:
-					dispatchEvent( new FriendEvent( FriendEvent.DELETE, data, true ));
+//					dispatchEvent( new FriendEvent( FriendEvent.DELETE, data, true ));
+					Alert.show( "你确定要删除好友【" + data.name + "】吗？", 
+						function abc(type:int):void {
+							dispatchEvent( new FriendEvent( FriendEvent.DELETE, data, type==Alert.YES ));
+						});
 					break;
 			}
 		}

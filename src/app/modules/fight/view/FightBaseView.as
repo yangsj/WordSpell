@@ -275,52 +275,58 @@ package app.modules.fight.view
 								var dy1:Number = mc1.direY;
 								var dx2:Number = mc2.direX;
 								var dy2:Number = mc2.direY;
+								
+								// 校正泡泡的间距
 								if ( dist1 < dist0 )
 								{
-									if ( mc1.x < mc2.x )
-									{
+									if ( mc1.x < mc2.x ) {
 										if ( mc2.isEdgeRight )
 											mc1.x = mc2.x - movex;
 										else mc2.x = mc1.x + movex;
-									}
-									else
-									{
+									} else {
 										if ( mc2.isEdgeLeft )
 											mc1.x = mc2.x + movex;
 										else mc2.x = mc1.x - movex;
 									}
-									if ( mc1.y < mc2.y )
-									{
+									
+									if ( mc1.y < mc2.y ) {
 										if ( mc2.isEdgeDown )
 											mc1.y = mc2.y - movey;
 										else mc2.y = mc1.y + movey;
+									} else {
+										if ( mc2.isEdgeUp )
+											mc1.y = mc2.y + movey;
+										else mc2.y = mc1.y - movey;
 									}
-									else if ( mc2.isEdgeUp )
-										mc1.y = mc2.y + movey;
-									else mc2.y = mc1.y - movey;
 								}
 								
-								mc1.changeDirection( -1, -1 );
-								mc2.changeDirection( -1, -1 );
+								// 方式1：与原来方向相反
+//								mc1.changeDirection( -1, -1 );
+//								mc2.changeDirection( -1, -1 );
 								
-//								if ( absx == absy )
-//								{
-//									mc1.changeDirection( -1, -1 );
-//									mc2.changeDirection( -1, -1 );
-//								}
-//								else
-//								{
-//									if ( absx > absy )
-//									{
-//										mc1.changeDirection( -1, 1 );
-//										mc2.changeDirection( -1, 1 );
-//									}
-//									else
-//									{
-//										mc1.changeDirection( 1, -1 );
-//										mc2.changeDirection( 1, -1 );
-//									}
-//								}
+								// 方式2：可能改变一个方向，也可能改变两个方向
+								if ( dx1 == dx2 ) {
+									mc1.changeDirection( 1, -1 );
+									mc2.changeDirection( 1, -1 );
+								} else if ( dy1 == dy2 ) {
+									mc1.changeDirection( -1, 1 );
+									mc2.changeDirection( -1, 1 );
+								} 
+								else　
+								{
+									if ( absx == absy )　{
+										mc1.changeDirection( -1, -1 );
+										mc2.changeDirection( -1, -1 );
+									}　
+									else　if ( absx > absy )　{
+										mc1.changeDirection( -1, 1 );
+										mc2.changeDirection( -1, 1 );
+									}　else　{
+										mc1.changeDirection( 1, -1 );
+										mc2.changeDirection( 1, -1 );
+									}
+								}
+								
 							}
 						}
 					}
