@@ -58,13 +58,20 @@ package app.modules.fight.view.alone
 
 		override public function setLettersPool( list:Vector.<LetterBubbleVo>, isSelf:Boolean = true ):void
 		{
+			points=[[41,44.2],[121.8,44.2],[202.6,44.2],[283.4,44.2],[364.2,44.2],[445,44.2],[525.8,44.2],[606.6,44.2],[687.4,44.2],[768.2,44.2],[849,44.2],[41,238.6],[121.8,238.6],[202.6,238.6],[283.4,238.6],[364.2,238.6],[445,238.6],[525.8,238.6],[606.6,238.6],[687.4,238.6],[768.2,238.6],[849,238.6],[41,141.4],[121.8,141.4],[202.6,141.4],[283.4,141.4],[364.2,141.4],[445,141.4],[525.8,141.4],[606.6,141.4],[687.4,141.4],[768.2,141.4],[849,141.4],[41,335.8],[121.8,335.8],[202.6,335.8],[283.4,335.8],[364.2,335.8],[445,335.8],[525.8,335.8],[606.6,335.8],[687.4,335.8],[768.2,335.8],[849,335.8]];
 			dictLetterSelf = new Dictionary();
 			DisplayUtil.removedAll( container, false );
+			var key:String;
+			var bubble:LetterBubble;
+			var point:Array;
 			for each ( var vo:LetterBubbleVo in list )
 			{
-				var key:String = vo.letter.toLocaleLowerCase();
-				var bubble:LetterBubble = new LetterBubble();
+				point = points.splice(int(Math.random() * points.length), 1)[0];
+				key = vo.letter.toLocaleLowerCase();
+				bubble = new LetterBubble();
 				bubble.setData( vo );
+				bubble.x = point[0];
+				bubble.y = point[1];
 				container.addChild( bubble );
 				dictLetterSelf[ key ] ||= [];
 				dictLetterSelf[ key ].push( bubble );

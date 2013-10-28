@@ -48,6 +48,8 @@ package app.modules.fight.view.item
 		private var _point:Point = new Point();
 		private var _scale:Number = 1;
 		private var _isAlone:Boolean = true;
+		private var _direX:int = 1;
+		private var _direY:int = 1;
 		
 		public function LetterBubble()
 		{
@@ -88,10 +90,10 @@ package app.modules.fight.view.item
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			
-			TickManager.doInterval( enterFrameHandler, 20 );
+			TickManager.doInterval( enterFrameHandler, 30 );
 			
 			if ( _isAlone ) _scale = Number((0.7 + Math.random() * 0.3).toFixed(2));
-			else _scale = Number((0.5 + Math.random() * 0.3).toFixed(2));
+			else _scale = Number((0.45 + Math.random() * 0.3).toFixed(2));
 			
 			_skin.scaleX = _skin.scaleY = _scale;
 			moveArea.width = moveArea.width + DIAMETER * ( 1 - scale );
@@ -99,8 +101,8 @@ package app.modules.fight.view.item
 			moveArea.x = RADIUS * scale;
 			moveArea.y = RADIUS * scale;
 			
-			x = moveArea.x + moveArea.width * Math.random();
-			y = moveArea.y + moveArea.height * Math.random();
+//			x = moveArea.x + moveArea.width * Math.random();
+//			y = moveArea.y + moveArea.height * Math.random();
 			adjustXY();
 			
 			var dxx:Number = Number((0.3 + Math.random() * 0.3).toFixed(2));
@@ -250,6 +252,18 @@ package app.modules.fight.view.item
 		public function set scale(value:Number):void
 		{
 			_scale = value;
+		}
+
+		public function get direX():int
+		{
+			return dx < 0 ? -1 : 1;
+			return _direX;
+		}
+
+		public function get direY():int
+		{
+			return dy < 0 ? -1 : 1;
+			return _direY;
 		}
 
 		

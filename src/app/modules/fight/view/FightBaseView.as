@@ -45,6 +45,8 @@ package app.modules.fight.view
 		protected var selfTotalTime:int = 60;
 		protected var dictProps:Dictionary;
 		
+		protected var points:Array = [];
+		
 		public function FightBaseView()
 		{
 			super();
@@ -66,8 +68,6 @@ package app.modules.fight.view
 			
 			effectContainer = new Sprite();
 			addChild( effectContainer );
-			
-			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
 		}
 		
 		override public function hide():void
@@ -83,6 +83,8 @@ package app.modules.fight.view
 		
 		public function initialize():void
 		{
+			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
+			
 			dictProps = new Dictionary();
 			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
@@ -91,7 +93,7 @@ package app.modules.fight.view
 		
 		public function clear():void
 		{
-//			appStage.removeEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
+			appStage.removeEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
 			TickManager.clearDoTime( enterFrameHandler );
 			TickManager.clearDoTime( timerHandler );
 			spellArea.clear();
@@ -132,6 +134,7 @@ package app.modules.fight.view
 		{
 			var bubble:LetterBubble;
 			var lettetVo:LetterBubbleVo;
+			var point:Array;
 			for ( var key:String in dictProps )
 			{
 				var selfKey:Boolean = key.indexOf( "_data" ) != -1;
@@ -139,9 +142,12 @@ package app.modules.fight.view
 				if ( selfKey || destKey )
 				{
 					lettetVo = dictProps[ key ];
+					point = points.splice(int(Math.random() * points.length), 1)[0];
 					bubble = new LetterBubble();
 					bubble.setMoveArea( isAlone );
 					bubble.setData( lettetVo );
+					bubble.x = point[0];
+					bubble.y = point[1];
 					
 					if ( isSelf ) dictProps[ lettetVo.itemType ] = bubble;
 					if ( isSelf && selfKey ) container.addChild( bubble );
@@ -256,17 +262,21 @@ package app.modules.fight.view
 						mc2 = container.getChildAt( j ) as LetterBubble;
 						if ( mc2 && mc1 != mc2 )
 						{
-							var dist0:Number = 41 * ( mc1.scale + mc2.scale );
+							var dist0:Number = LetterBubble.RADIUS * ( mc1.scale + mc2.scale )+2;
 							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
 							if ( dist1 <= dist0 )
 							{
+								var rate:Number = ( dist0 / dist1 );
+								var absx:Number = Math.abs( mc1.x - mc2.x );
+								var absy:Number = Math.abs( mc1.y - mc2.y );
+								var movex:Number = absx * rate;
+								var movey:Number = absy * rate;
+								var dx1:Number = mc1.direX;
+								var dy1:Number = mc1.direY;
+								var dx2:Number = mc2.direX;
+								var dy2:Number = mc2.direY;
 								if ( dist1 < dist0 )
 								{
-									var rate:Number = ( dist0 / dist1 );
-									var absx:Number = Math.abs( mc1.x - mc2.x );
-									var absy:Number = Math.abs( mc1.y - mc2.y );
-									var movex:Number = absx * rate;
-									var movey:Number = absy * rate;
 									if ( mc1.x < mc2.x )
 									{
 										if ( mc2.isEdgeRight )
@@ -289,24 +299,28 @@ package app.modules.fight.view
 										mc1.y = mc2.y + movey;
 									else mc2.y = mc1.y - movey;
 								}
-								if ( absx == absy )
-								{
-									mc1.changeDirection( -1, -1 );
-									mc2.changeDirection( -1, -1 );
-								}
-								else
-								{
-									if ( absx > absy )
-									{
-										mc1.changeDirection( -1, 1 );
-										mc2.changeDirection( -1, 1 );
-									}
-									else
-									{
-										mc1.changeDirection( 1, -1 );
-										mc2.changeDirection( 1, -1 );
-									}
-								}
+								
+								mc1.changeDirection( -1, -1 );
+								mc2.changeDirection( -1, -1 );
+								
+//								if ( absx == absy )
+//								{
+//									mc1.changeDirection( -1, -1 );
+//									mc2.changeDirection( -1, -1 );
+//								}
+//								else
+//								{
+//									if ( absx > absy )
+//									{
+//										mc1.changeDirection( -1, 1 );
+//										mc2.changeDirection( -1, 1 );
+//									}
+//									else
+//									{
+//										mc1.changeDirection( 1, -1 );
+//										mc2.changeDirection( 1, -1 );
+//									}
+//								}
 							}
 						}
 					}
