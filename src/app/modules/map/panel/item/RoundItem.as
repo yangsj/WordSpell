@@ -2,6 +2,7 @@ package app.modules.map.panel.item
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	import app.core.Tips;
 	import app.modules.map.main.item.MapItemBase;
@@ -21,11 +22,15 @@ package app.modules.map.panel.item
 		
 		public var mcStar:MovieClip;
 		public var mcTarget:MovieClip;
+		public var txtIndex:TextField;
+		private var index:int;
 		
-		public function RoundItem( skin:MovieClip )
+		public function RoundItem( skin:MovieClip, index:int )
 		{
 			super( skin );
 			Reflection.reflection( this, skin );
+			this.index = index;
+			txtIndex.text = index.toString();
 			mcStar.stop();
 			mcTarget.stop();
 		}

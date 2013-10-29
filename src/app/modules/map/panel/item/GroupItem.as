@@ -14,13 +14,15 @@ package app.modules.map.panel.item
 	{
 		private var vecListItem:Vector.<RoundItem>;
 		private var chapterVo:ChapterVo;
+		private var index:int;
 		
-		public function GroupItem( skin:MovieClip )
+		public function GroupItem( skin:MovieClip, index:int )
 		{
 			super( skin );
 			skin.mouseChildren = true;
 			skin.buttonMode = false;
 			skin.mouseEnabled = false;
+			this.index = index;
 			createItems();
 		}
 		
@@ -47,7 +49,7 @@ package app.modules.map.panel.item
 			vecListItem ||= new Vector.<RoundItem>();
 			for ( var i:int = 0; i < 5; i++ )
 			{
-				item = new RoundItem( skin.getChildByName( "r" + i ) as MovieClip );
+				item = new RoundItem( skin.getChildByName( "r" + i ) as MovieClip, 5 * index + i + 1);
 				vecListItem.push( item );
 			}
 		}

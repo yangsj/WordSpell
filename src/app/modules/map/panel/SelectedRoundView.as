@@ -33,7 +33,8 @@ package app.modules.map.panel
 		{
 			super.addedToStageHandler( event );
 			
-			txtName.y =3;
+			txtName.mouseEnabled = false;
+			txtName.y = 7;
 			txtName.text = mapVo.mapName;
 			_skin.addChild( txtName );
 		}
@@ -89,7 +90,7 @@ package app.modules.map.panel
 			for (var i:int = 0; i < 10; i++ )
 			{
 				mcGroup = _skin.getChildByName( "c" + i ) as MovieClip;
-				groupItem = new GroupItem( mcGroup );
+				groupItem = new GroupItem( mcGroup, i );
 				vecList.push( groupItem );
 			}
 		}
