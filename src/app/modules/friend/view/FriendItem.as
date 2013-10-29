@@ -174,6 +174,8 @@ package app.modules.friend.view
 		
 		public function setData( data:FriendVo ):void
 		{
+			_data = data;
+			
 			mcStatus.gotoAndStop( data.status );
 			
 			txtName.text = data.name;
