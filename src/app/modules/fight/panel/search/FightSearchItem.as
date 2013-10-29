@@ -70,6 +70,7 @@ package app.modules.fight.panel.search
 			_friendVo =friendVo;
 			DisplayUtil.removedFromParent( _nameBitmap );
 			txtName.visible = false;
+			txtName.text = _friendVo.name;
 			_nameBitmap = new Bitmap( new BitmapData( txtName.width, txtName.height, true, 0 ));
 			_nameBitmap.bitmapData.draw( txtName );
 			_nameBitmap.x = txtName.x;
@@ -87,7 +88,7 @@ package app.modules.fight.panel.search
 		
 		public function setStatus( status:int ):void
 		{
-			mcStatus.gotoAndStop( status % 3 + 1 );
+			mcStatus.gotoAndStop( status );
 		}
 
 		/**
