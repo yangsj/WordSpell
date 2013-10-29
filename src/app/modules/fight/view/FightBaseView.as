@@ -84,6 +84,7 @@ package app.modules.fight.view
 		public function initialize():void
 		{
 			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
+			appStage.focus = appStage;
 			
 			dictProps = new Dictionary();
 			TickManager.doInterval( timerHandler, 1000 );
