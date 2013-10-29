@@ -25,12 +25,13 @@
 	<asset id="testPanel" src="assets/panel/testPanel.swf" version="1_1" first="0"/>
 	
 	<!-- 地图资源 -->
-	<asset id="map_chapter_0" src="assets/map_chapter_0.swf" version="1_46" first="0"/>
-	<asset id="map_chapter_1" src="assets/map_chapter_1.swf" version="1_46" first="0"/>
-	<asset id="map_chapter_2" src="assets/map_chapter_2.swf" version="1_46" first="0"/>
-	<asset id="map_chapter_3" src="assets/map_chapter_3.swf" version="1_46" first="0"/>
-	<asset id="map_chapter_4" src="assets/map_chapter_4.swf" version="1_46" first="0"/>
-	<asset id="map_chapter_5" src="assets/map_chapter_5.swf" version="1_46" first="0"/>
+	<asset id="map_chapter_list" src="assets/map_chapter_list.swf" version="1_47" first="0"/>
+	<asset id="map_chapter_0" src="assets/map_chapter_0.swf" version="1_47" first="0"/>
+	<asset id="map_chapter_1" src="assets/map_chapter_1.swf" version="1_47" first="0"/>
+	<asset id="map_chapter_2" src="assets/map_chapter_2.swf" version="1_47" first="0"/>
+	<asset id="map_chapter_3" src="assets/map_chapter_3.swf" version="1_47" first="0"/>
+	<asset id="map_chapter_4" src="assets/map_chapter_4.swf" version="1_47" first="0"/>
+	<asset id="map_chapter_5" src="assets/map_chapter_5.swf" version="1_47" first="0"/>
 	
 	<!-- 好友 -->
 	<asset id="ui_friend" src="assets/ui_friend.swf" version="1_38" first="0"/>
