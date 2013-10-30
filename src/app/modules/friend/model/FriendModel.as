@@ -112,7 +112,7 @@ package app.modules.friend.model
 			
 			for ( var key:String in friendList ) {
 				
-				friendVo = friendVo[ key ];
+				friendVo = friendList[ key ];
 				if ( friendVo && friendVo.uid == uid )
 					return int( key );
 			}

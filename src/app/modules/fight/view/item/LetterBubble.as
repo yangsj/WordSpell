@@ -149,11 +149,11 @@ package app.modules.fight.view.item
 		{
 			_data = vo;
 			txtLetter.text = vo.itemType == 0 ? vo.letter : "道";
-			var bitmapData:BitmapData = new BitmapData(txtLetter.width, txtLetter.height, true, 0 );
+			var bitmapData:BitmapData = new BitmapData(txtLetter.textWidth, txtLetter.textHeight, true, 0 );
 			var bitmap:Bitmap = new Bitmap( bitmapData, "auto", true );
 			bitmap.bitmapData.draw( txtLetter );
-			bitmap.x = txtLetter.x;
-			bitmap.y = txtLetter.y;
+			bitmap.x = -bitmap.width >> 1;//txtLetter.x;
+			bitmap.y = -bitmap.height >> 1;//txtLetter.y;
 			txtLetter.parent.addChild( bitmap );
 		}
 		

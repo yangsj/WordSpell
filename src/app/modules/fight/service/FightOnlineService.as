@@ -23,6 +23,8 @@ package app.modules.fight.service
 	import ff.click_bubble_req_t;
 	import ff.click_bubble_ret_t;
 	import ff.client_cmd_e;
+	import ff.search_user_req_t;
+	import ff.search_user_ret_t;
 	import ff.server_cmd_e;
 	
 	import victor.framework.core.BaseService;
@@ -60,6 +62,8 @@ package app.modules.fight.service
 			regist( server_cmd_e.BATTLE_INVITE_RET, operateBattleInviteNotify, battle_invite_ret_t );
 			// 对方消除泡泡通知
 			regist( server_cmd_e.CLICK_BUBBLE_RET, destBubbleNotify, click_bubble_ret_t );
+			// 在线对战玩家搜索列表通知
+			regist( server_cmd_e.SEARCH_USER_RET, searchPlayerListNotify, search_user_ret_t );
 		}
 		
 //*************************** Notify *************************//
@@ -81,6 +85,11 @@ package app.modules.fight.service
 			//更新经验值
 			if ( fightModel.battleEndSelfVo.addExp > 0 )
 				GameData.instance.updateAddExp( fightModel.battleEndSelfVo.addExp );
+			
+			if ( fightModel.battleResultFlag == 1 )
+			{
+				Tips.showCenter( "对方已放弃对战！！！", 24 );
+			}
 			
 			dispatch( new FightOnlineEvent( FightOnlineEvent.BATTLE_END ));
 		}
@@ -143,6 +152,12 @@ package app.modules.fight.service
 			var letterVo:LetterBubbleVo = new LetterBubbleVo();
 			letterVo.id = data.bubble_id;
 			dispatch( new FightOnlineEvent( FightOnlineEvent.DEL_DEST_BUBLLE, letterVo ));
+		}
+
+		// 在线对战玩家搜索列表通知
+		private function searchPlayerListNotify( resp:SocketResp ):void
+		{
+			var data:search_user_ret_t = resp.data as search_user_ret_t;
 		}
 		
 //*************************** Request *************************//
@@ -220,6 +235,11 @@ package app.modules.fight.service
 			call( client_cmd_e.BATTLE_INVITE_ACCEPT_REQ, req );
 			
 			LoadingEffect.hide();
+		}
+		
+		public function pullSearchPlayerList():void
+		{
+			
 		}
 		
 	}

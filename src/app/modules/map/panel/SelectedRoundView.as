@@ -1,6 +1,7 @@
 package app.modules.map.panel
 {
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
@@ -21,6 +22,7 @@ package app.modules.map.panel
 	{
 		private var skinDict:Dictionary = new Dictionary();
 		private var vecList:Vector.<GroupItem>;
+		private var bgSkin:Sprite;
 		
 		public var txtName:TextField;
 		public var mapVo:MapVo;
@@ -33,7 +35,8 @@ package app.modules.map.panel
 		{
 			super.addedToStageHandler( event );
 			
-			txtName.y =3;
+			txtName.mouseEnabled = false;
+			txtName.y = 7;
 			txtName.text = mapVo.mapName;
 			_skin.addChild( txtName );
 		}
@@ -46,6 +49,7 @@ package app.modules.map.panel
 		
 		override protected function createSkin():void
 		{
+			// 
 			_skin = skinDict[ skinName ];
 			if ( _skin == null )
 			{
@@ -59,6 +63,15 @@ package app.modules.map.panel
 				Reflection.reflection( this, _skin );
 			}
 			createGroupItems();
+			
+			// 创建背景
+			bgSkin = skinDict[ bgSkinName ];
+			if ( bgSkin == null )
+			{
+				bgSkin = getObj( bgSkinName ) as Sprite;
+				skinDict[ bgSkinName ] = bgSkin;
+			}
+			addChildAt( bgSkin, 0 );
 		}
 		
 		override protected function transitionIn():void
@@ -89,7 +102,7 @@ package app.modules.map.panel
 			for (var i:int = 0; i < 10; i++ )
 			{
 				mcGroup = _skin.getChildByName( "c" + i ) as MovieClip;
-				groupItem = new GroupItem( mcGroup );
+				groupItem = new GroupItem( mcGroup, i );
 				vecList.push( groupItem );
 			}
 		}
@@ -113,12 +126,17 @@ package app.modules.map.panel
 		
 		override protected function get resNames():Array
 		{
-			return ["map_chapter_" + mapVo.mapId ];
+			return ["map_chapter_" + mapVo.mapId, "map_chapter_list" ];
 		}
 		
 		override protected function get skinName():String
 		{
-			return "ui_Skin_MapChapter_" + mapVo.mapId;
+			return "ui_Skin_MapChapterRoundList";
+		}
+		
+		protected function get bgSkinName():String
+		{
+			return "ui_Skin_MapChapterBg_" + mapVo.mapId;
 		}
 		
 	}
