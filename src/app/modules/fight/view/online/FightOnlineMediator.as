@@ -30,6 +30,7 @@ package app.modules.fight.view.online
 		
 		override public function onRegister():void
 		{
+			view.isAlone = false;
 			isAlone = false;
 			maxCount = 20;
 			

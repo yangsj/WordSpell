@@ -179,7 +179,10 @@ package app.modules.fight.service
 					Tips.showCenter( "答错了！骚年，继续加油。" );
 				
 				if ( data.inc_coin > 0 )
+				{
 					GameData.instance.updateAddMoney( data.inc_coin );
+					dispatch( new FightAloneEvent(FightAloneEvent.ADD_MONEY_EFFECT, data.inc_coin ));
+				}
 				
 				// 设置下一个单词信息
 				if ( fightModel.isFinish == false )

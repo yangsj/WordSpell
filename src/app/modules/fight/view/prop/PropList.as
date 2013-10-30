@@ -6,6 +6,7 @@ package app.modules.fight.view.prop
 	import flash.geom.Point;
 	
 	import app.modules.fight.view.prop.item.PropItem;
+	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
 	
 	
@@ -17,6 +18,7 @@ package app.modules.fight.view.prop
 	public class PropList extends Sprite
 	{
 		private static var _itemPoints:Vector.<Point>;
+		private static var _propIndex:Array;
 		
 		private var vecItemSkin:Vector.<PropItem>;
 		
@@ -24,23 +26,18 @@ package app.modules.fight.view.prop
 		{
 			super();
 			
-			createListItems();
-			
-			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
-		}
-		
-		protected function addedToStageHandler(event:Event):void
-		{
-			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
-			if ( _itemPoints == null )
+			if ( _propIndex == null )
 			{
-				_itemPoints = new Vector.<Point>();
-				for (var i:int = 0; i < numChildren; i++ )
+				var key:int = 0;
+				_propIndex = [];
+				for ( var i:int = 0; i < 4; i++ )
 				{
-					var dis:DisplayObject = this.getChildAt( i );
-					_itemPoints[ i ] = dis.localToGlobal( new Point( dis.width >> 1, dis.height>> 1));
+					key = [ItemType.EXTRA_TIME, ItemType.HINT, ItemType.BROOM, ItemType.SKIP][i];
+					_propIndex[key] = i;
 				}
 			}
+			
+			createListItems();
 		}
 		
 		public function clear():void
@@ -62,17 +59,29 @@ package app.modules.fight.view.prop
 				addChild( item );
 				vecItemSkin[ i ] = item;
 			}
-			
 		}
 		
 		public function setData( itemList:Vector.<ItemVo> ):void
 		{
 			var leng:int = itemList.length;
 			var item:PropItem;
+			var itemVo:ItemVo;
 			for (var i:int = 0; i < 4; i++ )
 			{
-				item = vecItemSkin[ i ];
-				item.setData( itemList[ i ] );
+				itemVo = itemList[ i ];
+				item = vecItemSkin[ _propIndex[itemVo.type] ];
+				item.setData( itemVo );
+			}
+			
+			if ( _itemPoints == null )
+			{
+				_itemPoints = new Vector.<Point>(10);
+				for ( i = 0; i < numChildren; i++ )
+				{
+					var dis:PropItem = this.getChildAt( i ) as PropItem;
+					if ( dis )
+						_itemPoints[ dis.itemVo.type ] = dis.localToGlobal( new Point( dis.width >> 1, dis.height>> 1));
+				}
 			}
 		}
 		

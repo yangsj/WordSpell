@@ -26,6 +26,7 @@ package app.modules.fight.view.alone
 
 		override public function onRegister():void
 		{
+			view.isAlone = true;
 			isAlone = true;
 			maxCount = 30;
 			

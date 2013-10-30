@@ -104,7 +104,7 @@ package app.modules.fight.view.online
 		
 		private function setPool( list:Vector.<LetterBubbleVo>, container:Sprite, isSelf:Boolean = true ):void
 		{
-			var points:Array = [[32.75,32],[102.65,32],[172.55,32],[242.45,32],[312.35,32],[382.25,32],[46.5,94.2],[110.9,94.2],[175.3,94.2],[239.75,94.2],[304.1,94.2],[368.5,94.2],[32.75,156.4],[96.15,156.4],[159.55,156.4],[222.95,156.4],[286.35,156.4],[349.75,156.4],[65.25,218.6],[128.65,218.6],[192.05,218.6],[255.45,218.6],[318.85,218.6],[382.25,218.6],[49,343],[112.4,343],[175.8,343],[239.2,343],[302.6,343],[366,343],[32.75,280.8],[102.65,280.8],[172.55,280.8],[242.45,280.8],[312.35,280.8],[382.25,280.8]];
+			points = [[32.75,32],[102.65,32],[172.55,32],[242.45,32],[312.35,32],[382.25,32],[46.5,94.2],[110.9,94.2],[175.3,94.2],[239.75,94.2],[304.1,94.2],[368.5,94.2],[32.75,156.4],[96.15,156.4],[159.55,156.4],[222.95,156.4],[286.35,156.4],[349.75,156.4],[65.25,218.6],[128.65,218.6],[192.05,218.6],[255.45,218.6],[318.85,218.6],[382.25,218.6],[49,343],[112.4,343],[175.8,343],[239.2,343],[302.6,343],[366,343],[32.75,280.8],[102.65,280.8],[172.55,280.8],[242.45,280.8],[312.35,280.8],[382.25,280.8]];
 			var dict:Dictionary = new Dictionary();
 			DisplayUtil.removedAll( container, false );
 			var key:String;
@@ -115,6 +115,7 @@ package app.modules.fight.view.online
 				point = points.splice(int(Math.random() * points.length), 1)[0];
 				key = vo.letter.toLocaleLowerCase();
 				bubble = new LetterBubble();
+				bubble.setMoveArea( isAlone );
 				bubble.setData( vo );
 				bubble.x = point[0];
 				bubble.y = point[1];
@@ -129,10 +130,10 @@ package app.modules.fight.view.online
 		override protected function timerHandler():void
 		{
 			selfTotalTime--;
-			setTimeText( txtTime, selfTotalTime, false );
+			setTimeText( txtTime, selfTotalTime );
 			
 			otherTotalTime--;
-			setTimeText( txtTime2, otherTotalTime, false );
+			setTimeText( txtTime2, otherTotalTime );
 		}
 		
 		/**

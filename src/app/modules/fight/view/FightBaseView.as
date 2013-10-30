@@ -1,8 +1,10 @@
 package app.modules.fight.view
 {
 	import com.greensock.TweenMax;
+	import com.greensock.easing.Back;
 	
 	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -37,6 +39,8 @@ package app.modules.fight.view
 		public var txtTime:TextField; // 时间显示
 		public var container:Sprite; // 自己字母泡泡显示容器
 		public var container2:Sprite;// 对手字母泡泡显示容器
+		public var isAlone:Boolean = true;
+		public var mapId:int = 0;
 		
 		protected var spellArea:SpellArea;
 		protected var propList:PropList;
@@ -101,6 +105,24 @@ package app.modules.fight.view
 			propList.clear();
 			clearDict( dictLetterSelf );
 			clearDict( dictProps );
+		}
+		
+		public function playAddMoneyEffect( num:int ):void
+		{
+			if ( num > 0 )
+			{
+				// 252 26  // 820 30
+				var endx:Number = isAlone ? 820 : 252;
+				var endy:Number = isAlone ? 30 : 26;
+				var mc:MovieClip = getObj("ui_Skin_AddMoneyEffectNum")as MovieClip;
+				mc.txtNum.text = "+" + num;
+				mc.x = appStage.mouseX;
+				mc.y = appStage.mouseY;
+				mc.gotoAndStop( mapId + 1 );
+				effectContainer.addChild( mc ); 
+				TweenMax.to( mc, 0.4, { x:endx, y:endy, ease:Back.easeOut });
+				TweenMax.to( mc, 0.3, { scaleX:0.1, scaleY:0.1, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[mc], delay:0.4,ease: Back.easeIn });
+			}
 		}
 		
 		public function playAddPropEffect( bubble:LetterBubble, point:Point ):void
@@ -203,7 +225,7 @@ package app.modules.fight.view
 			}
 		}
 		
-		protected function setTimeText( text:TextField, seconds:int, isAlone:Boolean = true ):void
+		protected function setTimeText( text:TextField, seconds:int ):void
 		{
 			if ( seconds >= 0 )
 				text.htmlText = txtTime.htmlText = getTimeString( seconds );

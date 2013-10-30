@@ -35,6 +35,11 @@ package app.modules.fight.events
 		 */
 		public static const SHOW_ANSWER:String = "show_answer";
 		
+		/**
+		 * 显示增加金币动画
+		 */
+		public static const ADD_MONEY_EFFECT:String = "add_money_effect";
+		
 		//////////////// notify
 		
 		/**

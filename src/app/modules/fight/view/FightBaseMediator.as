@@ -87,8 +87,16 @@ package app.modules.fight.view
 			addContextListener( PackEvent.UPDATE_ITEMS, updateItemsHandler, PackEvent );
 			// 更新下一个词
 			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
-
+			// 显示增加金币动画
+			addContextListener( FightAloneEvent.ADD_MONEY_EFFECT, addMoneyEffectHandler, FightAloneEvent );
+			
+			
 			clickPropBubble = [];
+		}
+		
+		protected function addMoneyEffectHandler( event:FightAloneEvent ):void
+		{
+			baseView.playAddMoneyEffect( int(event.data) );
 		}
 		
 		protected function updateMoneyNotify( event:MainUIEvent ):void
@@ -105,7 +113,7 @@ package app.modules.fight.view
 				{
 					var itemType:int = bubble.data.itemType;
 					baseView.delPropItemFromDict( itemType );
-					baseView.playAddPropEffect( bubble, PropList.itemPoints[ itemType - 1 ] );
+					baseView.playAddPropEffect( bubble, PropList.itemPoints[ itemType ] );
 				}
 			}
 		}

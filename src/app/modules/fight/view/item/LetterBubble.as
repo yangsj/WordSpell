@@ -5,6 +5,7 @@ package app.modules.fight.view.item
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
@@ -148,13 +149,22 @@ package app.modules.fight.view.item
 		public function setData( vo:LetterBubbleVo ):void
 		{
 			_data = vo;
-			txtLetter.text = vo.itemType == 0 ? vo.letter : "道";
-			var bitmapData:BitmapData = new BitmapData(txtLetter.textWidth, txtLetter.textHeight, true, 0 );
-			var bitmap:Bitmap = new Bitmap( bitmapData, "auto", true );
-			bitmap.bitmapData.draw( txtLetter );
-			bitmap.x = -bitmap.width >> 1;//txtLetter.x;
-			bitmap.y = -bitmap.height >> 1;//txtLetter.y;
-			txtLetter.parent.addChild( bitmap );
+			if ( vo.itemType == 0 )
+			{
+				txtLetter.text = vo.letter;
+				var bitmapData:BitmapData = new BitmapData(txtLetter.textWidth, txtLetter.textHeight, true, 0 );
+				var bitmap:Bitmap = new Bitmap( bitmapData, "auto", true );
+				bitmap.bitmapData.draw( txtLetter );
+				bitmap.x = -bitmap.width >> 1;//txtLetter.x;
+				bitmap.y = -bitmap.height >> 1;//txtLetter.y;
+				txtLetter.parent.addChild( bitmap );
+			}
+			else
+			{
+				setSkinWithName( "ui_Skin_Round_PropBubble" );
+				(_skin as MovieClip ).gotoAndStop( vo.itemType );
+				_skin.scaleX = _skin.scaleY = _scale;
+			}
 		}
 		
 		/**
@@ -174,8 +184,10 @@ package app.modules.fight.view.item
 				}
 				if ( _data.itemType == ItemType.DEFAULT || isSelf == false )
 				{
-					TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
-					TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });
+					new BubbleRemovedEffect( localToGlobal( new Point() ) );
+					effectComplete();
+//					TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
+//					TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });
 				}
 			}
 		}
