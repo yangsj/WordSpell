@@ -1,8 +1,5 @@
 package app.modules.fight.view.item
 {
-	import com.greensock.TweenMax;
-	import com.greensock.easing.Back;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
@@ -230,6 +227,17 @@ package app.modules.fight.view.item
 			return _bitmapData;
 		}
 		
+		/**
+		 * 对应的全局坐标
+		 */
+		public function get globalPoint():Point
+		{
+			return localToGlobal( new Point());
+		}
+		
+		/**
+		 * 本身的位置
+		 */
 		public function get point():Point
 		{
 			_point.x = x;

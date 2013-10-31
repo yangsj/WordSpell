@@ -6,12 +6,14 @@ package app.modules.map.panel
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
+	import app.core.SkinButton;
 	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapVo;
 	import app.modules.map.panel.item.GroupItem;
 	
 	import victor.framework.components.Reflection;
 	import victor.framework.core.BasePanel;
+	import victor.framework.utils.DisplayUtil;
 	
 	/**
 	 * ……
@@ -29,6 +31,13 @@ package app.modules.map.panel
 		
 		public function SelectedRoundView()
 		{
+		}
+		
+		override protected function onceInit():void
+		{
+			DisplayUtil.removedFromParent( btnClose );
+			btnClose = SkinButton.buttonExit;
+			_skin.addChild( btnClose );
 		}
 		
 		override protected function addedToStageHandler(event:Event):void

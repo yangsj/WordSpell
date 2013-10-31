@@ -1,5 +1,6 @@
 package app.data
 {
+	import app.events.GameEvent;
 	import app.modules.main.event.MainUIEvent;
 	
 	import org.robotlegs.mvcs.Actor;
@@ -42,7 +43,11 @@ package app.data
 		
 		public function updateLevel( level:int ):void
 		{
+			var tempLevel:int = selfVo.level;
 			selfVo.level = level;
+			// 升级
+			if ( tempLevel< level )
+				dispatch( new GameEvent( GameEvent.LEVEL_UP ));
 		}
 		
 		public function updateAddMoney( money:int ):void

@@ -19,6 +19,7 @@ package app.modules.map.model
 		private var _currentRoundVo:RoundVo;
 		private var _currentChapterVo:ChapterVo;
 		private var _mapList:Vector.<MapVo>;
+		private var _isNeddOpenFromFight:Boolean = false;
 		
 		public function MapModel()
 		{
@@ -79,6 +80,22 @@ package app.modules.map.model
 		public function set currentChapterVo(value:ChapterVo):void
 		{
 			_currentChapterVo = value;
+		}
+
+		/**
+		 * 从闯关界面返回是否需要打开关卡列表
+		 */
+		public function get isNeddOpenFromFight():Boolean
+		{
+			return _isNeddOpenFromFight;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isNeddOpenFromFight(value:Boolean):void
+		{
+			_isNeddOpenFromFight = value;
 		}
 		
 

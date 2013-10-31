@@ -71,6 +71,8 @@ package app.modules.fight.view.spell
 				}
 				isSendInput = true;
 				fightService.inputOver( sequence );
+				
+				dispatch( new SpellEvent( SpellEvent.ONE_WORD_OVER ));
 			}
 		}
 		

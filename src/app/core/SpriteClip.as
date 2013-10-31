@@ -9,6 +9,7 @@ package app.core
 	import flash.geom.Rectangle;
 	
 	import app.managers.LoaderManager;
+	import app.utils.safetyCall;
 	
 	import victor.framework.interfaces.IDisposable;
 	import victor.framework.manager.TickManager;
@@ -28,11 +29,13 @@ package app.core
 		private var _frameIndex:int;
 		private var _totalFrames:int;
 		private var _linkage:String;
+		private var _loopNum:int = 0;
+		private var _onComplete:Function;
+		private var _isLoop:Boolean = true;
 
-		public function SpriteClip( linkage:String, domainName:String = "", frameRate:int = 24 )
+		public function SpriteClip( linkage:String, loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 )
 		{
-			_frameRate = frameRate;
-			setLinkage( linkage, domainName );
+			setLinkage( linkage, loopNum, onComplete, frameRate );
 		}
 
 		////////////////////////// public functions ///////////////////////////////
@@ -40,27 +43,21 @@ package app.core
 		public function dispose():void
 		{
 			stop();
-			if ( _bitmapList )
-			{
-				while ( _bitmapList.length > 0 )
-				{
-					var frameVo:FrameVo = _bitmapList.pop();
-					if ( frameVo )
-						frameVo.dispose();
-					frameVo = null;
-				}
-				_bitmapList = null;
-			}
-			DisplayUtil.removedFromParent( _bitmap );
-			_bitmap = null;
+			clear();
+			_onComplete = null;
 		}
 
-		public function setLinkage( linkage:String, domainName:String = "" ):void
+		public function setLinkage( linkage:String, loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 ):void
 		{
 			if ( linkage )
 			{
+				_frameRate = frameRate;
+				_loopNum = loopNum;
+				_onComplete = onComplete;
+				_isLoop = loopNum == 0;
+				
 				this.linkage = linkage;
-				setClip( LoaderManager.getObj( linkage, domainName ) as MovieClip );
+				setClip( LoaderManager.getObj( linkage ) as MovieClip );
 			}
 		}
 
@@ -75,6 +72,7 @@ package app.core
 
 		public function refreshFrameRate( frameRate:int = 24 ):void
 		{
+			DisplayUtil.removedFromParent( _bitmap );
 			_frameRate = frameRate;
 			_bitmap = new Bitmap();
 			addChild( _bitmap );
@@ -88,6 +86,10 @@ package app.core
 				TickManager.instance.clearDoTime( loop );
 				TickManager.instance.doInterval( loop, 1000 / _frameRate );
 			}
+			else
+			{
+				loopComplete();
+			}
 			loop()
 		}
 
@@ -100,7 +102,7 @@ package app.core
 
 		private function drawBitmap( clip:MovieClip ):void
 		{
-			dispose();
+			clear();
 
 			var frameVo:FrameVo;
 			var bmd:BitmapData;
@@ -130,21 +132,49 @@ package app.core
 			_bitmap.x = frameVo.x;
 			_bitmap.y = frameVo.y;
 			_bitmap.bitmapData = frameVo.bitmapData;
+			
+			if ( _isLoop == false )
+			{
+				if ( _frameIndex % _totalFrames == 0 ) { _loopNum--; }
+				if ( _loopNum == 0 ) loopComplete();
+			}
 			_frameIndex++;
 		}
+		
+		private function loopComplete():void
+		{
+			safetyCall( _onComplete, this );
+			stop();
+		}
+		
+		private function clear():void
+		{
+			if ( _bitmapList )
+			{
+				while ( _bitmapList.length > 0 )
+				{
+					var frameVo:FrameVo = _bitmapList.pop();
+					if ( frameVo )
+						frameVo.dispose();
+					frameVo = null;
+				}
+				_bitmapList = null;
+			}
+			DisplayUtil.removedFromParent( _bitmap );
+			_bitmap = null;
+		}
 
+		/////////////////////// getters/setters ///////////////
+		
 		public function get linkage():String
 		{
 			return _linkage;
 		}
-
+		
 		public function set linkage(value:String):void
 		{
 			_linkage = value;
 		}
-
-
-		/////////////////////// getters/setters ///////////////
 
 	}
 }

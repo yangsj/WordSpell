@@ -3,12 +3,14 @@ package app.modules.fight.panel.matching
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import app.core.SkinButton;
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.modules.model.GenderType;
 	
 	import victor.framework.core.BasePanel;
 	import victor.framework.manager.TickManager;
+	import victor.framework.utils.DisplayUtil;
 	import victor.framework.utils.HtmlText;
 	
 	
@@ -25,6 +27,13 @@ package app.modules.fight.panel.matching
 		public function FightMatchingPanel()
 		{
 			super();
+		}
+		
+		override protected function onceInit():void
+		{
+			DisplayUtil.removedFromParent( btnClose );
+			btnClose = SkinButton.buttonExit;
+			_skin.addChild( btnClose );
 		}
 		
 		override public function hide():void

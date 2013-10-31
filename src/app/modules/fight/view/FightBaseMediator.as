@@ -1,5 +1,7 @@
 package app.modules.fight.view
 {
+	import flash.geom.Point;
+	
 	import app.core.Tips;
 	import app.events.PackEvent;
 	import app.modules.chat.event.ChatEvent;
@@ -11,6 +13,7 @@ package app.modules.fight.view
 	import app.modules.fight.service.FightAloneService;
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.fight.view.prop.PropList;
+	import app.modules.fight.view.spell.SpellEvent;
 	import app.modules.main.event.MainUIEvent;
 	import app.modules.map.model.MapModel;
 	import app.modules.model.vo.ItemType;
@@ -51,6 +54,10 @@ package app.modules.fight.view
 		 * 不是基础模式时出现泡泡的最大数量
 		 */
 		protected var maxCount:int = 20;
+		/**
+		 * 选中的泡泡的位置
+		 */
+		protected var removeBubblePoint:Point;
 		
 		
 		public function FightBaseMediator()
@@ -65,6 +72,8 @@ package app.modules.fight.view
 			dispatch( new ChatEvent( ChatEvent.EXPAND_CHAT ));
 			
 			baseView.clear();
+			
+			baseView.isValidOperate = false;
 		}
 		
 		override public function onRegister():void
@@ -89,16 +98,26 @@ package app.modules.fight.view
 			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordUpdateNotify, FightAloneEvent );
 			// 显示增加金币动画
 			addContextListener( FightAloneEvent.ADD_MONEY_EFFECT, addMoneyEffectHandler, FightAloneEvent );
+			// 完成一个单词输入
+			addContextListener( SpellEvent.ONE_WORD_OVER, onWordOverHandler, SpellEvent );
 			
+			baseView.mapId = mapModel.currentMapVo ? mapModel.currentMapVo.mapId : 0;
 			
 			clickPropBubble = [];
+			
+			baseView.isValidOperate = true;
+		}
+		
+		private function onWordOverHandler( event:SpellEvent ):void
+		{
+			baseView.isValidOperate = false;
 		}
 		
 		protected function addMoneyEffectHandler( event:FightAloneEvent ):void
 		{
 			var array:Array = event.data as Array;
-			if ( array[0] )
-				baseView.playAddMoneyEffect( int(array[1]) );
+			if ( array[0] && removeBubblePoint )
+				baseView.playAddMoneyEffect( int(array[1]), removeBubblePoint );
 		}
 		
 		protected function updateMoneyNotify( event:MainUIEvent ):void
@@ -122,6 +141,7 @@ package app.modules.fight.view
 		
 		private function nextWordUpdateNotify( event:FightAloneEvent ):void
 		{
+			baseView.isValidOperate = true;
 			letterIndex = 0;
 			setLetters();
 		}
@@ -157,6 +177,8 @@ package app.modules.fight.view
 		{
 			var letterBublle:LetterBubble = event.data as LetterBubble;
 			var vo:LetterBubbleVo = letterBublle.data;
+			
+			removeBubblePoint = letterBublle.globalPoint;
 			
 			// 测试泡泡
 			if ( vo.id == -1 )

@@ -23,6 +23,13 @@ package app.modules.fight.view.alone
 		{
 			super();
 		}
+		
+		override public function onRemove():void
+		{
+			super.onRemove();
+			if ( mapModel.isNeddOpenFromFight )
+				openView( ViewName.SelectedRoundPanel, mapModel.currentMapVo );
+		}
 
 		override public function onRegister():void
 		{

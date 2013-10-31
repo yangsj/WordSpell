@@ -1,5 +1,6 @@
 package app.modules.main.command
 {
+	import app.events.GameEvent;
 	import app.modules.ViewName;
 	import app.modules.main.view.MainUIMediator;
 	import app.modules.main.view.MainUIView;
@@ -22,6 +23,8 @@ package app.modules.main.command
 		override public function execute():void
 		{
 			addView( ViewName.MainUI, MainUIView, MainUIMediator );
+			
+			commandMap.mapEvent( GameEvent.LEVEL_UP, LevelupCommand, GameEvent );
 		}
 		
 	}

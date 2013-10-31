@@ -68,5 +68,10 @@ package app.events
 		 */
 		public static const UPDATE_PACK_ITEMS:String = "update_pack_items";
 		
+		/**
+		 * 升级
+		 */
+		public static const LEVEL_UP:String = "level_up";
+		
 	}
 }

@@ -2,6 +2,7 @@ package app.modules.fight.view
 {
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Back;
+	import com.greensock.easing.Linear;
 	
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
@@ -42,6 +43,8 @@ package app.modules.fight.view
 		public var isAlone:Boolean = true;
 		public var mapId:int = 0;
 		
+		private var _isValidOperate:Boolean = true;
+		
 		protected var spellArea:SpellArea;
 		protected var propList:PropList;
 		protected var effectContainer:Sprite;
@@ -72,6 +75,8 @@ package app.modules.fight.view
 			
 			effectContainer = new Sprite();
 			addChild( effectContainer );
+			
+			mouseEnabled = false;
 		}
 		
 		override public function hide():void
@@ -87,6 +92,8 @@ package app.modules.fight.view
 		
 		public function initialize():void
 		{
+			isValidOperate = true;
+			
 			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
 			appStage.focus = appStage;
 			
@@ -107,7 +114,7 @@ package app.modules.fight.view
 			clearDict( dictProps );
 		}
 		
-		public function playAddMoneyEffect( num:int ):void
+		public function playAddMoneyEffect( num:int, point:Point ):void
 		{
 			if ( num > 0 )
 			{
@@ -116,11 +123,11 @@ package app.modules.fight.view
 				var endy:Number = isAlone ? 30 : 26;
 				var mc:MovieClip = getObj("ui_Skin_AddMoneyEffectNum")as MovieClip;
 				mc.txtNum.text = "+" + num;
-				mc.x = appStage.mouseX;
-				mc.y = appStage.mouseY;
+				mc.x = point.x;
+				mc.y = point.y;
 				mc.gotoAndStop( mapId + 1 );
 				effectContainer.addChild( mc ); 
-				TweenMax.to( mc, 0.4, { x:endx, y:endy, ease:Back.easeOut });
+				TweenMax.to( mc, 0.4, { x:endx, y:endy, ease:Linear.easeNone });
 				TweenMax.to( mc, 0.3, { scaleX:0.1, scaleY:0.1, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[mc], delay:0.4,ease: Back.easeIn });
 				
 				txtMoney.text = (int( txtMoney.text ) + 1) + "";
@@ -133,11 +140,8 @@ package app.modules.fight.view
 			bubble.x = pos.x;
 			bubble.y = pos.y;
 			effectContainer.addChild( bubble );
-			TweenMax.to( bubble, 0.3, {x:point.x, y:point.y, onComplete: complete, onCompleteParams:[bubble]});
-			function complete( bubble:DisplayObject ):void
-			{
-				TweenMax.to( bubble, 0.2, {scaleX:0.3, scaleY:0.3, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[bubble]});
-			}
+			TweenMax.to( bubble, 0.4, { x:point.x, y:point.y, ease:Linear.easeNone });
+			TweenMax.to( bubble, 0.3, { scaleX:0.1, scaleY:0.1, ease:Back.easeIn, delay:0.4, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[bubble] });
 		}
 		
 		public function delPropItemFromDict( itemType:int ):void
@@ -258,15 +262,18 @@ package app.modules.fight.view
 		
 		protected function keyDownHandler( event:KeyboardEvent ):void
 		{
-			var charCode:int = event.charCode;
-			var key:String = String.fromCharCode( charCode ).toLocaleLowerCase();
-			if ( dictLetterSelf && parent && !(event.target is TextField) )
+			if ( isValidOperate )
 			{
-				var ary:Array = dictLetterSelf[ key ];
-				var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
-				
-				if ( bubble ) bubble.selected( true );
-				else Tips.showCenter( "按键无效" );
+				var charCode:int = event.charCode;
+				var key:String = String.fromCharCode( charCode ).toLocaleLowerCase();
+				if ( dictLetterSelf && parent && !(event.target is TextField) )
+				{
+					var ary:Array = dictLetterSelf[ key ];
+					var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+					
+					if ( bubble ) bubble.selected( true );
+					else Tips.showCenter( "按键无效" );
+				}
 			}
 		}
 		
@@ -358,5 +365,17 @@ package app.modules.fight.view
 				}
 			}
 		}
+
+		public function get isValidOperate():Boolean
+		{
+			return _isValidOperate;
+		}
+
+		public function set isValidOperate(value:Boolean):void
+		{
+			_isValidOperate = value;
+			container.mouseChildren = value;
+		}
+
 	}
 }

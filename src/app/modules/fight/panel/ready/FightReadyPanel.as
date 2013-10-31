@@ -2,9 +2,11 @@ package app.modules.fight.panel.ready
 {
 	import flash.display.Sprite;
 	
+	import app.core.SkinButton;
 	import app.modules.fight.model.FightMatchingVo;
 	
 	import victor.framework.core.BasePanel;
+	import victor.framework.utils.DisplayUtil;
 	
 	
 	/**
@@ -28,6 +30,10 @@ package app.modules.fight.panel.ready
 		override protected function onceInit():void
 		{
 			super.onceInit();
+			
+			DisplayUtil.removedFromParent( btnClose );
+			btnClose = SkinButton.buttonExit;
+			_skin.addChild( btnClose );
 			
 			itemLeft = new FightReadyItem( player1 );
 			itemRight = new FightReadyItem( player2 );

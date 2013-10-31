@@ -20,5 +20,10 @@ package app.modules.fight.view.spell
 		 */
 		public static const INPUT_OVER:String = "input_over";
 		
+		/**
+		 * 一个单词输入完成
+		 */
+		public static const ONE_WORD_OVER:String = "one_word_over";
+		
 	}
 }

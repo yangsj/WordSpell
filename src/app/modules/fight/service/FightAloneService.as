@@ -161,8 +161,10 @@ package app.modules.fight.service
 			//更新经验值
 			if ( endVo.addExp > 0 )
 				GameData.instance.updateAddExp( endVo.addExp );
-			// 
-			dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_END_ROUND ));
+
+			TickManager.doTimeout( function abc():void {
+				dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_END_ROUND ));
+			}, 500 );
 		}
 
 		// 下一个单词

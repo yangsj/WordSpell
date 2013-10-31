@@ -8,6 +8,7 @@ package app.modules.map.panel
 	import app.modules.map.service.MapService;
 	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.events.PanelEvent;
 	
 	
 	/**
@@ -38,9 +39,16 @@ package app.modules.map.panel
 			 
 			 // 选择关卡
 			 addViewListener( SelectedRoundEvent.SELECTED_ROUND, selectedRoundhandler, SelectedRoundEvent );
+			 // 关闭
+			 addViewListener( PanelEvent.CLOSE, closeHandler, PanelEvent );
 			 
 			 // 获取数据请求
 			 mapService.getChapterDetailInfo( view.mapVo.mapId );
+		}
+		
+		private function closeHandler( event:PanelEvent ):void
+		{
+			mapModel.isNeddOpenFromFight = false;
 		}
 		
 		private function chapterDetailNotify( event:SelectedRoundEvent ):void
@@ -53,7 +61,9 @@ package app.modules.map.panel
 			var roundVo:RoundVo = event.data as RoundVo;
 			mapModel.currentRoundVo = roundVo;
 			
-			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.SelectedRoundPanel ));			
+			mapModel.isNeddOpenFromFight = true;
+			
+			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.SelectedRoundPanel ));	
 			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightAlone ));
 		}
 		
