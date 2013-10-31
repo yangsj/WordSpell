@@ -5,6 +5,7 @@ package app.modules.fight.view.spell
 	import flash.text.TextField;
 	
 	import app.managers.LoaderManager;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	
 	import victor.framework.manager.TickManager;
@@ -102,7 +103,10 @@ package app.modules.fight.view.spell
 						var item:SpellItem = _spellItems[ _inputNum ];
 						item.setData( letterBubbleVo );
 						_inputList[_inputNum] = letterBubbleVo;
-						isOver = ( getEmptyIndex == -1 )
+						isOver = ( getEmptyIndex == -1 );
+						
+						// add money
+						dispatchEvent( new FightAloneEvent( FightAloneEvent.ADD_MONEY_EFFECT ));
 					}
 					else isOver = true;
 				}

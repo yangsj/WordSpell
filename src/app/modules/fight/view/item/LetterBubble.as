@@ -62,6 +62,7 @@ package app.modules.fight.view.item
 			
 //			txtLetter = TextUtil.cloneText( txtLetter );
 			txtLetter.visible = false;
+			txtLetter.filters = null;
 			
 			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );

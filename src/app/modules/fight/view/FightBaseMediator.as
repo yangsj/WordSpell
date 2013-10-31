@@ -96,7 +96,9 @@ package app.modules.fight.view
 		
 		protected function addMoneyEffectHandler( event:FightAloneEvent ):void
 		{
-			baseView.playAddMoneyEffect( int(event.data) );
+			var array:Array = event.data as Array;
+			if ( array[0] )
+				baseView.playAddMoneyEffect( int(array[1]) );
 		}
 		
 		protected function updateMoneyNotify( event:MainUIEvent ):void

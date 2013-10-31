@@ -181,7 +181,7 @@ package app.modules.fight.service
 				if ( data.inc_coin > 0 )
 				{
 					GameData.instance.updateAddMoney( data.inc_coin );
-					dispatch( new FightAloneEvent(FightAloneEvent.ADD_MONEY_EFFECT, data.inc_coin ));
+					dispatch( new FightAloneEvent(FightAloneEvent.ADD_MONEY_EFFECT, [ false, data.inc_coin] ));
 				}
 				
 				// 设置下一个单词信息

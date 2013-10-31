@@ -46,11 +46,18 @@ package app.modules.fight.view.spell
 			addContextListener( FightAloneEvent.SHOW_ANSWER, showAnswerHandler, FightAloneEvent );
 			// 更新下一个
 			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordNotify, FightAloneEvent );
+			// 字母拼写正确,增加金币
+			addViewListener( FightAloneEvent.ADD_MONEY_EFFECT, addMoneyEffectHandler, FightAloneEvent );
 			
 			isSendInput = false;
 			if ( fightModel.modeType == 5 )
 				view.setInitData( fightModel.spellVo );
 			
+		}
+		
+		private function addMoneyEffectHandler( event:FightAloneEvent ):void
+		{
+			dispatch( new FightAloneEvent(FightAloneEvent.ADD_MONEY_EFFECT, [ true, 1 ] ));
 		}
 		
 		private function inputOverHandler( event:SpellEvent ):void

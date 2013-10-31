@@ -122,6 +122,8 @@ package app.modules.fight.view
 				effectContainer.addChild( mc ); 
 				TweenMax.to( mc, 0.4, { x:endx, y:endy, ease:Back.easeOut });
 				TweenMax.to( mc, 0.3, { scaleX:0.1, scaleY:0.1, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[mc], delay:0.4,ease: Back.easeIn });
+				
+				txtMoney.text = (int( txtMoney.text ) + 1) + "";
 			}
 		}
 		
