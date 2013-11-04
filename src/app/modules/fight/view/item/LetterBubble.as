@@ -9,6 +9,7 @@ package app.modules.fight.view.item
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
 	import app.modules.TempleteSprite;
 	import app.modules.fight.events.FightAloneEvent;
@@ -35,19 +36,29 @@ package app.modules.fight.view.item
 		/**
 		 * 直径
 		 */
-		public static const DIAMETER:int = 82;;
+		public static const DIAMETER:int = 82;
+		private static const LetterColor:Array = [0x00FFFF, 0xFFFF00, 0xFFCC00, 0xFFCCFF, 0x33CCFF];
+		private static const itemPools:Vector.<LetterBubble> = new Vector.<LetterBubble>();
 		
-		public const moveArea:Rectangle = new Rectangle(RADIUS, RADIUS, 808, 298 );
+		private const moveArea:Rectangle = new Rectangle(RADIUS, RADIUS, 808, 298 );
+		
 		
 		public var txtLetter:TextField;
 		
 		private var _data:LetterBubbleVo;
-		private var _bitmapData:BitmapData;
-		private var _point:Point = new Point();
 		private var _scale:Number = 1;
 		private var _isAlone:Boolean = true;
-		private var _direX:int = 1;
-		private var _direY:int = 1;
+		private var _bitmapLetter:Bitmap;
+		private var _lastRandomNum:int = -1;
+		private var _speedX:Number = 1;
+		private var _speedY:Number = 1;
+		
+		public static function get itemInstance():LetterBubble
+		{
+			if ( itemPools && itemPools.length > 0 )
+				return itemPools.pop();
+			return new LetterBubble();
+		}
 		
 		public function LetterBubble()
 		{
@@ -55,13 +66,14 @@ package app.modules.fight.view.item
 			setMoveArea();
 			mouseChildren = false;
 			buttonMode = true;
-			setSkinWithName( "ui_Skin_Round_Bubble_" + int( Math.random() * 5 ) );
+			setSkinWithName( "ui_Skin_FightItemBubble" );
+		}
+		
+		private function addListeners():void
+		{
+			if ( stage == null ) addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
+			else addedToStageHandler( null );
 			
-//			txtLetter = TextUtil.cloneText( txtLetter );
-			txtLetter.visible = false;
-			txtLetter.filters = null;
-			
-			addEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
 			addEventListener( MouseEvent.CLICK, mouseHandler );
 		}
@@ -71,26 +83,23 @@ package app.modules.fight.view.item
 			selected( true );
 		}
 		
-		private var dx:Number = 1;
-		private var dy:Number = 1;
 		protected function enterFrameHandler(event:Event = null):void
 		{
+			x += _speedX;
+			y += _speedY;
+			
 			if ( x <= moveArea.x || x >= moveArea.x + moveArea.width )
 				changeDirection( -1, 1 );
 			
 			else if ( y <= moveArea.y || y >= moveArea.y + moveArea.height )
 				changeDirection( 1, -1 );
-			
-			x += dx;
-			y += dy;
 		}
 		
 		protected function addedToStageHandler(event:Event):void
 		{
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			
-			TickManager.doInterval( enterFrameHandler, 30 );
-			
+			// 随机泡泡大小
 			if ( _isAlone ) _scale = Number((0.7 + Math.random() * 0.3).toFixed(2));
 			else _scale = Number((0.45 + Math.random() * 0.3).toFixed(2));
 			
@@ -100,14 +109,15 @@ package app.modules.fight.view.item
 			moveArea.x = RADIUS * scale;
 			moveArea.y = RADIUS * scale;
 			
-//			x = moveArea.x + moveArea.width * Math.random();
-//			y = moveArea.y + moveArea.height * Math.random();
-			adjustXY();
+			x = MathUtil.range( x, moveArea.x + 5, moveArea.x + moveArea.width - 5 );
+			y = MathUtil.range( y, moveArea.x + 5, moveArea.y + moveArea.height- 5 );
 			
-			var dxx:Number = Number((0.3 + Math.random() * 0.3).toFixed(2));
-			var dxy:Number =Number((0.3 + Math.random() * 0.3).toFixed(2));
-			dx = Math.random() < 0.5 ? dxx : -dxx;
-			dy = Math.random() < 0.5 ? dxy : -dxy;
+			var sx:Number = Number((0.3 + Math.random() * 0.3).toFixed(2));
+			var sy:Number =Number((0.3 + Math.random() * 0.3).toFixed(2));
+			_speedX = Math.random() < 0.5 ? sx : -sx;
+			_speedY = Math.random() < 0.5 ? sy : -sy;
+			
+			TickManager.doInterval( enterFrameHandler, 30 );
 		}
 		
 		protected function removedFromStageHandler(event:Event):void
@@ -116,18 +126,17 @@ package app.modules.fight.view.item
 			removeEventListener( MouseEvent.MOUSE_OVER, mouseHandler );
 			removeEventListener( MouseEvent.CLICK, mouseHandler );
 			TickManager.clearDoTime( enterFrameHandler );
-		}
-		
-		protected function adjustXY():void
-		{
-			x = MathUtil.range( x, moveArea.x + 5, moveArea.x + moveArea.width - 5 );
-			y = MathUtil.range( y, moveArea.x + 5, moveArea.y + moveArea.height- 5 );
+			onStageHandler( null );
+			
+			// 放入对象池
+			if ( itemPools ) itemPools.push( this );
 		}
 		
 		public function setMoveArea( isAlone:Boolean = true ):void
 		{
+			if (　_isAlone!=isAlone )
+				moveArea.width = isAlone ? 808 : 333;
 			_isAlone = isAlone;
-			moveArea.width = isAlone ? 808 : 333;
 		}
 		
 		/**
@@ -137,32 +146,49 @@ package app.modules.fight.view.item
 		{
 			if ( parent )
 			{
-				dx *= direx;
-				dy *= direy;
-				x += dx;
-				y += dy;
+				_speedX *= direx;
+				_speedY *= direy;
+				x += _speedX;
+				y += _speedY;
 			}
 		}
 		
 		public function setData( vo:LetterBubbleVo ):void
 		{
+			addListeners();
+			
 			_data = vo;
-			if ( vo.itemType == 0 )
-			{
+			
+			// 销毁字母图像
+			if (_bitmapLetter) {
+				_bitmapLetter.bitmapData.dispose();
+				DisplayUtil.removedFromParent( _bitmapLetter );
+			}
+			
+			var frame:int = 5 + vo.itemType;
+			// 设置泡泡中的字母
+			if ( vo.isLetter ){
+				// 创建字母文献文本框
+				if ( _lastRandomNum == -1 || txtLetter == null ) {
+					_lastRandomNum = int( Math.random() * 5 );
+					txtLetter = new TextField();
+					txtLetter.defaultTextFormat = new TextFormat("微软雅黑", 50, LetterColor[_lastRandomNum],true,null,null,null,null,"center");
+					txtLetter.width = 60;
+					txtLetter.height = 70;
+					txtLetter.visible = false;
+					txtLetter.filters = null;
+				}
+				frame = _lastRandomNum;
 				txtLetter.text = vo.letter;
-				var bitmapData:BitmapData = new BitmapData(txtLetter.textWidth, txtLetter.textHeight, true, 0 );
-				var bitmap:Bitmap = new Bitmap( bitmapData, "auto", true );
-				bitmap.bitmapData.draw( txtLetter );
-				bitmap.x = -bitmap.width >> 1;//txtLetter.x;
-				bitmap.y = -bitmap.height >> 1;//txtLetter.y;
-				txtLetter.parent.addChild( bitmap );
+				// 将字母以位图渲染
+				_bitmapLetter = new Bitmap( new BitmapData(55, 70, true, 0 ), "auto", true );
+				_bitmapLetter.bitmapData.draw( txtLetter );
+				_bitmapLetter.x = -27.5;
+				_bitmapLetter.y = -35;
+				_skin.addChild( _bitmapLetter );
 			}
-			else
-			{
-				setSkinWithName( "ui_Skin_Round_PropBubble" );
-				(_skin as MovieClip ).gotoAndStop( vo.itemType );
-				_skin.scaleX = _skin.scaleY = _scale;
-			}
+			// 设置skin帧
+			(_skin as MovieClip ).gotoAndStop( frame );
 		}
 		
 		/**
@@ -173,26 +199,18 @@ package app.modules.fight.view.item
 		public function selected( value:Boolean, isSelf:Boolean = true ):void
 		{
 			TickManager.clearDoTime( enterFrameHandler );
-			if ( value )
-			{
+			if ( value ) {
 				mouseEnabled = false;
 				TickManager.clearDoTime( enterFrameHandler );
 				if ( isSelf ) {
 					dispatchEvent( new FightAloneEvent( FightAloneEvent.SELECTED_LETTER, this, true ));
 				}
-				if ( _data.itemType == ItemType.DEFAULT || isSelf == false )
-				{
+				
+				if ( _data.itemType == ItemType.DEFAULT || isSelf == false ) {
 					new BubbleRemovedEffect( localToGlobal( new Point() ) );
-					effectComplete();
-//					TweenMax.to( this, 0.15, {scaleX:1.5, scaleY:1.5, ease: Back.easeIn });
-//					TweenMax.to( this, 0.15, {scaleX:0.5, scaleY:0.5, ease: Back.easeOut, onComplete:effectComplete, delay: 0.15 });
+					DisplayUtil.removedFromParent( this );
 				}
 			}
-		}
-		
-		private function effectComplete():void
-		{
-			DisplayUtil.removedFromParent( this );
 		}
 		
 		/**
@@ -217,32 +235,12 @@ package app.modules.fight.view.item
 			return _data;
 		}
 		
-		public function get bitmapData():BitmapData
-		{
-			if ( _bitmapData == null )
-			{
-				_bitmapData = new BitmapData( width, height, true, 0 );
-				_bitmapData.draw( this );
-			}
-			return _bitmapData;
-		}
-		
 		/**
 		 * 对应的全局坐标
 		 */
 		public function get globalPoint():Point
 		{
 			return localToGlobal( new Point());
-		}
-		
-		/**
-		 * 本身的位置
-		 */
-		public function get point():Point
-		{
-			_point.x = x;
-			_point.y = y;
-			return _point;
 		}
 		
 		public function get isEdgeLeft():Boolean
@@ -277,14 +275,12 @@ package app.modules.fight.view.item
 
 		public function get direX():int
 		{
-			return dx < 0 ? -1 : 1;
-			return _direX;
+			return _speedX < 0 ? -1 : 1;
 		}
 
 		public function get direY():int
 		{
-			return dy < 0 ? -1 : 1;
-			return _direY;
+			return _speedY < 0 ? -1 : 1;
 		}
 
 		

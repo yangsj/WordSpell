@@ -102,7 +102,7 @@ package app.modules.fight.view.online
 					for each ( letterVo in array )
 						view.addPropItem( letterVo, false );
 				}
-				view.displayPropItem( isAlone, false );
+				view.displayPropItem( false );
 			}
 		}
 		

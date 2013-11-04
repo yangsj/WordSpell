@@ -232,7 +232,7 @@ package app.modules.fight.view
 						for each ( letterVo in array )
 							baseView.addPropItem( letterVo );
 					}
-					baseView.displayPropItem( isAlone );
+					baseView.displayPropItem();
 				}
 			}
 		}

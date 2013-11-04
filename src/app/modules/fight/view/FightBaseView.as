@@ -4,7 +4,6 @@ package app.modules.fight.view
 	import com.greensock.easing.Back;
 	import com.greensock.easing.Linear;
 	
-	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -51,7 +50,7 @@ package app.modules.fight.view
 		protected var dictLetterSelf:Dictionary;
 		protected var selfTotalTime:int = 60;
 		protected var dictProps:Dictionary;
-		
+		protected var dictCheckItem:Dictionary;
 		protected var points:Array = [];
 		
 		public function FightBaseView()
@@ -98,8 +97,8 @@ package app.modules.fight.view
 			appStage.focus = appStage;
 			
 			dictProps = new Dictionary();
-			TickManager.doInterval( timerHandler, 1000 );
 			timerHandler();
+			TickManager.doInterval( timerHandler, 1000 );
 			TickManager.doInterval( enterFrameHandler, 20 );
 		}
 		
@@ -112,6 +111,7 @@ package app.modules.fight.view
 			propList.clear();
 			clearDict( dictLetterSelf );
 			clearDict( dictProps );
+			clearDict( dictCheckItem );
 		}
 		
 		public function playAddMoneyEffect( num:int, point:Point ):void
@@ -128,7 +128,12 @@ package app.modules.fight.view
 				mc.gotoAndStop( mapId + 1 );
 				effectContainer.addChild( mc ); 
 				TweenMax.to( mc, 0.4, { x:endx, y:endy, ease:Linear.easeNone });
-				TweenMax.to( mc, 0.3, { scaleX:0.1, scaleY:0.1, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[mc], delay:0.4,ease: Back.easeIn });
+				TweenMax.to( mc, 0.3, { scaleX:0.1, 
+										scaleY:0.1, 
+										onComplete:DisplayUtil.removedFromParent, 
+										onCompleteParams:[mc], 
+										delay:0.4,
+										ease:Back.easeIn });
 				
 				txtMoney.text = (int( txtMoney.text ) + 1) + "";
 			}
@@ -141,7 +146,12 @@ package app.modules.fight.view
 			bubble.y = pos.y;
 			effectContainer.addChild( bubble );
 			TweenMax.to( bubble, 0.4, { x:point.x, y:point.y, ease:Linear.easeNone });
-			TweenMax.to( bubble, 0.3, { scaleX:0.1, scaleY:0.1, ease:Back.easeIn, delay:0.4, onComplete:DisplayUtil.removedFromParent, onCompleteParams:[bubble] });
+			TweenMax.to( bubble, 0.3, { scaleX:0.1, 
+										scaleY:0.1, 
+										ease:Back.easeIn, 
+										delay:0.4, 
+										onComplete:DisplayUtil.removedFromParent, 
+										onCompleteParams:[bubble] });
 		}
 		
 		public function delPropItemFromDict( itemType:int ):void
@@ -159,7 +169,7 @@ package app.modules.fight.view
 			}
 		}
 		
-		public function displayPropItem( isAlone:Boolean = true, isSelf:Boolean = true ):void
+		public function displayPropItem( isSelf:Boolean = true ):void
 		{
 			var bubble:LetterBubble;
 			var lettetVo:LetterBubbleVo;
@@ -172,13 +182,14 @@ package app.modules.fight.view
 				{
 					lettetVo = dictProps[ key ];
 					point = points.splice(int(Math.random() * points.length), 1)[0];
-					bubble = new LetterBubble();
+					bubble = LetterBubble.itemInstance;
 					bubble.setMoveArea( isAlone );
 					bubble.setData( lettetVo );
 					bubble.x = point[0];
 					bubble.y = point[1];
 					
 					if ( isSelf ) dictProps[ lettetVo.itemType ] = bubble;
+					
 					if ( isSelf && selfKey ) container.addChild( bubble );
 					else if ( isSelf==false && destKey ) container2.addChild( bubble );
 				}
@@ -249,8 +260,7 @@ package app.modules.fight.view
 		
 		protected function clearDict( dict:Dictionary ):void
 		{
-			if ( dict )
-			{
+			if ( dict ) {
 				for ( var key:String in dict )
 					delete dict[ key ];
 			}
@@ -283,21 +293,26 @@ package app.modules.fight.view
 		
 		protected function hitTestCheck( container:Sprite ):void
 		{
+			dictCheckItem ||= new Dictionary();
+			clearDict( dictCheckItem );
+			
 			var mc1:LetterBubble, mc2:LetterBubble;
-			for ( var i:int = 0; i < container.numChildren; i++ )
-			{
+			for ( var i:int = 0; i < container.numChildren; i++ ) {
 				mc1 = container.getChildAt( i ) as LetterBubble;
-				if ( mc1 )
-				{
-					for ( var j:int = 0; j < container.numChildren; j++ )
-					{
+				if ( mc1 ) {
+					for ( var j:int = 0; j < container.numChildren; j++ ) {
 						mc2 = container.getChildAt( j ) as LetterBubble;
-						if ( mc2 && mc1 != mc2 )
-						{
-							var dist0:Number = LetterBubble.RADIUS * ( mc1.scale + mc2.scale )+2;
-							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y);
-							if ( dist1 <= dist0 )
-							{
+						if ( mc2 && mc1 != mc2 ) {
+							
+							var key1:String = mc1.name + mc2.name;
+							var key2:String = mc2.name + mc1.name;
+							if ( dictCheckItem[key1] || dictCheckItem[key2] ) continue;
+							dictCheckItem[key1] = true;
+							dictCheckItem[key2] = true;
+							
+							var dist0:Number = LetterBubble.RADIUS * ( mc1.scale + mc2.scale );
+							var dist1:Number = MathUtil.distance( mc1.x, mc1.y, mc2.x, mc2.y) + 1;
+							if ( dist1 <= dist0 ) {
 								var rate:Number = ( dist0 / dist1 );
 								var absx:Number = Math.abs( mc1.x - mc2.x );
 								var absy:Number = Math.abs( mc1.y - mc2.y );
@@ -343,9 +358,7 @@ package app.modules.fight.view
 								} else if ( dy1 == dy2 ) {
 									mc1.changeDirection( -1, 1 );
 									mc2.changeDirection( -1, 1 );
-								} 
-								else　
-								{
+								} else　{
 									if ( absx == absy )　{
 										mc1.changeDirection( -1, -1 );
 										mc2.changeDirection( -1, -1 );
@@ -358,7 +371,6 @@ package app.modules.fight.view
 										mc2.changeDirection( 1, -1 );
 									}
 								}
-								
 							}
 						}
 					}

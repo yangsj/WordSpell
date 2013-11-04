@@ -33,5 +33,10 @@ package app.modules.model.vo
 		 */
 		public static const EXTRA_TIME:int = item_type_e.ITEM_TIME;
 		
+		/**
+		 * 炸弹
+		 */
+		public static const BOMB:int = item_type_e.ITEM_BOMB;
+		
 	}
 }

@@ -114,7 +114,7 @@ package app.modules.fight.view.online
 			{
 				point = points.splice(int(Math.random() * points.length), 1)[0];
 				key = vo.letter.toLocaleLowerCase();
-				bubble = new LetterBubble();
+				bubble = LetterBubble.itemInstance;
 				bubble.setMoveArea( isAlone );
 				bubble.setData( vo );
 				bubble.x = point[0];

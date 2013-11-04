@@ -1,5 +1,6 @@
 package app.modules.fight.model
 {
+	import app.modules.model.vo.ItemType;
 	
 	/**
 	 * ……
@@ -26,6 +27,14 @@ package app.modules.fight.model
 		 * @see app.modules.model.vo.ItemType
 		 */
 		public var itemType:int;
+		
+		/**
+		 * 是否是字母泡泡
+		 */
+		public function get isLetter():Boolean
+		{
+			return itemType == ItemType.DEFAULT;
+		}
 		
 		/**
 		 * 小写字母
