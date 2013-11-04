@@ -52,6 +52,7 @@ package app.modules.fight.view.item
 		private var _lastRandomNum:int = -1;
 		private var _speedX:Number = 1;
 		private var _speedY:Number = 1;
+		private var _txtTemp:TextField;
 		
 		public static function get itemInstance():LetterBubble
 		{
@@ -67,6 +68,13 @@ package app.modules.fight.view.item
 			mouseChildren = false;
 			buttonMode = true;
 			setSkinWithName( "ui_Skin_FightItemBubble" );
+			
+//			_txtTemp = new TextField();
+//			_txtTemp.width = 70;
+//			_txtTemp.height = 60;
+//			_txtTemp.x = -35;
+//			_txtTemp.y = -30;
+//			addChild( _txtTemp );
 		}
 		
 		private function addListeners():void
@@ -93,6 +101,11 @@ package app.modules.fight.view.item
 			
 			else if ( y <= moveArea.y || y >= moveArea.y + moveArea.height )
 				changeDirection( 1, -1 );
+			
+			x=MathUtil.range( x, moveArea.x, moveArea.x + moveArea.width );
+			y=MathUtil.range( y, moveArea.y, moveArea.y + moveArea.height );
+			
+//			_txtTemp.text = _speedX + "_" + _speedY + "\n" + x+"_"+y;
 		}
 		
 		protected function addedToStageHandler(event:Event):void
@@ -112,12 +125,12 @@ package app.modules.fight.view.item
 			x = MathUtil.range( x, moveArea.x + 5, moveArea.x + moveArea.width - 5 );
 			y = MathUtil.range( y, moveArea.x + 5, moveArea.y + moveArea.height- 5 );
 			
-			var sx:Number = Number((0.3 + Math.random() * 0.3).toFixed(2));
-			var sy:Number =Number((0.3 + Math.random() * 0.3).toFixed(2));
+			var sx:Number = Number((0.5 + Math.random() * 0.3).toFixed(2));
+			var sy:Number =Number((0.5 + Math.random() * 0.3).toFixed(2));
 			_speedX = Math.random() < 0.5 ? sx : -sx;
 			_speedY = Math.random() < 0.5 ? sy : -sy;
 			
-			TickManager.doInterval( enterFrameHandler, 30 );
+			TickManager.doInterval( enterFrameHandler, 40 );
 		}
 		
 		protected function removedFromStageHandler(event:Event):void
@@ -129,7 +142,7 @@ package app.modules.fight.view.item
 			onStageHandler( null );
 			
 			// 放入对象池
-			if ( itemPools ) itemPools.push( this );
+//			if ( itemPools ) itemPools.push( this );
 		}
 		
 		public function setMoveArea( isAlone:Boolean = true ):void
