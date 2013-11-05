@@ -30,13 +30,27 @@ package app.modules.fight.panel.search
 			
 			addViewListener( FightOnlineEvent.INVITE_PLAYER_BATTLE, invitePlayerToBattleHandler, FightOnlineEvent );
 			
-			view.setDataList( new Vector.<FriendVo>());
+			view.setData( getListData );
 		}
 		
 		private function invitePlayerToBattleHandler( event:FightOnlineEvent ):void
 		{
 			var friendVo:FriendVo = event.data as FriendVo;
 			fightOnlineService.matching( friendVo.uid );
+		}
+		
+		private function get getListData():Vector.<FriendVo>
+		{
+			var vec:Vector.<FriendVo> = new Vector.<FriendVo>();
+			for ( var i:int = 0; i < 50; i++ )
+			{
+				var startIndex:int = int( Math.random() * 20);
+				var vo:FriendVo = new FriendVo();
+				vo.name = i + "abcdefghijklmnopqrstuvwxyz".substr(startIndex, 6);
+				vo.status = int( Math.random() * 3)+1;
+				vec.push( vo );
+			}
+			return vec;
 		}
 	}
 }

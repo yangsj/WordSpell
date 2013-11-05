@@ -1,5 +1,6 @@
 package app.modules.task.model
 {
+	import victor.framework.utils.HtmlText;
 	
 	/**
 	 * ……
@@ -57,6 +58,26 @@ package app.modules.task.model
 		 * 任务需要达成的总量
 		 */
 		public var progressTotal:int;
+		
+		/**
+		 * 任务是否完成
+		 */
+		public function get isComplete():Boolean
+		{
+			return progressCurrent == progressTotal;
+		}
+		
+		/**
+		 * 完整的任务描述（包含进度）
+		 */
+		public function get fullDescribe():String
+		{
+			return describe + ( 
+								isComplete ? 
+								HtmlText.color("（已完成）", HtmlText.Green) : 
+								HtmlText.color(progressCurrent+"/"+progressTotal, HtmlText.Red)
+							);
+		}
 		
 	}
 }

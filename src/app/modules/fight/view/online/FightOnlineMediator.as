@@ -32,7 +32,7 @@ package app.modules.fight.view.online
 		{
 			view.isAlone = false;
 			isAlone = false;
-			maxCount = 20;
+			maxCount = 15;
 			
 			super.onRegister();
 			
@@ -87,13 +87,19 @@ package app.modules.fight.view.online
 				var length:int = fightModel.allLetterListCopy.length;
 				var index:int = 0;
 				Logger.debug( "对手的单词：" + spellVo.chinese );
-				for ( index = 0; index < maxCount; index++ )
-				{
-					if ( index < length ) items.push( fightModel.allLetterListCopy[ index ] );
-					else break;
-					if ( items.length > maxCount )
-						break;
+//				for ( index = 0; index < maxCount; index++ )
+//				{
+//					if ( index < length ) items.push( fightModel.allLetterListCopy[ index ] );
+//					else break;
+//					if ( items.length > maxCount )
+//						break;
+//				}
+				
+				maxCount = Math.min( int( Math.random() * 3 + 3 ), length );
+				for ( index = 0; index < maxCount; index++ ) {
+					items.push( fightModel.allLetterList[ index ] );
 				}
+				
 				view.setLettersPool( items, false );
 				
 				var array:Array = fightModel.dictPropPos[ fightModel.currentDestIndex ] as Array;

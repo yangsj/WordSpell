@@ -35,7 +35,7 @@ package app.modules.fight.view.alone
 		{
 			view.isAlone = true;
 			isAlone = true;
-			maxCount = 30;
+			maxCount = 18;
 			
 			super.onRegister();
 

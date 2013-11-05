@@ -35,5 +35,11 @@ package app.modules.fight
 		public static const MODE_BATTLE:int = 5;
 		
 		
+		
+		/**
+		 * 字母最长长度
+		 */
+		public static const MAX_LENGTH:int = 20;
+		
 	}
 }

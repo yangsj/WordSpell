@@ -53,7 +53,7 @@ package app.modules.fight.view
 		/**
 		 * 不是基础模式时出现泡泡的最大数量
 		 */
-		protected var maxCount:int = 20;
+		protected var maxCount:int = 15;
 		/**
 		 * 选中的泡泡的位置
 		 */
@@ -214,12 +214,17 @@ package app.modules.fight.view
 				{
 					var length:int = fightModel.allLetterList.length;
 					var index:int = 0;
-					for ( index = 0; index < maxCount; index++ )
-					{
-						if ( index < length ) items.push( fightModel.allLetterList[ index ] );
-						else break;
-						if ( items.length > maxCount )
-							break;
+//					for ( index = 0; index < maxCount; index++ )
+//					{
+//						if ( index < length ) items.push( fightModel.allLetterList[ index ] );
+//						else break;
+//						if ( items.length > maxCount )
+//							break;
+//					}
+					
+					maxCount = Math.min( int( Math.random() * 3 + 2 ), length );
+					for ( index = 0; index < maxCount; index++ ) {
+						items.push( fightModel.allLetterList[ index ] );
 					}
 				}
 				baseView.setLettersPool( items );
