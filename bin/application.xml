@@ -15,7 +15,7 @@
 	<asset id="ui_register" src="assets/ui_register.swf" version="1_1" first="1"/>
 	
 	<!-- 第二阶段加载 -->
-	<asset id="ui_map" src="assets/ui_map.swf" version="1_1" first="2"/>
+	<asset id="ui_map" src="assets/ui_map.swf" version="1_56" first="2"/>
 	<asset id="ui_main" src="assets/ui_main.swf" version="1_53" first="2"/>
 	<asset id="ui_chat" src="assets/ui_chat.swf" version="1_1" first="2"/>
 	<asset id="ui_font" src="assets/ui_font.swf" version="1_29" first="2"/>
@@ -26,7 +26,7 @@
 	
 	<!-- 地图资源 -->
 	<asset id="map_chapter_list" src="assets/map_chapter_list.swf" version="1_47" first="0"/>
-	<asset id="map_chapter_0" src="assets/map_chapter_0.swf" version="1_47" first="0"/>
+	<asset id="map_chapter_0" src="assets/map_chapter_0.swf" version="1_56" first="0"/>
 	<asset id="map_chapter_1" src="assets/map_chapter_1.swf" version="1_47" first="0"/>
 	<asset id="map_chapter_2" src="assets/map_chapter_2.swf" version="1_47" first="0"/>
 	<asset id="map_chapter_3" src="assets/map_chapter_3.swf" version="1_47" first="0"/>
