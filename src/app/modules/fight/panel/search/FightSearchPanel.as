@@ -46,7 +46,7 @@ package app.modules.fight.panel.search
 			else {
 				vec = new Vector.<FriendVo>();
 				for each ( var vo:FriendVo in vecList ) {
-					if ( vo && vo.name.search( input ) != -1 ) {
+					if ( vo && vo.name.substr( 0, input.length ) == input ) {
 						vec.push( vo );
 					}
 				}

@@ -33,7 +33,7 @@ package
 			appStage.scaleMode = StageScaleMode.NO_SCALE;
 			appStage.color = 0;
 			
-			GameConfig.isDebug = true;
+//			GameConfig.isDebug = true;
 			
 			new AppContext( this );
 		}

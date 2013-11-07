@@ -37,7 +37,7 @@ package app.modules.fight.view.item
 		 * 直径
 		 */
 		public static const DIAMETER:int = 82;
-		private static const LetterColor:Array = [0x00FFFF, 0xFFFF00, 0xFFCC00, 0xFFCCFF, 0x33CCFF];
+		private static const LetterColor:Array = [0x00FFFF, 0xFFFF99, 0xFFCC99, 0xFFFFCC, 0x99FFCC];
 		private static const itemPools:Vector.<LetterBubble> = new Vector.<LetterBubble>();
 		
 		private const moveArea:Rectangle = new Rectangle(RADIUS, RADIUS, 808, 298 );
@@ -113,7 +113,7 @@ package app.modules.fight.view.item
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			
 			// 随机泡泡大小
-			if ( _isAlone ) _scale = Number((0.6 + Math.random() * 0.3).toFixed(2));
+			if ( _isAlone ) _scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
 			else _scale = Number((0.45 + Math.random() * 0.3).toFixed(2));
 			
 			_skin.scaleX = _skin.scaleY = _scale;
@@ -142,13 +142,21 @@ package app.modules.fight.view.item
 			onStageHandler( null );
 			
 			// 放入对象池
-//			if ( itemPools ) itemPools.push( this );
+			if ( itemPools ) itemPools.push( this );
 		}
 		
 		public function setMoveArea( isAlone:Boolean = true ):void
 		{
-			if (　_isAlone!=isAlone )
-				moveArea.width = isAlone ? 808 : 333;
+			if ( isAlone )
+			{
+				moveArea.width = 960 - DIAMETER;
+				moveArea.height = 410 - DIAMETER;
+			}
+			else
+			{
+				moveArea.width = 333;
+				moveArea.height = 298;
+			}
 			_isAlone = isAlone;
 		}
 		
@@ -169,6 +177,8 @@ package app.modules.fight.view.item
 		public function setData( vo:LetterBubbleVo ):void
 		{
 			addListeners();
+			
+			mouseEnabled = true;
 			
 			_data = vo;
 			
@@ -191,12 +201,12 @@ package app.modules.fight.view.item
 					txtLetter.visible = false;
 					txtLetter.filters = null;
 				}
-				frame = _lastRandomNum;
-				txtLetter.text = vo.letter;
+				frame = _lastRandomNum + 1;
+				txtLetter.text = vo.upperCase;
 				// 将字母以位图渲染
-				_bitmapLetter = new Bitmap( new BitmapData(55, 70, true, 0 ), "auto", true );
+				_bitmapLetter = new Bitmap( new BitmapData(60, 70, true, 0 ), "auto", true );
 				_bitmapLetter.bitmapData.draw( txtLetter );
-				_bitmapLetter.x = -27.5;
+				_bitmapLetter.x = -30;
 				_bitmapLetter.y = -35;
 				_skin.addChild( _bitmapLetter );
 			}

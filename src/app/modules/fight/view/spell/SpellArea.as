@@ -18,7 +18,7 @@ package app.modules.fight.view.spell
 	 */
 	public class SpellArea extends Sprite
 	{
-		private const MAX:int = 10;
+		private const MAX:int = 14;
 
 		private var _skin:Sprite;
 
@@ -34,6 +34,8 @@ package app.modules.fight.view.spell
 			super();
 			createSkin();
 			createSpellItems();
+			x = 330;
+			y = 460;
 		}
 
 		private function createSkin():void

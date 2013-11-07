@@ -4,6 +4,7 @@ package app.startup
 	
 	import app.GameConfig;
 	import app.events.GameEvent;
+	import app.managers.ExternalManager;
 	
 	import net.hires.debug.Stats;
 	
@@ -33,7 +34,7 @@ package app.startup
 			
 			// debug
 			if ( parameters.hasOwnProperty( "debug" ))
-				GameConfig.isDebug = parameters.debug == "debug";
+				GameConfig.isDebug = parameters.debug;
 			
 			// 主机地址
 			if ( parameters.hasOwnProperty( "ip" ))

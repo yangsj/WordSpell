@@ -63,13 +63,9 @@ package app.modules.fight.view
 			super.onceInit();
 			
 			spellArea = new SpellArea();
-			spellArea.x = 440;
-			spellArea.y = 460;
 			addChild( spellArea );
 			
 			propList = new PropList();
-			propList.x = 665;
-			propList.y = 469;
 			addChild( propList );
 			
 			effectContainer = new Sprite();

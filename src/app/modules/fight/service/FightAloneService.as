@@ -127,6 +127,7 @@ package app.modules.fight.service
 			fightModel.spellList = spellList;
 			fightModel.spellListCopy = spellList.slice();
 			fightModel.modeType = data.mode;
+			fightModel.mapId = data.round_type;
 
 			// 清零
 			fightModel.currentSelfIndex = 0;

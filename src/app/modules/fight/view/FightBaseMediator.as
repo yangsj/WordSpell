@@ -69,7 +69,7 @@ package app.modules.fight.view
 		{
 			super.onRemove();
 			// 展开聊天窗口
-			dispatch( new ChatEvent( ChatEvent.EXPAND_CHAT ));
+			dispatch( new ChatEvent( ChatEvent.SHOW_CHAT ));
 			
 			baseView.clear();
 			
@@ -83,7 +83,7 @@ package app.modules.fight.view
 			super.onRegister();
 			
 			// 折叠聊天窗口
-			dispatch( new ChatEvent( ChatEvent.FOLD_CHAT ));
+			dispatch( new ChatEvent( ChatEvent.HIDE_CHAT ));
 			
 			// 选择字母
 			addViewListener( FightAloneEvent.SELECTED_LETTER, selectedLetterHandler, FightAloneEvent );
@@ -101,7 +101,7 @@ package app.modules.fight.view
 			// 完成一个单词输入
 			addContextListener( SpellEvent.ONE_WORD_OVER, onWordOverHandler, SpellEvent );
 			
-			baseView.mapId = mapModel.currentMapVo ? mapModel.currentMapVo.mapId : 0;
+			baseView.mapId = fightModel.mapId;
 			
 			clickPropBubble = [];
 			

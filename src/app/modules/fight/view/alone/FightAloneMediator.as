@@ -65,22 +65,14 @@ package app.modules.fight.view.alone
 		override protected function useItemSuccessHandler( event:PackEvent ):void
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
-			if ( itemVo )
-			{
-				if ( itemVo.type == ItemType.EXTRA_TIME )
-				{
+			if ( itemVo ) {
+				if ( itemVo.type == ItemType.EXTRA_TIME ) {
 					view.useExtraTimeProp();
-					Tips.showMouse( "时间 +5s" );
-				}
-				else if ( itemVo.type == ItemType.BROOM )
-				{
+				} else if ( itemVo.type == ItemType.BROOM ) {
 					view.useBroomProp();
-				}
-				else if ( itemVo.type == ItemType.HINT )
-				{
+				} else if ( itemVo.type == ItemType.HINT ) {
 					var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
-					if ( letterIndex < items.length )
-					{
+					if ( letterIndex < items.length ) {
 						var key:String = items[ letterIndex ].letter;
 						view.useHintProp( key );
 					}
@@ -90,6 +82,7 @@ package app.modules.fight.view.alone
 
 		private function initData():void
 		{
+			mapModel.currentMapVo.mapId = fightModel.mapId;
 			letterIndex = 0;
 			view.initialize();
 			view.setRoundName( mapModel.currentMapVo.mapName );

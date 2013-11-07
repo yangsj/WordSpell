@@ -26,6 +26,9 @@ package app.modules.fight.view.prop
 		{
 			super();
 			
+			x = 645;
+			y = 480;
+			
 			if ( _propIndex == null )
 			{
 				var key:int = 0;
@@ -55,7 +58,7 @@ package app.modules.fight.view.prop
 			for (var i:int = 0; i < 4; i++ )
 			{
 				item = new PropItem();
-				item.x = 74 * i;
+				item.x = 80 * i;
 				addChild( item );
 				vecItemSkin[ i ] = item;
 			}

@@ -28,6 +28,7 @@ package app.modules.fight.model
 		private var _battleEndDestVo:FightEndVo;
 		private var _battleResult:Boolean = false;
 		private var _battleResultFlag:int;
+		private var _mapId:int = 0;
 		
 		public function FightModel()
 		{
@@ -246,6 +247,16 @@ package app.modules.fight.model
 		public function set battleResultFlag(value:int):void
 		{
 			_battleResultFlag = value;
+		}
+
+		public function get mapId():int
+		{
+			return _mapId;
+		}
+
+		public function set mapId(value:int):void
+		{
+			_mapId = Math.max( value, 0 );
 		}
 
 

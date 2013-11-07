@@ -37,9 +37,16 @@ package app.modules.map.panel.item
 		
 		override protected function onClickHandler(event:MouseEvent):void
 		{
-			if ( roundVo.isOpen )
-				skin.dispatchEvent( new SelectedRoundEvent( SelectedRoundEvent.SELECTED_ROUND, roundVo, true ));
-			else Tips.showMouse( "未开启！" );
+			if ( roundVo )
+			{
+				if ( roundVo.isOpen )
+					skin.dispatchEvent( new SelectedRoundEvent( SelectedRoundEvent.SELECTED_ROUND, roundVo, true ));
+				else Tips.showMouse( "未开启！" );
+			}
+			else
+			{
+				Tips.showMouse( "没有地图数据！可能未初始化" );
+			}
 		}
 		
 		public function setData( roundVo:RoundVo ):void
