@@ -39,6 +39,13 @@
 	<!-- 任务 -->
 	<asset id="ui_task" src="assets/ui_task.swf" version="1_54" first="0"/>
 	
+	<!-- 排行榜 -->
+	<asset id="ui_Ranking" src="assets/ui_Ranking.swf" version="1_54" first="0"/>
+	
+	<!-- 個人信息 -->
+	<asset id="ui_Personal" src="assets/ui_Personal.swf" version="1_54" first="0"/>
+	
+	
 	<!-- 战斗部分 -->
 	<asset id="ui_fight" src="assets/ui_fight.swf" version="1_59" first="0"/>
 	<asset id="ui_round_losePanel" src="assets/ui_round_losePanel.swf" version="1_45" first="0"/>
