@@ -5,14 +5,14 @@ package app.startup
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
+	import app.GameConfig;
 	import app.events.LoadEvent;
 	import app.events.ViewEvent;
 	import app.managers.LoaderManager;
 	import app.modules.ViewName;
 	
 	import victor.framework.core.BaseCommand;
-	import app.utils.log;
-	import app.GameConfig;
+	import victor.framework.log.Logger;
 	
 	
 	/**
@@ -35,7 +35,7 @@ package app.startup
 			loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler );
 			loader.load( new URLRequest( url ));
 			
-			log ( url );
+			Logger.debug( url );
 		}
 		
 		protected function completeHandler(event:Event):void
@@ -54,7 +54,7 @@ package app.startup
 		protected function errorHandler(event:IOErrorEvent):void
 		{
 			removeEvent( event.target as URLLoader );
-			log( event.text );
+			Logger.debug( event.text );
 		}
 		
 		private function removeEvent( loader:URLLoader ):void
@@ -68,13 +68,13 @@ package app.startup
 		
 		private function loaderCompleteCallBack():void
 		{
-			log( "登陆资源加载完毕！！！" );
+			Logger.debug( "登陆资源加载完毕！！！" );
 			dispatch( new LoadEvent( LoadEvent.LOAD_COMPLETE ));
 		}
 		
 		private function loaderProgressCallBack( perent:Number ):void
 		{
-			log ( "loaderProgressCallBack: " + perent );
+			Logger.debug ( "loaderProgressCallBack: " + perent );
 			dispatch( new LoadEvent( LoadEvent.LOAD_PROGRESS, perent ));
 		}
 		
