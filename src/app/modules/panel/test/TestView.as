@@ -17,7 +17,7 @@ package app.modules.panel.test
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.components.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	import victor.framework.utils.HtmlText;
 	
 	/**
@@ -122,7 +122,7 @@ package app.modules.panel.test
 			trace( rtf.exportXML() );
 			function linkHandler(event:TextEvent):void
 			{
-				Logger.printData( event.text );
+				Debug.printData( event.text );
 			}
 		}
 		
@@ -146,7 +146,7 @@ package app.modules.panel.test
 		
 		protected function testAlert( con:Sprite ):void
 		{
-			Alert.show( "希望每个单身的人都能够相信爱情，一爱再爱不要低下头，最终有情人终成眷属。", function abc( type:uint ):void{ Logger.printData( type )}, "下一关" );
+			Alert.show( "希望每个单身的人都能够相信爱情，一爱再爱不要低下头，最终有情人终成眷属。", function abc( type:uint ):void{ Debug.printData( type )}, "下一关" );
 		}
 		
 		override protected function openComplete():void

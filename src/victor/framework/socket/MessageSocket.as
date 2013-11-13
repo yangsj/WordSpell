@@ -9,7 +9,7 @@ package victor.framework.socket
 	
 	import org.apache.thrift.FFUtil;
 	
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 
 
 	/**
@@ -144,12 +144,12 @@ package victor.framework.socket
 					respObj.data = msg;
 
 					if ( _isDebug )
-						Logger.printData( getTimer() + "|服务器返回数据(" + api + "):", respObj.data.toString());
+						Debug.printData( getTimer() + "|服务器返回数据(" + api + "):", respObj.data.toString());
 				}
 				else
 				{
 					if ( _isDebug )
-						Logger.printData( getTimer() + "|没有数据解包:" + api + "\n\t------" );
+						Debug.printData( getTimer() + "|没有数据解包:" + api + "\n\t------" );
 				}
 				// 检查是否有函数回调
 				dispatch( api );
@@ -246,7 +246,7 @@ package victor.framework.socket
 			dispatchEvent( new SocketEvent( SocketEvent.CALL_START ));
 			
 			// 序列化
-			Logger.printData( getTimer() + "|发送数据内容(" + req.cmd + "):", req.obj.toString());
+			Debug.printData( getTimer() + "|发送数据内容(" + req.cmd + "):", req.obj.toString());
 			var byteArray:ByteArray = PacketParse.synthesize( req );
 
 			SocketReq.disposeReq( req );

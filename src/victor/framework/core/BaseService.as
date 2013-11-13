@@ -1,5 +1,5 @@
 package victor.framework.core {
-	import app.GameConfig;
+
 	import app.core.Alert;
 	import app.core.Tips;
 	import app.events.ViewEvent;
@@ -9,6 +9,7 @@ package victor.framework.core {
 	import org.apache.thrift.TBase;
 	import org.robotlegs.mvcs.Actor;
 	
+	import victor.framework.debug.Debug;
 	import victor.framework.socket.IService;
 	import victor.framework.socket.ISocketManager;
 	import victor.framework.socket.SocketReq;
@@ -76,7 +77,7 @@ package victor.framework.core {
 			if ( errorCode > 0 )
 			{
 				var msg:String = msg_defConstants.error_code_desc[errorCode];
-				if ( GameConfig.isDebug )
+				if ( Debug.isDebug )
 					msg += "[错误代码：" + errorCode + "]";
 				if ( isShowTips )
 					Tips.showCenter( msg );

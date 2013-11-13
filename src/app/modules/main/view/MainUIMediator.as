@@ -12,7 +12,7 @@ package app.modules.main.view
 	import app.modules.main.event.MainUIEvent;
 	
 	import victor.framework.core.BaseMediator;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	
 	
 	/**
@@ -80,7 +80,7 @@ package app.modules.main.view
 		override protected function showViewHandler( event:ViewEvent ):void
 		{
 			var viewName:String = event.viewName;
-			Logger.debug( "open Function name:" + viewName );
+			Debug.debug( "open Function name:" + viewName );
 			switch ( viewName )
 			{
 				case FunctionBtnConfig.FIGHT:

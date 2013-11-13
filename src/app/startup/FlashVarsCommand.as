@@ -4,12 +4,11 @@ package app.startup
 	
 	import app.GameConfig;
 	import app.events.GameEvent;
-	import app.managers.ExternalManager;
 	
 	import net.hires.debug.Stats;
 	
 	import victor.framework.core.BaseCommand;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	
 	
 	/**
@@ -34,7 +33,7 @@ package app.startup
 			
 			// debug
 			if ( parameters.hasOwnProperty( "debug" ))
-				GameConfig.isDebug = parameters.debug;
+				Debug.isDebug = parameters.debug;
 			
 			// 主机地址
 			if ( parameters.hasOwnProperty( "ip" ))
@@ -53,7 +52,7 @@ package app.startup
 		
 		private function setDebug():void
 		{
-			if ( GameConfig.isDebug )
+			if ( Debug.isDebug )
 			{
 				var status:Stats = new Stats();
 				contextView.addChild( status );
@@ -72,7 +71,7 @@ package app.startup
 				}
 				
 				// 
-				Logger.initStage( contextView.stage );
+				Debug.initStage( contextView.stage );
 			}
 		}
 		

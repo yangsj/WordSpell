@@ -4,7 +4,7 @@ package app.startup
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.interfaces.IView;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 
 
 	/**
@@ -51,12 +51,12 @@ package app.startup
 					}
 					else
 					{
-						Logger.error( "找不到[" + viewName + "]绑定的类" );
+						Debug.error( "找不到[" + viewName + "]绑定的类" );
 					}
 				}
 				else
 				{
-					Logger.error( "viewName不存在！" );
+					Debug.error( "viewName不存在！" );
 				}
 			}
 		}

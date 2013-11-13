@@ -11,7 +11,7 @@ package victor.framework.socket
 	import flash.utils.Endian;
 	import flash.utils.getTimer;
 	
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 
 	/**
 	 * @author fireyang
@@ -44,7 +44,7 @@ package victor.framework.socket
 		{
 			_host = host;
 			_port = port;
-			Logger.debug( "开始连接服务器:", host, port );
+			Debug.debug( "开始连接服务器:", host, port );
 			close();
 			addListener();
 			_sock.connect( _host, _port );
@@ -74,7 +74,7 @@ package victor.framework.socket
 			else
 			{
 				dispatchEvent( new SocketEvent( SocketEvent.ERROR_SECURITY ));
-				Logger.error( "安全沙箱冲突!", "安全沙箱冲突: 不能从" + this._host + ":" + this._port + "加载数据。" );
+				Debug.error( "安全沙箱冲突!", "安全沙箱冲突: 不能从" + this._host + ":" + this._port + "加载数据。" );
 			}
 		}
 
@@ -84,7 +84,7 @@ package victor.framework.socket
 		private function onSocketDataHandler( event:ProgressEvent ):void
 		{
 			// 有足够的数据，才读取数据
-			Logger.debug( "_sock.bytesAvailable:" + _sock.bytesAvailable );
+			Debug.debug( "_sock.bytesAvailable:" + _sock.bytesAvailable );
 			while ( _sock.connected && _sock.bytesAvailable >= _pack_len )
 			{
 				// 读取头长度
@@ -128,11 +128,11 @@ package victor.framework.socket
 		 */
 		protected function onCloseHandler( event:Event ):void
 		{
-			Logger.error( getTimer() + "|连接关闭！", "连接地址：" + this._host + ":" + this._port );
+			Debug.error( getTimer() + "|连接关闭！", "连接地址：" + this._host + ":" + this._port );
 			if ( _sock.bytesAvailable > 0 )
 			{
 				var str:String = _sock.readUTFBytes( _sock.bytesAvailable );
-				Logger.error( "连接关闭打印:", str );
+				Debug.error( "连接关闭打印:", str );
 			}
 			dispatchEvent( new SocketEvent( SocketEvent.CLOSE ));
 		}
@@ -143,7 +143,7 @@ package victor.framework.socket
 		private function onConnectHandler( event:Event ):void
 		{
 			_connectSucceed = true;
-			Logger.debug( "连接成功!", "连接地址：" + this._host + ":" + this._port );
+			Debug.debug( "连接成功!", "连接地址：" + this._host + ":" + this._port );
 			dispatchEvent( new SocketEvent( SocketEvent.CONNECTED ));
 		}
 
@@ -158,7 +158,7 @@ package victor.framework.socket
 			}
 			else
 			{
-				Logger.error( "连接失败!", "不能连接" + this._host + ":" + this._port );
+				Debug.error( "连接失败!", "不能连接" + this._host + ":" + this._port );
 				dispatchEvent( new SocketEvent( SocketEvent.IO_ERROR ));
 			}
 		}
@@ -234,7 +234,7 @@ package victor.framework.socket
 			else
 			{
 				// TODO:  处理请求间隔短
-				Logger.debug( "接口请求间隔太短:", PacketParse.getModule( api ) + "-" + PacketParse.getAction( api ));
+				Debug.debug( "接口请求间隔太短:", PacketParse.getModule( api ) + "-" + PacketParse.getAction( api ));
 			}
 			return true;
 		}

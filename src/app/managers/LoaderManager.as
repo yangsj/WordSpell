@@ -13,7 +13,7 @@ package app.managers
 	import app.GameConfig;
 	import app.utils.safetyCall;
 	
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	import victor.framework.utils.ArrayUtil;
 
 
@@ -113,7 +113,7 @@ package app.managers
 						else
 						{
 							var url:String = dictResList[ name ];
-							Logger.debug( "加载url=" + url );
+							Debug.debug( "加载url=" + url );
 							dictResLoaded[ name ] = url;
 							loader.load( new URLRequest( url ), getLoaderContext( domainName ) );
 						}
@@ -148,7 +148,7 @@ package app.managers
 
 			function errorHandler( event:IOErrorEvent ):void
 			{
-				Logger.error( event.text );
+				Debug.error( event.text );
 				completeHandler( null );
 			}
 		}
@@ -161,7 +161,7 @@ package app.managers
 			}
 			catch ( e:Error )
 			{
-				Logger.error("LoaderManager.instance.getObj: [" + linkName + "]=" + linkName + "/[" + domainName + "]=" + domainName);
+				Debug.error("LoaderManager.instance.getObj: [" + linkName + "]=" + linkName + "/[" + domainName + "]=" + domainName);
 			}
 			return null;
 		}
@@ -180,7 +180,7 @@ package app.managers
 			}
 			catch ( e:Error )
 			{
-				Logger.error("LoaderManager.instance.getClass: [" + linkName + "]=" + linkName + "/[" + domainName + "]=" + domainName);
+				Debug.error("LoaderManager.instance.getClass: [" + linkName + "]=" + linkName + "/[" + domainName + "]=" + domainName);
 			}
 			return null;
 		}

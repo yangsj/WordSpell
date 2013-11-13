@@ -27,7 +27,7 @@ package app.modules.fight.service
 	import ff.start_round_ret_t;
 	
 	import victor.framework.core.BaseService;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	import victor.framework.manager.TickManager;
 	import victor.framework.socket.SocketResp;
 
@@ -100,7 +100,7 @@ package app.modules.fight.service
 				spellVo.chinese = cnAry[ i ];
 				spellVo.items = listBub;
 				spellList[ i ] = spellVo;
-				Logger.debug( spellVo.chinese, str );
+				Debug.debug( spellVo.chinese, str );
 			}
 			
 			var dict:Dictionary = new Dictionary();
@@ -193,9 +193,9 @@ package app.modules.fight.service
 					fightModel.currentSelfIndex++;
 					updateSelfWordList();
 					//
-					TickManager.doTimeout( function abc():void {
-					dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD ));
-					}, 500 );
+					TickManager.doTimeout( function abc( result:Boolean ):void {
+					dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD, result ));
+					}, 500, data.answer_flag );
 				}
 			}
 			else
@@ -203,7 +203,7 @@ package app.modules.fight.service
 				fightModel.currentDestIndex++;
 				updateDestWordList();
 				//
-				dispatch( new FightOnlineEvent( FightOnlineEvent.DEST_UPDATE_NEXT ));
+				dispatch( new FightOnlineEvent( FightOnlineEvent.DEST_UPDATE_NEXT, data.answer_flag ));
 			}
 		}
 		

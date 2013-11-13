@@ -2,6 +2,7 @@ package app.modules.fight.view.online
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
@@ -11,7 +12,7 @@ package app.modules.fight.view.online
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.model.vo.ItemType;
 	
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	import victor.framework.utils.DisplayUtil;
 	
 	/**
@@ -42,16 +43,28 @@ package app.modules.fight.view.online
 		
 		override public function initialize():void
 		{
-			selfTotalTime = 60;
-			otherTotalTime = 60;
+			selfTotalTime = 300;
+			otherTotalTime = 300;
 			super.initialize();
 		}
 		
 		override public function clear():void
 		{
 			super.clear();
-			Logger.debug( "FightOnlineView.clear()" );
+			Debug.debug( "FightOnlineView.clear()" );
 			clearDict( dictLetterOther );
+		}
+		
+		public function answerResult( isWin:Boolean, isSelf:Boolean ):void
+		{
+			var msg:String = isWin ? "时间 +3 秒" : "时间 -10 秒";
+			var time:int = isWin ? 3 : -10;
+			var point:Point = getTimeTipsPoint( isSelf );
+			
+			if ( isSelf ) selfTotalTime += time;
+			else otherTotalTime += time;
+			
+			Tips.show( msg, point.x, point.y, 25 );
 		}
 		
 		/**
@@ -61,14 +74,14 @@ package app.modules.fight.view.online
 		 */
 		public function delBubbleByIdForOther( id:int ):LetterBubble
 		{
-			Logger.debug( "xiaochu bubble_id:" + id  );
+			Debug.debug( "xiaochu bubble_id:" + id  );
 			var letter:LetterBubble;
 			for ( var i:int = 0; i < container2.numChildren; i++ )
 			{
 				letter = container2.getChildAt( i ) as LetterBubble;
 				if ( letter && letter.data.id == id )
 				{
-					Logger.debug( "对手消除泡泡：" + letter.data.upperCase + "|" + letter.data.id );
+					Debug.debug( "对手消除泡泡：" + letter.data.upperCase + "|" + letter.data.id );
 					letter.selected( true, false );
 					var itemType:int = letter.data.itemType;
 					if ( itemType != ItemType.DEFAULT ) delete dictProps[itemType+"_other"];
@@ -122,7 +135,7 @@ package app.modules.fight.view.online
 				container.addChild( bubble );
 				dict[ key ] ||= [];
 				dict[ key ].push( bubble );
-				Logger.debug( (isSelf ? "自己屏幕：" : "对手屏幕：") + key );
+				Debug.debug( (isSelf ? "自己屏幕：" : "对手屏幕：") + key );
 			}
 			if ( isSelf ) dictLetterSelf = dict;
 		}
@@ -141,15 +154,22 @@ package app.modules.fight.view.online
 		 */
 		override public function useExtraTimeProp( isSelf:Boolean = true ):void
 		{
-			var tipsy:Number = container.y + 190;
-			var tipsx:Number = container.x + 207;
+			var point:Point = getTimeTipsPoint( isSelf );
 			if ( isSelf ) {
 				selfTotalTime += 8;
 			} else {
 				otherTotalTime += 8;
-				tipsx = container2.x + 207;
 			}
-			Tips.show( "时间 +8s", tipsx, tipsy );
+			Tips.show( "时间 +8s", point.x, point.y );
+		}
+		
+		private function getTimeTipsPoint( isSelft:Boolean ):Point
+		{
+			var point:Point = new Point(container.x + 207, container.y + 207 );
+			if ( !isSelft ){
+				point.x = container2.x + 207;
+			}
+			return point;
 		}
 		
 		/**

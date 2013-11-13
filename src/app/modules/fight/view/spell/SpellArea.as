@@ -1,10 +1,12 @@
 package app.modules.fight.view.spell
 {
+	import flash.display.InteractiveObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.managers.LoaderManager;
+	import app.modules.TempleteSprite;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	
@@ -16,12 +18,11 @@ package app.modules.fight.view.spell
 	 * @author 	yangsj
 	 * 			2013-9-27
 	 */
-	public class SpellArea extends Sprite
+	public class SpellArea extends TempleteSprite
 	{
 		private const MAX:int = 14;
 
-		private var _skin:Sprite;
-
+		public var btnShowAnswer:InteractiveObject;
 		public var txtChinese:TextField;
 
 		private var _inputList:Vector.<LetterBubbleVo>;
@@ -40,12 +41,20 @@ package app.modules.fight.view.spell
 
 		private function createSkin():void
 		{
-			_skin = LoaderManager.getObj( "ui_Skin_Round_SpellArea" ) as Sprite;
-			addChild( _skin );
-			txtChinese = _skin.getChildByName( "txtChinese" ) as TextField;
+			setSkinWithName( "ui_Skin_Round_SpellArea" );
 			txtChinese.mouseEnabled = false;
+			if ( btnShowAnswer == null ) {
+				btnShowAnswer = new Sprite();
+			}
+			btnShowAnswer.addEventListener(MouseEvent.CLICK, onClickBtnShowAnswerHandler );
 		}
-
+		
+		protected function onClickBtnShowAnswerHandler(event:MouseEvent):void
+		{
+			btnShowAnswer.mouseEnabled = false;
+			showAnswer();
+		}
+		
 		private function createSpellItems():void
 		{
 			_spellItems = new Vector.<SpellItem>( MAX );
@@ -55,6 +64,8 @@ package app.modules.fight.view.spell
 		
 		public function setInitData( spellVo:SpellVo ):void
 		{
+			btnShowAnswer.mouseEnabled = true;
+			
 			_spellVo = spellVo;
 			_inputList = new Vector.<LetterBubbleVo>( _spellVo.charsLength );
 			_inputNum = 0;
@@ -160,6 +171,7 @@ package app.modules.fight.view.spell
 				item = _spellItems[ i ];
 				item.setData( _spellVo.items[ i ] );
 			}
+			TickManager.doTimeout( inputOver, 2000 );
 		}
 
 	}

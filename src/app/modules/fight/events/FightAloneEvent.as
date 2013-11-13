@@ -30,10 +30,6 @@ package app.modules.fight.events
 		 * 更新显示单词信息
 		 */
 		public static const UPDATE_WORD:String = "update_word";
-		/**
-		 * 显示答案
-		 */
-		public static const SHOW_ANSWER:String = "show_answer";
 		
 		/**
 		 * 显示增加金币动画

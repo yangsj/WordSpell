@@ -3,13 +3,14 @@ package app.modules.fight.view.online
 	import app.data.GameData;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.service.FightOnlineService;
 	import app.modules.fight.view.FightBaseMediator;
 	import app.modules.fight.view.spell.SpellVo;
 	
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	
 	/**
 	 * ……
@@ -58,6 +59,7 @@ package app.modules.fight.view.online
 		
 		private function destUpdateNextNotify( event:FightOnlineEvent ):void
 		{
+			view.answerResult( Boolean( event.data ), false );
 			setOtherLetters();
 		}
 		
@@ -86,7 +88,7 @@ package app.modules.fight.view.online
 				var items:Vector.<LetterBubbleVo> = spellVo.items.slice();
 				var length:int = fightModel.allLetterListCopy.length;
 				var index:int = 0;
-				Logger.debug( "对手的单词：" + spellVo.chinese );
+				Debug.debug( "对手的单词：" + spellVo.chinese );
 //				for ( index = 0; index < maxCount; index++ )
 //				{
 //					if ( index < length ) items.push( fightModel.allLetterListCopy[ index ] );
@@ -110,6 +112,12 @@ package app.modules.fight.view.online
 				}
 				view.displayPropItem( false );
 			}
+		}
+		
+		override protected function nextWordUpdateNotify( event:FightAloneEvent ):void
+		{
+			view.answerResult( Boolean( event.data ), true );
+			super.nextWordUpdateNotify( event );
 		}
 		
 		// 选择泡泡通知对方

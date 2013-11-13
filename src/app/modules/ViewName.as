@@ -128,5 +128,12 @@ package app.modules
 		
 		//// fight
 		
+		/////////////// panels////////////////
+		
+		/**
+		 * 分享到微博
+		 */
+		public static const ShareWeiboPanel:String = "ShareWeiboPanel";
+		
 	}
 }

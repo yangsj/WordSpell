@@ -6,7 +6,7 @@ package app.modules.fight.panel.ready
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.events.PanelEvent;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	
 	
 	/**
@@ -62,7 +62,7 @@ package app.modules.fight.panel.ready
 		
 		private function readyHandler( event:FightReadyEvent ):void
 		{
-			Logger.debug( "ready");
+			Debug.debug( "ready");
 			onlineService.ready();
 		}
 		

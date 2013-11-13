@@ -42,8 +42,6 @@ package app.modules.fight.view.spell
 			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
 			// 更新数据
 			addContextListener( FightAloneEvent.UPDATE_WORD, updateWordHandler, FightAloneEvent );
-			// 显示答案
-			addContextListener( FightAloneEvent.SHOW_ANSWER, showAnswerHandler, FightAloneEvent );
 			// 更新下一个
 			addContextListener( FightAloneEvent.NOTIFY_NEXT_WORD, nextWordNotify, FightAloneEvent );
 			// 字母拼写正确,增加金币
@@ -80,11 +78,10 @@ package app.modules.fight.view.spell
 		{
 			isSendInput = false;
 			view.setInitData( fightModel.spellVo );
-		}
-		
-		private function showAnswerHandler( event:FightAloneEvent ):void
-		{
-			view.showAnswer();
+			
+			if ( view.btnShowAnswer ) {
+				view.btnShowAnswer.visible = fightModel.modeType == 4;
+			}
 		}
 		
 		private function updateWordHandler( event:FightAloneEvent ):void

@@ -1,58 +1,59 @@
-package victor.framework.log
+package victor.framework.debug
 {
 
 	import flash.display.Stage;
+	import flash.system.Capabilities;
 
 	/**
 	 * @author
 	 */
-	public class Logger
+	public class Debug
 	{
 		private static var _ccInstance:CcInstance;
 
 		public static function warn( ... args ):void
 		{
-			if ( _ccInstance )
+			if ( _ccInstance && isDebug )
 			{
 				var msg:String = JSON.stringify( args );
 				_ccInstance.warn( msg );
-				trace( "[warn]" + msg );
+				Trace( "[warn]" + msg );
 			}
 		}
 
 		public static function error( ... args ):void
 		{
-			if ( _ccInstance )
+			if ( _ccInstance && isDebug )
 			{
 				var msg:String = JSON.stringify( args );
 				_ccInstance.error( msg );
-				trace( "[error]" + msg );
+				Trace( "[error]" + msg );
 			}
 		}
 
 		public static function debug( ... args ):void
 		{
-			if ( _ccInstance )
+			if ( _ccInstance && isDebug )
 			{
 				var msg:String = JSON.stringify( args );
 				_ccInstance.debug( msg );
-				trace( "[debug]" + msg );
+				Trace( "[debug]" + msg );
 			}
 		}
 
 		public static function printData( ... args ):void
 		{
-			if ( _ccInstance )
+			if ( _ccInstance && isDebug )
 			{
 				var msg:String = JSON.stringify( args );
 				_ccInstance.info( msg );
-				trace( "[printData]" + msg );
+				Trace( "[printData]" + msg );
 			}
 		}
 		
 		public static function Trace( ...args ):void
 		{
-			if ( _ccInstance )
+			if ( _ccInstance && isDebug )
 			{
 				trace("[trace][" + args.join(",") + "]");
 			}
@@ -65,6 +66,24 @@ package victor.framework.log
 		{
 			_ccInstance = new CcInstance();
 			_ccInstance.initStage( stage, pass );
+		}
+		
+		/////////////////////
+		
+		private static var _isDebug:Boolean;
+		/**
+		 * 是否是调试状态
+		 */
+		public static function get isDebug():Boolean
+		{
+			if ( Capabilities.playerType == "StandAlone" )
+				return true;
+			return _isDebug;
+		}
+		
+		public static function set isDebug( value:Boolean ):void
+		{
+			_isDebug = value;
 		}
 	}
 }

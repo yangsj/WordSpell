@@ -8,7 +8,7 @@ package app.modules.login.command
 	import app.modules.main.model.MainModel;
 	
 	import victor.framework.core.BaseCommand;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	
 	
 	/**
@@ -36,14 +36,14 @@ package app.modules.login.command
 		
 		private function loaderCompleteCallBack():void
 		{
-			Logger.debug( "登陆资源加载完毕！！！" );
+			Debug.debug( "登陆资源加载完毕！！！" );
 			mainModel.hasLoadCompleted = true;
 			dispatch( new GameEvent( GameEvent.MAIN_LOAD_COMPLETE ));
 		}
 		
 		private function loaderProgressCallBack( perent:Number ):void
 		{
-			Logger.Trace( "加载: " + perent );
+			Debug.Trace( "加载: " + perent );
 			dispatch( new LoadEvent( LoadEvent.LOAD_PROGRESS, perent ));
 		}
 	}

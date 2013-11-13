@@ -13,7 +13,7 @@ package app.modules.login.service
 	import ff.user_login_ret_t;
 	
 	import victor.framework.core.BaseService;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	import victor.framework.socket.SocketResp;
 
 
@@ -109,7 +109,7 @@ package app.modules.login.service
 			}
 			else
 			{
-				Logger.error("at setPlayerInfo function params value Invalid. at LoginService line 119");
+				Debug.error("at setPlayerInfo function params value Invalid. at LoginService line 119");
 			}
 		}
 

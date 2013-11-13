@@ -3,6 +3,8 @@ package app.modules.fight.view.prop
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.PackEvent;
+	import app.modules.fight.events.FightAloneEvent;
+	import app.modules.fight.model.FightModel;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.serivce.PackService;
@@ -23,6 +25,8 @@ package app.modules.fight.view.prop
 		public var packModel:PackModel;
 		[Inject]
 		public var packService:PackService;
+		[Inject]
+		public var fightModel:FightModel;
 		
 		
 		public function PropListMediator()
@@ -41,6 +45,8 @@ package app.modules.fight.view.prop
 			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
 			// 物品更新
 			addContextListener( PackEvent.UPDATE_ITEMS, updatePackItemsHandler, PackEvent );
+			// start
+			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
 			
 			setData();
 		}
@@ -48,6 +54,11 @@ package app.modules.fight.view.prop
 		private function setData():void
 		{
 			view.setData( packModel.itemList );
+		}
+		
+		private function nextWordNotify( event:FightAloneEvent ):void
+		{
+			view.visible = fightModel.modeType != 4;
 		}
 		
 		// 物品使用

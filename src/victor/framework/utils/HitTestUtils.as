@@ -60,12 +60,9 @@ package victor.framework.utils
 		public static function pixelsHitTest2( point1:Point, bitmapData1:BitmapData, point2:Point, bitmapData2:BitmapData, alphaThreshold:Number = 0 ):Boolean
 		{
 			var tempAlhpa:Number = uint(255 * alphaThreshold);
-			if (bitmapData1.hitTest(point1, tempAlhpa, bitmapData2, point2, tempAlhpa))
-			{
+			if (bitmapData1.hitTest(point1, tempAlhpa, bitmapData2, point2, tempAlhpa)) {
 				return true;
-			}
-			else
-			{
+			} else {
 				return false;
 			}
 		}
@@ -79,12 +76,9 @@ package victor.framework.utils
 		 */
 		public static function hitTestObject(obj1:DisplayObject, obj2:DisplayObject):Boolean
 		{
-			if (obj1.hitTestObject(obj2))
-			{
+			if (obj1.hitTestObject(obj2)) {
 				return true;
-			}
-			else
-			{
+			} else {
 				return false;
 			}
 		}

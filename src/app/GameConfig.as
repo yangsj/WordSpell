@@ -1,7 +1,5 @@
 package app
 {
-	import flash.system.Capabilities;
-	
 	import app.utils.appStage;
 	
 	/**
@@ -39,22 +37,6 @@ package app
 		
 		public function GameConfig()
 		{
-		}
-		
-		private static var _isDebug:Boolean;
-		/**
-		 * 是否是调试状态
-		 */
-		public static function get isDebug():Boolean
-		{
-			if ( Capabilities.playerType == "StandAlone" )
-				return true;
-			return _isDebug;
-		}
-		
-		public static function set isDebug( value:Boolean ):void
-		{
-			_isDebug = value;
 		}
 		
 /////////////////////////////////////////////////////////////////////////////////////////

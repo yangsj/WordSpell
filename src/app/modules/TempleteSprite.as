@@ -25,6 +25,9 @@ package app.modules
 		
 		public function dispose():void
 		{
+			DisplayUtil.removedFromParent( _skin );
+			Reflection.disposeReflection( this );
+			_skin = null;
 		}
 		
 		protected function setSkinWithName( skinName:String, domainName:String = "" ):void

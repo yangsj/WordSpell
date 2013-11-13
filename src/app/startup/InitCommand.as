@@ -15,6 +15,7 @@ package app.startup
 	import app.modules.model.PackModel;
 	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.rank.command.RankInitCommand;
+	import app.modules.panel.share.ShareWeiboInitCommand;
 	import app.modules.panel.test.TestInitCommand;
 	import app.modules.serivce.CommonService;
 	import app.modules.serivce.PackService;
@@ -37,6 +38,7 @@ package app.startup
 		private static var commands:Array = 
 			[
 				, TestInitCommand
+				
 				, MainUIInitCommand		// 主界面UI
 				, MapInitCommand		// 世界地圖
 				, TaskInitCommand		// 任务系统
@@ -46,6 +48,8 @@ package app.startup
 				, PersonalInitCommand	// 个人信息
 				, FightInitCommand		// 对战闯关系统
 				, RankInitCommand		// 排行系统
+				
+				, ShareWeiboInitCommand // 分享到微博
 			];
 		
 		public function InitCommand()

@@ -1,5 +1,6 @@
 package app.modules.fight.view.panel
 {
+	import app.modules.ViewName;
 
 	/**
 	 * ……
@@ -20,6 +21,10 @@ package app.modules.fight.view.panel
 		{
 			super.onRegister();
 			view.setData( fightModel.fightEndVo );
+			
+			// 是否是达人闯关成功|是，则打开分享界面
+			if ( fightModel.modeType == 3 )
+				openView( ViewName.ShareWeiboPanel );
 		}
 		
 		override protected function againHandler(event:FightResultEvent):void

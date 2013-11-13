@@ -12,7 +12,7 @@ package app.startup
 	import app.modules.ViewName;
 	
 	import victor.framework.core.BaseCommand;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	
 	
 	/**
@@ -35,7 +35,7 @@ package app.startup
 			loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler );
 			loader.load( new URLRequest( url ));
 			
-			Logger.debug( url );
+			Debug.debug( url );
 		}
 		
 		protected function completeHandler(event:Event):void
@@ -54,7 +54,7 @@ package app.startup
 		protected function errorHandler(event:IOErrorEvent):void
 		{
 			removeEvent( event.target as URLLoader );
-			Logger.debug( event.text );
+			Debug.debug( event.text );
 		}
 		
 		private function removeEvent( loader:URLLoader ):void
@@ -68,13 +68,13 @@ package app.startup
 		
 		private function loaderCompleteCallBack():void
 		{
-			Logger.debug( "登陆资源加载完毕！！！" );
+			Debug.debug( "登陆资源加载完毕！！！" );
 			dispatch( new LoadEvent( LoadEvent.LOAD_COMPLETE ));
 		}
 		
 		private function loaderProgressCallBack( perent:Number ):void
 		{
-			Logger.debug ( "loaderProgressCallBack: " + perent );
+			Debug.debug ( "loaderProgressCallBack: " + perent );
 			dispatch( new LoadEvent( LoadEvent.LOAD_PROGRESS, perent ));
 		}
 		

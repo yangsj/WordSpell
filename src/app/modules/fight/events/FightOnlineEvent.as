@@ -16,19 +16,9 @@ package app.modules.fight.events
 		}
 		
 		/**
-		 * 更新准备状态
-		 */
-		public static const UPDATE_READY:String = "update_ready";
-		
-		/**
 		 * 对战结束
 		 */
 		public static const BATTLE_END:String = "battle_end";
-		
-		/**
-		 * 开始
-		 */
-		public static const START:String = "start";
 		
 		/**
 		 * 删除对手屏幕泡泡

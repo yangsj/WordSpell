@@ -22,8 +22,7 @@ package victor.framework.utils
 		 */
 		public static function removedFromParent( target:DisplayObject ):DisplayObject
 		{
-			if ( target && target.parent )
-			{
+			if ( target && target.parent ) {
 				return target.parent.removeChild( target );
 			}
 			return target;
@@ -32,23 +31,19 @@ package victor.framework.utils
 		/**
 		 * 移除所有对象，并停止Movieclip时间轴
 		 * @param target 容器对象
-		 * @param isStopAllFrame 是否循环子级
+		 * @param isChildren 是否循环子级
 		 */
 		public static function removedAll( target:DisplayObjectContainer, isChildren:Boolean = false ):void
 		{
 			if ( target )
 			{
-				while ( target.numChildren > 0 )
-				{
+				while ( target.numChildren > 0 ) {
 					var dis:DisplayObject = target.removeChildAt( 0 );
-					if ( dis is MovieClip )
-					{
+					if ( dis is MovieClip ) {
 						( dis as MovieClip ).stop();
 					}
-					if ( isChildren )
-					{
-						if ( dis is DisplayObjectContainer )
-						{
+					if ( isChildren ) {
+						if ( dis is DisplayObjectContainer ) {
 							removedAll( dis as DisplayObjectContainer, isChildren );
 						}
 					}
@@ -60,25 +55,24 @@ package victor.framework.utils
 		{
 			if ( target )
 			{
-				if ( target.hasOwnProperty( "stopAllMovieClips" ))
-				{
+				if ( target.hasOwnProperty( "stopAllMovieClips" )) {
 					target.stopAllMovieClips();
 				}
 				else
 				{
-					if ( target is MovieClip )
-					{
+					if ( target is MovieClip ) {
 						( target as MovieClip ).stop();
 					}
+					
 					var numChildren:int = target.numChildren;
-					for (var i:int = 0; i < numChildren; i++)
-					{
+					for (var i:int = 0; i < numChildren; i++) {
 						var dis:DisplayObject = target.getChildAt( i );
 						if ( dis is DisplayObjectContainer )
 						{
 							stopAllMovieClips( dis as DisplayObjectContainer );
 						}
 					}
+					
 				}
 			}
 		}

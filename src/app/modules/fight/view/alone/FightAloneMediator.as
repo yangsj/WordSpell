@@ -1,6 +1,5 @@
 package app.modules.fight.view.alone
 {
-	import app.core.Tips;
 	import app.events.PackEvent;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightAloneEvent;

@@ -45,6 +45,9 @@
 	<!-- 個人信息 -->
 	<asset id="ui_Personal" src="assets/ui_Personal.swf" version="1_54" first="0"/>
 	
+	<!-- 微博分享 -->
+	<asset id="ui_share_weibo" src="assets/ui_share_weibo.swf" version="1_54" first="0"/>
+	
 	
 	<!-- 战斗部分 -->
 	<asset id="ui_fight" src="assets/ui_fight.swf" version="1_59" first="0"/>

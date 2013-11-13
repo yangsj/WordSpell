@@ -27,25 +27,20 @@ package victor.framework.utils
 		
 		public static function removeAll( ary:* ):void
 		{
-			if ( ary )
-			{
-				try
-				{
+			if ( ary ) {
+				
+				try {
 					ary.length = 0;
-				}
-				catch ( e:Error )
-				{
-				}
+				} catch ( e:Error ) { }
 			}
 		}
 		
 		public static function cloneArray( ary:Array ):Array
 		{
 			var arr:Array = [];
-			for each (var ay:* in ary )
-			{
-				arr.push( ay );
-			}
+			
+			for each (var ay:* in ary ) { arr.push( ay ); }
+			
 			return arr;
 		}
 		

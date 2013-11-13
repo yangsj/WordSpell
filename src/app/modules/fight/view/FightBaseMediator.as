@@ -20,7 +20,7 @@ package app.modules.fight.view
 	import app.modules.model.vo.ItemVo;
 	
 	import victor.framework.core.BaseMediator;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	
 	
 	/**
@@ -139,7 +139,7 @@ package app.modules.fight.view
 			}
 		}
 		
-		private function nextWordUpdateNotify( event:FightAloneEvent ):void
+		protected function nextWordUpdateNotify( event:FightAloneEvent ):void
 		{
 			baseView.isValidOperate = true;
 			letterIndex = 0;
@@ -228,7 +228,7 @@ package app.modules.fight.view
 					}
 				}
 				baseView.setLettersPool( items );
-				Logger.debug( " fightModel.currentIndex *********************************************" +  fightModel.currentSelfIndex );
+				Debug.debug( " fightModel.currentIndex *********************************************" +  fightModel.currentSelfIndex );
 				if ( modeType > 1 )
 				{
 					var array:Array = fightModel.dictPropPos[ fightModel.currentSelfIndex ] as Array;

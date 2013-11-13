@@ -56,7 +56,7 @@ package victor.framework.utils {
 			var str:String = "";
 			if(isPercentage)
 			{
-				str = value / 10 + "%";	
+				str = value / 100 + "%";	
 			} else 
 			{
 				str = value + "";

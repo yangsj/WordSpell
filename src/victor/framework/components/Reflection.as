@@ -4,6 +4,8 @@ package victor.framework.components
 	import flash.display.DisplayObjectContainer;
 	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
+	
+	import victor.framework.debug.Debug;
 
 
 	/**
@@ -34,10 +36,34 @@ package victor.framework.components
 				}
 				catch ( e:Error )
 				{
-					trace( "[Reflection.reflection]" + name + ":" + e );
+					Debug.error( "[Reflection.reflection]" + name + ":" + e );
 					continue;
 				}
 			}
 		}
+		
+		public static function disposeReflection( target:Object ):void
+		{
+			if ( target == null )
+				return;
+			
+			var xml:XML = describeType( target );
+			var variables:XMLList = xml.child( "variable" );
+			var name:String;
+			for each ( var item:XML in variables )
+			{
+				name = item.@name.toString();
+				try
+				{
+					target[ name ] = null;
+				}
+				catch ( e:Error )
+				{
+					Debug.error( "[Reflection.reflection]" + name + ":" + e );
+					continue;
+				}
+			}
+		}
+		
 	}
 }

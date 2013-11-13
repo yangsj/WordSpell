@@ -1,7 +1,5 @@
 package app.startup
 {
-	import flash.external.ExternalInterface;
-	
 	import app.GameConfig;
 	import app.core.Alert;
 	import app.events.ServiceEvent;
@@ -9,6 +7,7 @@ package app.startup
 	import app.modules.LoadingEffect;
 	
 	import victor.framework.core.BaseCommand;
+	import victor.framework.debug.Debug;
 	import victor.framework.socket.ISocketManager;
 	import victor.framework.socket.MessageSocket;
 	import victor.framework.socket.SocketEvent;
@@ -28,7 +27,7 @@ package app.startup
 		
 		override public function execute():void
 		{
-			var socket : MessageSocket = new  MessageSocket( GameConfig.isDebug );
+			var socket : MessageSocket = new  MessageSocket( Debug.isDebug );
 			injector.mapValue(ISocketManager, socket);
 			socket.addEventListener(SocketEvent.CLOSE, onSocketClose);
 			socket.addEventListener(SocketEvent.CONNECTED, onSocketConnected );

@@ -11,7 +11,7 @@ package app.startup
 	import app.managers.LoaderManager;
 	
 	import victor.framework.core.BaseCommand;
-	import victor.framework.log.Logger;
+	import victor.framework.debug.Debug;
 	
 	
 	/**
@@ -49,7 +49,7 @@ package app.startup
 		protected function errorHandler(event:IOErrorEvent):void
 		{
 			removeEvent( event.target as URLLoader );
-			Logger.error( event.text );
+			Debug.error( event.text );
 			Tips.showCenter( "application.xml load error" );
 		}
 		
