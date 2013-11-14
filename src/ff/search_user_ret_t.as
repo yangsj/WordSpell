@@ -17,210 +17,49 @@ import org.apache.thrift.protocol.*;
 
   public class search_user_ret_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("search_user_ret_t");
-    private static const UID_FIELD_DESC:TField = new TField("uid", TType.I32, 1);
-    private static const NAME_FIELD_DESC:TField = new TField("name", TType.STRING, 2);
-    private static const STATUS_FIELD_DESC:TField = new TField("status", TType.I16, 3);
-    private static const GRADE_FIELD_DESC:TField = new TField("grade", TType.STRING, 4);
-    private static const LEVEL_FIELD_DESC:TField = new TField("level", TType.I32, 5);
-    private static const GENDER_FIELD_DESC:TField = new TField("gender", TType.I16, 6);
+    private static const USER_LIST_FIELD_DESC:TField = new TField("user_list", TType.LIST, 1);
 
-    private var _uid:int;
-    public static const UID:int = 1;
-    private var _name:String;
-    public static const NAME:int = 2;
-    private var _status:int;
-    public static const STATUS:int = 3;
-    private var _grade:String;
-    public static const GRADE:int = 4;
-    private var _level:int;
-    public static const LEVEL:int = 5;
-    private var _gender:int;
-    public static const GENDER:int = 6;
+    private var _user_list:Array;
+    public static const USER_LIST:int = 1;
 
-    private var __isset_uid:Boolean = false;
-    private var __isset_status:Boolean = false;
-    private var __isset_level:Boolean = false;
-    private var __isset_gender:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[UID] = new FieldMetaData("uid", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I32));
-      metaDataMap[NAME] = new FieldMetaData("name", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.STRING));
-      metaDataMap[STATUS] = new FieldMetaData("status", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I16));
-      metaDataMap[GRADE] = new FieldMetaData("grade", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.STRING));
-      metaDataMap[LEVEL] = new FieldMetaData("level", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I32));
-      metaDataMap[GENDER] = new FieldMetaData("gender", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.I16));
+      metaDataMap[USER_LIST] = new FieldMetaData("user_list", TFieldRequirementType.DEFAULT, 
+          new ListMetaData(TType.LIST, 
+              new StructMetaData(TType.STRUCT, user_status_ret_t)));
     }
     {
       FieldMetaData.addStructMetaDataMap(search_user_ret_t, metaDataMap);
     }
 
     public function search_user_ret_t() {
-      this._uid = 0;
-      this._status = 0;
-      this._level = 0;
-      this._gender = 0;
     }
 
-    public function get uid():int {
-      return this._uid;
+    public function get user_list():Array {
+      return this._user_list;
     }
 
-    public function set uid(uid:int):void {
-      this._uid = uid;
-      this.__isset_uid = true;
+    public function set user_list(user_list:Array):void {
+      this._user_list = user_list;
     }
 
-    public function unsetUid():void {
-      this.__isset_uid = false;
+    public function unsetUser_list():void {
+      this.user_list = null;
     }
 
-    // Returns true if field uid is set (has been assigned a value) and false otherwise
-    public function isSetUid():Boolean {
-      return this.__isset_uid;
-    }
-
-    public function get name():String {
-      return this._name;
-    }
-
-    public function set name(name:String):void {
-      this._name = name;
-    }
-
-    public function unsetName():void {
-      this.name = null;
-    }
-
-    // Returns true if field name is set (has been assigned a value) and false otherwise
-    public function isSetName():Boolean {
-      return this.name != null;
-    }
-
-    public function get status():int {
-      return this._status;
-    }
-
-    public function set status(status:int):void {
-      this._status = status;
-      this.__isset_status = true;
-    }
-
-    public function unsetStatus():void {
-      this.__isset_status = false;
-    }
-
-    // Returns true if field status is set (has been assigned a value) and false otherwise
-    public function isSetStatus():Boolean {
-      return this.__isset_status;
-    }
-
-    public function get grade():String {
-      return this._grade;
-    }
-
-    public function set grade(grade:String):void {
-      this._grade = grade;
-    }
-
-    public function unsetGrade():void {
-      this.grade = null;
-    }
-
-    // Returns true if field grade is set (has been assigned a value) and false otherwise
-    public function isSetGrade():Boolean {
-      return this.grade != null;
-    }
-
-    public function get level():int {
-      return this._level;
-    }
-
-    public function set level(level:int):void {
-      this._level = level;
-      this.__isset_level = true;
-    }
-
-    public function unsetLevel():void {
-      this.__isset_level = false;
-    }
-
-    // Returns true if field level is set (has been assigned a value) and false otherwise
-    public function isSetLevel():Boolean {
-      return this.__isset_level;
-    }
-
-    public function get gender():int {
-      return this._gender;
-    }
-
-    public function set gender(gender:int):void {
-      this._gender = gender;
-      this.__isset_gender = true;
-    }
-
-    public function unsetGender():void {
-      this.__isset_gender = false;
-    }
-
-    // Returns true if field gender is set (has been assigned a value) and false otherwise
-    public function isSetGender():Boolean {
-      return this.__isset_gender;
+    // Returns true if field user_list is set (has been assigned a value) and false otherwise
+    public function isSetUser_list():Boolean {
+      return this.user_list != null;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case UID:
+      case USER_LIST:
         if (value == null) {
-          unsetUid();
+          unsetUser_list();
         } else {
-          this.uid = value;
-        }
-        break;
-
-      case NAME:
-        if (value == null) {
-          unsetName();
-        } else {
-          this.name = value;
-        }
-        break;
-
-      case STATUS:
-        if (value == null) {
-          unsetStatus();
-        } else {
-          this.status = value;
-        }
-        break;
-
-      case GRADE:
-        if (value == null) {
-          unsetGrade();
-        } else {
-          this.grade = value;
-        }
-        break;
-
-      case LEVEL:
-        if (value == null) {
-          unsetLevel();
-        } else {
-          this.level = value;
-        }
-        break;
-
-      case GENDER:
-        if (value == null) {
-          unsetGender();
-        } else {
-          this.gender = value;
+          this.user_list = value;
         }
         break;
 
@@ -231,18 +70,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case UID:
-        return this.uid;
-      case NAME:
-        return this.name;
-      case STATUS:
-        return this.status;
-      case GRADE:
-        return this.grade;
-      case LEVEL:
-        return this.level;
-      case GENDER:
-        return this.gender;
+      case USER_LIST:
+        return this.user_list;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -251,18 +80,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case UID:
-        return isSetUid();
-      case NAME:
-        return isSetName();
-      case STATUS:
-        return isSetStatus();
-      case GRADE:
-        return isSetGrade();
-      case LEVEL:
-        return isSetLevel();
-      case GENDER:
-        return isSetGender();
+      case USER_LIST:
+        return isSetUser_list();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -279,48 +98,20 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case UID:
-            if (field.type == TType.I32) {
-              this.uid = iprot.readI32();
-              this.__isset_uid = true;
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case NAME:
-            if (field.type == TType.STRING) {
-              this.name = iprot.readString();
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case STATUS:
-            if (field.type == TType.I16) {
-              this.status = iprot.readI16();
-              this.__isset_status = true;
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case GRADE:
-            if (field.type == TType.STRING) {
-              this.grade = iprot.readString();
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case LEVEL:
-            if (field.type == TType.I32) {
-              this.level = iprot.readI32();
-              this.__isset_level = true;
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
-          case GENDER:
-            if (field.type == TType.I16) {
-              this.gender = iprot.readI16();
-              this.__isset_gender = true;
+          case USER_LIST:
+            if (field.type == TType.LIST) {
+              {
+                var _list248:TList = iprot.readListBegin();
+                this.user_list = new Array();
+                for (var _i249:int = 0; _i249 < _list248.size; ++_i249)
+                {
+                  var _elem250:user_status_ret_t;
+                  _elem250 = new user_status_ret_t();
+                  _elem250.read(iprot);
+                  this.user_list.push(_elem250);
+                }
+                iprot.readListEnd();
+              }
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -342,28 +133,17 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(UID_FIELD_DESC);
-      oprot.writeI32(this.uid);
-      oprot.writeFieldEnd();
-      if (this.name != null) {
-        oprot.writeFieldBegin(NAME_FIELD_DESC);
-        oprot.writeString(this.name);
+      if (this.user_list != null) {
+        oprot.writeFieldBegin(USER_LIST_FIELD_DESC);
+        {
+          oprot.writeListBegin(new TList(TType.STRUCT, this.user_list.length));
+          for each (var elem251:* in this.user_list)          {
+            elem251.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
         oprot.writeFieldEnd();
       }
-      oprot.writeFieldBegin(STATUS_FIELD_DESC);
-      oprot.writeI16(this.status);
-      oprot.writeFieldEnd();
-      if (this.grade != null) {
-        oprot.writeFieldBegin(GRADE_FIELD_DESC);
-        oprot.writeString(this.grade);
-        oprot.writeFieldEnd();
-      }
-      oprot.writeFieldBegin(LEVEL_FIELD_DESC);
-      oprot.writeI32(this.level);
-      oprot.writeFieldEnd();
-      oprot.writeFieldBegin(GENDER_FIELD_DESC);
-      oprot.writeI16(this.gender);
-      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -372,36 +152,12 @@ import org.apache.thrift.protocol.*;
       var ret:String = new String("search_user_ret_t(");
       var first:Boolean = true;
 
-      ret += "uid:";
-      ret += this.uid;
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "name:";
-      if (this.name == null) {
+      ret += "user_list:";
+      if (this.user_list == null) {
         ret += "null";
       } else {
-        ret += this.name;
+        ret += this.user_list;
       }
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "status:";
-      ret += this.status;
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "grade:";
-      if (this.grade == null) {
-        ret += "null";
-      } else {
-        ret += this.grade;
-      }
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "level:";
-      ret += this.level;
-      first = false;
-      if (!first) ret +=  ", ";
-      ret += "gender:";
-      ret += this.gender;
       first = false;
       ret += ")";
       return ret;

@@ -42,6 +42,9 @@ package app.modules.model.vo
 			return "ui_Skin_Round_PropItem_" + type;
 		}
 
+		/**
+		 * 数量
+		 */
 		public function get num():int
 		{
 			return _num;
@@ -50,6 +53,14 @@ package app.modules.model.vo
 		public function set num(value:int):void
 		{
 			_num = Math.max( 0, value );
+		}
+		
+		/**
+		 * 道具名称
+		 */
+		public function get name():String
+		{
+			return ["提示", "扫帚", "跳过", "加时", "炸弹"][type];
 		}
 
 		

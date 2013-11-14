@@ -61,8 +61,12 @@ package app.modules.fight.view.online
 			var time:int = isWin ? 3 : -10;
 			var point:Point = getTimeTipsPoint( isSelf );
 			
+			Debug.debug( isSelf, time, selfTotalTime, otherTotalTime );
+			
 			if ( isSelf ) selfTotalTime += time;
 			else otherTotalTime += time;
+			
+			Debug.debug( isSelf, time, selfTotalTime, otherTotalTime );
 			
 			Tips.show( msg, point.x, point.y, 25 );
 		}
@@ -147,6 +151,8 @@ package app.modules.fight.view.online
 			
 			otherTotalTime--;
 			setTimeText( txtTime2, otherTotalTime );
+			
+			Debug.debug( "时间：", selfTotalTime, otherTotalTime );
 		}
 		
 		/**

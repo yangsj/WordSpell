@@ -40,5 +40,12 @@ package app.modules.fight.events
 		 */
 		public static const INVITE_PLAYER_BATTLE:String = "invite_player_battle";
 		
+		//////////// notify++++++++++++++++++++++++++++++++++++++
+		
+		/**
+		 * 在线对战搜索玩家列表数据拉取成功
+		 */
+		public static const SEARCH_LIST_NOTIFY:String = "search_list_notify";
+		
 	}
 }

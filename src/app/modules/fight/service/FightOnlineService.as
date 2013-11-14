@@ -12,6 +12,8 @@ package app.modules.fight.service
 	import app.modules.fight.model.FightReadyModel;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.panel.ready.FightReadyEvent;
+	import app.modules.friend.model.FriendModel;
+	import app.modules.friend.model.FriendVo;
 	
 	import ff.battle_close_ret_t;
 	import ff.battle_create_req_t;
@@ -26,6 +28,7 @@ package app.modules.fight.service
 	import ff.search_user_req_t;
 	import ff.search_user_ret_t;
 	import ff.server_cmd_e;
+	import ff.user_status_ret_t;
 	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
@@ -44,6 +47,8 @@ package app.modules.fight.service
 		public var readyModel:FightReadyModel;
 		[Inject]
 		public var aloneService:FightAloneService;
+		[Inject]
+		public var friendModel:FriendModel;
 		
 		public function FightOnlineService()
 		{
@@ -158,6 +163,34 @@ package app.modules.fight.service
 		private function searchPlayerListNotify( resp:SocketResp ):void
 		{
 			var data:search_user_ret_t = resp.data as search_user_ret_t;
+			var list:Array = data.user_list;
+			var vec:Vector.<FriendVo> = new Vector.<FriendVo>();
+			
+			for each ( var user:user_status_ret_t in list ) {
+				if ( user ) vec.push( getSearchUserVo( user ));
+			}
+			friendModel.searchUserList = vec;
+			
+			dispatch( new FightOnlineEvent( FightOnlineEvent.SEARCH_LIST_NOTIFY ));
+		}
+		
+//*************************** private functions ***************//
+		
+		/**
+		 * 将搜索列表转化为本地数据结构
+		 * @param user
+		 * @return 
+		 */
+		private function getSearchUserVo( user:user_status_ret_t ):FriendVo
+		{
+			var friendVo:FriendVo = new FriendVo();
+			friendVo.uid = user.uid;
+			friendVo.name = user.name;
+			friendVo.grade = user.grade;
+			friendVo.level = user.level;
+			friendVo.status = user.status;
+			friendVo.gender = user.gender;
+			return friendVo;
 		}
 		
 //*************************** Request *************************//
@@ -239,7 +272,8 @@ package app.modules.fight.service
 		
 		public function pullSearchPlayerList():void
 		{
-			
+			var req:search_user_req_t = new search_user_req_t();
+			call( client_cmd_e.SEARCH_USER_REQ, req );
 		}
 		
 	}

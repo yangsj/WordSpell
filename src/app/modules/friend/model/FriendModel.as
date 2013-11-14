@@ -19,6 +19,7 @@ package app.modules.friend.model
 		
 		private var _friendList:Vector.<FriendVo>;
 		private var _applyAddFriendList:Vector.<FriendApplyVo>;
+		private var _searchUserList:Vector.<FriendVo>;
 
 		public function FriendModel()
 		{
@@ -182,6 +183,22 @@ package app.modules.friend.model
 		public function addApplyAddFriendList(applyVo:FriendApplyVo):void
 		{
 			applyAddFriendList.push( applyVo );
+		}
+		
+		/**
+		 * 在线对战搜索用户玩家数据列表
+		 */
+		public function get searchUserList():Vector.<FriendVo>
+		{
+			return _searchUserList ||= new Vector.<FriendVo>();
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set searchUserList(value:Vector.<FriendVo>):void
+		{
+			_searchUserList = value;
 		}
 
 		

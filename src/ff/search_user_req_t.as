@@ -17,17 +17,10 @@ import org.apache.thrift.protocol.*;
 
   public class search_user_req_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("search_user_req_t");
-    private static const NAME_FIELD_DESC:TField = new TField("name", TType.STRING, 1);
 
-    private var _name:String;
-    public static const NAME:int = 1;
 
 
     public static const metaDataMap:Dictionary = new Dictionary();
-    {
-      metaDataMap[NAME] = new FieldMetaData("name", TFieldRequirementType.DEFAULT, 
-          new FieldValueMetaData(TType.STRING));
-    }
     {
       FieldMetaData.addStructMetaDataMap(search_user_req_t, metaDataMap);
     }
@@ -35,33 +28,8 @@ import org.apache.thrift.protocol.*;
     public function search_user_req_t() {
     }
 
-    public function get name():String {
-      return this._name;
-    }
-
-    public function set name(name:String):void {
-      this._name = name;
-    }
-
-    public function unsetName():void {
-      this.name = null;
-    }
-
-    // Returns true if field name is set (has been assigned a value) and false otherwise
-    public function isSetName():Boolean {
-      return this.name != null;
-    }
-
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case NAME:
-        if (value == null) {
-          unsetName();
-        } else {
-          this.name = value;
-        }
-        break;
-
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -69,8 +37,6 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case NAME:
-        return this.name;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -79,8 +45,6 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case NAME:
-        return isSetName();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -97,13 +61,6 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case NAME:
-            if (field.type == TType.STRING) {
-              this.name = iprot.readString();
-            } else { 
-              TProtocolUtil.skip(iprot, field.type);
-            }
-            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -121,11 +78,6 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (this.name != null) {
-        oprot.writeFieldBegin(NAME_FIELD_DESC);
-        oprot.writeString(this.name);
-        oprot.writeFieldEnd();
-      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -134,13 +86,6 @@ import org.apache.thrift.protocol.*;
       var ret:String = new String("search_user_req_t(");
       var first:Boolean = true;
 
-      ret += "name:";
-      if (this.name == null) {
-        ret += "null";
-      } else {
-        ret += this.name;
-      }
-      first = false;
       ret += ")";
       return ret;
     }

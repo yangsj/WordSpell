@@ -15,6 +15,7 @@ package app.modules.fight.service
 	import app.modules.fight.view.spell.SpellVo;
 	import app.modules.map.model.MapModel;
 	import app.modules.map.model.RoundVo;
+	import app.modules.model.vo.ItemVo;
 	
 	import ff.bubble_info_t;
 	import ff.client_cmd_e;
@@ -224,6 +225,14 @@ package app.modules.fight.service
 			var endVo:FightEndVo = new FightEndVo();
 			if ( battleData )
 			{
+				var dict:Dictionary = battleData.inc_items;
+				for each ( var key:String in dict )
+				{
+					var itemVo:ItemVo = new ItemVo();
+					itemVo.type = int( key );
+					itemVo.num = dict[key];
+					endVo.items.push( itemVo );
+				}
 				endVo.addExp = battleData.inc_exp;
 				endVo.addMoney = battleData.inc_coin;
 				endVo.currentLevel = battleData.cur_level;

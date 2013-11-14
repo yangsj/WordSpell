@@ -40,13 +40,13 @@
 	<asset id="ui_task" src="assets/ui_task.swf" version="1_54" first="0"/>
 	
 	<!-- 排行榜 -->
-	<asset id="ui_Ranking" src="assets/ui_Ranking.swf" version="1_54" first="0"/>
+	<asset id="ui_Ranking" src="assets/ui_Ranking.swf" version="1_62" first="0"/>
 	
 	<!-- 個人信息 -->
-	<asset id="ui_Personal" src="assets/ui_Personal.swf" version="1_54" first="0"/>
+	<asset id="ui_Personal" src="assets/ui_Personal.swf" version="1_62" first="0"/>
 	
 	<!-- 微博分享 -->
-	<asset id="ui_share_weibo" src="assets/ui_share_weibo.swf" version="1_54" first="0"/>
+	<asset id="ui_share_weibo" src="assets/ui_share_weibo.swf" version="1_62" first="0"/>
 	
 	
 	<!-- 战斗部分 -->

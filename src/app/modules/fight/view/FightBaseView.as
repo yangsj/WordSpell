@@ -241,7 +241,7 @@ package app.modules.fight.view
 		protected function setTimeText( text:TextField, seconds:int ):void
 		{
 			if ( seconds >= 0 )
-				text.htmlText = txtTime.htmlText = getTimeString( seconds );
+				text.htmlText = getTimeString( seconds );
 			
 			function getTimeString( seconds:int ):String
 			{

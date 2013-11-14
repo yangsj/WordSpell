@@ -1,5 +1,6 @@
 package app.modules.fight.model
 {
+	import app.modules.model.vo.ItemVo;
 	
 	/**
 	 * ……
@@ -49,6 +50,10 @@ package app.modules.fight.model
 		 * 答错的单词列表
 		 */
 		public var wrongList:Array;
+		/**
+		 * 获得的道具列表
+		 */
+		public var items:Vector.<ItemVo> = new Vector.<ItemVo>();
 		
 		
 	}

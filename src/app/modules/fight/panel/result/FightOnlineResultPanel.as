@@ -91,10 +91,12 @@ package app.modules.fight.panel.result
 			txtExp1.text = winVo.addExp + "";
 			txtMoney1.text = winVo.addMoney + "";
 			txtItems1.text = "";
+			txtItems1.text = "x" + winVo.items.length;
 			
 			txtExp2.text = loseVo.addExp + "";
 			txtMoney2.text = loseVo.addMoney + "";
 			txtItems2.text = "";
+			txtItems2.text = "x" + loseVo.items.length;
 		}
 		
 		override protected function get resNames():Array
