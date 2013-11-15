@@ -6,10 +6,7 @@
 	<!-- version:资源版本控制 -->
 	<!-- first:是否登陆加载（1第1阶段加载/2登陆加载/0非登陆加载用时加载） -->
 	
-	
 	<!-- 第一阶段加载 -->
-	<asset id="ui_test" src="assets/test/ui_test.swf" version="1_1" first="1"/>
-	
 	<asset id="ui_component" src="assets/ui_component.swf" version="1_31" first="1"/>
 	<asset id="ui_login" src="assets/ui_login.swf" version="1_1" first="1"/>
 	<asset id="ui_register" src="assets/ui_register.swf" version="1_1" first="1"/>
@@ -22,7 +19,8 @@
 	
 	<!-- 以下部分为用时加载 -->
 	
-	<asset id="testPanel" src="assets/panel/testPanel.swf" version="1_1" first="0"/>
+	<!-- 测试资源 -->
+	<asset id="testPanel" src="assets/testPanel.swf" version="1_1" first="0"/>
 	
 	<!-- 地图资源 -->
 	<asset id="map_chapter_list" src="assets/map_chapter_list.swf" version="1_47" first="0"/>
@@ -47,7 +45,6 @@
 	
 	<!-- 微博分享 -->
 	<asset id="ui_share_weibo" src="assets/ui_share_weibo.swf" version="1_62" first="0"/>
-	
 	
 	<!-- 战斗部分 -->
 	<asset id="ui_fight" src="assets/ui_fight.swf" version="1_59" first="0"/>
