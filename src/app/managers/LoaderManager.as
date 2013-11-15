@@ -67,7 +67,7 @@ package app.managers
 				var url:String = String( xml.@src );
 				var version:String = String( xml.@version );
 				var first:int = int( xml.@first );
-				var path:String = GameConfig.deployPath + url + "?t=" + version;
+				var path:String = GameConfig.deployPath + url;// + "?t=" + version;
 				dictResList[ name ] = path;
 				
 				if ( first == 1 )

@@ -14,37 +14,27 @@
 	if(!$versionNum)
 	{
 		die("<script>alert('版本号或版本语言不能为空.');history.back();</script>");
-
 	}
+
 	$fullVersion = "ver_".$versionNum;
 	echo "<h2>正在提交版本$fullVersion</h2>";
 	echo "<hr />";
 
-	echo "<h2>第一步、更新版本库到本地：</h2><div style='color:gray;font-size:8px;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
+	echo "<h2>第一步、更新版本库到本地：</h2><div style='color:gray;font-size:11px;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
 	$svnupdateVers = "svn update ".$versionLibPath." --username ".$svnUser." --password ".$svnPwd;
 	system($svnupdateVers);
 	echo "</div>";
 
 	$fullversionPath = $versionLibPath.$fullVersion."\\";
-
 	echo $fullversionPath;
 	
 	$createPathCmd  = "if not exist ".$fullversionPath." md ".$fullversionPath;
-	//echo "<h4 style='color:green;'> exec CMD:".$createPathCmd."</h4>";
 	system($createPathCmd);
 	
 	//svn 添加文件夹
 	echo "<h4 style='color:green;'>";
 	$svnaddFloder = "svn add ". $fullversionPath . " --force";
 	system($svnaddFloder);
-	echo "</h4>";
-
-	//svn 提交文件夹
-	echo "<h4 style='color:green;font-size:8px;'>";
-	$svncommitFloder = "svn commit ".$fullversionPath." --username ".$svnUser." --password ".$svnPwd." --message ".$versionLog;
-	echo "提交命令行：";
-	echo $svncommitFloder;
-	//system($svncommitFloder);
 	echo "</h4>";
 	
 	//copy 文件
@@ -54,7 +44,7 @@
 	
 	echo "<div style='font-size:9px;color:gray;width:800px;height:150px;overflow:scroll;border:1px solid gray;'>";
 
-	system("xcopy /Y ".$releaseFloader."*.swf ".$fullversionPath);
+	system("copy /Y ".$releaseFloader."WordsSpell.swf ".$fullversionPath."Main.swf");
 	system("xcopy /Y ".$releaseFloader."application.xml ".$fullversionPath);
 
 	echo "<br />";echo "<br />";
@@ -65,46 +55,48 @@
 	echo "<br>";
 	
 	/////////////////////////////////////////////////////////////////
-	//设置语言版本
+	///////设置语言版本
 	include_once("changefiles.php");
 	$subver = writeVersion($versionRem, $versionNum);
 	////////////////////////////////////////////////////////////////
 
 
-	//echo "<br>========================================================================================================<br>";
-	echo "<h2>第三步、提交文件到版本库</h2><br>";
-	//echo "===========================================================================================================<br>";
-
-	echo "<div style='font-size:9px;color:blue;width:800px;height:150px;overflow:scroll;border:1px solid gray;'>";
-	$svnAddFiles = "svn add ".$fullversionPath."*.* --force";
-	system($svnAddFiles);
-	echo "</div>";
-
-	echo "<h3 style='font-size:12px;'>";
-	echo $svncommitFloder;
-	echo "</h3>";
-
-
-	echo "<div style='font-size:9px;color:green;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
-	system($svncommitFloder);
-
-	$svncommitVersionRem = "svn commit ".$versionRem." --username ".$svnUser." --password ".$svnPwd." --message ".$versionLog;
-	//echo $svncommitVersionRem;
-	system($svncommitVersionRem);
-	echo "</div>";
-
+	////////////////////////////////////////////////////////////////
+	echo "<h2>第三步、提交文件到版本库</h2>";
 
 	///////更改资源版本信息
 	echo "<h3 style='font-size:12px;'>更改资源版本信息</h3>";
 	$filename5 = $fullversionPath."\\application.xml";
-	$filename6 = $releaseFloader."\\application.xml";
-	//echo $filename;
-	changeApplicationXmlVersions($filename5, $versionNum, $subver);
-	changeApplicationXmlVersions($filename6, $versionNum, $subver);
+	changeApplicationXmlVersions($filename5, $fullversionPath);
 
+	///////提交到svn///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//svn 提交文件夹
+	$svnAddFiles = "svn add ".$fullversionPath."*.* --force";
+
+	echo "<h4 style='color:green;font-size:12px;'>";
+	echo "svn add 命令行：".$svnAddFiles;
+	echo "</h4>";
+
+	echo "<div style='font-size:11px;color:blue;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
+	system($svnAddFiles);
+	echo "</div>";
+	
+	//svn 提交文件夹
+	$svncommitFloder = "svn commit ".$versionLibPath." --username ".$svnUser." --password ".$svnPwd." --message ".$versionLog;
+
+	echo "<h4 style='color:green;font-size:12px;'>";
+	echo "svn commit 命令行：".$svncommitFloder;
+	echo "</h4>";
+
+	echo "<div style='font-size:11px;color:green;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
 	system($svncommitFloder);
+	echo "</div>";
+
+	////////////////////////////////////////////////////////////////
 
 	echo "<br><h1>发布成功</h1><br>";
+
 
 	$_SESSION["start"] = null;
 ?>

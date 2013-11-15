@@ -2,45 +2,31 @@
 	include_once("log.php");
 	
 	
-	function changeApplicationXmlVersions($file, $versionNum, $subver)
+	function changeApplicationXmlVersions($file, $parent_url)
 	{
-		$verStr = $versionNum ."_". $subver;
-		$newFiles = getNewFileName();
+		$url = str_ireplace("\\", "/", $parent_url );
 
 		$doc = new DOMDocument();
 		$doc->load($file);
 		
 		$assests = $doc->getElementsByTagName("asset");
-		$modules = $doc->getElementsByTagName("module");
-		foreach($newFiles as $nfi)
+
+		foreach($assests as $ai)
 		{
-			foreach($assests as $ai)
+			$src = $ai->getAttribute("src");
+			$id = $ai->getAttribute("id");
+			$file_url = $url.$src;
+			if ( file_exists($file_url))
 			{
-				$src = $ai->getAttribute("src");
-				
-				if(strpos($src, $nfi) !== false)
-				{
-					//echo "ok<br />";
-					$ai -> setAttribute("version", $verStr);
-				}
+				// 生成md5
+				$md5_str = md5_file($file_url);
+				$new_src = str_ireplace($id, $md5_str, $src);
+				$new_name = str_ireplace($id, $md5_str, $file_url);
 
-				$src = $ai-> nodeValue;
-
-				if(strpos($src, $nfi) !== false)
-				{
-					$ai -> setAttribute("version", $verStr);
-					//echo "ok<br />";
-				}
-			}
-
-			foreach($modules as $mi)
-			{
-				$src = $mi->getAttribute("src");
-				if(strpos($src, $nfi) !== false)
-				{
-					$mi -> setAttribute("version", $verStr);
-					//echo "ok  $nfi<br />";
-				}
+				// 修改配置
+				$ai -> setAttribute("src", $new_src);
+				// 重命名文件名
+				rename($file_url, $new_name);
 			}
 		}
 

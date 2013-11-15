@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
 	
-	<!-- id:用于获取资源src的名称 -->
+	<!-- id:用于获取资源src的名称(和文件名称保持一致) -->
 	<!-- src:资源路径 -->
 	<!-- version:资源版本控制 -->
 	<!-- first:是否登陆加载（1第1阶段加载/2登陆加载/0非登陆加载用时加载） -->
@@ -10,7 +10,7 @@
 	<!-- 第一阶段加载 -->
 	<asset id="ui_test" src="assets/test/ui_test.swf" version="1_1" first="1"/>
 	
-	<asset id="ui_comp" src="assets/ui_component.swf" version="1_31" first="1"/>
+	<asset id="ui_component" src="assets/ui_component.swf" version="1_31" first="1"/>
 	<asset id="ui_login" src="assets/ui_login.swf" version="1_1" first="1"/>
 	<asset id="ui_register" src="assets/ui_register.swf" version="1_1" first="1"/>
 	
