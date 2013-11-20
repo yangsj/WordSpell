@@ -38,7 +38,7 @@ package app.modules.map.model
 
 		public function get currentMapVo():MapVo
 		{
-			return _currentMapVo;
+			return _currentMapVo ||= new MapVo();
 		}
 
 		public function set currentMapVo(value:MapVo):void
@@ -48,7 +48,7 @@ package app.modules.map.model
 
 		public function get currentRoundVo():RoundVo
 		{
-			return _currentRoundVo;
+			return _currentRoundVo ||= new RoundVo();
 		}
 
 		public function set currentRoundVo(value:RoundVo):void

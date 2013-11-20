@@ -21,8 +21,12 @@ package app.modules.fight.command
 	import app.modules.fight.view.online.FightOnlineView;
 	import app.modules.fight.view.panel.FightLoseMediator;
 	import app.modules.fight.view.panel.FightLosePanel;
+	import app.modules.fight.view.panel.FightPracticeEndMediator;
+	import app.modules.fight.view.panel.FightPracticeEndPanel;
 	import app.modules.fight.view.panel.FightWinMediator;
 	import app.modules.fight.view.panel.FightWinPanel;
+	import app.modules.fight.view.practice.FightPracticeMediator;
+	import app.modules.fight.view.practice.FightPracticeView;
 	import app.modules.fight.view.prop.PropList;
 	import app.modules.fight.view.prop.PropListMediator;
 	import app.modules.fight.view.spell.SpellArea;
@@ -45,20 +49,23 @@ package app.modules.fight.command
 		
 		override public function execute():void
 		{
-			addView( ViewName.FightAlone, FightAloneView, FightAloneMediator );
-			addView( ViewName.FightOnline, FightOnlineView, FightOnlineMediator );
+			addView( ViewName.FightPractice, FightPracticeView, FightPracticeMediator );//错误练习界面
+			addView( ViewName.FightPracticeEndPanel, FightPracticeEndPanel, FightPracticeEndMediator ); // 错误练习结束面板
 			
-			addView( ViewName.FightWinPanel, FightWinPanel, FightWinMediator );
-			addView( ViewName.FightLosePanel, FightLosePanel, FightLoseMediator );
+			addView( ViewName.FightAlone, FightAloneView, FightAloneMediator );//闯关和练习本关界面
 			
-			addView( ViewName.FightMatchingPanel, FightMatchingPanel, FightMatchingMediator );
-			addView( ViewName.FightReadyPanel, FightReadyPanel, FightReadyMediator );
-			addView( ViewName.FightOnlineResultPanel, FightOnlineResultPanel, FightOnlineResultMediator );
-			addView( ViewName.FightFriendPanel, FightFriendPanel, FightFriendMediator );
-			addView( ViewName.FightSearchPanel, FightSearchPanel, FightSearchMediator );
+			addView( ViewName.FightWinPanel, FightWinPanel, FightWinMediator );// 闯关胜利结算界面
+			addView( ViewName.FightLosePanel, FightLosePanel, FightLoseMediator );// 闯关失败结算界面
 			
-			mapView( PropList, PropListMediator );
-			mapView( SpellArea, SpellAreaMediator );
+			addView( ViewName.FightOnline, FightOnlineView, FightOnlineMediator );//在线对战界面
+			addView( ViewName.FightMatchingPanel, FightMatchingPanel, FightMatchingMediator );//匹配界面
+			addView( ViewName.FightReadyPanel, FightReadyPanel, FightReadyMediator );//准备界面
+			addView( ViewName.FightOnlineResultPanel, FightOnlineResultPanel, FightOnlineResultMediator );//在线对战结束界面
+			addView( ViewName.FightFriendPanel, FightFriendPanel, FightFriendMediator );//好友在线对战
+			addView( ViewName.FightSearchPanel, FightSearchPanel, FightSearchMediator );//搜索在线对战
+			
+			mapView( PropList, PropListMediator ); //道具列表
+			mapView( SpellArea, SpellAreaMediator );//批次字母输入
 			
 			injectActor( FightModel );
 			injectActor( FightReadyModel );

@@ -2,7 +2,6 @@ package app.modules.fight.view
 {
 	import flash.geom.Point;
 	
-	import app.core.Tips;
 	import app.events.PackEvent;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.fight.FightType;
@@ -155,7 +154,6 @@ package app.modules.fight.view
 				if ( itemVo.type == ItemType.EXTRA_TIME )
 				{
 					baseView.useExtraTimeProp();
-					Tips.showMouse( "时间 +8s" );
 				}
 				else if ( itemVo.type == ItemType.BROOM )
 				{
@@ -210,7 +208,7 @@ package app.modules.fight.view
 			{
 				var modeType:int = fightModel.modeType;
 				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items.slice();
-				if ( modeType != FightType.MODE_EASY && modeType != FightType.MODE_PRACTICE ) // 不为容易和练习
+				if ( modeType != FightType.MODE_EASY && modeType != FightType.MODE_PRACTICE && modeType != FightType.MODE_ERROR ) // 不为容易和练习
 				{
 					var length:int = fightModel.allLetterList.length;
 					var index:int = 0;

@@ -58,7 +58,7 @@ package app.modules.fight.view.prop
 		
 		private function nextWordNotify( event:FightAloneEvent ):void
 		{
-			view.visible = fightModel.modeType != 4;
+			view.visible = !fightModel.isPractice;
 		}
 		
 		// 物品使用

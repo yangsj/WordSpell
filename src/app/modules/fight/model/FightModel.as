@@ -74,7 +74,7 @@ package app.modules.fight.model
 		}
 
 		/**
-		 * 选择的模式 ( 模式 1简单、2进阶、3达人、4练习、5对战 )
+		 * 选择的模式 ( 模式 1简单、2进阶、3达人、4练习、5对战、6错误练习 )
 		 */
 		public function get modeType():int
 		{
@@ -259,6 +259,21 @@ package app.modules.fight.model
 			_mapId = Math.max( value, 0 );
 		}
 
+		/**
+		 * 是否是闯关失败或者错误练习
+		 */
+		public function get isPractice():Boolean
+		{
+			return modeType == 4 || modeType == 6;
+		}
+		
+		/**
+		 * 是否是错误练习
+		 */
+		public function get isErrorPractice():Boolean
+		{
+			return modeType == 6;
+		}
 
 	}
 }

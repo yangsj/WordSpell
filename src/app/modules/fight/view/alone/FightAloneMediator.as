@@ -2,6 +2,7 @@ package app.modules.fight.view.alone
 {
 	import app.events.PackEvent;
 	import app.modules.ViewName;
+	import app.modules.fight.FightType;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseMediator;
@@ -44,13 +45,17 @@ package app.modules.fight.view.alone
 			addContextListener( FightAloneEvent.NOTIFY_END_ROUND, endRoundNotify, FightAloneEvent );
 			
 			// 拉取数据
-			fightService.startRound();
+			pullData();
 		}
 		
-		private function endRoundNotify( event:FightAloneEvent ):void
+		protected function endRoundNotify( event:FightAloneEvent ):void
 		{
 			view.clear();
-			if ( fightModel.fightEndVo.isWin )
+			if ( fightModel.modeType == FightType.MODE_ERROR )
+			{
+				openView( ViewName.FightPracticeEndPanel );
+			}
+			else if ( fightModel.fightEndVo.isWin )
 				openView( ViewName.FightWinPanel );
 			else openView( ViewName.FightLosePanel );
 		}
@@ -78,13 +83,19 @@ package app.modules.fight.view.alone
 				}
 			}
 		}
+		
+		protected function  pullData():void
+		{
+			fightService.startRound();
+		}
 
 		private function initData():void
 		{
-			mapModel.currentMapVo.mapId = fightModel.mapId;
+			
+			view.setRoundName( mapModel.currentMapVo.mapName, !fightModel.isErrorPractice );
+			
 			letterIndex = 0;
-			view.initialize();
-			view.setRoundName( mapModel.currentMapVo.mapName );
+			view.initialize( !fightModel.isPractice );
 			updateMoneyNotify( null );
 			setLetters();
 		}

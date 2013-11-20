@@ -36,10 +36,10 @@ package app.modules.fight.view.alone
 			txtTime = TextUtil.cloneText( txtTime );
 		}
 		
-		override public function initialize():void
+		override public function initialize( isDisplayTime:Boolean = true ):void
 		{
 			selfTotalTime = 60;
-			super.initialize();
+			super.initialize( isDisplayTime );
 		}
 
 		override public function delLetterFromDict( letter:String, isSelf:Boolean = true ):void
@@ -104,8 +104,10 @@ package app.modules.fight.view.alone
 			setTimeText( txtTime, selfTotalTime );
 		}
 
-		override public function setRoundName( roundName:String ):void
+		override public function setRoundName( roundName:String, isDisplayTime:Boolean = true ):void
 		{
+			bgName.visible = isDisplayTime;
+			txtName.visible = isDisplayTime;
 			txtName.text = roundName;
 		}
 		

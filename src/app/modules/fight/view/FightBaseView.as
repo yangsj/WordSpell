@@ -35,6 +35,8 @@ package app.modules.fight.view
 	 */
 	public class FightBaseView extends LoadViewBase
 	{
+		public var bgName:Sprite; // 名称底
+		public var bgTime:Sprite; // 时间底
 		public var txtMoney:TextField; // 自己金钱数量显示
 		public var txtTime:TextField; // 时间显示
 		public var container:Sprite; // 自己字母泡泡显示容器
@@ -85,7 +87,7 @@ package app.modules.fight.view
 			ViewStruct.addChild( this, ViewStruct.SCENE2 );
 		}
 		
-		public function initialize():void
+		public function initialize( isDisplayTime:Boolean = true ):void
 		{
 			isValidOperate = true;
 			
@@ -93,8 +95,13 @@ package app.modules.fight.view
 			appStage.focus = appStage;
 			
 			dictProps = new Dictionary();
-			timerHandler();
-			TickManager.doInterval( timerHandler, 1000 );
+			
+			txtTime.visible = isDisplayTime;
+			bgTime.visible = isDisplayTime;
+			if ( isDisplayTime ) {
+				timerHandler();
+				TickManager.doInterval( timerHandler, 1000 );
+			}
 			TickManager.doInterval( enterFrameHandler, 20 );
 		}
 		
@@ -200,7 +207,7 @@ package app.modules.fight.view
 		{
 		}
 		
-		public function setRoundName( roundName:String ):void
+		public function setRoundName( roundName:String, isDisplayTime:Boolean = true ):void
 		{
 		}
 		

@@ -82,6 +82,16 @@ package app.modules
 		//// fight
 		
 		/**
+		 * 错误练习
+		 */
+		public static const FightPractice:String = "btnPractice";
+		
+		/**
+		 * 错误练习结束
+		 */
+		public static const FightPracticeEndPanel:String = "FightPracticeEndPanel";
+		
+		/**
 		 * 闯关或练习
 		 */
 		public static const FightAlone:String = "fightAloneView";

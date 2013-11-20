@@ -34,6 +34,11 @@ package app.modules.fight
 		 */
 		public static const MODE_BATTLE:int = 5;
 		
+		/**
+		 * 错误练习
+		 */
+		public static const MODE_ERROR:int = 6;
+		
 		
 		
 		/**

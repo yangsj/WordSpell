@@ -55,5 +55,6 @@
 	<asset id="ui_fight_search" src="assets/ui_fight_search.swf" version="1_32" first="0"/>
 	<asset id="ui_fight_friend_search" src="assets/ui_fight_friend_search.swf" version="1_49" first="0"/>
 	<asset id="ui_fight_online_result" src="assets/ui_fight_online_result.swf" version="1_45" first="0"/>
+	<asset id="ui_fight_error" src="assets/ui_fight_error.swf" version="1_59" first="0"/>
 	
 </data>

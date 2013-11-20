@@ -55,9 +55,12 @@ package app.modules.fight.view.panel
 			txtExp = TextUtil.cloneText( txtExp );
 			txtMoney = TextUtil.cloneText( txtMoney );
 			
-			btnAgain.addEventListener( MouseEvent.CLICK, btnAgainHandler );
-			btnNext.addEventListener( MouseEvent.CLICK, btnNextHandler );
-			btnPractice.addEventListener( MouseEvent.CLICK, btnPracticeHandler );
+			if ( btnAgain )
+				btnAgain.addEventListener( MouseEvent.CLICK, btnAgainHandler );
+			if ( btnNext )
+				btnNext.addEventListener( MouseEvent.CLICK, btnNextHandler );
+			if ( btnPractice )
+				btnPractice.addEventListener( MouseEvent.CLICK, btnPracticeHandler );
 			if ( btnClose )
 				btnClose.addEventListener( MouseEvent.CLICK, btnCloseHandler );
 		}

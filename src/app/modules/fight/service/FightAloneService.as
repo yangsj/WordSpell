@@ -143,7 +143,7 @@ package app.modules.fight.service
 				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightReadyPanel ));
 				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightOnline ));
 			}
-			else // 闯关和练习
+			else // 闯关和练习/错误练习
 			{
 				dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_START_ROUND ));
 			}
@@ -245,7 +245,7 @@ package app.modules.fight.service
 		}
 
 		/**
-		 * 开始战斗 [type: 0 表示普通闯关，1表示练习这一关, 2 表示进行下一关]
+		 * 开始战斗 [type: 0 表示普通闯关，1表示练习这一关, 2 表示进行下一关, 3 错误练习]
 		 * @param roundLevel 世界地图的类型
 		 * @param roundType 0-9 哪一组
 		 * @param destUid 对手的uid，只在对战时有效

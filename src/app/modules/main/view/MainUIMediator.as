@@ -86,7 +86,6 @@ package app.modules.main.view
 				case FunctionBtnConfig.FIGHT:
 					view.displayFightMenu();
 					break;
-				case FunctionBtnConfig.PRACTICE:
 				case FunctionBtnConfig.EXIT:
 					Tips.showMouse( "功能开发中敬请期待！" );
 					break;

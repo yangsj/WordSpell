@@ -41,11 +41,11 @@ package app.modules.fight.view.online
 			container2.mouseEnabled = false;
 		}
 		
-		override public function initialize():void
+		override public function initialize( isDisplayTime:Boolean = true ):void
 		{
 			selfTotalTime = 300;
 			otherTotalTime = 300;
-			super.initialize();
+			super.initialize( isDisplayTime );
 		}
 		
 		override public function clear():void
