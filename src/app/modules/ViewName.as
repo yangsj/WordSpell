@@ -70,6 +70,11 @@ package app.modules
 		public static const Task:String = "taskPanel";
 		
 		/**
+		 * 任务完成结算
+		 */
+		public static const TaskCompleted:String = "TaskCompleted";
+		
+		/**
 		 * 个人信息
 		 */
 		public static const Personal:String = "personalPanel";

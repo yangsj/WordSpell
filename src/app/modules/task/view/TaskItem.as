@@ -1,9 +1,12 @@
 package app.modules.task.view
 {
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import app.events.ViewEvent;
 	import app.modules.TempleteSprite;
+	import app.modules.ViewName;
 	import app.modules.task.model.TaskVo;
 	
 	
@@ -35,6 +38,7 @@ package app.modules.task.view
 		public function TaskItem()
 		{
 			setSkinWithName( "ui_Skin_TaskItem" );
+			txtDes.mouseEnabled = false;
 		}
 		
 		/*============================================================================*/
@@ -44,6 +48,7 @@ package app.modules.task.view
 		private function addListeners():void
 		{
 			addEventListener( Event.REMOVED, removedFromParentHandeler );
+			addEventListener( MouseEvent.CLICK, onClickHandler );
 		}
 		
 		private function removeListeners():void
@@ -68,11 +73,10 @@ package app.modules.task.view
 			if ( vecPools ) vecPools.push( this );
 		}
 		
-		/*============================================================================*/
-		/* override functions                                                         */
-		/*============================================================================*/
-		
-		
+		protected function onClickHandler(event:MouseEvent):void
+		{
+			dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.TaskCompleted, null, true ));
+		}
 		
 		/*============================================================================*/
 		/* public functions                                                           */

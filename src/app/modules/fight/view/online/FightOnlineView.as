@@ -197,11 +197,6 @@ package app.modules.fight.view.online
 			hitTestCheck( container2 );
 		}
 		
-		override protected function get resNames():Array
-		{
-			return [ "ui_fight" ];
-		}
-		
 		override protected function get skinName():String
 		{
 			return "ui_Skin_FightOnlineView";

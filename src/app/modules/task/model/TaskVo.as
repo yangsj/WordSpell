@@ -1,5 +1,7 @@
 package app.modules.task.model
 {
+	import app.modules.model.vo.ItemVo;
+	
 	import victor.framework.utils.HtmlText;
 	
 	/**
@@ -38,15 +40,6 @@ package app.modules.task.model
 		 */
 		public var rewardMoney:int;
 		/**
-		 * 奖励道具id
-		 */
-		public var rewardPropId:int;
-		/**
-		 * 奖励道具数量
-		 */
-		public var rewardPropNum:int;
-		
-		/**
 		 * 任务目标
 		 */
 		public var progressTarget:int;
@@ -58,6 +51,10 @@ package app.modules.task.model
 		 * 任务需要达成的总量
 		 */
 		public var progressTotal:int;
+		/**
+		 * 奖励道具列表
+		 */
+		public var propList:Vector.<ItemVo>;
 		
 		/**
 		 * 任务是否完成

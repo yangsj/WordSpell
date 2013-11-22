@@ -29,7 +29,7 @@ package app.modules.task.view
 			{
 				DisplayUtil.removedAll( listContainer );
 				var i:int = 0;
-				var disty:Number = 33;
+				var disty:Number = 43;
 				for each ( var vo:TaskVo in list )
 				{
 					var item:TaskItem = TaskItem.itemInstance;
@@ -65,10 +65,10 @@ package app.modules.task.view
 			
 			listContainer = new Sprite();
 			listContainer.graphics.beginFill(0, 0.1 );
-			listContainer.graphics.drawRect(0,0,375,300);
+			listContainer.graphics.drawRect(0,0,260,288);
 			listContainer.graphics.endFill();
-			listContainer.x = ( width - listContainer.width ) >> 1;
-			listContainer.y = ( height- listContainer.height) >> 1;
+			listContainer.x = 23;
+			listContainer.y = 46;
 			_skin.addChild( listContainer );
 			
 			gameScroll = new GameScrollPanel();

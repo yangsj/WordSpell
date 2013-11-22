@@ -1,6 +1,11 @@
 package app.modules.task.service
 {
+	import flash.utils.Dictionary;
+	
 	import app.data.GameData;
+	import app.events.ViewEvent;
+	import app.modules.ViewName;
+	import app.modules.model.vo.ItemVo;
 	import app.modules.task.model.TaskModel;
 	import app.modules.task.model.TaskVo;
 	
@@ -68,6 +73,28 @@ package app.modules.task.service
 			
 			// 更新经验值
 			if ( data.exp_award > 0 ) GameData.instance.updateAddExp( data.exp_award );
+			
+			var taskVo:TaskVo = new TaskVo();
+			taskVo.id = data.task_id;
+			taskVo.rewardMoney = data.coin_award;
+			taskVo.rewardExp = data.exp_award;
+			taskVo.propList = getRewardList( data.item_award );
+			
+			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.TaskCompleted, taskVo ));
+		}
+		
+		private function getRewardList( dict:Dictionary ):Vector.<ItemVo>
+		{
+			var vec:Vector.<ItemVo> = new Vector.<ItemVo>();
+			var itemVo:ItemVo;
+			for ( var key:String in dict )
+			{
+				itemVo = new ItemVo();
+				itemVo.type = int( key );
+				itemVo.num = int(dict[ key ]);
+				vec.push( itemVo );
+			}
+			return vec;
 		}
 		
 		////////////////////// publics 

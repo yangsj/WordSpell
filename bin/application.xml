@@ -46,6 +46,9 @@
 	<!-- 微博分享 -->
 	<asset id="ui_share_weibo" src="assets/ui_share_weibo.swf" version="1_62" first="0"/>
 	
+	<!-- 道具 -->
+	<asset id="ui_prop_list" src="assets/ui_prop_list.swf" version="1_59" first="0"/>
+	
 	<!-- 战斗部分 -->
 	<asset id="ui_fight" src="assets/ui_fight.swf" version="1_59" first="0"/>
 	<asset id="ui_round_losePanel" src="assets/ui_round_losePanel.swf" version="1_45" first="0"/>

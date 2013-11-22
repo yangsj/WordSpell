@@ -408,6 +408,11 @@ package app.modules.fight.view
 			_isValidOperate = value;
 			container.mouseChildren = value;
 		}
+		
+		override protected function get resNames():Array
+		{
+			return [ "ui_fight", "ui_prop_list" ];
+		}
 
 	}
 }
