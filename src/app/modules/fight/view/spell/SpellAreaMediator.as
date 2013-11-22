@@ -80,7 +80,7 @@ package app.modules.fight.view.spell
 			view.setInitData( fightModel.spellVo );
 			
 			if ( view.btnShowAnswer ) {
-				view.btnShowAnswer.visible = fightModel.modeType == 4;
+				view.btnShowAnswer.visible = fightModel.isPractice;
 			}
 		}
 		

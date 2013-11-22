@@ -4,16 +4,19 @@ package app.modules.fight.view
 	import com.greensock.easing.Back;
 	import com.greensock.easing.Linear;
 	
+	import flash.display.InteractiveObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
 	import app.core.Tips;
 	import app.data.GameData;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.fight.view.prop.PropList;
@@ -42,6 +45,7 @@ package app.modules.fight.view
 		public var txtMoney:TextField; // 自己金钱数量显示
 		public var container:Sprite; // 自己字母泡泡显示容器
 		public var container2:Sprite;// 对手字母泡泡显示容器
+		public var btnExit:InteractiveObject; // 退出【练习模式有】
 		public var isAlone:Boolean = true;
 		public var mapId:int = 0;
 		
@@ -74,7 +78,15 @@ package app.modules.fight.view
 			effectContainer = new Sprite();
 			addChild( effectContainer );
 			
+			btnExit ||= new Sprite();
+			btnExit.addEventListener(MouseEvent.CLICK, onClickBtnExitHandler );
+			
 			mouseEnabled = false;
+		}
+		
+		protected function onClickBtnExitHandler(event:MouseEvent):void
+		{
+			dispatchEvent( new FightAloneEvent( FightAloneEvent.EXIT_PRACTICE ));
 		}
 		
 		override public function hide():void

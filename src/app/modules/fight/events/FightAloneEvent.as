@@ -36,6 +36,11 @@ package app.modules.fight.events
 		 */
 		public static const ADD_MONEY_EFFECT:String = "add_money_effect";
 		
+		/**
+		 * 退出练习模式
+		 */
+		public static const EXIT_PRACTICE:String = "exit_practice";
+		
 		//////////////// notify
 		
 		/**

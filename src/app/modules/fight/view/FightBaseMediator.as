@@ -86,6 +86,8 @@ package app.modules.fight.view
 			
 			// 选择字母
 			addViewListener( FightAloneEvent.SELECTED_LETTER, selectedLetterHandler, FightAloneEvent );
+			// 退出练习
+			addViewListener( FightAloneEvent.EXIT_PRACTICE, exitPracticeHandler, FightAloneEvent );
 			
 			// 更新金币值变化
 			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
@@ -105,6 +107,11 @@ package app.modules.fight.view
 			clickPropBubble = [];
 			
 			baseView.isValidOperate = true;
+		}
+		
+		private function exitPracticeHandler( event:FightAloneEvent ):void
+		{
+			Debug.debug( "退出练习模式" );
 		}
 		
 		private function onWordOverHandler( event:SpellEvent ):void
