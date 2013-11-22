@@ -35,10 +35,11 @@ package app.modules.fight.view
 	 */
 	public class FightBaseView extends LoadViewBase
 	{
+		public var txtName:TextField;// 所属地图名称
 		public var bgName:Sprite; // 名称底
+		public var txtTime:TextField; // 时间显示
 		public var bgTime:Sprite; // 时间底
 		public var txtMoney:TextField; // 自己金钱数量显示
-		public var txtTime:TextField; // 时间显示
 		public var container:Sprite; // 自己字母泡泡显示容器
 		public var container2:Sprite;// 对手字母泡泡显示容器
 		public var isAlone:Boolean = true;
@@ -96,8 +97,12 @@ package app.modules.fight.view
 			
 			dictProps = new Dictionary();
 			
-			txtTime.visible = isDisplayTime;
-			bgTime.visible = isDisplayTime;
+			if ( bgName )
+				bgName.visible = isDisplayTime;
+			if ( txtTime )
+				txtTime.visible = isDisplayTime;
+			if ( bgTime )
+				bgTime.visible = isDisplayTime;
 			if ( isDisplayTime ) {
 				timerHandler();
 				TickManager.doInterval( timerHandler, 1000 );

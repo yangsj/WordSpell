@@ -20,8 +20,6 @@ package app.modules.fight.view.alone
 	 */
 	public class FightAloneView extends FightBaseView
 	{
-		// 所属地图名称
-		public var txtName:TextField;
 
 		public function FightAloneView()
 		{

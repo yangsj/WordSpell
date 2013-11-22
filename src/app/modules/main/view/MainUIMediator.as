@@ -3,7 +3,6 @@ package app.modules.main.view
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	
-	import app.GameConfig;
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.ViewEvent;

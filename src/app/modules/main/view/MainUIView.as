@@ -38,13 +38,15 @@ package app.modules.main.view
 		private var expCache:int = -1;
 		// 上一次更新的等级
 		private var levelCache:int = -1;
-		
+		// 缓存等级数字对象
 		private var levelNumCreate:NumCreate;
+		// 等级资源
 		private var levelNumSprite:Shape;
-		
+		// 经验值显示内容
 		private var expNumString:String = "0/0";
+		// 经验值百分比显示内容
 		private var expPercent:String = "0.00%";
-		
+		// 点击对战按钮弹出的菜单
 		private var fightMenu:FightButtonMenu;
 		
 		public function MainUIView()
@@ -65,17 +67,18 @@ package app.modules.main.view
 		{
 			fightMenu ||= new FightButtonMenu();
 			addChild( fightMenu );
+			fightMenu.show();
 		}
 		
 		public function updateLevelExp( level:int, exp:int ):void
 		{
 			if ( expCache != exp )
 			{
-				expCache = exp;
 				var levelExpItemVo:LevelExpItemVo = BaseConfig.levelExp.getItemByExp( exp );
 				var curExp:int = levelExpItemVo.curExp;
 				var nextExp:int = levelExpItemVo.nextExp;
 				var percent:Number;
+				expCache = exp;
 				expNumString = exp + "/" + nextExp;
 				if ( !MathUtil.isRange( exp, curExp, nextExp ))
 				{

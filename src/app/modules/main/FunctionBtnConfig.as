@@ -38,7 +38,7 @@ package app.modules.main
 		/**
 		 * 练习
 		 */
-		public static const PRACTICE:String = "btnPractice";
+		public static const PRACTICE:String = ViewName.FightPractice;
 		
 		/**
 		 * 对战
