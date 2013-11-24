@@ -1,7 +1,6 @@
 package app.modules.fight.view.alone
 {
 	import flash.events.Event;
-	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
 	import app.core.Tips;
