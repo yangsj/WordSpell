@@ -20,5 +20,10 @@ package app.modules.task.event
 		 */
 		public static const UPDATE_LIST:String = "update_list";
 		
+		/**
+		 * 检查是否还有已完成的任务缓存着，还未显示
+		 */
+		public static const TASK_CHECK_COMPLETED:String = "task_check_completed";
+		
 	}
 }

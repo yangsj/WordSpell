@@ -1,6 +1,7 @@
 package app.modules.task.command
 {
 	import app.modules.ViewName;
+	import app.modules.task.event.TaskEvent;
 	import app.modules.task.model.TaskModel;
 	import app.modules.task.service.TaskService;
 	import app.modules.task.view.TaskCompletedMediator;
@@ -30,6 +31,9 @@ package app.modules.task.command
 			
 			injectActor( TaskModel );
 			injectActor( TaskService );
+			
+			commandMap.mapEvent( TaskEvent.TASK_CHECK_COMPLETED, TaskCheckCompleteCommand, TaskEvent );
+			
 		}
 		
 	}

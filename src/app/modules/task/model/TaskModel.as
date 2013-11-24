@@ -16,6 +16,7 @@ package app.modules.task.model
 		public var hasTaskList:Boolean;
 		
 		private var _taskList:Vector.<TaskVo>;
+		private var _cacheCompleteTask:Vector.<TaskVo>;
 		
 		public function TaskModel()
 		{
@@ -60,6 +61,20 @@ package app.modules.task.model
 		{
 			return _taskList ||= new Vector.<TaskVo>();
 		}
+
+		/**
+		 * 缓存完成的任务
+		 */
+		public function get cacheCompleteTask():Vector.<TaskVo>
+		{
+			return _cacheCompleteTask ||= new Vector.<TaskVo>();
+		}
+
+		public function set cacheCompleteTask(value:Vector.<TaskVo>):void
+		{
+			_cacheCompleteTask = value;
+		}
+
 
 	}
 }

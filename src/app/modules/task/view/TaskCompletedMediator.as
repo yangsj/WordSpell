@@ -1,5 +1,7 @@
 package app.modules.task.view
 {
+	import app.modules.task.event.TaskEvent;
+	
 	import victor.framework.core.BaseMediator;
 	
 	
@@ -14,5 +16,13 @@ package app.modules.task.view
 		{
 			super();
 		}
+		
+		override public function onRegister():void
+		{
+			super.onRemove();
+			
+			dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
+		}
+		
 	}
 }

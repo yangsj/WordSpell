@@ -3,9 +3,9 @@ package app.modules.task.service
 	import flash.utils.Dictionary;
 	
 	import app.data.GameData;
-	import app.events.ViewEvent;
-	import app.modules.ViewName;
+	import app.modules.fight.model.FightModel;
 	import app.modules.model.vo.ItemVo;
+	import app.modules.task.event.TaskEvent;
 	import app.modules.task.model.TaskModel;
 	import app.modules.task.model.TaskVo;
 	
@@ -29,6 +29,8 @@ package app.modules.task.service
 	{
 		[Inject]
 		public var taskModel:TaskModel;
+		[Inject]
+		public var fightModel:FightModel;
 		
 		public function TaskService()
 		{
@@ -61,6 +63,7 @@ package app.modules.task.service
 				
 				taskModel.taskList.push( taskVo );
 			}
+			dispatch( new TaskEvent( TaskEvent.UPDATE_LIST ));
 		}
 		
 		// 任务完成通知
@@ -80,7 +83,10 @@ package app.modules.task.service
 			taskVo.rewardExp = data.exp_award;
 			taskVo.propList = getRewardList( data.item_award );
 			
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.TaskCompleted, taskVo ));
+			taskModel.cacheCompleteTask.push( taskVo );
+			
+			if ( !fightModel.isFighting )
+				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
 		}
 		
 		private function getRewardList( dict:Dictionary ):Vector.<ItemVo>

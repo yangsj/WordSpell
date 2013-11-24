@@ -16,6 +16,7 @@ package app.modules.fight.service
 	import app.modules.map.model.MapModel;
 	import app.modules.map.model.RoundVo;
 	import app.modules.model.vo.ItemVo;
+	import app.modules.task.event.TaskEvent;
 	
 	import ff.bubble_info_t;
 	import ff.client_cmd_e;
@@ -62,6 +63,8 @@ package app.modules.fight.service
 		// 闯关练习开始
 		private function startRoundNotify( resp:SocketResp ):void
 		{
+			fightModel.isFighting = true;
+			
 			var data:start_round_ret_t = resp.data as start_round_ret_t;
 			var cnAry:Array = data.chinese_words;
 			var blanks:Array = data.blank;
@@ -167,6 +170,10 @@ package app.modules.fight.service
 			TickManager.doTimeout( function abc():void {
 				dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_END_ROUND ));
 			}, 500 );
+			
+			fightModel.isFighting = false;
+			
+			dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
 		}
 
 		// 下一个单词

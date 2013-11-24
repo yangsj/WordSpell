@@ -43,22 +43,6 @@ package app.modules.task.view
 			}
 		}
 		
-		override protected function afterRender():void
-		{
-			super.afterRender();
-			var list:Vector.<TaskVo> = new Vector.<TaskVo>();
-			for ( var i:int = 0; i < 20; i++ )
-			{
-				var vo:TaskVo = new TaskVo();
-				vo.describe = "测试任务" + i;
-				vo.id = i;
-				vo.progressCurrent = int(Math.random()*4);
-				vo.progressTotal = int(Math.random() * 4 + 3);
-				list.push( vo );
-			}
-			setDataList( list );
-		}
-		
 		override protected function onceInit():void
 		{
 			super.onceInit();

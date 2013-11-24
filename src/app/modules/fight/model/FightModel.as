@@ -29,6 +29,7 @@ package app.modules.fight.model
 		private var _battleResult:Boolean = false;
 		private var _battleResultFlag:int;
 		private var _mapId:int = 0;
+		private var _isFighting:Boolean;
 		
 		public function FightModel()
 		{
@@ -274,6 +275,23 @@ package app.modules.fight.model
 		{
 			return modeType == 6;
 		}
+
+		/**
+		 * 是否正在战斗中
+		 */
+		public function get isFighting():Boolean
+		{
+			return _isFighting;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isFighting(value:Boolean):void
+		{
+			_isFighting = value;
+		}
+
 
 	}
 }

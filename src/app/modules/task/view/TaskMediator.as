@@ -1,5 +1,9 @@
 package app.modules.task.view
 {
+	import app.modules.task.event.TaskEvent;
+	import app.modules.task.model.TaskModel;
+	import app.modules.task.service.TaskService;
+	
 	import victor.framework.core.BaseMediator;
 	
 	
@@ -10,9 +14,29 @@ package app.modules.task.view
 	 */
 	public class TaskMediator extends BaseMediator
 	{
+		[Inject]
+		public var view:TaskView;
+		[Inject]
+		public var taskService:TaskService;
+		[Inject]
+		public var taskModel:TaskModel;
+		
 		public function TaskMediator()
 		{
 			super();
 		}
+		
+		override public function onRegister():void
+		{
+			addContextListener( TaskEvent.UPDATE_LIST, taskListNotify, TaskEvent );
+			
+			taskService.pullTaskList();
+		}
+		
+		private function taskListNotify( event:TaskEvent ):void
+		{
+			view.setDataList( taskModel.taskList );
+		}		
+		
 	}
 }

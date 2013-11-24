@@ -41,12 +41,12 @@ package app.startup
 				
 				, MainUIInitCommand		// 主界面UI
 				, MapInitCommand		// 世界地圖
-				, TaskInitCommand		// 任务系统
 				, ChatInitCommand		// 聊天系统
 				, FriendInitComand		// 好友系统
 				, LoginInitCommand		// 登陆游戏
-				, PersonalInitCommand	// 个人信息
 				, FightInitCommand		// 对战闯关系统
+				, TaskInitCommand		// 任务系统
+				, PersonalInitCommand	// 个人信息
 				, RankInitCommand		// 排行系统
 				
 				, ShareWeiboInitCommand // 分享到微博
