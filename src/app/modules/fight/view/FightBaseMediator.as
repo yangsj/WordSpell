@@ -102,8 +102,6 @@ package app.modules.fight.view
 			// 完成一个单词输入
 			addContextListener( SpellEvent.ONE_WORD_OVER, onWordOverHandler, SpellEvent );
 			
-			baseView.mapId = fightModel.mapId;
-			
 			clickPropBubble = [];
 			
 			baseView.isValidOperate = true;

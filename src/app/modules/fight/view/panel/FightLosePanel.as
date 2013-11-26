@@ -1,5 +1,6 @@
 package app.modules.fight.view.panel
 {
+	import app.utils.TextUtil;
 
 	/**
 	 * ……
@@ -17,6 +18,10 @@ package app.modules.fight.view.panel
 		override protected function onceInit():void
 		{
 			super.onceInit();
+			
+			txtExp = TextUtil.cloneText( txtExp );
+			txtMoney = TextUtil.cloneText( txtMoney );
+			
 			btnNext.visible = false;
 		}
 

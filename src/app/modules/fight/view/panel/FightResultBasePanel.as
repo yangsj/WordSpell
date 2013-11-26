@@ -52,9 +52,6 @@ package app.modules.fight.view.panel
 		{
 			super.onceInit();
 			
-			txtExp = TextUtil.cloneText( txtExp );
-			txtMoney = TextUtil.cloneText( txtMoney );
-			
 			if ( btnAgain )
 				btnAgain.addEventListener( MouseEvent.CLICK, btnAgainHandler );
 			if ( btnNext )

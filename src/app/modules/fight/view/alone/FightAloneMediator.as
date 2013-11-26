@@ -2,6 +2,7 @@ package app.modules.fight.view.alone
 {
 	import app.events.PackEvent;
 	import app.modules.ViewName;
+	import app.modules.chat.event.ChatEvent;
 	import app.modules.fight.FightType;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
@@ -63,6 +64,19 @@ package app.modules.fight.view.alone
 		private function startRoundNotify( event:FightAloneEvent ):void
 		{
 			initData();
+			
+			if ( fightModel.isPractice )
+			{
+				// 展开聊天窗口
+				dispatch( new ChatEvent( ChatEvent.SHOW_CHAT ));
+				// 折叠聊天窗口
+				dispatch( new ChatEvent( ChatEvent.FOLD_CHAT ));
+			}
+			else
+			{
+				// 折叠聊天窗口
+				dispatch( new ChatEvent( ChatEvent.HIDE_CHAT ));
+			}
 		}
 
 		// 物品使用成功
@@ -92,12 +106,15 @@ package app.modules.fight.view.alone
 		private function initData():void
 		{
 			
-			view.setRoundName( mapModel.currentMapVo.mapName, !fightModel.isErrorPractice );
+			view.setRoundName( mapModel.currentMapVo.mapName, !fightModel.isPractice );
 			
 			letterIndex = 0;
-			view.initialize( !fightModel.isPractice );
+			view.initialize( fightModel.isPractice );
 			updateMoneyNotify( null );
 			setLetters();
+			
+			// 设置背景
+			view.setBg( mapModel.currentMapVo.mapId );
 		}
 
 	}

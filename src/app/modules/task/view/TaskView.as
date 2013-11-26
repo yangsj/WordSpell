@@ -1,6 +1,7 @@
 package app.modules.task.view
 {
 	import flash.display.Sprite;
+	import flash.events.Event;
 	
 	import app.modules.task.model.TaskVo;
 	

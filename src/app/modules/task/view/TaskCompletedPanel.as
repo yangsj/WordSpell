@@ -1,6 +1,7 @@
 package app.modules.task.view
 {
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.text.TextField;
 	
 	import app.modules.fight.view.prop.item.PropItem;
@@ -32,6 +33,17 @@ package app.modules.task.view
 		{
 			super.openComplete();
 			createPropList();
+			addEventListener(Event.ENTER_FRAME, enterFrameHandler );
+		}
+		
+		protected function enterFrameHandler(event:Event):void
+		{
+			if ( parent )
+			{
+				parent.setChildIndex( this, parent.numChildren - 1 );
+			} else{
+				removeEventListener(Event.ENTER_FRAME, enterFrameHandler );
+			}
 		}
 		
 		private function createPropList():void

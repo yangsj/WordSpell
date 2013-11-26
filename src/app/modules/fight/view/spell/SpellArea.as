@@ -35,7 +35,11 @@ package app.modules.fight.view.spell
 			super();
 			createSkin();
 			createSpellItems();
-			x = 330;
+		}
+		
+		public function setPos(isPractice:Boolean = false ):void
+		{
+			x = isPractice ? 440 : 330;
 			y = 460;
 		}
 

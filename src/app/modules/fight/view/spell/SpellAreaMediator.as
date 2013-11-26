@@ -78,6 +78,7 @@ package app.modules.fight.view.spell
 		{
 			isSendInput = false;
 			view.setInitData( fightModel.spellVo );
+			view.setPos( fightModel.isPractice );
 			
 			if ( view.btnShowAnswer ) {
 				view.btnShowAnswer.visible = fightModel.isPractice;

@@ -10,6 +10,7 @@ package app.modules.map.panel
 	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapVo;
 	import app.modules.map.panel.item.GroupItem;
+	import app.utils.TextUtil;
 	
 	import victor.framework.components.Reflection;
 	import victor.framework.core.BasePanel;
@@ -35,6 +36,9 @@ package app.modules.map.panel
 		
 		override protected function onceInit():void
 		{
+			txtName = TextUtil.cloneText( txtName );
+			txtName.mouseEnabled = false;
+			
 			DisplayUtil.removedFromParent( btnClose );
 			btnClose = SkinButton.buttonExit;
 			_skin.addChild( btnClose );
@@ -44,8 +48,6 @@ package app.modules.map.panel
 		{
 			super.addedToStageHandler( event );
 			
-			txtName.mouseEnabled = false;
-			txtName.y = 7;
 			txtName.text = mapVo.mapName;
 			_skin.addChild( txtName );
 		}
@@ -135,7 +137,7 @@ package app.modules.map.panel
 		
 		override protected function get resNames():Array
 		{
-			return ["map_chapter_" + mapVo.mapId, "map_chapter_list" ];
+			return ["map_chapter_0", "map_chapter_1", "map_chapter_2", "map_chapter_3", "map_chapter_4", "map_chapter_5", "map_chapter_list" ];
 		}
 		
 		override protected function get skinName():String

@@ -26,15 +26,8 @@ package app.modules.fight.view.panel
 			txtNumWords.text = "总计答对 " + endVo.rightNum + " 个单词";
 			txtErrorWordList.text = "";
 			for each ( var word:String in endVo.wrongList ) {
-				txtErrorWordList.appendText( word + "\n" );
+				txtErrorWordList.appendText( word + "\t\t" );
 			}
-		}
-		
-		override protected function onceInit():void
-		{
-			super.onceInit();
-			
-			txtNumWords = TextUtil.cloneText( txtNumWords );
 		}
 		
 		override protected function get resNames():Array

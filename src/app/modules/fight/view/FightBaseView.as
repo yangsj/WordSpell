@@ -103,7 +103,7 @@ package app.modules.fight.view
 			ViewStruct.addChild( this, ViewStruct.SCENE2 );
 		}
 		
-		public function initialize( isDisplayTime:Boolean = true ):void
+		public function initialize( isPractice:Boolean = false ):void
 		{
 			isValidOperate = true;
 			
@@ -112,16 +112,16 @@ package app.modules.fight.view
 			
 			dictProps = new Dictionary();
 			
-			if ( bgName )
-				bgName.visible = isDisplayTime;
+//			if ( bgName )
+//				bgName.visible = isPractice;
 			if ( txtTime )
-				txtTime.visible = isDisplayTime;
+				txtTime.visible = !isPractice;
 			if ( bgTime )
-				bgTime.visible = isDisplayTime;
+				bgTime.visible = !isPractice;
 			if ( btnClose )
-				btnClose.visible = isDisplayTime;
+				btnClose.visible = isPractice;
 			
-			if ( isDisplayTime ) {
+			if ( !isPractice ) {
 				timerHandler();
 				TickManager.doInterval( timerHandler, 1000 );
 			}

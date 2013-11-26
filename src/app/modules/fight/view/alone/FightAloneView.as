@@ -1,5 +1,7 @@
 package app.modules.fight.view.alone
 {
+	import flash.display.DisplayObject;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.utils.Dictionary;
 	
@@ -19,24 +21,32 @@ package app.modules.fight.view.alone
 	 */
 	public class FightAloneView extends FightBaseView
 	{
-
+		protected var bgContainer:Sprite;
+		
 		public function FightAloneView()
 		{
 			super();
+		}
+		
+		protected function resetText():void
+		{
+			txtName = TextUtil.cloneText( txtName );
+			txtTime = TextUtil.cloneText( txtTime );
 		}
 
 		override protected function onceInit():void
 		{
 			super.onceInit();
-			
-			txtName = TextUtil.cloneText( txtName );
-			txtTime = TextUtil.cloneText( txtTime );
+			resetText();
+			bgContainer = new Sprite();
+			addChildAt( bgContainer, 0 );
 		}
 		
-		override public function initialize( isDisplayTime:Boolean = true ):void
+		override public function initialize( isPractice:Boolean = false ):void
 		{
 			selfTotalTime = 60;
-			super.initialize( isDisplayTime );
+			super.initialize( isPractice );
+			//
 		}
 
 		override public function delLetterFromDict( letter:String, isSelf:Boolean = true ):void
@@ -51,6 +61,16 @@ package app.modules.fight.view.alone
 			{
 				delete dictLetterSelf[ letter.toLocaleLowerCase()];
 			}
+		}
+		
+		public function setBg(mapId:int):void
+		{
+			if ( bgContainer.numChildren != 1 || this.mapId != mapId )
+			{
+				DisplayUtil.removedAll( bgContainer );
+				bgContainer.addChild( getObj( "ui_Skin_MapChapterBg_" + mapId ) as DisplayObject );
+			}
+			this.mapId = mapId;
 		}
 
 		override public function setLettersPool( list:Vector.<LetterBubbleVo>, isSelf:Boolean = true ):void
@@ -103,14 +123,27 @@ package app.modules.fight.view.alone
 
 		override public function setRoundName( roundName:String, isDisplayTime:Boolean = true ):void
 		{
-			bgName.visible = isDisplayTime;
-			txtName.visible = isDisplayTime;
+//			bgName.visible = isDisplayTime;
+//			txtName.visible = isDisplayTime;
 			txtName.text = roundName;
 		}
 		
 		override protected function enterFrameHandler( event:Event = null ):void
 		{
 			hitTestCheck( container );
+		}
+		
+		override protected function get resNames():Array
+		{
+			return[ 
+				"map_chapter_0", 
+				"map_chapter_1", 
+				"map_chapter_2", 
+				"map_chapter_3", 
+				"map_chapter_4", 
+				"map_chapter_5", 
+				"ui_fight", 
+				"ui_prop_list"];
 		}
 
 		override protected function get skinName():String
