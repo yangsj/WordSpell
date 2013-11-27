@@ -41,6 +41,11 @@ package app.modules.fight.events
 		 */
 		public static const EXIT_PRACTICE:String = "exit_practice";
 		
+		/**
+		 * 显示答案中
+		 */
+		public static const SHOW_ANSWER_ING:String = "show_answer_ing";
+		
 		//////////////// notify
 		
 		/**

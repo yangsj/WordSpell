@@ -27,6 +27,17 @@ package app.modules.chat.model
 		{
 			super();
 		}
+		
+		public function sendLocal( msg:String, channel:int = ChatChannelType.SYSTEM ):void
+		{
+			var chatVo:ChatVo = new ChatVo();
+			chatVo.msg = msg;
+			chatVo.channel = channel;
+			chatVo.emoticons = [];
+			chatVo.playerUid = 0;
+			chatVo.playerName = "";
+			addMsg( chatVo );
+		}
 
 		public function addMsg( chatVo:ChatVo ):void
 		{

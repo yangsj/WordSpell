@@ -28,7 +28,7 @@ package app.modules.task.model
 		 */
 		public var describe:String;
 		/**
-		 * 任务状态
+		 * 任务状态(0默认状态|1正在进行中|2已完成|3已领取奖励)
 		 */
 		public var status:int;
 		/**
@@ -61,6 +61,7 @@ package app.modules.task.model
 		 */
 		public function get isComplete():Boolean
 		{
+			return status > 1;
 			return progressCurrent == progressTotal;
 		}
 		
@@ -70,9 +71,9 @@ package app.modules.task.model
 		public function get fullDescribe():String
 		{
 			return describe + ( 
-								isComplete ? 
-								HtmlText.color("（已完成）", HtmlText.Green) : 
-								HtmlText.color(progressCurrent+"/"+progressTotal, HtmlText.Red)
+								isComplete ? "（已完成）" : ""
+//								HtmlText.color("（已完成）", HtmlText.Green) : 
+//								HtmlText.color("（"+progressCurrent+"/"+progressTotal + "）", HtmlText.Red)
 							);
 		}
 		

@@ -51,6 +51,7 @@ package app.modules.task.service
 			var data:task_info_t = resp.data as task_info_t;
 			var list:Array = data.task_list;
 			var taskVo:TaskVo;
+			taskModel.taskList.length = 0;
 			for each ( var task:task_t in list )
 			{
 				taskVo = new TaskVo();

@@ -112,8 +112,6 @@ package app.modules.fight.view
 			
 			dictProps = new Dictionary();
 			
-//			if ( bgName )
-//				bgName.visible = isPractice;
 			if ( txtTime )
 				txtTime.visible = !isPractice;
 			if ( bgTime )

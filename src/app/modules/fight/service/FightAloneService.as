@@ -23,6 +23,7 @@ package app.modules.fight.service
 	import ff.end_round_ret_t;
 	import ff.input_req_t;
 	import ff.next_word_t;
+	import ff.quit_round_req_t;
 	import ff.select_item_bubble_req_t;
 	import ff.server_cmd_e;
 	import ff.start_round_req_t;
@@ -64,6 +65,7 @@ package app.modules.fight.service
 		private function startRoundNotify( resp:SocketResp ):void
 		{
 			fightModel.isFighting = true;
+			fightModel.isSelfExit = false;
 			
 			var data:start_round_ret_t = resp.data as start_round_ret_t;
 			var cnAry:Array = data.chinese_words;
@@ -167,13 +169,24 @@ package app.modules.fight.service
 			if ( endVo.addExp > 0 )
 				GameData.instance.updateAddExp( endVo.addExp );
 
-			TickManager.doTimeout( function abc():void {
-				dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_END_ROUND ));
-			}, 500 );
-			
-			fightModel.isFighting = false;
-			
-			dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
+			if ( fightModel.isPractice && fightModel.isSelfExit )
+			{
+				if ( fightModel.isErrorPractice ) {
+					dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightPractice ));
+				} else {
+					dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightAlone ));
+				}
+			}
+			else
+			{
+				TickManager.doTimeout( function abc():void {
+					dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_END_ROUND ));
+				}, 500 );
+				
+				fightModel.isFighting = false;
+				
+				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
+			}
 		}
 
 		// 下一个单词
@@ -287,6 +300,17 @@ package app.modules.fight.service
 			call( client_cmd_e.SELECT_ITEM_BUBBLE_REQ , req );
 			LoadingEffect.hide();
 		}
+		
+		/**
+		 * 退出练习
+		 */
+		public function exitPractice():void
+		{
+			fightModel.isSelfExit = true;
+			var req:quit_round_req_t = new quit_round_req_t();
+			call( client_cmd_e.QUIT_ROUND_REQ , req );
+		}
+		
 
 	}
 }

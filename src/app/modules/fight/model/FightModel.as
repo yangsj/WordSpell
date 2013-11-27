@@ -30,6 +30,7 @@ package app.modules.fight.model
 		private var _battleResultFlag:int;
 		private var _mapId:int = 0;
 		private var _isFighting:Boolean;
+		private var _isSelfExit:Boolean;
 		
 		public function FightModel()
 		{
@@ -290,6 +291,22 @@ package app.modules.fight.model
 		public function set isFighting(value:Boolean):void
 		{
 			_isFighting = value;
+		}
+
+		/**
+		 * 在练习模式下是自己主动退出的
+		 */
+		public function get isSelfExit():Boolean
+		{
+			return _isSelfExit;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isSelfExit(value:Boolean):void
+		{
+			_isSelfExit = value;
 		}
 
 

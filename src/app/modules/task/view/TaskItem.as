@@ -1,5 +1,6 @@
 package app.modules.task.view
 {
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -8,6 +9,8 @@ package app.modules.task.view
 	import app.modules.TempleteSprite;
 	import app.modules.ViewName;
 	import app.modules.task.model.TaskVo;
+	
+	import victor.framework.utils.MathUtil;
 	
 	
 	/**
@@ -22,6 +25,10 @@ package app.modules.task.view
 		/*============================================================================*/
 		
 		public var txtDes:TextField;
+		/**
+		 * 1帧为常态|2为正在进行|3已完成
+		 */
+		public var bgStatus:MovieClip;
 		
 		// 创建对象池
 		private static const vecPools:Vector.<TaskItem> = new Vector.<TaskItem>();
@@ -57,12 +64,6 @@ package app.modules.task.view
 		}
 		
 		/*============================================================================*/
-		/* protected functions                                                        */
-		/*============================================================================*/
-		
-		
-		
-		/*============================================================================*/
 		/* events handlers                                                            */
 		/*============================================================================*/
 		
@@ -85,7 +86,7 @@ package app.modules.task.view
 		public function setData( vo:TaskVo ):void
 		{
 			txtDes.htmlText = vo.fullDescribe;
-			
+			bgStatus.gotoAndStop( MathUtil.range(vo.status + 1, 1, 3) );
 			addListeners();
 		}
 		

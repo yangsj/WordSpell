@@ -101,15 +101,23 @@ package app.modules.fight.view
 			addContextListener( FightAloneEvent.ADD_MONEY_EFFECT, addMoneyEffectHandler, FightAloneEvent );
 			// 完成一个单词输入
 			addContextListener( SpellEvent.ONE_WORD_OVER, onWordOverHandler, SpellEvent );
+			// 练习模式显示答案中
+			addContextListener( FightAloneEvent.SHOW_ANSWER_ING, showAnswerIngHandler, FightAloneEvent );
 			
 			clickPropBubble = [];
 			
 			baseView.isValidOperate = true;
 		}
 		
+		private function showAnswerIngHandler( event:FightAloneEvent ):void
+		{
+			baseView.isValidOperate = false;
+		}
+		
 		private function exitPracticeHandler( event:FightAloneEvent ):void
 		{
 			Debug.debug( "退出练习模式" );
+			fightService.exitPractice();
 		}
 		
 		private function onWordOverHandler( event:SpellEvent ):void

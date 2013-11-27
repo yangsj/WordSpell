@@ -2,6 +2,7 @@ package app.modules.chat.view
 {
 	import flash.events.MouseEvent;
 	
+	import app.data.GameData;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.chat.model.ChatModel;
 	import app.modules.chat.model.ChatVo;
@@ -59,6 +60,8 @@ package app.modules.chat.view
 			
 			// 选中世界频道
 			view.selectedWorld();
+			
+			chatModel.sendLocal( "你的用户id为" + GameData.instance.selfVo.uid );
 		}
 		
 		// 展开聊天日志

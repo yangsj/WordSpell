@@ -25,5 +25,10 @@ package app.modules.fight.view.spell
 		 */
 		public static const ONE_WORD_OVER:String = "one_word_over";
 		
+		/**
+		 * 显示答案
+		 */
+		public static const SHOW_ANSWER:String = "show_answer";
+		
 	}
 }

@@ -37,6 +37,8 @@ package app.modules.fight.view.spell
 			addViewListener( FightAloneEvent.REMOVED_LETTER, removedLetterHandler, FightAloneEvent );
 			// 输入结束
 			addViewListener( SpellEvent.INPUT_OVER, inputOverHandler, SpellEvent );
+			// 显示答案
+			addViewListener( SpellEvent.SHOW_ANSWER, showAnswerHandler, SpellEvent );
 			
 			// start
 			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
@@ -51,6 +53,11 @@ package app.modules.fight.view.spell
 			if ( fightModel.modeType == 5 )
 				view.setInitData( fightModel.spellVo );
 			
+		}
+		
+		private function showAnswerHandler( event:SpellEvent ):void
+		{
+			dispatch( new FightAloneEvent( FightAloneEvent.SHOW_ANSWER_ING ));
 		}
 		
 		private function addMoneyEffectHandler( event:FightAloneEvent ):void

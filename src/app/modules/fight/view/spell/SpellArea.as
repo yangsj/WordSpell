@@ -56,6 +56,7 @@ package app.modules.fight.view.spell
 		protected function onClickBtnShowAnswerHandler(event:MouseEvent):void
 		{
 			btnShowAnswer.mouseEnabled = false;
+			dispatchEvent( new SpellEvent( SpellEvent.SHOW_ANSWER ));
 			showAnswer();
 		}
 		
