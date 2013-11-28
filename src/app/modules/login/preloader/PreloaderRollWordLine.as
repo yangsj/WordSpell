@@ -29,7 +29,7 @@ package app.modules.login.preloader
 		private var wordArray:Array;
 		private var lastIndex:int;
 		
-		private const HEIGHT:Number = 20;
+		private const HEIGHT:Number = 26;
 		
 		public function PreloaderRollWordLine()
 		{
@@ -50,7 +50,7 @@ package app.modules.login.preloader
 		{
 			if ( txtLine == null )
 			{
-				txtLine = TextFiledUtil.create( "", 14, 0xffffff, TextFormatAlign.CENTER );
+				txtLine = TextFiledUtil.create( "微软雅黑", 16, 0x0066FF, TextFormatAlign.CENTER );
 				txtLine.width = 500;
 				txtLine.height = HEIGHT;
 			}

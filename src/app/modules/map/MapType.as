@@ -33,7 +33,7 @@ package app.modules.map
 		 */
 		public static const ISLAND:int = 4;
 		/**
-		 * 天空
+		 * 天空[暂不用]
 		 */
 		public static const SKY:int    = 5;
 		

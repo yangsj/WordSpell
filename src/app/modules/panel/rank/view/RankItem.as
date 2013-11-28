@@ -31,6 +31,9 @@ package app.modules.panel.rank.view
 		public function RankItem()
 		{
 			setSkinWithName( "ui_Skin_RankItem" );
+			mouseEnabled = false;
+			mouseChildren = false;
+			cacheAsBitmap = true;
 		}
 		
 		protected function removedFromParentHandler(event:Event):void

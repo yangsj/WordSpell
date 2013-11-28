@@ -55,6 +55,7 @@ package app.modules.task.view
 			txtDes.visible = false;
 			mouseChildren = false;
 			mouseEnabled = false;
+			cacheAsBitmap = true;
 		}
 		
 		/*============================================================================*/

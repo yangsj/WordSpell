@@ -3,6 +3,7 @@ package app.modules.chat.view
 	import flash.events.MouseEvent;
 	
 	import app.data.GameData;
+	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.chat.model.ChatModel;
 	import app.modules.chat.model.ChatVo;
@@ -62,6 +63,7 @@ package app.modules.chat.view
 			view.selectedWorld();
 			
 			chatModel.sendLocal( "你的用户id为" + GameData.instance.selfVo.uid );
+			chatModel.sendLocal( "和好友私聊，请先选择一个好友", ChatChannelType.PRIVATE );
 		}
 		
 		// 展开聊天日志

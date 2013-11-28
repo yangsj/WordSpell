@@ -3,6 +3,7 @@ package app.modules.panel.rank.view
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	
+	import app.modules.panel.rank.events.RankEvent;
 	import app.modules.panel.rank.model.RankVo;
 	
 	import victor.framework.components.TabButtonControl;
@@ -22,9 +23,15 @@ package app.modules.panel.rank.view
 		private var gameScroll:GameScrollPanel;
 		
 		public var listContainer:Sprite;
+		public var currentTabType:int = 0;
 		
 		public function RankView()
 		{
+		}
+		
+		public function defaultSelected():void
+		{
+			tabControl.setDefaultTarget( null, true );
 		}
 		
 		public function createList(list:Vector.<RankVo>):void
@@ -63,41 +70,8 @@ package app.modules.panel.rank.view
 		
 		private function tabControlHandler( clickTarget:MovieClip, data:Object ):void
 		{
-			var list:Vector.<RankVo> = new Vector.<RankVo>();
-			var typeName:String = "";
-			switch ( data )
-			{
-				case 0:
-					typeName = tabName[data];
-					break;
-				case 1:
-					typeName = tabName[data];
-					break;
-				case 2:
-					typeName = tabName[data];
-					break;
-				case 3:
-					typeName = tabName[data];
-					break;
-				case 4:
-					typeName = tabName[data];
-					break;
-			}
-			if ( typeName )
-			{
-				var vo:RankVo;
-				for ( var i:int = 0; i < 20; i ++ )
-				{
-					vo = new RankVo();
-					vo.honor = "荣誉";
-					vo.rank = i+1;
-					vo.name = typeName + i;
-					vo.level = 2 + int(Math.random() * 20);
-					vo.validity = "无限延长";
-					list.push( vo );
-				}
-				createList( list );
-			}
+			currentTabType = int( data );
+			dispatchEvent( new RankEvent( RankEvent.CHANGE_TAB ));
 		}
 		
 		override protected function  onceInit():void

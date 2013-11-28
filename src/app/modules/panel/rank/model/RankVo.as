@@ -13,7 +13,7 @@ package app.modules.panel.rank.model
 		}
 		
 		/**
-		 * 类型：1=周|2=月|3=综合|4=财富|5=丰收
+		 * 类型：0=周|1=月|2=综合|3=财富|4=丰收
 		 */
 		public var type:int;
 		

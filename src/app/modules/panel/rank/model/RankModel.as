@@ -1,5 +1,7 @@
 package app.modules.panel.rank.model
 {
+	import flash.utils.Dictionary;
+	
 	import org.robotlegs.mvcs.Actor;
 	
 	
@@ -10,28 +12,28 @@ package app.modules.panel.rank.model
 	 */
 	public class RankModel extends Actor
 	{
-		private var _list:Vector.<RankVo> = new Vector.<RankVo>();
+		private var _dictList:Dictionary = new Dictionary();
 		
 		public function RankModel()
 		{
 			super();
 		}
 		
-		
-		/**
-		 * 列表
-		 */
-		public function get list():Vector.<RankVo>
+		public function clearDictList():void
 		{
-			return _list;
+			_dictList = new Dictionary();
 		}
-
-		/**
-		 * @private
-		 */
-		public function set list(value:Vector.<RankVo>):void
+		
+		public function getListByType( type:int ):Vector.<RankVo>
 		{
-			_list = value;
+			_dictList ||= new Dictionary();
+			return _dictList[ type ] as Vector.<RankVo>;
+		}
+		
+		public function setListByType( type:int, list:Vector.<RankVo> ):void
+		{
+			_dictList ||= new Dictionary();
+			_dictList[ type ] = list;
 		}
 
 	}

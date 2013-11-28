@@ -1,5 +1,6 @@
 package app.modules.login.preloader
 {
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
@@ -18,7 +19,7 @@ package app.modules.login.preloader
 	 */
 	public class PreloaderView extends BaseScene
 	{
-		public var mcProgressBar:Sprite;
+		public var mcProgressBar:MovieClip;
 		public var txtProgressValue:TextField;
 		
 		private var rollWord:PreloaderRollWordLine;
@@ -33,6 +34,13 @@ package app.modules.login.preloader
 			this.graphics.beginFill( 0 );
 			this.graphics.drawRect( 0, 0, appStage.stageWidth, appStage.stageHeight);
 			this.graphics.endFill();
+		}
+		
+		override protected function onceInit():void
+		{
+			super.onceInit();
+			
+			txtProgressValue ||= TextFiledUtil.create( "", 45, 0xffffff );
 		}
 		
 		override public function dispose():void
@@ -57,7 +65,7 @@ package app.modules.login.preloader
 				{
 					rollWord = new PreloaderRollWordLine();
 					rollWord.x = ( width - rollWord.width ) >> 1;
-					rollWord.y = ( height - 50 );
+					rollWord.y = txtProgressValue.y + txtProgressValue.height + 10;
 					addChild( rollWord );
 				}
 				rollWord.initialize();
@@ -66,9 +74,9 @@ package app.modules.login.preloader
 		
 		public function setProgressValue( value:Number ):void
 		{
-			txtProgressValue ||= TextFiledUtil.create( "", 45, 0xffffff );
 			txtProgressValue.text = ( value * 100 ).toFixed( 2 ) + "%";
-			mcProgressBar.scaleX = Math.min( value, 1 );
+//			mcProgressBar.scaleX = Math.min( value, 1 );
+			mcProgressBar.gotoAndStop( int(value * 100) );
 			addChild( txtProgressValue );
 		}
 		

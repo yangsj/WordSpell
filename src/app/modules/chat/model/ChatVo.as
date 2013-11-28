@@ -1,6 +1,7 @@
 package app.modules.chat.model
 {
 	import app.Language;
+	import app.modules.chat.ChatChannelType;
 
 	/**
 	 * ����
@@ -44,6 +45,11 @@ package app.modules.chat.model
 		 * 发送的表情
 		 */
 		public var emoticons:Array = [];
+		
+		/**
+		 * 是否是本地消息
+		 */
+		public var isLocal:Boolean = false;
 
 		/**
 		 * 获取文字部分内容
@@ -63,7 +69,11 @@ package app.modules.chat.model
 		
 		private function get addHeadMsg():String
 		{
-			return channelName[ channel ] + playerName + ":";
+			var ch:uint = channel;
+			if ( isLocal && channel == ChatChannelType.PRIVATE ) {
+				ch = ChatChannelType.SYSTEM;
+			}
+			return channelName[ ch ] + playerName + ":";
 		}
 
 	}

@@ -136,14 +136,10 @@ package app.modules.fight.view.alone
 		override protected function get resNames():Array
 		{
 			return[ 
-				"map_chapter_0", 
-				"map_chapter_1", 
-				"map_chapter_2", 
-				"map_chapter_3", 
-				"map_chapter_4", 
-				"map_chapter_5", 
-				"ui_fight", 
-				"ui_prop_list"];
+					"map_chapter_bg", 
+					"ui_fight", 
+					"ui_prop_list"
+				];
 		}
 
 		override protected function get skinName():String

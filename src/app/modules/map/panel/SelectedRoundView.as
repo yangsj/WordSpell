@@ -60,6 +60,7 @@ package app.modules.map.panel
 		
 		override protected function createSkin():void
 		{
+			DisplayUtil.removedAll( this );
 			// 
 			_skin = skinDict[ skinName ];
 			if ( _skin == null )
@@ -137,7 +138,7 @@ package app.modules.map.panel
 		
 		override protected function get resNames():Array
 		{
-			return ["map_chapter_0", "map_chapter_1", "map_chapter_2", "map_chapter_3", "map_chapter_4", "map_chapter_5", "map_chapter_list" ];
+			return ["map_chapter_bg", "map_chapter_list" ];
 		}
 		
 		override protected function get skinName():String

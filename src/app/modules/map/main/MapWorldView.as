@@ -23,6 +23,8 @@ package app.modules.map.main
 		public var map4:MovieClip;
 		public var map5:MovieClip;
 		
+		private const MAP_NUM:int = 5;
+		
 		public function MapWorldView()
 		{
 			addedToStageHandler( null );
@@ -33,7 +35,7 @@ package app.modules.map.main
 		private function initMapItem():void
 		{
 			var tempList:Array = [ map0, map1, map2, map3, map4, map5 ];
-			for ( var i:int = 0; i < 6; i++ )
+			for ( var i:int = 0; i < MAP_NUM; i++ )
 				mapListItem.push( new MapItem( tempList[ i ] ));
 		}
 		
@@ -41,7 +43,8 @@ package app.modules.map.main
 		{
 			if ( list )
 			{
-				for (var i:int = 0; i < list.length; i++ )
+				var length:int = Math.min( MAP_NUM, list.length );
+				for (var i:int = 0; i < length; i++ )
 					mapListItem[i].setAndUpdateData( list[ i ] );
 			}
 		}

@@ -14,5 +14,16 @@ package app.modules.panel.rank.events
 		{
 			super(type, data, bubbles, cancelable);
 		}
+		
+		/**
+		 * 拉取数据成功
+		 */
+		public static const COMPLETE_NOTITY:String = "complete_notity";
+		
+		/**
+		 * tab标签切换
+		 */
+		public static const CHANGE_TAB:String = "change_tab";
+		
 	}
 }

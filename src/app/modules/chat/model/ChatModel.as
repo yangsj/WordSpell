@@ -36,6 +36,7 @@ package app.modules.chat.model
 			chatVo.emoticons = [];
 			chatVo.playerUid = 0;
 			chatVo.playerName = "";
+			chatVo.isLocal = true;
 			addMsg( chatVo );
 		}
 
