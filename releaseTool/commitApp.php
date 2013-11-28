@@ -32,10 +32,15 @@
 	system($createPathCmd);
 	
 	//svn 添加文件夹
-	echo "<h4 style='color:green;'>";
-	$svnaddFloder = "svn add ". $fullversionPath . " --force";
-	system($svnaddFloder);
-	echo "</h4>";
+	//echo "<h4 style='color:green;'>";
+	//$svnaddFloder = "svn add ". $fullversionPath . " --force";
+	//system($svnaddFloder);
+	//echo "</h4>";
+	
+	
+	$assetsPath  = "if not exist ".$fullversionPath."\\assets md ".$fullversionPath;
+	$assetsFloder = "svn del ". $fullversionPath."\\assets\\*.swf";
+	system($assetsFloder);
 	
 	//copy 文件
 	//echo "<br>====================================================================================================<br>";
