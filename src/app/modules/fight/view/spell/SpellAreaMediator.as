@@ -6,6 +6,7 @@ package app.modules.fight.view.spell
 	import app.modules.fight.service.FightAloneService;
 	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.manager.TickManager;
 	
 	
 	/**
@@ -49,6 +50,7 @@ package app.modules.fight.view.spell
 			// 字母拼写正确,增加金币
 			addViewListener( FightAloneEvent.ADD_MONEY_EFFECT, addMoneyEffectHandler, FightAloneEvent );
 			
+			fightModel.isErrorLastAnswerForPractice = false;
 			isSendInput = false;
 			if ( fightModel.modeType == 5 )
 				view.setInitData( fightModel.spellVo );
@@ -57,6 +59,7 @@ package app.modules.fight.view.spell
 		
 		private function showAnswerHandler( event:SpellEvent ):void
 		{
+			fightModel.isErrorLastAnswerForPractice = true;
 			dispatch( new FightAloneEvent( FightAloneEvent.SHOW_ANSWER_ING ));
 		}
 		
@@ -83,13 +86,19 @@ package app.modules.fight.view.spell
 		
 		private function nextWordNotify( event:FightAloneEvent ):void
 		{
-			isSendInput = false;
-			view.setInitData( fightModel.spellVo );
-			view.setPos( fightModel.isPractice );
+			setNextWrodInfo();
 			
 			if ( view.btnShowAnswer ) {
 				view.btnShowAnswer.visible = fightModel.isPractice;
 			}
+		}
+		
+		private function setNextWrodInfo():void
+		{
+			fightModel.isErrorLastAnswerForPractice = false;
+			isSendInput = false;
+			view.setInitData( fightModel.spellVo );
+			view.setPos( fightModel.isPractice );
 		}
 		
 		private function updateWordHandler( event:FightAloneEvent ):void

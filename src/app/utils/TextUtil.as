@@ -23,10 +23,10 @@ package app.utils
 		 * @param align
 		 * @return 
 		 */
-		public static function getFormat( size:int = 50, color:uint = 0, align:String = "center" ):TextFormat
+		public static function getFormat( font:String = "", size:int = 50, color:uint = 0, align:String = "center" ):TextFormat
 		{
 			var tf:TextFormat = new TextFormat();
-			tf.font = FontManager.fontName;
+			tf.font = font ? font : FontManager.fontName;
 			tf.color = color;
 			tf.size = size;
 			tf.align = align;
@@ -44,11 +44,11 @@ package app.utils
 		 * @param aglin
 		 * @return TextField对象实例，绑定嵌入字体显示，仅用可选和鼠标事件
 		 */
-		public static function getText( size:int, color:uint, x:Number = 0, y:Number = 0, w:Number = 100, h:Number = 22, aglin:String = "center" ):TextField
+		public static function getText( size:int, color:uint, font:String = "", x:Number = 0, y:Number = 0, w:Number = 100, h:Number = 22, aglin:String = "center" ):TextField
 		{
 			var text:TextField = new TextField();
-			text.defaultTextFormat = getFormat( size, color );
-			text.embedFonts = true;
+			text.defaultTextFormat = getFormat( font, size, color, aglin );
+			text.embedFonts = font == "";
 			text.selectable = false;
 			text.mouseEnabled = false;
 			text.x = x;
@@ -66,7 +66,7 @@ package app.utils
 		public static function cloneText( originalText:TextField ):TextField
 		{
 			var tf:TextFormat = originalText.defaultTextFormat;
-			var tt:TextField = getText( int(tf.size), uint(tf.color), originalText.x, originalText.y, originalText.width, originalText.height, tf.align );
+			var tt:TextField = getText( int(tf.size), uint(tf.color), tf.font, originalText.x, originalText.y, originalText.width, originalText.height, tf.align );
 			if ( originalText.parent ) {
 				originalText.parent.addChild( tt );
 				originalText.parent.removeChild( originalText );

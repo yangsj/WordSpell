@@ -1,5 +1,7 @@
 package app.modules.task.view
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -9,7 +11,9 @@ package app.modules.task.view
 	import app.modules.TempleteSprite;
 	import app.modules.ViewName;
 	import app.modules.task.model.TaskVo;
+	import app.utils.TextUtil;
 	
+	import victor.framework.utils.DisplayUtil;
 	import victor.framework.utils.MathUtil;
 	
 	
@@ -30,12 +34,14 @@ package app.modules.task.view
 		 */
 		public var bgStatus:MovieClip;
 		
+		private var bitmapDes:Bitmap;
+		
 		// 创建对象池
 		private static const vecPools:Vector.<TaskItem> = new Vector.<TaskItem>();
 		public static function get itemInstance():TaskItem
 		{
 			if ( vecPools && vecPools.length > 0 )
-				return vecPools.pop();
+				return vecPools.shift();
 			return new TaskItem();
 		}
 		
@@ -45,7 +51,10 @@ package app.modules.task.view
 		public function TaskItem()
 		{
 			setSkinWithName( "ui_Skin_TaskItem" );
-			txtDes.mouseEnabled = false;
+			txtDes = TextUtil.cloneText( txtDes );
+			txtDes.visible = false;
+			mouseChildren = false;
+			mouseEnabled = false;
 		}
 		
 		/*============================================================================*/
@@ -85,9 +94,24 @@ package app.modules.task.view
 		
 		public function setData( vo:TaskVo ):void
 		{
-			txtDes.htmlText = vo.fullDescribe;
-			bgStatus.gotoAndStop( MathUtil.range(vo.status + 1, 1, 3) );
+//			bgStatus.gotoAndStop( MathUtil.range(vo.status + 1, 1, 3) );
+			bgStatus.gotoAndStop( vo.isComplete ? 3 : 1 );
 			addListeners();
+			
+			if (  txtDes.htmlText != vo.fullDescribe )
+			{
+				txtDes.htmlText = vo.fullDescribe;
+				if ( bitmapDes ) {
+					if ( bitmapDes.bitmapData )
+						bitmapDes.bitmapData.dispose();
+					DisplayUtil.removedFromParent( bitmapDes );
+				}
+				bitmapDes = new Bitmap( new BitmapData( txtDes.width, txtDes.height, true, 0 ));
+				bitmapDes.bitmapData.draw( txtDes );
+				bitmapDes.x = txtDes.x;
+				bitmapDes.y = txtDes.y;
+				_skin.addChild( bitmapDes );
+			}
 		}
 		
 		/*============================================================================*/

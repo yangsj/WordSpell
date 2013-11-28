@@ -29,6 +29,8 @@ package app.modules.fight.view.spell
 		private var _spellVo:SpellVo;
 		private var _spellItems:Vector.<SpellItem>;
 		private var _inputNum:int = 0;
+		private var _isPractice:Boolean = false;
+		private var _lastIsAnswerError:Boolean = false;
 
 		public function SpellArea()
 		{
@@ -39,6 +41,7 @@ package app.modules.fight.view.spell
 		
 		public function setPos(isPractice:Boolean = false ):void
 		{
+			_isPractice = isPractice;
 			x = isPractice ? 440 : 330;
 			y = 460;
 		}
@@ -56,8 +59,8 @@ package app.modules.fight.view.spell
 		protected function onClickBtnShowAnswerHandler(event:MouseEvent):void
 		{
 			btnShowAnswer.mouseEnabled = false;
-			dispatchEvent( new SpellEvent( SpellEvent.SHOW_ANSWER ));
 			showAnswer();
+			inputOver();
 		}
 		
 		private function createSpellItems():void
@@ -70,6 +73,7 @@ package app.modules.fight.view.spell
 		public function setInitData( spellVo:SpellVo ):void
 		{
 			btnShowAnswer.mouseEnabled = true;
+			_lastIsAnswerError = false;
 			
 			_spellVo = spellVo;
 			_inputList = new Vector.<LetterBubbleVo>( _spellVo.charsLength );
@@ -126,10 +130,17 @@ package app.modules.fight.view.spell
 						// add money
 						dispatchEvent( new FightAloneEvent( FightAloneEvent.ADD_MONEY_EFFECT ));
 					}
-					else isOver = true;
+					else 
+					{
+						isOver = true;
+						_lastIsAnswerError = true;
+					}
 				}
-				if ( isOver )
-					inputOver();
+				if ( isOver ) {
+					if ( _isPractice && _lastIsAnswerError )
+						btnShowAnswer.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
+					else inputOver();
+				}
 			}
 			else
 			{
@@ -171,13 +182,18 @@ package app.modules.fight.view.spell
 		{
 			var item:SpellItem;
 			var leng:int = Math.min(_spellVo.items.length, MAX );
-			for ( var i:int = 0; i < leng; i++ )
-			{
+			for ( var i:int = 0; i < leng; i++ ) {
 				item = _spellItems[ i ];
 				item.setData( _spellVo.items[ i ] );
 			}
-			TickManager.doTimeout( inputOver, 2000 );
+			dispatchEvent( new SpellEvent( SpellEvent.SHOW_ANSWER ));
 		}
+
+		public function get lastIsAnswerError():Boolean
+		{
+			return _lastIsAnswerError;
+		}
+
 
 	}
 }

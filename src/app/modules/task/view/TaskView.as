@@ -31,10 +31,12 @@ package app.modules.task.view
 				DisplayUtil.removedAll( listContainer );
 				var i:int = 0;
 				var disty:Number = 43;
+				var startx:Number = list.length < 7 ? 5 : 0;
 				for each ( var vo:TaskVo in list )
 				{
 					var item:TaskItem = TaskItem.itemInstance;
 					item.setData( vo );
+					item.x = startx;
 					item.y = disty * i;
 					listContainer.addChild( item );
 					i++;

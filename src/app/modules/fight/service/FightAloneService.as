@@ -213,10 +213,12 @@ package app.modules.fight.service
 				{
 					fightModel.currentSelfIndex++;
 					updateSelfWordList();
+					
+					var time:int = fightModel.isErrorLastAnswerForPractice ? 2000 : 500;
 					//
 					TickManager.doTimeout( function abc( result:Boolean ):void {
 					dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD, result ));
-					}, 500, data.answer_flag );
+					}, time, data.answer_flag );
 				}
 			}
 			else

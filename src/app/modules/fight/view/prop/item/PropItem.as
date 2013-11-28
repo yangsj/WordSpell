@@ -54,9 +54,9 @@ package app.modules.fight.view.prop.item
 		{
 			var array:Array = [new GlowFilter(0,1,2,2,3,3)];
 			
-			txtCost = TextUtil.getText(25, 0xffff00,-10, 60, 80, 35);
-			txtNum = TextUtil.getText(25, 0xffff00,5, 60, 60, 35);
-			txtTime = TextUtil.getText(25, 0xffff00,-10, 60, 80, 35);
+			txtCost = TextUtil.getText(25, 0xffff00,"", -10, 60, 80, 35);
+			txtNum = TextUtil.getText(25, 0xffff00, "", 5, 60, 60, 35);
+			txtTime = TextUtil.getText(25, 0xffff00, "", -10, 60, 80, 35);
 			
 			txtCost.filters = array;
 			txtNum.filters = array;

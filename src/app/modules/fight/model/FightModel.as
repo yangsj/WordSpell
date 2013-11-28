@@ -31,6 +31,7 @@ package app.modules.fight.model
 		private var _mapId:int = 0;
 		private var _isFighting:Boolean;
 		private var _isSelfExit:Boolean;
+		private var _isErrorLastAnswerForPractice:Boolean = false;
 		
 		public function FightModel()
 		{
@@ -307,6 +308,22 @@ package app.modules.fight.model
 		public function set isSelfExit(value:Boolean):void
 		{
 			_isSelfExit = value;
+		}
+
+		/**
+		 *  練習模式上一個詞是否答錯
+		 */
+		public function get isErrorLastAnswerForPractice():Boolean
+		{
+			return _isErrorLastAnswerForPractice;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isErrorLastAnswerForPractice(value:Boolean):void
+		{
+			_isErrorLastAnswerForPractice = value;
 		}
 
 
