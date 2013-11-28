@@ -37,22 +37,23 @@
 	//system($svnaddFloder);
 	//echo "</h4>";
 	
-	
-	$assetsPath  = "if not exist ".$fullversionPath."\\assets md ".$fullversionPath;
-	$assetsFloder = "svn del ". $fullversionPath."\\assets\\*.swf";
-	system($assetsFloder);
-	
 	//copy 文件
 	//echo "<br>====================================================================================================<br>";
 	echo "<h2>第二步、复制文件到版本目录</h2><br>";
 	//echo "=====================================================================================================<br>";
 	
-	echo "<div style='font-size:9px;color:gray;width:800px;height:150px;overflow:scroll;border:1px solid gray;'>";
+	echo "<div style='font-size:12px;color:gray;width:800px;height:150px;overflow:scroll;border:1px solid gray;'>";
+	
+	$assetsPath  = "if not exist ".$fullversionPath."\\assets md ".$fullversionPath;
+	$assetsFloder = "svn del ". $fullversionPath."\\assets\\*.swf";
+	system($assetsFloder);
+
+	echo "<br />--------------------------------------";echo "<br />";
 
 	system("copy /Y ".$releaseFloader."WordsSpell.swf ".$fullversionPath."Main.swf");
 	system("xcopy /Y ".$releaseFloader."application.xml ".$fullversionPath);
 
-	echo "<br />";echo "<br />";
+	echo "<br />--------------------------------------";echo "<br />";
 
 	system("xcopy /S/Y ".$releaseFloader."assets\*.swf ".$fullversionPath."assets\\");
 
@@ -83,7 +84,7 @@
 	echo "svn add 命令行：".$svnAddFiles;
 	echo "</h4>";
 
-	echo "<div style='font-size:11px;color:blue;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
+	echo "<div style='font-size:12px;color:blue;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
 	system($svnAddFiles);
 	echo "</div>";
 	
@@ -94,7 +95,7 @@
 	echo "svn commit 命令行：".$svncommitFloder;
 	echo "</h4>";
 
-	echo "<div style='font-size:11px;color:green;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
+	echo "<div style='font-size:12px;color:green;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
 	system($svncommitFloder);
 	echo "</div>";
 
