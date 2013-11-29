@@ -11,6 +11,8 @@
 		
 		$assests = $doc->getElementsByTagName("asset");
 
+		$array = array();
+
 		foreach($assests as $ai)
 		{
 			$src = $ai->getAttribute("src");
@@ -27,10 +29,15 @@
 				$ai -> setAttribute("src", $new_src);
 				// 重命名文件名
 				rename($file_url, $new_name);
+
+				$array[$md5_str] = 1;
+				//array_push( $array, $md5_str );
 			}
 		}
 
 		$doc->save($file);
+
+		return $array;
 	}
 
 

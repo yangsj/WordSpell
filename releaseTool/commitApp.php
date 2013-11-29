@@ -30,6 +30,7 @@
 	
 	$createPathCmd  = "if not exist ".$fullversionPath." md ".$fullversionPath;
 	system($createPathCmd);
+
 	
 	//svn 添加文件夹
 	//echo "<h4 style='color:green;'>";
@@ -44,9 +45,9 @@
 	
 	echo "<div style='font-size:12px;color:gray;width:800px;height:150px;overflow:scroll;border:1px solid gray;'>";
 	
-	$assetsPath  = "if not exist ".$fullversionPath."\\assets md ".$fullversionPath;
-	$assetsFloder = "svn del ". $fullversionPath."\\assets\\*.swf";
-	system($assetsFloder);
+	//$assetsPath  = "if not exist ".$fullversionPath."\\assets md ".$fullversionPath;
+	//$assetsFloder = "svn del ". $fullversionPath."\\assets\\*.swf";
+	//system($assetsFloder);
 
 	echo "<br />--------------------------------------";echo "<br />";
 
@@ -71,20 +72,40 @@
 	echo "<h2>第三步、提交文件到版本库</h2>";
 
 	///////更改资源版本信息
-	echo "<h3 style='font-size:12px;'>更改资源版本信息</h3>";
+
+	echo "<h4 style='color:green;font-size:12px;'>";
+	echo "1、刪除未使用到的資源";
+	echo "</h4>";
+
+	echo "<div style='font-size:12px;color:green;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
+
+	// 更新資源版本控制
 	$filename5 = $fullversionPath."\\application.xml";
-	changeApplicationXmlVersions($filename5, $fullversionPath);
+	$newArray = changeApplicationXmlVersions($filename5, $fullversionPath);
+
+	// 刪除版本目錄下未使用的資源
+	$fileArray = glob($fullversionPath."assets\\*.swf");
+	foreach ( $fileArray as $fileUrl )
+	{
+		$index = strrpos( $fileUrl, "\\" ) + 1;
+		$end = strrpos( $fileUrl, "." );
+		$length = $end - $index;
+		$fileName = substr( $fileUrl, $index, $length );
+		if ( $newArray[ $fileName ] != 1 ) {
+			system( "svn del ".$fileUrl );
+		}
+	}
+	echo "</div>";
 
 	///////提交到svn///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//svn 提交文件夹
-	$svnAddFiles = "svn add ".$fullversionPath."*.* --force";
-
 	echo "<h4 style='color:green;font-size:12px;'>";
-	echo "svn add 命令行：".$svnAddFiles;
+	echo "2、新增資源添加到版本庫中";
 	echo "</h4>";
 
 	echo "<div style='font-size:12px;color:blue;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
+	$svnAddFiles = "svn add ".$fullversionPath."*.* --force";
 	system($svnAddFiles);
 	echo "</div>";
 	
@@ -92,7 +113,7 @@
 	$svncommitFloder = "svn commit ".$versionLibPath." --username ".$svnUser." --password ".$svnPwd." --message ".$versionLog;
 
 	echo "<h4 style='color:green;font-size:12px;'>";
-	echo "svn commit 命令行：".$svncommitFloder;
+	echo "3、更新版本庫";
 	echo "</h4>";
 
 	echo "<div style='font-size:12px;color:green;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
