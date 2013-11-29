@@ -80,6 +80,11 @@ package app.modules
 		public static const Personal:String = "personalPanel";
 		
 		/**
+		 * 错误单词列表
+		 */
+		public static const ErrorListPanel:String = "errorListPanel";
+		
+		/**
 		 * 排行系统
 		 */
 		public static const Rank:String = "rankPanel";
