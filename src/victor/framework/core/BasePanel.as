@@ -1,6 +1,6 @@
 package victor.framework.core
 {
-	import com.greensock.TweenMax;
+	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
 	import flash.display.InteractiveObject;
@@ -9,7 +9,7 @@ package victor.framework.core
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.events.PanelEvent;
 	
@@ -36,7 +36,7 @@ package victor.framework.core
 		/**
 		 * 是否鼠标可以穿透
 		 */
-		protected var isPenetrate:Boolean = false;
+		protected var isPenetrate:Boolean = true;
 		
 		public function BasePanel()
 		{
@@ -109,8 +109,8 @@ package victor.framework.core
 			this.scaleX = 0.1;
 			this.scaleY = 0.1;
 			changePosAtOpen();
-			TweenMax.killTweensOf( this );
-			TweenMax.to( this, 0.5, { 	scaleX: 1, 
+			TweenLite.killTweensOf( this );
+			TweenLite.to( this, 0.5, { 	scaleX: 1, 
 				scaleY: 1, 
 				alpha: 1, 
 				onUpdate: changePosAtOpen, 
@@ -126,8 +126,8 @@ package victor.framework.core
 				mouseChildren = false;
 				hideX = x;
 				hideY = y;
-				TweenMax.killTweensOf( this );
-				TweenMax.to( this, delay, { scaleX: 0.2, 
+				TweenLite.killTweensOf( this );
+				TweenLite.to( this, delay, { scaleX: 0.2, 
 					scaleY: 0.2, 
 					alpha: 0, 
 					ease: Back.easeIn, 

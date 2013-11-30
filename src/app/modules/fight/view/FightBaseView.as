@@ -1,6 +1,6 @@
 package app.modules.fight.view
 {
-	import com.greensock.TweenMax;
+	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	import com.greensock.easing.Linear;
 	
@@ -14,7 +14,7 @@ package app.modules.fight.view
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
-	import app.core.SkinButton;
+	import app.core.ButtonSkin;
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.modules.fight.events.FightAloneEvent;
@@ -22,7 +22,7 @@ package app.modules.fight.view
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.fight.view.prop.PropList;
 	import app.modules.fight.view.spell.SpellArea;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.core.LoadViewBase;
 	import victor.framework.core.ViewStruct;
@@ -79,7 +79,7 @@ package app.modules.fight.view
 			effectContainer = new Sprite();
 			addChild( effectContainer );
 			
-			btnClose = SkinButton.buttonExit;
+			btnClose = ButtonSkin.buttonExit;
 			addChild( btnClose );
 			btnClose.visible = false;
 			btnClose.addEventListener(MouseEvent.CLICK, onClickBtnCloseHandler );
@@ -151,8 +151,8 @@ package app.modules.fight.view
 				mc.y = point.y;
 				mc.gotoAndStop( mapId + 1 );
 				effectContainer.addChild( mc ); 
-				TweenMax.to( mc, 0.4, { x:endx, y:endy, ease:Linear.easeNone });
-				TweenMax.to( mc, 0.3, { scaleX:0.1, 
+				TweenLite.to( mc, 0.4, { x:endx, y:endy, ease:Linear.easeNone });
+				TweenLite.to( mc, 0.3, { scaleX:0.1, 
 										scaleY:0.1, 
 										onComplete:DisplayUtil.removedFromParent, 
 										onCompleteParams:[mc], 
@@ -169,8 +169,8 @@ package app.modules.fight.view
 			bubble.x = pos.x;
 			bubble.y = pos.y;
 			effectContainer.addChild( bubble );
-			TweenMax.to( bubble, 0.4, { x:point.x, y:point.y, ease:Linear.easeNone });
-			TweenMax.to( bubble, 0.3, { scaleX:0.1, 
+			TweenLite.to( bubble, 0.4, { x:point.x, y:point.y, ease:Linear.easeNone });
+			TweenLite.to( bubble, 0.3, { scaleX:0.1, 
 										scaleY:0.1, 
 										ease:Back.easeIn, 
 										delay:0.4, 

@@ -1,4 +1,4 @@
-package app.utils
+package app.core
 {
 	import flash.text.TextField;
 	import flash.text.TextFormat;
@@ -10,9 +10,9 @@ package app.utils
 	 * @author 	yangsj 
 	 * 			2013-10-16
 	 */
-	public class TextUtil
+	public class Text
 	{
-		public function TextUtil()
+		public function Text()
 		{
 		}
 		

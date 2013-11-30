@@ -9,8 +9,8 @@ package app.core
 	import flash.text.TextField;
 	
 	import app.managers.LoaderManager;
-	import app.utils.appStage;
-	import app.utils.safetyCall;
+	import victor.framework.utils.appStage;
+	import victor.framework.utils.safetyCall;
 	
 	import victor.framework.components.Reflection;
 	import victor.framework.core.ViewStruct;

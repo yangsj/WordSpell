@@ -3,21 +3,21 @@ package victor.framework.debug
 
 	import flash.display.Stage;
 	import flash.system.Capabilities;
+	
+	import victor.framework.interfaces.IDebug;
 
 	/**
 	 * @author
 	 */
 	public class Debug
 	{
-		private static var _ccInstance:CcInstance;
+		private static var _ccInstance:IDebug;
 
 		public static function warn( ... args ):void
 		{
 			if ( _ccInstance && isDebug )
 			{
-				var msg:String = JSON.stringify( args );
-				_ccInstance.warn( msg );
-				Trace( "[warn]" + msg );
+				_ccInstance.warn( args );
 			}
 		}
 
@@ -25,9 +25,7 @@ package victor.framework.debug
 		{
 			if ( _ccInstance && isDebug )
 			{
-				var msg:String = JSON.stringify( args );
-				_ccInstance.error( msg );
-				Trace( "[error]" + msg );
+				_ccInstance.error( args );
 			}
 		}
 
@@ -35,30 +33,18 @@ package victor.framework.debug
 		{
 			if ( _ccInstance && isDebug )
 			{
-				var msg:String = JSON.stringify( args );
-				_ccInstance.debug( msg );
-				Trace( "[debug]" + msg );
+				_ccInstance.debug( args );
 			}
 		}
 
-		public static function printData( ... args ):void
+		public static function printServer( ... args ):void
 		{
 			if ( _ccInstance && isDebug )
 			{
-				var msg:String = JSON.stringify( args );
-				_ccInstance.info( msg );
-				Trace( "[printData]" + msg );
+				_ccInstance.printServer( args );
 			}
 		}
 		
-		public static function Trace( ...args ):void
-		{
-			if ( _ccInstance && isDebug )
-			{
-				trace("[trace][" + args.join(",") + "]");
-			}
-		}
-
 		/**
 		 * 初始化舞台
 		 */
@@ -86,48 +72,4 @@ package victor.framework.debug
 			_isDebug = value;
 		}
 	}
-}
-
-import com.junkbyte.console.Cc;
-
-import flash.display.Stage;
-
-class CcInstance
-{
-	public function warn( ... args ):void
-	{
-		Cc.warn( args );
-	}
-
-	public function error( ... args ):void
-	{
-		Cc.error( args );
-	}
-
-	public function debug( ... args ):void
-	{
-		Cc.debug( args );
-	}
-
-	public function info( ... args ):void
-	{
-		Cc.info( args );
-	}
-
-	/**
-	 * 初始化舞台
-	 */
-	public function initStage( stage:Stage, pass:String = " " ):void
-	{
-		Cc.config.style.backgroundAlpha = 0.7;
-		Cc.startOnStage( stage, pass );
-		Cc.commandLine = true;
-		Cc.fpsMonitor = true;
-		Cc.memoryMonitor = true;
-		Cc.config.commandLineAllowed = true;
-		Cc.config.alwaysOnTop = true;
-		Cc.visible = false;
-		Cc.width = stage.stageWidth - 50;
-	}
-
 }

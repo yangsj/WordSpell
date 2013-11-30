@@ -2,7 +2,7 @@ package app.modules.fight.panel.ready
 {
 	import flash.display.Sprite;
 	
-	import app.core.SkinButton;
+	import app.core.ButtonSkin;
 	import app.modules.fight.model.FightMatchingVo;
 	
 	import victor.framework.core.BasePanel;
@@ -32,7 +32,7 @@ package app.modules.fight.panel.ready
 			super.onceInit();
 			
 			DisplayUtil.removedFromParent( btnClose );
-			btnClose = SkinButton.buttonExit;
+			btnClose = ButtonSkin.buttonExit;
 			_skin.addChild( btnClose );
 			
 			itemLeft = new FightReadyItem( player1 );

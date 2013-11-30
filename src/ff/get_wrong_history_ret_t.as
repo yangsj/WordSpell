@@ -15,51 +15,51 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class search_user_ret_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("search_user_ret_t");
-    private static const USER_LIST_FIELD_DESC:TField = new TField("user_list", TType.LIST, 1);
+  public class get_wrong_history_ret_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("get_wrong_history_ret_t");
+    private static const WRONG_WORDS_FIELD_DESC:TField = new TField("wrong_words", TType.LIST, 1);
 
-    private var _user_list:Array;
-    public static const USER_LIST:int = 1;
+    private var _wrong_words:Array;
+    public static const WRONG_WORDS:int = 1;
 
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[USER_LIST] = new FieldMetaData("user_list", TFieldRequirementType.DEFAULT, 
+      metaDataMap[WRONG_WORDS] = new FieldMetaData("wrong_words", TFieldRequirementType.DEFAULT, 
           new ListMetaData(TType.LIST, 
-              new StructMetaData(TType.STRUCT, user_status_ret_t)));
+              new FieldValueMetaData(TType.STRING)));
     }
     {
-      FieldMetaData.addStructMetaDataMap(search_user_ret_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(get_wrong_history_ret_t, metaDataMap);
     }
 
-    public function search_user_ret_t() {
+    public function get_wrong_history_ret_t() {
     }
 
-    public function get user_list():Array {
-      return this._user_list;
+    public function get wrong_words():Array {
+      return this._wrong_words;
     }
 
-    public function set user_list(user_list:Array):void {
-      this._user_list = user_list;
+    public function set wrong_words(wrong_words:Array):void {
+      this._wrong_words = wrong_words;
     }
 
-    public function unsetUser_list():void {
-      this.user_list = null;
+    public function unsetWrong_words():void {
+      this.wrong_words = null;
     }
 
-    // Returns true if field user_list is set (has been assigned a value) and false otherwise
-    public function isSetUser_list():Boolean {
-      return this.user_list != null;
+    // Returns true if field wrong_words is set (has been assigned a value) and false otherwise
+    public function isSetWrong_words():Boolean {
+      return this.wrong_words != null;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case USER_LIST:
+      case WRONG_WORDS:
         if (value == null) {
-          unsetUser_list();
+          unsetWrong_words();
         } else {
-          this.user_list = value;
+          this.wrong_words = value;
         }
         break;
 
@@ -70,8 +70,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case USER_LIST:
-        return this.user_list;
+      case WRONG_WORDS:
+        return this.wrong_words;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -80,8 +80,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case USER_LIST:
-        return isSetUser_list();
+      case WRONG_WORDS:
+        return isSetWrong_words();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -98,17 +98,16 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case USER_LIST:
+          case WRONG_WORDS:
             if (field.type == TType.LIST) {
               {
-                var _list250:TList = iprot.readListBegin();
-                this.user_list = new Array();
-                for (var _i251:int = 0; _i251 < _list250.size; ++_i251)
+                var _list267:TList = iprot.readListBegin();
+                this.wrong_words = new Array();
+                for (var _i268:int = 0; _i268 < _list267.size; ++_i268)
                 {
-                  var _elem252:user_status_ret_t;
-                  _elem252 = new user_status_ret_t();
-                  _elem252.read(iprot);
-                  this.user_list.push(_elem252);
+                  var _elem269:String;
+                  _elem269 = iprot.readString();
+                  this.wrong_words.push(_elem269);
                 }
                 iprot.readListEnd();
               }
@@ -133,12 +132,12 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (this.user_list != null) {
-        oprot.writeFieldBegin(USER_LIST_FIELD_DESC);
+      if (this.wrong_words != null) {
+        oprot.writeFieldBegin(WRONG_WORDS_FIELD_DESC);
         {
-          oprot.writeListBegin(new TList(TType.STRUCT, this.user_list.length));
-          for each (var elem253:* in this.user_list)          {
-            elem253.write(oprot);
+          oprot.writeListBegin(new TList(TType.STRING, this.wrong_words.length));
+          for each (var elem270:* in this.wrong_words)          {
+            oprot.writeString(elem270);
           }
           oprot.writeListEnd();
         }
@@ -149,14 +148,14 @@ import org.apache.thrift.protocol.*;
     }
 
     public function toString():String {
-      var ret:String = new String("search_user_ret_t(");
+      var ret:String = new String("get_wrong_history_ret_t(");
       var first:Boolean = true;
 
-      ret += "user_list:";
-      if (this.user_list == null) {
+      ret += "wrong_words:";
+      if (this.wrong_words == null) {
         ret += "null";
       } else {
-        ret += this.user_list;
+        ret += this.wrong_words;
       }
       first = false;
       ret += ")";

@@ -21,7 +21,7 @@ package app.modules.chat.view
 	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.chat.model.ChatVo;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.components.scroll.ScrollBar;

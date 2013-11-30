@@ -12,7 +12,7 @@ package app.modules.main.view
 	import app.events.ViewEvent;
 	import app.managers.LoaderManager;
 	import app.modules.main.FunctionBtnConfig;
-	import app.utils.NumCreate;
+	import app.core.Numeric;
 	
 	import victor.framework.core.ViewSprite;
 	import victor.framework.core.ViewStruct;
@@ -39,7 +39,7 @@ package app.modules.main.view
 		// 上一次更新的等级
 		private var levelCache:int = -1;
 		// 缓存等级数字对象
-		private var levelNumCreate:NumCreate;
+		private var levelNumCreate:Numeric;
 		// 等级资源
 		private var levelNumSprite:Shape;
 		// 经验值显示内容
@@ -96,7 +96,7 @@ package app.modules.main.view
 			if ( level != levelCache )
 			{
 				levelCache = level;
-				levelNumCreate ||= new NumCreate(LoaderManager.getObj( "ui_Skin_LevelNumber" ) as MovieClip);
+				levelNumCreate ||= new Numeric(LoaderManager.getObj( "ui_Skin_LevelNumber" ) as MovieClip);
 				levelNumSprite = levelNumCreate.creatNumber( level );
 				levelNumSprite.x = -levelNumSprite.width >> 1;
 				DisplayUtil.removedAll( levelContainer );

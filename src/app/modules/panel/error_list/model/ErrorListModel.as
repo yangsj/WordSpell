@@ -12,6 +12,8 @@ package app.modules.panel.error_list.model
 	{
 		private var _list:Vector.<ErrorListVo>;
 		
+		private var _englshList:Array;
+		
 		public function ErrorListModel()
 		{
 			super();
@@ -33,6 +35,17 @@ package app.modules.panel.error_list.model
 		{
 			return _list;
 		}
+
+		public function get englshList():Array
+		{
+			return _englshList ||= [];
+		}
+
+		public function set englshList(value:Array):void
+		{
+			_englshList = value;
+		}
+
 
 	}
 }

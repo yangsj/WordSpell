@@ -126,7 +126,6 @@ package org.apache.thrift.transport {
       } else {
         debugString = "null";
       }
-      trace(debugString);
       return debugString;
     }
 

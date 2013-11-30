@@ -9,7 +9,7 @@ package app.core
 	import flash.geom.Rectangle;
 	
 	import app.managers.LoaderManager;
-	import app.utils.safetyCall;
+	import victor.framework.utils.safetyCall;
 	
 	import victor.framework.interfaces.IDisposable;
 	import victor.framework.manager.TickManager;
@@ -21,7 +21,7 @@ package app.core
 	 * @author 	yangsj
 	 * 			2013-9-18
 	 */
-	public class SpriteClip extends Sprite implements IDisposable
+	public class Clip extends Sprite implements IDisposable
 	{
 		private var _frameRate:int = 24;
 		private var _bitmapList:Vector.<FrameVo>;
@@ -33,7 +33,7 @@ package app.core
 		private var _onComplete:Function;
 		private var _isLoop:Boolean = true;
 
-		public function SpriteClip( linkage:String, loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 )
+		public function Clip( linkage:String, loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 )
 		{
 			setLinkage( linkage, loopNum, onComplete, frameRate );
 		}

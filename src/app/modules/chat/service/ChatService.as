@@ -56,6 +56,8 @@ package app.modules.chat.service
 			req.player_name = chatVo.playerName;
 			call( client_cmd_e.CHAT_REQ, req );
 			
+			LoadingEffect.hide();
+			
 			// 发送到自己聊天窗口
 //			chatVo.emoticons = decode( req.emotions );
 //			chatModel.addMsg( chatVo );

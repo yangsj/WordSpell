@@ -91,7 +91,7 @@
 		$end = strrpos( $fileUrl, "." );
 		$length = $end - $index;
 		$fileName = substr( $fileUrl, $index, $length );
-		if ( $newArray[ $fileName ] != 1 ) {
+		if ( $newArray[ $fileName ] != 1 && file_exists( $fileUrl ) ) {
 			system( "svn del ".$fileUrl );
 		}
 	}

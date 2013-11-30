@@ -17,7 +17,6 @@ package app.startup
 	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.rank.command.RankInitCommand;
 	import app.modules.panel.share.ShareWeiboInitCommand;
-	import app.modules.panel.test.TestInitCommand;
 	import app.modules.serivce.CommonService;
 	import app.modules.serivce.PackService;
 	import app.modules.task.command.TaskInitCommand;
@@ -38,8 +37,6 @@ package app.startup
 		
 		private static var commands:Array = 
 			[
-				, TestInitCommand
-				
 				, MainUIInitCommand		// 主界面UI
 				, MapInitCommand		// 世界地圖
 				, ChatInitCommand		// 聊天系统
@@ -50,7 +47,6 @@ package app.startup
 				, PersonalInitCommand	// 个人信息
 				, RankInitCommand		// 排行系统
 				, ErrorListInitCommand 	// 错误单词列表
-				
 				, ShareWeiboInitCommand // 分享到微博
 			];
 		
@@ -66,6 +62,8 @@ package app.startup
 			commandMap.mapEvent( ViewEvent.SHOW_VIEW, ShowViewCommand, ViewEvent );
 			// 监听关闭视图
 			commandMap.mapEvent( ViewEvent.HIDE_VIEW, ShowViewCommand, ViewEvent );
+			// 监听关闭所有
+			commandMap.mapEvent( ViewEvent.CLOSE_ALL, ShowViewCommand, ViewEvent );
 			
 			//////////////
 			

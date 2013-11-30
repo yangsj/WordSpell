@@ -82,7 +82,6 @@ package net.hires.debug {
 		}
 
 		private function init(e : Event) : void {
-			trace("init stage222");
 			graphics.beginFill(colors.bg);
 			graphics.drawRect(0, 0, WIDTH, HEIGHT);
 			graphics.endFill();

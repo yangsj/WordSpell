@@ -1,10 +1,16 @@
 package app.startup
 {
+	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
+	
 	import app.events.ViewEvent;
+	import app.modules.ViewName;
 	
 	import victor.framework.core.BaseCommand;
-	import victor.framework.interfaces.IView;
+	import victor.framework.core.ViewStruct;
 	import victor.framework.debug.Debug;
+	import victor.framework.interfaces.IView;
+	import victor.framework.utils.DisplayUtil;
 
 
 	/**
@@ -28,9 +34,26 @@ package app.startup
 			{
 				var viewName:String = event.viewName;
 				var view:IView;
-				if ( viewName )
+				if ( event.type == ViewEvent.CLOSE_ALL )
 				{
-					var cls:Class = getViewByName(viewName ) as Class;
+					var container:DisplayObjectContainer = ViewStruct.getContainer( ViewStruct.PANEL );
+					if ( container )
+					{
+						var dis:DisplayObject;
+						while ( container.numChildren > 0 )
+						{
+							dis = container.getChildAt( 0 );
+							view = dis as IView;
+							if ( view ) {
+								view.hide();
+							} 
+							DisplayUtil.removedFromParent( dis );
+						}
+					}
+				}
+				else if ( viewName )
+				{
+					var cls:Class = getViewByName( viewName ) as Class;
 					if ( cls )
 					{
 						view = injector.getInstance( cls );
@@ -38,6 +61,10 @@ package app.startup
 						{
 							if ( event.type == ViewEvent.SHOW_VIEW )
 							{
+								if ( ViewName.isCloseAllWhenOpenByName( viewName ) ) {
+									dispatch( new ViewEvent( ViewEvent.CLOSE_ALL, "" ));
+								}
+								
 								view.data = event.data;
 								if ( view.parent == null )
 									view.show();

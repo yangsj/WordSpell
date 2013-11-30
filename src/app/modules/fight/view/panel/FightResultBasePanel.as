@@ -6,7 +6,7 @@ package app.modules.fight.view.panel
 	import flash.text.TextField;
 	
 	import app.modules.fight.model.FightEndVo;
-	import app.utils.TextUtil;
+	import app.core.Text;
 	
 	import victor.framework.core.BasePanel;
 

@@ -9,9 +9,9 @@ package app.core
 	 * @author 	yangsj 
 	 * 			2013-10-31
 	 */
-	public class SkinButton
+	public class ButtonSkin
 	{
-		public function SkinButton()
+		public function ButtonSkin()
 		{
 		}
 		

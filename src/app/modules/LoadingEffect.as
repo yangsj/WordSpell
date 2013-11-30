@@ -3,7 +3,7 @@ package app.modules
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.core.ViewStruct;
 	
@@ -60,11 +60,9 @@ package app.modules
 			instance.hide();
 		}
 
-		public static function get instance():LoadingEffect
+		private static function get instance():LoadingEffect
 		{
-			if ( _instance == null )
-				new LoadingEffect();
-			return _instance;
+			return _instance ||= new LoadingEffect();
 		}
 
 	}

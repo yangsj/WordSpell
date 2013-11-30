@@ -1,14 +1,14 @@
 package app.modules.login.register
 {
-	import com.greensock.TweenMax;
+	import com.greensock.TweenLite;
 	import com.greensock.easing.Linear;
 	
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
 	import app.modules.TempleteSprite;
-	import app.utils.appStage;
-	import app.utils.safetyCall;
+	import victor.framework.utils.appStage;
+	import victor.framework.utils.safetyCall;
 	
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.interfaces.IDisposable;
@@ -52,16 +52,16 @@ package app.modules.login.register
 			_isOpen = true;
 			visible = true;
 			scaleX = scaleY = 0.01;
-			TweenMax.killTweensOf( this );
-			TweenMax.to( this, 0.2, {scaleX:1, scaleY:1, ease:Linear.easeNone, onComplete: onOpenComplete} );
+			TweenLite.killTweensOf( this );
+			TweenLite.to( this, 0.2, {scaleX:1, scaleY:1, ease:Linear.easeNone, onComplete: onOpenComplete} );
 		}
 		
 		public function tweenClose():void
 		{
 			_isOpen = false;
 			appStage.removeEventListener(MouseEvent.CLICK, onStageClickHandler );
-			TweenMax.killTweensOf( this );
-			TweenMax.to( this, 0.2, {scaleX:0.01, scaleY:0.01, ease:Linear.easeNone, onComplete:onCloseComplete} );
+			TweenLite.killTweensOf( this );
+			TweenLite.to( this, 0.2, {scaleX:0.01, scaleY:0.01, ease:Linear.easeNone, onComplete:onCloseComplete} );
 		}
 		
 		public function setData( array:Array, isArea:Boolean = true ):void

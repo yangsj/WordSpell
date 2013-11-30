@@ -6,11 +6,11 @@ package app.modules.map.panel
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
-	import app.core.SkinButton;
+	import app.core.ButtonSkin;
 	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapVo;
 	import app.modules.map.panel.item.GroupItem;
-	import app.utils.TextUtil;
+	import app.core.Text;
 	
 	import victor.framework.components.Reflection;
 	import victor.framework.core.BasePanel;
@@ -36,11 +36,11 @@ package app.modules.map.panel
 		
 		override protected function onceInit():void
 		{
-			txtName = TextUtil.cloneText( txtName );
+			txtName = Text.cloneText( txtName );
 			txtName.mouseEnabled = false;
 			
 			DisplayUtil.removedFromParent( btnClose );
-			btnClose = SkinButton.buttonExit;
+			btnClose = ButtonSkin.buttonExit;
 			_skin.addChild( btnClose );
 		}
 		

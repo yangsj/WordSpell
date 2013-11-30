@@ -12,7 +12,7 @@ package app.core
 	
 	import victor.framework.utils.BitmapUtil;
 	import victor.framework.utils.DisplayUtil;
-	import app.utils.safetyCall;
+	import victor.framework.utils.safetyCall;
 
 	/**
 	 * ……

@@ -35,5 +35,10 @@ package app.events
 		 */
 		public static const HIDE_VIEW:String = "hideViewByEventCommand";
 		
+		/**
+		 * 关闭所以已经打开的面板
+		 */
+		public static const CLOSE_ALL:String = "close_all";
+		
 	}
 }

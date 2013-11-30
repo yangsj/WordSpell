@@ -11,7 +11,7 @@ package app.modules.friend.view
 	import app.modules.TempleteSprite;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.model.FriendVo;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.utils.DisplayUtil;
 	

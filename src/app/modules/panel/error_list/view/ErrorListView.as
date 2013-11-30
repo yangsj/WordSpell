@@ -6,6 +6,7 @@ package app.modules.panel.error_list.view
 	import flash.events.MouseEvent;
 	import flash.net.FileReference;
 	import flash.text.TextField;
+	import flash.utils.ByteArray;
 	
 	import app.core.Tips;
 	import app.modules.panel.error_list.model.ErrorListVo;
@@ -41,6 +42,31 @@ package app.modules.panel.error_list.view
 			super();
 		}
 		
+		public function setArrayList( list:Array ):void
+		{
+			if ( list )
+			{
+				createScroll();
+				txtStr.text = "";
+				listStr = "";
+				for each ( var val:String in list )
+				{
+					if ( listStr == "" ) {
+						listStr = val + ",中文";
+						txtStr.appendText( val );
+					}
+					else {
+						listStr += "\r" + val + ",中文";
+						txtStr.appendText( "\n" + val );
+					}
+				}
+				txtStr.height = txtStr.textHeight + 15;
+				
+				gameScroll.updateMainHeight( listContainer.height );
+				gameScroll.setPos( 0 );
+			}
+		}
+		
 		public function setVo( list:Vector.<ErrorListVo> ):void
 		{
 			if ( list )
@@ -52,7 +78,7 @@ package app.modules.panel.error_list.view
 				{
 					var val:String = "第" + i + "行:";
 					if ( listStr == "" ) {
-						listStr = val;
+						listStr = val + ",中文";
 						txtStr.appendText( val );
 					}
 					else {
@@ -90,6 +116,7 @@ package app.modules.panel.error_list.view
 			txtStr = listContainer.getChildByName( "txtStr" ) as TextField;
 			txtStr ||= new TextField();
 			txtStr.mouseEnabled = false;
+			txtStr.text = "";
 			
 			setVo( null );
 			
@@ -99,12 +126,21 @@ package app.modules.panel.error_list.view
 		protected function btnExportClickHandler(event:MouseEvent):void
 		{
 			if ( listStr ) {
+				
+				var byte:ByteArray = new ByteArray();
+				byte.writeUTFBytes( listStr );
+				
 				fileReference = new FileReference();
 				fileReference.addEventListener(Event.COMPLETE, saveCompleteHandler );
-				fileReference.save( listStr, "error_list.txt" );
+				fileReference.addEventListener(Event.SELECT, selectedDirHandler );
+				fileReference.save( byte, "error_list.rtf" );//txt|doc|csv|rtf
 			} else {
 				Tips.showMouse( "没有需要保存的内容！" );
 			}
+		}
+		
+		protected function selectedDirHandler(event:Event):void
+		{
 		}
 		
 		protected function saveCompleteHandler(event:Event):void

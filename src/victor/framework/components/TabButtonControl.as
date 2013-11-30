@@ -4,7 +4,7 @@ package victor.framework.components
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
 	
-	import app.utils.safetyCall;
+	import victor.framework.utils.safetyCall;
 	
 	import victor.framework.interfaces.IDisposable;
 

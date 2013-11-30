@@ -1,6 +1,6 @@
 package app
 {
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	/**
 	 * ……

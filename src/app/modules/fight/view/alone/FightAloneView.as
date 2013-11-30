@@ -9,7 +9,7 @@ package app.modules.fight.view.alone
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseView;
 	import app.modules.fight.view.item.LetterBubble;
-	import app.utils.TextUtil;
+	import app.core.Text;
 	
 	import victor.framework.utils.DisplayUtil;
 
@@ -30,8 +30,8 @@ package app.modules.fight.view.alone
 		
 		protected function resetText():void
 		{
-			txtName = TextUtil.cloneText( txtName );
-			txtTime = TextUtil.cloneText( txtTime );
+			txtName = Text.cloneText( txtName );
+			txtTime = Text.cloneText( txtTime );
 		}
 
 		override protected function onceInit():void

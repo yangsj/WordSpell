@@ -42,8 +42,10 @@ package app.modules.serivce
 		{
 			var data:update_property_ret_t = resp.data as update_property_ret_t;
 			GameData.instance.selfVo.exp = data.exp;
-			GameData.instance.selfVo.level = data.level;
+			GameData.instance.updateLevel( data.level );
 			GameData.instance.selfVo.money = data.coin;
+			GameData.instance.selfVo.rightWordsNum = data.right_words_num;
+			GameData.instance.selfVo.wrongWordsNum = data.wrong_words_num;
 			
 //			// 道具数量
 //			var dict:Dictionary = data.items;

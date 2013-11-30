@@ -11,7 +11,7 @@ package app.managers
 	import flash.utils.getDefinitionByName;
 	
 	import app.GameConfig;
-	import app.utils.safetyCall;
+	import victor.framework.utils.safetyCall;
 	
 	import victor.framework.debug.Debug;
 	import victor.framework.utils.ArrayUtil;

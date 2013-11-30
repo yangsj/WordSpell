@@ -13,7 +13,7 @@ package app
 	import app.startup.InitFontCommand;
 	import app.startup.InitServiceCommand;
 	import app.startup.ShowLoginCommand;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import org.robotlegs.base.ContextEvent;
 	

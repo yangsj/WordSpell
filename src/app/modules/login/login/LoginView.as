@@ -14,7 +14,7 @@ package app.modules.login.login
 	import app.core.Tips;
 	import app.modules.login.login.event.LoginEvent;
 	import app.modules.login.login.vo.LoginVo;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.core.BasePanel;
 	import victor.framework.core.ViewStruct;

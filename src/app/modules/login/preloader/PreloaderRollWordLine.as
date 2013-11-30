@@ -1,6 +1,6 @@
 package app.modules.login.preloader
 {
-	import com.greensock.TweenMax;
+	import com.greensock.TweenLite;
 	import com.greensock.easing.Linear;
 	
 	import flash.display.Bitmap;
@@ -41,7 +41,7 @@ package app.modules.login.preloader
 		public function dispose():void
 		{
 			this.mask = null;
-			TweenMax.killDelayedCallsTo( start );
+			TweenLite.killDelayedCallsTo( start );
 			DisplayUtil.removedAll( this );
 			DisplayUtil.removedFromParent( maskShape );
 		}
@@ -95,9 +95,9 @@ package app.modules.login.preloader
 			const moveTime:Number = 0.4;
 			const delayTime:Number = 2.4;
 			
-			TweenMax.to( bitmap, moveTime, { y:0, alpha:1, ease:Linear.easeNone });
-			TweenMax.to( bitmap, moveTime, { y:-HEIGHT, alpha:0, ease:Linear.easeNone, delay:delayTime, onComplete:BitmapUtil.disposeBitmapFromTarget, onCompleteParams:[ bitmap ]});
-			TweenMax.delayedCall( delayTime, start );
+			TweenLite.to( bitmap, moveTime, { y:0, alpha:1, ease:Linear.easeNone });
+			TweenLite.to( bitmap, moveTime, { y:-HEIGHT, alpha:0, ease:Linear.easeNone, delay:delayTime, onComplete:BitmapUtil.disposeBitmapFromTarget, onCompleteParams:[ bitmap ]});
+			TweenLite.delayedCall( delayTime, start );
 		}
 		
 		/*

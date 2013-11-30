@@ -20,6 +20,8 @@ import org.apache.thrift.protocol.*;
     private static const EXP_FIELD_DESC:TField = new TField("exp", TType.I32, 1);
     private static const LEVEL_FIELD_DESC:TField = new TField("level", TType.I32, 2);
     private static const COIN_FIELD_DESC:TField = new TField("coin", TType.I32, 3);
+    private static const RIGHT_WORDS_NUM_FIELD_DESC:TField = new TField("right_words_num", TType.I32, 4);
+    private static const WRONG_WORDS_NUM_FIELD_DESC:TField = new TField("wrong_words_num", TType.I32, 5);
 
     private var _exp:int;
     public static const EXP:int = 1;
@@ -27,10 +29,16 @@ import org.apache.thrift.protocol.*;
     public static const LEVEL:int = 2;
     private var _coin:int;
     public static const COIN:int = 3;
+    private var _right_words_num:int;
+    public static const RIGHT_WORDS_NUM:int = 4;
+    private var _wrong_words_num:int;
+    public static const WRONG_WORDS_NUM:int = 5;
 
     private var __isset_exp:Boolean = false;
     private var __isset_level:Boolean = false;
     private var __isset_coin:Boolean = false;
+    private var __isset_right_words_num:Boolean = false;
+    private var __isset_wrong_words_num:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -39,6 +47,10 @@ import org.apache.thrift.protocol.*;
       metaDataMap[LEVEL] = new FieldMetaData("level", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
       metaDataMap[COIN] = new FieldMetaData("coin", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
+      metaDataMap[RIGHT_WORDS_NUM] = new FieldMetaData("right_words_num", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
+      metaDataMap[WRONG_WORDS_NUM] = new FieldMetaData("wrong_words_num", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
     }
     {
@@ -49,6 +61,8 @@ import org.apache.thrift.protocol.*;
       this._exp = 0;
       this._level = 0;
       this._coin = 0;
+      this._right_words_num = 0;
+      this._wrong_words_num = 0;
     }
 
     public function get exp():int {
@@ -105,6 +119,42 @@ import org.apache.thrift.protocol.*;
       return this.__isset_coin;
     }
 
+    public function get right_words_num():int {
+      return this._right_words_num;
+    }
+
+    public function set right_words_num(right_words_num:int):void {
+      this._right_words_num = right_words_num;
+      this.__isset_right_words_num = true;
+    }
+
+    public function unsetRight_words_num():void {
+      this.__isset_right_words_num = false;
+    }
+
+    // Returns true if field right_words_num is set (has been assigned a value) and false otherwise
+    public function isSetRight_words_num():Boolean {
+      return this.__isset_right_words_num;
+    }
+
+    public function get wrong_words_num():int {
+      return this._wrong_words_num;
+    }
+
+    public function set wrong_words_num(wrong_words_num:int):void {
+      this._wrong_words_num = wrong_words_num;
+      this.__isset_wrong_words_num = true;
+    }
+
+    public function unsetWrong_words_num():void {
+      this.__isset_wrong_words_num = false;
+    }
+
+    // Returns true if field wrong_words_num is set (has been assigned a value) and false otherwise
+    public function isSetWrong_words_num():Boolean {
+      return this.__isset_wrong_words_num;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case EXP:
@@ -131,6 +181,22 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case RIGHT_WORDS_NUM:
+        if (value == null) {
+          unsetRight_words_num();
+        } else {
+          this.right_words_num = value;
+        }
+        break;
+
+      case WRONG_WORDS_NUM:
+        if (value == null) {
+          unsetWrong_words_num();
+        } else {
+          this.wrong_words_num = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -144,6 +210,10 @@ import org.apache.thrift.protocol.*;
         return this.level;
       case COIN:
         return this.coin;
+      case RIGHT_WORDS_NUM:
+        return this.right_words_num;
+      case WRONG_WORDS_NUM:
+        return this.wrong_words_num;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -158,6 +228,10 @@ import org.apache.thrift.protocol.*;
         return isSetLevel();
       case COIN:
         return isSetCoin();
+      case RIGHT_WORDS_NUM:
+        return isSetRight_words_num();
+      case WRONG_WORDS_NUM:
+        return isSetWrong_words_num();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -198,6 +272,22 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case RIGHT_WORDS_NUM:
+            if (field.type == TType.I32) {
+              this.right_words_num = iprot.readI32();
+              this.__isset_right_words_num = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case WRONG_WORDS_NUM:
+            if (field.type == TType.I32) {
+              this.wrong_words_num = iprot.readI32();
+              this.__isset_wrong_words_num = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -224,6 +314,12 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(COIN_FIELD_DESC);
       oprot.writeI32(this.coin);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(RIGHT_WORDS_NUM_FIELD_DESC);
+      oprot.writeI32(this.right_words_num);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(WRONG_WORDS_NUM_FIELD_DESC);
+      oprot.writeI32(this.wrong_words_num);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -242,6 +338,14 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "coin:";
       ret += this.coin;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "right_words_num:";
+      ret += this.right_words_num;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "wrong_words_num:";
+      ret += this.wrong_words_num;
       first = false;
       ret += ")";
       return ret;

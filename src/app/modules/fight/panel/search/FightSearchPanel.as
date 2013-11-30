@@ -1,6 +1,6 @@
 package app.modules.fight.panel.search
 {
-	import com.greensock.TweenMax;
+	import com.greensock.TweenLite;
 	
 	import flash.events.Event;
 	import flash.text.TextField;
@@ -33,8 +33,8 @@ package app.modules.fight.panel.search
 		
 		protected function textInputHandler(event:Event):void
 		{
-			TweenMax.killDelayedCallsTo( searchMatching );
-			TweenMax.delayedCall(0.1, searchMatching );
+			TweenLite.killDelayedCallsTo( searchMatching );
+			TweenLite.delayedCall(0.1, searchMatching );
 		}
 		
 		private function searchMatching():void

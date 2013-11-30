@@ -30,6 +30,8 @@ package app.modules.panel.personal.view
 		
 		private var oldName:String = "";
 		
+		public var propList:PersonalPropList;
+		
 		public function PersonalPanel()
 		{
 		}
@@ -37,6 +39,9 @@ package app.modules.panel.personal.view
 		override protected function onceInit():void
 		{
 			super.onceInit();
+			
+			propList = new PersonalPropList();
+			addChild( propList );
 			
 			btnChangeName.addEventListener(MouseEvent.CLICK, btnChangeNameClickHandler );
 			btnErrorWordList.addEventListener(MouseEvent.CLICK, btnErrorWordListClickHandler );
@@ -71,7 +76,7 @@ package app.modules.panel.personal.view
 		
 		override protected function get resNames():Array
 		{
-			return ["ui_Personal"];
+			return ["ui_Personal", "ui_prop_list"];
 		}
 		
 		override protected function get skinName():String

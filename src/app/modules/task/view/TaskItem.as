@@ -11,7 +11,7 @@ package app.modules.task.view
 	import app.modules.TempleteSprite;
 	import app.modules.ViewName;
 	import app.modules.task.model.TaskVo;
-	import app.utils.TextUtil;
+	import app.core.Text;
 	
 	import victor.framework.utils.DisplayUtil;
 	import victor.framework.utils.MathUtil;
@@ -51,7 +51,7 @@ package app.modules.task.view
 		public function TaskItem()
 		{
 			setSkinWithName( "ui_Skin_TaskItem" );
-			txtDes = TextUtil.cloneText( txtDes );
+			txtDes = Text.cloneText( txtDes );
 			txtDes.visible = false;
 			mouseChildren = false;
 			mouseEnabled = false;

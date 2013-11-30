@@ -1,6 +1,6 @@
 package app.modules.fight.view.panel
 {
-	import app.utils.TextUtil;
+	import app.core.Text;
 
 	/**
 	 * ……
@@ -19,8 +19,8 @@ package app.modules.fight.view.panel
 		{
 			super.onceInit();
 			
-			txtExp = TextUtil.cloneText( txtExp );
-			txtMoney = TextUtil.cloneText( txtMoney );
+			txtExp = Text.cloneText( txtExp );
+			txtMoney = Text.cloneText( txtMoney );
 			
 			btnNext.visible = false;
 		}

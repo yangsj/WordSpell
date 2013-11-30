@@ -1,4 +1,4 @@
-package app.utils
+package victor.framework.utils
 {
 	import flash.display.Stage;
 	

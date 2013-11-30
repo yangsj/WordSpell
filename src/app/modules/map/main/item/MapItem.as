@@ -1,7 +1,11 @@
 package app.modules.map.main.item
 {
+	import com.greensock.TweenLite;
+	import com.greensock.easing.Back;
+	
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	import app.core.Tips;
 	import app.modules.map.event.MapEvent;
@@ -15,10 +19,36 @@ package app.modules.map.main.item
 	public class MapItem extends MapItemBase
 	{
 		private var mapVo:MapVo;
+		private var tips:MovieClip;
+		private var txtTips:TextField;
 		
 		public function MapItem( skin:MovieClip )
 		{
 			super( skin );
+			skin.mouseChildren = true;
+			tips = skin.getChildByName( "tips" ) as MovieClip || new MovieClip();
+			txtTips = tips.getChildByName( "txt" ) as TextField || new TextField();
+			tips.mouseEnabled = false;
+			tips.mouseChildren = false;
+			skin.addEventListener(MouseEvent.ROLL_OVER, mouseHandler );
+			skin.addEventListener(MouseEvent.ROLL_OUT , mouseHandler );
+			tips.visible = false;
+		}
+		
+		protected function mouseHandler(event:MouseEvent):void
+		{
+			var type:String = event.type;
+			if ( type == MouseEvent.ROLL_OVER ) {
+				skin.addEventListener(MouseEvent.MOUSE_MOVE, mouseHandler );
+				tips.visible = true;
+				tips.x = skin.mouseX;
+				tips.y = skin.mouseY;
+			} else if ( type == MouseEvent.ROLL_OUT ) {
+				tips.visible = false;
+			} else if ( type == MouseEvent.MOUSE_MOVE ) {
+				TweenLite.killTweensOf( tips );
+				TweenLite.to( tips, 0.5, {x: skin.mouseX, y: skin.mouseY, ease: Back.easeOut });
+			}
 		}
 		
 		override protected function onClickHandler(event:MouseEvent):void
@@ -32,6 +62,7 @@ package app.modules.map.main.item
 		{
 			this.mapVo = mapVo;
 			skin.gotoAndStop( isOpen ? FRAME_OPEN : FRAME_CLOSE );
+			txtTips.text = mapVo.mapName;
 		}
 		
 		/**

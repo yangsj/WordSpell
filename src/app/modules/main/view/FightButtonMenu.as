@@ -8,7 +8,7 @@ package app.modules.main.view
 	import app.events.ViewEvent;
 	import app.modules.TempleteSprite;
 	import app.modules.ViewName;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	/**
 	 * ……

@@ -8,7 +8,7 @@ package app.modules.login.register
 	import app.core.Tips;
 	import app.modules.login.register.event.RegisterEvent;
 	import app.modules.login.register.vo.RegisterVo;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.core.BasePanel;
 	

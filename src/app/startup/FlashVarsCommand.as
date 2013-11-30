@@ -1,11 +1,7 @@
 package app.startup
 {
-	import flash.events.MouseEvent;
-	
 	import app.GameConfig;
 	import app.events.GameEvent;
-	
-	import net.hires.debug.Stats;
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.debug.Debug;
@@ -54,23 +50,7 @@ package app.startup
 		{
 			if ( Debug.isDebug )
 			{
-				var status:Stats = new Stats();
-				contextView.addChild( status );
-				status.addEventListener(MouseEvent.MOUSE_DOWN, mouseHandler);
-				contextView.addEventListener(MouseEvent.MOUSE_UP, mouseHandler );
-				function mouseHandler( event:MouseEvent ):void
-				{
-					if ( event.type == MouseEvent.MOUSE_DOWN )
-					{
-						status.startDrag();
-					}
-					else if ( event.type == MouseEvent.MOUSE_UP )
-					{
-						status.stopDrag();
-					}
-				}
-				
-				// 
+				// 初始化调试工具
 				Debug.initStage( contextView.stage );
 			}
 		}

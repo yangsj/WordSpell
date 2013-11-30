@@ -44,7 +44,8 @@ package app.modules.panel.error_list.view
 		
 		private function getListNotify( event:ErrorListEvent ):void
 		{
-			view.setVo( errorListModel.list );
+//			view.setVo( errorListModel.list );
+			view.setArrayList( errorListModel.englshList );
 		}
 		
 		private function openedPanelHandler( event:PanelEvent ):void

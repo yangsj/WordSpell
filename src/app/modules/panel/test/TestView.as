@@ -8,11 +8,8 @@ package app.modules.panel.test
 	import flash.text.TextFormat;
 	
 	import app.core.Alert;
-	import app.core.components.controls.combo.ComboBox;
-	import app.core.components.controls.combo.ComboData;
-	import app.core.components.controls.combo.ComboItemVo;
 	import app.managers.LoaderManager;
-	import app.utils.safetyCall;
+	import victor.framework.utils.safetyCall;
 	
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.components.scroll.GameScrollPanel;
@@ -119,34 +116,33 @@ package app.modules.panel.test
 
 			xml.htmlText[0] = HtmlText.urlEvent( "this", "yangsj,victor,king", 0xff0000) + "  is RichTextField";
 			rtf.importXML( xml );
-			trace( rtf.exportXML() );
 			function linkHandler(event:TextEvent):void
 			{
-				Debug.printData( event.text );
+				Debug.printServer( event.text );
 			}
 		}
 		
 		private function testComboBox( con:Sprite ):void
 		{
-			var comboData:ComboData = new ComboData();
-			for (var i:int = 0; i < 10; i++)
-			{
-				var vo:ComboItemVo = new ComboItemVo();
-				vo.label = "label_" + i;
-				comboData.addItem( vo );
-			}
-			
-			var comboBox:ComboBox = new ComboBox( comboData );
-			con.addChild( comboBox );
-			
-			var comboBox1:ComboBox = new ComboBox( comboData, 100 );
-			con.addChild( comboBox1 );
-			comboBox1.x = 200;
+//			var comboData:ComboData = new ComboData();
+//			for (var i:int = 0; i < 10; i++)
+//			{
+//				var vo:ComboItemVo = new ComboItemVo();
+//				vo.label = "label_" + i;
+//				comboData.addItem( vo );
+//			}
+//			
+//			var comboBox:ComboBox = new ComboBox( comboData );
+//			con.addChild( comboBox );
+//			
+//			var comboBox1:ComboBox = new ComboBox( comboData, 100 );
+//			con.addChild( comboBox1 );
+//			comboBox1.x = 200;
 		}
 		
 		protected function testAlert( con:Sprite ):void
 		{
-			Alert.show( "希望每个单身的人都能够相信爱情，一爱再爱不要低下头，最终有情人终成眷属。", function abc( type:uint ):void{ Debug.printData( type )}, "下一关" );
+			Alert.show( "希望每个单身的人都能够相信爱情，一爱再爱不要低下头，最终有情人终成眷属。", function abc( type:uint ):void{ Debug.printServer( type )}, "下一关" );
 		}
 		
 		override protected function openComplete():void

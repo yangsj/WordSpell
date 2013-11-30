@@ -4,7 +4,7 @@ package victor.framework.core
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.utils.DisplayUtil;
 
@@ -82,10 +82,13 @@ package victor.framework.core
 		
 		public static function removePanel( panel:BasePanel ):void
 		{
-			var con:Sprite = getContainer( PANEL ) as Sprite;
-			con.removeChild( panel );
-			if ( con.numChildren == 0 )
-				con.graphics.clear();
+			if ( panel && panel.parent )
+			{
+				var con:Sprite = getContainer( PANEL ) as Sprite;
+				con.removeChild( panel );
+				if ( con.numChildren == 0 )
+					con.graphics.clear();
+			}
 		}
 
 		/**

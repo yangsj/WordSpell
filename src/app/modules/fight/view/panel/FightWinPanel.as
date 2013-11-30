@@ -1,7 +1,7 @@
 package app.modules.fight.view.panel
 {
 	import app.modules.fight.model.FightEndVo;
-	import app.utils.TextUtil;
+	import app.core.Text;
 	
 	import victor.framework.utils.UtilsFilter;
 
@@ -22,8 +22,8 @@ package app.modules.fight.view.panel
 		{
 			super.onceInit();
 			
-			txtExp = TextUtil.cloneText( txtExp );
-			txtMoney = TextUtil.cloneText( txtMoney );
+			txtExp = Text.cloneText( txtExp );
+			txtMoney = Text.cloneText( txtMoney );
 		}
 
 		override public function setData( endVo:FightEndVo ):void

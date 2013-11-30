@@ -13,7 +13,7 @@ package app.core
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.utils.BitmapUtil;
 
@@ -57,7 +57,7 @@ package app.core
 		 */
 		public static function showCenter( msg:String, size:int = 18, offsetY:int = 0, borderColor:uint = 0, removeOld : Boolean = true):void
 		{
-            if (removeOld && line) line.complete()
+            if (removeOld && line) line.complete();
 			instance.showCenter( msg, size, offsetY, borderColor );
 		}
 

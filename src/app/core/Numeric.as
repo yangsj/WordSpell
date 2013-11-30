@@ -1,4 +1,4 @@
-package app.utils
+package app.core
 {
 	import flash.display.Shape;
 	import flash.display.Bitmap;
@@ -12,12 +12,12 @@ package app.utils
 	 * 位图数字构造类
 	 * @author FireYang
 	 */
-	public class NumCreate
+	public class Numeric
 	{
 		private var _numCache:Array;
 		private var _maxHeight:int;
 
-		public function NumCreate( mc:MovieClip, hasBoard:Boolean = true )
+		public function Numeric( mc:MovieClip, hasBoard:Boolean = true )
 		{
 			_numCache = [];
 			cacheNumber( mc, hasBoard );

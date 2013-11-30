@@ -4,7 +4,7 @@ package app.modules.login.preloader
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.core.BaseScene;
 	import victor.framework.core.ViewStruct;

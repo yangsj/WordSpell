@@ -9,7 +9,7 @@ package app.modules.fight.view.prop.item
 	import app.events.PackEvent;
 	import app.managers.LoaderManager;
 	import app.modules.model.vo.ItemVo;
-	import app.utils.TextUtil;
+	import app.core.Text;
 	
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
@@ -54,9 +54,9 @@ package app.modules.fight.view.prop.item
 		{
 			var array:Array = [new GlowFilter(0,1,2,2,3,3)];
 			
-			txtCost = TextUtil.getText(25, 0xffff00,"", -10, 60, 80, 35);
-			txtNum = TextUtil.getText(25, 0xffff00, "", 5, 60, 60, 35);
-			txtTime = TextUtil.getText(25, 0xffff00, "", -10, 60, 80, 35);
+			txtCost = Text.getText(25, 0xffff00,"", -10, 60, 80, 35);
+			txtNum = Text.getText(25, 0xffff00, "", 5, 60, 60, 35);
+			txtTime = Text.getText(25, 0xffff00, "", -10, 60, 80, 35);
 			
 			txtCost.filters = array;
 			txtNum.filters = array;
@@ -102,6 +102,13 @@ package app.modules.fight.view.prop.item
 		}
 		
 		///////////////////////////////////
+		
+		public function displayOnlyNum():void 
+		{
+			txtTime.visible = false;
+			txtCost.visible = false;
+			txtNum.visible =  true;
+		}
 		
 		public function setData( itemVo:ItemVo ):void
 		{

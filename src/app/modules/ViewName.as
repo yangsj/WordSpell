@@ -155,5 +155,16 @@ package app.modules
 		 */
 		public static const ShareWeiboPanel:String = "ShareWeiboPanel";
 		
+		
+		///////////////// config 
+		
+		public static function isCloseAllWhenOpenByName( viewName:String ):Boolean
+		{
+			return [
+						  SelectedRoundPanel
+						, FightPractice
+				].indexOf( viewName ) != -1;
+		}
+		
 	}
 }

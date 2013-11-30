@@ -5,9 +5,9 @@ package app.modules.chat.view
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
-	import app.core.SpriteClip;
+	import app.core.Clip;
 	import app.modules.chat.event.ChatEvent;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.core.ViewSprite;
 	
@@ -35,7 +35,7 @@ package app.modules.chat.view
 		{
 			super.onceInit();
 			
-			var clip:SpriteClip;
+			var clip:Clip;
 			var point:Point;
 			var key:String;
 			var length:int = points.length;
@@ -43,7 +43,7 @@ package app.modules.chat.view
 			{
 				point = points[ i - 1 ];
 				key = "emotion_" + (i < 10 ? "0" : "") + i;
-				clip = new SpriteClip( "ui.chat." + key );
+				clip = new Clip( "ui.chat." + key );
 				clip.x = point.x;
 				clip.y = point.y;
 				clip.name = key;

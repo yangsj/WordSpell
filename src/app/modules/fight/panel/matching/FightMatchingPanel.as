@@ -3,7 +3,7 @@ package app.modules.fight.panel.matching
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.core.SkinButton;
+	import app.core.ButtonSkin;
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.modules.model.GenderType;
@@ -32,7 +32,7 @@ package app.modules.fight.panel.matching
 		override protected function onceInit():void
 		{
 			DisplayUtil.removedFromParent( btnClose );
-			btnClose = SkinButton.buttonExit;
+			btnClose = ButtonSkin.buttonExit;
 			_skin.addChild( btnClose );
 		}
 		

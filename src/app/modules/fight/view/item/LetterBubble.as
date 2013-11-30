@@ -15,7 +15,7 @@ package app.modules.fight.view.item
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.model.vo.ItemType;
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;

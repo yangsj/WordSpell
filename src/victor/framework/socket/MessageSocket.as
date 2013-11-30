@@ -144,12 +144,12 @@ package victor.framework.socket
 					respObj.data = msg;
 
 					if ( _isDebug )
-						Debug.printData( getTimer() + "|服务器返回数据(" + api + "):", respObj.data.toString());
+						Debug.printServer( getTimer() + "|服务器返回数据(" + api + "):", respObj.data.toString());
 				}
 				else
 				{
 					if ( _isDebug )
-						Debug.printData( getTimer() + "|没有数据解包:" + api + "\n\t------" );
+						Debug.printServer( getTimer() + "|没有数据解包:" + api + "\n\t------" );
 				}
 				// 检查是否有函数回调
 				dispatch( api );
@@ -246,7 +246,7 @@ package victor.framework.socket
 			dispatchEvent( new SocketEvent( SocketEvent.CALL_START ));
 			
 			// 序列化
-			Debug.printData( getTimer() + "|发送数据内容(" + req.cmd + "):", req.obj.toString());
+			Debug.printServer( getTimer() + "|发送数据内容(" + req.cmd + "):", req.obj.toString());
 			var byteArray:ByteArray = PacketParse.synthesize( req );
 
 			SocketReq.disposeReq( req );

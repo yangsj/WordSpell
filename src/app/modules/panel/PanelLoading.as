@@ -3,7 +3,7 @@ package app.modules.panel
 	import flash.text.TextField;
 	import flash.text.TextFormatAlign;
 	
-	import app.utils.appStage;
+	import victor.framework.utils.appStage;
 	
 	import victor.framework.core.ViewSprite;
 	import victor.framework.core.ViewStruct;

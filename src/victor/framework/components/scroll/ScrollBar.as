@@ -88,6 +88,9 @@ package victor.framework.components.scroll
 			if ( _radio > 1 )
 			{
 				_radio = 1;
+			}else if ( _radio < 0.15 )
+			{
+				_radio = 0.15;
 			}
 			if ( _radio == 1 )
 			{

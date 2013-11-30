@@ -75,6 +75,8 @@ package app.modules.fight.panel.search
 		{
 			super.onceInit();
 			
+//			isPenetrate = false;
+			
 			btnConfirm.addEventListener(MouseEvent.CLICK, onBtnConfirmClickHandler );
 		}
 		
