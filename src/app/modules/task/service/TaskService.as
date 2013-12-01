@@ -4,6 +4,7 @@ package app.modules.task.service
 	
 	import app.data.GameData;
 	import app.modules.fight.model.FightModel;
+	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.task.event.TaskEvent;
 	import app.modules.task.model.TaskModel;
@@ -31,6 +32,8 @@ package app.modules.task.service
 		public var taskModel:TaskModel;
 		[Inject]
 		public var fightModel:FightModel;
+		[Inject]
+		public var packModel:PackModel;
 		
 		public function TaskService()
 		{
@@ -100,6 +103,9 @@ package app.modules.task.service
 				itemVo.type = int( key );
 				itemVo.num = int(dict[ key ]);
 				vec.push( itemVo );
+				
+				// 更新到背包中
+//				packModel.addNumByType( itemVo.type, 1 );
 			}
 			return vec;
 		}
