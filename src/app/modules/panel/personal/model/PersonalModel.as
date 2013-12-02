@@ -1,4 +1,4 @@
-package app.modules.panel.error_list.model
+package app.modules.panel.personal.model
 {
 	import org.robotlegs.mvcs.Actor;
 	
@@ -8,13 +8,13 @@ package app.modules.panel.error_list.model
 	 * @author 	yangsj 
 	 * 			2013-11-30
 	 */
-	public class ErrorListModel extends Actor
+	public class PersonalModel extends Actor
 	{
 		private var _list:Vector.<ErrorListVo>;
 		
 		private var _englshList:Array;
 		
-		public function ErrorListModel()
+		public function PersonalModel()
 		{
 			super();
 			clearList();

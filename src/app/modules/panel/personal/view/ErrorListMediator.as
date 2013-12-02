@@ -1,8 +1,8 @@
-package app.modules.panel.error_list.view
+package app.modules.panel.personal.view
 {
-	import app.modules.panel.error_list.event.ErrorListEvent;
-	import app.modules.panel.error_list.model.ErrorListModel;
-	import app.modules.panel.error_list.service.ErrorListService;
+	import app.modules.panel.personal.events.PersonalEvent;
+	import app.modules.panel.personal.model.PersonalModel;
+	import app.modules.panel.personal.service.PersonalService;
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.events.PanelEvent;
@@ -18,9 +18,9 @@ package app.modules.panel.error_list.view
 		[Inject]
 		public var view:ErrorListView;
 		[Inject]
-		public var errorListModel:ErrorListModel;
+		public var personalModel:PersonalModel;
 		[Inject]
-		public var errorListService:ErrorListService;
+		public var personalService:PersonalService;
 		
 		public function ErrorListMediator()
 		{
@@ -30,27 +30,27 @@ package app.modules.panel.error_list.view
 		override public function onRemove():void
 		{
 			super.onRemove();
-			errorListModel.clearList();
+			personalModel.clearList();
 		}
 		
 		override public function onRegister():void
 		{
 			super.onRegister();
 			
-			addContextListener( ErrorListEvent.GET_LIST_SUCCESSED, getListNotify, ErrorListEvent );
+			addContextListener( PersonalEvent.ERROR_LIST_SUCCESSED, getListNotify, PersonalEvent );
 			
 			addViewListener( PanelEvent.OPENED, openedPanelHandler, PanelEvent );
 		}
 		
-		private function getListNotify( event:ErrorListEvent ):void
+		private function getListNotify( event:PersonalEvent ):void
 		{
 //			view.setVo( errorListModel.list );
-			view.setArrayList( errorListModel.englshList );
+			view.setArrayList( personalModel.englshList );
 		}
 		
 		private function openedPanelHandler( event:PanelEvent ):void
 		{
-			errorListService.getErrorList();
+			personalService.getErrorList();
 		}
 		
 	}

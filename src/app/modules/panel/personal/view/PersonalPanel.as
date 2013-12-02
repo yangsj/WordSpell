@@ -43,17 +43,18 @@ package app.modules.panel.personal.view
 			propList = new PersonalPropList();
 			addChild( propList );
 			
-			btnChangeName.visible = false;
+//			btnChangeName.visible = false;
 			btnChangeName.addEventListener(MouseEvent.CLICK, btnChangeNameClickHandler );
 			btnErrorWordList.addEventListener(MouseEvent.CLICK, btnErrorWordListClickHandler );
 		}
 		
 		protected function btnChangeNameClickHandler(event:MouseEvent):void
 		{
-			if ( oldName != txtName.text ) {
-				oldName = txtName.text;
-				dispatchEvent( new PersonalEvent( PersonalEvent.CHANGE_INFO, oldName ));
-			}
+//			if ( oldName != txtName.text ) {
+//				oldName = txtName.text;
+//				dispatchEvent( new PersonalEvent( PersonalEvent.CHANGE_INFO, oldName ));
+//			}
+			dispatchEvent( new ViewEvent(ViewEvent.SHOW_VIEW, ViewName.InformationPanel ));
 		}
 		
 		protected function btnErrorWordListClickHandler(event:MouseEvent):void

@@ -1,4 +1,4 @@
-package app.modules.panel.error_list.model
+package app.modules.panel.personal.model
 {
 	
 	/**

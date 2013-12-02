@@ -13,7 +13,6 @@ package app.startup
 	import app.modules.map.command.MapInitCommand;
 	import app.modules.model.CommonModel;
 	import app.modules.model.PackModel;
-	import app.modules.panel.error_list.command.ErrorListInitCommand;
 	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.rank.command.RankInitCommand;
 	import app.modules.panel.share.ShareWeiboInitCommand;
@@ -46,7 +45,6 @@ package app.startup
 				, TaskInitCommand		// 任务系统
 				, PersonalInitCommand	// 个人信息
 				, RankInitCommand		// 排行系统
-				, ErrorListInitCommand 	// 错误单词列表
 				, ShareWeiboInitCommand // 分享到微博
 			];
 		

@@ -74,6 +74,7 @@ package app.modules
 		 */
 		public static const TaskCompleted:String = "TaskCompleted";
 		
+		////////////////////////////////
 		/**
 		 * 个人信息
 		 */
@@ -83,6 +84,13 @@ package app.modules
 		 * 错误单词列表
 		 */
 		public static const ErrorListPanel:String = "errorListPanel";
+		
+		/**
+		 * 修改信息
+		 */
+		public static const InformationPanel:String = "InformationPanel";
+		
+		/////////////////////////////////
 		
 		/**
 		 * 排行系统

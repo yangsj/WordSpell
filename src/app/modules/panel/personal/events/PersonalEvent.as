@@ -20,5 +20,14 @@ package app.modules.panel.personal.events
 		 */
 		public static const CHANGE_INFO:String = "CHANGE_INFO";
 		
+		/**
+		 * 成功获取到列表数据
+		 */
+		public static const ERROR_LIST_SUCCESSED:String = "ERROR_LIST_SUCCESSED";
+		
+		/**
+		 * 开始发请求数据
+		 */
+		public static const TO_SEND_ERRO_LIST_REQ:String = "TO_SEND_ERRO_LIST_REQ";
 	}
 }

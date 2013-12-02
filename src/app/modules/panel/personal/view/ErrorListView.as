@@ -1,17 +1,19 @@
-package app.modules.panel.error_list.view
+package app.modules.panel.personal.view
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.FileReference;
 	import flash.text.TextField;
 	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
 	import app.core.Tips;
-	import app.modules.panel.error_list.model.ErrorListVo;
+	import app.modules.panel.personal.model.ErrorListVo;
 	
 	import victor.framework.components.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
@@ -41,6 +43,8 @@ package app.modules.panel.error_list.view
 		private var englishBitmap:Bitmap;
 		private var chineseBitmap:Bitmap;
 		private var listWidth:Number = 100;
+		private var itemBgCon:Sprite;
+		private var vecItemBg:Dictionary = new Dictionary();
 		
 		public function ErrorListView()
 		{
@@ -53,9 +57,12 @@ package app.modules.panel.error_list.view
 			{
 				var english:String = "";
 				var chinese:String = "";
+				var i:int = 0;
 				createScroll();
 				txtStr.text = "";
 				listStr = "";
+				DisplayUtil.removedAll( itemBgCon );
+				listContainer.addChild( itemBgCon );
 				for each ( var val:String in list )
 				{
 					if ( listStr == "" ) {
@@ -68,6 +75,8 @@ package app.modules.panel.error_list.view
 						english += "\n" + val;
 						chinese += "\n中文";
 					}
+					itemBgCon.addChild( getItemBg( i ) );
+					i++;
 				}
 				var bitx:Number = txtStr.x;
 				var bity:Number = txtStr.y;
@@ -89,6 +98,20 @@ package app.modules.panel.error_list.view
 				gameScroll.updateMainHeight( listContainer.height );
 				gameScroll.setPos( 0 );
 			}
+		}
+		
+		private function getItemBg( index:int ):Sprite
+		{
+			var sprite:Sprite = vecItemBg[index] as Sprite;
+			if ( sprite == null )
+			{
+				sprite = getObj( "ui_Skin_ErrorListItemBg" ) as Sprite;
+				vecItemBg[index] = sprite;
+			}
+			sprite.height = 40;
+			sprite.y = 38 * index;
+			sprite.visible = ( index % 2 == 1 );
+			return sprite;
 		}
 		
 		private function getTextBitmap( msg:String ):Bitmap
@@ -155,6 +178,9 @@ package app.modules.panel.error_list.view
 			txtStr.visible = false;
 			
 			listWidth = listContainer.width;
+			
+			itemBgCon = new Sprite();
+			listContainer.addChild( itemBgCon );
 			
 			btnExport.visible = false;
 			btnExport.addEventListener(MouseEvent.CLICK, btnExportClickHandler );
