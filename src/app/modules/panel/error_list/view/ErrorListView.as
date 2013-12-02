@@ -1,5 +1,7 @@
 package app.modules.panel.error_list.view
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
 	import flash.events.Event;
@@ -36,6 +38,9 @@ package app.modules.panel.error_list.view
 		private var fileReference:FileReference;
 		private var gameScroll:GameScrollPanel;
 		private var listStr:String = "";
+		private var englishBitmap:Bitmap;
+		private var chineseBitmap:Bitmap;
+		private var listWidth:Number = 100;
 		
 		public function ErrorListView()
 		{
@@ -46,6 +51,8 @@ package app.modules.panel.error_list.view
 		{
 			if ( list )
 			{
+				var english:String = "";
+				var chinese:String = "";
 				createScroll();
 				txtStr.text = "";
 				listStr = "";
@@ -53,44 +60,72 @@ package app.modules.panel.error_list.view
 				{
 					if ( listStr == "" ) {
 						listStr = val + ",中文";
-						txtStr.appendText( val );
+						english = val;
+						chinese = "中文";
 					}
 					else {
-						listStr += "\r" + val + ",中文";
-						txtStr.appendText( "\n" + val );
+						listStr += "\t\n" + val + ",中文";
+						english += "\n" + val;
+						chinese += "\n中文";
 					}
 				}
-				txtStr.height = txtStr.textHeight + 15;
+				var bitx:Number = txtStr.x;
+				var bity:Number = txtStr.y;
+				var tarw:Number = 0;
+				
+				DisplayUtil.removedFromParent( englishBitmap );
+				englishBitmap = getTextBitmap( english );
+				englishBitmap.x = bitx;
+				englishBitmap.y = bity;
+				listContainer.addChild( englishBitmap );
+				tarw = bitx + englishBitmap.width;
+				
+				DisplayUtil.removedFromParent( chineseBitmap );
+				chineseBitmap = getTextBitmap( chinese );
+				chineseBitmap.x = tarw + ( (listWidth - tarw) - chineseBitmap.width ) * 0.5;
+				chineseBitmap.y = bity;
+				listContainer.addChild( chineseBitmap );
 				
 				gameScroll.updateMainHeight( listContainer.height );
 				gameScroll.setPos( 0 );
 			}
 		}
 		
+		private function getTextBitmap( msg:String ):Bitmap
+		{
+			txtStr.text = msg;
+			txtStr.width = txtStr.textWidth + 30;
+			txtStr.height = txtStr.textHeight + 20;
+			
+			var bitmap:Bitmap = new Bitmap( new BitmapData( txtStr.width, txtStr.height, true, 0), "auto", true );
+			bitmap.bitmapData.draw( txtStr );
+			return bitmap;
+		}
+		
 		public function setVo( list:Vector.<ErrorListVo> ):void
 		{
-			if ( list )
-			{
-				createScroll();
-				
-				listStr = "";
-				for ( var i:int = 0; i < 20; i++ )
-				{
-					var val:String = "第" + i + "行:";
-					if ( listStr == "" ) {
-						listStr = val + ",中文";
-						txtStr.appendText( val );
-					}
-					else {
-						listStr += "\n\r" + val;
-						txtStr.appendText( "\n" + val );
-					}
-				}
-				txtStr.height = txtStr.textHeight + 15;
-				
-				gameScroll.updateMainHeight( listContainer.height );
-				gameScroll.setPos( 0 );
-			}
+//			if ( list )
+//			{
+//				createScroll();
+//				
+//				listStr = "";
+//				for ( var i:int = 0; i < 20; i++ )
+//				{
+//					var val:String = "第" + i + "行:";
+//					if ( listStr == "" ) {
+//						listStr = val + ",中文";
+//						txtStr.appendText( val );
+//					}
+//					else {
+//						listStr += "\n\r" + val;
+//						txtStr.appendText( "\n" + val );
+//					}
+//				}
+//				txtStr.height = txtStr.textHeight + 15;
+//				
+//				gameScroll.updateMainHeight( listContainer.height );
+//				gameScroll.setPos( 0 );
+//			}
 		}
 		
 		private function createScroll():void
@@ -98,7 +133,7 @@ package app.modules.panel.error_list.view
 			if ( gameScroll == null )
 			{
 				gameScroll = new GameScrollPanel();
-				gameScroll.setTargetAndHeight( listContainer, listContainer.height, listContainer.width );
+				gameScroll.setTargetAndHeight( listContainer, listContainer.height, listWidth );
 				
 				DisplayUtil.removedAll( listContainer );
 				listContainer.addChild( txtStr );
@@ -117,9 +152,11 @@ package app.modules.panel.error_list.view
 			txtStr ||= new TextField();
 			txtStr.mouseEnabled = false;
 			txtStr.text = "";
+			txtStr.visible = false;
 			
-			setVo( null );
+			listWidth = listContainer.width;
 			
+			btnExport.visible = false;
 			btnExport.addEventListener(MouseEvent.CLICK, btnExportClickHandler );
 		}
 		
@@ -133,7 +170,7 @@ package app.modules.panel.error_list.view
 				fileReference = new FileReference();
 				fileReference.addEventListener(Event.COMPLETE, saveCompleteHandler );
 				fileReference.addEventListener(Event.SELECT, selectedDirHandler );
-				fileReference.save( byte, "error_list.rtf" );//txt|doc|csv|rtf
+				fileReference.save( byte, "error_list.txt" );//txt|doc|csv|rtf
 			} else {
 				Tips.showMouse( "没有需要保存的内容！" );
 			}

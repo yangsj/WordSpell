@@ -43,6 +43,7 @@ package app.modules.panel.personal.view
 			propList = new PersonalPropList();
 			addChild( propList );
 			
+			btnChangeName.visible = false;
 			btnChangeName.addEventListener(MouseEvent.CLICK, btnChangeNameClickHandler );
 			btnErrorWordList.addEventListener(MouseEvent.CLICK, btnErrorWordListClickHandler );
 		}

@@ -78,7 +78,7 @@ package app.modules.login.preloader
 		
 		private function start():void
 		{
-			var index:int;
+			var index:int = lastIndex;
 			var bitmap:Bitmap;
 			while ( index == lastIndex )
 			{

@@ -87,12 +87,17 @@
 	$fileArray = glob($fullversionPath."assets\\*.swf");
 	foreach ( $fileArray as $fileUrl )
 	{
-		$index = strrpos( $fileUrl, "\\" ) + 1;
+		$fileUrl = str_ireplace("\\", "/", $fileUrl );
+		$index = strrpos( $fileUrl, "/" ) + 1;
 		$end = strrpos( $fileUrl, "." );
 		$length = $end - $index;
 		$fileName = substr( $fileUrl, $index, $length );
-		if ( $newArray[ $fileName ] != 1 && file_exists( $fileUrl ) ) {
-			system( "svn del ".$fileUrl );
+		if ( file_exists( $fileUrl ) ) {
+			echo $fileName."_".$newArray[ $fileName ]."<br>";
+			if ( $newArray[ $fileName ] != 1 ) {
+				system( "svn del ".$fileUrl );
+				echo "Delete ".$fileUrl."<br>";
+			}
 		}
 	}
 	echo "</div>";
