@@ -7,12 +7,14 @@ package app.modules.main.view
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import app.core.Numeric;
 	import app.data.BaseConfig;
 	import app.data.vo.LevelExpItemVo;
 	import app.events.ViewEvent;
 	import app.managers.LoaderManager;
 	import app.modules.main.FunctionBtnConfig;
-	import app.core.Numeric;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import victor.framework.core.ViewSprite;
 	import victor.framework.core.ViewStruct;
@@ -124,6 +126,7 @@ package app.modules.main.view
 		
 		protected function onClickFunsBtnHandler(event:MouseEvent):void
 		{
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 			dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, event.target.name ));
 		}
 		

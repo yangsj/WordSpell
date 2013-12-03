@@ -18,14 +18,20 @@ import org.apache.thrift.protocol.*;
   public class get_wrong_history_ret_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("get_wrong_history_ret_t");
     private static const WRONG_WORDS_FIELD_DESC:TField = new TField("wrong_words", TType.LIST, 1);
+    private static const CHINESE_FIELD_DESC:TField = new TField("chinese", TType.LIST, 2);
 
     private var _wrong_words:Array;
     public static const WRONG_WORDS:int = 1;
+    private var _chinese:Array;
+    public static const CHINESE:int = 2;
 
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
       metaDataMap[WRONG_WORDS] = new FieldMetaData("wrong_words", TFieldRequirementType.DEFAULT, 
+          new ListMetaData(TType.LIST, 
+              new FieldValueMetaData(TType.STRING)));
+      metaDataMap[CHINESE] = new FieldMetaData("chinese", TFieldRequirementType.DEFAULT, 
           new ListMetaData(TType.LIST, 
               new FieldValueMetaData(TType.STRING)));
     }
@@ -53,6 +59,23 @@ import org.apache.thrift.protocol.*;
       return this.wrong_words != null;
     }
 
+    public function get chinese():Array {
+      return this._chinese;
+    }
+
+    public function set chinese(chinese:Array):void {
+      this._chinese = chinese;
+    }
+
+    public function unsetChinese():void {
+      this.chinese = null;
+    }
+
+    // Returns true if field chinese is set (has been assigned a value) and false otherwise
+    public function isSetChinese():Boolean {
+      return this.chinese != null;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case WRONG_WORDS:
@@ -60,6 +83,14 @@ import org.apache.thrift.protocol.*;
           unsetWrong_words();
         } else {
           this.wrong_words = value;
+        }
+        break;
+
+      case CHINESE:
+        if (value == null) {
+          unsetChinese();
+        } else {
+          this.chinese = value;
         }
         break;
 
@@ -72,6 +103,8 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case WRONG_WORDS:
         return this.wrong_words;
+      case CHINESE:
+        return this.chinese;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -82,6 +115,8 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case WRONG_WORDS:
         return isSetWrong_words();
+      case CHINESE:
+        return isSetChinese();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -101,13 +136,30 @@ import org.apache.thrift.protocol.*;
           case WRONG_WORDS:
             if (field.type == TType.LIST) {
               {
-                var _list267:TList = iprot.readListBegin();
+                var _list268:TList = iprot.readListBegin();
                 this.wrong_words = new Array();
-                for (var _i268:int = 0; _i268 < _list267.size; ++_i268)
+                for (var _i269:int = 0; _i269 < _list268.size; ++_i269)
                 {
-                  var _elem269:String;
-                  _elem269 = iprot.readString();
-                  this.wrong_words.push(_elem269);
+                  var _elem270:String;
+                  _elem270 = iprot.readString();
+                  this.wrong_words.push(_elem270);
+                }
+                iprot.readListEnd();
+              }
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case CHINESE:
+            if (field.type == TType.LIST) {
+              {
+                var _list271:TList = iprot.readListBegin();
+                this.chinese = new Array();
+                for (var _i272:int = 0; _i272 < _list271.size; ++_i272)
+                {
+                  var _elem273:String;
+                  _elem273 = iprot.readString();
+                  this.chinese.push(_elem273);
                 }
                 iprot.readListEnd();
               }
@@ -136,8 +188,19 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(WRONG_WORDS_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRING, this.wrong_words.length));
-          for each (var elem270:* in this.wrong_words)          {
-            oprot.writeString(elem270);
+          for each (var elem274:* in this.wrong_words)          {
+            oprot.writeString(elem274);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (this.chinese != null) {
+        oprot.writeFieldBegin(CHINESE_FIELD_DESC);
+        {
+          oprot.writeListBegin(new TList(TType.STRING, this.chinese.length));
+          for each (var elem275:* in this.chinese)          {
+            oprot.writeString(elem275);
           }
           oprot.writeListEnd();
         }
@@ -156,6 +219,14 @@ import org.apache.thrift.protocol.*;
         ret += "null";
       } else {
         ret += this.wrong_words;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "chinese:";
+      if (this.chinese == null) {
+        ret += "null";
+      } else {
+        ret += this.chinese;
       }
       first = false;
       ret += ")";

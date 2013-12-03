@@ -1,5 +1,6 @@
 package app.modules.panel.personal.view
 {
+	import app.modules.ViewName;
 	import app.modules.panel.personal.events.PersonalEvent;
 	import app.modules.panel.personal.model.PersonalModel;
 	import app.modules.panel.personal.service.PersonalService;
@@ -31,6 +32,7 @@ package app.modules.panel.personal.view
 		{
 			super.onRemove();
 			personalModel.clearList();
+			openView( ViewName.Personal );
 		}
 		
 		override public function onRegister():void
@@ -45,7 +47,7 @@ package app.modules.panel.personal.view
 		private function getListNotify( event:PersonalEvent ):void
 		{
 //			view.setVo( errorListModel.list );
-			view.setArrayList( personalModel.englshList );
+			view.setArrayList( personalModel.englshList, personalModel.chineseList );
 		}
 		
 		private function openedPanelHandler( event:PanelEvent ):void

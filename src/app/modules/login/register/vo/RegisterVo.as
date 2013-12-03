@@ -44,6 +44,10 @@ package app.modules.login.register.vo
 		 * 密码确认
 		 */
 		public var passwordConfirm:String;
+		/**
+		 * 性别
+		 */
+		public var gender:int = 0;
 
 		
 //////// Optional

@@ -17,6 +17,8 @@ package app.modules.fight.service
 	import app.modules.map.model.RoundVo;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.task.event.TaskEvent;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import ff.bubble_info_t;
 	import ff.client_cmd_e;
@@ -160,6 +162,8 @@ package app.modules.fight.service
 			var data:end_round_ret_t = resp.data as end_round_ret_t;
 			var endVo:FightEndVo = getBattleEndVo( data );
 			fightModel.fightEndVo = endVo;
+			
+			SoundManager.playEffectMusic( endVo.isWin ? SoundType.SUCCESS : SoundType.FAILED );
 			
 			//更新等级
 			if ( endVo.currentLevel != GameData.instance.selfVo.level )

@@ -53,6 +53,7 @@ package app.modules.map.main.item
 		
 		override protected function onClickHandler(event:MouseEvent):void
 		{
+			super.onClickHandler( event );
 			if ( isOpen )
 				skin.dispatchEvent( new MapEvent( MapEvent.OPEN_SELECTED_ROUND, mapVo, true ));
 			else Tips.showMouse( "该章节地图未激活！" );

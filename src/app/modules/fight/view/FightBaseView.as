@@ -22,7 +22,8 @@ package app.modules.fight.view
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.fight.view.prop.PropList;
 	import app.modules.fight.view.spell.SpellArea;
-	import victor.framework.utils.appStage;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import victor.framework.core.LoadViewBase;
 	import victor.framework.core.ViewStruct;
@@ -30,6 +31,7 @@ package app.modules.fight.view
 	import victor.framework.utils.DisplayUtil;
 	import victor.framework.utils.HtmlText;
 	import victor.framework.utils.MathUtil;
+	import victor.framework.utils.appStage;
 	
 	
 	/**
@@ -89,6 +91,7 @@ package app.modules.fight.view
 		
 		protected function onClickBtnCloseHandler(event:MouseEvent):void
 		{
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 			dispatchEvent( new FightAloneEvent( FightAloneEvent.EXIT_PRACTICE ));
 		}
 		

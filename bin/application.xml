@@ -55,4 +55,10 @@
 	<asset id="ui_fight_online_result" src="assets/ui_fight_online_result.swf" version="1_45" first="0"/>
 	<asset id="ui_fight_error" src="assets/ui_fight_error.swf" version="1_59" first="0"/>
 	
+	<!-- sounds -->
+	<asset id="sound_effect" src="assets/sound_effect.swf" version="1_59" first="2"/>
+	<asset id="main_bg" src="sound/main_bg.mp3" version="1_59" first="0"/>
+	<asset id="fight_bg_0" src="sound/fight_bg_0.mp3" version="1_59" first="0"/>
+	<asset id="fight_bg_1" src="sound/fight_bg_1.mp3" version="1_59" first="0"/>
+	
 </data>

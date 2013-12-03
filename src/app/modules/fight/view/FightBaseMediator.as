@@ -17,6 +17,7 @@ package app.modules.fight.view
 	import app.modules.map.model.MapModel;
 	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
+	import app.sound.SoundManager;
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.debug.Debug;
@@ -73,6 +74,8 @@ package app.modules.fight.view
 			baseView.clear();
 			
 			baseView.isValidOperate = false;
+			
+			SoundManager.playMainSceneSoundBg();
 		}
 		
 		override public function onRegister():void
@@ -107,6 +110,8 @@ package app.modules.fight.view
 			clickPropBubble = [];
 			
 			baseView.isValidOperate = true;
+			
+			SoundManager.playFightSoundBg();
 		}
 		
 		private function showAnswerIngHandler( event:FightAloneEvent ):void

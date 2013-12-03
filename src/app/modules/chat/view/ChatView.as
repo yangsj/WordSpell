@@ -21,13 +21,15 @@ package app.modules.chat.view
 	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.chat.model.ChatVo;
-	import victor.framework.utils.appStage;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.components.scroll.ScrollBar;
 	import victor.framework.core.ViewSprite;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.utils.StringUitl;
+	import victor.framework.utils.appStage;
 
 
 	/**
@@ -109,8 +111,9 @@ package app.modules.chat.view
 //			if ( _isExpand )
 //			{
 				txtOutput.clear();
-				for each ( var chatVo:ChatVo in list )
-				addMsg( chatVo );
+				for each ( var chatVo:ChatVo in list ){
+					addMsg( chatVo );
+				}
 //			}
 		}
 
@@ -168,6 +171,8 @@ package app.modules.chat.view
 					break;
 			}
 			dispatchEvent( new ChatEvent( ChatEvent.CHANGE_CHANNEL, curChannel ));
+			
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 		}
 
 		/**
@@ -336,6 +341,7 @@ package app.modules.chat.view
 		protected function btnSendClickHandler( event:MouseEvent ):void
 		{
 			sendChat();
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 		}
 
 		private function sendChat():void

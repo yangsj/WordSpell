@@ -13,6 +13,7 @@ package app.modules.panel.personal.model
 		private var _list:Vector.<ErrorListVo>;
 		
 		private var _englshList:Array;
+		private var _chineseList:Array;
 		
 		public function PersonalModel()
 		{
@@ -44,6 +45,16 @@ package app.modules.panel.personal.model
 		public function set englshList(value:Array):void
 		{
 			_englshList = value;
+		}
+
+		public function get chineseList():Array
+		{
+			return _chineseList ||= [];
+		}
+
+		public function set chineseList(value:Array):void
+		{
+			_chineseList = value;
 		}
 
 

@@ -20,7 +20,7 @@ package app.modules.panel.personal.service
 	public class PersonalService extends BaseService
 	{
 		[Inject]
-		public var errorListModel:PersonalModel;
+		public var personalModel:PersonalModel;
 		
 		public function PersonalService()
 		{
@@ -36,15 +36,28 @@ package app.modules.panel.personal.service
 		{
 			var data:get_wrong_history_ret_t = resp.data as get_wrong_history_ret_t;
 			
-			errorListModel.englshList = data.wrong_words;
+			personalModel.englshList = data.wrong_words;
+			personalModel.chineseList = data.chinese;
 			
 			dispatch( new PersonalEvent( PersonalEvent.ERROR_LIST_SUCCESSED ));
 		}
 		
+		/**
+		 * 获取错误单词列表
+		 */
 		public function getErrorList():void
 		{
 			var req:get_wrong_history_req_t = new get_wrong_history_req_t();
 			call( client_cmd_e.GET_WRONG_HISTORY_REQ, req );
 		}
+		
+		/**
+		 * 更改个人信息
+		 */
+		public function changeInfo():void
+		{
+			
+		}
+		
 	}
 }

@@ -3,6 +3,9 @@ package app.modules.map.main.item
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
+	
 	import victor.framework.interfaces.IDisposable;
 	
 	/**
@@ -30,6 +33,7 @@ package app.modules.map.main.item
 		
 		protected function onClickHandler(event:MouseEvent):void
 		{
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 		}
 		
 		public function dispose():void

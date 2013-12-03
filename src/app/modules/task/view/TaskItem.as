@@ -104,13 +104,13 @@ package app.modules.task.view
 			if ( time > 0 )
 			{
 				if ( bitmapDes ) {
-					bitmapDes.x = txtDes.x;
+					var endx:Number = bitmapDes.x == txtDes.x ? endMoveX : txtDes.x;
 					TweenLite.to( bitmapDes, time, {
-														x:endMoveX, 
+														x:endx, 
 														ease:Linear.easeNone, 
 														onComplete:startMoveDes, 
 														onCompleteParams:[ true ], 
-														delay: isLoop ? 0.5 : 0 
+														delay: isLoop ? 1 : 0 
 													});
 				}
 			}

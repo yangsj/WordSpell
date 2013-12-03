@@ -8,6 +8,9 @@ package app.modules.main.view
 	import app.events.ViewEvent;
 	import app.modules.TempleteSprite;
 	import app.modules.ViewName;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
+	
 	import victor.framework.utils.appStage;
 	
 	/**
@@ -31,6 +34,7 @@ package app.modules.main.view
 		{
 			var targetName:String = event.target.name;
 			if ( isOpen( targetName ) ) {
+				SoundManager.playEffectMusic( SoundType.CLICK01 );
 				dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, targetName, null, true ));
 			}
 			hide();

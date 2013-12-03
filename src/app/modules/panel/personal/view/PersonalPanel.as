@@ -54,11 +54,13 @@ package app.modules.panel.personal.view
 //				oldName = txtName.text;
 //				dispatchEvent( new PersonalEvent( PersonalEvent.CHANGE_INFO, oldName ));
 //			}
+			dispatchEvent( new ViewEvent(ViewEvent.HIDE_VIEW, ViewName.Personal ));
 			dispatchEvent( new ViewEvent(ViewEvent.SHOW_VIEW, ViewName.InformationPanel ));
 		}
 		
 		protected function btnErrorWordListClickHandler(event:MouseEvent):void
 		{
+			dispatchEvent( new ViewEvent(ViewEvent.HIDE_VIEW, ViewName.Personal ));
 			dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.ErrorListPanel ));
 		}
 		

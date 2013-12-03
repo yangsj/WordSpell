@@ -15,11 +15,13 @@ package app.modules.fight.view.item
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.model.vo.ItemType;
-	import victor.framework.utils.appStage;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
 	import victor.framework.utils.MathUtil;
+	import victor.framework.utils.appStage;
 	
 	
 	/**
@@ -232,6 +234,11 @@ package app.modules.fight.view.item
 				if ( _data.itemType == ItemType.DEFAULT || isSelf == false ) {
 					new BubbleRemovedEffect( localToGlobal( new Point() ) );
 					DisplayUtil.removedFromParent( this );
+				}
+				
+				if ( isSelf ) {
+//					SoundManager.playEffectMusic( SoundType.CLICK02 );
+					SoundManager.playEffectMusic( SoundType.BOMB );
 				}
 			}
 		}

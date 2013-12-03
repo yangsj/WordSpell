@@ -56,7 +56,8 @@
 
 	echo "<br />--------------------------------------";echo "<br />";
 
-	system("xcopy /S/Y ".$releaseFloader."assets\*.swf ".$fullversionPath."assets\\");
+	system("xcopy /S/Y ".$releaseFloader."assets\\*.swf ".$fullversionPath."assets\\");
+	system("xcopy /S/Y ".$releaseFloader."sound\\*.mp3 ".$fullversionPath."sound\\");
 
 	echo "</div>";
 	echo "<br>";
@@ -85,6 +86,7 @@
 
 	// 刪除版本目錄下未使用的資源
 	$fileArray = glob($fullversionPath."assets\\*.swf");
+	$fileArray = array_combine( $fileArray, glob($fullversionPath."sound\\*.mp3");
 	foreach ( $fileArray as $fileUrl )
 	{
 		$fileUrl = str_ireplace("\\", "/", $fileUrl );

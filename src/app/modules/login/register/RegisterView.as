@@ -1,6 +1,7 @@
 package app.modules.login.register
 {
 	import flash.display.InteractiveObject;
+	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
@@ -8,9 +9,12 @@ package app.modules.login.register
 	import app.core.Tips;
 	import app.modules.login.register.event.RegisterEvent;
 	import app.modules.login.register.vo.RegisterVo;
-	import victor.framework.utils.appStage;
+	import app.modules.model.GenderType;
 	
+	import victor.framework.components.TabButtonControl;
 	import victor.framework.core.BasePanel;
+	import victor.framework.debug.Debug;
+	import victor.framework.utils.appStage;
 	
 	/**
 	 * ……
@@ -57,16 +61,21 @@ package app.modules.login.register
 		public var txtClass:TextField;
 		public var txtQQ:TextField;
 		
+		public var tab0:MovieClip;
+		public var tab1:MovieClip;
+		
 		public var btnRegister:InteractiveObject;
 		public var btnLogin:InteractiveObject;
 		
 		public var checkboxArea:InteractiveObject;
 		public var checkboxGrade:InteractiveObject;
 		
+		private var tabControl:TabButtonControl;
 		private var areaPanel:CheckboxPanel;
 		private var gradePanel:CheckboxPanel;
 		
 		private var _registerVo:RegisterVo;
+		private var gender:int;
 		
 		public function RegisterView()
 		{
@@ -84,6 +93,11 @@ package app.modules.login.register
 			btnRegister.addEventListener(MouseEvent.CLICK, btnRegisterHandler );
 			checkboxArea.addEventListener(MouseEvent.CLICK, checkboxAreaHandler );
 			checkboxGrade.addEventListener(MouseEvent.CLICK, checkboxGradeHandler );
+			
+			tabControl = new TabButtonControl( tabControlHandler );
+			tabControl.addTarget( tab0, GenderType.MALE );
+			tabControl.addTarget( tab1, GenderType.FEMALE );
+			tabControl.setTargetByIndex( 0 );
 			
 			txtPhone.maxChars = 11;
 			txtPhone.restrict = "0-9";
@@ -112,6 +126,12 @@ package app.modules.login.register
 		private function gradeCallBackFun( data:Array ):void
 		{
 			txtClass.text = data[0] + "";
+		}
+		
+		private function tabControlHandler( mc:MovieClip, data:int ):void
+		{
+			gender = data;
+			Debug.debug( "性别：" + data );
 		}
 		
 		protected function checkboxAreaHandler(event:MouseEvent):void
@@ -223,6 +243,7 @@ package app.modules.login.register
 			_registerVo.passwordConfirm = txtPw2.text;
 			_registerVo.phone = txtPhone.text;
 			_registerVo.email = txtEmail.text;
+			_registerVo.gender = gender;
 			
 			_registerVo.playerName = txtName.text;
 			_registerVo.playerAddress = txtArea.text;

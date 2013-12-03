@@ -1,30 +1,34 @@
-package app.modules.panel.personal.view
+package app.sound
 {
-	import app.modules.ViewName;
-	
-	import victor.framework.core.BaseMediator;
-	
 	
 	/**
 	 * ……
 	 * @author 	yangsj 
 	 * 			2013-12-3
 	 */
-	public class InformationMediator extends BaseMediator
+	public class SoundType
 	{
 		/*============================================================================*/
 		/* private variables                                                          */
 		/*============================================================================*/
 		
-		[Inject]
-		public var view:InformationPanel;
+		public static const mainSceneBgSound:String = "main_bg";
+		public static const fightSceneBgSound:String = "fight_bg_"; // 随机 1 和 2[ fight_bg_0 || fight_bg_1 ]
+		
+		////effects
+		
+		public static const SUCCESS:String = "snd.Success";
+		public static const REWARD_DIAMOND:String = "snd.Failed";
+		public static const FAILED:String = "snd.Failed";
+		public static const CLICK01:String = "snd.Click01"; // 点击按钮
+		public static const CLICK02:String = "snd.Click02"; // 点击泡泡
+		public static const BOMB:String = "snd.BubbleBomb";
 		
 		/*============================================================================*/
 		/* Constructor                                                                */
 		/*============================================================================*/
-		public function InformationMediator()
+		public function SoundType()
 		{
-			super();
 		}
 		
 		/*============================================================================*/
@@ -49,18 +53,7 @@ package app.modules.panel.personal.view
 		/* override functions                                                         */
 		/*============================================================================*/
 		
-		override public function onRemove():void
-		{
-			super.onRemove();
-			openView( ViewName.Personal );
-		}
 		
-		override public function onRegister():void
-		{
-			super.onRegister();
-			
-			view.setBaseData();
-		}
 		
 		/*============================================================================*/
 		/* public functions                                                           */

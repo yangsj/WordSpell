@@ -7,12 +7,13 @@ package app.modules.login.register
 	import flash.events.MouseEvent;
 	
 	import app.modules.TempleteSprite;
-	import victor.framework.utils.appStage;
-	import victor.framework.utils.safetyCall;
 	
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.interfaces.IDisposable;
 	import victor.framework.utils.DisplayUtil;
+	import victor.framework.utils.MathUtil;
+	import victor.framework.utils.appStage;
+	import victor.framework.utils.safetyCall;
 	
 	
 	/**
@@ -34,7 +35,7 @@ package app.modules.login.register
 			setSkinWithName( "ui_Skin_CheckBoxPanel" );
 			onCloseComplete();
 			
-			addEventListener( MouseEvent.CLICK, onClickHandler );
+//			addEventListener( MouseEvent.CLICK, onClickHandler );
 		}
 		
 		override public function dispose():void
@@ -62,6 +63,12 @@ package app.modules.login.register
 			appStage.removeEventListener(MouseEvent.CLICK, onStageClickHandler );
 			TweenLite.killTweensOf( this );
 			TweenLite.to( this, 0.2, {scaleX:0.01, scaleY:0.01, ease:Linear.easeNone, onComplete:onCloseComplete} );
+		}
+		
+		public function selectedForItem( index:int ):void
+		{
+			index = MathUtil.range( index - 1, 0, index );
+			tabControl.setTargetByIndex(index);
 		}
 		
 		public function setData( array:Array, isArea:Boolean = true ):void

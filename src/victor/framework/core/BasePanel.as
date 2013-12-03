@@ -9,9 +9,11 @@ package victor.framework.core
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
-	import victor.framework.utils.appStage;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import victor.framework.events.PanelEvent;
+	import victor.framework.utils.appStage;
 	
 	/**
 	 * ……
@@ -63,6 +65,7 @@ package victor.framework.core
 		
 		private function btnCloseClickHandler(event:MouseEvent):void
 		{
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 			hide();
 			dispatchEvent( new PanelEvent( PanelEvent.CLOSE ));
 		}
@@ -110,7 +113,7 @@ package victor.framework.core
 			this.scaleY = 0.1;
 			changePosAtOpen();
 			TweenLite.killTweensOf( this );
-			TweenLite.to( this, 0.5, { 	scaleX: 1, 
+			TweenLite.to( this, 0.3, { 	scaleX: 1, 
 				scaleY: 1, 
 				alpha: 1, 
 				onUpdate: changePosAtOpen, 

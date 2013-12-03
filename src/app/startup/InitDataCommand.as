@@ -9,6 +9,7 @@ package app.startup
 	import app.core.Tips;
 	import app.events.GameEvent;
 	import app.managers.LoaderManager;
+	import app.sound.SoundManager;
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.debug.Debug;
@@ -44,6 +45,9 @@ package app.startup
 			
 			// 资源初始化完成
 			dispatch( new GameEvent( GameEvent.DATA_INIT_COMPLETE ));
+			
+			// 播放主界面背景音乐
+			SoundManager.playMainSceneSoundBg();
 		}
 		
 		protected function errorHandler(event:IOErrorEvent):void

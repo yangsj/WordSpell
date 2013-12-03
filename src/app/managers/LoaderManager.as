@@ -11,10 +11,10 @@ package app.managers
 	import flash.utils.getDefinitionByName;
 	
 	import app.GameConfig;
-	import victor.framework.utils.safetyCall;
 	
 	import victor.framework.debug.Debug;
 	import victor.framework.utils.ArrayUtil;
+	import victor.framework.utils.safetyCall;
 
 
 	/**
@@ -39,6 +39,11 @@ package app.managers
 		public static function getClass( linkName:String, domainName:String = "" ):Class
 		{
 			return instance.getClass( linkName, domainName );
+		}
+		
+		public static function getUrl( name:String ):String
+		{
+			return instance.getUrl( name );
 		}
 
 		///////////////////////////////////////////////////////
@@ -198,6 +203,11 @@ package app.managers
 				return tempContext;
 			}
 			return context;
+		}
+		
+		public function getUrl( name:String ):String
+		{
+			return dictResList[ name ];
 		}
 
 	}

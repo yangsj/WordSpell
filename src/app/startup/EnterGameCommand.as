@@ -5,6 +5,7 @@ package app.startup
 	import app.modules.ViewName;
 	import app.modules.main.model.MainModel;
 	import app.modules.map.model.MapModel;
+	import app.sound.SoundManager;
 	
 	import victor.framework.core.BaseCommand;
 	

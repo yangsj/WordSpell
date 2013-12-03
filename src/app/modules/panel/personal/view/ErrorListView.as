@@ -51,9 +51,9 @@ package app.modules.panel.personal.view
 			super();
 		}
 		
-		public function setArrayList( list:Array ):void
+		public function setArrayList( englishList:Array, chineseList:Array ):void
 		{
-			if ( list )
+			if ( englishList )
 			{
 				var english:String = "";
 				var chinese:String = "";
@@ -63,17 +63,17 @@ package app.modules.panel.personal.view
 				listStr = "";
 				DisplayUtil.removedAll( itemBgCon );
 				listContainer.addChild( itemBgCon );
-				for each ( var val:String in list )
+				for each ( var val:String in englishList )
 				{
 					if ( listStr == "" ) {
-						listStr = val + ",中文";
+						listStr = val + "," + chineseList[i];
 						english = val;
-						chinese = "中文";
+						chinese = chineseList[i];
 					}
 					else {
-						listStr += "\t\n" + val + ",中文";
+						listStr += "\t\n" + val + ",";
 						english += "\n" + val;
-						chinese += "\n中文";
+						chinese += "\n" + chineseList[i];
 					}
 					itemBgCon.addChild( getItemBg( i ) );
 					i++;
@@ -176,6 +176,7 @@ package app.modules.panel.personal.view
 			txtStr.mouseEnabled = false;
 			txtStr.text = "";
 			txtStr.visible = false;
+			txtStr.wordWrap = false;
 			
 			listWidth = listContainer.width;
 			

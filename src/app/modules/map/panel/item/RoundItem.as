@@ -37,6 +37,7 @@ package app.modules.map.panel.item
 		
 		override protected function onClickHandler(event:MouseEvent):void
 		{
+			super.onClickHandler( event );
 			if ( roundVo )
 			{
 				if ( roundVo.isOpen )

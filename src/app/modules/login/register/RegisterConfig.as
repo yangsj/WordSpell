@@ -48,5 +48,31 @@ package app.modules.login.register
 												[ "高三", 12 ]
 											];
 		
+		/**
+		 * 
+		 * @param areaName
+		 * @return 
+		 * 
+		 */
+		public static function getAreaIndexByName( areaName:String ):int
+		{
+			for each ( var ary:Array in AREA_NAME )
+			{
+				if ( ary[0] == areaName )
+					return ary[1];
+			}
+			return -1;
+		}
+		
+		public static function getGradeIndexByName( gradeName:String ):int
+		{
+			for each ( var ary:Array in GRADE_NAME )
+			{
+				if ( ary[0] == gradeName )
+					return ary[1];
+			}
+			return -1;
+		}
+		
 	}
 }
