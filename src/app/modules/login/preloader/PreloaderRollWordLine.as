@@ -1,6 +1,6 @@
 package app.modules.login.preloader
 {
-	import com.greensock.TweenLite;
+	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
 	
 	import flash.display.Bitmap;
@@ -28,6 +28,7 @@ package app.modules.login.preloader
 		private var maskShape:Shape;
 		private var wordArray:Array;
 		private var lastIndex:int;
+//		private var bitmap:Bitmap;
 		
 		private const HEIGHT:Number = 26;
 		
@@ -41,7 +42,7 @@ package app.modules.login.preloader
 		public function dispose():void
 		{
 			this.mask = null;
-			TweenLite.killDelayedCallsTo( start );
+			TweenMax.killDelayedCallsTo( start );
 			DisplayUtil.removedAll( this );
 			DisplayUtil.removedFromParent( maskShape );
 		}
@@ -78,12 +79,14 @@ package app.modules.login.preloader
 		
 		private function start():void
 		{
+//			DisplayUtil.removedFromParent( bitmap );
+			
 			var index:int = lastIndex;
-			var bitmap:Bitmap;
 //			while ( index == lastIndex ) {
 //				index = int(wordArray.length * Math.random());
 //			}
 //			lastIndex = index;
+			var bitmap:Bitmap;
 			txtLine.text = wordArray[ lastIndex ];
 			bitmap = BitmapUtil.cloneBitmapFromTarget( txtLine );
 			bitmap.y = HEIGHT;
@@ -96,30 +99,16 @@ package app.modules.login.preloader
 			const moveTime:Number = 0.4;
 			const delayTime:Number = 2.4;
 			
-			TweenLite.to( bitmap, moveTime, { y:0, alpha:1, ease:Linear.easeNone, onComplete: oneComplete });
-			function oneComplete():void {
-				TweenLite.to( bitmap, 
-					moveTime, 
-					{ 	y:-HEIGHT, 
-						alpha:0, 
-						delay:delayTime,
-						ease:Linear.easeNone, 
-						onComplete:twoComplete, 
-						onCompleteParams:[ bitmap ]
-					});	
-			}
-			function twoComplete( dis:Bitmap ):void
-			{
-				if ( dis )
-				{
-					DisplayUtil.removedFromParent( dis );
-					if ( dis.bitmapData ) {
-						dis.bitmapData.dispose();
-						dis.bitmapData = null;
-					}
-				}
-				start();
-			}
+			TweenMax.to( bitmap, moveTime, { y:0, alpha:1, ease:Linear.easeNone });
+			TweenMax.to( bitmap, moveTime, { 	
+												y:-HEIGHT, 
+												alpha:0, 
+												delay:delayTime,
+												ease:Linear.easeNone, 
+												onComplete:DisplayUtil.removedFromParent, 
+												onCompleteParams:[ bitmap ]
+											});	
+			TweenMax.delayedCall( delayTime, start );
 		}
 		
 		/*

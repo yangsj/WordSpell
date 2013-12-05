@@ -31,8 +31,8 @@ package app.modules.login.command
 		private function loaderCompleteCallBack():void
 		{
 			Debug.debug( "登陆资源加载完毕！！！" );
-			dispatch( new GameEvent( GameEvent.FIRST_LOAD_COMPLETE ));
-			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Preloader ));
+//			dispatch( new GameEvent( GameEvent.FIRST_LOAD_COMPLETE ));
+//			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Preloader ));
 		}
 		
 		private function loaderProgressCallBack( perent:Number ):void

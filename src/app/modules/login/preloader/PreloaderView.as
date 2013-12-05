@@ -63,15 +63,14 @@ package app.modules.login.preloader
 				rollWord = new PreloaderRollWordLine();
 				rollWord.x = ( appStage.stageWidth - rollWord.width ) >> 1;
 				rollWord.y = txtProgressValue.y + txtProgressValue.height + 10;
+				addChild( rollWord );
 			}
-			addChild( rollWord );
 			rollWord.initialize();
 		}
 		
 		public function setProgressValue( value:Number ):void
 		{
 			txtProgressValue.text = ( value * 100 ).toFixed( 2 ) + "%";
-//			mcProgressBar.scaleX = Math.min( value, 1 );
 			mcProgressBar.gotoAndStop( int(value * 100) );
 			addChild( txtProgressValue );
 		}
