@@ -28,7 +28,7 @@ package app.modules.login.preloader
 		private var maskShape:Shape;
 		private var wordArray:Array;
 		private var lastIndex:int;
-//		private var bitmap:Bitmap;
+		private var bitmapCon:Sprite;
 		
 		private const HEIGHT:Number = 26;
 		
@@ -37,6 +37,9 @@ package app.modules.login.preloader
 			this.graphics.beginFill(0,0);
 			this.graphics.drawRect( 0, 0, 500, HEIGHT);
 			this.graphics.endFill();
+			
+			bitmapCon = new Sprite();
+			addChild( bitmapCon );
 		}
 		
 		public function dispose():void
@@ -79,7 +82,7 @@ package app.modules.login.preloader
 		
 		private function start():void
 		{
-//			DisplayUtil.removedFromParent( bitmap );
+			DisplayUtil.removedAll( bitmapCon );
 			
 			var index:int = lastIndex;
 //			while ( index == lastIndex ) {
@@ -91,7 +94,7 @@ package app.modules.login.preloader
 			bitmap = BitmapUtil.cloneBitmapFromTarget( txtLine );
 			bitmap.y = HEIGHT;
 			bitmap.alpha = 0;
-			addChild( bitmap );
+			bitmapCon.addChild( bitmap );
 			
 			lastIndex++;
 			if ( lastIndex == wordArray.length ) lastIndex = 0;
