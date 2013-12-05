@@ -80,24 +80,46 @@ package app.modules.login.preloader
 		{
 			var index:int = lastIndex;
 			var bitmap:Bitmap;
-			while ( index == lastIndex )
-			{
-				index = int(wordArray.length * Math.random());
-			}
-			
-			lastIndex = index;
+//			while ( index == lastIndex ) {
+//				index = int(wordArray.length * Math.random());
+//			}
+//			lastIndex = index;
 			txtLine.text = wordArray[ lastIndex ];
 			bitmap = BitmapUtil.cloneBitmapFromTarget( txtLine );
 			bitmap.y = HEIGHT;
 			bitmap.alpha = 0;
 			addChild( bitmap );
 			
+			lastIndex++;
+			if ( lastIndex == wordArray.length ) lastIndex = 0;
+			
 			const moveTime:Number = 0.4;
 			const delayTime:Number = 2.4;
 			
-			TweenLite.to( bitmap, moveTime, { y:0, alpha:1, ease:Linear.easeNone });
-			TweenLite.to( bitmap, moveTime, { y:-HEIGHT, alpha:0, ease:Linear.easeNone, delay:delayTime, onComplete:BitmapUtil.disposeBitmapFromTarget, onCompleteParams:[ bitmap ]});
-			TweenLite.delayedCall( delayTime, start );
+			TweenLite.to( bitmap, moveTime, { y:0, alpha:1, ease:Linear.easeNone, onComplete: oneComplete });
+			function oneComplete():void {
+				TweenLite.to( bitmap, 
+					moveTime, 
+					{ 	y:-HEIGHT, 
+						alpha:0, 
+						delay:delayTime,
+						ease:Linear.easeNone, 
+						onComplete:twoComplete, 
+						onCompleteParams:[ bitmap ]
+					});	
+			}
+			function twoComplete( dis:Bitmap ):void
+			{
+				if ( dis )
+				{
+					DisplayUtil.removedFromParent( dis );
+					if ( dis.bitmapData ) {
+						dis.bitmapData.dispose();
+						dis.bitmapData = null;
+					}
+				}
+				start();
+			}
 		}
 		
 		/*

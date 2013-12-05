@@ -4,12 +4,11 @@ package app.modules.login.preloader
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
-	import victor.framework.utils.appStage;
-	
 	import victor.framework.core.BaseScene;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.utils.DisplayUtil;
 	import victor.framework.utils.TextFiledUtil;
+	import victor.framework.utils.appStage;
 	
 	
 	/**
@@ -59,17 +58,14 @@ package app.modules.login.preloader
 		{
 			ViewStruct.addChild( this, ViewStruct.LOADING );
 			
-			if ( this.data == null )
+			if ( rollWord == null )
 			{
-				if ( rollWord == null )
-				{
-					rollWord = new PreloaderRollWordLine();
-					rollWord.x = ( width - rollWord.width ) >> 1;
-					rollWord.y = txtProgressValue.y + txtProgressValue.height + 10;
-				}
-				addChild( rollWord );
-				rollWord.initialize();
+				rollWord = new PreloaderRollWordLine();
+				rollWord.x = ( appStage.stageWidth - rollWord.width ) >> 1;
+				rollWord.y = txtProgressValue.y + txtProgressValue.height + 10;
 			}
+			addChild( rollWord );
+			rollWord.initialize();
 		}
 		
 		public function setProgressValue( value:Number ):void
