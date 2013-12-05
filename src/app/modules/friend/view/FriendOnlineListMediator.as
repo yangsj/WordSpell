@@ -1,6 +1,7 @@
 package app.modules.friend.view
 {
 	import app.modules.ViewName;
+	import app.modules.friend.event.FriendEvent;
 	
 	/**
 	 * ……

@@ -66,8 +66,8 @@ package app.modules.login.preloader
 					rollWord = new PreloaderRollWordLine();
 					rollWord.x = ( width - rollWord.width ) >> 1;
 					rollWord.y = txtProgressValue.y + txtProgressValue.height + 10;
-					addChild( rollWord );
 				}
+				addChild( rollWord );
 				rollWord.initialize();
 			}
 		}

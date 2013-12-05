@@ -2,8 +2,6 @@ package app.modules.task.model
 {
 	import app.modules.model.vo.ItemVo;
 	
-	import victor.framework.utils.HtmlText;
-	
 	/**
 	 * ……
 	 * @author 	yangsj 
@@ -40,29 +38,32 @@ package app.modules.task.model
 		 */
 		public var rewardMoney:int;
 		/**
-		 * 任务目标
-		 */
-		public var progressTarget:int;
-		/**
-		 * 任务完成当前进度
-		 */
-		public var progressCurrent:int;
-		/**
-		 * 任务需要达成的总量
-		 */
-		public var progressTotal:int;
-		/**
 		 * 奖励道具列表
 		 */
 		public var propList:Vector.<ItemVo>;
 		
 		/**
+		 * 是否已经领取
+		 */
+		public function get isHide():Boolean
+		{
+			return status == 3;
+		}
+		
+		/**
 		 * 任务是否完成
 		 */
-		public function get isComplete():Boolean
+		public function get isEd():Boolean
 		{
-			return status > 1;
-			return progressCurrent == progressTotal;
+			return status == 2;
+		}
+		
+		/**
+		 * 是否正在进行
+		 */
+		public function get isIng():Boolean
+		{
+			return status == 1;
 		}
 		
 		/**
@@ -70,11 +71,7 @@ package app.modules.task.model
 		 */
 		public function get fullDescribe():String
 		{
-			return describe + ( 
-								isComplete ? "（已完成）" : ""
-//								HtmlText.color("（已完成）", HtmlText.Green) : 
-//								HtmlText.color("（"+progressCurrent+"/"+progressTotal + "）", HtmlText.Red)
-							);
+			return describe + ( isEd ? "（已完成）" : ( isHide ? "（已领取）" : "" ) );
 		}
 		
 	}

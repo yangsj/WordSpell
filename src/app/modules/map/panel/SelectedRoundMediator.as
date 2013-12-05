@@ -1,5 +1,6 @@
 package app.modules.map.panel
 {
+	import app.core.Alert;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.map.model.MapModel;
@@ -58,13 +59,20 @@ package app.modules.map.panel
 		
 		private function selectedRoundhandler( event:SelectedRoundEvent ):void
 		{
-			var roundVo:RoundVo = event.data as RoundVo;
-			mapModel.currentRoundVo = roundVo;
-			
-			mapModel.isNeddOpenFromFight = true;
-			
-			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.SelectedRoundPanel ));	
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightAlone ));
+			Alert.show( "模式选择", callback, "闯  关", "练  习", "" );
+			function callback( type :int ):void
+			{
+				if ( type != Alert.CLOSE )
+				{
+					var roundVo:RoundVo = event.data as RoundVo;
+					mapModel.currentRoundVo = roundVo;
+					mapModel.isNeddOpenFromFight = true;
+					mapModel.isSelectedRound = ( type == Alert.YES );
+					
+					dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.SelectedRoundPanel ));	
+					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightAlone ));
+				}
+			}
 		}
 		
 	}

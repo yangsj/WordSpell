@@ -13,9 +13,9 @@ package app.modules.task.view
 	import flash.text.TextField;
 	
 	import app.core.Text;
-	import app.events.ViewEvent;
+	import app.core.Tips;
 	import app.modules.TempleteSprite;
-	import app.modules.ViewName;
+	import app.modules.task.event.TaskEvent;
 	import app.modules.task.model.TaskVo;
 	
 	import victor.framework.utils.DisplayUtil;
@@ -44,6 +44,8 @@ package app.modules.task.view
 		private var endMoveX:Number = 0;
 		private var txtWidth:Number = 0;
 		
+		private var _data:TaskVo;
+		
 		// 创建对象池
 		private static const vecPools:Vector.<TaskItem> = new Vector.<TaskItem>();
 		public static function get itemInstance():TaskItem
@@ -61,14 +63,13 @@ package app.modules.task.view
 			setSkinWithName( "ui_Skin_TaskItem" );
 			txtDes = Text.cloneText( txtDes );
 			txtDes.visible = false;
-			mouseChildren = false;
-//			mouseEnabled = false;
-//			cacheAsBitmap = true;
-			buttonMode = true;
+			txtDes.mouseEnabled = false;
 			
 			txtWidth = txtDes.width;
 			
 			bitmapCon = new Sprite();
+			bitmapCon.mouseEnabled = false;
+			bitmapCon.mouseEnabled = false;
 			_skin.addChild( bitmapCon );
 
 			bitmapMask = new Shape();
@@ -85,7 +86,6 @@ package app.modules.task.view
 		
 		private function addListeners():void
 		{
-			addEventListener( Event.REMOVED, removedFromParentHandeler );
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
 			addEventListener( MouseEvent.CLICK, onClickHandler );
 			addEventListener( MouseEvent.ROLL_OVER, rollMouseHandler );
@@ -94,9 +94,10 @@ package app.modules.task.view
 		
 		private function removeListeners():void
 		{
-			removeEventListener( Event.REMOVED, removedFromParentHandeler );
 			removeEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
 			removeEventListener( MouseEvent.CLICK, onClickHandler );
+			removeEventListener( MouseEvent.ROLL_OVER, rollMouseHandler );
+			removeEventListener( MouseEvent.ROLL_OUT , rollMouseHandler );
 		}
 		
 		private function startMoveDes( isLoop:Boolean = false ):void
@@ -128,21 +129,24 @@ package app.modules.task.view
 		/* events handlers                                                            */
 		/*============================================================================*/
 		
-		protected function removedFromParentHandeler(event:Event):void
-		{
-			removeListeners();
-			
-			if ( vecPools ) vecPools.push( this );
-		}
-		
 		protected function removedFromStageHandler(event:Event):void
 		{
 			stopMoveDes();
+			removeListeners();
+			if ( vecPools ) {
+				vecPools.push( this );
+			}
 		}
 		
 		protected function onClickHandler(event:MouseEvent):void
 		{
-			dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.TaskCompleted, null, true ));
+			if ( data.isEd ) {
+				dispatchEvent( new TaskEvent( TaskEvent.TAKE_REWARD, data, true ));
+			} else if ( data.isIng ) {
+				Tips.showMouse( "该任务还未完成，不能领取奖励！！！" );
+			} else {
+				Tips.showMouse( "该任务奖励奖励已领取" );
+			}
 		}
 		
 		protected function rollMouseHandler(event:MouseEvent):void
@@ -160,8 +164,9 @@ package app.modules.task.view
 		
 		public function setData( vo:TaskVo ):void
 		{
-//			bgStatus.gotoAndStop( MathUtil.range(vo.status + 1, 1, 3) );
-			bgStatus.gotoAndStop( vo.isComplete ? 3 : 1 );
+			_data = vo;
+			
+			bgStatus.gotoAndStop( vo.isEd ? 3 : 1 );
 			addListeners();
 			
 			if (  txtDes.htmlText != vo.fullDescribe )
@@ -182,20 +187,22 @@ package app.modules.task.view
 				endMoveX = txtDes.x;
 				time = 0;
 				
-				if ( bitmapDes.width > txtWidth )
-				{
+				if ( bitmapDes.width > txtWidth ) {
 					var diff:Number = ( bitmapDes.width - txtWidth );
 					endMoveX = endMoveX - diff;
 					time = diff / 60;
-//					startMoveDes();
 				}
 			}
 		}
-		
+
 		/*============================================================================*/
 		/* public variables                                                           */
 		/*============================================================================*/
 		
+		public function get data():TaskVo
+		{
+			return _data;
+		}
 		
 		
 	}

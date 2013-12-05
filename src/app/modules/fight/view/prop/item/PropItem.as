@@ -5,11 +5,11 @@ package app.modules.fight.view.prop.item
 	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	
+	import app.core.Text;
 	import app.core.Tips;
 	import app.events.PackEvent;
 	import app.managers.LoaderManager;
 	import app.modules.model.vo.ItemVo;
-	import app.core.Text;
 	
 	import victor.framework.manager.TickManager;
 	import victor.framework.utils.DisplayUtil;
@@ -22,7 +22,7 @@ package app.modules.fight.view.prop.item
 	 */
 	public class PropItem extends Sprite
 	{
-		private var _itemVo:ItemVo;
+		private var _data:ItemVo;
 		private var _isCanClick:Boolean = true;
 		private var _timeNum:int= 0;
 		
@@ -35,18 +35,22 @@ package app.modules.fight.view.prop.item
 		// 花费金币价钱
 		public var txtCost:TextField;
 		
+		private var tips:PropItemTips;
+		
 		public function PropItem()
 		{
 			super();
 			createTexts();
 			addEventListener( MouseEvent.CLICK, onClickHandler );
 			scaleX = scaleY = 0.8;
+			
+			tips = new PropItemTips( this );
 		}
 		
 		protected function onClickHandler( event:MouseEvent ):void
 		{
 			if ( _isCanClick )
-				dispatchEvent( new PackEvent( PackEvent.USE_ITEM, itemVo, true ));
+				dispatchEvent( new PackEvent( PackEvent.USE_ITEM, data, true ));
 			else Tips.showMouse( "您的节奏有点太快了" );
 		}
 		
@@ -80,11 +84,11 @@ package app.modules.fight.view.prop.item
 		private function setText():void
 		{
 			txtTime.visible = false;
-			txtCost.visible = _itemVo.num == 0;
-			txtNum.visible = _itemVo.num != 0;
+			txtCost.visible = _data.num == 0;
+			txtNum.visible = _data.num != 0;
 			
-			txtCost.text = _itemVo.contMoney.toString();
-			txtNum.text = "x" + _itemVo.num.toString();
+			txtCost.text = _data.contMoney.toString();
+			txtNum.text = "x" + _data.num.toString();
 		}
 		
 		private function doInterval():void
@@ -112,16 +116,18 @@ package app.modules.fight.view.prop.item
 		
 		public function setData( itemVo:ItemVo ):void
 		{
-			if ( _itemVo == null || _itemVo.type != itemVo.type )
+			if ( _data == null || _data.type != itemVo.type )
 			{
 				DisplayUtil.removedFromParent( _skin );
 				_skin = LoaderManager.getObj( itemVo.skinId ) as Sprite;
 				addChildAt( _skin, 0 );
 //				Reflection.reflection( this, _skin );
 			}
-			_itemVo = itemVo;
+			_data = itemVo;
 			clearTimeout();
 			setText();
+			
+			tips.setVo( itemVo );
 		}
 		
 		/**
@@ -130,14 +136,14 @@ package app.modules.fight.view.prop.item
 		 */
 		public function update( itemVo:ItemVo ):void
 		{
-			if ( _itemVo && _itemVo.num == 0 )
+			if ( _data && _data.num == 0 )
 			{
 				clearTimeout();
 				
 				txtCost.visible = txtNum.visible = false;
 				txtTime.visible = true;
 				
-				_itemVo = itemVo;
+				_data = itemVo;
 				_isCanClick = false;
 				_timeNum = itemVo.intervalTime;
 				TickManager.doInterval( doInterval, 1000 );
@@ -156,9 +162,9 @@ package app.modules.fight.view.prop.item
 			TickManager.clearDoTime( doInterval );
 		}
 		
-		public function get itemVo():ItemVo
+		public function get data():ItemVo
 		{
-			return _itemVo;
+			return _data;
 		}
 		
 		

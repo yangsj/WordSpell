@@ -99,13 +99,19 @@ package app.modules.fight.view.item
 			y += _speedY;
 			
 			if ( x <= moveArea.x || x >= moveArea.x + moveArea.width )
+			{
+				x = MathUtil.range( x, moveArea.x + 1, moveArea.x + moveArea.width - 1 );
 				changeDirection( -1, 1 );
+			}
 			
 			else if ( y <= moveArea.y || y >= moveArea.y + moveArea.height )
+			{
+				y = MathUtil.range( y, moveArea.y + 1, moveArea.y + moveArea.height - 1 );
 				changeDirection( 1, -1 );
+			}
 			
-			x=MathUtil.range( x, moveArea.x, moveArea.x + moveArea.width );
-			y=MathUtil.range( y, moveArea.y, moveArea.y + moveArea.height );
+//			x=MathUtil.range( x, moveArea.x, moveArea.x + moveArea.width );
+//			y=MathUtil.range( y, moveArea.y, moveArea.y + moveArea.height );
 			
 //			_txtTemp.text = _speedX + "_" + _speedY + "\n" + x+"_"+y;
 		}
@@ -115,8 +121,10 @@ package app.modules.fight.view.item
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			
 			// 随机泡泡大小
-			if ( _isAlone ) _scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
-			else _scale = Number((0.45 + Math.random() * 0.3).toFixed(2));
+//			if ( _isAlone ) _scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
+//			else _scale = Number((0.65 + Math.random() * 0.3).toFixed(2));
+			
+			_scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
 			
 			_skin.scaleX = _skin.scaleY = _scale;
 			moveArea.width = moveArea.width + DIAMETER * ( 1 - scale );
@@ -127,12 +135,12 @@ package app.modules.fight.view.item
 			x = MathUtil.range( x, moveArea.x + 5, moveArea.x + moveArea.width - 5 );
 			y = MathUtil.range( y, moveArea.x + 5, moveArea.y + moveArea.height- 5 );
 			
-			var sx:Number = Number((0.5 + Math.random() * 0.3).toFixed(2));
-			var sy:Number =Number((0.5 + Math.random() * 0.3).toFixed(2));
-			_speedX = Math.random() < 0.5 ? sx : -sx;
-			_speedY = Math.random() < 0.5 ? sy : -sy;
+			_speedX = Number((0.25 + Math.random() * 0.15).toFixed(2));
+			_speedY = Number((0.25 + Math.random() * 0.15).toFixed(2));
+			_speedX = Math.random() < 0.5 ? _speedX : -_speedX;
+			_speedY = Math.random() < 0.5 ? _speedY : -_speedY;
 			
-			TickManager.doInterval( enterFrameHandler, 40 );
+			TickManager.doInterval( enterFrameHandler, 20 );
 		}
 		
 		protected function removedFromStageHandler(event:Event):void
@@ -202,6 +210,11 @@ package app.modules.fight.view.item
 					txtLetter.height = 70;
 					txtLetter.visible = false;
 					txtLetter.filters = null;
+					
+//					txtLetter.cacheAsBitmap = true;
+//					txtLetter.x = -30;
+//					txtLetter.y = -35;
+//					_skin.addChild( txtLetter );
 				}
 				frame = _lastRandomNum + 1;
 				txtLetter.text = vo.upperCase;
@@ -214,6 +227,7 @@ package app.modules.fight.view.item
 			}
 			// 设置skin帧
 			(_skin as MovieClip ).gotoAndStop( frame );
+			_skin.cacheAsBitmap = true;
 		}
 		
 		/**
@@ -237,7 +251,6 @@ package app.modules.fight.view.item
 				}
 				
 				if ( isSelf ) {
-//					SoundManager.playEffectMusic( SoundType.CLICK02 );
 					SoundManager.playEffectMusic( SoundType.BOMB );
 				}
 			}

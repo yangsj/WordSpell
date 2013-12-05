@@ -100,7 +100,7 @@ package app.modules.fight.view.alone
 		
 		protected function  pullData():void
 		{
-			fightService.startRound();
+			fightService.startRound( mapModel.isSelectedRound ? 0 : 1 );
 		}
 
 		private function initData():void

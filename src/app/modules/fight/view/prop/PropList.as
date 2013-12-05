@@ -83,7 +83,7 @@ package app.modules.fight.view.prop
 				{
 					var dis:PropItem = this.getChildAt( i ) as PropItem;
 					if ( dis )
-						_itemPoints[ dis.itemVo.type ] = dis.localToGlobal( new Point( dis.width >> 1, dis.height>> 1));
+						_itemPoints[ dis.data.type ] = dis.localToGlobal( new Point( dis.width >> 1, dis.height>> 1));
 				}
 			}
 		}
@@ -102,7 +102,7 @@ package app.modules.fight.view.prop
 		{
 			for each ( var item:PropItem in vecItemSkin )
 			{
-				if ( item.itemVo && item.itemVo.type == type )
+				if ( item.data && item.data.type == type )
 				{
 					return item;
 				}

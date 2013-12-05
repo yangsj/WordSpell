@@ -1,7 +1,6 @@
 package app.modules.task.view
 {
 	import flash.display.Sprite;
-	import flash.events.Event;
 	
 	import app.modules.task.model.TaskVo;
 	
@@ -32,6 +31,7 @@ package app.modules.task.view
 				var i:int = 0;
 				var disty:Number = 43;
 				var startx:Number = list.length < 7 ? 5 : 0;
+				var pos:Number = isNaN( gameScroll.curPos ) ? 0 : gameScroll.curPos;
 				for each ( var vo:TaskVo in list )
 				{
 					var item:TaskItem = TaskItem.itemInstance;
@@ -42,7 +42,7 @@ package app.modules.task.view
 					i++;
 				}
 				gameScroll.updateMainHeight( listContainer.height );
-				gameScroll.setPos( 0 );
+				gameScroll.setPos( pos );
 			}
 		}
 		

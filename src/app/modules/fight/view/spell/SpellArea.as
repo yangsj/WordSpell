@@ -9,8 +9,6 @@ package app.modules.fight.view.spell
 	import app.modules.TempleteSprite;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
-	import app.sound.SoundManager;
-	import app.sound.SoundType;
 	
 	import victor.framework.manager.TickManager;
 
@@ -131,9 +129,6 @@ package app.modules.fight.view.spell
 						
 						// add money
 						dispatchEvent( new FightAloneEvent( FightAloneEvent.ADD_MONEY_EFFECT ));
-						
-						//
-						SoundManager.playEffectMusic( SoundType.REWARD_DIAMOND );
 					}
 					else 
 					{

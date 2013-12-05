@@ -38,7 +38,7 @@ package victor.framework.core
 		/**
 		 * 是否鼠标可以穿透
 		 */
-		protected var isPenetrate:Boolean = true;
+		protected var isPenetrate:Boolean = false;
 		
 		public function BasePanel()
 		{

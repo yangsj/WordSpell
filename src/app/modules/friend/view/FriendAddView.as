@@ -21,7 +21,6 @@ package app.modules.friend.view
 		
 		public function FriendAddView()
 		{
-			isPenetrate = true;
 			super();
 		}
 		

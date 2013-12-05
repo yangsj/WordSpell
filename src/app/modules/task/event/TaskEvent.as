@@ -25,5 +25,10 @@ package app.modules.task.event
 		 */
 		public static const TASK_CHECK_COMPLETED:String = "task_check_completed";
 		
+		/**
+		 * 領取任務奖励
+		 */
+		public static const TAKE_REWARD:String = "take_reward";
+		
 	}
 }

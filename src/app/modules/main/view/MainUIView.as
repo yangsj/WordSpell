@@ -119,6 +119,8 @@ package app.modules.main.view
 					if ( dis.hasOwnProperty("buttonMode"))
 						dis["buttonMode"] = true;
 					
+					if ( btnName == FunctionBtnConfig.EXIT ) dis.visible = false;
+					
 					dis.addEventListener(MouseEvent.CLICK, onClickFunsBtnHandler );
 				}
 			}

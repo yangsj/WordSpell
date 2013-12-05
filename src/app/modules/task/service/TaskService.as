@@ -46,6 +46,16 @@ package app.modules.task.service
 			regist( server_cmd_e.TASK_INFO_RET, taskInfoListNotify, task_info_t );
 			// 任务完成通知
 			regist( server_cmd_e.TASK_COMPLETED_RET, taskCompleteNotify, task_completed_ret_t );
+			// 任务奖励领取成功
+			regist( -1, takeRewardSuccessNotify, null );
+		}
+		
+		// 任务完成奖励
+		private function takeRewardSuccessNotify( resp:SocketResp ):void
+		{
+			
+			// 重新更新列表
+			pullTaskList();
 		}
 		
 		// 任务列表数据通知
@@ -65,7 +75,9 @@ package app.modules.task.service
 				taskVo.rewardExp = task.exp_award;
 				taskVo.rewardMoney = task.coin_award;
 				
-				taskModel.taskList.push( taskVo );
+				if ( !taskVo.isHide ) {
+					taskModel.taskList.push( taskVo );
+				}
 			}
 			dispatch( new TaskEvent( TaskEvent.UPDATE_LIST ));
 		}
@@ -121,6 +133,10 @@ package app.modules.task.service
 			call( client_cmd_e.TASK_INFO_REQ, req );
 		}
 		
+		public function takeReward( id:int ):void
+		{
+			
+		}
 		
 	}
 }

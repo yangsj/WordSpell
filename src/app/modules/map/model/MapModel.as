@@ -20,6 +20,7 @@ package app.modules.map.model
 		private var _currentChapterVo:ChapterVo;
 		private var _mapList:Vector.<MapVo>;
 		private var _isNeddOpenFromFight:Boolean = false;
+		private var _isSelectedRound:Boolean = true;
 		
 		public function MapModel()
 		{
@@ -96,6 +97,22 @@ package app.modules.map.model
 		public function set isNeddOpenFromFight(value:Boolean):void
 		{
 			_isNeddOpenFromFight = value;
+		}
+
+		/**
+		 * 是否选择闯关，否侧是练习
+		 */
+		public function get isSelectedRound():Boolean
+		{
+			return _isSelectedRound;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isSelectedRound(value:Boolean):void
+		{
+			_isSelectedRound = value;
 		}
 		
 

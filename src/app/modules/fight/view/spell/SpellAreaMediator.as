@@ -53,7 +53,10 @@ package app.modules.fight.view.spell
 			fightModel.isErrorLastAnswerForPractice = false;
 			isSendInput = false;
 			if ( fightModel.modeType == 5 )
+			{
+				setNextWrodInfo();
 				view.setInitData( fightModel.spellVo );
+			}
 			
 		}
 		

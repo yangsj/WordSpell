@@ -51,6 +51,7 @@ package app.modules.fight.view
 		public var btnClose:InteractiveObject; // 退出【练习模式有】
 		public var isAlone:Boolean = true;
 		public var mapId:int = 0;
+		public var moneyIcon:Sprite;
 		
 		private var _isValidOperate:Boolean = true;
 		
@@ -238,6 +239,10 @@ package app.modules.fight.view
 		public function updateMoneyDisplay():void
 		{
 			txtMoney.text = GameData.instance.selfVo.money.toString();
+			if ( btnClose && moneyIcon ) {
+				txtMoney.x = btnClose.x - txtMoney.textWidth - 10;
+				moneyIcon.x = txtMoney.x - moneyIcon.width - 5;
+			}
 		}
 		
 		/**

@@ -4,6 +4,7 @@ package app.modules.map.main.item
 	import com.greensock.easing.Back;
 	
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
@@ -21,6 +22,7 @@ package app.modules.map.main.item
 		private var mapVo:MapVo;
 		private var tips:MovieClip;
 		private var txtTips:TextField;
+		private var bgTips:Sprite;
 		
 		public function MapItem( skin:MovieClip )
 		{
@@ -28,6 +30,7 @@ package app.modules.map.main.item
 			skin.mouseChildren = true;
 			tips = skin.getChildByName( "tips" ) as MovieClip || new MovieClip();
 			txtTips = tips.getChildByName( "txt" ) as TextField || new TextField();
+			bgTips = tips.getChildByName( "bg" ) as Sprite || new Sprite();
 			tips.mouseEnabled = false;
 			tips.mouseChildren = false;
 			skin.addEventListener(MouseEvent.ROLL_OVER, mouseHandler );
@@ -64,6 +67,10 @@ package app.modules.map.main.item
 			this.mapVo = mapVo;
 			skin.gotoAndStop( isOpen ? FRAME_OPEN : FRAME_CLOSE );
 			txtTips.text = mapVo.mapName;
+			txtTips.width = txtTips.textWidth + 20;
+			txtTips.x = -( txtTips.width >> 1 );
+			bgTips.width = txtTips.width;
+			tips.cacheAsBitmap = true;
 		}
 		
 		/**

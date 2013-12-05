@@ -42,7 +42,6 @@ package app.modules.friend.view
 		
 		public function FriendView()
 		{
-			isPenetrate = true;
 			super();
 		}
 		

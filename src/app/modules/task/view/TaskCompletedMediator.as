@@ -1,6 +1,8 @@
 package app.modules.task.view
 {
 	import app.modules.task.event.TaskEvent;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import victor.framework.core.BaseMediator;
 	
@@ -22,6 +24,9 @@ package app.modules.task.view
 			super.onRemove();
 			
 			dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
+			
+			// 
+			SoundManager.playEffectMusic( SoundType.REWARD_DIAMOND );
 		}
 		
 	}

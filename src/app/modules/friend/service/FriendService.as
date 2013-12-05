@@ -159,7 +159,7 @@ package app.modules.friend.service
 			req.name = friendName;
 			call( client_cmd_e.ADD_FRIEND_REQ, req );
 			
-			Tips.showMouse( "申请消息已发送！" );
+//			Tips.showMouse( "申请消息已发送！" );
 			
 			LoadingEffect.hide();
 		}
@@ -188,12 +188,5 @@ package app.modules.friend.service
 			call( client_cmd_e.DEL_FRIEND_REQ, req );
 		}
 		
-		/**
-		 * 拉取所有在线玩家
-		 */
-		public function pullAllOnlineList():void
-		{
-		}
-
 	}
 }

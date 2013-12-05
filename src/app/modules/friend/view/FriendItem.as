@@ -180,9 +180,9 @@ package app.modules.friend.view
 			
 			txtName.text = data.name;
 			
-			_tips2.txtName.text = data.name;
-			_tips2.txtGrade.text = data.grade;
-			_tips2.txtLevel.text = "Lv " + data.grade;
+			_tips2.txtName.text = "" + data.name;
+			_tips2.txtGrade.text = "" + data.grade;
+			_tips2.txtLevel.text = "Lv " + data.level;
 			_tips2.mcBg.gotoAndStop( data.gender + 1 );
 		}
 
