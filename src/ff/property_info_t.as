@@ -30,6 +30,7 @@ import org.apache.thrift.protocol.*;
     private static const GRADE_FIELD_DESC:TField = new TField("grade", TType.STRING, 11);
     private static const QQ_FIELD_DESC:TField = new TField("qq", TType.STRING, 12);
     private static const REAL_NAME_FIELD_DESC:TField = new TField("real_name", TType.STRING, 13);
+    private static const GENDER_FIELD_DESC:TField = new TField("gender", TType.I16, 14);
 
     private var _level:int;
     public static const LEVEL:int = 1;
@@ -57,12 +58,15 @@ import org.apache.thrift.protocol.*;
     public static const QQ:int = 12;
     private var _real_name:String;
     public static const REAL_NAME:int = 13;
+    private var _gender:int;
+    public static const GENDER:int = 14;
 
     private var __isset_level:Boolean = false;
     private var __isset_exp:Boolean = false;
     private var __isset_coin:Boolean = false;
     private var __isset_right_words_num:Boolean = false;
     private var __isset_wrong_words_num:Boolean = false;
+    private var __isset_gender:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -92,6 +96,8 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.STRING));
       metaDataMap[REAL_NAME] = new FieldMetaData("real_name", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
+      metaDataMap[GENDER] = new FieldMetaData("gender", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
     }
     {
       FieldMetaData.addStructMetaDataMap(property_info_t, metaDataMap);
@@ -103,6 +109,7 @@ import org.apache.thrift.protocol.*;
       this._coin = 0;
       this._right_words_num = 0;
       this._wrong_words_num = 0;
+      this._gender = 0;
     }
 
     public function get level():int {
@@ -331,6 +338,24 @@ import org.apache.thrift.protocol.*;
       return this.real_name != null;
     }
 
+    public function get gender():int {
+      return this._gender;
+    }
+
+    public function set gender(gender:int):void {
+      this._gender = gender;
+      this.__isset_gender = true;
+    }
+
+    public function unsetGender():void {
+      this.__isset_gender = false;
+    }
+
+    // Returns true if field gender is set (has been assigned a value) and false otherwise
+    public function isSetGender():Boolean {
+      return this.__isset_gender;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case LEVEL:
@@ -437,6 +462,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case GENDER:
+        if (value == null) {
+          unsetGender();
+        } else {
+          this.gender = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -470,6 +503,8 @@ import org.apache.thrift.protocol.*;
         return this.qq;
       case REAL_NAME:
         return this.real_name;
+      case GENDER:
+        return this.gender;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -504,6 +539,8 @@ import org.apache.thrift.protocol.*;
         return isSetQq();
       case REAL_NAME:
         return isSetReal_name();
+      case GENDER:
+        return isSetGender();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -616,6 +653,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case GENDER:
+            if (field.type == TType.I16) {
+              this.gender = iprot.readI16();
+              this.__isset_gender = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -688,6 +733,9 @@ import org.apache.thrift.protocol.*;
         oprot.writeString(this.real_name);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(GENDER_FIELD_DESC);
+      oprot.writeI16(this.gender);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -778,6 +826,10 @@ import org.apache.thrift.protocol.*;
       } else {
         ret += this.real_name;
       }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "gender:";
+      ret += this.gender;
       first = false;
       ret += ")";
       return ret;

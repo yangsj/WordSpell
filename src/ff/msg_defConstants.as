@@ -21,7 +21,8 @@ import flash.utils.Dictionary;
         error_code_desc[3] = "系统忙";
         error_code_desc[4] = "此账号已被占用";
         error_code_desc[5] = "此账号无效";
-        error_code_desc[6] = "密码错误";
+        error_code_desc[6] = "无此用户或密码输入错误";
+        error_code_desc[7] = "CD时间未到，您操作太过频繁";
       }();
     }
 

@@ -48,10 +48,12 @@ package app.modules.login.preloader
 			TweenMax.killDelayedCallsTo( start );
 			DisplayUtil.removedAll( this );
 			DisplayUtil.removedFromParent( maskShape );
+			DisplayUtil.removedAll( bitmapCon );
 		}
 		
 		public function initialize():void
 		{
+			DisplayUtil.removedAll( bitmapCon );
 			if ( txtLine == null )
 			{
 				txtLine = TextFiledUtil.create( "微软雅黑", 16, 0x0066FF, TextFormatAlign.CENTER );
@@ -81,9 +83,7 @@ package app.modules.login.preloader
 		}
 		
 		private function start():void
-		{
-			DisplayUtil.removedAll( bitmapCon );
-			
+		{	
 			var index:int = lastIndex;
 //			while ( index == lastIndex ) {
 //				index = int(wordArray.length * Math.random());

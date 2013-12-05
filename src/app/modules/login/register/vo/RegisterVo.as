@@ -27,15 +27,15 @@ package app.modules.login.register.vo
 		/**
 		 * 玩家姓名
 		 */
-		public var playerName:String;
+		public var realName:String;
 		/**
 		 * 地址
 		 */
-		public var playerAddress:String;
+		public var address:String;
 		/**
 		 * 昵称
 		 */
-		public var nickName:String;
+		public var name:String;
 		/**
 		 * 密码
 		 */
@@ -54,11 +54,11 @@ package app.modules.login.register.vo
 		/**
 		 * 学校名称
 		 */
-		public var schoolName:String;
+		public var school:String;
 		/**
 		 * 年级
 		 */
-		public var className:String;
+		public var grade:String;
 		/**
 		 * 联系方式
 		 */
@@ -71,6 +71,10 @@ package app.modules.login.register.vo
 		 * 电子邮箱
 		 */
 		public var email:String;
+		/**
+		 * 年龄
+		 */
+		public var age:int = 0;
 		
 	}
 }

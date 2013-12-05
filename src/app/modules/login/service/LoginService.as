@@ -69,15 +69,16 @@ package app.modules.login.service
 		public function register( registerVo:RegisterVo, callBack:Function = null ):void
 		{
 			var req:account_req_t = new account_req_t();
-			req.real_name = registerVo.playerName;
-			req.nick_name = registerVo.nickName;
+			req.real_name = registerVo.realName;
+			req.nick_name = registerVo.name;
 			req.password = registerVo.password;
-			req.address = registerVo.playerAddress;
+			req.address = registerVo.address;
 			req.email = registerVo.email;
-			req.grade = registerVo.className;
+			req.grade = registerVo.grade;
 			req.phone = registerVo.phone;
 			req.qq = registerVo.QQ;
-			req.school = registerVo.schoolName;
+			req.school = registerVo.school;
+			req.gender = registerVo.gender;
 			req.register_flag = true;
 			call( client_cmd_e.LOGIN_REQ, req, callBack );
 		}
@@ -105,7 +106,7 @@ package app.modules.login.service
 				selfVo.rightWordsNum = data.right_words_num;
 				selfVo.wrongWordsNum = data.wrong_words_num;
 				selfVo.school = data.school;
-//				selfVo.gender = data.gender;
+				selfVo.gender = data.gender;
 			}
 			else
 			{

@@ -16,8 +16,9 @@ import flash.utils.Dictionary;
     public static const USER_TAKEN:int = 4;
     public static const USER_INVALID:int = 5;
     public static const PASS_INVALID:int = 6;
+    public static const CD_INVALID:int = 7;
 
-    public static const VALID_VALUES:Set = new Set(OK, SERVER_ERROR, INPUT_ERROR, SERVER_BUSY, USER_TAKEN, USER_INVALID, PASS_INVALID);
+    public static const VALID_VALUES:Set = new Set(OK, SERVER_ERROR, INPUT_ERROR, SERVER_BUSY, USER_TAKEN, USER_INVALID, PASS_INVALID, CD_INVALID);
     public static const VALUES_TO_NAMES:Dictionary = new Dictionary();
     {
       VALUES_TO_NAMES[OK] = "OK";
@@ -27,6 +28,7 @@ import flash.utils.Dictionary;
       VALUES_TO_NAMES[USER_TAKEN] = "USER_TAKEN";
       VALUES_TO_NAMES[USER_INVALID] = "USER_INVALID";
       VALUES_TO_NAMES[PASS_INVALID] = "PASS_INVALID";
+      VALUES_TO_NAMES[CD_INVALID] = "CD_INVALID";
 
     }
   }

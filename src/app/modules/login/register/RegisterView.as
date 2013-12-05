@@ -14,6 +14,7 @@ package app.modules.login.register
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.core.BasePanel;
 	import victor.framework.debug.Debug;
+	import victor.framework.utils.StringUitl;
 	import victor.framework.utils.appStage;
 	
 	/**
@@ -171,7 +172,7 @@ package app.modules.login.register
 			var msg:String = "";
 			var array:Array = Language.lang(Language.RegisterView_0).split("|");
 			
-			if ( !registerVo.nickName )
+			if ( !registerVo.name )
 				msg = array[0];
 			
 			else if ( !registerVo.password )
@@ -195,9 +196,9 @@ package app.modules.login.register
 				}
 				else
 				{
-					if ( !validatePhoneNumber( registerVo.phone ))
+					if ( !StringUitl.validatePhoneNumber( registerVo.phone ))
 						msg = array[6];
-					else if ( !validateEmail( registerVo.email ))
+					else if ( !StringUitl.validateEmail( registerVo.email ))
 						msg = array[7];
 				}
 			}
@@ -207,48 +208,20 @@ package app.modules.login.register
 			else dispatchEvent( new RegisterEvent( RegisterEvent.REGISTER ));
 		}
 		
-		/**
-		 * 验证邮箱是否格式正确
-		 * @param str
-		 * @return 
-		 */
-		private function validateEmail(str:String):Boolean {
-			var pattern:RegExp = /(\w|[_.\-])+@((\w|-)+\.)+\w{2,4}+/;
-			var result:Object = pattern.exec(str);
-			if(result == null) {
-				return false;
-			}
-			return true;
-		}
-		
-		/**
-		 * 验证电话号码是否正确
-		 * @param str
-		 * @return 
-		 */
-		private function validatePhoneNumber(str:String):Boolean {
-			var pattern:RegExp = /^\d{11}$/;
-			var result:Object = pattern.exec(str);
-			if(result == null) {
-				return false;
-			}
-			return true;
-		}
-		
 		public function get registerVo():RegisterVo
 		{
 			_registerVo ||= new RegisterVo();
-			_registerVo.nickName = txtAccount.text;
+			_registerVo.name = txtAccount.text;
 			_registerVo.password = txtPw1.text;
 			_registerVo.passwordConfirm = txtPw2.text;
 			_registerVo.phone = txtPhone.text;
 			_registerVo.email = txtEmail.text;
 			_registerVo.gender = gender;
 			
-			_registerVo.playerName = txtName.text;
-			_registerVo.playerAddress = txtArea.text;
-			_registerVo.schoolName = txtSchool.text;
-			_registerVo.className = txtClass.text;
+			_registerVo.realName = txtName.text;
+			_registerVo.address = txtArea.text;
+			_registerVo.school = txtSchool.text;
+			_registerVo.grade = txtClass.text;
 			_registerVo.QQ = txtQQ.text;
 			
 			return _registerVo;

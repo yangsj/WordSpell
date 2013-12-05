@@ -9,12 +9,14 @@ package app.core
 	import flash.text.TextField;
 	
 	import app.managers.LoaderManager;
-	import victor.framework.utils.appStage;
-	import victor.framework.utils.safetyCall;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import victor.framework.components.Reflection;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.utils.DisplayUtil;
+	import victor.framework.utils.appStage;
+	import victor.framework.utils.safetyCall;
 	
 	/**
 	 * ……
@@ -95,7 +97,7 @@ package app.core
 		private function setTitle( title:String ):void
 		{
 			if ( title != _title )
-				txtTitle.text = title;
+				txtTitle.htmlText = title;
 			
 			_title = title;
 		}
@@ -179,18 +181,21 @@ package app.core
 		
 		protected function btnCloseHandler(event:MouseEvent):void
 		{
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 			safetyCall( _complete, CLOSE );
 			hide();
 		}
 		
 		protected function btnCancelHandler(event:MouseEvent):void
 		{
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 			safetyCall( _complete, NO );
 			hide();
 		}
 		
 		protected function btnConfirmHandler(event:MouseEvent):void
 		{
+			SoundManager.playEffectMusic( SoundType.CLICK01 );
 			safetyCall( _complete, YES );
 			hide();
 		}
@@ -262,6 +267,17 @@ package app.core
 		{
 			instance.hide();
 		}
+		
+		
+		
+		public function setBtnPosForSelectedRoundAlert():void
+		{
+			btnCancel.y -= 25;
+			btnConfirm1.y -= 25;
+			btnConfirm2.y -= 25;
+			txtMsg.y -= 25;
+		}
+		
 
 		/**
 		 * 获取实例

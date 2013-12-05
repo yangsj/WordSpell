@@ -102,16 +102,16 @@ import org.apache.thrift.protocol.*;
           case ALL_CHAPTER_INFO:
             if (field.type == TType.MAP) {
               {
-                var _map107:TMap = iprot.readMapBegin();
+                var _map112:TMap = iprot.readMapBegin();
                 this.all_chapter_info = new Dictionary();
-                for (var _i108:int = 0; _i108 < _map107.size; ++_i108)
+                for (var _i113:int = 0; _i113 < _map112.size; ++_i113)
                 {
-                  var _key109:int;
-                  var _val110:chapter_info_t;
-                  _key109 = iprot.readI32();
-                  _val110 = new chapter_info_t();
-                  _val110.read(iprot);
-                  this.all_chapter_info[_key109] = _val110;
+                  var _key114:int;
+                  var _val115:chapter_info_t;
+                  _key114 = iprot.readI32();
+                  _val115 = new chapter_info_t();
+                  _val115.read(iprot);
+                  this.all_chapter_info[_key114] = _val115;
                 }
                 iprot.readMapEnd();
               }
@@ -139,14 +139,14 @@ import org.apache.thrift.protocol.*;
       if (this.all_chapter_info != null) {
         oprot.writeFieldBegin(ALL_CHAPTER_INFO_FIELD_DESC);
         {
-          var _sizeCounter112:int = 0;
-          for (var _key111:* in this.all_chapter_info) {
-            _sizeCounter112++;
+          var _sizeCounter117:int = 0;
+          for (var _key116:* in this.all_chapter_info) {
+            _sizeCounter117++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.STRUCT, _sizeCounter112));
-          for (var elem113:* in this.all_chapter_info)          {
-            oprot.writeI32(elem113);
-            this.all_chapter_info[elem113].write(oprot);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.STRUCT, _sizeCounter117));
+          for (var elem118:* in this.all_chapter_info)          {
+            oprot.writeI32(elem118);
+            this.all_chapter_info[elem118].write(oprot);
           }
           oprot.writeMapEnd();
         }

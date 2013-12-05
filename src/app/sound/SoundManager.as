@@ -20,8 +20,8 @@ package app.sound
 		private static var currSound:Sound;
 		private static var currSoundChannel:SoundChannel;
 		private static var dictSound:Dictionary = new Dictionary();
-		private static var _sndTransformBg:SoundTransform = new SoundTransform( 0.3 );
-		private static var _sndTransformEffect:SoundTransform = new SoundTransform( 1 );
+		private static var _sndTransformBg:SoundTransform = new SoundTransform( 0.05 );
+		private static var _sndTransformEffect:SoundTransform = new SoundTransform( 0.2 );
 		private static var _isOpenBg:Boolean = true;
 		private static var _isOpenEffect:Boolean = true;
 

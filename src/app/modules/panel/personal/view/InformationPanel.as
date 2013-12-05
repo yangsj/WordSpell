@@ -12,12 +12,15 @@ package app.modules.panel.personal.view
 	import app.modules.login.register.CheckboxPanel;
 	import app.modules.login.register.RegisterConfig;
 	import app.modules.login.register.event.RegisterEvent;
+	import app.modules.login.register.vo.RegisterVo;
 	import app.modules.model.GenderType;
+	import app.modules.panel.personal.events.PersonalEvent;
 	
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.core.BasePanel;
 	import victor.framework.debug.Debug;
 	import victor.framework.manager.TickManager;
+	import victor.framework.utils.StringUitl;
 	
 	/**
 	 * ……
@@ -53,6 +56,8 @@ package app.modules.panel.personal.view
 		
 		private var areaPanel:CheckboxPanel;
 		private var gradePanel:CheckboxPanel;
+		
+		private var _registerVo:RegisterVo;
 		
 		/*============================================================================*/
 		/* Constructor                                                                */
@@ -104,9 +109,42 @@ package app.modules.panel.personal.view
 			else gradePanel.tweenOpen();
 		}
 		
-		protected function btnRegisterHandler(event:MouseEvent):void
+		protected function btnCommitHandler(event:MouseEvent):void
 		{
+			var msg:String;
+			if ( txtCurPw.text ) {
+				if ( !txtChangePw.text ) {
+					msg = "请输入新密码";
+				} else if ( txtChangePw.text != txtConfirmPw.text ) {
+					msg = "两次密码输入不一致";
+				}
+			}
 			
+			if ( !StringUitl.validatePhoneNumber( registerVo.phone ))
+			{
+				msg = "输入电话号码无效！";
+			}
+			else if ( !StringUitl.validateEmail( registerVo.email ))
+			{
+				msg = "输入电子邮箱无效！";
+			}
+			
+			if ( Boolean( msg ) ){
+				Tips.showMouse( msg );
+				return ;
+			}
+			
+			_registerVo.realName = txtRealName.text;
+			_registerVo.address = txtArea.text;
+			_registerVo.school = txtSchool.text;
+			_registerVo.grade = txtClass.text;
+			_registerVo.QQ = txtQQ.text;
+			_registerVo.email = txtEmail.text;
+			_registerVo.name = txtName.text;
+			_registerVo.password = txtCurPw.text;
+			_registerVo.passwordConfirm = txtConfirmPw.text;
+			
+			dispatchEvent( new PersonalEvent( PersonalEvent.CHANGE_INFO, _registerVo, true ));
 		}
 		
 		/*============================================================================*/
@@ -115,7 +153,7 @@ package app.modules.panel.personal.view
 		
 		override protected function onceInit():void
 		{
-			btnCommit.addEventListener(MouseEvent.CLICK, btnRegisterHandler );
+			btnCommit.addEventListener(MouseEvent.CLICK, btnCommitHandler );
 			checkboxArea.addEventListener(MouseEvent.CLICK, checkboxAreaHandler );
 			checkboxGrade.addEventListener(MouseEvent.CLICK, checkboxGradeHandler );
 			
@@ -170,11 +208,30 @@ package app.modules.panel.personal.view
 			tabControl.setTargetByIndex( selfVo.gender );
 			areaPanel.selectedForItem( RegisterConfig.getAreaIndexByName( selfVo.address ));
 			gradePanel.selectedForItem( RegisterConfig.getGradeIndexByName( selfVo.grade ));
+			
+			_registerVo = new RegisterVo();
+			_registerVo.grade = selfVo.grade;
+			_registerVo.address = selfVo.address;
+			_registerVo.email = selfVo.email;
+			_registerVo.gender = selfVo.gender;
+			_registerVo.name = selfVo.name;
+			_registerVo.password = "";
+			_registerVo.passwordConfirm = "";
+			_registerVo.phone = selfVo.phone;
+			_registerVo.QQ = selfVo.qq;
+			_registerVo.realName = selfVo.realName;
+			_registerVo.school = selfVo.school;
 		}
+
 		
 		/*============================================================================*/
 		/* public variables                                                           */
 		/*============================================================================*/
+		
+		public function get registerVo():RegisterVo
+		{
+			return _registerVo;
+		}
 		
 		
 		

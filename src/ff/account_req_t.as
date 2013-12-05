@@ -19,6 +19,7 @@ import org.apache.thrift.protocol.*;
     private static const STRUCT_DESC:TStruct = new TStruct("account_req_t");
     private static const NICK_NAME_FIELD_DESC:TField = new TField("nick_name", TType.STRING, 1);
     private static const PASSWORD_FIELD_DESC:TField = new TField("password", TType.STRING, 2);
+    private static const NEW_PASSWORD_FIELD_DESC:TField = new TField("new_password", TType.STRING, 13);
     private static const REGISTER_FLAG_FIELD_DESC:TField = new TField("register_flag", TType.BOOL, 3);
     private static const EMAIL_FIELD_DESC:TField = new TField("email", TType.STRING, 4);
     private static const REAL_NAME_FIELD_DESC:TField = new TField("real_name", TType.STRING, 5);
@@ -28,11 +29,14 @@ import org.apache.thrift.protocol.*;
     private static const QQ_FIELD_DESC:TField = new TField("qq", TType.STRING, 9);
     private static const PHONE_FIELD_DESC:TField = new TField("phone", TType.STRING, 10);
     private static const ADDRESS_FIELD_DESC:TField = new TField("address", TType.STRING, 11);
+    private static const GENDER_FIELD_DESC:TField = new TField("gender", TType.I16, 12);
 
     private var _nick_name:String;
     public static const NICK_NAME:int = 1;
     private var _password:String;
     public static const PASSWORD:int = 2;
+    private var _new_password:String;
+    public static const NEW_PASSWORD:int = 13;
     private var _register_flag:Boolean;
     public static const REGISTER_FLAG:int = 3;
     private var _email:String;
@@ -51,15 +55,20 @@ import org.apache.thrift.protocol.*;
     public static const PHONE:int = 10;
     private var _address:String;
     public static const ADDRESS:int = 11;
+    private var _gender:int;
+    public static const GENDER:int = 12;
 
     private var __isset_register_flag:Boolean = false;
     private var __isset_age:Boolean = false;
+    private var __isset_gender:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
       metaDataMap[NICK_NAME] = new FieldMetaData("nick_name", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
       metaDataMap[PASSWORD] = new FieldMetaData("password", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
+      metaDataMap[NEW_PASSWORD] = new FieldMetaData("new_password", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
       metaDataMap[REGISTER_FLAG] = new FieldMetaData("register_flag", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.BOOL));
@@ -79,6 +88,8 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.STRING));
       metaDataMap[ADDRESS] = new FieldMetaData("address", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
+      metaDataMap[GENDER] = new FieldMetaData("gender", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I16));
     }
     {
       FieldMetaData.addStructMetaDataMap(account_req_t, metaDataMap);
@@ -87,6 +98,7 @@ import org.apache.thrift.protocol.*;
     public function account_req_t() {
       this._register_flag = 0;
       this._age = 0;
+      this._gender = 0;
     }
 
     public function get nick_name():String {
@@ -121,6 +133,23 @@ import org.apache.thrift.protocol.*;
     // Returns true if field password is set (has been assigned a value) and false otherwise
     public function isSetPassword():Boolean {
       return this.password != null;
+    }
+
+    public function get new_password():String {
+      return this._new_password;
+    }
+
+    public function set new_password(new_password:String):void {
+      this._new_password = new_password;
+    }
+
+    public function unsetNew_password():void {
+      this.new_password = null;
+    }
+
+    // Returns true if field new_password is set (has been assigned a value) and false otherwise
+    public function isSetNew_password():Boolean {
+      return this.new_password != null;
     }
 
     public function get register_flag():Boolean {
@@ -278,6 +307,24 @@ import org.apache.thrift.protocol.*;
       return this.address != null;
     }
 
+    public function get gender():int {
+      return this._gender;
+    }
+
+    public function set gender(gender:int):void {
+      this._gender = gender;
+      this.__isset_gender = true;
+    }
+
+    public function unsetGender():void {
+      this.__isset_gender = false;
+    }
+
+    // Returns true if field gender is set (has been assigned a value) and false otherwise
+    public function isSetGender():Boolean {
+      return this.__isset_gender;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case NICK_NAME:
@@ -293,6 +340,14 @@ import org.apache.thrift.protocol.*;
           unsetPassword();
         } else {
           this.password = value;
+        }
+        break;
+
+      case NEW_PASSWORD:
+        if (value == null) {
+          unsetNew_password();
+        } else {
+          this.new_password = value;
         }
         break;
 
@@ -368,6 +423,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case GENDER:
+        if (value == null) {
+          unsetGender();
+        } else {
+          this.gender = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -379,6 +442,8 @@ import org.apache.thrift.protocol.*;
         return this.nick_name;
       case PASSWORD:
         return this.password;
+      case NEW_PASSWORD:
+        return this.new_password;
       case REGISTER_FLAG:
         return this.register_flag;
       case EMAIL:
@@ -397,6 +462,8 @@ import org.apache.thrift.protocol.*;
         return this.phone;
       case ADDRESS:
         return this.address;
+      case GENDER:
+        return this.gender;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -409,6 +476,8 @@ import org.apache.thrift.protocol.*;
         return isSetNick_name();
       case PASSWORD:
         return isSetPassword();
+      case NEW_PASSWORD:
+        return isSetNew_password();
       case REGISTER_FLAG:
         return isSetRegister_flag();
       case EMAIL:
@@ -427,6 +496,8 @@ import org.apache.thrift.protocol.*;
         return isSetPhone();
       case ADDRESS:
         return isSetAddress();
+      case GENDER:
+        return isSetGender();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -453,6 +524,13 @@ import org.apache.thrift.protocol.*;
           case PASSWORD:
             if (field.type == TType.STRING) {
               this.password = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case NEW_PASSWORD:
+            if (field.type == TType.STRING) {
+              this.new_password = iprot.readString();
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -518,6 +596,14 @@ import org.apache.thrift.protocol.*;
           case ADDRESS:
             if (field.type == TType.STRING) {
               this.address = iprot.readString();
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case GENDER:
+            if (field.type == TType.I16) {
+              this.gender = iprot.readI16();
+              this.__isset_gender = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -590,6 +676,14 @@ import org.apache.thrift.protocol.*;
         oprot.writeString(this.address);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(GENDER_FIELD_DESC);
+      oprot.writeI16(this.gender);
+      oprot.writeFieldEnd();
+      if (this.new_password != null) {
+        oprot.writeFieldBegin(NEW_PASSWORD_FIELD_DESC);
+        oprot.writeString(this.new_password);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -611,6 +705,14 @@ import org.apache.thrift.protocol.*;
         ret += "null";
       } else {
         ret += this.password;
+      }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "new_password:";
+      if (this.new_password == null) {
+        ret += "null";
+      } else {
+        ret += this.new_password;
       }
       first = false;
       if (!first) ret +=  ", ";
@@ -676,6 +778,10 @@ import org.apache.thrift.protocol.*;
       } else {
         ret += this.address;
       }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "gender:";
+      ret += this.gender;
       first = false;
       ret += ")";
       return ret;

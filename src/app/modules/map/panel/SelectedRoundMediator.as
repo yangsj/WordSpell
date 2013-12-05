@@ -59,7 +59,9 @@ package app.modules.map.panel
 		
 		private function selectedRoundhandler( event:SelectedRoundEvent ):void
 		{
-			Alert.show( "模式选择", callback, "闯  关", "练  习", "" );
+			var alert:Alert = new Alert();
+			alert.setBtnPosForSelectedRoundAlert();
+			alert.show(  "<font size=\"24\">模式选择</font>", callback, "闯  关", "练  习", "" );
 			function callback( type :int ):void
 			{
 				if ( type != Alert.CLOSE )
