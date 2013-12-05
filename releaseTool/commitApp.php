@@ -85,20 +85,29 @@
 	$newArray = changeApplicationXmlVersions($filename5, $fullversionPath);
 
 	// 刪除版本目錄下未使用的資源
-	$fileArray = glob($fullversionPath."assets\\*.swf");
-	$fileArray = array_combine( $fileArray, glob($fullversionPath."sound\\*.mp3");
-	foreach ( $fileArray as $fileUrl )
+	$fileArray1 = glob( $fullversionPath."assets\\*.swf" );
+	$fileArray2 = glob( $fullversionPath."sound\\*.mp3" );
+	$fileArray = array_merge( $fileArray1, $fileArray2 );
+	if ( $fileArray )
 	{
-		$fileUrl = str_ireplace("\\", "/", $fileUrl );
-		$index = strrpos( $fileUrl, "/" ) + 1;
-		$end = strrpos( $fileUrl, "." );
-		$length = $end - $index;
-		$fileName = substr( $fileUrl, $index, $length );
-		if ( file_exists( $fileUrl ) ) {
-			echo $fileName."_".$newArray[ $fileName ]."<br>";
-			if ( $newArray[ $fileName ] != 1 ) {
-				system( "svn del ".$fileUrl );
-				echo "Delete ".$fileUrl."<br>";
+		foreach ( $fileArray as $fileUrl )
+		{
+			if ( $fileUrl )
+			{
+				$fileUrl = str_ireplace("\\", "/", $fileUrl );
+				$index = strrpos( $fileUrl, "/" ) + 1;
+				$end = strrpos( $fileUrl, "." );
+				$length = $end - $index;
+				$fileName = substr( $fileUrl, $index, $length );
+				if ( file_exists( $fileUrl ) ) {
+					if ( !array_key_exists( $fileName, $newArray) ) {
+						$md5_str = md5_file($fileUrl);
+						echo "已刪除：".$fileUrl."____".$md5_str."<br>";
+						$new_name = str_ireplace($fileName, $md5_str, $fileUrl);
+						rename($fileUrl, $new_name);
+						system( "svn del ".$fileUrl );
+					}
+				}
 			}
 		}
 	}
