@@ -1,8 +1,8 @@
 package app.modules.task.view
 {
 	import app.modules.task.event.TaskEvent;
-	import app.sound.SoundManager;
-	import app.sound.SoundType;
+	import app.modules.task.model.TaskVo;
+	import app.modules.task.service.TaskService;
 	
 	import victor.framework.core.BaseMediator;
 	
@@ -14,6 +14,9 @@ package app.modules.task.view
 	 */
 	public class TaskCompletedMediator extends BaseMediator
 	{
+		[Inject]
+		public var taskService:TaskService;
+		
 		public function TaskCompletedMediator()
 		{
 			super();
@@ -25,8 +28,13 @@ package app.modules.task.view
 			
 			dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
 			
-			// 
-			SoundManager.playEffectMusic( SoundType.REWARD_DIAMOND );
+			addViewListener( TaskEvent.TAKE_REWARD, takeRewardHandler, TaskEvent );
+		}
+		
+		private function takeRewardHandler( event:TaskEvent ):void
+		{
+			var taskVo:TaskVo = event.data as TaskVo;
+			taskService.takeReward( taskVo.id );
 		}
 		
 	}

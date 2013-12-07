@@ -30,5 +30,10 @@ package app.modules.task.event
 		 */
 		public static const TAKE_REWARD:String = "take_reward";
 		
+		/**
+		 * 打开任务奖励面板
+		 */
+		public static const OPEN_REWARD:String = "open_reward";
+		
 	}
 }

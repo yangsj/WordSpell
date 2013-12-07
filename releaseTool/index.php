@@ -27,7 +27,7 @@
 			resultInforDiv = document.getElementById("resultInfor");
 
 
-			resultInforDiv.innerHTML = "ver_" + versionNum + "_" + verlan + "&nbsp;";
+			resultInforDiv.innerHTML = "v" + versionNum + "&nbsp;";
 
 		}
 		
@@ -35,7 +35,8 @@
 		{
 			if(releaseFlash.versionNum.value != "")
 			{
-				if(confirm("你确定要提交版本  (ver_" + versionNum + "_" + verlan + ")  吗？"))
+				return true;
+				if(confirm("你确定要提交版本  (v" + versionNum +  ")  吗？"))
 				{
 					return true;
 				}
@@ -60,6 +61,9 @@
 			<h4>当前版本号为：<?php echo $curver[0];?>, 当前版本子号为：<?php echo $curver[1];?></h4>
 			<ul>
 				<li><span>版本号：</span><input name="versionNum" type="text" value="<?php echo $curver[0];?>" onKeyUp="formChange()" /></li>
+				<li>
+					<span>语言：</span><?php include_once("langSelects.php"); ?>
+				</li>
 				<li>
 					更新内容:<textarea name="versionLog" style="height:150px;width:300px;"></textarea>
 				</li>

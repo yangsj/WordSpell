@@ -121,10 +121,10 @@ package app.modules.fight.view.item
 			removeEventListener( Event.ADDED_TO_STAGE, addedToStageHandler );
 			
 			// 随机泡泡大小
-//			if ( _isAlone ) _scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
-//			else _scale = Number((0.65 + Math.random() * 0.3).toFixed(2));
+			if ( _isAlone ) _scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
+			else _scale = Number((0.65 + Math.random() * 0.3).toFixed(2));
 			
-			_scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
+//			_scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
 			
 			_skin.scaleX = _skin.scaleY = _scale;
 			moveArea.width = moveArea.width + DIAMETER * ( 1 - scale );

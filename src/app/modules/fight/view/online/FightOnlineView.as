@@ -27,7 +27,7 @@ package app.modules.fight.view.online
 		public var txtTime2:TextField; // 时间显示
 		
 		private var dictLetterOther:Dictionary;
-		private var otherTotalTime:int = 60;
+		private var otherTotalTime:int = 120;
 		
 		public function FightOnlineView()
 		{
@@ -43,8 +43,8 @@ package app.modules.fight.view.online
 		
 		override public function initialize( isPractice:Boolean = false ):void
 		{
-			selfTotalTime = 300;
-			otherTotalTime = 300;
+			selfTotalTime = 120;
+			otherTotalTime = 120;
 			super.initialize( isPractice );
 		}
 		
@@ -132,6 +132,8 @@ package app.modules.fight.view.online
 				point = points.splice(int(Math.random() * points.length), 1)[0];
 				key = vo.letter.toLocaleLowerCase();
 				bubble = LetterBubble.itemInstance;
+				bubble.scaleX = 1;
+				bubble.scaleY = 1;
 				bubble.setMoveArea( isAlone );
 				bubble.setData( vo );
 				bubble.x = point[0];

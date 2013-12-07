@@ -16,7 +16,7 @@
 		die("<script>alert('版本号或版本语言不能为空.');history.back();</script>");
 	}
 
-	$fullVersion = "ver_".$versionNum;
+	$fullVersion = "v".$versionNum;
 	echo "<h2>正在提交版本$fullVersion</h2>";
 	echo "<hr />";
 
@@ -121,7 +121,7 @@
 	echo "</h4>";
 
 	echo "<div style='font-size:12px;color:blue;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
-	$svnAddFiles = "svn add ".$fullversionPath."*.* --force";
+	$svnAddFiles = "svn add ".$versionLibPath."*.* --force";
 	system($svnAddFiles);
 	echo "</div>";
 	

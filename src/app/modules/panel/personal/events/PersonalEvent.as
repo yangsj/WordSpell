@@ -21,6 +21,11 @@ package app.modules.panel.personal.events
 		public static const CHANGE_INFO:String = "CHANGE_INFO";
 		
 		/**
+		 * 修改个人信息成功
+		 */
+		public static const CHANGE_INFO_SUCCESS:String = "change_info_success";
+		
+		/**
 		 * 成功获取到列表数据
 		 */
 		public static const ERROR_LIST_SUCCESSED:String = "ERROR_LIST_SUCCESSED";

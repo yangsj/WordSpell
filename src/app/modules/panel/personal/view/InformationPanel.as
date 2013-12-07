@@ -5,13 +5,11 @@ package app.modules.panel.personal.view
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.Language;
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.data.PlayerSelfVo;
 	import app.modules.login.register.CheckboxPanel;
 	import app.modules.login.register.RegisterConfig;
-	import app.modules.login.register.event.RegisterEvent;
 	import app.modules.login.register.vo.RegisterVo;
 	import app.modules.model.GenderType;
 	import app.modules.panel.personal.events.PersonalEvent;
@@ -19,7 +17,6 @@ package app.modules.panel.personal.view
 	import victor.framework.components.TabButtonControl;
 	import victor.framework.core.BasePanel;
 	import victor.framework.debug.Debug;
-	import victor.framework.manager.TickManager;
 	import victor.framework.utils.StringUitl;
 	
 	/**
@@ -112,7 +109,21 @@ package app.modules.panel.personal.view
 		protected function btnCommitHandler(event:MouseEvent):void
 		{
 			var msg:String;
-			if ( txtCurPw.text ) {
+			if ( _registerVo.realName == txtRealName.text && 
+				_registerVo.address == txtArea.text && 
+				_registerVo.school == txtSchool.text && 
+				_registerVo.grade == txtClass.text && 
+				_registerVo.QQ == txtQQ.text && 
+				_registerVo.email == txtEmail.text && 
+				_registerVo.name == txtName.text && 
+				_registerVo.password == txtCurPw.text && 
+				_registerVo.gender == gender &&
+				_registerVo.passwordConfirm == txtConfirmPw.text )
+			{
+				msg = "没有任何信息更变";
+			}
+			
+			if ( !msg && txtCurPw.text ) {
 				if ( !txtChangePw.text ) {
 					msg = "请输入新密码";
 				} else if ( txtChangePw.text != txtConfirmPw.text ) {
@@ -120,13 +131,16 @@ package app.modules.panel.personal.view
 				}
 			}
 			
-			if ( !StringUitl.validatePhoneNumber( registerVo.phone ))
+			if ( !msg )
 			{
-				msg = "输入电话号码无效！";
-			}
-			else if ( !StringUitl.validateEmail( registerVo.email ))
-			{
-				msg = "输入电子邮箱无效！";
+				if ( !StringUitl.validateEmail( txtEmail.text ))
+				{
+					msg = "输入电子邮箱无效！";
+				}
+//				else if ( registerVo.phone && !StringUitl.validatePhoneNumber( registerVo.phone ))
+//				{
+//					msg = "输入电话号码无效！";
+//				}
 			}
 			
 			if ( Boolean( msg ) ){
@@ -134,6 +148,7 @@ package app.modules.panel.personal.view
 				return ;
 			}
 			
+			_registerVo.gender = gender;
 			_registerVo.realName = txtRealName.text;
 			_registerVo.address = txtArea.text;
 			_registerVo.school = txtSchool.text;
@@ -221,6 +236,7 @@ package app.modules.panel.personal.view
 			_registerVo.QQ = selfVo.qq;
 			_registerVo.realName = selfVo.realName;
 			_registerVo.school = selfVo.school;
+			_registerVo.phone = selfVo.phone;
 		}
 
 		

@@ -101,14 +101,14 @@ import org.apache.thrift.protocol.*;
           case USER_LIST:
             if (field.type == TType.LIST) {
               {
-                var _list255:TList = iprot.readListBegin();
+                var _list269:TList = iprot.readListBegin();
                 this.user_list = new Array();
-                for (var _i256:int = 0; _i256 < _list255.size; ++_i256)
+                for (var _i270:int = 0; _i270 < _list269.size; ++_i270)
                 {
-                  var _elem257:user_status_ret_t;
-                  _elem257 = new user_status_ret_t();
-                  _elem257.read(iprot);
-                  this.user_list.push(_elem257);
+                  var _elem271:user_status_ret_t;
+                  _elem271 = new user_status_ret_t();
+                  _elem271.read(iprot);
+                  this.user_list.push(_elem271);
                 }
                 iprot.readListEnd();
               }
@@ -137,8 +137,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(USER_LIST_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRUCT, this.user_list.length));
-          for each (var elem258:* in this.user_list)          {
-            elem258.write(oprot);
+          for each (var elem272:* in this.user_list)          {
+            elem272.write(oprot);
           }
           oprot.writeListEnd();
         }

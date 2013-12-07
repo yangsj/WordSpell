@@ -15,51 +15,53 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class input_req_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("input_req_t");
-    private static const INPUT_FIELD_DESC:TField = new TField("input", TType.LIST, 1);
+  public class task_accept_award_req_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("task_accept_award_req_t");
+    private static const TASK_ID_FIELD_DESC:TField = new TField("task_id", TType.I32, 1);
 
-    private var _input:Array;
-    public static const INPUT:int = 1;
+    private var _task_id:int;
+    public static const TASK_ID:int = 1;
 
+    private var __isset_task_id:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
-      metaDataMap[INPUT] = new FieldMetaData("input", TFieldRequirementType.DEFAULT, 
-          new ListMetaData(TType.LIST, 
-              new FieldValueMetaData(TType.I32)));
+      metaDataMap[TASK_ID] = new FieldMetaData("task_id", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
-      FieldMetaData.addStructMetaDataMap(input_req_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(task_accept_award_req_t, metaDataMap);
     }
 
-    public function input_req_t() {
+    public function task_accept_award_req_t() {
+      this._task_id = 0;
     }
 
-    public function get input():Array {
-      return this._input;
+    public function get task_id():int {
+      return this._task_id;
     }
 
-    public function set input(input:Array):void {
-      this._input = input;
+    public function set task_id(task_id:int):void {
+      this._task_id = task_id;
+      this.__isset_task_id = true;
     }
 
-    public function unsetInput():void {
-      this.input = null;
+    public function unsetTask_id():void {
+      this.__isset_task_id = false;
     }
 
-    // Returns true if field input is set (has been assigned a value) and false otherwise
-    public function isSetInput():Boolean {
-      return this.input != null;
+    // Returns true if field task_id is set (has been assigned a value) and false otherwise
+    public function isSetTask_id():Boolean {
+      return this.__isset_task_id;
     }
 
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
-      case INPUT:
+      case TASK_ID:
         if (value == null) {
-          unsetInput();
+          unsetTask_id();
         } else {
-          this.input = value;
+          this.task_id = value;
         }
         break;
 
@@ -70,8 +72,8 @@ import org.apache.thrift.protocol.*;
 
     public function getFieldValue(fieldID:int):* {
       switch (fieldID) {
-      case INPUT:
-        return this.input;
+      case TASK_ID:
+        return this.task_id;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -80,8 +82,8 @@ import org.apache.thrift.protocol.*;
     // Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
     public function isSet(fieldID:int):Boolean {
       switch (fieldID) {
-      case INPUT:
-        return isSetInput();
+      case TASK_ID:
+        return isSetTask_id();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -98,19 +100,10 @@ import org.apache.thrift.protocol.*;
         }
         switch (field.id)
         {
-          case INPUT:
-            if (field.type == TType.LIST) {
-              {
-                var _list205:TList = iprot.readListBegin();
-                this.input = new Array();
-                for (var _i206:int = 0; _i206 < _list205.size; ++_i206)
-                {
-                  var _elem207:int;
-                  _elem207 = iprot.readI32();
-                  this.input.push(_elem207);
-                }
-                iprot.readListEnd();
-              }
+          case TASK_ID:
+            if (field.type == TType.I32) {
+              this.task_id = iprot.readI32();
+              this.__isset_task_id = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -132,31 +125,19 @@ import org.apache.thrift.protocol.*;
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (this.input != null) {
-        oprot.writeFieldBegin(INPUT_FIELD_DESC);
-        {
-          oprot.writeListBegin(new TList(TType.I32, this.input.length));
-          for each (var elem208:* in this.input)          {
-            oprot.writeI32(elem208);
-          }
-          oprot.writeListEnd();
-        }
-        oprot.writeFieldEnd();
-      }
+      oprot.writeFieldBegin(TASK_ID_FIELD_DESC);
+      oprot.writeI32(this.task_id);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
 
     public function toString():String {
-      var ret:String = new String("input_req_t(");
+      var ret:String = new String("task_accept_award_req_t(");
       var first:Boolean = true;
 
-      ret += "input:";
-      if (this.input == null) {
-        ret += "null";
-      } else {
-        ret += this.input;
-      }
+      ret += "task_id:";
+      ret += this.task_id;
       first = false;
       ret += ")";
       return ret;

@@ -2,16 +2,23 @@ package app.modules.task.service
 {
 	import flash.utils.Dictionary;
 	
+	import app.core.Tips;
 	import app.data.GameData;
+	import app.events.ViewEvent;
+	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.task.event.TaskEvent;
 	import app.modules.task.model.TaskModel;
 	import app.modules.task.model.TaskVo;
+	import app.sound.SoundManager;
+	import app.sound.SoundType;
 	
 	import ff.client_cmd_e;
 	import ff.server_cmd_e;
+	import ff.task_accept_award_req_t;
+	import ff.task_accept_award_ret_t;
 	import ff.task_completed_ret_t;
 	import ff.task_info_req_t;
 	import ff.task_info_t;
@@ -47,12 +54,32 @@ package app.modules.task.service
 			// 任务完成通知
 			regist( server_cmd_e.TASK_COMPLETED_RET, taskCompleteNotify, task_completed_ret_t );
 			// 任务奖励领取成功
-			regist( -1, takeRewardSuccessNotify, null );
+			regist( server_cmd_e.TASK_ACCEPT_AWARD_RET, takeRewardSuccessNotify, task_accept_award_ret_t );
 		}
 		
 		// 任务完成奖励
 		private function takeRewardSuccessNotify( resp:SocketResp ):void
 		{
+			var data:task_accept_award_ret_t = resp.data as task_accept_award_ret_t;
+			
+//			// 更新金币值
+//			if ( data.coin_award > 0 ) GameData.instance.updateAddMoney( data.coin_award );
+//			
+//			// 更新经验值
+//			if ( data.exp_award > 0 ) GameData.instance.updateAddExp( data.exp_award );
+			
+			var taskVo:TaskVo = new TaskVo();
+			taskVo.id = data.task_id;
+			taskVo.rewardMoney = data.coin_award;
+			taskVo.rewardExp = data.exp_award;
+			taskVo.propList = getRewardList( data.item_award );
+			
+			Tips.showCenter( "任务奖励领取成功！" );
+			
+			// 
+			SoundManager.playEffectMusic( SoundType.REWARD_DIAMOND );
+			
+			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.TaskCompleted ));
 			
 			// 重新更新列表
 			pullTaskList();
@@ -74,9 +101,14 @@ package app.modules.task.service
 				taskVo.status = task.status;
 				taskVo.rewardExp = task.exp_award;
 				taskVo.rewardMoney = task.coin_award;
+				taskVo.propList = getRewardList( task.item_award );
 				
 				if ( !taskVo.isHide ) {
-					taskModel.taskList.push( taskVo );
+					if ( taskVo.isEd ) {
+						taskModel.taskList.unshift( taskVo );
+					} else {
+						taskModel.taskList.push( taskVo );
+					}
 				}
 			}
 			dispatch( new TaskEvent( TaskEvent.UPDATE_LIST ));
@@ -88,21 +120,24 @@ package app.modules.task.service
 			var data:task_completed_ret_t = resp.data as task_completed_ret_t;
 			
 			// 更新金币值
-			if ( data.coin_award > 0 ) GameData.instance.updateAddMoney( data.coin_award );
+//			if ( data.coin_award > 0 ) GameData.instance.updateAddMoney( data.coin_award );
+//			
+//			// 更新经验值
+//			if ( data.exp_award > 0 ) GameData.instance.updateAddExp( data.exp_award );
 			
-			// 更新经验值
-			if ( data.exp_award > 0 ) GameData.instance.updateAddExp( data.exp_award );
+//			var taskVo:TaskVo = new TaskVo();
+//			taskVo.id = data.task_id;
+//			taskVo.status = data.status;
+//			taskVo.rewardMoney = data.coin_award;
+//			taskVo.rewardExp = data.exp_award;
+//			taskVo.propList = getRewardList( data.item_award );
+//			
+//			taskModel.cacheCompleteTask.push( taskVo );
+//			
+//			if ( !fightModel.isFighting )
+//				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
 			
-			var taskVo:TaskVo = new TaskVo();
-			taskVo.id = data.task_id;
-			taskVo.rewardMoney = data.coin_award;
-			taskVo.rewardExp = data.exp_award;
-			taskVo.propList = getRewardList( data.item_award );
-			
-			taskModel.cacheCompleteTask.push( taskVo );
-			
-			if ( !fightModel.isFighting )
-				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
+			Tips.showCenter( "你已经完成了一个新任务，可以领取任务奖励" );
 		}
 		
 		private function getRewardList( dict:Dictionary ):Vector.<ItemVo>
@@ -135,7 +170,9 @@ package app.modules.task.service
 		
 		public function takeReward( id:int ):void
 		{
-			
+			var req:task_accept_award_req_t = new task_accept_award_req_t();
+			req.task_id = id;
+			call( client_cmd_e.TASK_ACCEPT_AWARD_REQ, req );
 		}
 		
 	}

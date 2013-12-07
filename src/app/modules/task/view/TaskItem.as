@@ -14,7 +14,9 @@ package app.modules.task.view
 	
 	import app.core.Text;
 	import app.core.Tips;
+	import app.events.ViewEvent;
 	import app.modules.TempleteSprite;
+	import app.modules.ViewName;
 	import app.modules.task.event.TaskEvent;
 	import app.modules.task.model.TaskVo;
 	
@@ -141,7 +143,8 @@ package app.modules.task.view
 		protected function onClickHandler(event:MouseEvent):void
 		{
 			if ( data.isEd ) {
-				dispatchEvent( new TaskEvent( TaskEvent.TAKE_REWARD, data, true ));
+//				dispatchEvent( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.TaskCompleted, data, true ));
+				dispatchEvent( new TaskEvent( TaskEvent.OPEN_REWARD, data, true ));
 			} else if ( data.isIng ) {
 				Tips.showMouse( "该任务还未完成，不能领取奖励！！！" );
 			} else {
@@ -192,6 +195,9 @@ package app.modules.task.view
 					endMoveX = endMoveX - diff;
 					time = diff / 60;
 				}
+				
+				bitmapCon.mouseChildren = false;
+				bitmapCon.mouseEnabled = false;
 			}
 		}
 

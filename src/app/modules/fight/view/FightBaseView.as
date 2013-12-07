@@ -59,7 +59,7 @@ package app.modules.fight.view
 		protected var propList:PropList;
 		protected var effectContainer:Sprite;
 		protected var dictLetterSelf:Dictionary;
-		protected var selfTotalTime:int = 60;
+		protected var selfTotalTime:int = 120;
 		protected var dictProps:Dictionary;
 		protected var dictCheckItem:Dictionary;
 		protected var points:Array = [];
@@ -211,6 +211,8 @@ package app.modules.fight.view
 					lettetVo = dictProps[ key ];
 					point = points.splice(int(Math.random() * points.length), 1)[0];
 					bubble = LetterBubble.itemInstance;
+					bubble.scaleX = 1;
+					bubble.scaleY = 1;
 					bubble.setMoveArea( isAlone );
 					bubble.setData( lettetVo );
 					bubble.x = point[0];

@@ -3,7 +3,6 @@ package app.modules.fight.view.alone
 	import app.events.PackEvent;
 	import app.modules.ViewName;
 	import app.modules.chat.event.ChatEvent;
-	import app.modules.fight.FightType;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseMediator;
@@ -52,7 +51,7 @@ package app.modules.fight.view.alone
 		protected function endRoundNotify( event:FightAloneEvent ):void
 		{
 			view.clear();
-			if ( fightModel.modeType == FightType.MODE_ERROR )
+			if ( fightModel.isPractice )
 			{
 				openView( ViewName.FightPracticeEndPanel );
 			}

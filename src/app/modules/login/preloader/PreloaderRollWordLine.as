@@ -11,6 +11,7 @@ package app.modules.login.preloader
 	
 	import app.Language;
 	
+	import victor.framework.debug.Debug;
 	import victor.framework.interfaces.IDisposable;
 	import victor.framework.utils.BitmapUtil;
 	import victor.framework.utils.DisplayUtil;
@@ -40,15 +41,22 @@ package app.modules.login.preloader
 			
 			bitmapCon = new Sprite();
 			addChild( bitmapCon );
+			
+			Debug.debug( " new PreloaderRollWordLine()************************" );
+		}
+		
+		public function clear():void
+		{
+			TweenMax.killDelayedCallsTo( start );
+			DisplayUtil.removedAll( bitmapCon );
 		}
 		
 		public function dispose():void
 		{
+			clear();
 			this.mask = null;
-			TweenMax.killDelayedCallsTo( start );
 			DisplayUtil.removedAll( this );
 			DisplayUtil.removedFromParent( maskShape );
-			DisplayUtil.removedAll( bitmapCon );
 		}
 		
 		public function initialize():void
@@ -65,16 +73,19 @@ package app.modules.login.preloader
 			{
 				
 				DisplayUtil.removedFromParent( maskShape );
-				maskShape = new Shape();
-				maskShape.graphics.beginFill(0, 0);
-				maskShape.graphics.drawRect( 0, 0, 500, HEIGHT);
-				maskShape.graphics.endFill();
+				if ( maskShape == null )
+				{
+					maskShape = new Shape();
+					maskShape.graphics.beginFill(0, 0);
+					maskShape.graphics.drawRect( 0, 0, 500, HEIGHT);
+					maskShape.graphics.endFill();
+				}
 				maskShape.x = x;
 				maskShape.y = y;
 				parent.addChild( maskShape );
 				this.mask = maskShape;
 			}
-			
+			Debug.debug( "initialize loading tips app_________________________" );
 			wordArray ||= Language.PreloaderRollWordLine_0.split("|");
 			if ( wordArray && wordArray.length > 0 )
 			{

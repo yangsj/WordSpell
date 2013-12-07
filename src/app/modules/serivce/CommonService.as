@@ -1,16 +1,18 @@
 package app.modules.serivce
 {
-	import flash.utils.Dictionary;
-	
+	import app.core.Alert;
+	import app.core.Tips;
 	import app.data.GameData;
 	import app.modules.main.event.MainUIEvent;
 	import app.modules.model.PackModel;
 	
 	import ff.error_code_ret_t;
+	import ff.msg_defConstants;
 	import ff.server_cmd_e;
 	import ff.update_property_ret_t;
 	
 	import victor.framework.core.BaseService;
+	import victor.framework.debug.Debug;
 	import victor.framework.socket.SocketResp;
 	
 	
@@ -58,7 +60,18 @@ package app.modules.serivce
 		private function errorCodeNotify(  resp:SocketResp ):void
 		{
 			var data:error_code_ret_t = resp.data as error_code_ret_t;
-			errorHandler( data.error_code );
+			var errorCode:int = data.error_code;
+//			errorHandler( data.error_code );
+			var msg:String = data.error_msg;
+			if ( !msg ) {
+				msg = msg_defConstants.error_code_desc[errorCode];
+			}
+			
+			if ( Debug.isDebug )
+				msg += "[错误代码：" + errorCode + "]";
+			if ( false )
+				Tips.showCenter( msg );
+			else Alert.show( msg );
 		}
 		
 	}

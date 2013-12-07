@@ -53,6 +53,8 @@ package app.modules.panel.personal.service
 			var data:modify_user_info_ret_t = resp.data as modify_user_info_ret_t;
 			if ( data.flag ) {
 				Tips.showCenter( "信息修改成功" );
+				
+				dispatch( new PersonalEvent( PersonalEvent.CHANGE_INFO_SUCCESS ));
 			}
 		}
 		

@@ -44,9 +44,8 @@ package app.modules.fight.view.alone
 		
 		override public function initialize( isPractice:Boolean = false ):void
 		{
-			selfTotalTime = 60;
+			selfTotalTime = 120;
 			super.initialize( isPractice );
-			//
 		}
 
 		override public function delLetterFromDict( letter:String, isSelf:Boolean = true ):void
@@ -86,6 +85,8 @@ package app.modules.fight.view.alone
 				point = points.splice(int(Math.random() * points.length), 1)[0];
 				key = vo.letter.toLocaleLowerCase();
 				bubble = LetterBubble.itemInstance;
+				bubble.scaleX = 1;
+				bubble.scaleY = 1;
 				bubble.setMoveArea( isAlone );
 				bubble.setData( vo );
 				bubble.x = point[0];

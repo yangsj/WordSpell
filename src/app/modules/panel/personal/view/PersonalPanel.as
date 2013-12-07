@@ -8,7 +8,6 @@ package app.modules.panel.personal.view
 	import app.data.PlayerSelfVo;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
-	import app.modules.panel.personal.events.PersonalEvent;
 	
 	import victor.framework.core.BasePanel;
 	
@@ -43,17 +42,19 @@ package app.modules.panel.personal.view
 			propList = new PersonalPropList();
 			addChild( propList );
 			
-//			btnChangeName.visible = false;
+			txtErrorNum.mouseEnabled = false;
+			txtExp.mouseEnabled = false;
+			txtLevel.mouseEnabled = false;
+			txtMoney.mouseEnabled = false;
+			txtName.mouseEnabled = false;
+			txtRightNum.mouseEnabled = false;
+			
 			btnChangeName.addEventListener(MouseEvent.CLICK, btnChangeNameClickHandler );
 			btnErrorWordList.addEventListener(MouseEvent.CLICK, btnErrorWordListClickHandler );
 		}
 		
 		protected function btnChangeNameClickHandler(event:MouseEvent):void
 		{
-//			if ( oldName != txtName.text ) {
-//				oldName = txtName.text;
-//				dispatchEvent( new PersonalEvent( PersonalEvent.CHANGE_INFO, oldName ));
-//			}
 			dispatchEvent( new ViewEvent(ViewEvent.HIDE_VIEW, ViewName.Personal ));
 			dispatchEvent( new ViewEvent(ViewEvent.SHOW_VIEW, ViewName.InformationPanel ));
 		}

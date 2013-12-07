@@ -15,8 +15,8 @@ import org.apache.thrift.meta_data.*;
 import org.apache.thrift.protocol.*;
 
 
-  public class task_completed_ret_t implements TBase   {
-    private static const STRUCT_DESC:TStruct = new TStruct("task_completed_ret_t");
+  public class task_accept_award_ret_t implements TBase   {
+    private static const STRUCT_DESC:TStruct = new TStruct("task_accept_award_ret_t");
     private static const TASK_ID_FIELD_DESC:TField = new TField("task_id", TType.I32, 1);
     private static const COIN_AWARD_FIELD_DESC:TField = new TField("coin_award", TType.I32, 2);
     private static const EXP_AWARD_FIELD_DESC:TField = new TField("exp_award", TType.I32, 3);
@@ -55,10 +55,10 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.I32));
     }
     {
-      FieldMetaData.addStructMetaDataMap(task_completed_ret_t, metaDataMap);
+      FieldMetaData.addStructMetaDataMap(task_accept_award_ret_t, metaDataMap);
     }
 
-    public function task_completed_ret_t() {
+    public function task_accept_award_ret_t() {
       this._task_id = 0;
       this._coin_award = 0;
       this._exp_award = 0;
@@ -274,15 +274,15 @@ import org.apache.thrift.protocol.*;
           case ITEM_AWARD:
             if (field.type == TType.MAP) {
               {
-                var _map104:TMap = iprot.readMapBegin();
+                var _map117:TMap = iprot.readMapBegin();
                 this.item_award = new Dictionary();
-                for (var _i105:int = 0; _i105 < _map104.size; ++_i105)
+                for (var _i118:int = 0; _i118 < _map117.size; ++_i118)
                 {
-                  var _key106:int;
-                  var _val107:int;
-                  _key106 = iprot.readI32();
-                  _val107 = iprot.readI32();
-                  this.item_award[_key106] = _val107;
+                  var _key119:int;
+                  var _val120:int;
+                  _key119 = iprot.readI32();
+                  _val120 = iprot.readI32();
+                  this.item_award[_key119] = _val120;
                 }
                 iprot.readMapEnd();
               }
@@ -327,14 +327,14 @@ import org.apache.thrift.protocol.*;
       if (this.item_award != null) {
         oprot.writeFieldBegin(ITEM_AWARD_FIELD_DESC);
         {
-          var _sizeCounter109:int = 0;
-          for (var _key108:* in this.item_award) {
-            _sizeCounter109++;
+          var _sizeCounter122:int = 0;
+          for (var _key121:* in this.item_award) {
+            _sizeCounter122++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter109));
-          for (var elem110:* in this.item_award)          {
-            oprot.writeI32(elem110);
-            oprot.writeI32(this.item_award[elem110]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter122));
+          for (var elem123:* in this.item_award)          {
+            oprot.writeI32(elem123);
+            oprot.writeI32(this.item_award[elem123]);
           }
           oprot.writeMapEnd();
         }
@@ -348,7 +348,7 @@ import org.apache.thrift.protocol.*;
     }
 
     public function toString():String {
-      var ret:String = new String("task_completed_ret_t(");
+      var ret:String = new String("task_accept_award_ret_t(");
       var first:Boolean = true;
 
       ret += "task_id:";
