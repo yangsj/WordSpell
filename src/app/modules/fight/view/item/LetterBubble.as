@@ -217,7 +217,7 @@ package app.modules.fight.view.item
 //					_skin.addChild( txtLetter );
 				}
 				frame = _lastRandomNum + 1;
-				txtLetter.text = vo.upperCase;
+				txtLetter.text = vo.displayCase;
 				// 将字母以位图渲染
 				_bitmapLetter = new Bitmap( new BitmapData(60, 70, true, 0 ), "auto", true );
 				_bitmapLetter.bitmapData.draw( txtLetter );

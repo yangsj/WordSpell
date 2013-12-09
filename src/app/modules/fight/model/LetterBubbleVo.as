@@ -52,5 +52,16 @@ package app.modules.fight.model
 			return letter.toLocaleUpperCase();
 		}
 		
+		public function get displayCase():String
+		{
+			return _isUpperCase ? upperCase : lowerCase;
+		}
+		
+		private var _isUpperCase:Boolean = false;
+		public function set isUpperCase(value:Boolean):void
+		{
+			_isUpperCase = value;
+		}
+		
 	}
 }

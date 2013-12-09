@@ -3,7 +3,6 @@ package app.modules.task.service
 	import flash.utils.Dictionary;
 	
 	import app.core.Tips;
-	import app.data.GameData;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
@@ -61,13 +60,6 @@ package app.modules.task.service
 		private function takeRewardSuccessNotify( resp:SocketResp ):void
 		{
 			var data:task_accept_award_ret_t = resp.data as task_accept_award_ret_t;
-			
-//			// 更新金币值
-//			if ( data.coin_award > 0 ) GameData.instance.updateAddMoney( data.coin_award );
-//			
-//			// 更新经验值
-//			if ( data.exp_award > 0 ) GameData.instance.updateAddExp( data.exp_award );
-			
 			var taskVo:TaskVo = new TaskVo();
 			taskVo.id = data.task_id;
 			taskVo.rewardMoney = data.coin_award;

@@ -11,9 +11,9 @@ package app.modules.friend.view
 	import app.modules.TempleteSprite;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.model.FriendVo;
-	import victor.framework.utils.appStage;
 	
 	import victor.framework.utils.DisplayUtil;
+	import victor.framework.utils.appStage;
 	
 	
 	/**
@@ -35,11 +35,12 @@ package app.modules.friend.view
 		 * 玩家名称
 		 */
 		public var txtName:TextField;
+		public var txtLevel:TextField;
 		
 		private var _data:FriendVo;
 		private var _selected:Boolean;
 		
-		private var _tips1:Sprite;
+		private var _tips1:MovieClip;
 		private var _tips2:MovieClip;
 		private var _isClick:Boolean = false;
 		
@@ -63,17 +64,19 @@ package app.modules.friend.view
 			mcStatus.stop();
 			selected = false;
 			
-			_tips1 = getObj( "ui_Skin_FriendItemSuspendTips" ) as Sprite;
+			_tips1 = getObj( "ui_Skin_FriendItemSuspendTips" ) as MovieClip;
 			_tips1.addEventListener(MouseEvent.MOUSE_OVER, mouseTipsHandler );
 			_tips1.addEventListener(MouseEvent.MOUSE_OUT, mouseTipsHandler );
 			_tips1.addEventListener(MouseEvent.CLICK, mouseTips1ClickHandler );
 			_tips1.name = "addTips1";
 			
-			_tips2 = getObj( "ui_Skin_FriendItemClickTips" ) as MovieClip;
-			_tips2.addEventListener(MouseEvent.MOUSE_OVER, mouseTipsHandler );
-			_tips2.addEventListener(MouseEvent.MOUSE_OUT, mouseTipsHandler );
-			_tips2.name = "addTips2";
-			_tips2.mcBg.stop();
+//			_tips2 = getObj( "ui_Skin_FriendItemClickTips" ) as MovieClip;
+//			_tips2.addEventListener(MouseEvent.MOUSE_OVER, mouseTipsHandler );
+//			_tips2.addEventListener(MouseEvent.MOUSE_OUT, mouseTipsHandler );
+//			_tips2.name = "addTips2";
+//			_tips2.mcBg.stop();
+			
+			_tips2 = _tips1;
 		}
 		
 		protected function mouseTipsHandler(event:MouseEvent):void
@@ -164,7 +167,7 @@ package app.modules.friend.view
 					_tips2.x = point.x + width - 15;
 				else _tips2.x = point.x - _tips2.width + 2;
 				
-				_tips2.y = point.y - 30;
+				_tips2.y = point.y - 5;
 				if ( point.y + _tips2.height > appStage.stageHeight )
 					_tips2.y = appStage.stageHeight - _tips2.height - 30;
 				
@@ -179,11 +182,12 @@ package app.modules.friend.view
 			mcStatus.gotoAndStop( data.status );
 			
 			txtName.text = data.name;
+			txtLevel.text = "Lv " + data.level;
 			
-			_tips2.txtName.text = "" + data.name;
-			_tips2.txtGrade.text = "" + data.grade;
-			_tips2.txtLevel.text = "Lv " + data.level;
-			_tips2.mcBg.gotoAndStop( data.gender + 1 );
+//			_tips2.txtName.text = "" + data.name;
+//			_tips2.txtGrade.text = "" + data.grade;
+//			_tips2.txtLevel.text = "Lv " + data.level;
+//			_tips2.mcBg.gotoAndStop( data.gender + 1 );
 		}
 
 		public function get data():FriendVo

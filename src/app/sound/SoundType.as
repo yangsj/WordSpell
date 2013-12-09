@@ -18,8 +18,8 @@ package app.sound
 		////effects
 		
 		public static const SUCCESS:String = "snd.Success";
-		public static const REWARD_DIAMOND:String = "snd.Failed";
 		public static const FAILED:String = "snd.Failed";
+		public static const REWARD_DIAMOND:String = "snd.Price";
 		public static const CLICK01:String = "snd.Click01"; // 点击按钮
 		public static const CLICK02:String = "snd.Click02"; // 点击泡泡
 		public static const BOMB:String = "snd.BubbleBomb";

@@ -88,6 +88,7 @@ package app.modules.fight.view.online
 				var items:Vector.<LetterBubbleVo> = spellVo.items.slice();
 				var length:int = fightModel.allLetterListCopy.length;
 				var index:int = 0;
+				items[0].isUpperCase = true;
 				Debug.debug( "对手的单词：" + spellVo.chinese );
 //				for ( index = 0; index < maxCount; index++ )
 //				{

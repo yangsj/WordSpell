@@ -226,6 +226,7 @@ package app.modules.fight.view
 			{
 				var modeType:int = fightModel.modeType;
 				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items.slice();
+				items[0].isUpperCase = true;
 				if ( modeType != FightType.MODE_EASY && modeType != FightType.MODE_PRACTICE && modeType != FightType.MODE_ERROR ) // 不为容易和练习
 				{
 					var length:int = fightModel.allLetterList.length;

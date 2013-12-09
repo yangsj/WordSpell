@@ -23,10 +23,10 @@ package victor.framework.core
 		public static const CHAT:uint = numCount++;//聊天层
 		public static const PANEL:uint = numCount++;//面板弹出层
 		public static const CHAT2:uint = numCount++;//聊天层
-		public static const ALERT:uint = numCount++;//警告提示层
 		public static const EFFECT:uint = numCount++;//特效播放层
 		public static const DRAG:uint = numCount++;//对象拖拽层
 		public static const LOADING:uint = numCount++;//loading层
+		public static const ALERT:uint = numCount++;//警告提示层
 		public static const TIPS:int = numCount++;//tips显示层
 
 		private static var container:Sprite;
