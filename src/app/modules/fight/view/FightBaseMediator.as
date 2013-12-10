@@ -239,7 +239,11 @@ package app.modules.fight.view
 //							break;
 //					}
 					
-					maxCount = Math.min( int( Math.random() * 3 + 2 ), length );
+					if ( modeType == FightType.MODE_BATTLE ) {
+						maxCount = Math.min( getOnlineAddCaseNumber( items.length ), length );
+					} else {
+						maxCount = Math.min( int( Math.random() * 3 + 2 ), length );
+					}
 					for ( index = 0; index < maxCount; index++ ) {
 						items.push( fightModel.allLetterList[ index ] );
 					}
@@ -258,6 +262,25 @@ package app.modules.fight.view
 				}
 			}
 		}
+		
+		protected function getOnlineAddCaseNumber( wordLength:int ):int
+		{
+			if ( wordLength < 4 ) {
+				return 5 - wordLength;
+			} else if ( wordLength < 7 ) {
+				return 5;
+			} else if ( wordLength < 10 ) {
+				return 4;
+			} else if ( wordLength < 13 ) {
+				return 3;
+			} else if ( wordLength < 15 ) {
+				return 2;
+			}else if ( wordLength < 18 ) {
+				return 1;
+			}
+			return 0;
+		}
+		
 		
 	}
 }

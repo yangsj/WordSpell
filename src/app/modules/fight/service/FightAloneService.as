@@ -74,21 +74,28 @@ package app.modules.fight.service
 			var blanks:Array = data.blank;
 			var bubbles:Array = data.bubble_info;
 			var length:int = cnAry.length;
-			var spellList:Vector.<SpellVo> = new Vector.<SpellVo>( length );
 			var spellVo:SpellVo;
 			var info:bubble_info_t;
 			var order:int;
 			var index:int;
 			var tempBub:Array;
-			var listBub:Vector.<LetterBubbleVo>;
 			var str:String = "";
 			var letterBubbleVo:LetterBubbleVo;
+			
+			var spellList:Vector.<SpellVo> = new Vector.<SpellVo>( length );
+			var spellList2:Vector.<SpellVo> = new Vector.<SpellVo>( length );
+			var listBub:Vector.<LetterBubbleVo>;
+			var listBub2:Vector.<LetterBubbleVo>;
 			var allLetterList:Vector.<LetterBubbleVo> = new Vector.<LetterBubbleVo>();
+			var allLetterList2:Vector.<LetterBubbleVo> = new Vector.<LetterBubbleVo>();
+			
+			// 单词数据
 			for ( var i:int = 0; i < length; i++ )
 			{
 				index = int( blanks[ i ]);
 				tempBub = bubbles.splice( 0, index );
 				listBub = new Vector.<LetterBubbleVo>();
+				listBub2 = new Vector.<LetterBubbleVo>();
 				str = "";
 				order = 0;
 				for each ( info in tempBub )
@@ -99,18 +106,33 @@ package app.modules.fight.service
 					letterBubbleVo.letter = info.word;
 					letterBubbleVo.itemType = info.item_type;
 					listBub.push( letterBubbleVo );
+					allLetterList.push( letterBubbleVo );
+					
+					letterBubbleVo = new LetterBubbleVo();
+					letterBubbleVo.index = order;
+					letterBubbleVo.id = info.bubble_id;
+					letterBubbleVo.letter = info.word;
+					letterBubbleVo.itemType = info.item_type;
+					listBub2.push( letterBubbleVo );
+					allLetterList2.push( letterBubbleVo );
+					
 					str += letterBubbleVo.letter;
 					order++;
 					
-					allLetterList.push( letterBubbleVo );
 				}
 				spellVo = new SpellVo();
 				spellVo.chinese = cnAry[ i ];
 				spellVo.items = listBub;
 				spellList[ i ] = spellVo;
+				
+				spellVo = new SpellVo();
+				spellVo.chinese = cnAry[ i ];
+				spellVo.items = listBub2;
+				spellList2[ i ] = spellVo;
+				
 				Debug.debug( spellVo.chinese, str );
 			}
-			
+			// 道具数据
 			var dict:Dictionary = new Dictionary();
 			for ( var key:* in data.bubble_item )
 			{
@@ -131,9 +153,9 @@ package app.modules.fight.service
 			}
 			fightModel.dictPropPos = dict;
 			fightModel.allLetterList = allLetterList;
-			fightModel.allLetterListCopy = allLetterList.slice();
+			fightModel.allLetterListCopy = allLetterList2;
 			fightModel.spellList = spellList;
-			fightModel.spellListCopy = spellList.slice();
+			fightModel.spellListCopy = spellList2;
 			fightModel.modeType = data.mode;
 			fightModel.mapId = data.round_type;
 
@@ -201,13 +223,15 @@ package app.modules.fight.service
 
 			if ( isSelf )
 			{
-				if ( data.answer_flag )
+				if ( data.answer_flag ) {
 					Tips.showCenter( "恭喜您！答对了。" );
-				else
-					Tips.showCenter( "答错了！骚年，继续加油。" );
+				} else {
+					if (　!fightModel.isPractice || ( fightModel.isPractice && fightModel.isShowAnswer == false )) {
+						Tips.showCenter( "请牢记，下次就不会再错了。" );
+					}
+				}
 				
-				if ( data.inc_coin > 0 )
-				{
+				if ( data.inc_coin > 0 ) {
 					GameData.instance.updateAddMoney( data.inc_coin );
 					dispatch( new FightAloneEvent(FightAloneEvent.ADD_MONEY_EFFECT, [ false, data.inc_coin] ));
 				}

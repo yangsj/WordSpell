@@ -32,6 +32,7 @@ package app.modules.fight.model
 		private var _isFighting:Boolean;
 		private var _isSelfExit:Boolean;
 		private var _isErrorLastAnswerForPractice:Boolean = false;
+		private var _isShowAnswer:Boolean = false;
 		
 		public function FightModel()
 		{
@@ -324,6 +325,22 @@ package app.modules.fight.model
 		public function set isErrorLastAnswerForPractice(value:Boolean):void
 		{
 			_isErrorLastAnswerForPractice = value;
+		}
+
+		/**
+		 * 是否点击显示答案
+		 */
+		public function get isShowAnswer():Boolean
+		{
+			return _isShowAnswer;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isShowAnswer(value:Boolean):void
+		{
+			_isShowAnswer = value;
 		}
 
 

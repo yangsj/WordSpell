@@ -30,5 +30,10 @@ package app.modules.fight.view.spell
 		 */
 		public static const SHOW_ANSWER:String = "show_answer";
 		
+		/**
+		 * 点击显示答案
+		 */
+		public static const CLICK_SHOW:String = "click_show";
+		
 	}
 }

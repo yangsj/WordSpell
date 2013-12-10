@@ -58,6 +58,12 @@ package app.modules.fight.view.spell
 		
 		protected function onClickBtnShowAnswerHandler(event:MouseEvent):void
 		{
+			dispatchEvent( new SpellEvent( SpellEvent.CLICK_SHOW ));
+			showAnswerResult();
+		}
+		
+		private function showAnswerResult():void
+		{
 			btnShowAnswer.mouseEnabled = false;
 			showAnswer();
 			inputOver();
@@ -138,7 +144,8 @@ package app.modules.fight.view.spell
 				}
 				if ( isOver ) {
 					if ( _isPractice && _lastIsAnswerError )
-						btnShowAnswer.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
+//						btnShowAnswer.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
+						showAnswerResult();
 					else inputOver();
 				}
 			}

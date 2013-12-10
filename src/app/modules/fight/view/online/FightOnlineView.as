@@ -154,7 +154,7 @@ package app.modules.fight.view.online
 			otherTotalTime--;
 			setTimeText( txtTime2, otherTotalTime );
 			
-			Debug.debug( "时间：", selfTotalTime, otherTotalTime );
+//			Debug.debug( "时间：", selfTotalTime, otherTotalTime );
 		}
 		
 		/**

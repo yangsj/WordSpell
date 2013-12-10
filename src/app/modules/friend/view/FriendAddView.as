@@ -1,8 +1,10 @@
 package app.modules.friend.view
 {
 	import flash.display.SimpleButton;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import flash.ui.Keyboard;
 	
 	import app.modules.friend.event.FriendEvent;
 	
@@ -29,6 +31,16 @@ package app.modules.friend.view
 			super.onceInit();
 			txtInput.text = "";
 			btnAdd.addEventListener( MouseEvent.CLICK, btnAddHandler );
+			txtInput.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler );
+			txtInput.wordWrap = false;
+			txtInput.multiline = false;
+		}
+		
+		protected function keyHandler(event:KeyboardEvent):void
+		{
+			if ( event.keyCode == Keyboard.ENTER ) {
+				btnAddHandler( null );
+			}
 		}
 		
 		protected function btnAddHandler(event:MouseEvent):void

@@ -40,6 +40,8 @@ package app.modules.fight.view.spell
 			addViewListener( SpellEvent.INPUT_OVER, inputOverHandler, SpellEvent );
 			// 显示答案
 			addViewListener( SpellEvent.SHOW_ANSWER, showAnswerHandler, SpellEvent );
+			// 
+			addViewListener( SpellEvent.CLICK_SHOW, clickShowHandler, SpellEvent );
 			
 			// start
 			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
@@ -50,14 +52,19 @@ package app.modules.fight.view.spell
 			// 字母拼写正确,增加金币
 			addViewListener( FightAloneEvent.ADD_MONEY_EFFECT, addMoneyEffectHandler, FightAloneEvent );
 			
+			fightModel.isShowAnswer = false;
 			fightModel.isErrorLastAnswerForPractice = false;
 			isSendInput = false;
 			if ( fightModel.modeType == 5 )
 			{
-				setNextWrodInfo();
-				view.setInitData( fightModel.spellVo );
+				nextWordNotify( null );
 			}
 			
+		}
+		
+		private function clickShowHandler( event:SpellEvent ):void
+		{
+			fightModel.isShowAnswer = true;
 		}
 		
 		private function showAnswerHandler( event:SpellEvent ):void
@@ -89,6 +96,8 @@ package app.modules.fight.view.spell
 		
 		private function nextWordNotify( event:FightAloneEvent ):void
 		{
+			fightModel.isShowAnswer = false;
+			
 			setNextWrodInfo();
 			
 			if ( view.btnShowAnswer ) {

@@ -98,9 +98,10 @@ package app.modules.fight.view.online
 //						break;
 //				}
 				
-				maxCount = Math.min( int( Math.random() * 3 + 3 ), length );
+//				maxCount = Math.min( int( Math.random() * 3 + 3 ), length );
+				maxCount = Math.min( getOnlineAddCaseNumber( items.length ), length );
 				for ( index = 0; index < maxCount; index++ ) {
-					items.push( fightModel.allLetterList[ index ] );
+					items.push( fightModel.allLetterListCopy[ index ] );
 				}
 				
 				view.setLettersPool( items, false );

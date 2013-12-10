@@ -3,6 +3,7 @@ package app.modules.map.main.item
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
 	
+	import flash.display.InteractiveObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -23,18 +24,21 @@ package app.modules.map.main.item
 		private var tips:MovieClip;
 		private var txtTips:TextField;
 		private var bgTips:Sprite;
+		private var btn:InteractiveObject;
 		
 		public function MapItem( skin:MovieClip )
 		{
 			super( skin );
 			skin.mouseChildren = true;
+			skin.mouseEnabled = false;
 			tips = skin.getChildByName( "tips" ) as MovieClip || new MovieClip();
 			txtTips = tips.getChildByName( "txt" ) as TextField || new TextField();
 			bgTips = tips.getChildByName( "bg" ) as Sprite || new Sprite();
+			btn = skin.getChildByName( "btn" ) as InteractiveObject || new Sprite();
 			tips.mouseEnabled = false;
 			tips.mouseChildren = false;
-			skin.addEventListener(MouseEvent.ROLL_OVER, mouseHandler );
-			skin.addEventListener(MouseEvent.ROLL_OUT , mouseHandler );
+			btn.addEventListener(MouseEvent.ROLL_OVER, mouseHandler );
+			btn.addEventListener(MouseEvent.ROLL_OUT , mouseHandler );
 			tips.visible = false;
 		}
 		
@@ -42,7 +46,7 @@ package app.modules.map.main.item
 		{
 			var type:String = event.type;
 			if ( type == MouseEvent.ROLL_OVER ) {
-				skin.addEventListener(MouseEvent.MOUSE_MOVE, mouseHandler );
+				btn.addEventListener(MouseEvent.MOUSE_MOVE, mouseHandler );
 				tips.visible = true;
 				tips.x = skin.mouseX;
 				tips.y = skin.mouseY;
@@ -56,10 +60,13 @@ package app.modules.map.main.item
 		
 		override protected function onClickHandler(event:MouseEvent):void
 		{
-			super.onClickHandler( event );
-			if ( isOpen )
-				skin.dispatchEvent( new MapEvent( MapEvent.OPEN_SELECTED_ROUND, mapVo, true ));
-			else Tips.showMouse( "该章节地图未激活！" );
+			if ( event.target.name == "btn" )
+			{
+				super.onClickHandler( event );
+				if ( isOpen )
+					skin.dispatchEvent( new MapEvent( MapEvent.OPEN_SELECTED_ROUND, mapVo, true ));
+				else Tips.showMouse( "该章节地图未激活！" );
+			}
 		}
 		
 		public function setAndUpdateData( mapVo:MapVo ):void

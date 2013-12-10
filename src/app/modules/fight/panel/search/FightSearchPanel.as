@@ -58,6 +58,9 @@ package app.modules.fight.panel.search
 		{
 			super.onceInit();
 			txtSearch.addEventListener(Event.CHANGE, textInputHandler );
+			
+			txtSearch.wordWrap = false;
+			txtSearch.multiline = false;
 		}
 		
 		override protected function beforeRender():void
