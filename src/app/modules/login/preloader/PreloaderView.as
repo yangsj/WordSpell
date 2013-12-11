@@ -80,12 +80,12 @@ package app.modules.login.preloader
 		{
 			if ( mcProgressBar.currentFrame < stopFrame ) {
 				mcProgressBar.nextFrame();
+				txtProgressValue.text = (mcProgressBar.currentFrame + Number(Math.random().toFixed(2))) + "%";
 			}
 		}
 		
 		public function setProgressValue( value:Number ):void
 		{
-			txtProgressValue.text = ( value * 100 ).toFixed( 2 ) + "%";
 			stopFrame = int(value * 100);
 		}
 		
