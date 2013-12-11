@@ -1,7 +1,10 @@
 package app.modules.login.preloader
 {
+	import com.greensock.TweenMax;
+	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.text.TextField;
 	
 	import victor.framework.core.BaseScene;
@@ -22,6 +25,7 @@ package app.modules.login.preloader
 		public var txtProgressValue:TextField;
 		
 		private var rollWord:PreloaderRollWordLine;
+		private var stopFrame:int = 0;
 		
 		public function PreloaderView()
 		{
@@ -40,6 +44,7 @@ package app.modules.login.preloader
 			super.onceInit();
 			
 			txtProgressValue ||= TextFiledUtil.create( "", 45, 0xffffff );
+			addChild( txtProgressValue );
 		}
 		
 		override public function dispose():void
@@ -57,7 +62,7 @@ package app.modules.login.preloader
 		override public function show():void
 		{
 			ViewStruct.addChild( this, ViewStruct.LOADING );
-			
+			mcProgressBar.gotoAndStop( 1 );
 			if ( rollWord == null )
 			{
 				rollWord = new PreloaderRollWordLine();
@@ -68,13 +73,20 @@ package app.modules.login.preloader
 				rollWord.clear();
 			}
 			rollWord.initialize();
+			mcProgressBar.addEventListener(Event.ENTER_FRAME, barEnterFrameHandler );
+		}
+		
+		protected function barEnterFrameHandler(event:Event):void
+		{
+			if ( mcProgressBar.currentFrame < stopFrame ) {
+				mcProgressBar.nextFrame();
+			}
 		}
 		
 		public function setProgressValue( value:Number ):void
 		{
 			txtProgressValue.text = ( value * 100 ).toFixed( 2 ) + "%";
-			mcProgressBar.gotoAndStop( int(value * 100) );
-			addChild( txtProgressValue );
+			stopFrame = int(value * 100);
 		}
 		
 		override protected function get skinName():String

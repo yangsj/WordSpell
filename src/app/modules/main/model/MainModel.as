@@ -13,6 +13,8 @@ package app.modules.main.model
 		private var _hasLoadCompleted:Boolean;
 		private var _hasEnterGame:Boolean;
 		
+		public var startLoadTime:int = 0;
+		
 		public function MainModel()
 		{
 			super();

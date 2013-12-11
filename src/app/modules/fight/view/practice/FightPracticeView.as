@@ -26,7 +26,7 @@ package app.modules.fight.view.practice
 		
 		override public function setRoundName( roundName:String, isDisplayTime:Boolean = true ):void
 		{
-			txtName.text = "错误单词练习";
+			super.setRoundName( "错误单词练习" );
 		}
 		
 		override protected function resetText():void

@@ -1,5 +1,7 @@
 package app.modules.login.command
 {
+	import flash.utils.getTimer;
+	
 	import app.events.GameEvent;
 	import app.events.LoadEvent;
 	import app.events.ViewEvent;
@@ -9,6 +11,7 @@ package app.modules.login.command
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.debug.Debug;
+	import victor.framework.manager.TickManager;
 	
 	
 	/**
@@ -28,6 +31,8 @@ package app.modules.login.command
 		
 		override public function execute():void
 		{
+			mainModel.startLoadTime = getTimer();
+			
 			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Register ));
 			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Login ));
 			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Preloader ));
@@ -35,6 +40,16 @@ package app.modules.login.command
 		}
 		
 		private function loaderCompleteCallBack():void
+		{
+			var time:int = 1600 - ( getTimer() - mainModel.startLoadTime );
+			if (  time > 0 ) {
+				TickManager.doTimeout( tweenCall, time );
+			} else {
+				tweenCall();
+			}
+		}
+		
+		private function tweenCall():void
 		{
 			Debug.debug( "登陆资源加载完毕！！！" );
 			mainModel.hasLoadCompleted = true;

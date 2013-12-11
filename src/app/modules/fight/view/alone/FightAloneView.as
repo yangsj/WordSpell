@@ -124,9 +124,8 @@ package app.modules.fight.view.alone
 
 		override public function setRoundName( roundName:String, isDisplayTime:Boolean = true ):void
 		{
-//			bgName.visible = isDisplayTime;
-//			txtName.visible = isDisplayTime;
 			txtName.text = roundName;
+			bgName.width = txtName.textWidth + 40;
 		}
 		
 		override protected function enterFrameHandler( event:Event = null ):void
