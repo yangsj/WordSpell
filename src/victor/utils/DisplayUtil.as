@@ -1,4 +1,4 @@
-package victor.framework.utils
+package victor.utils
 {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -22,7 +22,8 @@ package victor.framework.utils
 		 */
 		public static function removedFromParent( target:DisplayObject ):DisplayObject
 		{
-			if ( target && target.parent ) {
+			if ( target && target.parent )
+			{
 				return target.parent.removeChild( target );
 			}
 			return target;
@@ -37,47 +38,54 @@ package victor.framework.utils
 		{
 			if ( target )
 			{
-				while ( target.numChildren > 0 ) {
+				while ( target.numChildren > 0 )
+				{
 					var dis:DisplayObject = target.removeChildAt( 0 );
-					if ( dis is MovieClip ) {
+					if ( dis is MovieClip )
+					{
 						( dis as MovieClip ).stop();
 					}
-					if ( isChildren ) {
-						if ( dis is DisplayObjectContainer ) {
+					if ( isChildren )
+					{
+						if ( dis is DisplayObjectContainer )
+						{
 							removedAll( dis as DisplayObjectContainer, isChildren );
 						}
 					}
 				}
 			}
 		}
-		
+
 		public static function stopAllMovieClips( target:DisplayObjectContainer ):void
 		{
 			if ( target )
 			{
-				if ( target.hasOwnProperty( "stopAllMovieClips" )) {
+				if ( target.hasOwnProperty( "stopAllMovieClips" ))
+				{
 					target.stopAllMovieClips();
 				}
 				else
 				{
-					if ( target is MovieClip ) {
+					if ( target is MovieClip )
+					{
 						( target as MovieClip ).stop();
 					}
-					
+
 					var numChildren:int = target.numChildren;
-					for (var i:int = 0; i < numChildren; i++) {
+					for ( var i:int = 0; i < numChildren; i++ )
+					{
 						var dis:DisplayObject = target.getChildAt( i );
 						if ( dis is DisplayObjectContainer )
 						{
 							stopAllMovieClips( dis as DisplayObjectContainer );
 						}
 					}
-					
+
 				}
 			}
 		}
-		
-		
+
+
 
 	}
 }

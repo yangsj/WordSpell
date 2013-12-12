@@ -6,7 +6,7 @@ package app.modules.fight.panel.ready
 	import app.modules.fight.model.FightMatchingVo;
 	
 	import victor.framework.core.BasePanel;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**

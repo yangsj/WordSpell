@@ -25,13 +25,13 @@ package app.modules.fight.view
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
-	import victor.framework.core.LoadViewBase;
+	import victor.framework.core.BaseLoadView;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.manager.TickManager;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.HtmlText;
-	import victor.framework.utils.MathUtil;
-	import victor.framework.utils.appStage;
+	import victor.utils.DisplayUtil;
+	import victor.utils.HtmlText;
+	import victor.utils.MathUtil;
+	import victor.utils.appStage;
 	
 	
 	/**
@@ -39,7 +39,7 @@ package app.modules.fight.view
 	 * @author 	yangsj 
 	 * 			2013-10-17
 	 */
-	public class FightBaseView extends LoadViewBase
+	public class FightBaseView extends BaseLoadView
 	{
 		public var txtName:TextField;// 所属地图名称
 		public var bgName:Sprite; // 名称底

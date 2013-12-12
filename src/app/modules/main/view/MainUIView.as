@@ -7,19 +7,19 @@ package app.modules.main.view
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.core.Numeric;
+	import victor.core.Numeric;
 	import app.data.BaseConfig;
 	import app.data.vo.LevelExpItemVo;
 	import app.events.ViewEvent;
-	import app.managers.LoaderManager;
+	import victor.framework.manager.LoaderManager;
 	import app.modules.main.FunctionBtnConfig;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
-	import victor.framework.core.ViewSprite;
+	import victor.framework.core.BaseView;
 	import victor.framework.core.ViewStruct;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.MathUtil;
+	import victor.utils.DisplayUtil;
+	import victor.utils.MathUtil;
 	
 	
 	/**
@@ -27,7 +27,7 @@ package app.modules.main.view
 	 * @author 	yangsj 
 	 * 			2013-9-10
 	 */
-	public class MainUIView extends ViewSprite
+	public class MainUIView extends BaseView
 	{
 		// 等级数字显示容器
 		public var levelContainer:Sprite;

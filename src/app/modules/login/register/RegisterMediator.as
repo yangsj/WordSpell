@@ -1,6 +1,5 @@
 package app.modules.login.register
 {
-	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.login.register.event.RegisterEvent;
 	import app.modules.login.service.LoginService;
@@ -36,12 +35,12 @@ package app.modules.login.register
 		
 		private function registerHandler( event:RegisterEvent ):void
 		{
-			loginService.register( view.registerVo, view.hide );
+			loginService.register( view.registerVo );
 		}
 		
 		private function loginHandler( event:RegisterEvent ):void
 		{
-			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Register ));
+			closeView( ViewName.Register );
 		}
 		
 	}

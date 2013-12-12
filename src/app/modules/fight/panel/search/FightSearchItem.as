@@ -6,10 +6,10 @@ package app.modules.fight.panel.search
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.modules.TempleteSprite;
+	import victor.framework.core.BaseSprite;
 	import app.modules.friend.model.FriendVo;
 	
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**
@@ -17,7 +17,7 @@ package app.modules.fight.panel.search
 	 * @author 	yangsj 
 	 * 			2013-10-18
 	 */
-	public class FightSearchItem extends TempleteSprite
+	public class FightSearchItem extends BaseSprite
 	{
 		public var txtName:TextField;
 		public var mcStatus:MovieClip; // 1:在线  2:闯关中 3:对战中

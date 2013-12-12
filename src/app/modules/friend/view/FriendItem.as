@@ -8,12 +8,12 @@ package app.modules.friend.view
 	import flash.text.TextField;
 	
 	import app.core.Alert;
-	import app.modules.TempleteSprite;
+	import victor.framework.core.BaseSprite;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.model.FriendVo;
 	
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.appStage;
+	import victor.utils.DisplayUtil;
+	import victor.utils.appStage;
 	
 	
 	/**
@@ -21,7 +21,7 @@ package app.modules.friend.view
 	 * @author 	yangsj 
 	 * 			2013-10-23
 	 */
-	public class FriendItem extends TempleteSprite
+	public class FriendItem extends BaseSprite
 	{
 		/**
 		 * mcSelected

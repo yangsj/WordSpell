@@ -13,14 +13,14 @@ package victor.framework.core
 	import app.sound.SoundType;
 	
 	import victor.framework.events.PanelEvent;
-	import victor.framework.utils.appStage;
+	import victor.utils.appStage;
 	
 	/**
 	 * ……
 	 * @author 	yangsj
 	 * 			2013-8-5
 	 */
-	public class BasePanel extends LoadViewBase
+	public class BasePanel extends BaseLoadView
 	{
 		
 		/**

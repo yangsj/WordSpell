@@ -5,11 +5,11 @@ package app.modules.chat.view
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
-	import app.core.Clip;
+	import victor.core.AnimationClip;
 	import app.modules.chat.event.ChatEvent;
-	import victor.framework.utils.appStage;
+	import victor.utils.appStage;
 	
-	import victor.framework.core.ViewSprite;
+	import victor.framework.core.BaseView;
 	
 	
 	/**
@@ -17,7 +17,7 @@ package app.modules.chat.view
 	 * @author 	yangsj 
 	 * 			2013-9-9
 	 */
-	public class ChatEmotionPanel extends ViewSprite
+	public class ChatEmotionPanel extends BaseView
 	{
 		private var _parentTarget:DisplayObjectContainer;
 		
@@ -35,7 +35,7 @@ package app.modules.chat.view
 		{
 			super.onceInit();
 			
-			var clip:Clip;
+			var clip:AnimationClip;
 			var point:Point;
 			var key:String;
 			var length:int = points.length;
@@ -43,7 +43,7 @@ package app.modules.chat.view
 			{
 				point = points[ i - 1 ];
 				key = "emotion_" + (i < 10 ? "0" : "") + i;
-				clip = new Clip( "ui.chat." + key );
+				clip = new AnimationClip( "ui.chat." + key );
 				clip.x = point.x;
 				clip.y = point.y;
 				clip.name = key;

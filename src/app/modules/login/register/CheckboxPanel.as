@@ -6,14 +6,14 @@ package app.modules.login.register
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
-	import app.modules.TempleteSprite;
+	import victor.framework.core.BaseSprite;
 	
-	import victor.framework.components.TabButtonControl;
+	import victor.core.TabButtonControl;
 	import victor.framework.interfaces.IDisposable;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.MathUtil;
-	import victor.framework.utils.appStage;
-	import victor.framework.utils.safetyCall;
+	import victor.utils.DisplayUtil;
+	import victor.utils.MathUtil;
+	import victor.utils.appStage;
+	import victor.utils.safetyCall;
 	
 	
 	/**
@@ -21,7 +21,7 @@ package app.modules.login.register
 	 * @author 	yangsj 
 	 * 			2013-10-9
 	 */
-	public class CheckboxPanel extends TempleteSprite implements IDisposable
+	public class CheckboxPanel extends BaseSprite implements IDisposable
 	{
 		public var mcBg:MovieClip;
 		

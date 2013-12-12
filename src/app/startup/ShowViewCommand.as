@@ -10,7 +10,7 @@ package app.startup
 	import victor.framework.core.ViewStruct;
 	import victor.framework.debug.Debug;
 	import victor.framework.interfaces.IView;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 
 
 	/**
@@ -68,11 +68,14 @@ package app.startup
 								view.data = event.data;
 								if ( view.parent == null )
 									view.show();
+								
+								Debug.debug( "open view name: " + viewName );
 							}
 							else if ( event.type == ViewEvent.HIDE_VIEW )
 							{
 								if ( view.parent )
 									view.hide();
+								Debug.debug( "close view name: " + viewName );
 							}
 						}
 					}

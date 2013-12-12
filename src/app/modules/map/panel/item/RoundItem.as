@@ -9,7 +9,7 @@ package app.modules.map.panel.item
 	import app.modules.map.model.RoundVo;
 	import app.modules.map.panel.event.SelectedRoundEvent;
 	
-	import victor.framework.components.Reflection;
+	import victor.core.Reflection;
 	
 	/**
 	 * ……

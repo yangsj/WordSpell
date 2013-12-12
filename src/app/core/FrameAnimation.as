@@ -8,7 +8,7 @@ package app.core
 	import victor.framework.manager.TickManager;
 	
 	/**
-	 * ……
+	 * ……按指定的帧频播放MovieClip元件动画
 	 * @author 	yangsj 
 	 * 			2013-9-26
 	 */
@@ -32,13 +32,18 @@ package app.core
 			this._movieClip.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler );
 			this._movieClip.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler );
 			
-			if ( this._movieClip.stage )
+			if ( this._movieClip.stage &&　_autoPlay　)
+			{
 				play();
+			}
 		}
 		
 		protected function addedToStageHandler(event:Event):void
 		{
-			play();
+			if (_autoPlay)
+			{
+				play();
+			}
 		}
 		
 		protected function removedFromStageHandler(event:Event):void
@@ -68,7 +73,9 @@ package app.core
 				}
 				var leng:int = targetClip.numChildren;
 				for ( var i:int = 0; i < leng; i++ )
+				{
 					gotoFrame( targetClip.getChildAt( i ) as DisplayObjectContainer, isPlay );
+				}
 			}
 		}
 		

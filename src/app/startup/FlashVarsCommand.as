@@ -41,6 +41,16 @@ package app.startup
 				GameConfig.serverPort = parameters["port"];
 			else GameConfig.serverPort = 10242;
 			
+			// 玩家登录帐号
+			if ( parameters.hasOwnProperty( "uid" ))
+				GameConfig.uid = parameters[ "uid" ];
+			else GameConfig.uid = "";
+			
+			// 玩家帐号密码
+			if ( parameters.hasOwnProperty( "key" ))
+				GameConfig.key = parameters[ "key" ];
+			else GameConfig.key = "";
+			
 			dispatch( new GameEvent( GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE ));
 			
 			setDebug();
@@ -52,6 +62,11 @@ package app.startup
 			{
 				// 初始化调试工具
 				Debug.initStage( contextView.stage );
+				
+				Debug.debug( "debug" );
+				Debug.error( "error" );
+				Debug.warn( "warn" );
+				Debug.printServer( "server" );
 			}
 		}
 		

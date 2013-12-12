@@ -1,4 +1,4 @@
-package app.core
+package victor.core
 {
 	import flash.display.Shape;
 	import flash.display.Bitmap;
@@ -10,7 +10,7 @@ package app.core
 
 	/**
 	 * 位图数字构造类
-	 * @author FireYang
+	 * @author yangsj
 	 */
 	public class Numeric
 	{
@@ -113,8 +113,10 @@ package app.core
 			var str:String = num.toString();
 			var numArr:Array = str.split( "" );
 			var len:int = numArr.length;
+			
 			_numMc.height = height;
 			_numMc.scaleX = _numMc.scaleY;
+			
 			var width:int = height * len * 2;
 			var bitmapData:BitmapData = new BitmapData( width, _numMc.height, true, 0x00000000 );
 			var matrix:Matrix = new Matrix();

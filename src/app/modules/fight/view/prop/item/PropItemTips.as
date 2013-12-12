@@ -5,15 +5,14 @@ package app.modules.fight.view.prop.item
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.text.TextField;
-	import flash.text.TextFormatAlign;
 	
+	import app.core.Text;
 	import app.modules.model.vo.ItemVo;
 	
 	import victor.framework.core.ViewStruct;
 	import victor.framework.interfaces.IDisposable;
-	import victor.framework.utils.MathUtil;
-	import victor.framework.utils.TextFiledUtil;
-	import victor.framework.utils.appStage;
+	import victor.utils.MathUtil;
+	import victor.utils.appStage;
 	
 	
 	/**
@@ -35,10 +34,10 @@ package app.modules.fight.view.prop.item
 		/*============================================================================*/
 		public function PropItemTips( target:DisplayObject )
 		{
-			txtLine = TextFiledUtil.create( "微软雅黑 Bold", 14, 0xFFFFFF, TextFormatAlign.CENTER );
+							  
+			txtLine = Text.getText( 14, 0xFFFFFF, "微软雅黑 Bold", 0, 2, 100, 60 );
 			txtLine.text = "   ";
-			txtLine.height = txtLine.textHeight + 2;
-			txtLine.y = 2;
+			txtLine.height = txtLine.textHeight + 8;
 			addChild( txtLine );
 			this.target = target;
 			if ( target )

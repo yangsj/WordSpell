@@ -48,13 +48,14 @@ package app.core
 		{
 			var text:TextField = new TextField();
 			text.defaultTextFormat = getFormat( font, size, color, aglin );
-			text.embedFonts = font == "";
+			text.embedFonts = ( font == "" || font == FontManager.fontName );
 			text.selectable = false;
 			text.mouseEnabled = false;
 			text.x = x;
 			text.y = y;
 			text.width = w;
 			text.height = h;
+			text.cacheAsBitmap = true;
 			return text;
 		}
 		
@@ -72,6 +73,16 @@ package app.core
 				originalText.parent.removeChild( originalText );
 			}
 			tt.filters = originalText.filters;
+			tt.cacheAsBitmap = true;
+			tt.alpha = originalText.alpha;
+			tt.multiline = originalText.multiline;
+			tt.background = originalText.background;
+			tt.backgroundColor = originalText.backgroundColor;
+			tt.border = originalText.border;
+			tt.borderColor = originalText.borderColor;
+			tt.displayAsPassword = originalText.displayAsPassword;
+			tt.wordWrap = originalText.wordWrap;
+			tt.visible = originalText.visible;
 			return tt;
 		}
 		

@@ -6,19 +6,19 @@ package app.modules.main.view
 	import flash.events.MouseEvent;
 	
 	import app.events.ViewEvent;
-	import app.modules.TempleteSprite;
+	import victor.framework.core.BaseSprite;
 	import app.modules.ViewName;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
-	import victor.framework.utils.appStage;
+	import victor.utils.appStage;
 	
 	/**
 	 * ……
 	 * @author 	yangsj 
 	 * 			2013-10-18
 	 */
-	public class FightButtonMenu extends TempleteSprite
+	public class FightButtonMenu extends BaseSprite
 	{
 		
 		public function FightButtonMenu()

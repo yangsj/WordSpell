@@ -4,8 +4,8 @@ package victor.framework.core
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.appStage;
+	import victor.utils.DisplayUtil;
+	import victor.utils.appStage;
 
 	/**
 	 * ……

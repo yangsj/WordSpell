@@ -1,10 +1,10 @@
-package victor.framework.components
+package victor.core
 {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
-	
+
 	import victor.framework.debug.Debug;
 
 
@@ -16,12 +16,17 @@ package victor.framework.components
 	public class Reflection
 	{
 
+		/**
+		 * 映射
+		 * @param target
+		 * @param skin
+		 */
 		public static function reflection( target:Object, skin:DisplayObject ):void
 		{
 			var skinContainer:DisplayObjectContainer = skin as DisplayObjectContainer;
 			if ( target == null || skinContainer == null )
 				return;
-			
+
 			var xml:XML = describeType( target );
 			var variables:XMLList = xml.child( "variable" );
 			var name:String;
@@ -32,7 +37,10 @@ package victor.framework.components
 				try
 				{
 					tmp = skinContainer.getChildByName( name );
-					if ( tmp ) target[ name ] = tmp;
+					if ( tmp )
+					{
+						target[ name ] = tmp;
+					}
 				}
 				catch ( e:Error )
 				{
@@ -41,12 +49,18 @@ package victor.framework.components
 				}
 			}
 		}
-		
+
+		/**
+		 * 销毁映射
+		 * @param target
+		 */
 		public static function disposeReflection( target:Object ):void
 		{
 			if ( target == null )
+			{
 				return;
-			
+			}
+
 			var xml:XML = describeType( target );
 			var variables:XMLList = xml.child( "variable" );
 			var name:String;
@@ -64,6 +78,6 @@ package victor.framework.components
 				}
 			}
 		}
-		
+
 	}
 }

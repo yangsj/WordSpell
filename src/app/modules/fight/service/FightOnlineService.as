@@ -3,7 +3,6 @@ package app.modules.fight.service
 	import app.core.Alert;
 	import app.core.Tips;
 	import app.data.GameData;
-	import app.events.ViewEvent;
 	import app.modules.LoadingEffect;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightOnlineEvent;
@@ -128,10 +127,12 @@ package app.modules.fight.service
 				
 				// 关闭面板
 				for each ( var viewName:String in needCloseView )
-					dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, viewName ));
+				{
+					closeView( viewName );
+				}
 				
 				// 进入ready 界面
-				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightReadyPanel ));
+				openView( ViewName.FightReadyPanel );
 			}
 			else 
 			{

@@ -8,7 +8,7 @@ package app.modules.fight.panel.ready
 	
 	import app.modules.fight.model.FightMatchingVo;
 	
-	import victor.framework.components.Reflection;
+	import victor.core.Reflection;
 	import victor.framework.interfaces.IDisposable;
 	
 	/**

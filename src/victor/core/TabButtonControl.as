@@ -1,10 +1,10 @@
-package victor.framework.components
+package victor.core
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
 	
-	import victor.framework.utils.safetyCall;
+	import victor.utils.safetyCall;
 	
 	import victor.framework.interfaces.IDisposable;
 

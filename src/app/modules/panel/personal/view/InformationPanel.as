@@ -14,10 +14,10 @@ package app.modules.panel.personal.view
 	import app.modules.model.GenderType;
 	import app.modules.panel.personal.events.PersonalEvent;
 	
-	import victor.framework.components.TabButtonControl;
+	import victor.core.TabButtonControl;
 	import victor.framework.core.BasePanel;
 	import victor.framework.debug.Debug;
-	import victor.framework.utils.StringUitl;
+	import victor.utils.StringUitl;
 	
 	/**
 	 * ……

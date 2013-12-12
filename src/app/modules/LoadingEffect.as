@@ -3,7 +3,7 @@ package app.modules
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	
-	import victor.framework.utils.appStage;
+	import victor.utils.appStage;
 	
 	import victor.framework.core.ViewStruct;
 	

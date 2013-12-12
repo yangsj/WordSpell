@@ -30,7 +30,7 @@ package app.modules.task.command
 			if ( cacheCompleteTask && cacheCompleteTask.length > 0 )
 			{
 				var taskVo:TaskVo = cacheCompleteTask.shift();
-				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.TaskCompleted, taskVo ));
+				openView( ViewName.TaskCompleted, taskVo );
 			}
 		}
 

@@ -11,7 +11,7 @@ package app.modules.fight.view.item
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
-	import app.modules.TempleteSprite;
+	import victor.framework.core.BaseSprite;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.model.vo.ItemType;
@@ -19,9 +19,9 @@ package app.modules.fight.view.item
 	import app.sound.SoundType;
 	
 	import victor.framework.manager.TickManager;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.MathUtil;
-	import victor.framework.utils.appStage;
+	import victor.utils.DisplayUtil;
+	import victor.utils.MathUtil;
+	import victor.utils.appStage;
 	
 	
 	/**
@@ -29,7 +29,7 @@ package app.modules.fight.view.item
 	 * @author 	yangsj 
 	 * 			2013-9-28
 	 */
-	public class LetterBubble extends TempleteSprite
+	public class LetterBubble extends BaseSprite
 	{
 		/**
 		 * 半径

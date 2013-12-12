@@ -13,9 +13,9 @@ package app.core
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
-	import victor.framework.utils.appStage;
+	import victor.utils.appStage;
 	
-	import victor.framework.utils.BitmapUtil;
+	import victor.utils.BitmapUtil;
 
 	public class Tips
 	{
@@ -95,7 +95,6 @@ package app.core
 			_tf_format.font = "Microsoft YaHei";
 			_sizeFormat = new TextFormat();
 			_sizeFormat.size = DEFAULT_SIZE;
-//			_tf.border = true;
 			_tf.multiline = true;
 			_tf.autoSize = TextFormatAlign.LEFT;
 			_tf.defaultTextFormat = _tf_format;

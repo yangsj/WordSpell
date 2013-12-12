@@ -7,7 +7,7 @@ package app.core.components.controls.combo
 	import app.core.components.controls.ControlFrameType;
 	
 	import victor.framework.interfaces.IDisposable;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**

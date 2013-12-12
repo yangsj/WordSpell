@@ -7,16 +7,14 @@ package app.modules.login.preloader
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.text.TextField;
-	import flash.text.TextFormatAlign;
 	
 	import app.Language;
+	import app.core.Text;
 	
 	import victor.framework.debug.Debug;
 	import victor.framework.interfaces.IDisposable;
-	import victor.framework.utils.BitmapUtil;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.TextFiledUtil;
-	
+	import victor.utils.BitmapUtil;
+	import victor.utils.DisplayUtil;
 	
 	/**
 	 * ……
@@ -64,9 +62,7 @@ package app.modules.login.preloader
 			DisplayUtil.removedAll( bitmapCon );
 			if ( txtLine == null )
 			{
-				txtLine = TextFiledUtil.create( "微软雅黑", 16, 0x0066FF, TextFormatAlign.CENTER );
-				txtLine.width = 500;
-				txtLine.height = HEIGHT;
+				txtLine = Text.getText( 16, 0x0066FF, "微软雅黑", 0, 0, 500, HEIGHT);
 			}
 			
 			if ( maskShape == null || this.mask == null )

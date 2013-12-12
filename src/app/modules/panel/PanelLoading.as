@@ -1,13 +1,12 @@
 package app.modules.panel
 {
 	import flash.text.TextField;
-	import flash.text.TextFormatAlign;
 	
-	import victor.framework.utils.appStage;
+	import app.core.Text;
 	
-	import victor.framework.core.ViewSprite;
+	import victor.framework.core.BaseView;
 	import victor.framework.core.ViewStruct;
-	import victor.framework.utils.TextFiledUtil;
+	import victor.utils.appStage;
 	
 	
 	/**
@@ -15,7 +14,7 @@ package app.modules.panel
 	 * @author 	yangsj 
 	 * 			2013-8-28
 	 */
-	public class PanelLoading extends ViewSprite
+	public class PanelLoading extends BaseView
 	{
 		private var txtProgress:TextField;
 		
@@ -25,13 +24,13 @@ package app.modules.panel
 			this.graphics.drawRoundRect( 0, 0, 200, 200, 15 );
 			this.graphics.endFill();
 			
-			var txt:TextField = TextFiledUtil.create("_sans", 25, 0xffffff, TextFormatAlign.CENTER );
+			var txt:TextField = Text.getText( 25, 0xffffff, "_sans" );
 			txt.text = "已加载";
 			txt.width = 104;
 			txt.height = 33;
 			addChild( txt );
 			
-			txtProgress = TextFiledUtil.create( "Verdana", 35, 0xffffff, TextFormatAlign.CENTER );
+			txtProgress = Text.getText( 35, 0xffffff, "Verdana" );
 			txtProgress.width = 191;
 			txtProgress.height = 46;
 			addChild( txtProgress );

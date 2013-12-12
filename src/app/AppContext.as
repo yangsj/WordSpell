@@ -3,7 +3,7 @@ package app
 	import flash.display.DisplayObjectContainer;
 	
 	import app.events.GameEvent;
-	import app.events.ServiceEvent;
+	import victor.framework.events.ServiceEvent;
 	import app.modules.login.command.FirstLoadCommand;
 	import app.modules.login.command.MainLoadCommand;
 	import app.startup.EnterGameCommand;
@@ -13,13 +13,10 @@ package app
 	import app.startup.InitFontCommand;
 	import app.startup.InitServiceCommand;
 	import app.startup.ShowLoginCommand;
-	import victor.framework.utils.appStage;
 	
 	import org.robotlegs.base.ContextEvent;
 	
 	import victor.framework.core.BaseContext;
-	import victor.framework.core.ViewStruct;
-	import victor.framework.manager.TickManager;
 	
 	
 	/**
@@ -34,24 +31,13 @@ package app
 			super(contextView, autoStartup);
 		}
 		
-		override public function startup():void
+		override protected function initManager():void
 		{
-			initManager();
-			addStartupCommand()
+			super.initManager();
 			
-			super.startup();
 		}
 		
-		private function initManager() : void
-		{
-			// 初始化视图结构管理器
-			ViewStruct.initialize( contextView );
-			
-			// 计时器管理器
-			TickManager.instance.init( appStage.frameRate );
-		}
-		
-		private function addStartupCommand() : void
+		override protected function addStartupCommand() : void
 		{
 			// 解析传flash的参数值
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, FlashVarsCommand, ContextEvent, true);
@@ -59,7 +45,7 @@ package app
 			// 初始化网络
 			commandMap.mapEvent(GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE, InitServiceCommand, GameEvent, true);
 			
-			// 初始化command
+			// 初始化command | 功能模块
 			commandMap.mapEvent(GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE, InitCommand, GameEvent, true);
 			
 			// 初始化application资源数据

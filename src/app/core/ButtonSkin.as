@@ -2,7 +2,7 @@ package app.core
 {
 	import flash.display.InteractiveObject;
 	
-	import app.managers.LoaderManager;
+	import victor.framework.manager.LoaderManager;
 	
 	/**
 	 * ……

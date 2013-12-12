@@ -4,7 +4,6 @@ package app.modules.fight.service
 	
 	import app.core.Tips;
 	import app.data.GameData;
-	import app.events.ViewEvent;
 	import app.modules.LoadingEffect;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightAloneEvent;
@@ -169,8 +168,8 @@ package app.modules.fight.service
 
 			if ( fightModel.modeType == 5 ) // 在线对战
 			{
-				dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightReadyPanel ));
-				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightOnline ));
+				closeView( ViewName.FightReadyPanel );
+				openView( ViewName.FightOnline );
 			}
 			else // 闯关和练习/错误练习
 			{
@@ -198,9 +197,9 @@ package app.modules.fight.service
 			if ( fightModel.isPractice && fightModel.isSelfExit )
 			{
 				if ( fightModel.isErrorPractice ) {
-					dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightPractice ));
+					closeView( ViewName.FightPractice );
 				} else {
-					dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightAlone ));
+					closeView( ViewName.FightAlone );
 				}
 			}
 			else

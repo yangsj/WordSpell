@@ -10,13 +10,13 @@ package victor.framework.interfaces
 	public interface IDebug
 	{
 		
-		function warn( args:Array ):void;
+		function warn( ... args ):void;
 		
-		function debug( args:Array ):void;
+		function debug( ... args ):void;
 		
-		function error( args:Array ):void;
+		function error( ... args ):void;
 		
-		function printServer( args:Array ):void;
+		function printServer( ... args ):void;
 		
 		function initStage( stage:Stage, pass:String = " " ):void;
 		

@@ -13,7 +13,7 @@ package app.modules.fight.view.online
 	import app.modules.model.vo.ItemType;
 	
 	import victor.framework.debug.Debug;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	/**
 	 * ……

@@ -1,8 +1,9 @@
 package app.modules.login.preloader
 {
-	import app.events.LoadEvent;
+	import app.events.GameEvent;
 	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.events.LoadEvent;
 	
 	
 	/**
@@ -25,11 +26,20 @@ package app.modules.login.preloader
 			super.onRegister();
 			
 			addContextListener( LoadEvent.LOAD_PROGRESS, loadProgressHandler, LoadEvent );
+			
+			addViewListener( LoadEvent.LOAD_COMPLETE, loadCompleted, LoadEvent );
 		}
 		
 		private function loadProgressHandler( event:LoadEvent ):void
 		{
 			view.setProgressValue( Number( event.data ) );
+		}
+		
+		private function loadCompleted( event:LoadEvent ):void
+		{
+			if ( view.data == 2 ) {
+				dispatch( new GameEvent( GameEvent.MAIN_LOAD_COMPLETE ));
+			}
 		}
 		
 	}

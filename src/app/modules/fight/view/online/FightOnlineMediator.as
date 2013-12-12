@@ -1,7 +1,6 @@
 package app.modules.fight.view.online
 {
 	import app.data.GameData;
-	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.events.FightOnlineEvent;
@@ -38,7 +37,7 @@ package app.modules.fight.view.online
 			super.onRegister();
 			
 			// 若是结果显示面板已打开则关闭
-			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.FightOnlineResultPanel ));
+			closeView( ViewName.FightOnlineResultPanel );
 			
 			// 结束通知
 			addContextListener( FightOnlineEvent.BATTLE_END, endBattleNotify, FightOnlineEvent );

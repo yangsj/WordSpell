@@ -8,15 +8,15 @@ package app.core
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	
-	import app.managers.LoaderManager;
+	import victor.framework.manager.LoaderManager;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
-	import victor.framework.components.Reflection;
+	import victor.core.Reflection;
 	import victor.framework.core.ViewStruct;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.appStage;
-	import victor.framework.utils.safetyCall;
+	import victor.utils.DisplayUtil;
+	import victor.utils.appStage;
+	import victor.utils.safetyCall;
 	
 	/**
 	 * ……

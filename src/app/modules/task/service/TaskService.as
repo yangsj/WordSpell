@@ -3,7 +3,6 @@ package app.modules.task.service
 	import flash.utils.Dictionary;
 	
 	import app.core.Tips;
-	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
 	import app.modules.model.PackModel;
@@ -56,34 +55,16 @@ package app.modules.task.service
 			regist( server_cmd_e.TASK_ACCEPT_AWARD_RET, takeRewardSuccessNotify, task_accept_award_ret_t );
 		}
 		
-		// 任务完成奖励
-		private function takeRewardSuccessNotify( resp:SocketResp ):void
-		{
-			var data:task_accept_award_ret_t = resp.data as task_accept_award_ret_t;
-			var taskVo:TaskVo = new TaskVo();
-			taskVo.id = data.task_id;
-			taskVo.rewardMoney = data.coin_award;
-			taskVo.rewardExp = data.exp_award;
-			taskVo.propList = getRewardList( data.item_award );
-			
-			Tips.showCenter( "任务奖励领取成功！" );
-			
-			// 
-			SoundManager.playEffectMusic( SoundType.REWARD_DIAMOND );
-			
-			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.TaskCompleted ));
-			
-			// 重新更新列表
-			pullTaskList();
-		}
-		
 		// 任务列表数据通知
 		private function taskInfoListNotify( resp:SocketResp ):void
 		{
 			var data:task_info_t = resp.data as task_info_t;
 			var list:Array = data.task_list;
 			var taskVo:TaskVo;
+			
+			taskModel.hasTaskList = false;
 			taskModel.taskList.length = 0;
+			
 			for each ( var task:task_t in list )
 			{
 				taskVo = new TaskVo();
@@ -95,14 +76,11 @@ package app.modules.task.service
 				taskVo.rewardMoney = task.coin_award;
 				taskVo.propList = getRewardList( task.item_award );
 				
-				if ( !taskVo.isHide ) {
-					if ( taskVo.isEd ) {
-						taskModel.taskList.unshift( taskVo );
-					} else {
-						taskModel.taskList.push( taskVo );
-					}
-				}
+				taskModel.updateTask( taskVo );
 			}
+			
+			taskModel.hasTaskList = true;
+			// 更新列表通知
 			dispatch( new TaskEvent( TaskEvent.UPDATE_LIST ));
 		}
 		
@@ -110,29 +88,49 @@ package app.modules.task.service
 		private function taskCompleteNotify( resp:SocketResp ):void
 		{
 			var data:task_completed_ret_t = resp.data as task_completed_ret_t;
+			var taskVo:TaskVo = taskModel.getTaskVoById( data.task_id );
+			taskVo.id = data.task_id;
+			taskVo.status = TaskVo.STATUS_ED;
+			taskVo.rewardMoney = data.coin_award;
+			taskVo.rewardExp = data.exp_award;
+			taskVo.propList = getRewardList( data.item_award );
+			// 更新当前任务状态
+			taskModel.updateTask( taskVo );
 			
-			// 更新金币值
-//			if ( data.coin_award > 0 ) GameData.instance.updateAddMoney( data.coin_award );
-//			
-//			// 更新经验值
-//			if ( data.exp_award > 0 ) GameData.instance.updateAddExp( data.exp_award );
-			
-//			var taskVo:TaskVo = new TaskVo();
-//			taskVo.id = data.task_id;
-//			taskVo.status = data.status;
-//			taskVo.rewardMoney = data.coin_award;
-//			taskVo.rewardExp = data.exp_award;
-//			taskVo.propList = getRewardList( data.item_award );
-//			
+			// 弹出奖励领取面板|已屏蔽
 //			taskModel.cacheCompleteTask.push( taskVo );
-//			
 //			if ( !fightModel.isFighting )
 //				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
 			
 			Tips.showCenter( "你已经完成了一个新任务，可以领取任务奖励" );
 		}
 		
-		private function getRewardList( dict:Dictionary ):Vector.<ItemVo>
+		// 任务奖励领取成功
+		private function takeRewardSuccessNotify( resp:SocketResp ):void
+		{
+			var data:task_accept_award_ret_t = resp.data as task_accept_award_ret_t;
+			var taskVo:TaskVo = taskModel.getTaskVoById( data.task_id );
+			taskVo.id = data.task_id;
+			taskVo.status = TaskVo.STATUS_HIDE;
+			taskVo.rewardMoney = data.coin_award;
+			taskVo.rewardExp = data.exp_award;
+			taskVo.propList = getRewardList( data.item_award, true );
+			// 更新当前任务状态
+			taskModel.updateTask( taskVo );
+			
+			Tips.showCenter( "任务奖励领取成功！" );
+			
+			// 播放音效
+			SoundManager.playEffectMusic( SoundType.REWARD_DIAMOND );
+			
+			// 自动关闭奖励领取面板
+			closeView( ViewName.TaskCompleted );
+			
+			// 重新更新列表
+			pullTaskList();
+		}
+		
+		private function getRewardList( dict:Dictionary, isUpdateToPack:Boolean = false ):Vector.<ItemVo>
 		{
 			var vec:Vector.<ItemVo> = new Vector.<ItemVo>();
 			var itemVo:ItemVo;
@@ -144,7 +142,9 @@ package app.modules.task.service
 				vec.push( itemVo );
 				
 				// 更新到背包中
-//				packModel.addNumByType( itemVo.type, 1 );
+				if ( isUpdateToPack ) {
+					packModel.addNumByType( itemVo.type, itemVo.num );
+				}
 			}
 			return vec;
 		}
@@ -156,8 +156,13 @@ package app.modules.task.service
 		 */
 		public function pullTaskList():void
 		{
-			var req:task_info_req_t = new task_info_req_t();
-			call( client_cmd_e.TASK_INFO_REQ, req );
+			if ( taskModel.hasTaskList ) {
+				// 更新列表通知
+				dispatch( new TaskEvent( TaskEvent.UPDATE_LIST ));
+			} else {
+				var req:task_info_req_t = new task_info_req_t();
+				call( client_cmd_e.TASK_INFO_REQ, req );
+			}
 		}
 		
 		public function takeReward( id:int ):void

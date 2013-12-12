@@ -8,11 +8,11 @@ package app.modules.fight.view.prop.item
 	import app.core.Text;
 	import app.core.Tips;
 	import app.events.PackEvent;
-	import app.managers.LoaderManager;
+	import victor.framework.manager.LoaderManager;
 	import app.modules.model.vo.ItemVo;
 	
 	import victor.framework.manager.TickManager;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**

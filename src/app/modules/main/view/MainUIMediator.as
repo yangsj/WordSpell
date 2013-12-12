@@ -41,19 +41,6 @@ package app.modules.main.view
 			addContextListener( MainUIEvent.UPDATE_PROPERTY, updatePropertyHandler, MainUIEvent );
 			
 			initData();
-			
-//			if ( GameConfig.isDebug )
-//			{
-//				contextView.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler );
-//			}
-		}
-		
-		protected function keyHandler(event:KeyboardEvent):void
-		{
-			if ( event.keyCode == Keyboard.D )
-			{
-				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Test ));
-			}
 		}
 		
 		private function initData():void
@@ -89,7 +76,7 @@ package app.modules.main.view
 					Tips.showMouse( "功能开发中敬请期待！" );
 					break;
 				default :
-					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName ) );
+					openView( viewName );
 			}
 		}
 		

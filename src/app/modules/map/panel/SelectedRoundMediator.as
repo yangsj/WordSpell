@@ -71,8 +71,8 @@ package app.modules.map.panel
 					mapModel.isNeddOpenFromFight = true;
 					mapModel.isSelectedRound = ( type == Alert.YES );
 					
-					dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.SelectedRoundPanel ));	
-					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.FightAlone ));
+					closeView( ViewName.SelectedRoundPanel );	
+					openView( ViewName.FightAlone );
 				}
 			}
 		}

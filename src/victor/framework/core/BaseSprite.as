@@ -1,12 +1,12 @@
-package app.modules
+package victor.framework.core
 {
 	import flash.display.Sprite;
 	
-	import app.managers.LoaderManager;
+	import victor.framework.manager.LoaderManager;
 	
-	import victor.framework.components.Reflection;
+	import victor.core.Reflection;
 	import victor.framework.interfaces.IDisposable;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**
@@ -14,11 +14,11 @@ package app.modules
 	 * @author 	yangsj 
 	 * 			2013-9-28
 	 */
-	public class TempleteSprite extends Sprite implements IDisposable
+	public class BaseSprite extends Sprite implements IDisposable
 	{
 		protected var _skin:Sprite;
 		
-		public function TempleteSprite()
+		public function BaseSprite()
 		{
 			super();
 		}

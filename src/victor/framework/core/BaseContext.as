@@ -4,6 +4,9 @@ package victor.framework.core
 	
 	import org.robotlegs.mvcs.Context;
 	
+	import victor.framework.manager.TickManager;
+	import victor.utils.appStage;
+	
 	
 	/**
 	 * ……
@@ -15,6 +18,28 @@ package victor.framework.core
 		public function BaseContext(contextView:DisplayObjectContainer=null, autoStartup:Boolean=true)
 		{
 			super(contextView, autoStartup);
+		}
+		
+		override public function startup():void
+		{
+			initManager();
+			addStartupCommand()
+			
+			super.startup();
+		}
+		
+		protected function initManager() : void
+		{
+			// 初始化视图结构管理器
+			ViewStruct.initialize( contextView );
+			
+			// 计时器管理器
+			TickManager.instance.init( appStage.frameRate );
+		}
+		
+		protected function addStartupCommand() : void
+		{
+			
 		}
 	}
 }

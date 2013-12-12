@@ -1,4 +1,4 @@
-package app.core
+package victor.core
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -9,10 +9,10 @@ package app.core
 	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-	
-	import victor.framework.utils.BitmapUtil;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.safetyCall;
+
+	import victor.utils.BitmapUtil;
+	import victor.utils.DisplayUtil;
+	import victor.utils.safetyCall;
 
 	/**
 	 * ……

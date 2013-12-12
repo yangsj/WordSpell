@@ -2,7 +2,7 @@ package app.startup
 {
 	import app.GameConfig;
 	import app.core.Alert;
-	import app.events.ServiceEvent;
+	import victor.framework.events.ServiceEvent;
 	import app.managers.ExternalManager;
 	import app.modules.LoadingEffect;
 	

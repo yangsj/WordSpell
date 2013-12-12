@@ -1,11 +1,9 @@
 package app.startup
 {
 	import app.data.GameData;
-	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.main.model.MainModel;
 	import app.modules.map.model.MapModel;
-	import app.sound.SoundManager;
 	
 	import victor.framework.core.BaseCommand;
 	
@@ -47,11 +45,11 @@ package app.startup
 			var displayView:Array = [ ViewName.MainUI, ViewName.MapWorld, ViewName.Chat ];
 			
 			for each (var viewName:String in displayView ) {
-				dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, viewName ));
+				openView( viewName );
 			}
 			
 			// 关闭Preloader
-			dispatch( new ViewEvent( ViewEvent.HIDE_VIEW, ViewName.Preloader ));
+			closeView( ViewName.Preloader );
 		}
 		
 	}

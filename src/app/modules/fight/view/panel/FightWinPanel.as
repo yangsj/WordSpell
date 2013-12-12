@@ -3,7 +3,7 @@ package app.modules.fight.view.panel
 	import app.modules.fight.model.FightEndVo;
 	import app.core.Text;
 	
-	import victor.framework.utils.UtilsFilter;
+	import victor.utils.UtilsFilter;
 
 	/**
 	 * ……

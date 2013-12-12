@@ -5,11 +5,11 @@ package app.core.components.controls.combo
 	import flash.text.TextField;
 	
 	import app.core.components.controls.ControlFrameType;
-	import victor.framework.utils.appStage;
+	import victor.utils.appStage;
 	
-	import victor.framework.components.scroll.GameScrollPanel;
+	import victor.core.scroll.GameScrollPanel;
 	import victor.framework.interfaces.IDisposable;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**

@@ -6,7 +6,7 @@ package
 	import flash.events.Event;
 	
 	import app.AppContext;
-	import victor.framework.utils.appStage;
+	import victor.utils.appStage;
 	
 	[SWF( width = "960", height = "560", frameRate = "60" )]
 	/**

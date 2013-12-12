@@ -1,6 +1,8 @@
 package app
 {
-	import victor.framework.utils.appStage;
+	import app.modules.login.login.vo.LoginVo;
+	
+	import victor.utils.appStage;
 	
 	/**
 	 * ……
@@ -27,7 +29,7 @@ package app
 		/**
 		 * 用户id
 		 */
-		public static var uid:int;
+		public static var uid:String;
 		
 		/**
 		 * 登陆key
@@ -62,6 +64,24 @@ package app
 		public static function set deployPath( value:String ):void
 		{
 			_deployPath = value;
+		}
+		
+		/////////// static vars
+		
+		/**
+		 * 是否可以直接登陆[ 若是页面已给玩家的uid和key则直接登录  ]
+		 */
+		public static function get canImmediateLogin():Boolean
+		{
+			return Boolean( uid ) && Boolean( key );
+		}
+		
+		public static function get immediateLoginVo():LoginVo
+		{
+			var loginVo:LoginVo = new LoginVo();
+			loginVo.accountName = uid;
+			loginVo.password = key;
+			return loginVo;
 		}
 		
 	}

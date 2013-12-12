@@ -3,23 +3,22 @@ package victor.framework.core
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	import app.modules.TempleteSprite;
 	
 	import victor.framework.interfaces.IView;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 
 	/**
 	 * ……
 	 * @author 	yangsj
 	 * 			2013-8-5
 	 */
-	public class ViewSprite extends TempleteSprite implements IView
+	public class BaseView extends BaseSprite implements IView
 	{
 		protected var _data:Object;
 		protected var rectangle:Rectangle;
 		protected var _isInit:Boolean = false;
 
-		public function ViewSprite()
+		public function BaseView()
 		{
 			super();
 

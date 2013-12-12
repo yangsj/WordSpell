@@ -17,19 +17,19 @@ package app.modules.chat.view
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.data.PlayerBaseVo;
-	import app.managers.LoaderManager;
+	import victor.framework.manager.LoaderManager;
 	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.chat.model.ChatVo;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
-	import victor.framework.components.TabButtonControl;
-	import victor.framework.components.scroll.ScrollBar;
-	import victor.framework.core.ViewSprite;
+	import victor.core.TabButtonControl;
+	import victor.core.scroll.ScrollBar;
+	import victor.framework.core.BaseView;
 	import victor.framework.core.ViewStruct;
-	import victor.framework.utils.StringUitl;
-	import victor.framework.utils.appStage;
+	import victor.utils.StringUitl;
+	import victor.utils.appStage;
 
 
 	/**
@@ -37,7 +37,7 @@ package app.modules.chat.view
 	 * @author 	yangsj
 	 * 			2013-9-6
 	 */
-	public class ChatView extends ViewSprite
+	public class ChatView extends BaseView
 	{
 		//底图
 		public var mcBg:MovieClip;

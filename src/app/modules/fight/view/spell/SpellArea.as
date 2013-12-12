@@ -6,7 +6,7 @@ package app.modules.fight.view.spell
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.modules.TempleteSprite;
+	import victor.framework.core.BaseSprite;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	
@@ -18,7 +18,7 @@ package app.modules.fight.view.spell
 	 * @author 	yangsj
 	 * 			2013-9-27
 	 */
-	public class SpellArea extends TempleteSprite
+	public class SpellArea extends BaseSprite
 	{
 		private const MAX:int = 14;
 

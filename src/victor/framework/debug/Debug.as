@@ -1,47 +1,53 @@
 package victor.framework.debug
 {
 
+	import com.junkbyte.console.Cc;
+	
 	import flash.display.Stage;
 	import flash.system.Capabilities;
 	
-	import victor.framework.interfaces.IDebug;
-
 	/**
 	 * @author
 	 */
 	public class Debug
 	{
-		private static var _ccInstance:IDebug;
-
 		public static function warn( ... args ):void
 		{
-			if ( _ccInstance && isDebug )
+			if ( isDebug )
 			{
-				_ccInstance.warn( args );
+				var msg:String = JSON.stringify( args );
+				Cc.warn( msg );
+				trace( "[warn]" + msg );
 			}
 		}
 
 		public static function error( ... args ):void
 		{
-			if ( _ccInstance && isDebug )
+			if ( isDebug )
 			{
-				_ccInstance.error( args );
+				var msg:String = JSON.stringify( args );
+				Cc.error( msg );
+				trace( "[error]" + msg );
 			}
 		}
 
 		public static function debug( ... args ):void
 		{
-			if ( _ccInstance && isDebug )
+			if ( isDebug )
 			{
-				_ccInstance.debug( args );
+				var msg:String = JSON.stringify( args );
+				Cc.debug( msg );
+				trace( "[debug]" + msg );
 			}
 		}
 
 		public static function printServer( ... args ):void
 		{
-			if ( _ccInstance && isDebug )
+			if ( isDebug )
 			{
-				_ccInstance.printServer( args );
+				var msg:String = JSON.stringify( args );
+				Cc.ch( "server", msg, 2 );
+				trace( "[server]" + msg );
 			}
 		}
 		
@@ -50,8 +56,18 @@ package victor.framework.debug
 		 */
 		public static function initStage( stage:Stage, pass:String = " " ):void
 		{
-			_ccInstance = new CcInstance();
-			_ccInstance.initStage( stage, pass );
+			if ( isDebug )
+			{
+				Cc.config.style.backgroundAlpha = 0.7;
+				Cc.startOnStage( stage, pass );
+				Cc.commandLine = true;
+				Cc.fpsMonitor = true;
+				Cc.memoryMonitor = true;
+				Cc.config.commandLineAllowed = true;
+				Cc.config.alwaysOnTop = true;
+				Cc.visible = false;
+				Cc.width = stage.stageWidth - 50;
+			}
 		}
 		
 		/////////////////////

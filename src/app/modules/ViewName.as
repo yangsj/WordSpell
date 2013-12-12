@@ -10,7 +10,7 @@ package app.modules
 	{
 		
 		/**
-		 * 登陆资源加载器界面
+		 * 登陆资源加载器界面 | data=1为第一阶段 | data=2为第二阶段
 		 */
 		public static const Preloader:String = "PreloaderView";
 		

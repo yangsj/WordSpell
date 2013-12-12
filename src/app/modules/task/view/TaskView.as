@@ -4,9 +4,9 @@ package app.modules.task.view
 	
 	import app.modules.task.model.TaskVo;
 	
-	import victor.framework.components.scroll.GameScrollPanel;
+	import victor.core.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**

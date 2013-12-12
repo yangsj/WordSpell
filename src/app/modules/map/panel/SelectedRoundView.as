@@ -12,9 +12,9 @@ package app.modules.map.panel
 	import app.modules.map.panel.item.GroupItem;
 	import app.core.Text;
 	
-	import victor.framework.components.Reflection;
+	import victor.core.Reflection;
 	import victor.framework.core.BasePanel;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	/**
 	 * ……

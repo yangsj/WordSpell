@@ -8,11 +8,12 @@ package app.startup
 	import app.GameConfig;
 	import app.core.Tips;
 	import app.events.GameEvent;
-	import app.managers.LoaderManager;
+	import app.modules.login.service.LoginService;
 	import app.sound.SoundManager;
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.debug.Debug;
+	import victor.framework.manager.LoaderManager;
 	
 	
 	/**
@@ -22,6 +23,9 @@ package app.startup
 	 */
 	public class InitDataCommand extends BaseCommand
 	{
+		[Inject]
+		public var loginService:LoginService;
+		
 		public function InitDataCommand()
 		{
 			super();
@@ -43,8 +47,19 @@ package app.startup
 			
 			LoaderManager.instance.setApplicationConfig( new XML(loader.data));
 			
-			// 资源初始化完成
-			dispatch( new GameEvent( GameEvent.DATA_INIT_COMPLETE ));
+			if ( GameConfig.canImmediateLogin )
+			{
+				// 播放主界面背景音乐
+				SoundManager.playMainSceneSoundBg();
+				
+				// 开始登录
+				loginService.login( GameConfig.immediateLoginVo );
+			}
+			else
+			{
+				// 资源初始化完成
+				dispatch( new GameEvent( GameEvent.DATA_INIT_COMPLETE ));
+			}
 		}
 		
 		protected function errorHandler(event:IOErrorEvent):void

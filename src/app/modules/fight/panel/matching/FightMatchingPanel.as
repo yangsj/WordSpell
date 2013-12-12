@@ -10,8 +10,8 @@ package app.modules.fight.panel.matching
 	
 	import victor.framework.core.BasePanel;
 	import victor.framework.manager.TickManager;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.HtmlText;
+	import victor.utils.DisplayUtil;
+	import victor.utils.HtmlText;
 	
 	
 	/**

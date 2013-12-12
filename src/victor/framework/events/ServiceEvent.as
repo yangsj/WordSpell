@@ -1,6 +1,5 @@
-package app.events
+package victor.framework.events
 {
-	import victor.framework.events.BaseEvent;
 	
 	
 	/**

@@ -31,6 +31,7 @@ package app.modules.fight.view.panel
 		
 		override protected function closeHandler( event:FightResultEvent ):void
 		{
+			closeView( ViewName.FightAlone );
 			closeView( ViewName.FightPractice );
 		}
 	}

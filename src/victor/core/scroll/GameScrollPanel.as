@@ -1,9 +1,9 @@
-package victor.framework.components.scroll
+package victor.core.scroll
 {
 
 	import flash.display.Sprite;
-	
-	import app.managers.LoaderManager;
+
+	import victor.framework.manager.LoaderManager;
 
 	/**
 	 * @author fireyang

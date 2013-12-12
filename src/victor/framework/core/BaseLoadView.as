@@ -1,6 +1,6 @@
 package victor.framework.core
 {
-	import app.managers.LoaderManager;
+	import victor.framework.manager.LoaderManager;
 	import app.modules.panel.PanelLoading;
 	
 	/**
@@ -8,9 +8,9 @@ package victor.framework.core
 	 * @author 	yangsj 
 	 * 			2013-9-27
 	 */
-	public class LoadViewBase extends ViewSprite
+	public class BaseLoadView extends BaseView
 	{
-		public function LoadViewBase()
+		public function BaseLoadView()
 		{
 			super();
 		}

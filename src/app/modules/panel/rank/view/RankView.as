@@ -6,10 +6,10 @@ package app.modules.panel.rank.view
 	import app.modules.panel.rank.events.RankEvent;
 	import app.modules.panel.rank.model.RankVo;
 	
-	import victor.framework.components.TabButtonControl;
-	import victor.framework.components.scroll.GameScrollPanel;
+	import victor.core.TabButtonControl;
+	import victor.core.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	/**
 	 * ……

@@ -1,4 +1,4 @@
-package victor.framework.components.scroll
+package victor.core.scroll
 {
 
 	import flash.display.MovieClip;
@@ -9,13 +9,13 @@ package victor.framework.components.scroll
 	import flash.geom.Rectangle;
 
 	import victor.framework.interfaces.IDisposable;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.MathUtil;
-	import victor.framework.utils.UtilsFilter;
+	import victor.utils.DisplayUtil;
+	import victor.utils.MathUtil;
+	import victor.utils.UtilsFilter;
 
 	/**
 	 *  滚动条
-	 * @author fireyang
+	 * @author yangsj
 	 */
 	public class ScrollBar extends Sprite implements IDisposable
 	{
@@ -48,7 +48,6 @@ package victor.framework.components.scroll
 		public function ScrollBar( skin:Sprite )
 		{
 			_skin = skin;
-			// GlobalFun.assetsManager.createClassByName("ui_oneFight_scrollBar");
 			_UpBtn = _skin.getChildByName( "_UpBtn" ) as SimpleButton;
 			_DownBtn = _skin.getChildByName( "_DownBtn" ) as SimpleButton;
 			_ScrollMc = _skin.getChildByName( "_ScrollBtn" ) as MovieClip;
@@ -56,7 +55,6 @@ package victor.framework.components.scroll
 			_ScrollMc.y = 0;
 			_ScrollMc.stop();
 			_ScrollMc.visible = false;
-			// _moveNum = 0;
 			addChild( _skin );
 		}
 
@@ -88,7 +86,8 @@ package victor.framework.components.scroll
 			if ( _radio > 1 )
 			{
 				_radio = 1;
-			}else if ( _radio < 0.15 )
+			}
+			else if ( _radio < 0.15 )
 			{
 				_radio = 0.15;
 			}

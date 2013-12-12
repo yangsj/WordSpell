@@ -8,14 +8,14 @@ package app.modules.panel.test
 	import flash.text.TextFormat;
 	
 	import app.core.Alert;
-	import app.managers.LoaderManager;
-	import victor.framework.utils.safetyCall;
+	import victor.framework.manager.LoaderManager;
+	import victor.utils.safetyCall;
 	
-	import victor.framework.components.TabButtonControl;
-	import victor.framework.components.scroll.GameScrollPanel;
+	import victor.core.TabButtonControl;
+	import victor.core.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
 	import victor.framework.debug.Debug;
-	import victor.framework.utils.HtmlText;
+	import victor.utils.HtmlText;
 	
 	/**
 	 * ……

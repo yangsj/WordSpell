@@ -10,9 +10,9 @@ package app.modules.fight.panel.search
 	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.friend.model.FriendVo;
 	
-	import victor.framework.components.scroll.GameScrollPanel;
+	import victor.core.scroll.GameScrollPanel;
 	import victor.framework.core.BasePanel;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**

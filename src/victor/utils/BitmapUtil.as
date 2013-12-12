@@ -1,4 +1,4 @@
-package victor.framework.utils
+package victor.utils
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

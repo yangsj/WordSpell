@@ -6,7 +6,7 @@ package victor.framework.core
 	 * @author 	yangsj 
 	 * 			2013-8-5
 	 */
-	public class BaseScene extends ViewSprite
+	public class BaseScene extends BaseView
 	{
 		public function BaseScene()
 		{

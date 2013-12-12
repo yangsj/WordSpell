@@ -4,7 +4,7 @@ package app.data
 	
 	import org.robotlegs.mvcs.Actor;
 	
-	import victor.framework.utils.MathUtil;
+	import victor.utils.MathUtil;
 	
 	
 	/**

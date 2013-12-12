@@ -8,7 +8,7 @@ package app.sound
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
 
-	import app.managers.LoaderManager;
+	import victor.framework.manager.LoaderManager;
 
 	import victor.framework.debug.Debug;
 

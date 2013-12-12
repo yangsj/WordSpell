@@ -15,19 +15,19 @@ package app.modules.task.view
 	import app.core.Text;
 	import app.core.Tips;
 	import app.events.ViewEvent;
-	import app.modules.TempleteSprite;
+	import victor.framework.core.BaseSprite;
 	import app.modules.ViewName;
 	import app.modules.task.event.TaskEvent;
 	import app.modules.task.model.TaskVo;
 	
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	/**
 	 * ……
 	 * @author 	yangsj 
 	 * 			2013-11-5
 	 */
-	public class TaskItem extends TempleteSprite
+	public class TaskItem extends BaseSprite
 	{
 		/*============================================================================*/
 		/* private variables                                                          */

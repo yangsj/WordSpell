@@ -11,11 +11,11 @@ package app.modules.login.register
 	import app.modules.login.register.vo.RegisterVo;
 	import app.modules.model.GenderType;
 	
-	import victor.framework.components.TabButtonControl;
+	import victor.core.TabButtonControl;
 	import victor.framework.core.BasePanel;
 	import victor.framework.debug.Debug;
-	import victor.framework.utils.StringUitl;
-	import victor.framework.utils.appStage;
+	import victor.utils.StringUitl;
+	import victor.utils.appStage;
 	
 	/**
 	 * ……

@@ -11,7 +11,7 @@ package app.modules.fight.view.alone
 	import app.modules.fight.view.item.LetterBubble;
 	import app.core.Text;
 	
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 
 
 	/**

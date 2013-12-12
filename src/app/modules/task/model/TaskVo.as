@@ -9,6 +9,24 @@ package app.modules.task.model
 	 */
 	public class TaskVo
 	{
+		/**
+		 * 0默认状态
+		 */
+		public static const DEFAULT:int = 0;
+		/**
+		 * 1正在进行中
+		 */
+		public static const STATUS_ING:int = 1;
+		/**
+		 * 2已完成
+		 */
+		public static const STATUS_ED:int = 2;
+		/**
+		 * 3已领取奖励
+		 */
+		public static const STATUS_HIDE:int = 3; 
+		
+		
 		public function TaskVo()
 		{
 		}
@@ -27,6 +45,10 @@ package app.modules.task.model
 		public var describe:String;
 		/**
 		 * 任务状态(0默认状态|1正在进行中|2已完成|3已领取奖励)
+		 * @see app.modules.task.model.TaskVo.DEFAULT
+		 * @see app.modules.task.model.TaskVo.STATUS_ING
+		 * @see app.modules.task.model.TaskVo.STATUS_ED
+		 * @see app.modules.task.model.TaskVo.STATUS_HIDE
 		 */
 		public var status:int;
 		/**
@@ -47,7 +69,7 @@ package app.modules.task.model
 		 */
 		public function get isHide():Boolean
 		{
-			return status == 3;
+			return status == STATUS_HIDE;
 		}
 		
 		/**
@@ -55,7 +77,7 @@ package app.modules.task.model
 		 */
 		public function get isEd():Boolean
 		{
-			return status == 2;
+			return status == STATUS_ED;
 		}
 		
 		/**
@@ -63,7 +85,7 @@ package app.modules.task.model
 		 */
 		public function get isIng():Boolean
 		{
-			return status == 1;
+			return status == STATUS_ING;
 		}
 		
 		/**

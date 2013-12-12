@@ -1,4 +1,4 @@
-package victor.framework.utils
+package victor.utils
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;

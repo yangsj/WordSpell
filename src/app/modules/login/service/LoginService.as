@@ -57,16 +57,16 @@ package app.modules.login.service
 			loginSuccessed();
 		}
 
-		public function login( loginVo:LoginVo, callBack:Function ):void
+		public function login( loginVo:LoginVo ):void
 		{
 			var req:account_req_t = new account_req_t();
 			req.nick_name = loginVo.accountName;
 			req.password = loginVo.password;
 			req.register_flag = false;
-			call( client_cmd_e.LOGIN_REQ, req, callBack );
+			call( client_cmd_e.LOGIN_REQ, req );
 		}
 
-		public function register( registerVo:RegisterVo, callBack:Function = null ):void
+		public function register( registerVo:RegisterVo ):void
 		{
 			var req:account_req_t = new account_req_t();
 			req.real_name = registerVo.realName;
@@ -80,7 +80,7 @@ package app.modules.login.service
 			req.school = registerVo.school;
 			req.gender = registerVo.gender;
 			req.register_flag = true;
-			call( client_cmd_e.LOGIN_REQ, req, callBack );
+			call( client_cmd_e.LOGIN_REQ, req );
 		}
 
 		private function loginSuccessed():void

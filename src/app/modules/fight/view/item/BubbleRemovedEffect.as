@@ -2,11 +2,11 @@ package app.modules.fight.view.item
 {
 	import flash.geom.Point;
 	
-	import app.core.Clip;
-	import app.modules.TempleteSprite;
+	import victor.core.AnimationClip;
+	import victor.framework.core.BaseSprite;
 	
 	import victor.framework.core.ViewStruct;
-	import victor.framework.utils.DisplayUtil;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**
@@ -14,9 +14,9 @@ package app.modules.fight.view.item
 	 * @author 	yangsj 
 	 * 			2013-10-30
 	 */
-	public class BubbleRemovedEffect extends TempleteSprite
+	public class BubbleRemovedEffect extends BaseSprite
 	{
-		private var spriteClip:Clip;
+		private var clip:AnimationClip;
 		
 		public function BubbleRemovedEffect( point:Point )
 		{
@@ -26,7 +26,7 @@ package app.modules.fight.view.item
 			this.mouseChildren = false;
 			this.mouseEnabled = false;
 			
-			addChild( new Clip("ui_Skin_BubbleRemoveEffect", 1, loopComplete ) );
+			addChild( new AnimationClip("ui_Skin_BubbleRemoveEffect", 1, loopComplete ) );
 			ViewStruct.addChild( this, ViewStruct.EFFECT );
 		}
 		

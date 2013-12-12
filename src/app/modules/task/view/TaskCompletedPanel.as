@@ -12,8 +12,8 @@ package app.modules.task.view
 	import app.modules.task.model.TaskVo;
 	
 	import victor.framework.core.BasePanel;
-	import victor.framework.utils.DisplayUtil;
-	import victor.framework.utils.UtilsFilter;
+	import victor.utils.DisplayUtil;
+	import victor.utils.UtilsFilter;
 	
 	
 	/**

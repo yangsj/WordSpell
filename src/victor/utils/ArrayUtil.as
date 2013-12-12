@@ -1,4 +1,4 @@
-package victor.framework.utils
+package victor.utils
 {
 
 	/**
@@ -24,26 +24,40 @@ package victor.framework.utils
 				return int( Math.random() * 3 ) - 1;
 			}
 		}
-		
+
+		/**
+		 * 清空数组
+		 * @param ary
+		 */
 		public static function removeAll( ary:* ):void
 		{
-			if ( ary ) {
-				
-				try {
+			if ( ary )
+			{
+				try
+				{
 					ary.length = 0;
-				} catch ( e:Error ) { }
+				}
+				catch ( e:Error )
+				{
+				}
 			}
 		}
 		
+		/**
+		 * 浅渡克隆
+		 * @param ary 需要克隆的数组
+		 * @return  返回克隆数组
+		 */
 		public static function cloneArray( ary:Array ):Array
 		{
 			var arr:Array = [];
-			
-			for each (var ay:* in ary ) { arr.push( ay ); }
-			
+			for each ( var ay:* in ary )
+			{
+				arr.push( ay );
+			}
 			return arr;
 		}
-		
+
 
 	}
 }

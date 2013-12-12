@@ -7,7 +7,7 @@ package app.modules.fight.panel.search
 	
 	import app.modules.friend.model.FriendVo;
 	
-	import victor.framework.utils.StringUitl;
+	import victor.utils.StringUitl;
 	
 	/**
 	 * ……

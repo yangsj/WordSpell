@@ -1,6 +1,5 @@
 package app.modules.login.login
 {
-	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.login.login.event.LoginEvent;
 	import app.modules.login.service.LoginService;
@@ -36,12 +35,12 @@ package app.modules.login.login
 		
 		private function actionRegisterHandler( event:LoginEvent ):void
 		{
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Register ));
+			openView( ViewName.Register );
 		}
 		
 		private function actionLoginHandler( event:LoginEvent ):void
 		{
-			loginService.login( view.loginVo, view.hide  );
+			loginService.login( view.loginVo );
 		}		
 		
 	}

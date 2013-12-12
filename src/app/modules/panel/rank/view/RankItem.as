@@ -3,7 +3,7 @@ package app.modules.panel.rank.view
 	import flash.events.Event;
 	import flash.text.TextField;
 	
-	import app.modules.TempleteSprite;
+	import victor.framework.core.BaseSprite;
 	import app.modules.panel.rank.model.RankVo;
 	
 	
@@ -12,7 +12,7 @@ package app.modules.panel.rank.view
 	 * @author 	yangsj 
 	 * 			2013-11-25
 	 */
-	public class RankItem extends TempleteSprite
+	public class RankItem extends BaseSprite
 	{
 		public var txtRank:TextField;  // 名次
 		public var txtName:TextField;  // 昵称

@@ -50,7 +50,7 @@ package app.modules.map.main
 		
 		private function openSelectedRoundHandler( event:MapEvent ):void
 		{
-			dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.SelectedRoundPanel, event.data ));
+			openView( ViewName.SelectedRoundPanel, event.data );
 		}
 		
 		
