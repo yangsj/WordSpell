@@ -5,11 +5,11 @@ package app.modules.fight.view.alone
 	import flash.events.Event;
 	import flash.utils.Dictionary;
 	
+	import app.core.Text;
 	import app.core.Tips;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseView;
 	import app.modules.fight.view.item.LetterBubble;
-	import app.core.Text;
 	
 	import victor.utils.DisplayUtil;
 
@@ -107,13 +107,6 @@ package app.modules.fight.view.alone
 				selfTotalTime += 5;
 				Tips.showCenter( "时间 +5s" );
 			}
-		}
-		
-		/**
-		 * 使用 扫帚
-		 */
-		override public function useBroomProp( isSelf:Boolean = true ):void
-		{
 		}
 		
 		override protected function timerHandler():void

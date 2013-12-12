@@ -18,16 +18,22 @@ import org.apache.thrift.protocol.*;
   public class use_item_ret_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("use_item_ret_t");
     private static const ITEM_TYPE_FIELD_DESC:TField = new TField("item_type", TType.I16, 1);
+    private static const UID_FIELD_DESC:TField = new TField("uid", TType.I32, 2);
 
     private var _item_type:int;
     public static const ITEM_TYPE:int = 1;
+    private var _uid:int;
+    public static const UID:int = 2;
 
     private var __isset_item_type:Boolean = false;
+    private var __isset_uid:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
       metaDataMap[ITEM_TYPE] = new FieldMetaData("item_type", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I16));
+      metaDataMap[UID] = new FieldMetaData("uid", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(use_item_ret_t, metaDataMap);
@@ -35,6 +41,7 @@ import org.apache.thrift.protocol.*;
 
     public function use_item_ret_t() {
       this._item_type = 0;
+      this._uid = 0;
     }
 
     public function get item_type():int {
@@ -55,6 +62,24 @@ import org.apache.thrift.protocol.*;
       return this.__isset_item_type;
     }
 
+    public function get uid():int {
+      return this._uid;
+    }
+
+    public function set uid(uid:int):void {
+      this._uid = uid;
+      this.__isset_uid = true;
+    }
+
+    public function unsetUid():void {
+      this.__isset_uid = false;
+    }
+
+    // Returns true if field uid is set (has been assigned a value) and false otherwise
+    public function isSetUid():Boolean {
+      return this.__isset_uid;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case ITEM_TYPE:
@@ -62,6 +87,14 @@ import org.apache.thrift.protocol.*;
           unsetItem_type();
         } else {
           this.item_type = value;
+        }
+        break;
+
+      case UID:
+        if (value == null) {
+          unsetUid();
+        } else {
+          this.uid = value;
         }
         break;
 
@@ -74,6 +107,8 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case ITEM_TYPE:
         return this.item_type;
+      case UID:
+        return this.uid;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -84,6 +119,8 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case ITEM_TYPE:
         return isSetItem_type();
+      case UID:
+        return isSetUid();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -108,6 +145,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case UID:
+            if (field.type == TType.I32) {
+              this.uid = iprot.readI32();
+              this.__isset_uid = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -128,6 +173,9 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(ITEM_TYPE_FIELD_DESC);
       oprot.writeI16(this.item_type);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(UID_FIELD_DESC);
+      oprot.writeI32(this.uid);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -138,6 +186,10 @@ import org.apache.thrift.protocol.*;
 
       ret += "item_type:";
       ret += this.item_type;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "uid:";
+      ret += this.uid;
       first = false;
       ret += ")";
       return ret;

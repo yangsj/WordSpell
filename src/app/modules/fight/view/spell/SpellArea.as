@@ -6,10 +6,10 @@ package app.modules.fight.view.spell
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import victor.framework.core.BaseSprite;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	
+	import victor.framework.core.BaseSprite;
 	import victor.framework.manager.TickManager;
 
 
@@ -24,6 +24,7 @@ package app.modules.fight.view.spell
 
 		public var btnShowAnswer:InteractiveObject;
 		public var txtChinese:TextField;
+		public var txtLeftWords:TextField;
 
 		private var _inputList:Vector.<LetterBubbleVo>;
 		private var _spellVo:SpellVo;
@@ -74,6 +75,11 @@ package app.modules.fight.view.spell
 			_spellItems = new Vector.<SpellItem>( MAX );
 			for ( var i:int = 0; i < MAX; i++ )
 				_spellItems[ i ] = ( new SpellItem( _skin.getChildByName( "pos" + i ) as MovieClip, i ));
+		}
+		
+		public function setLeftWords( num:int ):void
+		{
+			txtLeftWords.text = "剩余单词数：" + num;
 		}
 		
 		public function setInitData( spellVo:SpellVo ):void

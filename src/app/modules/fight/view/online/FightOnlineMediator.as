@@ -1,6 +1,7 @@
 package app.modules.fight.view.online
 {
 	import app.data.GameData;
+	import app.events.PackEvent;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.events.FightOnlineEvent;
@@ -8,6 +9,8 @@ package app.modules.fight.view.online
 	import app.modules.fight.service.FightOnlineService;
 	import app.modules.fight.view.FightBaseMediator;
 	import app.modules.fight.view.spell.SpellVo;
+	import app.modules.model.vo.ItemType;
+	import app.modules.model.vo.ItemVo;
 	
 	import victor.framework.debug.Debug;
 	
@@ -45,8 +48,12 @@ package app.modules.fight.view.online
 			addContextListener( FightOnlineEvent.DEL_DEST_BUBLLE, delDestBubbleHandler, FightOnlineEvent );
 			// 对手更新下一个单词
 			addContextListener( FightOnlineEvent.DEST_UPDATE_NEXT, destUpdateNextNotify, FightOnlineEvent );
+			// 对手使用个道具
+			addContextListener( PackEvent.DEST_USE_SUCCESS, useItemSuccessHandler, PackEvent );
 			
 			initData();
+			
+			view.btnClose.visible = false;
 		}
 		
 		// 删除对手屏幕中的泡泡
@@ -89,6 +96,7 @@ package app.modules.fight.view.online
 				var index:int = 0;
 				items[0].isUpperCase = true;
 				Debug.debug( "对手的单词：" + spellVo.chinese );
+				view.vecAddBubbleVoForOther = new Vector.<LetterBubbleVo>();
 //				for ( index = 0; index < maxCount; index++ )
 //				{
 //					if ( index < length ) items.push( fightModel.allLetterListCopy[ index ] );
@@ -101,6 +109,7 @@ package app.modules.fight.view.online
 				maxCount = Math.min( getOnlineAddCaseNumber( items.length ), length );
 				for ( index = 0; index < maxCount; index++ ) {
 					items.push( fightModel.allLetterListCopy[ index ] );
+					view.vecAddBubbleVoForOther.push( items[ items.length - 1 ]);
 				}
 				
 				view.setLettersPool( items, false );
@@ -112,6 +121,32 @@ package app.modules.fight.view.online
 						view.addPropItem( letterVo, false );
 				}
 				view.displayPropItem( false );
+			}
+		}
+		
+		override protected function useItemSuccessHandler(event:PackEvent):void
+		{
+			if ( event.type == PackEvent.USE_SUCCESS ) 
+			{
+				super.useItemSuccessHandler( event );
+			}
+			else
+			{
+				var itemVo:ItemVo = event.data as ItemVo;
+				if ( itemVo )
+				{
+					if ( itemVo.type == ItemType.EXTRA_TIME )
+					{
+						view.useExtraTimeProp( false );
+					}
+					else if ( itemVo.type == ItemType.BROOM )
+					{
+						view.useBroomProp( false );
+					}
+					else if ( itemVo.type == ItemType.HINT )
+					{
+					}
+				}
 			}
 		}
 		

@@ -4,7 +4,6 @@ package app.modules.fight.view.item
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -21,7 +20,6 @@ package app.modules.fight.view.item
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
 	import victor.utils.MathUtil;
-	import victor.utils.appStage;
 	
 	
 	/**
@@ -149,7 +147,6 @@ package app.modules.fight.view.item
 			removeEventListener( MouseEvent.MOUSE_OVER, mouseHandler );
 			removeEventListener( MouseEvent.CLICK, mouseHandler );
 			TickManager.clearDoTime( enterFrameHandler );
-			onStageHandler( null );
 			
 			// 放入对象池
 			if ( itemPools ) itemPools.push( this );
@@ -246,8 +243,7 @@ package app.modules.fight.view.item
 				}
 				
 				if ( _data.itemType == ItemType.DEFAULT || isSelf == false ) {
-					new BubbleRemovedEffect( localToGlobal( new Point() ) );
-					DisplayUtil.removedFromParent( this );
+					playRemovedEffect();
 				}
 				
 				if ( isSelf ) {
@@ -256,21 +252,18 @@ package app.modules.fight.view.item
 			}
 		}
 		
+		public function playRemovedEffect():void
+		{
+			new BubbleRemovedEffect( localToGlobal( new Point() ) );
+			DisplayUtil.removedFromParent( this );
+		}
+		
 		/**
 		 * 提示
 		 */
 		public function hint():void
 		{
-			this.alpha = 0.6;
-			appStage.addEventListener(MouseEvent.MOUSE_DOWN, onStageHandler );
-			appStage.addEventListener(KeyboardEvent.KEY_DOWN, onStageHandler );
-		}
-		
-		private function onStageHandler( event:Event ):void
-		{
-			this.alpha = 1;
-			appStage.removeEventListener(MouseEvent.CLICK, onStageHandler );
-			appStage.removeEventListener(KeyboardEvent.KEY_DOWN, onStageHandler );
+			selected( true );
 		}
 		
 		public function get data():LetterBubbleVo

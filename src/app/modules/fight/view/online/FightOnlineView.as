@@ -29,6 +29,8 @@ package app.modules.fight.view.online
 		private var dictLetterOther:Dictionary;
 		private var otherTotalTime:int = 120;
 		
+		public var vecAddBubbleVoForOther:Vector.<LetterBubbleVo>; // 记录增加干扰的泡泡
+		
 		public function FightOnlineView()
 		{
 			super();
@@ -171,6 +173,32 @@ package app.modules.fight.view.online
 			Tips.show( "时间 +8s", point.x, point.y );
 		}
 		
+		/**
+		* 使用 扫帚
+		*/
+		override public function useBroomProp( isSelf:Boolean = true ):void
+		{
+			if ( isSelf ) {
+				super.useBroomProp();
+			}
+			else if ( vecAddBubbleVoForOther && vecAddBubbleVoForOther.length > 0 )
+			{
+				var vo:LetterBubbleVo = vecAddBubbleVoForOther.pop();
+				var key:String = vo.lowerCase;
+				if ( dictLetterSelf && parent )
+				{
+					var ary:Array = dictLetterOther[ key ];
+					var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+					if ( bubble )
+					{
+						bubble.playRemovedEffect();
+						var point:Point = getTimeTipsPoint( false );
+						Tips.show( "对手成功清除屏幕中的一个干扰泡泡", point.x, point.y );
+					}
+				}
+			}
+		}
+		
 		private function getTimeTipsPoint( isSelft:Boolean ):Point
 		{
 			var point:Point = new Point(container.x + 207, container.y + 207 );
@@ -178,13 +206,6 @@ package app.modules.fight.view.online
 				point.x = container2.x + 207;
 			}
 			return point;
-		}
-		
-		/**
-		 * 使用 扫帚
-		 */
-		override public function useBroomProp( isSelf:Boolean = true ):void
-		{
 		}
 		
 		public function setPlayerName( playerName1:String, playerName2:String ):void

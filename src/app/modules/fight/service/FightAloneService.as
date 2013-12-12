@@ -157,6 +157,8 @@ package app.modules.fight.service
 			fightModel.spellListCopy = spellList2;
 			fightModel.modeType = data.mode;
 			fightModel.mapId = data.round_type;
+			fightModel.roundId = data.round_id;
+			mapModel.currentMapVo.mapId = data.round_type;
 
 			// 清零
 			fightModel.currentSelfIndex = 0;
@@ -194,7 +196,7 @@ package app.modules.fight.service
 			if ( endVo.addExp > 0 )
 				GameData.instance.updateAddExp( endVo.addExp );
 
-			if ( fightModel.isPractice && fightModel.isSelfExit )
+			if ( fightModel.isSelfExit )
 			{
 				if ( fightModel.isErrorPractice ) {
 					closeView( ViewName.FightPractice );

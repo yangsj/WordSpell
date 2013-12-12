@@ -5,6 +5,7 @@ package app.modules.task.service
 	import app.core.Tips;
 	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
+	import app.modules.main.model.MainModel;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.task.event.TaskEvent;
@@ -39,6 +40,8 @@ package app.modules.task.service
 		public var fightModel:FightModel;
 		[Inject]
 		public var packModel:PackModel;
+		[Inject]
+		public var mainModel:MainModel;
 		
 		public function TaskService()
 		{
@@ -98,11 +101,10 @@ package app.modules.task.service
 			taskModel.updateTask( taskVo );
 			
 			// 弹出奖励领取面板|已屏蔽
-//			taskModel.cacheCompleteTask.push( taskVo );
-//			if ( !fightModel.isFighting )
-//				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
+			taskModel.cacheCompleteTask.push( taskVo );
+			if ( !fightModel.isFighting && mainModel.hasEnterGame )
+				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
 			
-			Tips.showCenter( "你已经完成了一个新任务，可以领取任务奖励" );
 		}
 		
 		// 任务奖励领取成功

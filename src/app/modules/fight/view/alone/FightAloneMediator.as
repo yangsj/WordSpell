@@ -46,6 +46,8 @@ package app.modules.fight.view.alone
 			
 			// 拉取数据
 			pullData();
+			
+			view.btnClose.visible = true;
 		}
 		
 		protected function endRoundNotify( event:FightAloneEvent ):void
@@ -78,25 +80,6 @@ package app.modules.fight.view.alone
 			}
 		}
 
-		// 物品使用成功
-		override protected function useItemSuccessHandler( event:PackEvent ):void
-		{
-			var itemVo:ItemVo = event.data as ItemVo;
-			if ( itemVo ) {
-				if ( itemVo.type == ItemType.EXTRA_TIME ) {
-					view.useExtraTimeProp();
-				} else if ( itemVo.type == ItemType.BROOM ) {
-					view.useBroomProp();
-				} else if ( itemVo.type == ItemType.HINT ) {
-					var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
-					if ( letterIndex < items.length ) {
-						var key:String = items[ letterIndex ].letter;
-						view.useHintProp( key );
-					}
-				}
-			}
-		}
-		
 		protected function  pullData():void
 		{
 			fightService.startRound( mapModel.isSelectedRound ? 0 : 1 );
@@ -104,8 +87,8 @@ package app.modules.fight.view.alone
 
 		private function initData():void
 		{
-			
-			view.setRoundName( mapModel.currentMapVo.mapName, !fightModel.isPractice );
+			var str:String = (fightModel.mapId + 1 ) + "—" + ( fightModel.roundId + 1 );
+			view.setRoundName( mapModel.currentMapVo.mapName + "  " + str, !fightModel.isPractice );
 			
 			letterIndex = 0;
 			view.initialize( fightModel.isPractice );

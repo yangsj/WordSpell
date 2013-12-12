@@ -1,10 +1,11 @@
 package app.modules.task.command
 {
+	import app.core.Tips;
 	import app.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.task.model.TaskModel;
 	import app.modules.task.model.TaskVo;
-
+	
 	import victor.framework.core.BaseCommand;
 
 
@@ -30,7 +31,8 @@ package app.modules.task.command
 			if ( cacheCompleteTask && cacheCompleteTask.length > 0 )
 			{
 				var taskVo:TaskVo = cacheCompleteTask.shift();
-				openView( ViewName.TaskCompleted, taskVo );
+//				openView( ViewName.TaskCompleted, taskVo );
+				Tips.showCenter( "你已经完成了一个新任务，可以领取任务奖励" );
 			}
 		}
 

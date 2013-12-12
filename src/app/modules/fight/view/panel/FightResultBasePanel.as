@@ -5,8 +5,8 @@ package app.modules.fight.view.panel
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import app.modules.fight.model.FightEndVo;
 	import app.core.Text;
+	import app.modules.fight.model.FightEndVo;
 	
 	import victor.framework.core.BasePanel;
 
@@ -39,6 +39,10 @@ package app.modules.fight.view.panel
 		 */
 		public var txtMoney:TextField;
 		/**
+		 * 答对单词数量
+		 */
+		public var txtNumWords:TextField;
+		/**
 		 * 星级评分mc， 包含3帧
 		 */
 		public var mcStar:MovieClip;
@@ -60,6 +64,17 @@ package app.modules.fight.view.panel
 				btnPractice.addEventListener( MouseEvent.CLICK, btnPracticeHandler );
 			if ( btnClose )
 				btnClose.addEventListener( MouseEvent.CLICK, btnCloseHandler );
+			
+			if ( txtExp )
+			{
+				txtExp = Text.cloneText( txtExp );
+			}
+			if ( txtMoney )
+			{
+				txtMoney = Text.cloneText( txtMoney );
+			}
+			txtExp ||= new TextField();
+			txtMoney ||= new TextField();
 		}
 
 		protected function btnCloseHandler( event:MouseEvent ):void
@@ -88,6 +103,11 @@ package app.modules.fight.view.panel
 			txtMoney.text = endVo.addMoney.toString();
 			txtExp.mouseEnabled = false;
 			txtMoney.mouseEnabled = false;
+			
+			if ( txtNumWords )
+			{
+				txtNumWords.text = "总计答对 " + endVo.rightNum + " 个单词";
+			}
 		}
 	}
 }

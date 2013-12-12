@@ -11,6 +11,10 @@ package app
 	 */
 	public class GameConfig
 	{
+		/**
+		 * 密码是否使用md5加密
+		 */
+		public static var IS_MD5:Boolean = false;
 		
 		/**
 		 * 最大等级

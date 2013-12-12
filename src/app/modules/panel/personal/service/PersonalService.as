@@ -1,5 +1,6 @@
 package app.modules.panel.personal.service
 {
+	import app.GameConfig;
 	import app.core.Tips;
 	import app.modules.login.register.vo.RegisterVo;
 	import app.modules.panel.personal.events.PersonalEvent;
@@ -79,6 +80,9 @@ package app.modules.panel.personal.service
 			user_info.gender = registerVo.gender;
 			user_info.grade = registerVo.grade;
 			user_info.new_password = registerVo.passwordConfirm;
+			if ( GameConfig.IS_MD5 ){
+				user_info.new_password = MD5.calculate( registerVo.passwordConfirm );
+			}
 			user_info.nick_name = registerVo.name;
 			user_info.password = registerVo.password;
 			user_info.phone = registerVo.phone;

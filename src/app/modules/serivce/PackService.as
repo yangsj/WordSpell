@@ -1,5 +1,6 @@
 package app.modules.serivce
 {
+	import app.data.GameData;
 	import app.events.PackEvent;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
@@ -65,7 +66,11 @@ package app.modules.serivce
 		{
 			var data:use_item_ret_t = resp.data as use_item_ret_t;
 			var itemVo:ItemVo = packModel.delNumByType( data.item_type );
-			dispatch( new PackEvent( PackEvent.USE_SUCCESS, itemVo ));
+			if ( data.uid == GameData.instance.selfVo.uid ) {
+				dispatch( new PackEvent( PackEvent.USE_SUCCESS, itemVo ));
+			} else {
+				dispatch( new PackEvent( PackEvent.DEST_USE_SUCCESS, itemVo ));
+			}
 		}
 		
 		////////////////////////////

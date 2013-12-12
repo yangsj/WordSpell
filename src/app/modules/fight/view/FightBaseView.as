@@ -41,6 +41,7 @@ package app.modules.fight.view
 	 */
 	public class FightBaseView extends BaseLoadView
 	{
+		public var txtRoundNum:TextField; // 显示关卡数
 		public var txtName:TextField;// 所属地图名称
 		public var bgName:Sprite; // 名称底
 		public var txtTime:TextField; // 时间显示
@@ -52,6 +53,7 @@ package app.modules.fight.view
 		public var isAlone:Boolean = true;
 		public var mapId:int = 0;
 		public var moneyIcon:Sprite;
+		public var vecAddBubbleVo:Vector.<LetterBubbleVo>; // 记录增加干扰的泡泡
 		
 		private var _isValidOperate:Boolean = true;
 		
@@ -120,8 +122,6 @@ package app.modules.fight.view
 				txtTime.visible = !isPractice;
 			if ( bgTime )
 				bgTime.visible = !isPractice;
-			if ( btnClose )
-				btnClose.visible = isPractice;
 			
 			if ( !isPractice ) {
 				timerHandler();
@@ -238,6 +238,11 @@ package app.modules.fight.view
 		{
 		}
 		
+		public function setRoundNum( roundNumStr:String ):void
+		{
+			txtRoundNum.text = roundNumStr;
+		}
+		
 		public function updateMoneyDisplay():void
 		{
 			txtMoney.text = GameData.instance.selfVo.money.toString();
@@ -259,6 +264,21 @@ package app.modules.fight.view
 		 */
 		public function useBroomProp( isSelf:Boolean = true ):void
 		{
+			if ( vecAddBubbleVo && vecAddBubbleVo.length > 0 )
+			{
+				var vo:LetterBubbleVo = vecAddBubbleVo.pop();
+				var key:String = vo.lowerCase;
+				if ( dictLetterSelf && parent )
+				{
+					var ary:Array = dictLetterSelf[ key ];
+					var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+					if ( bubble )
+					{
+						bubble.playRemovedEffect();
+						Tips.showMouse( "成功清除屏幕中的一个干扰泡泡" );
+					}
+				}
+			}
 		}
 		
 		/**

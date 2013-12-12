@@ -76,9 +76,6 @@ package app.startup
 			
 			//////////////
 			
-			injectActor( CommonService );
-			injectActor( PackService );
-			
 			//************  initlialize commands ************************************************//
 			// 初始化 command
 			var len:int = commands.length;
@@ -92,6 +89,9 @@ package app.startup
 			dispatch( new Event( INIT_COMMAND ));
 			
 			//////////////
+			
+			injectActor( CommonService );
+			injectActor( PackService );
 			
 		}
 		

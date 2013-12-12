@@ -1,6 +1,9 @@
 package app.modules.fight.view.panel
 {
+	import flash.text.TextField;
+	
 	import app.core.Text;
+	import app.modules.fight.model.FightEndVo;
 
 	/**
 	 * ……
@@ -9,7 +12,6 @@ package app.modules.fight.view.panel
 	 */
 	public class FightLosePanel extends FightResultBasePanel
 	{
-
 		public function FightLosePanel()
 		{
 			super();
@@ -18,9 +20,6 @@ package app.modules.fight.view.panel
 		override protected function onceInit():void
 		{
 			super.onceInit();
-			
-			txtExp = Text.cloneText( txtExp );
-			txtMoney = Text.cloneText( txtMoney );
 			
 			btnNext.visible = false;
 		}

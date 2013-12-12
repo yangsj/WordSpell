@@ -1,5 +1,6 @@
 package app.modules.login.service
 {
+	import app.GameConfig;
 	import app.data.GameData;
 	import app.data.PlayerSelfVo;
 	import app.events.GameEvent;
@@ -62,6 +63,9 @@ package app.modules.login.service
 			var req:account_req_t = new account_req_t();
 			req.nick_name = loginVo.accountName;
 			req.password = loginVo.password;
+			if ( GameConfig.IS_MD5 ){
+				req.password = MD5.calculate( loginVo.password );
+			}
 			req.register_flag = false;
 			call( client_cmd_e.LOGIN_REQ, req );
 		}
@@ -72,6 +76,9 @@ package app.modules.login.service
 			req.real_name = registerVo.realName;
 			req.nick_name = registerVo.name;
 			req.password = registerVo.password;
+			if ( GameConfig.IS_MD5 ){
+				req.password = MD5.calculate( registerVo.password );
+			}
 			req.address = registerVo.address;
 			req.email = registerVo.email;
 			req.grade = registerVo.grade;

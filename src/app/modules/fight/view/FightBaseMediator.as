@@ -227,6 +227,7 @@ package app.modules.fight.view
 				var modeType:int = fightModel.modeType;
 				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items.slice();
 				items[0].isUpperCase = true;
+				baseView.vecAddBubbleVo = new Vector.<LetterBubbleVo>();
 				if ( modeType != FightType.MODE_EASY && modeType != FightType.MODE_PRACTICE && modeType != FightType.MODE_ERROR ) // 不为容易和练习
 				{
 					var length:int = fightModel.allLetterList.length;
@@ -246,6 +247,7 @@ package app.modules.fight.view
 					}
 					for ( index = 0; index < maxCount; index++ ) {
 						items.push( fightModel.allLetterList[ index ] );
+						baseView.vecAddBubbleVo.push( items[ items.length - 1 ] );
 					}
 				}
 				baseView.setLettersPool( items );

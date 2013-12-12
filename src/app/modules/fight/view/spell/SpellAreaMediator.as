@@ -6,7 +6,6 @@ package app.modules.fight.view.spell
 	import app.modules.fight.service.FightAloneService;
 	
 	import victor.framework.core.BaseMediator;
-	import victor.framework.manager.TickManager;
 	
 	
 	/**
@@ -111,6 +110,8 @@ package app.modules.fight.view.spell
 			isSendInput = false;
 			view.setInitData( fightModel.spellVo );
 			view.setPos( fightModel.isPractice );
+			
+			view.setLeftWords( 9 - fightModel.currentSelfIndex );
 		}
 		
 		private function updateWordHandler( event:FightAloneEvent ):void

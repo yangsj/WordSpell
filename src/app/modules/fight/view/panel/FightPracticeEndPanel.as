@@ -2,8 +2,8 @@ package app.modules.fight.view.panel
 {
 	import flash.text.TextField;
 	
-	import app.modules.fight.model.FightEndVo;
 	import app.core.Text;
+	import app.modules.fight.model.FightEndVo;
 	
 	/**
 	 * ……
@@ -12,7 +12,6 @@ package app.modules.fight.view.panel
 	 */
 	public class FightPracticeEndPanel extends FightResultBasePanel
 	{
-		public var txtNumWords:TextField;
 		public var txtErrorWordList:TextField;
 		
 		public function FightPracticeEndPanel()
@@ -23,10 +22,11 @@ package app.modules.fight.view.panel
 		override public function setData( endVo:FightEndVo ):void
 		{
 			super.setData( endVo );
-			txtNumWords.text = "总计答对 " + endVo.rightNum + " 个单词";
 			txtErrorWordList.text = "";
+			var i:int = 0;
 			for each ( var word:String in endVo.wrongList ) {
-				txtErrorWordList.appendText( word + "\t\t" );
+				txtErrorWordList.appendText( word + "\t" + (i!=0&&i%3==0?"\n":"") );
+				i++;
 			}
 		}
 		

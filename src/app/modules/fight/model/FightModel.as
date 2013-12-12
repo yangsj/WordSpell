@@ -29,6 +29,7 @@ package app.modules.fight.model
 		private var _battleResult:Boolean = false;
 		private var _battleResultFlag:int;
 		private var _mapId:int = 0;
+		private var _roundId:int = 0;
 		private var _isFighting:Boolean;
 		private var _isSelfExit:Boolean;
 		private var _isErrorLastAnswerForPractice:Boolean = false;
@@ -261,6 +262,22 @@ package app.modules.fight.model
 		public function set mapId(value:int):void
 		{
 			_mapId = Math.max( value, 0 );
+		}
+		
+		/**
+		 * 关卡id  0 - 49
+		 */
+		public function get roundId():int
+		{
+			return _roundId;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set roundId(value:int):void
+		{
+			_roundId = Math.max( 0, value );
 		}
 
 		/**

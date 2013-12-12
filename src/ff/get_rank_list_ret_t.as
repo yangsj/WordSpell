@@ -146,14 +146,14 @@ import org.apache.thrift.protocol.*;
           case RANK_LIST:
             if (field.type == TType.LIST) {
               {
-                var _list281:TList = iprot.readListBegin();
+                var _list283:TList = iprot.readListBegin();
                 this.rank_list = new Array();
-                for (var _i282:int = 0; _i282 < _list281.size; ++_i282)
+                for (var _i284:int = 0; _i284 < _list283.size; ++_i284)
                 {
-                  var _elem283:rank_data_t;
-                  _elem283 = new rank_data_t();
-                  _elem283.read(iprot);
-                  this.rank_list.push(_elem283);
+                  var _elem285:rank_data_t;
+                  _elem285 = new rank_data_t();
+                  _elem285.read(iprot);
+                  this.rank_list.push(_elem285);
                 }
                 iprot.readListEnd();
               }
@@ -185,8 +185,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(RANK_LIST_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRUCT, this.rank_list.length));
-          for each (var elem284:* in this.rank_list)          {
-            elem284.write(oprot);
+          for each (var elem286:* in this.rank_list)          {
+            elem286.write(oprot);
           }
           oprot.writeListEnd();
         }

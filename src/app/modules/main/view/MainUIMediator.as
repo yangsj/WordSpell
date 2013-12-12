@@ -1,18 +1,15 @@
 package app.modules.main.view
 {
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
-	
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.ViewEvent;
-	import app.modules.ViewName;
 	import app.modules.main.FunctionBtnConfig;
 	import app.modules.main.event.MainUIEvent;
+	import app.modules.task.event.TaskEvent;
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.debug.Debug;
-	
+	import victor.framework.manager.TickManager;
 	
 	/**
 	 * ……
@@ -41,6 +38,12 @@ package app.modules.main.view
 			addContextListener( MainUIEvent.UPDATE_PROPERTY, updatePropertyHandler, MainUIEvent );
 			
 			initData();
+
+			// 检查是否有完成的任务
+			TickManager.doTimeout( function abc():void
+			{
+				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ))
+			}, 1000 );
 		}
 		
 		private function initData():void

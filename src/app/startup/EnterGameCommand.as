@@ -4,8 +4,10 @@ package app.startup
 	import app.modules.ViewName;
 	import app.modules.main.model.MainModel;
 	import app.modules.map.model.MapModel;
+	import app.modules.task.event.TaskEvent;
 	
 	import victor.framework.core.BaseCommand;
+	import victor.framework.manager.TickManager;
 	
 	
 	/**

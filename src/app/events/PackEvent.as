@@ -27,6 +27,10 @@ package app.events
 		 * 更新列表
 		 */
 		public static const UPDATE_ITEMS:String = "update_items";
+		/**
+		 * 对战中对手使用道具成功
+		 */
+		public static const DEST_USE_SUCCESS:String = "dest_use_success";
 		
 	}
 }
