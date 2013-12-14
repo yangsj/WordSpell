@@ -4,9 +4,11 @@ package app.modules.friend.service
 	import app.core.Tips;
 	import app.events.GameEvent;
 	import app.modules.LoadingEffect;
+	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.model.FriendApplyVo;
 	import app.modules.friend.model.FriendModel;
 	import app.modules.friend.model.FriendVo;
+	import app.modules.main.model.MainModel;
 	
 	import ff.add_friend_req_t;
 	import ff.add_friends_success_ret_t;
@@ -33,6 +35,8 @@ package app.modules.friend.service
 	{
 		[Inject]
 		public var friendModel:FriendModel;
+		[Inject]
+		public var mainModel:MainModel;
 
 		public function FriendService()
 		{
@@ -91,7 +95,9 @@ package app.modules.friend.service
 			applyVo.name = data.name;
 			applyVo.uid = data.uid;
 			friendModel.addApplyAddFriendList( applyVo );
-			if ( friendModel.applyAddFriendList.length == 1 ) dealApplyList();
+			if ( mainModel.hasEnterGame ) {
+				dispatch( new FriendEvent( FriendEvent.CHECK_ADD ));
+			}
 		}
 		
 		// 成功删除好友通知
@@ -104,22 +110,7 @@ package app.modules.friend.service
 		
 	////////////////////////////////// private 
 		
-		/**
-		 * 好友申请通知处理
-		 */
-		private function dealApplyList():void
-		{
-			var applyVo:FriendApplyVo = friendModel.applyAddFriendList[0];
-			Alert.show( "[ " + applyVo.name + " ]申请和您成为好友，您是否同意？", callBack, "同意", "拒绝" );
-			function callBack( type:int ):void
-			{
-				var isAgree:Boolean = type == Alert.YES;
-				agreeAddFriend( applyVo.uid, isAgree );
-				friendModel.applyAddFriendList.shift();
-				if ( friendModel.isEmptyApplyList == false )
-					dealApplyList();
-			}
-		}
+		
 		
 	////////////////////////////////// public 
 		

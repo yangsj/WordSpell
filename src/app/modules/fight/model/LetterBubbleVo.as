@@ -54,6 +54,7 @@ package app.modules.fight.model
 		
 		public function get displayCase():String
 		{
+			return lowerCase;
 			return _isUpperCase ? upperCase : lowerCase;
 		}
 		

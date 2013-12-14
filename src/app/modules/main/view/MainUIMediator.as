@@ -3,6 +3,7 @@ package app.modules.main.view
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.ViewEvent;
+	import app.modules.friend.event.FriendEvent;
 	import app.modules.main.FunctionBtnConfig;
 	import app.modules.main.event.MainUIEvent;
 	import app.modules.task.event.TaskEvent;
@@ -42,7 +43,10 @@ package app.modules.main.view
 			// 检查是否有完成的任务
 			TickManager.doTimeout( function abc():void
 			{
-				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ))
+				// 检查登陆是否有完成任务消息
+				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
+				// 检查登陆是否有加好友消息
+				dispatch( new FriendEvent( FriendEvent.CHECK_ADD ));
 			}, 1000 );
 		}
 		

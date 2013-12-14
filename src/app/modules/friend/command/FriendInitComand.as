@@ -1,6 +1,7 @@
 package app.modules.friend.command
 {
 	import app.modules.ViewName;
+	import app.modules.friend.event.FriendEvent;
 	import app.modules.friend.model.FriendModel;
 	import app.modules.friend.service.FriendService;
 	import app.modules.friend.view.FriendAddMediator;
@@ -34,6 +35,7 @@ package app.modules.friend.command
 			injectActor( FriendModel );
 			injectActor( FriendService );
 			
+			commandMap.mapEvent( FriendEvent.CHECK_ADD, CheckAddFrinedCommand, FriendEvent );
 		}
 		
 	}

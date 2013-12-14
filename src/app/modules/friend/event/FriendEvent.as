@@ -40,6 +40,11 @@ package app.modules.friend.event
 		 */
 		public static const DELETE:String = "delete";
 		
+		/**
+		 * 检查是否有加好友消息
+		 */
+		public static const CHECK_ADD:String = "check_add";
+		
 		
 	}
 }
