@@ -9,6 +9,7 @@ package app.modules.chat.view
 	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
@@ -237,10 +238,12 @@ package app.modules.chat.view
 			tabControl = new TabButtonControl( channelChangeHandler );
 			tabControl.addMultiTargets( tabWorld, tabPrivate );
 
-			var txtFormat:TextFormat = new TextFormat( "宋体", 12, 0xFFFFFF, false, false, false );
+			var txtFormat:TextFormat = new TextFormat( "微软雅黑", 12, 0xFFFFFF, false, false, false );
 			txtFormat.size = 14;
-			txtFormat.color = 0x0;
+			txtFormat.color = 0xFFFFFF;//0x0;
 			txtFormat.leading = 2;
+			
+			var txtFilters:Array = [];//[new GlowFilter(0x064869,1,3,3,10,3)];
 
 			txtOutput = new RichTextField();
 			txtOutput.html = true;
@@ -251,11 +254,12 @@ package app.modules.chat.view
 			txtOutput.name = "output";
 			txtOutput.mouseEnabled = false;
 			txtOutput.lineHeight = 16;
+			txtOutput.filters = txtFilters;
 			chatMc.addChild( txtOutput );
 
-			txtFormat = new TextFormat( "宋体", 12, 0xFFFFFF, false, false, false );
-			txtFormat.size = 18;
-			txtFormat.color = 0x0;
+			txtFormat = new TextFormat( "微软雅黑", 12, 0xFFFFFF, false, false, false );
+			txtFormat.size = 14;
+			txtFormat.color = 0xFFFFFF;//0x0;
 			
 			txtInput = new RichTextField();
 			txtInput.x = 148;
@@ -267,6 +271,7 @@ package app.modules.chat.view
 			txtInput.type = RichTextField.INPUT;
 			txtInput.textfield.multiline = false;
 			txtInput.defaultTextFormat = txtFormat;
+			txtInput.filters = txtFilters;
 			_skin.addChild( txtInput );
 
 			txtFriendName = new TextField();

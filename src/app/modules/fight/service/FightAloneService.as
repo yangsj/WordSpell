@@ -190,14 +190,6 @@ package app.modules.fight.service
 			
 			SoundManager.playEffectMusic( endVo.isWin ? SoundType.SUCCESS : SoundType.FAILED );
 			
-			//更新等级
-			if ( endVo.currentLevel != GameData.instance.selfVo.level )
-				GameData.instance.updateLevel( endVo.currentLevel );
-			
-			//更新经验值
-			if ( endVo.addExp > 0 )
-				GameData.instance.updateAddExp( endVo.addExp );
-
 			if ( fightModel.isSelfExit )
 			{
 				if ( fightModel.isErrorPractice ) {

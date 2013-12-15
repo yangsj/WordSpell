@@ -56,7 +56,11 @@ package app.modules.chat.model
 		 */
 		public function get htmlText():String
 		{
-			return addHeadMsg + msg;
+			var str:String = addHeadMsg + msg;
+			if ( str.search( "<font color=" ) != -1 ) {
+				return str + (channel == ChatChannelType.SYSTEM ? "</font>" : "");
+			}
+			return str;
 		}
 		
 		/**
@@ -73,7 +77,11 @@ package app.modules.chat.model
 			if ( isLocal && channel == ChatChannelType.PRIVATE ) {
 				ch = ChatChannelType.SYSTEM;
 			}
-			return channelName[ ch ] + playerName + ":";
+			var msg:String = channelName[ ch ] + playerName + ":";
+			if ( ch == ChatChannelType.SYSTEM ) {
+				return "<font color=\"#ff0000\">" + msg;
+			}
+			return msg;
 		}
 
 	}

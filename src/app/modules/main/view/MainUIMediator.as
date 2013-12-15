@@ -77,6 +77,10 @@ package app.modules.main.view
 			switch ( viewName )
 			{
 				case FunctionBtnConfig.FIGHT:
+					if ( GameData.instance.selfVo.level < 10 ){
+						Tips.showMouse( "等级达到10级开启在线对战功能！！！" );
+						return ;
+					}
 					view.displayFightMenu();
 					break;
 				case FunctionBtnConfig.EXIT:
