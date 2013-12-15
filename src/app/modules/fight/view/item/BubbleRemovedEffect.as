@@ -4,7 +4,6 @@ package app.modules.fight.view.item
 	
 	import victor.core.AnimationClip;
 	import victor.framework.core.BaseSprite;
-	
 	import victor.framework.core.ViewStruct;
 	import victor.utils.DisplayUtil;
 	
@@ -18,7 +17,7 @@ package app.modules.fight.view.item
 	{
 		private var clip:AnimationClip;
 		
-		public function BubbleRemovedEffect( point:Point )
+		public function BubbleRemovedEffect( linkage:String, point:Point )
 		{
 			x = point.x;
 			y = point.y;
@@ -26,7 +25,7 @@ package app.modules.fight.view.item
 			this.mouseChildren = false;
 			this.mouseEnabled = false;
 			
-			addChild( new AnimationClip("ui_Skin_BubbleRemoveEffect", 1, loopComplete ) );
+			addChild( new AnimationClip( linkage, 1, loopComplete ) );
 			ViewStruct.addChild( this, ViewStruct.EFFECT );
 		}
 		

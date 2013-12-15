@@ -91,6 +91,8 @@ package app.modules.fight.view
 			addViewListener( FightAloneEvent.SELECTED_LETTER, selectedLetterHandler, FightAloneEvent );
 			// 退出练习
 			addViewListener( FightAloneEvent.EXIT_PRACTICE, exitPracticeHandler, FightAloneEvent );
+			//
+			addViewListener( FightAloneEvent.CLEAR_DISTURB_SELF, clearSelfDisturbHandler, FightAloneEvent );
 			
 			// 更新金币值变化
 			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
@@ -112,6 +114,11 @@ package app.modules.fight.view
 			baseView.isValidOperate = true;
 			
 			SoundManager.playFightSoundBg();
+		}
+		
+		private function clearSelfDisturbHandler( event:FightAloneEvent ):void
+		{
+			fightModel.isHasDisturbForSelf = false;
 		}
 		
 		private function showAnswerIngHandler( event:FightAloneEvent ):void
@@ -226,6 +233,7 @@ package app.modules.fight.view
 			{
 				var modeType:int = fightModel.modeType;
 				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items.slice();
+				fightModel.isHasDisturbForSelf = false;
 				items[0].isUpperCase = true;
 				baseView.vecAddBubbleVo = new Vector.<LetterBubbleVo>();
 				if ( modeType != FightType.MODE_EASY && modeType != FightType.MODE_PRACTICE && modeType != FightType.MODE_ERROR ) // 不为容易和练习
@@ -249,6 +257,7 @@ package app.modules.fight.view
 						items.push( fightModel.allLetterList[ index ] );
 						baseView.vecAddBubbleVo.push( items[ items.length - 1 ] );
 					}
+					fightModel.isHasDisturbForSelf = true;
 				}
 				baseView.setLettersPool( items );
 				Debug.debug( " fightModel.currentIndex *********************************************" +  fightModel.currentSelfIndex );

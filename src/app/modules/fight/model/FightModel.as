@@ -34,6 +34,8 @@ package app.modules.fight.model
 		private var _isSelfExit:Boolean;
 		private var _isErrorLastAnswerForPractice:Boolean = false;
 		private var _isShowAnswer:Boolean = false;
+		private var _isHasDisturbForSelf:Boolean = false;
+		private var _isHasDisturbForDest:Boolean = false;
 		
 		public function FightModel()
 		{
@@ -358,6 +360,38 @@ package app.modules.fight.model
 		public function set isShowAnswer(value:Boolean):void
 		{
 			_isShowAnswer = value;
+		}
+
+		/**
+		 * 自己是否有干扰 
+		 */
+		public function get isHasDisturbForSelf():Boolean
+		{
+			return _isHasDisturbForSelf;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isHasDisturbForSelf(value:Boolean):void
+		{
+			_isHasDisturbForSelf = value;
+		}
+
+		/**
+		 * 对手清除干扰
+		 */
+		public function get isHasDisturbForDest():Boolean
+		{
+			return _isHasDisturbForDest;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isHasDisturbForDest(value:Boolean):void
+		{
+			_isHasDisturbForDest = value;
 		}
 
 

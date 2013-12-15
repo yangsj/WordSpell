@@ -64,8 +64,6 @@ package app.modules.chat.view
 			
 			chatModel.sendLocal( "你的用户id为" + GameData.instance.selfVo.uid );
 			chatModel.sendLocal( "和好友私聊，请先选择一个好友", ChatChannelType.PRIVATE );
-			
-			foldLogHandler( null );
 		}
 		
 		// 展开聊天日志

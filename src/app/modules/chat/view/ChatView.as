@@ -17,7 +17,6 @@ package app.modules.chat.view
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.data.PlayerBaseVo;
-	import victor.framework.manager.LoaderManager;
 	import app.modules.chat.ChatChannelType;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.chat.model.ChatVo;
@@ -28,6 +27,7 @@ package app.modules.chat.view
 	import victor.core.scroll.ScrollBar;
 	import victor.framework.core.BaseView;
 	import victor.framework.core.ViewStruct;
+	import victor.framework.manager.LoaderManager;
 	import victor.utils.StringUitl;
 	import victor.utils.appStage;
 
@@ -65,6 +65,7 @@ package app.modules.chat.view
 		private var curChannel:uint = 0;
 		private var chatFriendVo:PlayerBaseVo;
 
+		private var _isStartFirst:Boolean = true;
 		private var _isExpand:Boolean = true;
 		private var _scrollBar:ScrollBar;
 		private var _isLock:Boolean = false;
@@ -130,8 +131,8 @@ package app.modules.chat.view
 				txtInput.clear();
 				txtFriendName.visible = true;
 				txtFriendName.text = "/" + ( chatFriendVo ? chatFriendVo.name : " " ) + " ";
-				txtInput.x = txtFriendName.x + txtFriendName.textWidth;
 				txtInput.setSize( 165 - txtFriendName.textWidth, 23 );
+//				txtInput.x = txtFriendName.x + txtFriendName.textWidth;
 			}
 			else
 			{
@@ -154,6 +155,7 @@ package app.modules.chat.view
 			btnExpandHide.y = _isExpand ? -172 : -61;
 			mcBg.gotoAndStop( _isExpand ? 1 : 2 );
 			btnExpandHide.gotoAndStop( _isExpand ? 1 : 2 );
+			_isStartFirst = false;
 		}
 
 		/////////////// private 
@@ -271,7 +273,7 @@ package app.modules.chat.view
 			txtFriendName.defaultTextFormat = txtFormat;
 			txtFriendName.mouseEnabled = false;
 			txtFriendName.x = 148;
-			txtFriendName.y = -34;
+			txtFriendName.y = -34 - 30;
 			_skin.addChild( txtFriendName );
 
 			initBar();
@@ -280,6 +282,9 @@ package app.modules.chat.view
 			mcLock.mouseEnabled = false;
 			mcLock.mouseChildren = false;
 			mcLock.buttonMode = true;
+			
+			btnExpandHide.mouseChildren = false;
+			btnExpandHide.buttonMode = true;
 
 			emotionPanel = new ChatEmotionPanel( _skin, 123, -163 );
 
@@ -293,9 +298,6 @@ package app.modules.chat.view
 			txtInput.addEventListener(FocusEvent.FOCUS_OUT, txtInputFocusHandler );
 			addEventListener( MouseEvent.CLICK, onClickHandler );
 			appStage.addEventListener(MouseEvent.CLICK, onClickHandler );
-
-			selectedWorld();
-
 		}
 		
 		protected function onClickHandler(event:MouseEvent):void
@@ -308,6 +310,16 @@ package app.modules.chat.view
 			else
 			{
 				ViewStruct.addChild( this, ViewStruct.CHAT );
+			}
+			if ( _isStartFirst )
+			{
+				_isExpand = true;
+				setExpandHide();
+			}
+			else if ( event.target != btnExpandHide && event.currentTarget != appStage )
+			{
+				_isExpand = false;
+				setExpandHide();
 			}
 		}
 		

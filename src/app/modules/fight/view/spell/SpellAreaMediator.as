@@ -54,6 +54,7 @@ package app.modules.fight.view.spell
 			fightModel.isShowAnswer = false;
 			fightModel.isErrorLastAnswerForPractice = false;
 			isSendInput = false;
+			view.setLeftWordsPos( fightModel.modeType == 5 );
 			if ( fightModel.modeType == 5 )
 			{
 				nextWordNotify( null );

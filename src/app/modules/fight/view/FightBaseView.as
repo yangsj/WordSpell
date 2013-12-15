@@ -266,19 +266,36 @@ package app.modules.fight.view
 		{
 			if ( vecAddBubbleVo && vecAddBubbleVo.length > 0 )
 			{
-				var vo:LetterBubbleVo = vecAddBubbleVo.pop();
-				var key:String = vo.lowerCase;
-				if ( dictLetterSelf && parent )
+				while ( vecAddBubbleVo.length > 0 )
 				{
-					var ary:Array = dictLetterSelf[ key ];
-					var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
-					if ( bubble )
+					var vo:LetterBubbleVo = vecAddBubbleVo.pop();
+					var key:String = vo.lowerCase;
+					if ( dictLetterSelf && parent )
 					{
-						bubble.playRemovedEffect();
-						Tips.showMouse( "成功清除屏幕中的一个干扰泡泡" );
+						var ary:Array = dictLetterSelf[ key ];
+						var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+						if ( bubble ) {
+							bubble.playRemovedEffect( vo.itemType );
+						}
 					}
+					if ( isAlone )
+						Tips.showMouse( "成功清除屏幕中的干扰泡泡" );
+					else{
+						var point:Point = getTimeTipsPoint( false );
+						Tips.show( "成功清除屏幕中的干扰泡泡", point.x, point.y );
+					}
+					dispatchEvent( new FightAloneEvent( FightAloneEvent.CLEAR_DISTURB_SELF ));
 				}
 			}
+		}
+		
+		protected function getTimeTipsPoint( isSelft:Boolean ):Point
+		{
+			var point:Point = new Point(container.x + 207, container.y + 207 );
+			if ( !isSelft ){
+				point.x = container2.x + 207;
+			}
+			return point;
 		}
 		
 		/**

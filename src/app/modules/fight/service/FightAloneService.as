@@ -67,6 +67,8 @@ package app.modules.fight.service
 		{
 			fightModel.isFighting = true;
 			fightModel.isSelfExit = false;
+			fightModel.isHasDisturbForSelf = false;
+			fightModel.isHasDisturbForDest = false;
 			
 			var data:start_round_ret_t = resp.data as start_round_ret_t;
 			var cnAry:Array = data.chinese_words;

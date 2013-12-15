@@ -10,13 +10,13 @@ package app.modules.fight.view.item
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
-	import victor.framework.core.BaseSprite;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.model.vo.ItemType;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
+	import victor.framework.core.BaseSprite;
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
 	import victor.utils.MathUtil;
@@ -252,9 +252,19 @@ package app.modules.fight.view.item
 			}
 		}
 		
-		public function playRemovedEffect():void
+		public function playRemovedEffect( propType:int = 0 ):void
 		{
-			new BubbleRemovedEffect( localToGlobal( new Point() ) );
+			var linkage:String = "ui_Skin_BubbleRemoveEffect";
+			if ( propType > 0 )
+			{
+				switch ( propType )
+				{
+					case ItemType.BOMB:
+						linkage = "ui_Skin_BroomPropEffect";
+						break;
+				}
+			}
+			new BubbleRemovedEffect( linkage, localToGlobal( new Point() ) );
 			DisplayUtil.removedFromParent( this );
 		}
 		

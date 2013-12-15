@@ -7,6 +7,7 @@ package app.modules.fight.view.online
 	import flash.utils.Dictionary;
 	
 	import app.core.Tips;
+	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseView;
 	import app.modules.fight.view.item.LetterBubble;
@@ -189,23 +190,14 @@ package app.modules.fight.view.online
 				{
 					var ary:Array = dictLetterOther[ key ];
 					var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
-					if ( bubble )
-					{
-						bubble.playRemovedEffect();
-						var point:Point = getTimeTipsPoint( false );
-						Tips.show( "对手成功清除屏幕中的一个干扰泡泡", point.x, point.y );
+					if ( bubble ) {
+						bubble.playRemovedEffect( vo.itemType );
 					}
 				}
+				var point:Point = getTimeTipsPoint( false );
+				Tips.show( "对手成功清除屏幕中的一个干扰泡泡", point.x, point.y );
+				dispatchEvent( new FightAloneEvent( FightAloneEvent.CLEAR_DISTURB_DEST ));
 			}
-		}
-		
-		private function getTimeTipsPoint( isSelft:Boolean ):Point
-		{
-			var point:Point = new Point(container.x + 207, container.y + 207 );
-			if ( !isSelft ){
-				point.x = container2.x + 207;
-			}
-			return point;
 		}
 		
 		public function setPlayerName( playerName1:String, playerName2:String ):void

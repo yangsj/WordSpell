@@ -6,6 +6,7 @@ package app.modules.fight.view.prop
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.model.PackModel;
+	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.serivce.PackService;
 	
@@ -65,6 +66,16 @@ package app.modules.fight.view.prop
 		private function useItemHandler( event:PackEvent ):void
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
+			switch ( itemVo.type )
+			{
+				case ItemType.BOMB:
+					if ( fightModel.isHasDisturbForSelf == false ) {
+						Tips.showMouse( "当前屏幕中没有需要清楚的干扰因素！！！" );
+						return ;
+					}
+					break;
+			}
+			
 			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
 				packService.useItem( itemVo.type );
 			else Tips.showMouse( "钻石不足！" );

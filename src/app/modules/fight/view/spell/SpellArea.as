@@ -82,6 +82,20 @@ package app.modules.fight.view.spell
 			txtLeftWords.text = "剩余单词数：" + num;
 		}
 		
+		public function setLeftWordsPos( isBattle:Boolean ):void
+		{
+			if ( isBattle )
+			{
+				txtLeftWords.x = -txtLeftWords.width - 5;
+				txtLeftWords.y = btnShowAnswer.y + 10;
+			}
+			else 
+			{
+				txtLeftWords.x = txtChinese.x + ( txtChinese.width - txtLeftWords.width ) * 0.5;
+				txtLeftWords.y = -txtLeftWords.height - 5;
+			}
+		}
+		
 		public function setInitData( spellVo:SpellVo ):void
 		{
 			btnShowAnswer.mouseEnabled = true;

@@ -13,9 +13,8 @@ package app.core
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
-	import victor.utils.appStage;
-	
 	import victor.utils.BitmapUtil;
+	import victor.utils.appStage;
 
 	public class Tips
 	{
@@ -128,8 +127,8 @@ package app.core
 			var bd:BitmapData = new BitmapData( _txt.width, _txt.height, true, 0 );
 			bd.draw( _txt );
 			var mc:Bitmap = new Bitmap( bd );
-			mc.x = x - mc.width / 2;
-			mc.y = y - mc.height / 2;
+			mc.x = Math.min( x - mc.width / 2, appStage.stageWidth - mc.width );
+			mc.y = Math.max( y - mc.height / 2, 40 );
 			_container.addChild( mc );
 			line = new TimelineLite();
 			line.append( TweenLite.from( mc, 0.3, { y: mc.y + 40, alpha: 0 }));

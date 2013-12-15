@@ -51,9 +51,17 @@ package app.modules.fight.view.online
 			// 对手使用个道具
 			addContextListener( PackEvent.DEST_USE_SUCCESS, useItemSuccessHandler, PackEvent );
 			
+			addViewListener( FightAloneEvent.CLEAR_DISTURB_DEST, clearDisturbDestHandler, FightAloneEvent );
+			
+			
 			initData();
 			
 			view.btnClose.visible = false;
+		}
+		
+		private function clearDisturbDestHandler( event:FightAloneEvent ):void
+		{
+			fightModel.isHasDisturbForDest = false;
 		}
 		
 		// 删除对手屏幕中的泡泡
@@ -94,6 +102,7 @@ package app.modules.fight.view.online
 				var items:Vector.<LetterBubbleVo> = spellVo.items.slice();
 				var length:int = fightModel.allLetterListCopy.length;
 				var index:int = 0;
+				fightModel.isHasDisturbForDest = false;
 				items[0].isUpperCase = true;
 				Debug.debug( "对手的单词：" + spellVo.chinese );
 				view.vecAddBubbleVoForOther = new Vector.<LetterBubbleVo>();
@@ -111,6 +120,7 @@ package app.modules.fight.view.online
 					items.push( fightModel.allLetterListCopy[ index ] );
 					view.vecAddBubbleVoForOther.push( items[ items.length - 1 ]);
 				}
+				fightModel.isHasDisturbForDest = maxCount > 0;
 				
 				view.setLettersPool( items, false );
 				

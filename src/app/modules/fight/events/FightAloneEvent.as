@@ -46,6 +46,16 @@ package app.modules.fight.events
 		 */
 		public static const SHOW_ANSWER_ING:String = "show_answer_ing";
 		
+		/**
+		 * 自己清楚所有干扰
+		 */
+		public static const CLEAR_DISTURB_SELF:String = "clear_disturb_self";
+		
+		/**
+		 * 对手清楚所有干扰
+		 */
+		public static const CLEAR_DISTURB_DEST:String = "clear_disturb_dest";
+		
 		//////////////// notify
 		
 		/**
