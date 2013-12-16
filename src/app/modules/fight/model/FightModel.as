@@ -44,14 +44,26 @@ package app.modules.fight.model
 		
 		public function updateSelfWordList():void
 		{
-			_spellVo = spellList.shift();
-			allLetterList.splice(0, _spellVo.charsLength );
+			if ( spellList && spellList.length > 0 ) {
+				_spellVo = spellList.shift();
+				allLetterList.splice(0, _spellVo.charsLength );
+			}
+			else 
+			{
+				_spellVo = null;
+			}
 		}
 		
 		public function updateDestWordList():void
 		{
-			_spellCopyVo = spellListCopy.shift();
-			allLetterListCopy.splice(0, _spellCopyVo.charsLength );
+			if ( spellListCopy && spellListCopy.length ) {
+				_spellCopyVo = spellListCopy.shift();
+				allLetterListCopy.splice(0, _spellCopyVo.charsLength );
+			}
+			else
+			{
+				spellListCopy = null;
+			}
 		}
 		
 		public function get spellVo():SpellVo
@@ -280,6 +292,11 @@ package app.modules.fight.model
 		public function set roundId(value:int):void
 		{
 			_roundId = Math.max( 0, value );
+		}
+		
+		public function get isBattle():Boolean
+		{
+			return modeType == 5;
 		}
 
 		/**

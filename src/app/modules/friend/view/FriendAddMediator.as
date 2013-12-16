@@ -6,6 +6,7 @@ package app.modules.friend.view
 	import app.modules.friend.service.FriendService;
 	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.events.PanelEvent;
 	
 	
 	/**
@@ -25,13 +26,6 @@ package app.modules.friend.view
 			super();
 		}
 		
-		override public function onRemove():void
-		{
-			openView( ViewName.Friend );
-			
-			super.onRemove();
-		}
-		
 		override public function onRegister():void
 		{
 			// 关闭
@@ -39,6 +33,7 @@ package app.modules.friend.view
 			
 			super.onRegister();
 			addViewListener( FriendEvent.ADD_FRIEND, addFriendHandle, FriendEvent );
+			addViewListener( PanelEvent.CLOSE, closeQuitHandler, PanelEvent );
 		}
 		
 		private function addFriendHandle( event:FriendEvent ):void
@@ -48,5 +43,11 @@ package app.modules.friend.view
 				friendService.addFriend( friendName );
 			else Tips.showMouse( "太不小心了，好友名称还没输入呢！" );
 		}
+		
+		private function closeQuitHandler( event:PanelEvent ):void
+		{
+			openView( ViewName.Friend );
+		}
+		
 	}
 }

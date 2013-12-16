@@ -1,6 +1,6 @@
 package app.modules.panel.share
 {
-	import app.core.Tips;
+	import app.managers.ExternalManager;
 	
 	import victor.framework.core.BaseMediator;
 	
@@ -33,8 +33,8 @@ package app.modules.panel.share
 		
 		private function shareWeiboHandler( event:ShareWeiboEvent ):void
 		{
-			Tips.showMouse( "分享" );
 			view.hide();
+			ExternalManager.shareWeibo();
 		}	
 		
 		/*============================================================================*/

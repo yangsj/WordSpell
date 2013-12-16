@@ -232,8 +232,8 @@ package app.modules.fight.service
 				}
 				
 				// 设置下一个单词信息
-				if ( fightModel.isFinish == false )
-				{
+//				if ( fightModel.isFinish == false )
+//				{
 					fightModel.currentSelfIndex++;
 					updateSelfWordList();
 					
@@ -242,7 +242,7 @@ package app.modules.fight.service
 					TickManager.doTimeout( function abc( result:Boolean ):void {
 					dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD, result ));
 					}, time, data.answer_flag );
-				}
+//				}
 			}
 			else
 			{

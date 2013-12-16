@@ -18,6 +18,11 @@ package app.managers
 			callJs( "reload" );
 		}
 		
+		public static function shareWeibo():void
+		{
+			callJs( "share_weibo", "分享到微博拿奖励!!!成功分享后宝石 +500" );
+		}
+		
 		public static function callJs(...arg):void
 		{
 			if ( ExternalInterface.available )

@@ -59,19 +59,24 @@ package app.modules.chat.view
 			{
 				dispatchEvent( new ChatEvent( ChatEvent.INPUT_EMOTION, "ui.chat." + targetName ));
 			}
-			hide();
+			else
+			{
+				hide();
+			}
 		}
 		
 		override public function show():void
 		{
 			_parentTarget.addChild( this );
 			appStage.addEventListener(MouseEvent.MOUSE_DOWN, onClickHandler );
+//			this.addEventListener(MouseEvent.MOUSE_DOWN, onClickHandler );
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
 			appStage.removeEventListener(MouseEvent.MOUSE_DOWN, onClickHandler );
+//			this.removeEventListener(MouseEvent.MOUSE_DOWN, onClickHandler );
 		}
 		
 		override protected function get skinName():String

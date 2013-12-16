@@ -2,6 +2,7 @@ package app.modules.fight.view
 {
 	import flash.geom.Point;
 	
+	import app.core.Tips;
 	import app.events.PackEvent;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.fight.FightType;
@@ -21,6 +22,7 @@ package app.modules.fight.view
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.debug.Debug;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**
@@ -72,6 +74,8 @@ package app.modules.fight.view
 			dispatch( new ChatEvent( ChatEvent.SHOW_CHAT ));
 			
 			baseView.clear();
+			
+			baseView.removeConChilds();
 			
 			baseView.isValidOperate = false;
 			
@@ -186,11 +190,13 @@ package app.modules.fight.view
 				}
 				else if ( itemVo.type == ItemType.HINT )
 				{
-					var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
-					if ( letterIndex < items.length )
-					{
-						var key:String = items[ letterIndex ].letter;
-						baseView.useHintProp( key );
+					if ( fightModel.spellVo ) {
+						var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
+						if ( letterIndex < items.length )
+						{
+							var key:String = items[ letterIndex ].letter;
+							baseView.useHintProp( key );
+						}
 					}
 				}
 			}
@@ -272,6 +278,10 @@ package app.modules.fight.view
 					baseView.displayPropItem();
 				}
 			}
+			else if ( fightModel.isBattle ) {
+				DisplayUtil.removedAll( baseView.container );
+				Tips.showCenter( "你已拼完所有单词，请等待对方拼完再结算！" );
+			}
 		}
 		
 		protected function getOnlineAddCaseNumber( wordLength:int ):int
@@ -279,17 +289,17 @@ package app.modules.fight.view
 			if ( wordLength < 4 ) {
 				return 5 - wordLength;
 			} else if ( wordLength < 7 ) {
-				return 5;
+				return 6;
 			} else if ( wordLength < 10 ) {
-				return 4;
+				return 5;
 			} else if ( wordLength < 13 ) {
-				return 3;
+				return 4;
 			} else if ( wordLength < 15 ) {
-				return 2;
+				return 3;
 			}else if ( wordLength < 18 ) {
-				return 1;
+				return 2;
 			}
-			return 0;
+			return 1;
 		}
 		
 		

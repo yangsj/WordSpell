@@ -1,7 +1,8 @@
 package app.modules.friend.view
 {
 	import app.modules.ViewName;
-	import app.modules.friend.event.FriendEvent;
+	
+	import victor.framework.events.PanelEvent;
 	
 	/**
 	 * ……
@@ -16,13 +17,6 @@ package app.modules.friend.view
 			super();
 		}
 		
-		override public function onRemove():void
-		{
-			openView( ViewName.Friend );
-			
-			super.onRemove();
-		}
-		
 		override public function onRegister():void
 		{
 			// 关闭
@@ -31,11 +25,18 @@ package app.modules.friend.view
 			view = this.viewComponent as FriendOnlineListView;
 			
 			super.onRegister();
+			
+			addViewListener( PanelEvent.CLOSE, closeQuitHandler, PanelEvent );
 		}
 		
 		override protected function setFriendList():void
 		{
 			view.setData( friendModel.onLineList );
+		}
+		
+		private function closeQuitHandler( event:PanelEvent ):void
+		{
+			openView( ViewName.Friend );
 		}
 		
 	}

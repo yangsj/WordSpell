@@ -1,5 +1,6 @@
 package app.modules.fight.view.spell
 {
+	import app.core.Tips;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
@@ -54,7 +55,7 @@ package app.modules.fight.view.spell
 			fightModel.isShowAnswer = false;
 			fightModel.isErrorLastAnswerForPractice = false;
 			isSendInput = false;
-			view.setLeftWordsPos( fightModel.modeType == 5 );
+			view.setLeftWordsPos( false );
 			if ( fightModel.modeType == 5 )
 			{
 				nextWordNotify( null );
@@ -107,12 +108,15 @@ package app.modules.fight.view.spell
 		
 		private function setNextWrodInfo():void
 		{
-			fightModel.isErrorLastAnswerForPractice = false;
-			isSendInput = false;
-			view.setInitData( fightModel.spellVo );
-			view.setPos( fightModel.isPractice );
-			
-			view.setLeftWords( 9 - fightModel.currentSelfIndex );
+			if ( fightModel.spellVo )
+			{
+				fightModel.isErrorLastAnswerForPractice = false;
+				isSendInput = false;
+				view.setInitData( fightModel.spellVo );
+				view.setPos( fightModel.isPractice );
+				view.setLeftWordsPos( fightModel.isBattle );
+				view.setLeftWords( 9 - fightModel.currentSelfIndex );
+			}
 		}
 		
 		private function updateWordHandler( event:FightAloneEvent ):void

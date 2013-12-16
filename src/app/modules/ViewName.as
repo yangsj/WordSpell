@@ -171,6 +171,8 @@ package app.modules
 			return [
 						  SelectedRoundPanel
 						, FightPractice
+						, FightReadyPanel
+						, FightMatchingPanel
 				].indexOf( viewName ) != -1;
 		}
 		

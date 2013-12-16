@@ -416,7 +416,9 @@ package app.modules.chat.view
 
 		protected function btnExpressionClickHandler( event:MouseEvent ):void
 		{
-			event.stopPropagation();
+			_isExpand = false;
+			setExpandHide();
+			event.stopPropagation(); //
 			emotionPanel.show();
 		}
 

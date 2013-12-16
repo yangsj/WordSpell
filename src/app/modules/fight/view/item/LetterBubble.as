@@ -148,7 +148,7 @@ package app.modules.fight.view.item
 			removeEventListener( MouseEvent.CLICK, mouseHandler );
 			TickManager.clearDoTime( enterFrameHandler );
 			
-			// 放入对象池
+			// 放入对象池 
 			if ( itemPools ) itemPools.push( this );
 		}
 		

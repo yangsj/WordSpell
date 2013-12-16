@@ -288,9 +288,9 @@ package com.riaidea.text {
             _textRenderer.setTextFormat(format, index, index + 1);
 
             // adjust sprites index which come after this sprite
-            _spriteRenderer.adjustSpritesIndex(index, 1);
+            var boo:Boolean = _spriteRenderer.adjustSpritesIndex(index, 1);
             // insert spriteObj to specific index and render it if it's visible
-            _spriteRenderer.insertSprite(spriteObj, index);
+            _spriteRenderer.insertSprite( spriteObj, boo ? index + 1 : index );
 
             // if autoRender, just do it
             if (autoRender) _spriteRenderer.render();

@@ -142,6 +142,12 @@ package app.modules.fight.view
 			clearDict( dictCheckItem );
 		}
 		
+		public function removeConChilds():void
+		{
+			DisplayUtil.removedAll( container );
+			DisplayUtil.removedAll( container2 );
+		}
+		
 		public function playAddMoneyEffect( num:int, point:Point ):void
 		{
 			if ( num > 0 )

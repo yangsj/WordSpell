@@ -83,12 +83,12 @@ package app.modules.fight.service
 			fightModel.battleEndDestVo = aloneService.getBattleEndVo( data.dest_result );
 			
 			//更新等级
-			if ( fightModel.battleEndSelfVo.currentLevel != GameData.instance.selfVo.level )
-				GameData.instance.updateLevel( fightModel.battleEndSelfVo.currentLevel );
-			
-			//更新经验值
-			if ( fightModel.battleEndSelfVo.addExp > 0 )
-				GameData.instance.updateAddExp( fightModel.battleEndSelfVo.addExp );
+//			if ( fightModel.battleEndSelfVo.currentLevel != GameData.instance.selfVo.level )
+//				GameData.instance.updateLevel( fightModel.battleEndSelfVo.currentLevel );
+//			
+//			//更新经验值
+//			if ( fightModel.battleEndSelfVo.addExp > 0 )
+//				GameData.instance.updateAddExp( fightModel.battleEndSelfVo.addExp );
 			
 			if ( fightModel.battleResultFlag == 1 )
 			{

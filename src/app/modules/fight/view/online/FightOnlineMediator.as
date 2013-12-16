@@ -13,6 +13,7 @@ package app.modules.fight.view.online
 	import app.modules.model.vo.ItemVo;
 	
 	import victor.framework.debug.Debug;
+	import victor.utils.DisplayUtil;
 	
 	/**
 	 * ……
@@ -96,7 +97,7 @@ package app.modules.fight.view.online
 		
 		private function setOtherLetters():void
 		{
-			if ( fightModel.spellListCopy && fightModel.spellListCopy.length )
+			if ( fightModel.spellCopyVo )
 			{
 				var spellVo:SpellVo = fightModel.spellCopyVo;
 				var items:Vector.<LetterBubbleVo> = spellVo.items.slice();
@@ -131,6 +132,10 @@ package app.modules.fight.view.online
 						view.addPropItem( letterVo, false );
 				}
 				view.displayPropItem( false );
+			}
+			else
+			{
+				DisplayUtil.removedAll( view.container2 );
 			}
 		}
 		

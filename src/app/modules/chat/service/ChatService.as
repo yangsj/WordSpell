@@ -76,11 +76,13 @@ package app.modules.chat.service
 			var dict:Dictionary = new Dictionary();
 			if ( emoticons )
 			{
+				var num:int = 100;
 				for each ( var obj:Object in emoticons )
 				{
 					var index:int = obj.index;
-					var src:String = "1" + String(obj.src);
+					var src:String = num + "" + String(obj.src);
 					dict[src] = index;
+					num++;
 				}
 			}
 			return dict;
@@ -97,7 +99,7 @@ package app.modules.chat.service
 			if ( emoticons )
 			{
 				for ( var key:* in emoticons )
-					array.push({index:int(emoticons[key]), src:"ui.chat.emotion_" + String( key ).substr(1) });
+					array.push({index:int(emoticons[key]), src:"ui.chat.emotion_" + String( key ).substr(3) });
 			}
 			return array;
 		}
