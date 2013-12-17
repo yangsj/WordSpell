@@ -7,17 +7,17 @@ package app.modules.main.view
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import victor.core.Numeric;
 	import app.data.BaseConfig;
 	import app.data.vo.LevelExpItemVo;
 	import app.events.ViewEvent;
-	import victor.framework.manager.LoaderManager;
 	import app.modules.main.FunctionBtnConfig;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
+	import victor.core.Numeric;
 	import victor.framework.core.BaseView;
 	import victor.framework.core.ViewStruct;
+	import victor.framework.manager.LoaderManager;
 	import victor.utils.DisplayUtil;
 	import victor.utils.MathUtil;
 	
@@ -79,9 +79,11 @@ package app.modules.main.view
 				var levelExpItemVo:LevelExpItemVo = BaseConfig.levelExp.getItemByExp( exp );
 				var curExp:int = levelExpItemVo.curExp;
 				var nextExp:int = levelExpItemVo.nextExp;
+				var c:int = (exp - curExp );
+				var t:int = (nextExp - curExp);
 				var percent:Number;
 				expCache = exp;
-				expNumString = exp + "/" + nextExp;
+				expNumString = c + "/" + t;
 				if ( !MathUtil.isRange( exp, curExp, nextExp ))
 				{
 					percent = 100;
@@ -89,7 +91,7 @@ package app.modules.main.view
 				}
 				else
 				{
-					percent = ((exp - curExp )/(nextExp - curExp)) * 100;
+					percent = (c/t) * 100;
 					expPercent = percent.toFixed( 2 ) + "%";
 				}
 				expBar.gotoAndStop( int(percent) );
