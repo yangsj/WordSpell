@@ -36,6 +36,7 @@ package app.modules.fight.model
 		private var _isShowAnswer:Boolean = false;
 		private var _isHasDisturbForSelf:Boolean = false;
 		private var _isHasDisturbForDest:Boolean = false;
+		private var _isUsePorped:Boolean = false;
 		
 		public function FightModel()
 		{
@@ -409,6 +410,22 @@ package app.modules.fight.model
 		public function set isHasDisturbForDest(value:Boolean):void
 		{
 			_isHasDisturbForDest = value;
+		}
+
+		/**
+		 * 是否使用道具
+		 */
+		public function get isUsePorped():Boolean
+		{
+			return _isUsePorped;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isUsePorped(value:Boolean):void
+		{
+			_isUsePorped = value;
 		}
 
 

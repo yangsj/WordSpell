@@ -2,6 +2,7 @@ package app.modules.serivce
 {
 	import app.data.GameData;
 	import app.events.PackEvent;
+	import app.modules.fight.model.FightModel;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemVo;
 	
@@ -25,6 +26,8 @@ package app.modules.serivce
 	{
 		[Inject]
 		public var packModel:PackModel;
+		[Inject]
+		public var fightModel:FightModel;
 		
 		public function PackService()
 		{
@@ -84,6 +87,8 @@ package app.modules.serivce
 			var req:use_item_req_t = new use_item_req_t();
 			req.item_type = itemType;
 			call( client_cmd_e.USE_ITEM_REQ, req );
+			
+			fightModel.isUsePorped = true;
 		}
 		
 		

@@ -36,7 +36,7 @@ package app.modules.map.model
 
 		public function get mapName():String
 		{
-			return ["加拿大大熊湖","西澳大利亚沙漠","澳大利亚凯恩斯热带雨林","美国雷尼尔山","埃尔斯米尔岛","天空"][mapId];
+			return ["巨鲸群岛","黄金沙漠","沉睡森林","赤色火山","远古冰川","天空"][mapId];
 		}
 		
 	}

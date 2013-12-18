@@ -218,13 +218,16 @@ package app.modules.fight.service
 
 			if ( isSelf )
 			{
-				if ( data.answer_flag ) {
-					Tips.showCenter( "恭喜您！答对了。" );
-				} else {
-					if (　!fightModel.isPractice || ( fightModel.isPractice && fightModel.isShowAnswer == false )) {
-						Tips.showCenter( "请牢记，下次就不会再错了。" );
+				if ( fightModel.isUsePorped ) {
+					if ( data.answer_flag ) {
+						Tips.showCenter( "恭喜您！答对了。" );
+					} else {
+						if (　!fightModel.isPractice || ( fightModel.isPractice && fightModel.isShowAnswer == false )) {
+							Tips.showCenter( "请牢记，下次就不会再错了。" );
+						}
 					}
 				}
+				fightModel.isUsePorped = false;
 				
 				if ( data.inc_coin > 0 ) {
 					GameData.instance.updateAddMoney( data.inc_coin );
