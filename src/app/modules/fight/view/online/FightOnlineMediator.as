@@ -9,8 +9,6 @@ package app.modules.fight.view.online
 	import app.modules.fight.service.FightOnlineService;
 	import app.modules.fight.view.FightBaseMediator;
 	import app.modules.fight.view.spell.SpellVo;
-	import app.modules.model.vo.ItemType;
-	import app.modules.model.vo.ItemVo;
 	
 	import victor.framework.debug.Debug;
 	import victor.utils.DisplayUtil;
@@ -136,32 +134,6 @@ package app.modules.fight.view.online
 			else
 			{
 				DisplayUtil.removedAll( view.container2 );
-			}
-		}
-		
-		override protected function useItemSuccessHandler(event:PackEvent):void
-		{
-			if ( event.type == PackEvent.USE_SUCCESS ) 
-			{
-				super.useItemSuccessHandler( event );
-			}
-			else
-			{
-				var itemVo:ItemVo = event.data as ItemVo;
-				if ( itemVo )
-				{
-					if ( itemVo.type == ItemType.EXTRA_TIME )
-					{
-						view.useExtraTimeProp( false );
-					}
-					else if ( itemVo.type == ItemType.BROOM )
-					{
-						view.useBroomProp( false );
-					}
-					else if ( itemVo.type == ItemType.HINT )
-					{
-					}
-				}
 			}
 		}
 		

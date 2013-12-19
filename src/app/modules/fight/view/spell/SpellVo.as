@@ -31,5 +31,7 @@ package app.modules.fight.view.spell
 			return items.length;
 		}
 		
+		public var english:String = "english";
+		
 	}
 }

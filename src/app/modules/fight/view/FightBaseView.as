@@ -266,6 +266,21 @@ package app.modules.fight.view
 		}
 		
 		/**
+		 * 使用跳过道具
+		 * @param msg
+		 * @param isSelf
+		 */
+		public function useSkinProp( msg:String, isSelf:Boolean = true ):void
+		{
+			if ( isAlone )
+				Tips.showCenter( msg );
+			else{
+				var point:Point = getShowTipsPoint( false );
+				Tips.show( msg, point.x, point.y );
+			}
+		}
+		
+		/**
 		 * 使用 扫帚
 		 */
 		public function useBroomProp( isSelf:Boolean = true ):void
@@ -285,23 +300,14 @@ package app.modules.fight.view
 						}
 					}
 					if ( isAlone )
-						Tips.showMouse( "成功清除屏幕中的干扰泡泡" );
+						Tips.showCenter( "成功清除屏幕中的干扰泡泡" );
 					else{
-						var point:Point = getTimeTipsPoint( false );
+						var point:Point = getShowTipsPoint( false );
 						Tips.show( "成功清除屏幕中的干扰泡泡", point.x, point.y );
 					}
 					dispatchEvent( new FightAloneEvent( FightAloneEvent.CLEAR_DISTURB_SELF ));
 				}
 			}
-		}
-		
-		protected function getTimeTipsPoint( isSelft:Boolean ):Point
-		{
-			var point:Point = new Point(container.x + 207, container.y + 207 );
-			if ( !isSelft ){
-				point.x = container2.x + 207;
-			}
-			return point;
 		}
 		
 		/**
@@ -317,6 +323,15 @@ package app.modules.fight.view
 				var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
 				if ( bubble ) bubble.hint();
 			}
+		}
+		
+		protected function getShowTipsPoint( isSelft:Boolean ):Point
+		{
+			var point:Point = new Point(container.x + 207, container.y + 207 );
+			if ( !isSelft ){
+				point.x = container2.x + 207;
+			}
+			return point;
 		}
 		
 		protected function setTimeText( text:TextField, seconds:int ):void

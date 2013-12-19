@@ -67,7 +67,7 @@ package app.modules.friend.service
 			friendModel.clearZero();
 			
 			for each ( var friend:friend_t in list )
-				friendModel.addFriend(getFriendVo( friend ), false );
+				friendModel.updateFriend(getFriendVo( friend ), false );
 			
 			// 更新列表
 			friendModel.update();

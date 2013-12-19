@@ -62,7 +62,7 @@ package app.modules.fight.view.online
 		{
 			var msg:String = isWin ? "时间 +3 秒" : "时间 -10 秒";
 			var time:int = isWin ? 3 : -10;
-			var point:Point = getTimeTipsPoint( isSelf );
+			var point:Point = getShowTipsPoint( isSelf );
 			
 			Debug.debug( isSelf, time, selfTotalTime, otherTotalTime );
 			
@@ -165,7 +165,7 @@ package app.modules.fight.view.online
 		 */
 		override public function useExtraTimeProp( isSelf:Boolean = true ):void
 		{
-			var point:Point = getTimeTipsPoint( isSelf );
+			var point:Point = getShowTipsPoint( isSelf );
 			if ( isSelf ) {
 				selfTotalTime += 8;
 			} else {
@@ -194,7 +194,7 @@ package app.modules.fight.view.online
 						bubble.playRemovedEffect( vo.itemType );
 					}
 				}
-				var point:Point = getTimeTipsPoint( false );
+				var point:Point = getShowTipsPoint( false );
 				Tips.show( "对手成功清除屏幕中的一个干扰泡泡", point.x, point.y );
 				dispatchEvent( new FightAloneEvent( FightAloneEvent.CLEAR_DISTURB_DEST ));
 			}

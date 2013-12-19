@@ -116,6 +116,7 @@ package app.modules.fight.view
 			clickPropBubble = [];
 			
 			baseView.isValidOperate = true;
+			fightModel.isUsePorped = false;
 			
 			SoundManager.playFightSoundBg();
 		}
@@ -178,26 +179,36 @@ package app.modules.fight.view
 		protected function useItemSuccessHandler( event:PackEvent ):void
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
+			var isSelf:Boolean = event.type == PackEvent.USE_SUCCESS;
 			if ( itemVo )
 			{
 				if ( itemVo.type == ItemType.EXTRA_TIME )
 				{
-					baseView.useExtraTimeProp();
+					baseView.useExtraTimeProp( isSelf );
 				}
 				else if ( itemVo.type == ItemType.BROOM )
 				{
-					baseView.useBroomProp();
+					baseView.useBroomProp( isSelf );
 				}
 				else if ( itemVo.type == ItemType.HINT )
 				{
-					if ( fightModel.spellVo ) {
+					if ( isSelf && fightModel.spellVo ) {
 						var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
 						if ( letterIndex < items.length )
 						{
 							var key:String = items[ letterIndex ].letter;
 							baseView.useHintProp( key );
 						}
+						Tips.showMouse( "已成功提示一个字母【" + key + "】" );
 					}
+				}
+				else if ( itemVo.type == ItemType.SKIP )
+				{
+					var msg:String = "成功跳过一个单词！";
+					if ( fightModel.spellVo ) {
+						msg = "成功跳过单词【" + fightModel.spellVo.english + "】";
+					}
+					baseView.useSkinProp( msg, isSelf );
 				}
 			}
 		}

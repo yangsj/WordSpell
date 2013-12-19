@@ -8,7 +8,6 @@ package app.core
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	
-	import victor.framework.manager.LoaderManager;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
@@ -31,8 +30,8 @@ package app.core
 		public static const NO:uint = 1;
 		public static const CLOSE:uint = 2;
 		
-		private static const YES_NAME:String = "确定";
-		private static const NO_NAME:String = "取消";
+		public static const YES_NAME:String = "确定";
+		public static const NO_NAME:String = "取消";
 		
 		private static var _instance:Alert;
 
@@ -255,7 +254,7 @@ package app.core
 		 * @param btnName2 取消按钮名称，默认显示“取消”。若是空字符串值则不显示该按钮，确定按钮居中显示
 		 * @param title 标题内容
 		 */
-		public static function show( msg:String, callBackFun:Function = null, btnName1:String = Alert.YES_NAME, btnName2:String = Alert.NO_NAME, title:String = "提示" ):void
+		public static function show( msg:String, callBackFun:Function = null, btnName1:String = Alert.YES_NAME, btnName2:String = Alert.NO_NAME, title:String = "提  示" ):void
 		{
 			instance.show( msg, callBackFun, btnName1, btnName2, title );
 		}

@@ -75,7 +75,7 @@ package app.modules.friend.model
 		 * 更新好友数据。若是当前好友不在列表中，则添加到列表中
 		 * @param friendVo
 		 */
-		public function updateFriend( friendVo:FriendVo ):void
+		public function updateFriend( friendVo:FriendVo, needUpdate:Boolean = true ):void
 		{
 			if ( friendVo ) {
 				var key:int = getIndexByUid( friendVo.uid );
@@ -83,7 +83,7 @@ package app.modules.friend.model
 				if ( key != -1 ) friendList[ key ] = friendVo;
 				else friendList.push( friendVo );
 				
-				update();
+				if ( needUpdate ) update();
 			}
 		}
 

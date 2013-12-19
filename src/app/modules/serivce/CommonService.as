@@ -78,7 +78,7 @@ package app.modules.serivce
 			{
 				if ( Debug.isDebug )
 					msg += "[错误代码：" + errorCode + "]";
-				Alert.show( msg );
+				Alert.show( msg, null, Alert.YES_NAME, "" );
 			}
 		}
 

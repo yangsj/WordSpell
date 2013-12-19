@@ -80,7 +80,7 @@ package app.modules.fight.service
 			var order:int;
 			var index:int;
 			var tempBub:Array;
-			var str:String = "";
+			var english:String = "";
 			var letterBubbleVo:LetterBubbleVo;
 			
 			var spellList:Vector.<SpellVo> = new Vector.<SpellVo>( length );
@@ -97,7 +97,7 @@ package app.modules.fight.service
 				tempBub = bubbles.splice( 0, index );
 				listBub = new Vector.<LetterBubbleVo>();
 				listBub2 = new Vector.<LetterBubbleVo>();
-				str = "";
+				english = "";
 				order = 0;
 				for each ( info in tempBub )
 				{
@@ -117,21 +117,23 @@ package app.modules.fight.service
 					listBub2.push( letterBubbleVo );
 					allLetterList2.push( letterBubbleVo );
 					
-					str += letterBubbleVo.letter;
+					english += letterBubbleVo.letter;
 					order++;
 					
 				}
 				spellVo = new SpellVo();
 				spellVo.chinese = cnAry[ i ];
+				spellVo.english = english;
 				spellVo.items = listBub;
 				spellList[ i ] = spellVo;
 				
 				spellVo = new SpellVo();
 				spellVo.chinese = cnAry[ i ];
+				spellVo.english = english;
 				spellVo.items = listBub2;
 				spellList2[ i ] = spellVo;
 				
-				Debug.debug( spellVo.chinese, str );
+				Debug.debug( spellVo.chinese, english );
 			}
 			// 道具数据
 			var dict:Dictionary = new Dictionary();
@@ -218,7 +220,8 @@ package app.modules.fight.service
 
 			if ( isSelf )
 			{
-				if ( fightModel.isUsePorped ) {
+				// 不是使用道具完成一个单词时
+				if ( !fightModel.isUsePorped ) {
 					if ( data.answer_flag ) {
 						Tips.showCenter( "恭喜您！答对了。" );
 					} else {

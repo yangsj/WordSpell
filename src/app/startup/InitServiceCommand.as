@@ -76,7 +76,7 @@ package app.startup
 		private function alert( msg:String ):void
 		{
 			LoadingEffect.hide();
-			Alert.show( msg, callBack, "刷新", "" );
+			Alert.show( msg, callBack, "刷  新", "" );
 			function callBack( type:int ):void
 			{
 				ExternalManager.reload();
