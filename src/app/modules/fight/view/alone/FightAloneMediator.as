@@ -1,13 +1,9 @@
 package app.modules.fight.view.alone
 {
-	import app.events.PackEvent;
 	import app.modules.ViewName;
 	import app.modules.chat.event.ChatEvent;
 	import app.modules.fight.events.FightAloneEvent;
-	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseMediator;
-	import app.modules.model.vo.ItemType;
-	import app.modules.model.vo.ItemVo;
 	
 	/**
 	 * ……
@@ -27,6 +23,7 @@ package app.modules.fight.view.alone
 		override public function onRemove():void
 		{
 			super.onRemove();
+			fightModel.modeType = 0;
 			if ( mapModel.isNeddOpenFromFight )
 				openView( ViewName.SelectedRoundPanel, mapModel.currentMapVo );
 		}

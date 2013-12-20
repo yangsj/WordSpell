@@ -37,6 +37,7 @@ package app.modules.fight.model
 		private var _isHasDisturbForSelf:Boolean = false;
 		private var _isHasDisturbForDest:Boolean = false;
 		private var _isUsePorped:Boolean = false;
+		private var _inputNumberLettle:int = 0;
 		
 		public function FightModel()
 		{
@@ -426,6 +427,30 @@ package app.modules.fight.model
 		public function set isUsePorped(value:Boolean):void
 		{
 			_isUsePorped = value;
+		}
+
+		/**
+		 * 当前单词以输入的字母数量
+		 */
+		public function get inputNumberLettle():int
+		{
+			return _inputNumberLettle;
+		}
+
+		public function set inputNumberLettle(value:int):void
+		{
+			_inputNumberLettle = value;
+		}
+		
+		/**
+		 * 当前单词还剩余为输入的字母数量
+		 */
+		public function get surplusLetterNum():int
+		{
+			if ( spellVo ) {
+				return spellVo.charsLength - _inputNumberLettle;
+			}
+			return 0;
 		}
 
 

@@ -22,6 +22,7 @@ package app.modules.fight.view
 	import app.modules.fight.view.item.LetterBubble;
 	import app.modules.fight.view.prop.PropList;
 	import app.modules.fight.view.spell.SpellArea;
+	import app.modules.model.vo.ItemType;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
@@ -249,6 +250,24 @@ package app.modules.fight.view
 			txtRoundNum.text = roundNumStr;
 		}
 		
+		/**
+		 * 输入字母
+		 * @param key
+		 * @param isKeyboard
+		 */
+		public function inputLetter( key:String, isKeyboard:Boolean = true ):void
+		{
+			key = key.toLowerCase();
+			if ( dictLetterSelf && parent )
+			{
+				var ary:Array = dictLetterSelf[ key ];
+				var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+				
+				if ( bubble ) bubble.selected( true );
+				else if ( isKeyboard ) Tips.showCenter( "按键无效" );
+			}
+		}
+		
 		public function updateMoneyDisplay():void
 		{
 			txtMoney.text = GameData.instance.selfVo.money.toString();
@@ -296,7 +315,7 @@ package app.modules.fight.view
 						var ary:Array = dictLetterSelf[ key ];
 						var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
 						if ( bubble ) {
-							bubble.playRemovedEffect( vo.itemType );
+							bubble.playRemovedEffect( ItemType.BROOM );
 						}
 					}
 					if ( isAlone )
@@ -368,13 +387,8 @@ package app.modules.fight.view
 			{
 				var charCode:int = event.charCode;
 				var key:String = String.fromCharCode( charCode ).toLocaleLowerCase();
-				if ( dictLetterSelf && parent && !(event.target is TextField) )
-				{
-					var ary:Array = dictLetterSelf[ key ];
-					var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
-					
-					if ( bubble ) bubble.selected( true );
-					else Tips.showCenter( "按键无效" );
+				if ( !(event.target is TextField) ) {
+					inputLetter( key, true );
 				}
 			}
 		}

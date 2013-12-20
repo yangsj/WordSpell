@@ -3,6 +3,7 @@ package app.modules.fight.view.prop
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.events.PackEvent;
+	import app.modules.fight.FightType;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.model.PackModel;
@@ -11,6 +12,7 @@ package app.modules.fight.view.prop
 	import app.modules.serivce.PackService;
 	
 	import victor.framework.core.BaseMediator;
+	import victor.framework.manager.TickManager;
 	
 	
 	/**
@@ -68,14 +70,23 @@ package app.modules.fight.view.prop
 			var itemVo:ItemVo = event.data as ItemVo;
 			switch ( itemVo.type )
 			{
-				case ItemType.BOMB:
+				case ItemType.BROOM:
 					if ( fightModel.isHasDisturbForSelf == false ) {
 						Tips.showMouse( "当前屏幕中没有需要清楚的干扰因素！！！" );
 						return ;
 					}
 					break;
+				case ItemType.SKIP:
+					dispatch( new FightAloneEvent( FightAloneEvent.USE_SKIP_INPUT_AUTO ));
+					TickManager.doTimeout( useProp, FightType.SKIP_TIME_PER_LETTER * ( fightModel.surplusLetterNum + 1 ), itemVo );
+					return ;
+					break;
 			}
-			
+			useProp(itemVo);
+		}
+		
+		private function useProp( itemVo:ItemVo ):void
+		{
 			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
 				packService.useItem( itemVo.type );
 			else Tips.showMouse( "钻石不足！" );

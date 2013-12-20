@@ -22,6 +22,7 @@ package app.modules.fight.view
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.debug.Debug;
+	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
 	
 	
@@ -98,6 +99,9 @@ package app.modules.fight.view
 			//
 			addViewListener( FightAloneEvent.CLEAR_DISTURB_SELF, clearSelfDisturbHandler, FightAloneEvent );
 			
+			//
+			addContextListener( FightAloneEvent.USE_SKIP_INPUT_AUTO, useSkipInputAutoHandler, FightAloneEvent );
+			
 			// 更新金币值变化
 			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
 			// 物品使用成功
@@ -119,6 +123,29 @@ package app.modules.fight.view
 			fightModel.isUsePorped = false;
 			
 			SoundManager.playFightSoundBg();
+		}
+		
+		private function useSkipInputAutoHandler( event:FightAloneEvent ):void
+		{
+			if ( fightModel.spellVo )
+			{
+				baseView.isValidOperate = false;
+				var array:Array = [];
+				var vo:LetterBubbleVo;
+				var items:Vector.<LetterBubbleVo> = fightModel.spellVo.items;
+				for ( var i:int = fightModel.inputNumberLettle; i < items.length; i++ ) {
+					vo = items[i];
+					array.push( vo.lowerCase );
+				}
+				abc();
+				function abc():void 
+				{
+					if ( array.length > 0 ) {
+						baseView.inputLetter(array.shift(), false );
+						TickManager.doTimeout( abc, FightType.SKIP_TIME_PER_LETTER );
+					}
+				}
+			}
 		}
 		
 		private function clearSelfDisturbHandler( event:FightAloneEvent ):void

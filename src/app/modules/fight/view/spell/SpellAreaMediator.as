@@ -1,6 +1,5 @@
 package app.modules.fight.view.spell
 {
-	import app.core.Tips;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.LetterBubbleVo;
@@ -43,6 +42,9 @@ package app.modules.fight.view.spell
 			// 
 			addViewListener( SpellEvent.CLICK_SHOW, clickShowHandler, SpellEvent );
 			
+			//
+			addContextListener( FightAloneEvent.USE_SKIP_INPUT_AUTO, useSkipInputAutoHandler, FightAloneEvent );
+			
 			// start
 			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
 			// 更新数据
@@ -56,11 +58,15 @@ package app.modules.fight.view.spell
 			fightModel.isErrorLastAnswerForPractice = false;
 			isSendInput = false;
 			view.setLeftWordsPos( false );
-			if ( fightModel.modeType == 5 )
-			{
+			if ( fightModel.modeType == 5 ) {
 				nextWordNotify( null );
 			}
 			
+		}
+		
+		private function useSkipInputAutoHandler( event:FightAloneEvent ):void
+		{
+			isSendInput = true;
 		}
 		
 		private function clickShowHandler( event:SpellEvent ):void
@@ -97,6 +103,7 @@ package app.modules.fight.view.spell
 		
 		private function nextWordNotify( event:FightAloneEvent ):void
 		{
+			fightModel.inputNumberLettle = 0;
 			fightModel.isShowAnswer = false;
 			
 			setNextWrodInfo();
@@ -121,6 +128,7 @@ package app.modules.fight.view.spell
 		
 		private function updateWordHandler( event:FightAloneEvent ):void
 		{
+			fightModel.inputNumberLettle += 1;
 			view.setSingleLetter( event.data as LetterBubbleVo );
 		}
 		

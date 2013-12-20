@@ -46,5 +46,10 @@ package app.modules.fight
 		 */
 		public static const MAX_LENGTH:int = 20;
 		
+		/**
+		 * 使用到过道具时，一次输入每个字母的间隔时间(毫秒)
+		 */
+		public static const SKIP_TIME_PER_LETTER:int = 300;
+		
 	}
 }

@@ -56,6 +56,11 @@ package app.modules.fight.events
 		 */
 		public static const CLEAR_DISTURB_DEST:String = "clear_disturb_dest";
 		
+		/**
+		 * 使用跳过道具后自动输入到格子
+		 */
+		public static const USE_SKIP_INPUT_AUTO:String = "use_skip_input_auto";
+		
 		//////////////// notify
 		
 		/**

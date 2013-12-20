@@ -259,7 +259,7 @@ package app.modules.fight.view.item
 			{
 				switch ( propType )
 				{
-					case ItemType.BOMB:
+					case ItemType.BROOM:
 						linkage = "ui_Skin_BroomPropEffect";
 						break;
 				}
