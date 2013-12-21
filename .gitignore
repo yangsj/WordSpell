@@ -12,3 +12,5 @@
 /releaseTool/config.php
 /bin/SwfEncryptAppEncode.swf
 /bin/SwfEncryptAppDecode.swf
+
+/bin/index.php

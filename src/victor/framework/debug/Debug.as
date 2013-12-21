@@ -4,6 +4,7 @@ package victor.framework.debug
 	import com.junkbyte.console.Cc;
 	
 	import flash.display.Stage;
+	import flash.external.ExternalInterface;
 	import flash.system.Capabilities;
 	
 	/**
@@ -11,43 +12,72 @@ package victor.framework.debug
 	 */
 	public class Debug
 	{
+		/**
+		 * 打印警告数据
+		 * @param args
+		 */
 		public static function warn( ... args ):void
 		{
 			if ( isDebug )
 			{
 				var msg:String = JSON.stringify( args );
 				Cc.warn( msg );
-				trace( "[warn]" + msg );
+				browserLog( "[warn]" + msg );
 			}
 		}
 
+		/**
+		 * 打印错误信息
+		 * @param args
+		 */
 		public static function error( ... args ):void
 		{
 			if ( isDebug )
 			{
 				var msg:String = JSON.stringify( args );
 				Cc.error( msg );
-				trace( "[error]" + msg );
+				browserLog( "[error]" + msg );
 			}
 		}
 
+		/**
+		 * 打印调试数据
+		 * @param args
+		 */
 		public static function debug( ... args ):void
 		{
 			if ( isDebug )
 			{
 				var msg:String = JSON.stringify( args );
 				Cc.debug( msg );
-				trace( "[debug]" + msg );
+				browserLog( "[debug]" + msg );
 			}
 		}
 
+		/**
+		 * 打印请求服务器数据
+		 * @param args
+		 */
 		public static function printServer( ... args ):void
 		{
 			if ( isDebug )
 			{
 				var msg:String = JSON.stringify( args );
 				Cc.ch( "server", msg, 2 );
-				trace( "[server]" + msg );
+				browserLog( "[server]" + msg );
+			}
+		}
+		
+		/**
+		 * 打印到浏览器控制台
+		 * @param args
+		 */
+		public static function browserLog(...  args ):void
+		{
+			var msg:String = JSON.stringify( args );
+			trace( msg );
+			if ( ExternalInterface.available ){
+				ExternalInterface.call("console.log", msg );
 			}
 		}
 		
