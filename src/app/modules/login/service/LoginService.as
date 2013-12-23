@@ -16,6 +16,7 @@ package app.modules.login.service
 	import victor.framework.core.BaseService;
 	import victor.framework.debug.Debug;
 	import victor.framework.socket.SocketResp;
+	import victor.core.MD5;
 
 
 	/**

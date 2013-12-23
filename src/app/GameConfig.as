@@ -11,6 +11,7 @@ package app
 	 */
 	public class GameConfig
 	{
+		public static var VERSION:String = "null";
 		/**
 		 * 密码是否使用md5加密
 		 */

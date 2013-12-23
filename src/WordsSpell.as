@@ -4,13 +4,8 @@ package
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
-	import flash.text.TextField;
-	import flash.ui.ContextMenu;
-	import flash.ui.ContextMenuBuiltInItems;
-	import flash.ui.ContextMenuItem;
 	
 	import app.AppContext;
-	
 	import victor.utils.appStage;
 	
 	[SWF( width = "960", height = "560", frameRate = "60" )]
@@ -37,27 +32,9 @@ package
 			appStage.scaleMode = StageScaleMode.NO_SCALE;
 			appStage.color = 0;
 			
+			// 初始化并启动应用
 			new AppContext( this );
-			
-			myContextMenu = new ContextMenu();
-			removeDefaultItems();
-			addCustomMenuItems();
-			this.contextMenu = myContextMenu;
 		}
-		
-		
-		private var myContextMenu:ContextMenu;
-		private function removeDefaultItems():void {
-			myContextMenu.hideBuiltInItems();
-			var defaultItems:ContextMenuBuiltInItems = myContextMenu.builtInItems;
-			defaultItems.print = true;
-		}
-		
-		private function addCustomMenuItems():void {
-			var item:ContextMenuItem = new ContextMenuItem("victor雨山");
-			myContextMenu.customItems.push(item);
-		}
-		
 		
 	}
 }

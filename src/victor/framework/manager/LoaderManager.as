@@ -70,7 +70,7 @@ package victor.framework.manager
 		private static const context:LoaderContext = new LoaderContext( false, ApplicationDomain.currentDomain );
 
 		private static var loader:Loader;
-
+		
 		///////////////////////////////////////////////////////
 
 		public function LoaderManager()
@@ -79,17 +79,17 @@ package victor.framework.manager
 
 		public function setApplicationConfig( applicationXml:XML ):void
 		{
-			var xmllist:XMLList = applicationXml.children();
+			GameConfig.VERSION = applicationXml.app[0].@version;
+			var xmllist:XMLList = applicationXml.asset;
 			for each ( var xml:XML in xmllist )
 			{
 				var name:String = String( xml.@id );
 				var url:String = String( xml.@src );
 				var version:String = String( xml.@version );
 				var first:int = int( xml.@first );
-				var path:String = GameConfig.deployPath + url; // + "?t=" + version;
-//				var path:String = GameConfig.deployPath + url + "?t=" + (new Date().time);
+				var path:String = GameConfig.deployPath + url;
+				
 				dictResList[ name ] = path;
-
 				if ( first > 0 )
 				{
 					if ( first == 1 )

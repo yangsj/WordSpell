@@ -255,16 +255,18 @@ package app.modules.fight.view.item
 		public function playRemovedEffect( propType:int = 0 ):void
 		{
 			var linkage:String = "ui_Skin_BubbleRemoveEffect";
+			var loop:int = 1;
 			if ( propType > 0 )
 			{
 				switch ( propType )
 				{
 					case ItemType.BROOM:
 						linkage = "ui_Skin_BroomPropEffect";
+						loop = 3;
 						break;
 				}
 			}
-			new BubbleRemovedEffect( linkage, localToGlobal( new Point() ) );
+			new BubbleRemovedEffect( linkage, localToGlobal( new Point() ), loop );
 			DisplayUtil.removedFromParent( this );
 		}
 		

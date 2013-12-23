@@ -3,7 +3,6 @@ package app
 	import flash.display.DisplayObjectContainer;
 	
 	import app.events.GameEvent;
-	import victor.framework.events.ServiceEvent;
 	import app.modules.login.command.FirstLoadCommand;
 	import app.modules.login.command.MainLoadCommand;
 	import app.startup.EnterGameCommand;
@@ -12,11 +11,13 @@ package app
 	import app.startup.InitDataCommand;
 	import app.startup.InitFontCommand;
 	import app.startup.InitServiceCommand;
+	import app.startup.SetPlayerMenuCommand;
 	import app.startup.ShowLoginCommand;
 	
 	import org.robotlegs.base.ContextEvent;
 	
 	import victor.framework.core.BaseContext;
+	import victor.framework.events.ServiceEvent;
 	
 	
 	/**
@@ -50,6 +51,9 @@ package app
 			
 			// 初始化application资源数据
 			commandMap.mapEvent(ServiceEvent.CONNECTED, InitDataCommand, ServiceEvent, true);
+			
+			// 设置flash player 菜单
+			commandMap.mapEvent(GameEvent.DATA_INIT_COMPLETE, SetPlayerMenuCommand, GameEvent, true );
 			
 			// 开始第一阶段资源加载
 			commandMap.mapEvent(GameEvent.DATA_INIT_COMPLETE, FirstLoadCommand, GameEvent, true );

@@ -17,7 +17,7 @@ package app.modules.fight.view.item
 	{
 		private var clip:AnimationClip;
 		
-		public function BubbleRemovedEffect( linkage:String, point:Point )
+		public function BubbleRemovedEffect( linkage:String, point:Point, loop:int = 1 )
 		{
 			x = point.x;
 			y = point.y;
@@ -25,7 +25,7 @@ package app.modules.fight.view.item
 			this.mouseChildren = false;
 			this.mouseEnabled = false;
 			
-			addChild( new AnimationClip( linkage, 1, loopComplete ) );
+			addChild( new AnimationClip( linkage, loop, loopComplete ) );
 			ViewStruct.addChild( this, ViewStruct.EFFECT );
 		}
 		

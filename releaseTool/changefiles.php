@@ -9,6 +9,17 @@
 		$doc = new DOMDocument();
 		$doc->load($file);
 		
+		$app = $doc->getElementsByTagName("app");
+		if ( $app ) 
+		{
+			//$app -> setAttribute("version", "2013.12.23 14:10");
+			//echo 'app xml elments:'.$app."<br>";
+		}
+		foreach($app as $ai)
+		{
+			$ai -> setAttribute("version", date('Y-m-d H:m:s', time()));
+		}
+
 		$assests = $doc->getElementsByTagName("asset");
 
 		$array = array();
@@ -31,7 +42,6 @@
 				rename($file_url, $new_name);
 
 				$array[$md5_str] = 1;
-				//array_push( $array, $md5_str );
 			}
 		}
 

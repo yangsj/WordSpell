@@ -16,6 +16,7 @@ package app.modules.panel.personal.service
 	
 	import victor.framework.core.BaseService;
 	import victor.framework.socket.SocketResp;
+	import victor.core.MD5;
 	
 	
 	/**
