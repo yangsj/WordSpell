@@ -61,6 +61,11 @@ package app.events
 		 */
 		public static const ACQUIRE_TASK_DATA:String = "acquire_task_data";
 		
+		/**
+		 * 设置player的菜单选项
+		 */
+		public static const SET_PLAYER_MENU:String = "set_player_menu";
+		
 ///******************* in game
 		
 		/**

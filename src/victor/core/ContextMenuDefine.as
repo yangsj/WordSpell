@@ -63,8 +63,10 @@ package victor.core
 					if ( ary.length < 3 ) {
 						ary.length = 3;
 					}
-					dictLabels[ary[0]] = ary[1] as Function;
-					addCustomMenuItems( ary[0], Boolean( ary[2]) );
+					var key:String = ary[0];
+					dictLabels[key] = ary[1] as Function;
+					addCustomMenuItems( key, Boolean( ary[2]) );
+					Debug.debug( "player menu:" + key );
 				}
 			}
 		}

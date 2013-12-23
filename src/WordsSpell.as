@@ -6,6 +6,7 @@ package
 	import flash.events.Event;
 	
 	import app.AppContext;
+	
 	import victor.utils.appStage;
 	
 	[SWF( width = "960", height = "560", frameRate = "60" )]
@@ -35,6 +36,7 @@ package
 			// 初始化并启动应用
 			new AppContext( this );
 		}
+		
 		
 	}
 }

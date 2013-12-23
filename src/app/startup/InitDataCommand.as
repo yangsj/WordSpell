@@ -60,6 +60,7 @@ package app.startup
 				// 资源初始化完成
 				dispatch( new GameEvent( GameEvent.DATA_INIT_COMPLETE ));
 			}
+			dispatch( new GameEvent( GameEvent.SET_PLAYER_MENU ));
 		}
 		
 		protected function errorHandler(event:IOErrorEvent):void

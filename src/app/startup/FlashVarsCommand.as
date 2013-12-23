@@ -56,9 +56,9 @@ package app.startup
 				GameConfig.IS_MD5 = parameters[ "md5" ];
 			else GameConfig.IS_MD5 = false;
 			
-			dispatch( new GameEvent( GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE ));
-			
 			setDebug();
+			
+			dispatch( new GameEvent( GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE ));
 		}
 		
 		private function setDebug():void
@@ -67,11 +67,6 @@ package app.startup
 			{
 				// 初始化调试工具
 				Debug.initStage( contextView.stage );
-				
-				Debug.debug( "debug" );
-				Debug.error( "error" );
-				Debug.warn( "warn" );
-				Debug.printServer( "server" );
 			}
 		}
 		

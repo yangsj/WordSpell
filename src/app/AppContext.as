@@ -53,7 +53,7 @@ package app
 			commandMap.mapEvent(ServiceEvent.CONNECTED, InitDataCommand, ServiceEvent, true);
 			
 			// 设置flash player 菜单
-			commandMap.mapEvent(GameEvent.DATA_INIT_COMPLETE, SetPlayerMenuCommand, GameEvent, true );
+			commandMap.mapEvent(GameEvent.SET_PLAYER_MENU, SetPlayerMenuCommand, GameEvent, true );
 			
 			// 开始第一阶段资源加载
 			commandMap.mapEvent(GameEvent.DATA_INIT_COMPLETE, FirstLoadCommand, GameEvent, true );
