@@ -1,16 +1,16 @@
 package app.modules.fight.view.prop.item
 {
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	
-	import app.core.Text;
 	import app.core.Tips;
 	import app.events.PackEvent;
-	import victor.framework.manager.LoaderManager;
 	import app.modules.model.vo.ItemVo;
 	
+	import victor.core.Reflection;
+	import victor.framework.manager.LoaderManager;
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
 	
@@ -22,6 +22,10 @@ package app.modules.fight.view.prop.item
 	 */
 	public class PropItem extends Sprite
 	{
+		public static const POS_LEFT:int = 0;
+		public static const POS_RIGHT:int = 1;
+		public static const POS_DOWN:int = 2;
+		
 		private var _data:ItemVo;
 		private var _isCanClick:Boolean = true;
 		private var _timeNum:int= 0;
@@ -34,17 +38,18 @@ package app.modules.fight.view.prop.item
 		public var txtTime:TextField;
 		// 花费金币价钱
 		public var txtCost:TextField;
+		// 
+		public var tips:MovieClip;
+		//
+		public var bgArea:MovieClip;
 		
-		private var tips:PropItemTips;
+		private var itemTips:PropItemTips;
 		
 		public function PropItem()
 		{
 			super();
-			createTexts();
 			addEventListener( MouseEvent.CLICK, onClickHandler );
-			scaleX = scaleY = 0.8;
-			
-			tips = new PropItemTips( this );
+			itemTips = new PropItemTips( this );
 		}
 		
 		protected function onClickHandler( event:MouseEvent ):void
@@ -52,31 +57,6 @@ package app.modules.fight.view.prop.item
 			if ( _isCanClick )
 				dispatchEvent( new PackEvent( PackEvent.USE_ITEM, data, true ));
 			else Tips.showMouse( "您的节奏有点太快了" );
-		}
-		
-		private function createTexts():void
-		{
-			var array:Array = [new GlowFilter(0,1,2,2,3,3)];
-			
-			txtCost = Text.getText(25, 0xffff00,"", -10, 60, 80, 35);
-			txtNum = Text.getText(25, 0xffff00, "", 5, 60, 60, 35);
-			txtTime = Text.getText(25, 0xffff00, "", -10, 60, 80, 35);
-			
-			txtCost.filters = array;
-			txtNum.filters = array;
-			txtTime.filters = array;
-			
-			txtCost.mouseEnabled = false;
-			txtNum.mouseEnabled = false;
-			txtTime.mouseEnabled = false;
-			
-			txtCost.visible = false;
-			txtNum.visible = false;
-			txtTime.visible = false;
-			
-			addChild( txtCost );
-			addChild( txtNum );
-			addChild( txtTime );
 		}
 		
 		//////////////////////////////////
@@ -107,6 +87,28 @@ package app.modules.fight.view.prop.item
 		
 		///////////////////////////////////
 		
+		public function setPosType( type:int = POS_DOWN ):void
+		{
+			if ( tips )
+			{
+				switch ( type )
+				{
+					case POS_LEFT:
+						tips.x = -38;
+						tips.y = 13;
+						break;
+					case POS_RIGHT:
+						tips.x = 50;
+						tips.y = 13;
+						break;
+					case POS_DOWN:
+					default:
+						tips.x = 6;
+						tips.y = 51;
+				}
+			}
+		}
+		
 		public function displayOnlyNum():void 
 		{
 			txtTime.visible = false;
@@ -121,13 +123,19 @@ package app.modules.fight.view.prop.item
 				DisplayUtil.removedFromParent( _skin );
 				_skin = LoaderManager.getObj( itemVo.skinId ) as Sprite;
 				addChildAt( _skin, 0 );
-//				Reflection.reflection( this, _skin );
+				Reflection.reflection( this, _skin );
+				tips.mouseEnabled = false;
+				tips.mouseChildren = false;
+				txtTime = tips.txtTime as TextField;
+				txtNum  = tips.txtNum as TextField;
+				txtCost = tips.txtCost as TextField;
+				setPosType();
 			}
 			_data = itemVo;
 			clearTimeout();
 			setText();
 			
-			tips.setVo( itemVo );
+			itemTips.setVo( itemVo );
 		}
 		
 		/**

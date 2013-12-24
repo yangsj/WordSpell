@@ -52,7 +52,6 @@ package app.modules.fight.view.online
 			
 			addViewListener( FightAloneEvent.CLEAR_DISTURB_DEST, clearDisturbDestHandler, FightAloneEvent );
 			
-			
 			initData();
 			
 			view.btnClose.visible = false;
@@ -105,15 +104,6 @@ package app.modules.fight.view.online
 				items[0].isUpperCase = true;
 				Debug.debug( "对手的单词：" + spellVo.chinese );
 				view.vecAddBubbleVoForOther = new Vector.<LetterBubbleVo>();
-//				for ( index = 0; index < maxCount; index++ )
-//				{
-//					if ( index < length ) items.push( fightModel.allLetterListCopy[ index ] );
-//					else break;
-//					if ( items.length > maxCount )
-//						break;
-//				}
-				
-//				maxCount = Math.min( int( Math.random() * 3 + 3 ), length );
 				maxCount = Math.min( getOnlineAddCaseNumber( items.length ), length );
 				for ( index = 0; index < maxCount; index++ ) {
 					items.push( fightModel.allLetterListCopy[ index ] );
@@ -130,6 +120,9 @@ package app.modules.fight.view.online
 						view.addPropItem( letterVo, false );
 				}
 				view.displayPropItem( false );
+				
+				// 设置自己还剩余单词数量
+				view.setTxtLeftWordsSelf( (fightModel.totalWordsNum - fightModel.currentDestIndex) +"/" + fightModel.totalWordsNum );
 			}
 			else
 			{

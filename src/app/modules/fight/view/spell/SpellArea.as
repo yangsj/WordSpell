@@ -1,7 +1,6 @@
 package app.modules.fight.view.spell
 {
 	import flash.display.InteractiveObject;
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -24,11 +23,10 @@ package app.modules.fight.view.spell
 
 		public var btnShowAnswer:InteractiveObject;
 		public var txtChinese:TextField;
-		public var txtLeftWords:TextField;
-
+		public var txtEnglish:TextField;
+		
 		private var _inputList:Vector.<LetterBubbleVo>;
 		private var _spellVo:SpellVo;
-		private var _spellItems:Vector.<SpellItem>;
 		private var _inputNum:int = 0;
 		private var _isPractice:Boolean = false;
 		private var _lastIsAnswerError:Boolean = false;
@@ -36,20 +34,18 @@ package app.modules.fight.view.spell
 		public function SpellArea()
 		{
 			super();
-			createSkin();
-			createSpellItems();
 		}
 		
 		public function setPos(isPractice:Boolean = false ):void
 		{
 			_isPractice = isPractice;
-			x = isPractice ? 440 : 330;
-			y = 460;
+//			x = isPractice ? 440 : 330;
+//			y = 460;
 		}
 
-		private function createSkin():void
+		public function initSkin():void
 		{
-			setSkinWithName( "ui_Skin_Round_SpellArea" );
+//			setSkinWithName( "ui_Skin_Round_SpellArea" );
 			txtChinese.mouseEnabled = false;
 			if ( btnShowAnswer == null ) {
 				btnShowAnswer = new Sprite();
@@ -70,32 +66,6 @@ package app.modules.fight.view.spell
 			inputOver();
 		}
 		
-		private function createSpellItems():void
-		{
-			_spellItems = new Vector.<SpellItem>( MAX );
-			for ( var i:int = 0; i < MAX; i++ )
-				_spellItems[ i ] = ( new SpellItem( _skin.getChildByName( "pos" + i ) as MovieClip, i ));
-		}
-		
-		public function setLeftWords( num:int ):void
-		{
-			txtLeftWords.text = "剩余单词数：" + num;
-		}
-		
-		public function setLeftWordsPos( isBattle:Boolean ):void
-		{
-			if ( isBattle )
-			{
-				txtLeftWords.x = -txtLeftWords.width - 5;
-				txtLeftWords.y = btnShowAnswer.y + 10;
-			}
-			else 
-			{
-				txtLeftWords.x = txtChinese.x + ( txtChinese.width - txtLeftWords.width ) * 0.5;
-				txtLeftWords.y = -txtLeftWords.height - 5;
-			}
-		}
-		
 		public function setInitData( spellVo:SpellVo ):void
 		{
 			btnShowAnswer.mouseEnabled = true;
@@ -108,28 +78,7 @@ package app.modules.fight.view.spell
 			txtChinese.text = spellVo.chinese;
 
 			// 初始化字母显示格子
-			for ( var i:int = 0; i < MAX; i++ )
-			{
-				var item:SpellItem = _spellItems[ i ];
-				item.initialize();
-				item.visible = i < _spellVo.charsLength;
-			}
-			
-			// 计时
-//			TickManager.instance.clearDoTime( inputOver );
-//			TickManager.instance.doTimeout( inputOver, 10000 );
-		}
-		
-		/**
-		 * 删除已选的字母
-		 * @param index
-		 * 
-		 */
-		public function delLetter( index:int ):void
-		{
-			var item:SpellItem = _spellItems[ index ];
-			item.initialize();
-			_inputList[ index ] = null;
+			displayInput();
 		}
 
 		/**
@@ -148,9 +97,9 @@ package app.modules.fight.view.spell
 					var current:LetterBubbleVo = _spellVo.items[ _inputNum ];
 					if ( letterBubbleVo && current.lowerCase == letterBubbleVo.lowerCase ) // 输入的字母顺序是否正确
 					{
-						var item:SpellItem = _spellItems[ _inputNum ];
-						item.setData( letterBubbleVo );
 						_inputList[_inputNum] = letterBubbleVo;
+						displayInput();
+						
 						isOver = ( getEmptyIndex == -1 );
 						
 						// add money
@@ -164,7 +113,6 @@ package app.modules.fight.view.spell
 				}
 				if ( isOver ) {
 					if ( _isPractice && _lastIsAnswerError )
-//						btnShowAnswer.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
 						showAnswerResult();
 					else inputOver();
 				}
@@ -173,6 +121,29 @@ package app.modules.fight.view.spell
 			{
 				throw new Error( "setSingleLetter没有初始化" );
 			}
+		}
+		
+		public function get inputList():Vector.<LetterBubbleVo>
+		{
+			return _inputList;
+		}
+		
+		public function clear():void
+		{
+			TickManager.instance.clearDoTime( inputOver );
+		}
+		
+		public function showAnswer():void
+		{
+			var item:SpellItem;
+			var leng:int = Math.min(_spellVo.items.length, MAX );
+			txtEnglish.text = _spellVo.english;
+			dispatchEvent( new SpellEvent( SpellEvent.SHOW_ANSWER ));
+		}
+		
+		public function get lastIsAnswerError():Boolean
+		{
+			return _lastIsAnswerError;
 		}
 		
 		/**
@@ -188,39 +159,30 @@ package app.modules.fight.view.spell
 			}
 			return -1;
 		}
-
-		public function get inputList():Vector.<LetterBubbleVo>
-		{
-			return _inputList;
-		}
-
+		
 		private function inputOver():void
 		{
 			TickManager.instance.clearDoTime( inputOver );
 			dispatchEvent( new SpellEvent( SpellEvent.INPUT_OVER ));
 		}
-
-		public function clear():void
+		
+		private function displayInput():void
 		{
-			TickManager.instance.clearDoTime( inputOver );
-		}
-
-		public function showAnswer():void
-		{
-			var item:SpellItem;
-			var leng:int = Math.min(_spellVo.items.length, MAX );
-			for ( var i:int = 0; i < leng; i++ ) {
-				item = _spellItems[ i ];
-				item.setData( _spellVo.items[ i ] );
+			var letterVo:LetterBubbleVo;
+			var length:int = _spellVo.charsLength;
+			var str:String = "";
+			for ( var i:int = 0; i < length; i++ )
+			{
+				letterVo = _inputList[i];
+				if ( letterVo ) {
+					str += letterVo.letter;
+				} else {
+					str += " _";
+				}
 			}
-			dispatchEvent( new SpellEvent( SpellEvent.SHOW_ANSWER ));
+			txtEnglish.text = str;
 		}
-
-		public function get lastIsAnswerError():Boolean
-		{
-			return _lastIsAnswerError;
-		}
-
+		
 
 	}
 }

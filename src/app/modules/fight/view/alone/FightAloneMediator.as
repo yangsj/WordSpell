@@ -5,6 +5,8 @@ package app.modules.fight.view.alone
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.view.FightBaseMediator;
 	
+	import victor.utils.HtmlText;
+	
 	/**
 	 * ……
 	 * @author 	yangsj
@@ -84,8 +86,7 @@ package app.modules.fight.view.alone
 
 		private function initData():void
 		{
-			var str:String = (fightModel.mapId + 1 ) + "—" + ( fightModel.roundId + 1 );
-			view.setRoundName( mapModel.currentMapVo.mapName + "  " + str, !fightModel.isPractice );
+			view.setRoundName( mapModel.currentMapVo.mapName + "<br>" + HtmlText.color("第" + fightModel.roundId + "关", 0xffffff ) );
 			
 			letterIndex = 0;
 			view.initialize( fightModel.isPractice );

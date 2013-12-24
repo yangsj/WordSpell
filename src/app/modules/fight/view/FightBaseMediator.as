@@ -117,6 +117,10 @@ package app.modules.fight.view
 			// 练习模式显示答案中
 			addContextListener( FightAloneEvent.SHOW_ANSWER_ING, showAnswerIngHandler, FightAloneEvent );
 			
+			//初始文本
+			baseView.setTxtLeftWordsSelf();
+			baseView.setTxtLeftWordsDest();
+			
 			clickPropBubble = [];
 			
 			baseView.isValidOperate = true;
@@ -226,7 +230,7 @@ package app.modules.fight.view
 							var key:String = items[ letterIndex ].letter;
 							baseView.useHintProp( key );
 						}
-						Tips.showMouse( "已成功提示一个字母【" + key + "】" );
+						Tips.showCenter( "已成功提示一个字母【" + key + "】" );
 					}
 				}
 				else if ( itemVo.type == ItemType.SKIP )
@@ -284,14 +288,6 @@ package app.modules.fight.view
 				{
 					var length:int = fightModel.allLetterList.length;
 					var index:int = 0;
-//					for ( index = 0; index < maxCount; index++ )
-//					{
-//						if ( index < length ) items.push( fightModel.allLetterList[ index ] );
-//						else break;
-//						if ( items.length > maxCount )
-//							break;
-//					}
-					
 					if ( modeType == FightType.MODE_BATTLE ) {
 						maxCount = Math.min( getOnlineAddCaseNumber( items.length ), length );
 					} else {
@@ -315,6 +311,8 @@ package app.modules.fight.view
 					}
 					baseView.displayPropItem();
 				}
+				// 设置自己还剩余单词数量
+				baseView.setTxtLeftWordsSelf( (fightModel.totalWordsNum - fightModel.currentSelfIndex) + "/" + fightModel.totalWordsNum);
 			}
 			else if ( fightModel.isBattle ) {
 				DisplayUtil.removedAll( baseView.container );

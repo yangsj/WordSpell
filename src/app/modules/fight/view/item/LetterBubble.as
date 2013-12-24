@@ -52,7 +52,6 @@ package app.modules.fight.view.item
 		private var _lastRandomNum:int = -1;
 		private var _speedX:Number = 1;
 		private var _speedY:Number = 1;
-		private var _txtTemp:TextField;
 		
 		public static function get itemInstance():LetterBubble
 		{
@@ -68,13 +67,6 @@ package app.modules.fight.view.item
 			mouseChildren = false;
 			buttonMode = true;
 			setSkinWithName( "ui_Skin_FightItemBubble" );
-			
-//			_txtTemp = new TextField();
-//			_txtTemp.width = 70;
-//			_txtTemp.height = 60;
-//			_txtTemp.x = -35;
-//			_txtTemp.y = -30;
-//			addChild( _txtTemp );
 		}
 		
 		private function addListeners():void
@@ -107,11 +99,6 @@ package app.modules.fight.view.item
 				y = MathUtil.range( y, moveArea.y + 1, moveArea.y + moveArea.height - 1 );
 				changeDirection( 1, -1 );
 			}
-			
-//			x=MathUtil.range( x, moveArea.x, moveArea.x + moveArea.width );
-//			y=MathUtil.range( y, moveArea.y, moveArea.y + moveArea.height );
-			
-//			_txtTemp.text = _speedX + "_" + _speedY + "\n" + x+"_"+y;
 		}
 		
 		protected function addedToStageHandler(event:Event):void
@@ -122,13 +109,11 @@ package app.modules.fight.view.item
 			if ( _isAlone ) _scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
 			else _scale = Number((0.65 + Math.random() * 0.3).toFixed(2));
 			
-//			_scale = Number((0.8 + Math.random() * 0.25).toFixed(2));
-			
 			_skin.scaleX = _skin.scaleY = _scale;
-			moveArea.width = moveArea.width + DIAMETER * ( 1 - scale );
-			moveArea.height = moveArea.height + DIAMETER * ( 1 - scale );
 			moveArea.x = RADIUS * scale;
 			moveArea.y = RADIUS * scale;
+			moveArea.width = moveArea.width - moveArea.x * 2;
+			moveArea.height = moveArea.height - moveArea.y * 2;
 			
 			x = MathUtil.range( x, moveArea.x + 5, moveArea.x + moveArea.width - 5 );
 			y = MathUtil.range( y, moveArea.x + 5, moveArea.y + moveArea.height- 5 );
@@ -156,13 +141,13 @@ package app.modules.fight.view.item
 		{
 			if ( isAlone )
 			{
-				moveArea.width = 960 - DIAMETER;
-				moveArea.height = 410 - DIAMETER;
+				moveArea.width  = 785;
+				moveArea.height = 480;
 			}
 			else
 			{
-				moveArea.width = 333;
-				moveArea.height = 298;
+				moveArea.width  = 430;
+				moveArea.height = 400;
 			}
 			_isAlone = isAlone;
 		}

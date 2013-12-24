@@ -57,11 +57,19 @@ package app.modules.fight.view.prop
 		private function setData():void
 		{
 			view.setData( packModel.itemList );
+			if ( fightModel.isBattle ) {
+				view.setForBattle();
+			}
 		}
 		
 		private function nextWordNotify( event:FightAloneEvent ):void
 		{
 			view.visible = !fightModel.isPractice;
+			if ( fightModel.isBattle ) {
+				view.setForBattle();
+			} else {
+				view.setForAlone();
+			}
 		}
 		
 		// 物品使用

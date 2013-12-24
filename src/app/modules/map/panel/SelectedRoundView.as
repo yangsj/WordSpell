@@ -3,14 +3,12 @@ package app.modules.map.panel
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
 	import app.core.ButtonSkin;
 	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapVo;
 	import app.modules.map.panel.item.GroupItem;
-	import app.core.Text;
 	
 	import victor.core.Reflection;
 	import victor.framework.core.BasePanel;
@@ -27,8 +25,8 @@ package app.modules.map.panel
 		private var vecList:Vector.<GroupItem>;
 		private var bgSkin:Sprite;
 		
-		public var txtName:TextField;
 		public var mapVo:MapVo;
+		public var mcTitleName:MovieClip;
 		
 		public function SelectedRoundView()
 		{
@@ -36,9 +34,6 @@ package app.modules.map.panel
 		
 		override protected function onceInit():void
 		{
-			txtName = Text.cloneText( txtName );
-			txtName.mouseEnabled = false;
-			
 			DisplayUtil.removedFromParent( btnClose );
 			btnClose = ButtonSkin.buttonExit;
 			_skin.addChild( btnClose );
@@ -47,9 +42,7 @@ package app.modules.map.panel
 		override protected function addedToStageHandler(event:Event):void
 		{
 			super.addedToStageHandler( event );
-			
-			txtName.text = mapVo.mapName;
-			_skin.addChild( txtName );
+			mcTitleName.gotoAndStop( mapVo.mapId + 1 );
 		}
 		
 		override protected function removedFromStageHandler(event:Event):void

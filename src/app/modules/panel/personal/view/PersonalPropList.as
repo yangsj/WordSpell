@@ -25,7 +25,7 @@ package app.modules.panel.personal.view
 			super();
 			
 			x = 70;
-			y = 180;
+			y = 170;
 			
 			if ( _propIndex == null )
 			{
@@ -49,7 +49,7 @@ package app.modules.panel.personal.view
 			{
 				item = new PropItem();
 				item.x = 125 * ( i % 2 );
-				item.y = 75 * int( i/2 );
+				item.y = 84 * int( i/2 );
 				addChild( item );
 				vecItemSkin[ i ] = item;
 			}

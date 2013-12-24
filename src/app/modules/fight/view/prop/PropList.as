@@ -1,8 +1,6 @@
 package app.modules.fight.view.prop
 {
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import app.modules.fight.view.prop.item.PropItem;
@@ -26,8 +24,8 @@ package app.modules.fight.view.prop
 		{
 			super();
 			
-			x = 645;
-			y = 480;
+//			x = 645;
+//			y = 480;
 			
 			if ( _propIndex == null )
 			{
@@ -35,12 +33,26 @@ package app.modules.fight.view.prop
 				_propIndex = [];
 				for ( var i:int = 0; i < 4; i++ )
 				{
-					key = [ItemType.EXTRA_TIME, ItemType.HINT, ItemType.BROOM, ItemType.SKIP][i];
+					key = [ItemType.BROOM, ItemType.HINT, ItemType.SKIP, ItemType.EXTRA_TIME][i];
 					_propIndex[key] = i;
 				}
 			}
 			
 			createListItems();
+		}
+		
+		public function setForBattle():void
+		{
+			x = 469;
+			y = 110;
+			recordItempoints( PropItem.POS_LEFT );
+		}
+		
+		public function setForAlone():void
+		{
+			x = 869.7;
+			y = 110;
+			recordItempoints( PropItem.POS_RIGHT );
 		}
 		
 		public function clear():void
@@ -58,7 +70,6 @@ package app.modules.fight.view.prop
 			for (var i:int = 0; i < 4; i++ )
 			{
 				item = new PropItem();
-				item.x = 80 * i;
 				addChild( item );
 				vecItemSkin[ i ] = item;
 			}
@@ -73,17 +84,25 @@ package app.modules.fight.view.prop
 			{
 				itemVo = itemList[ i ];
 				item = vecItemSkin[ _propIndex[itemVo.type] ];
+				item.y = i * 81;
 				item.setData( itemVo );
 			}
-			
-			if ( _itemPoints == null )
+			recordItempoints( PropItem.POS_LEFT );
+		}
+		
+		private function recordItempoints( pos:int = PropItem.POS_LEFT ):void
+		{
+			if ( stage )
 			{
 				_itemPoints = new Vector.<Point>(10);
-				for ( i = 0; i < numChildren; i++ )
+				for ( var i:int  = 0; i < numChildren; i++ )
 				{
 					var dis:PropItem = this.getChildAt( i ) as PropItem;
-					if ( dis )
+					if ( dis ) 
+					{
+						dis.setPosType( pos );
 						_itemPoints[ dis.data.type ] = dis.localToGlobal( new Point( dis.width >> 1, dis.height>> 1));
+					}
 				}
 			}
 		}

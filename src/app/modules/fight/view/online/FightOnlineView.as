@@ -28,7 +28,7 @@ package app.modules.fight.view.online
 		public var txtTime2:TextField; // 时间显示
 		
 		private var dictLetterOther:Dictionary;
-		private var otherTotalTime:int = 120;
+		private var destCurrentTime:int = 120;
 		
 		public var vecAddBubbleVoForOther:Vector.<LetterBubbleVo>; // 记录增加干扰的泡泡
 		
@@ -46,8 +46,8 @@ package app.modules.fight.view.online
 		
 		override public function initialize( isPractice:Boolean = false ):void
 		{
-			selfTotalTime = 120;
-			otherTotalTime = 120;
+			selfCurrentTime = 120;
+			destCurrentTime = 120;
 			super.initialize( isPractice );
 		}
 		
@@ -64,12 +64,12 @@ package app.modules.fight.view.online
 			var time:int = isWin ? 3 : -10;
 			var point:Point = getShowTipsPoint( isSelf );
 			
-			Debug.debug( isSelf, time, selfTotalTime, otherTotalTime );
+			Debug.debug( isSelf, time, selfCurrentTime, destCurrentTime );
 			
-			if ( isSelf ) selfTotalTime += time;
-			else otherTotalTime += time;
+			if ( isSelf ) selfCurrentTime += time;
+			else destCurrentTime += time;
 			
-			Debug.debug( isSelf, time, selfTotalTime, otherTotalTime );
+			Debug.debug( isSelf, time, selfCurrentTime, destCurrentTime );
 			
 			Tips.show( msg, point.x, point.y, 25 );
 		}
@@ -124,7 +124,7 @@ package app.modules.fight.view.online
 		
 		private function setPool( list:Vector.<LetterBubbleVo>, con:Sprite, isSelf:Boolean = true ):void
 		{
-			points = [[32.75,32],[102.65,32],[172.55,32],[242.45,32],[312.35,32],[382.25,32],[46.5,94.2],[110.9,94.2],[175.3,94.2],[239.75,94.2],[304.1,94.2],[368.5,94.2],[32.75,156.4],[96.15,156.4],[159.55,156.4],[222.95,156.4],[286.35,156.4],[349.75,156.4],[65.25,218.6],[128.65,218.6],[192.05,218.6],[255.45,218.6],[318.85,218.6],[382.25,218.6],[49,343],[112.4,343],[175.8,343],[239.2,343],[302.6,343],[366,343],[32.75,280.8],[102.65,280.8],[172.55,280.8],[242.45,280.8],[312.35,280.8],[382.25,280.8]];
+			points = [[40.25, 44.5],[110.15, 44.5],[180.05, 44.5],[249.95, 44.5],[319.85, 44.5],[389.75, 44.5],[54, 106.7],[118.4, 106.7],[182.8, 106.7],[247.25, 106.7],[311.6, 106.7],[376, 106.7],[40.25, 168.9],[103.65, 168.9],[167.05, 168.9],[230.45, 168.9],[293.85, 168.9],[357.25, 168.9],[72.75, 231.1],[136.15, 231.1],[199.55, 231.1],[262.95, 231.1],[326.35, 231.1],[389.75, 231.1],[56.5, 355.5],[119.9, 355.5],[183.3, 355.5],[246.7, 355.5],[310.1, 355.5],[373.5, 355.5],[40.25, 293.3],[110.15, 293.3],[180.05, 293.3],[249.95, 293.3],[319.85, 293.3],[389.75, 293.3]];
 			var dict:Dictionary = new Dictionary();
 			DisplayUtil.removedAll( con, false );
 			var key:String;
@@ -147,17 +147,16 @@ package app.modules.fight.view.online
 				Debug.debug( (isSelf ? "自己屏幕：" : "对手屏幕：") + key );
 			}
 			if ( isSelf ) dictLetterSelf = dict;
+			else dictLetterOther = dict;
 		}
 		
 		override protected function timerHandler():void
 		{
-			selfTotalTime--;
-			setTimeText( txtTime, selfTotalTime );
+			selfCurrentTime--;
+			setTimeText( txtTime, selfCurrentTime, selfBar );
 			
-			otherTotalTime--;
-			setTimeText( txtTime2, otherTotalTime );
-			
-//			Debug.debug( "时间：", selfTotalTime, otherTotalTime );
+			destCurrentTime--;
+			setTimeText( txtTime2, destCurrentTime, destBar );
 		}
 		
 		/**
@@ -167,9 +166,9 @@ package app.modules.fight.view.online
 		{
 			var point:Point = getShowTipsPoint( isSelf );
 			if ( isSelf ) {
-				selfTotalTime += 8;
+				selfCurrentTime += 8;
 			} else {
-				otherTotalTime += 8;
+				destCurrentTime += 8;
 			}
 			Tips.show( "时间 +8s", point.x, point.y );
 		}
@@ -186,7 +185,7 @@ package app.modules.fight.view.online
 			{
 				var vo:LetterBubbleVo = vecAddBubbleVoForOther.pop();
 				var key:String = vo.lowerCase;
-				if ( dictLetterSelf && parent )
+				if ( dictLetterOther && parent )
 				{
 					var ary:Array = dictLetterOther[ key ];
 					var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;

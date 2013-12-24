@@ -44,16 +44,21 @@ package app.modules.fight.view
 	{
 		public var txtRoundNum:TextField; // 显示关卡数
 		public var txtName:TextField;// 所属地图名称
-		public var bgName:Sprite; // 名称底
 		public var txtTime:TextField; // 时间显示
-		public var bgTime:Sprite; // 时间底
 		public var txtMoney:TextField; // 自己金钱数量显示
 		public var container:Sprite; // 自己字母泡泡显示容器
 		public var container2:Sprite;// 对手字母泡泡显示容器
 		public var btnClose:InteractiveObject; // 退出【练习模式有】
+		public var txtLeftWordsSelf:TextField;//自己剩余单词显示
+		public var txtLeftWordsDest:TextField;//对手剩余单词显示
+		public var btnShowAnswer:InteractiveObject;// 显示单词
+		public var txtChinese:TextField;//中文显示
+		public var txtEnglish:TextField;//英文显示
+		public var selfBar:MovieClip;
+		public var destBar:MovieClip;
+		
 		public var isAlone:Boolean = true;
 		public var mapId:int = 0;
-		public var moneyIcon:Sprite;
 		public var vecAddBubbleVo:Vector.<LetterBubbleVo>; // 记录增加干扰的泡泡
 		
 		private var _isValidOperate:Boolean = true;
@@ -62,10 +67,11 @@ package app.modules.fight.view
 		protected var propList:PropList;
 		protected var effectContainer:Sprite;
 		protected var dictLetterSelf:Dictionary;
-		protected var selfTotalTime:int = 120;
+		protected var selfCurrentTime:int = 120;
 		protected var dictProps:Dictionary;
 		protected var dictCheckItem:Dictionary;
 		protected var points:Array = [];
+		protected var totalTime:Number = 60;
 		
 		public function FightBaseView()
 		{
@@ -78,6 +84,10 @@ package app.modules.fight.view
 			
 			spellArea = new SpellArea();
 			addChild( spellArea );
+			spellArea.txtChinese = txtChinese;
+			spellArea.txtEnglish = txtEnglish;
+			spellArea.btnShowAnswer = btnShowAnswer;
+			spellArea.initSkin();
 			
 			propList = new PropList();
 			addChild( propList );
@@ -112,6 +122,7 @@ package app.modules.fight.view
 		
 		public function initialize( isPractice:Boolean = false ):void
 		{
+			totalTime = selfCurrentTime;
 			isValidOperate = true;
 			
 			appStage.addEventListener( KeyboardEvent.KEY_UP, keyDownHandler );
@@ -121,9 +132,6 @@ package app.modules.fight.view
 			
 			if ( txtTime )
 				txtTime.visible = !isPractice;
-			if ( bgTime )
-				bgTime.visible = !isPractice;
-			
 			if ( !isPractice ) {
 				timerHandler();
 				TickManager.doInterval( timerHandler, 1000 );
@@ -143,6 +151,18 @@ package app.modules.fight.view
 			clearDict( dictCheckItem );
 		}
 		
+		public function setTxtLeftWordsSelf( num:String = "" ):void
+		{
+			txtLeftWordsSelf.text = num.toString();
+		}
+		
+		public function setTxtLeftWordsDest( num:String = "" ):void
+		{
+			if (txtLeftWordsDest ) {
+				txtLeftWordsDest.text = num.toString();
+			}
+		}
+		
 		public function removeConChilds():void
 		{
 			DisplayUtil.removedAll( container );
@@ -154,8 +174,8 @@ package app.modules.fight.view
 			if ( num > 0 )
 			{
 				// 252 26  // 820 30
-				var endx:Number = isAlone ? 820 : 252;
-				var endy:Number = isAlone ? 30 : 26;
+				var endx:Number = isAlone ? txtMoney.x + txtMoney.width * 0.5 : txtMoney.x - 25;
+				var endy:Number = isAlone ? txtMoney.y - 25 : txtMoney.y + txtMoney.height* 0.5;
 				var mc:MovieClip = getObj("ui_Skin_AddMoneyEffectNum")as MovieClip;
 				mc.txtNum.text = "+" + num;
 				mc.x = point.x;
@@ -241,7 +261,7 @@ package app.modules.fight.view
 		{
 		}
 		
-		public function setRoundName( roundName:String, isDisplayTime:Boolean = true ):void
+		public function setRoundName( roundName:String ):void
 		{
 		}
 		
@@ -271,10 +291,6 @@ package app.modules.fight.view
 		public function updateMoneyDisplay():void
 		{
 			txtMoney.text = GameData.instance.selfVo.money.toString();
-			if ( btnClose && moneyIcon ) {
-				txtMoney.x = btnClose.x - txtMoney.textWidth - 10;
-				moneyIcon.x = txtMoney.x - moneyIcon.width - 5;
-			}
 		}
 		
 		/**
@@ -353,19 +369,28 @@ package app.modules.fight.view
 			return point;
 		}
 		
-		protected function setTimeText( text:TextField, seconds:int ):void
+		protected function setTimeText( text:TextField, seconds:int, mcBar:MovieClip ):void
 		{
 			if ( seconds >= 0 )
 				text.htmlText = getTimeString( seconds );
 			
+			if ( mcBar ) {
+				mcBar.bar.scaleX = Math.min( seconds / totalTime, 1 );
+				if ( mcBar.rotation > 0 ) {
+					text.x = MathUtil.range( mcBar.x - mcBar.bar.width, mcBar.x - mcBar.width, mcBar.x - text.width );
+				} else {
+					text.x = MathUtil.range( mcBar.x + mcBar.bar.width - text.width, mcBar.x, mcBar.x + mcBar.width - text.width );
+				}
+			}
+			
 			function getTimeString( seconds:int ):String
 			{
-				if ( isAlone == false )
-					return HtmlText.color( seconds + "", seconds <= 10 ? 0xff0000 : 0xffff00 );
+//				if ( isAlone == false )
+//					return HtmlText.color( seconds + "", seconds <= 10 ? 0xff0000 : 0xffffff );
 				
 				var min:int = int(seconds/60);
 				var sec:int = seconds%60;
-				return HtmlText.color( (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), seconds <= 10 ? 0xff0000 : 0xffff00 );
+				return HtmlText.color( (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), seconds <= 10 ? 0xff0000 : 0xffffff );
 			}
 		}
 		

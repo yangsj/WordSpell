@@ -5,7 +5,6 @@ package app.modules.fight.view.alone
 	import flash.events.Event;
 	import flash.utils.Dictionary;
 	
-	import app.core.Text;
 	import app.core.Tips;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.FightBaseView;
@@ -30,8 +29,6 @@ package app.modules.fight.view.alone
 		
 		protected function resetText():void
 		{
-			txtName = Text.cloneText( txtName );
-			txtTime = Text.cloneText( txtTime );
 		}
 
 		override protected function onceInit():void
@@ -44,7 +41,7 @@ package app.modules.fight.view.alone
 		
 		override public function initialize( isPractice:Boolean = false ):void
 		{
-			selfTotalTime = 120;
+			selfCurrentTime = 120;
 			super.initialize( isPractice );
 		}
 
@@ -74,7 +71,7 @@ package app.modules.fight.view.alone
 
 		override public function setLettersPool( list:Vector.<LetterBubbleVo>, isSelf:Boolean = true ):void
 		{
-			points=[[41,44.2],[121.8,44.2],[202.6,44.2],[283.4,44.2],[364.2,44.2],[445,44.2],[525.8,44.2],[606.6,44.2],[687.4,44.2],[768.2,44.2],[849,44.2],[41,238.6],[121.8,238.6],[202.6,238.6],[283.4,238.6],[364.2,238.6],[445,238.6],[525.8,238.6],[606.6,238.6],[687.4,238.6],[768.2,238.6],[849,238.6],[41,141.4],[121.8,141.4],[202.6,141.4],[283.4,141.4],[364.2,141.4],[445,141.4],[525.8,141.4],[606.6,141.4],[687.4,141.4],[768.2,141.4],[849,141.4],[41,335.8],[121.8,335.8],[202.6,335.8],[283.4,335.8],[364.2,335.8],[445,335.8],[525.8,335.8],[606.6,335.8],[687.4,335.8],[768.2,335.8],[849,335.8]];
+			points=[[69.3, 48.4],[150.1, 48.4],[230.9, 48.4],[311.7, 48.4],[392.5, 48.4],[473.3, 48.4],[554.1, 48.4],[634.9, 48.4],[715.7, 48.4],[69.3, 240],[150.1, 240],[230.9, 240],[311.7, 240],[392.5, 240],[473.3, 240],[554.1, 240],[634.9, 240],[715.7, 240],[69.3, 144.2],[150.1, 144.2],[230.9, 144.2],[311.7, 144.2],[392.5, 144.2],[473.3, 144.2],[554.1, 144.2],[634.9, 144.2],[715.7, 144.2],[69.3, 335.8],[150.1, 335.8],[230.9, 335.8],[311.7, 335.8],[392.5, 335.8],[473.3, 335.8],[554.1, 335.8],[634.9, 335.8],[715.7, 335.8],[69.3, 431.6],[150.1, 431.6],[230.9, 431.6],[311.7, 431.6],[392.5, 431.6],[473.3, 431.6],[554.1, 431.6],[634.9, 431.6],[715.7, 431.6]];
 			dictLetterSelf = new Dictionary();
 			DisplayUtil.removedAll( container, false );
 			var key:String;
@@ -104,21 +101,20 @@ package app.modules.fight.view.alone
 		{
 			if ( isSelf )
 			{
-				selfTotalTime += 5;
+				selfCurrentTime += 5;
 				Tips.showCenter( "时间 +5s" );
 			}
 		}
 		
 		override protected function timerHandler():void
 		{
-			selfTotalTime--;
-			setTimeText( txtTime, selfTotalTime );
+			selfCurrentTime--;
+			setTimeText( txtTime, selfCurrentTime, selfBar );
 		}
 
-		override public function setRoundName( roundName:String, isDisplayTime:Boolean = true ):void
+		override public function setRoundName( roundName:String ):void
 		{
-			txtName.text = roundName;
-			bgName.width = txtName.textWidth + 40;
+			txtName.htmlText = roundName;
 		}
 		
 		override protected function enterFrameHandler( event:Event = null ):void

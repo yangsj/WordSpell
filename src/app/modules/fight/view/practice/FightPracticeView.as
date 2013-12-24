@@ -24,9 +24,9 @@ package app.modules.fight.view.practice
 			}
 		}
 		
-		override public function setRoundName( roundName:String, isDisplayTime:Boolean = true ):void
+		override public function setRoundName( roundName:String ):void
 		{
-			super.setRoundName( "错误单词练习" );
+			super.setRoundName( "单词复习" );
 		}
 		
 		override protected function resetText():void

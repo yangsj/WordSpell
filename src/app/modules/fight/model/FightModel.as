@@ -38,6 +38,7 @@ package app.modules.fight.model
 		private var _isHasDisturbForDest:Boolean = false;
 		private var _isUsePorped:Boolean = false;
 		private var _inputNumberLettle:int = 0;
+		private var _totalWordsNum:int = 10;
 		
 		public function FightModel()
 		{
@@ -451,6 +452,22 @@ package app.modules.fight.model
 				return spellVo.charsLength - _inputNumberLettle;
 			}
 			return 0;
+		}
+
+		/**
+		 * 当前关中单词总数量
+		 */
+		public function get totalWordsNum():int
+		{
+			return _totalWordsNum;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set totalWordsNum(value:int):void
+		{
+			_totalWordsNum = value;
 		}
 
 

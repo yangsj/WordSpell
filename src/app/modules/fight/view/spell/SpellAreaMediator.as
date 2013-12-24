@@ -57,7 +57,6 @@ package app.modules.fight.view.spell
 			fightModel.isShowAnswer = false;
 			fightModel.isErrorLastAnswerForPractice = false;
 			isSendInput = false;
-			view.setLeftWordsPos( false );
 			if ( fightModel.modeType == 5 ) {
 				nextWordNotify( null );
 			}
@@ -121,8 +120,6 @@ package app.modules.fight.view.spell
 				isSendInput = false;
 				view.setInitData( fightModel.spellVo );
 				view.setPos( fightModel.isPractice );
-				view.setLeftWordsPos( fightModel.isBattle );
-				view.setLeftWords( 9 - fightModel.currentSelfIndex );
 			}
 		}
 		

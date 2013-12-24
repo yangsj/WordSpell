@@ -162,6 +162,7 @@ package app.modules.fight.service
 			fightModel.modeType = data.mode;
 			fightModel.mapId = data.round_type;
 			fightModel.roundId = data.round_id;
+			fightModel.totalWordsNum = spellList.length;
 			mapModel.currentMapVo.mapId = data.round_type;
 
 			// 清零
