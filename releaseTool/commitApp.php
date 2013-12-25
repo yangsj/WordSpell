@@ -80,6 +80,9 @@
 
 	echo "<div style='font-size:12px;color:green;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
 
+	// 本地配置app版本时间更改
+	$filename5 = $releaseFloader."\\application.xml";
+	$newArray = changeLocalVersionTime($filename5);
 	// 更新資源版本控制
 	$filename5 = $fullversionPath."\\application.xml";
 	$newArray = changeApplicationXmlVersions($filename5, $fullversionPath);

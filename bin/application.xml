@@ -2,7 +2,7 @@
 <data>
 
 	<!-- 版本号 -->
-	<app version="2013-12-23 13:29" />
+	<app version="2013-12-25 22:11:11"/>
 	
 	<!-- id:用于获取资源src的名称(和文件名称保持一致) -->
 	<!-- src:资源路径 -->
@@ -18,7 +18,7 @@
 	<asset id="ui_map" src="assets/ui_map.swf" version="1_56" first="2"/>
 	<asset id="ui_main" src="assets/ui_main.swf" version="1_53" first="2"/>
 	<asset id="ui_chat" src="assets/ui_chat.swf" version="1_1" first="2"/>
-	<asset id="ui_font" src="assets/ui_font.swf" version="1_29" first="2"/>
+	<!-- <asset id="ui_font" src="assets/ui_font.swf" version="1_29" first="2"/> -->
 	<asset id="ui_number" src="assets/ui_number.swf" version="1_29" first="2"/>
 	
 	<!-- 以下部分为用时加载 -->

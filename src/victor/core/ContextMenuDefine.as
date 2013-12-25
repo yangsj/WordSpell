@@ -6,7 +6,6 @@ package victor.core
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	import flash.ui.ContextMenu;
-	import flash.ui.ContextMenuBuiltInItems;
 	import flash.ui.ContextMenuItem;
 	import flash.utils.Dictionary;
 	
@@ -26,7 +25,7 @@ package victor.core
 		private static var myContextMenu:ContextMenu;
 		private var dictLabels:Dictionary;
 		
-		private const defaultName:String = "author yushan";
+		private const defaultName:String = "yushan sir";
 		
 		/*============================================================================*/
 		/* Constructor                                                                */

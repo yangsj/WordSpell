@@ -1,15 +1,16 @@
 package app.modules.task.view
 {
 	import flash.display.InteractiveObject;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.text.TextField;
 	
 	import app.modules.fight.view.prop.item.PropItem;
 	import app.modules.model.vo.ItemVo;
 	import app.modules.task.event.TaskEvent;
 	import app.modules.task.model.TaskVo;
+	import app.modules.util.Num;
 	
 	import victor.framework.core.BasePanel;
 	import victor.utils.DisplayUtil;
@@ -23,8 +24,9 @@ package app.modules.task.view
 	 */
 	public class TaskCompletedPanel extends BasePanel
 	{
-		public var txtExp:TextField;
-		public var txtMoney:TextField;
+		
+		public var conExpNum:Sprite;
+		public var conMoneyNum:Sprite;
 		public var btnTake:InteractiveObject;
 		
 		private var propListContainer:Sprite;
@@ -78,22 +80,21 @@ package app.modules.task.view
 					item.mouseEnabled = false;
 					propListContainer.addChild( item );
 				}
-				txtExp.text = taskVo.rewardExp.toString();
-				txtMoney.text = taskVo.rewardMoney.toString();
+				
+				DisplayUtil.removedAll( conExpNum );
+				DisplayUtil.removedAll( conMoneyNum );
+				
+				var shapeNum:Shape = Num.getShape( taskVo.rewardExp );
+				shapeNum.y = -shapeNum.height * 0.5;
+				conExpNum.addChild( shapeNum );
+				
+				shapeNum = Num.getShape( taskVo.rewardMoney );
+				shapeNum.y = -shapeNum.height * 0.5;
+				conMoneyNum.addChild( shapeNum );
+				
 				btnTake.mouseEnabled = taskVo.isEd;
 				btnTake.filters = taskVo.isEd ? [] : [ UtilsFilter.COLOR_GREW ];
 			}
-//			else
-//			{
-//				var vo:ItemVo = new ItemVo();
-//				vo.type = int(Math.random() * 4) + 1;
-//				vo.num = 2;
-//				item = new PropItem();
-//				item.setData(vo);
-//				item.mouseChildren = false;
-//				item.mouseEnabled = false;
-//				propListContainer.addChild( item );
-//			}
 		}
 		
 		override protected function onceInit():void

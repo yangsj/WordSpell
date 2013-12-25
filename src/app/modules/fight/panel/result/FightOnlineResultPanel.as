@@ -1,13 +1,18 @@
 package app.modules.fight.panel.result
 {
+	import flash.display.MovieClip;
+	import flash.display.Shape;
 	import flash.display.SimpleButton;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
 	import app.modules.fight.events.FightOnlineEvent;
 	import app.modules.fight.model.FightEndVo;
+	import app.modules.util.Num;
 	
 	import victor.framework.core.BasePanel;
+	import victor.utils.DisplayUtil;
 	
 	
 	/**
@@ -30,33 +35,33 @@ package app.modules.fight.panel.result
 		 */
 		public var txtPlayerName1:TextField;
 		/**
-		 * txtExp2
-		 */
-		public var txtExp2:TextField;
-		/**
-		 * txtExp1
-		 */
-		public var txtExp1:TextField;
-		/**
-		 * txtMoney1
-		 */
-		public var txtMoney1:TextField;
-		/**
-		 * txtItems1
-		 */
-		public var txtItems1:TextField;
-		/**
 		 * txtPlayerName2
 		 */
 		public var txtPlayerName2:TextField;
 		/**
-		 * txtMoney2
+		 * conExp1
 		 */
-		public var txtMoney2:TextField;
+		public var conExp1:MovieClip;
 		/**
-		 * txtItems2
+		 * conExp2
 		 */
-		public var txtItems2:TextField;
+		public var conExp2:MovieClip;
+		/**
+		 * conMoney1
+		 */
+		public var conMoney1:MovieClip;
+		/**
+		 * conMoney2
+		 */
+		public var conMoney2:MovieClip;
+		/**
+		 * conItems1
+		 */
+		public var conItems1:MovieClip;
+		/**
+		 * conItems2
+		 */
+		public var conItems2:MovieClip;
 		
 		public function FightOnlineResultPanel()
 		{
@@ -88,15 +93,31 @@ package app.modules.fight.panel.result
 		
 		public function setData( winVo:FightEndVo, loseVo:FightEndVo ):void
 		{
-			txtExp1.text = winVo.addExp + "";
-			txtMoney1.text = winVo.addMoney + "";
-			txtItems1.text = "";
-			txtItems1.text = "x" + winVo.items.length;
+//			txtExp1.text = winVo.addExp + "";
+//			txtMoney1.text = winVo.addMoney + "";
+//			txtItems1.text = "";
+//			txtItems1.text = "x" + winVo.items.length;
+//			
+//			txtExp2.text = loseVo.addExp + "";
+//			txtMoney2.text = loseVo.addMoney + "";
+//			txtItems2.text = "";
+//			txtItems2.text = "x" + loseVo.items.length;
 			
-			txtExp2.text = loseVo.addExp + "";
-			txtMoney2.text = loseVo.addMoney + "";
-			txtItems2.text = "";
-			txtItems2.text = "x" + loseVo.items.length;
+			setConNum( conExp1, winVo.addExp );
+			setConNum( conMoney1, winVo.addMoney );
+			setConNum( conItems1, winVo.items.length );
+			setConNum( conExp2, loseVo.addExp );
+			setConNum( conMoney2, loseVo.addMoney );
+			setConNum( conItems2, loseVo.items.length );
+		}
+		
+		private function setConNum( con:Sprite, num:int ):void
+		{
+			DisplayUtil.removedAll( con );
+			var shapeNum:Shape = Num.getShape( num );
+			shapeNum.x = -shapeNum.width * 0.5;
+			shapeNum.y = -shapeNum.height * 0.5;
+			con.addChild( shapeNum );
 		}
 		
 		override protected function get resNames():Array

@@ -2,7 +2,6 @@ package app.modules.fight.view.panel
 {
 	import flash.text.TextField;
 	
-	import app.core.Text;
 	import app.modules.fight.model.FightEndVo;
 	
 	/**

@@ -21,23 +21,23 @@ package app.managers
 		
 		public static function init():void
 		{
-			var myClass:Class = LoaderManager.getClass( "gamewordspellfont" );
-			Font.registerFont( myClass );
-			var array:Array = Font.enumerateFonts( false );
-			_font = array[ 0 ];
-			_fontName = _font.fontName;
-			Debug.debug( "字体嵌入数量：" + array.length );
+//			var myClass:Class = LoaderManager.getClass( "gamewordspellfont" );
+//			Font.registerFont( myClass );
+//			var array:Array = Font.enumerateFonts( false );
+//			_font = array[ 0 ];
+//			_fontName = _font.fontName;
+//			Debug.debug( "字体嵌入数量：" + array.length );
 		}
 
-		public static function get font():Font
-		{
-			return _font;
-		}
-
-		public static function get fontName():String
-		{
-			return _fontName;
-		}
+//		public static function get font():Font
+//		{
+//			return _font;
+//		}
+//
+//		public static function get fontName():String
+//		{
+//			return _fontName;
+//		}
 
 		
 	}

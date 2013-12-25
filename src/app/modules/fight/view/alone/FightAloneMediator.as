@@ -86,7 +86,7 @@ package app.modules.fight.view.alone
 
 		private function initData():void
 		{
-			view.setRoundName( mapModel.currentMapVo.mapName + "<br>" + HtmlText.color("第" + fightModel.roundId + "关", 0xffffff ) );
+			view.setRoundName( mapModel.currentMapVo.mapName + "<br>" + HtmlText.color("第" + ( fightModel.roundId + 1 ) + "关", 0xffffff ) );
 			
 			letterIndex = 0;
 			view.initialize( fightModel.isPractice );

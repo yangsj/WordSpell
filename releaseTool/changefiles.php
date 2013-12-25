@@ -10,14 +10,11 @@
 		$doc->load($file);
 		
 		$app = $doc->getElementsByTagName("app");
-		if ( $app ) 
-		{
-			//$app -> setAttribute("version", "2013.12.23 14:10");
-			//echo 'app xml elments:'.$app."<br>";
-		}
 		foreach($app as $ai)
 		{
-			$ai -> setAttribute("version", date('Y-m-d H:m:s', time()));
+			echo "上次更新时间：".$ai -> getAttribute("version")."<br>";
+			$ai -> setAttribute("version", getTimeStringNow() );
+			echo "本次更新时间：".$ai -> getAttribute("version")."<br>";
 		}
 
 		$assests = $doc->getElementsByTagName("asset");
@@ -50,32 +47,34 @@
 		return $array;
 	}
 
-
-	function changeApplicationXml($file, $versionNum, $subver)
+	function changeLocalVersionTime($file)
 	{
-		$filename = $file;
-		$appfd = fopen($filename, "r+");
-		$contents = fread($appfd, filesize($filename));
-		$contents = preg_replace("/version=\"[0-9]+\"/i", "version=\"".$versionNum."_".$subver."\"", $contents);
-		fclose($appfd);
+		$doc = new DOMDocument();
+		$doc->load($file);
 		
-		$appfd = fopen($filename, "r+");
-		fwrite($appfd, $contents);
-		fclose($appfd);
+		$app = $doc->getElementsByTagName("app");
+		foreach($app as $ai)
+		{
+			$ai -> setAttribute( "version", getTimeStringNow() );
+		}
+
+		$doc->save($file);
 	}
 
-	function changeConfigXml($file, $lang)
+	function getTimeStringNow()
 	{
-		$filename = $file;
-		$appfd = fopen($filename, "r+");
-		$contents = fread($appfd, filesize($filename));
-
-		$contents = preg_replace("/item name=\"language\" value=\"[a-zA-z_0-9]+\"/", "item name=\"language\" value=\"".$lang."\" ", $contents);
-		fclose($appfd);
-		
-		$appfd = fopen($filename, "w+");
-		fwrite($appfd, $contents);
-		fclose($appfd);
+		$ary = getdate(strtotime("now"));
+		return $ary["year"]."-".getStr($ary["mon"])."-".getStr($ary["mday"])." ".getStr($ary["hours"]).":".getStr($ary["minutes"]).":".getStr($ary["seconds"]);
+		//return date('Y-m-d H:m:s', strtotime("now"));
 	}
+
+	function getStr($time)
+	{
+		if ( $time < 10 ) {
+			return "0".$time;
+		}
+		return $time;
+	}
+
 	
 ?>

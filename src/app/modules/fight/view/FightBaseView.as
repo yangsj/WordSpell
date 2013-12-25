@@ -371,11 +371,10 @@ package app.modules.fight.view
 		
 		protected function setTimeText( text:TextField, seconds:int, mcBar:MovieClip ):void
 		{
-			if ( seconds >= 0 )
-				text.htmlText = getTimeString( seconds );
+			text.htmlText = getTimeString( seconds );
 			
 			if ( mcBar ) {
-				mcBar.bar.scaleX = Math.min( seconds / totalTime, 1 );
+				mcBar.bar.scaleX = MathUtil.range( seconds / totalTime, 0, 1 );
 				if ( mcBar.rotation > 0 ) {
 					text.x = MathUtil.range( mcBar.x - mcBar.bar.width, mcBar.x - mcBar.width, mcBar.x - text.width );
 				} else {
@@ -388,6 +387,8 @@ package app.modules.fight.view
 //				if ( isAlone == false )
 //					return HtmlText.color( seconds + "", seconds <= 10 ? 0xff0000 : 0xffffff );
 				
+				if ( seconds <= 0 ) return HtmlText.color( "00:00", 0xff0000 );
+					
 				var min:int = int(seconds/60);
 				var sec:int = seconds%60;
 				return HtmlText.color( (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), seconds <= 10 ? 0xff0000 : 0xffffff );

@@ -26,7 +26,7 @@ package app.core
 		public static function getFormat( font:String = "", size:int = 50, color:uint = 0, align:String = "center" ):TextFormat
 		{
 			var tf:TextFormat = new TextFormat();
-			tf.font = font ? font : FontManager.fontName;
+			if ( font ) tf.font = font;
 			tf.color = color;
 			tf.size = size;
 			tf.align = align;
@@ -44,11 +44,10 @@ package app.core
 		 * @param aglin
 		 * @return TextField对象实例，绑定嵌入字体显示，仅用可选和鼠标事件
 		 */
-		public static function getText( size:int, color:uint, font:String = "", x:Number = 0, y:Number = 0, w:Number = 100, h:Number = 22, aglin:String = "center" ):TextField
+		public static function getText( size:int, color:uint, font:String, x:Number = 0, y:Number = 0, w:Number = 100, h:Number = 22, aglin:String = "center" ):TextField
 		{
 			var text:TextField = new TextField();
 			text.defaultTextFormat = getFormat( font, size, color, aglin );
-			text.embedFonts = ( font == "" || font == FontManager.fontName );
 			text.selectable = false;
 			text.mouseEnabled = false;
 			text.x = x;

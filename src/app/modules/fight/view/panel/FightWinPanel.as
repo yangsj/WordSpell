@@ -1,7 +1,6 @@
 package app.modules.fight.view.panel
 {
 	import app.modules.fight.model.FightEndVo;
-	import app.core.Text;
 	
 	import victor.utils.UtilsFilter;
 
@@ -16,14 +15,6 @@ package app.modules.fight.view.panel
 		public function FightWinPanel()
 		{
 			super();
-		}
-		
-		override protected function onceInit():void
-		{
-			super.onceInit();
-			
-			txtExp = Text.cloneText( txtExp );
-			txtMoney = Text.cloneText( txtMoney );
 		}
 
 		override public function setData( endVo:FightEndVo ):void
