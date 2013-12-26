@@ -76,28 +76,30 @@ package app.modules.fight.view.prop
 		private function useItemHandler( event:PackEvent ):void
 		{
 			var itemVo:ItemVo = event.data as ItemVo;
-			switch ( itemVo.type )
+			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
 			{
-				case ItemType.BROOM:
-					if ( fightModel.isHasDisturbForSelf == false ) {
-						Tips.showMouse( "当前屏幕中没有需要清楚的干扰因素！！！" );
+				switch ( itemVo.type )
+				{
+					case ItemType.BROOM:
+						if ( fightModel.isHasDisturbForSelf == false ) {
+							Tips.showMouse( "当前屏幕中没有需要清楚的干扰因素！！！" );
+							return ;
+						}
+						break;
+					case ItemType.SKIP:
+						dispatch( new FightAloneEvent( FightAloneEvent.USE_SKIP_INPUT_AUTO ));
+						TickManager.doTimeout( useProp, FightType.SKIP_TIME_PER_LETTER * ( fightModel.surplusLetterNum + 1 ), itemVo );
 						return ;
-					}
-					break;
-				case ItemType.SKIP:
-					dispatch( new FightAloneEvent( FightAloneEvent.USE_SKIP_INPUT_AUTO ));
-					TickManager.doTimeout( useProp, FightType.SKIP_TIME_PER_LETTER * ( fightModel.surplusLetterNum + 1 ), itemVo );
-					return ;
-					break;
+						break;
+				}
+				useProp(itemVo);
 			}
-			useProp(itemVo);
+			else Tips.showMouse( "钻石不足！" );
 		}
 		
 		private function useProp( itemVo:ItemVo ):void
 		{
-			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
-				packService.useItem( itemVo.type );
-			else Tips.showMouse( "钻石不足！" );
+			packService.useItem( itemVo.type );
 		}
 		
 		// 物品使用成功

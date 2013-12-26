@@ -280,8 +280,13 @@ package app.modules.fight.view
 			key = key.toLowerCase();
 			if ( dictLetterSelf && parent )
 			{
-				var ary:Array = dictLetterSelf[ key ];
-				var bubble:LetterBubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+				var bubble:LetterBubble;
+				if ( isNaN( Number(key) )) {
+					var ary:Array = dictLetterSelf[ key ];
+					bubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+				} else {
+					bubble = dictProps[ key ];
+				}
 				
 				if ( bubble ) bubble.selected( true );
 				else if ( isKeyboard ) Tips.showCenter( "按键无效" );

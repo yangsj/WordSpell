@@ -469,6 +469,16 @@ package app.modules.fight.model
 		{
 			_totalWordsNum = value;
 		}
+		
+		public function get progressWordsForSelf():String
+		{
+			return (_totalWordsNum - currentSelfIndex - 1) +"/"+_totalWordsNum;
+		}
+		
+		public function get progressWordsForDest():String
+		{
+			return (_totalWordsNum - currentDestIndex - 1) +"/"+_totalWordsNum;
+		}
 
 
 	}

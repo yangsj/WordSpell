@@ -85,7 +85,7 @@ package app.modules.fight.view.prop
 				itemVo = itemList[ i ];
 				item = vecItemSkin[ _propIndex[itemVo.type] ];
 				item.y = i * 81;
-				item.setData( itemVo );
+				item.setData( itemVo.clone() );
 			}
 			recordItempoints( PropItem.POS_LEFT );
 		}
@@ -101,7 +101,7 @@ package app.modules.fight.view.prop
 					if ( dis ) 
 					{
 						dis.setPosType( pos );
-						_itemPoints[ dis.data.type ] = dis.localToGlobal( new Point( dis.width >> 1, dis.height>> 1));
+						_itemPoints[ dis.data.type ] = dis.localToGlobal( new Point( dis["bgArea"].width >> 1, dis["bgArea"].height>> 1));
 					}
 				}
 			}

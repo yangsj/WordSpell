@@ -312,7 +312,7 @@ package app.modules.fight.view
 					baseView.displayPropItem();
 				}
 				// 设置自己还剩余单词数量
-				baseView.setTxtLeftWordsSelf( (fightModel.totalWordsNum - fightModel.currentSelfIndex) + "/" + fightModel.totalWordsNum);
+				baseView.setTxtLeftWordsSelf( fightModel.progressWordsForSelf );
 			}
 			else if ( fightModel.isBattle ) {
 				DisplayUtil.removedAll( baseView.container );

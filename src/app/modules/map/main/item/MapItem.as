@@ -65,7 +65,7 @@ package app.modules.map.main.item
 				super.onClickHandler( event );
 				if ( isOpen )
 					skin.dispatchEvent( new MapEvent( MapEvent.OPEN_SELECTED_ROUND, mapVo, true ));
-				else Tips.showMouse( "该章节地图未激活！" );
+				else Tips.showMouse( "当前地图还没有开启，你需要更多的星星才能开启！" );
 			}
 		}
 		

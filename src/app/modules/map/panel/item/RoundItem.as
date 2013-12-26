@@ -42,7 +42,7 @@ package app.modules.map.panel.item
 			{
 				if ( roundVo.isOpen )
 					skin.dispatchEvent( new SelectedRoundEvent( SelectedRoundEvent.SELECTED_ROUND, roundVo, true ));
-				else Tips.showMouse( "未开启！" );
+				else Tips.showMouse( "你还没有开启当前关卡，继续积累更多星星吧！" );
 			}
 			else
 			{

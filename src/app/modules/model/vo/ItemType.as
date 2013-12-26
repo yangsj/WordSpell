@@ -14,22 +14,22 @@ package app.modules.model.vo
 		 */
 		public static const DEFAULT:int = item_type_e.ITEM_NONE;
 		/**
-		 * 提示
+		 * 提示1
 		 */
 		public static const HINT:int = item_type_e.ITEM_TIPS;
 		
 		/**
-		 * 扫帚
+		 * 扫帚2
 		 */
 		public static const BROOM:int = item_type_e.ITEM_BROOM;
 		
 		/**
-		 * 跳过
+		 * 跳过3
 		 */
 		public static const SKIP:int = item_type_e.ITEM_NEXT;
 		
 		/**
-		 * 加时间
+		 * 加时间4
 		 */
 		public static const EXTRA_TIME:int = item_type_e.ITEM_TIME;
 		
