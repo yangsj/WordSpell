@@ -1,7 +1,6 @@
 package app.modules.fight.view.alone
 {
 	import app.modules.ViewName;
-	import app.modules.chat.event.ChatEvent;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.view.FightBaseMediator;
 	
@@ -64,19 +63,6 @@ package app.modules.fight.view.alone
 		private function startRoundNotify( event:FightAloneEvent ):void
 		{
 			initData();
-			
-			if ( fightModel.isPractice )
-			{
-				// 展开聊天窗口
-				dispatch( new ChatEvent( ChatEvent.SHOW_CHAT ));
-				// 折叠聊天窗口
-				dispatch( new ChatEvent( ChatEvent.FOLD_CHAT ));
-			}
-			else
-			{
-				// 折叠聊天窗口
-				dispatch( new ChatEvent( ChatEvent.HIDE_CHAT ));
-			}
 		}
 
 		protected function  pullData():void
@@ -86,7 +72,11 @@ package app.modules.fight.view.alone
 
 		private function initData():void
 		{
-			view.setRoundName( mapModel.currentMapVo.mapName + "<br>" + HtmlText.color("第" + ( fightModel.roundId + 1 ) + "关", 0xffffff ) );
+			if ( fightModel.isPractice ) {
+				view.setRoundName( mapModel.currentMapVo.mapName + "<br>" + HtmlText.color("练习", 0xffffff ) );
+			} else {
+				view.setRoundName( mapModel.currentMapVo.mapName + "<br>" + HtmlText.color("第" + ( fightModel.roundId + 1 ) + "关", 0xffffff ) );
+			}
 			
 			letterIndex = 0;
 			view.initialize( fightModel.isPractice );

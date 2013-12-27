@@ -13,6 +13,7 @@ package app.modules.fight.view.prop.item
 	import victor.framework.manager.LoaderManager;
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
+	import victor.utils.UtilsFilter;
 	
 	
 	/**
@@ -45,6 +46,8 @@ package app.modules.fight.view.prop.item
 		
 		private var itemTips:PropItemTips;
 		
+		private var _enabled:Boolean = true;
+		
 		public function PropItem()
 		{
 			super();
@@ -54,9 +57,12 @@ package app.modules.fight.view.prop.item
 		
 		protected function onClickHandler( event:MouseEvent ):void
 		{
-			if ( _isCanClick )
-				dispatchEvent( new PackEvent( PackEvent.USE_ITEM, data, true ));
-			else Tips.showMouse( "您的节奏有点太快了" );
+			if ( _enabled )
+			{
+				if ( _isCanClick )
+					dispatchEvent( new PackEvent( PackEvent.USE_ITEM, data, true ));
+				else Tips.showMouse( "您的节奏有点太快了" );
+			}
 		}
 		
 		//////////////////////////////////
@@ -86,6 +92,12 @@ package app.modules.fight.view.prop.item
 		}
 		
 		///////////////////////////////////
+		
+		public function enabled( value:Boolean ):void
+		{
+			this.filters = value ? [] : [ UtilsFilter.COLOR_GREW ];
+			_enabled = value;
+		}
 		
 		public function setPosType( type:int = POS_DOWN ):void
 		{

@@ -39,6 +39,7 @@ package app.modules.fight.model
 		private var _isUsePorped:Boolean = false;
 		private var _inputNumberLettle:int = 0;
 		private var _totalWordsNum:int = 10;
+		private var _cacheInviteList:Vector.<FightInviteVo> = new Vector.<FightInviteVo>();
 		
 		public function FightModel()
 		{
@@ -478,6 +479,11 @@ package app.modules.fight.model
 		public function get progressWordsForDest():String
 		{
 			return (_totalWordsNum - currentDestIndex - 1) +"/"+_totalWordsNum;
+		}
+
+		public function get cacheInviteList():Vector.<FightInviteVo>
+		{
+			return _cacheInviteList;
 		}
 
 

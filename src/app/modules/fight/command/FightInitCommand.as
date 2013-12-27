@@ -33,6 +33,7 @@ package app.modules.fight.command
 	import app.modules.fight.view.spell.SpellAreaMediator;
 	
 	import victor.framework.core.BaseCommand;
+	import victor.framework.events.PanelEvent;
 	
 	
 	/**
@@ -71,6 +72,9 @@ package app.modules.fight.command
 			injectActor( FightReadyModel );
 			injectActor( FightAloneService );
 			injectActor( FightOnlineService );
+			
+			commandMap.mapEvent( PanelEvent.LOAD_END,   FightInviteCommand, PanelEvent );
+			commandMap.mapEvent( PanelEvent.LOAD_START, FightInviteCommand, PanelEvent );
 		}
 		
 	}

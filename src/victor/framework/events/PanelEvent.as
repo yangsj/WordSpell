@@ -28,5 +28,8 @@ package victor.framework.events
 		 */
 		public static const COMPLETE:String = "complete";
 		
+		public static const LOAD_START:String = "load_start";
+		public static const LOAD_END:String = "load_end";
+		
 	}
 }

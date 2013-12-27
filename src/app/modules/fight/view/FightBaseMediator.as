@@ -104,6 +104,7 @@ package app.modules.fight.view
 			
 			// 更新金币值变化
 			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyNotify, MainUIEvent );
+			addContextListener( MainUIEvent.UPDATE_PROPERTY, updateMoneyNotify, MainUIEvent );
 			// 物品使用成功
 			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
 			// 物品更新

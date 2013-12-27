@@ -51,25 +51,27 @@ package app.modules.fight.view.prop
 			// start
 			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
 			
-			setData();
+			if ( fightModel.isBattle ) {
+				setData();
+			}
 		}
 		
 		private function setData():void
 		{
-			view.setData( packModel.itemList );
 			if ( fightModel.isBattle ) {
 				view.setForBattle();
+			} else if ( fightModel.isPractice ) {
+				view.setFroPractice();
+			} else {
+				view.setForAlone();
 			}
+			view.setData( packModel.itemList );
 		}
 		
 		private function nextWordNotify( event:FightAloneEvent ):void
 		{
-			view.visible = !fightModel.isPractice;
-			if ( fightModel.isBattle ) {
-				view.setForBattle();
-			} else {
-				view.setForAlone();
-			}
+//			view.visible = !fightModel.isPractice;
+			setData();
 		}
 		
 		// 物品使用

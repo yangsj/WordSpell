@@ -6,6 +6,7 @@ package app.modules.fight.service
 	import app.modules.LoadingEffect;
 	import app.modules.ViewName;
 	import app.modules.fight.events.FightOnlineEvent;
+	import app.modules.fight.model.FightInviteVo;
 	import app.modules.fight.model.FightMatchingVo;
 	import app.modules.fight.model.FightModel;
 	import app.modules.fight.model.FightReadyModel;
@@ -13,6 +14,7 @@ package app.modules.fight.service
 	import app.modules.fight.panel.ready.FightReadyEvent;
 	import app.modules.friend.model.FriendModel;
 	import app.modules.friend.model.FriendVo;
+	import app.modules.model.CommonModel;
 	
 	import ff.battle_close_ret_t;
 	import ff.battle_create_req_t;
@@ -30,6 +32,7 @@ package app.modules.fight.service
 	import ff.user_status_ret_t;
 	
 	import victor.framework.core.BaseService;
+	import victor.framework.events.PanelEvent;
 	import victor.framework.socket.SocketResp;
 	
 	
@@ -48,6 +51,8 @@ package app.modules.fight.service
 		public var aloneService:FightAloneService;
 		[Inject]
 		public var friendModel:FriendModel;
+		[Inject]
+		public var commondModel:CommonModel;
 		
 		public function FightOnlineService()
 		{
@@ -124,6 +129,11 @@ package app.modules.fight.service
 				needCloseView.push( ViewName.FightOnline, ViewName.FriendOnline, ViewName.Friend ); // 若是从好友列表中发起对战
 				needCloseView.push( ViewName.FightFriendPanel ); // 若是从好友搜索列表发起对战
 				needCloseView.push( ViewName.FightSearchPanel ); // 若是从在线玩家搜索列表中发起对战
+				needCloseView.push( ViewName.FightAlone );
+				needCloseView.push( ViewName.FightPractice );
+				needCloseView.push( ViewName.FightLosePanel );
+				needCloseView.push( ViewName.FightWinPanel );
+				needCloseView.push( ViewName.FightPracticeEndPanel );
 				
 				// 关闭面板
 				for each ( var viewName:String in needCloseView )
@@ -144,10 +154,10 @@ package app.modules.fight.service
 		private function operateBattleInviteNotify( resp:SocketResp ):void
 		{
 			var data:battle_invite_ret_t = resp.data as battle_invite_ret_t;
-			Alert.show( "[" + data.dest_name + "]邀请你加入对战，是否接受？", callBack, "接受", "拒绝");
-			function callBack( type:int ):void
-			{
-				agreeOperateInvite( data.dest_id, type==Alert.YES );
+			if ( commondModel.isLoading ) {
+				fightModel.cacheInviteList.push( new FightInviteVo(data.dest_name, data.dest_id, data.dest_level, data.gender, data.dest_grade ));
+			} else {
+				dispatch( new PanelEvent( PanelEvent.LOAD_END ));
 			}
 		}
 		

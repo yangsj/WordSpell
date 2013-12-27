@@ -20,6 +20,9 @@ package app.modules.fight.view.prop
 		
 		private var vecItemSkin:Vector.<PropItem>;
 		
+		public var posType:int = PropItem.POS_LEFT;
+		public var isPracticeMode:Boolean = false;
+		
 		public function PropList()
 		{
 			super();
@@ -45,14 +48,22 @@ package app.modules.fight.view.prop
 		{
 			x = 469;
 			y = 110;
-			recordItempoints( PropItem.POS_LEFT );
+			posType = PropItem.POS_LEFT;
+			isPracticeMode = false;
 		}
 		
 		public function setForAlone():void
 		{
 			x = 869.7;
 			y = 110;
-			recordItempoints( PropItem.POS_RIGHT );
+			posType = PropItem.POS_RIGHT;
+			isPracticeMode = false;
+		}
+		
+		public function setFroPractice():void
+		{
+			setForAlone();
+			isPracticeMode = true;
 		}
 		
 		public function clear():void
@@ -86,8 +97,16 @@ package app.modules.fight.view.prop
 				item = vecItemSkin[ _propIndex[itemVo.type] ];
 				item.y = i * 81;
 				item.setData( itemVo.clone() );
+				if ( isPracticeMode ) 
+				{
+					item.enabled( itemVo.type == ItemType.SKIP );
+				}
+				else 
+				{
+					item.enabled( true );
+				}
 			}
-			recordItempoints( PropItem.POS_LEFT );
+			recordItempoints( posType );
 		}
 		
 		private function recordItempoints( pos:int = PropItem.POS_LEFT ):void

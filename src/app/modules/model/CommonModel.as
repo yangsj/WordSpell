@@ -14,5 +14,11 @@ package app.modules.model
 		{
 			super();
 		}
+		
+		/**
+		 * 是否正在加载资源
+		 */
+		public var isLoading:Boolean = false;
+		
 	}
 }

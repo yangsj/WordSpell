@@ -1,7 +1,9 @@
 package victor.framework.core
 {
-	import victor.framework.manager.LoaderManager;
 	import app.modules.panel.PanelLoading;
+	
+	import victor.framework.events.PanelEvent;
+	import victor.framework.manager.LoaderManager;
 	
 	/**
 	 * ……
@@ -28,6 +30,7 @@ package victor.framework.core
 		
 		private function startLoadResource():void
 		{
+			dispatchEvent( new PanelEvent( PanelEvent.LOAD_START ));
 			PanelLoading.instance.show();
 			LoaderManager.instance.load( resNames, addDisplayList, loadProgress, domainName );
 		}
@@ -40,6 +43,8 @@ package victor.framework.core
 		private function addDisplayList():void
 		{
 			PanelLoading.instance.hide();
+			
+			dispatchEvent( new PanelEvent( PanelEvent.LOAD_END ));
 			
 			createSkin();
 			
