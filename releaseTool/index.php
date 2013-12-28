@@ -51,6 +51,9 @@
 	</script>
 	<body>
 		<?php
+			
+			date_default_timezone_set('Asia/Shanghai');//'Asia/Shanghai' ÑÇÖÞ/ÉÏº£
+
 			include_once("config.php");
 			$curver = getCurrentVer($versionRem);
 			session_start();
