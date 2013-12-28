@@ -54,10 +54,9 @@
 		//try
 		//{
 			$vers = getVersions($versionFile);
-			$vers[$versionNum] = $vers[$versionNum];
-			if($vers[$versionNum])
+			if(array_key_exists($versionNum,$vers))
 			{
-				$vers[$versionNum] ++;
+				$vers[$versionNum]++;
 			}
 			else
 			{

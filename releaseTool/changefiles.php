@@ -2,7 +2,7 @@
 	include_once("log.php");
 	
 	
-	function changeApplicationXmlVersions($file, $parent_url)
+	function changeApplicationXmlVersions($file, $parent_url, $verstr)
 	{
 		$url = str_ireplace("\\", "/", $parent_url );
 
@@ -13,7 +13,7 @@
 		foreach($app as $ai)
 		{
 			echo "上次更新时间：".$ai -> getAttribute("version")."<br>";
-			$ai -> setAttribute("version", getTimeStringNow() );
+			$ai -> setAttribute("version", getTimeStringNow()." ".$verstr );
 			echo "本次更新时间：".$ai -> getAttribute("version")."<br>";
 		}
 
@@ -47,7 +47,7 @@
 		return $array;
 	}
 
-	function changeLocalVersionTime($file)
+	function changeLocalVersionTime($file, $verstr)
 	{
 		$doc = new DOMDocument();
 		$doc->load($file);
@@ -55,7 +55,7 @@
 		$app = $doc->getElementsByTagName("app");
 		foreach($app as $ai)
 		{
-			$ai -> setAttribute( "version", getTimeStringNow() );
+			$ai -> setAttribute( "version", getTimeStringNow()." ".$verstr );
 		}
 
 		$doc->save($file);
