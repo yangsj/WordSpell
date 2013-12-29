@@ -13,6 +13,7 @@ package app.startup
 	import app.modules.map.command.MapInitCommand;
 	import app.modules.model.CommonModel;
 	import app.modules.model.PackModel;
+	import app.modules.panel.PanelLoading;
 	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.rank.command.RankInitCommand;
 	import app.modules.panel.share.ShareWeiboInitCommand;
@@ -22,6 +23,7 @@ package app.startup
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.drag.DragManager;
+	import victor.framework.events.PanelEvent;
 	
 	
 	/**
@@ -93,6 +95,19 @@ package app.startup
 			injectActor( CommonService );
 			injectActor( PackService );
 			
+			////
+			PanelLoading.instance.setFun( loadStartHandler, loadEnfHandler );
+			
+		}
+		
+		private function loadEnfHandler():void
+		{
+			dispatch( new PanelEvent( PanelEvent.LOAD_END ));
+		}
+		
+		private function loadStartHandler():void
+		{
+			dispatch( new PanelEvent( PanelEvent.LOAD_START ));
 		}
 		
 	}

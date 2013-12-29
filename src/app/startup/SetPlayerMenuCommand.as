@@ -34,7 +34,7 @@ package app.startup
 			Debug.debug( "to set flash player system menu" );
 			var vec:Vector.<Array> = new Vector.<Array>();
 			vec.push( ["重载游戏", ExternalManager.reload, true] );
-			vec.push( ["最后更新：" + GameConfig.VERSION, null, false] );
+			vec.push( ["当前版本：" + GameConfig.VERSION, null, false] );
 			new ContextMenuDefine( contextView, vec, true );
 		}
 		

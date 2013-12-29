@@ -1,5 +1,6 @@
 package app.modules.panel
 {
+	import flash.display.MovieClip;
 	import flash.text.TextField;
 	
 	import app.core.Text;
@@ -16,37 +17,32 @@ package app.modules.panel
 	 */
 	public class PanelLoading extends BaseView
 	{
-		private var txtProgress:TextField;
+		private var _callStartFun:Function;
+		private var _callEndFun:Function;
+		
+		public var mcProgressBar:MovieClip;
+		public var txtProgressValue:TextField;
 		
 		public function PanelLoading()
 		{
-			this.graphics.beginFill( 0, 0.6 );
-			this.graphics.drawRoundRect( 0, 0, 200, 200, 15 );
+			this.graphics.beginFill( 0, 0 );
+			this.graphics.drawRoundRect( 0, 0, appStage.stageWidth, appStage.stageHeight, 0 );
 			this.graphics.endFill();
 			
-			var txt:TextField = Text.getText( 25, 0xffffff, "_sans" );
-			txt.text = "已加载";
-			txt.width = 104;
-			txt.height = 33;
-			addChild( txt );
-			
-			txtProgress = Text.getText( 35, 0xffffff, "Verdana" );
-			txtProgress.width = 191;
-			txtProgress.height = 46;
-			addChild( txtProgress );
-			
-			txt.x = ( width - txt.width ) >> 1;
-			txt.y = ( height - ( txt.height + txtProgress.height )) >> 1;
-			txtProgress.x = ( width - txtProgress.width ) >> 1;
-			txtProgress.y = txt.y + txt.height;
-			
-			x = ( appStage.stageWidth - width ) >> 1;
-			y = ( appStage.stageHeight -height ) >> 1;
+			setSkinWithName( "ui_Skin_Preloader" );
+			mcProgressBar.gotoAndStop( 1 );
+		}
+		
+		public function setFun( startFun:Function, endFun:Function ):void
+		{
+			_callStartFun = startFun;
+			_callEndFun = endFun;
 		}
 		
 		public function setProgressValue( perent:Number ):void
 		{
-			txtProgress.text = (perent * 100).toFixed( 2 ) + "%";
+			txtProgressValue.text = (perent * 100).toFixed( 2 ) + "%";
+			mcProgressBar.gotoAndStop( int(perent * 100) );
 		}
 		
 		override public function show():void
@@ -54,6 +50,8 @@ package app.modules.panel
 			ViewStruct.addChild( this, ViewStruct.LOADING );
 			
 			appStage.mouseChildren = false;
+			
+			if ( _callStartFun ) _callStartFun();
 		}
 
 		override public function hide():void
@@ -61,6 +59,8 @@ package app.modules.panel
 			super.hide();
 			
 			appStage.mouseChildren = true;
+			
+			if ( _callEndFun ) _callEndFun();
 		}
 		
 		

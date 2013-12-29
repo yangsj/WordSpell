@@ -10,6 +10,7 @@ package app.modules.main.view
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.debug.Debug;
+	import victor.framework.events.PanelEvent;
 	import victor.framework.manager.TickManager;
 	
 	/**
@@ -47,6 +48,8 @@ package app.modules.main.view
 				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
 				// 检查登陆是否有加好友消息
 				dispatch( new FriendEvent( FriendEvent.CHECK_ADD ));
+				// 检查好友邀请对战
+				dispatch( new PanelEvent( PanelEvent.LOAD_END ));
 			}, 1000 );
 		}
 		

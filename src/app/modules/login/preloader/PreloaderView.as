@@ -1,6 +1,8 @@
 package app.modules.login.preloader
 {
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
 	
@@ -32,8 +34,8 @@ package app.modules.login.preloader
 
 			// 引用资源
 			ui_Skin_Preloader;
-
-			this.graphics.beginFill( 0 );
+			
+			this.graphics.beginBitmapFill(new ui_Skin_PreloaderBG());
 			this.graphics.drawRect( 0, 0, appStage.stageWidth, appStage.stageHeight );
 			this.graphics.endFill();
 		}

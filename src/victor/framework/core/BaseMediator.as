@@ -4,8 +4,6 @@ package victor.framework.core
 	
 	import org.robotlegs.mvcs.Mediator;
 	
-	import victor.framework.events.PanelEvent;
-	
 	
 	/**
 	 * ……
@@ -26,20 +24,6 @@ package victor.framework.core
 			addViewListener( ViewEvent.SHOW_VIEW, showViewHandler, ViewEvent );
 			// 关闭view
 			addViewListener( ViewEvent.HIDE_VIEW, hideViewHandler, ViewEvent );
-			// 开始加载资源
-			addViewListener( PanelEvent.LOAD_START, loadStartHandler, PanelEvent );
-			// 结束加载资源
-			addViewListener( PanelEvent.LOAD_START, loadEnfHandler, PanelEvent );
-		}
-		
-		private function loadEnfHandler( event:PanelEvent ):void
-		{
-			dispatch( new PanelEvent( PanelEvent.LOAD_END ));
-		}
-		
-		private function loadStartHandler( event:PanelEvent ):void
-		{
-			dispatch( new PanelEvent( PanelEvent.LOAD_START ));
 		}
 		
 		protected function hideViewHandler( event:ViewEvent ):void

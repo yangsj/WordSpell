@@ -18,7 +18,7 @@ package app.modules.model
 		/**
 		 * 是否正在加载资源
 		 */
-		public var isLoading:Boolean = false;
+		public var isLoading:Boolean = true;
 		
 	}
 }

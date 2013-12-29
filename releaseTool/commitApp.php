@@ -81,7 +81,7 @@
 
 	echo "<div style='font-size:12px;color:green;width:800px;height:100px;overflow:scroll;border:1px solid gray;'>";
 
-	$verStr = "v".$versionNum ."_". $subver;
+	$verStr = "v".$versionNum .".". $subver;
 
 	// 本地配置app版本时间更改
 	$filename5 = $releaseFloader."\\application.xml";

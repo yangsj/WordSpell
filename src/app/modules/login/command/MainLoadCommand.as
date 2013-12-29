@@ -1,12 +1,13 @@
 package app.modules.login.command
 {
-	import victor.framework.events.LoadEvent;
-	import victor.framework.manager.LoaderManager;
 	import app.modules.ViewName;
 	import app.modules.main.model.MainModel;
 	
 	import victor.framework.core.BaseCommand;
 	import victor.framework.debug.Debug;
+	import victor.framework.events.LoadEvent;
+	import victor.framework.events.PanelEvent;
+	import victor.framework.manager.LoaderManager;
 	
 	
 	/**
@@ -30,6 +31,8 @@ package app.modules.login.command
 			closeView( ViewName.Login );
 			openView( ViewName.Preloader, 2 );
 			LoaderManager.instance.startMainLoad( loaderCompleteCallBack, loaderProgressCallBack );
+			
+			dispatch( new PanelEvent( PanelEvent.LOAD_START ));
 		}
 		
 		private function loaderCompleteCallBack():void

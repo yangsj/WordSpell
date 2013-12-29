@@ -1,5 +1,6 @@
 package app.modules.fight.view.prop.item
 {
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -42,7 +43,7 @@ package app.modules.fight.view.prop.item
 		// 
 		public var tips:MovieClip;
 		//
-		public var bgArea:MovieClip;
+		public var bgArea:DisplayObject;
 		
 		private var itemTips:PropItemTips;
 		

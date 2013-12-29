@@ -26,6 +26,7 @@ package app.modules.fight.view.prop.item
 		/* private variables                                                          */
 		/*============================================================================*/
 		
+		private var bgArea:DisplayObject;
 		private var target:DisplayObject;
 		private var txtLine:TextField;
 		private var isDraw:Boolean = false;
@@ -36,7 +37,7 @@ package app.modules.fight.view.prop.item
 		public function PropItemTips( target:DisplayObject )
 		{
 							  
-			txtLine = Text.getText( 14, 0xffffff, "微软雅黑 Bold", 0, 2, 100, 60 );
+			txtLine = Text.getText( 14, 0xffffff, "微软雅黑", 0, 2, 100, 60 );
 			txtLine.text = "   ";
 			txtLine.height = txtLine.textHeight + 8;
 			addChild( txtLine );
@@ -56,10 +57,12 @@ package app.modules.fight.view.prop.item
 				{
 					ViewStruct.addChild( this, ViewStruct.TIPS );
 					drawBg();
+					bgArea.alpha = 0.7;
 				}
 				else if ( event.type == MouseEvent.ROLL_OUT )
 				{
 					ViewStruct.removeChild( this );
+					bgArea.alpha = 1;
 				}
 			}
 		}
@@ -73,7 +76,7 @@ package app.modules.fight.view.prop.item
 				this.graphics.drawRoundRect(0,0,txtLine.width, txtLine.height, 5 );
 				this.graphics.endFill();
 				
-				var point:Point = target.localToGlobal( new Point( ( target["bgArea"].width *0.5 - width *0.5 ), -10 ));
+				var point:Point = target.localToGlobal( new Point( ( bgArea.width *0.5 - width *0.5 ), -10 ));
 				x = MathUtil.range( point.x, 10, appStage.stageWidth - width - 10 );
 				y = point.y - height;
 				
@@ -93,13 +96,13 @@ package app.modules.fight.view.prop.item
 		
 		public function dispose():void
 		{
-			
 		}
 		
 		public function setVo( itemVo:ItemVo ):void
 		{
 			txtLine.text = itemVo.desc;
 			txtLine.width = txtLine.textWidth + 20;
+			bgArea = target["bgArea"] as DisplayObject;
 			drawBg();
 		}
 		

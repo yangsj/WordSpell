@@ -4,6 +4,7 @@ package app.modules.login.service
 	import app.data.GameData;
 	import app.data.PlayerSelfVo;
 	import app.events.GameEvent;
+	import app.modules.LoadingEffect;
 	import app.modules.login.login.vo.LoginVo;
 	import app.modules.login.register.vo.RegisterVo;
 	
@@ -13,10 +14,10 @@ package app.modules.login.service
 	import ff.server_cmd_e;
 	import ff.user_login_ret_t;
 	
+	import victor.core.MD5;
 	import victor.framework.core.BaseService;
 	import victor.framework.debug.Debug;
 	import victor.framework.socket.SocketResp;
-	import victor.core.MD5;
 
 
 	/**
@@ -69,6 +70,8 @@ package app.modules.login.service
 			}
 			req.register_flag = false;
 			call( client_cmd_e.LOGIN_REQ, req );
+			
+			LoadingEffect.hide();
 		}
 
 		public function register( registerVo:RegisterVo ):void
@@ -89,6 +92,8 @@ package app.modules.login.service
 			req.gender = registerVo.gender;
 			req.register_flag = true;
 			call( client_cmd_e.LOGIN_REQ, req );
+			
+			LoadingEffect.hide();
 		}
 
 		private function loginSuccessed():void

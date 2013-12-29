@@ -154,9 +154,8 @@ package app.modules.fight.service
 		private function operateBattleInviteNotify( resp:SocketResp ):void
 		{
 			var data:battle_invite_ret_t = resp.data as battle_invite_ret_t;
-			if ( commondModel.isLoading ) {
-				fightModel.cacheInviteList.push( new FightInviteVo(data.dest_name, data.dest_id, data.dest_level, data.gender, data.dest_grade ));
-			} else {
+			fightModel.cacheInviteList.push( new FightInviteVo(data.dest_name, data.dest_id, data.dest_level, data.gender, data.dest_grade ));
+			if ( !commondModel.isLoading ) {
 				dispatch( new PanelEvent( PanelEvent.LOAD_END ));
 			}
 		}

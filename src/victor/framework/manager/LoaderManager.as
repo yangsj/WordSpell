@@ -87,7 +87,7 @@ package victor.framework.manager
 				var url:String = String( xml.@src );
 				var version:String = String( xml.@version );
 				var first:int = int( xml.@first );
-				var path:String = GameConfig.deployPath + url;
+				var path:String = GameConfig.deployPath + url;// + "?t=" + (new Date()).time;
 				
 				dictResList[ name ] = path;
 				if ( first > 0 )
