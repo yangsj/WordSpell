@@ -10,6 +10,7 @@ package app.modules.fight.view.spell
 	
 	import victor.framework.core.BaseSprite;
 	import victor.framework.manager.TickManager;
+	import victor.utils.DisplayUtil;
 
 
 	/**
@@ -51,6 +52,8 @@ package app.modules.fight.view.spell
 				btnShowAnswer = new Sprite();
 			}
 			btnShowAnswer.addEventListener(MouseEvent.CLICK, onClickBtnShowAnswerHandler );
+			// 不显示
+			DisplayUtil.removedFromParent( btnShowAnswer );
 		}
 		
 		protected function onClickBtnShowAnswerHandler(event:MouseEvent):void
@@ -92,6 +95,7 @@ package app.modules.fight.view.spell
 			{
 				_inputNum = getEmptyIndex;
 				var isOver:Boolean = false;
+				var isErrorInput:Boolean = false;
 				if ( _inputNum != -1 )
 				{
 					var current:LetterBubbleVo = _spellVo.items[ _inputNum ];
@@ -107,12 +111,13 @@ package app.modules.fight.view.spell
 					}
 					else 
 					{
+						isErrorInput = true;
 						isOver = true;
 						_lastIsAnswerError = true;
 					}
 				}
 				if ( isOver ) {
-					if ( _isPractice && _lastIsAnswerError )
+					if ( isErrorInput || (_isPractice && _lastIsAnswerError ))
 						showAnswerResult();
 					else inputOver();
 				}
@@ -162,7 +167,7 @@ package app.modules.fight.view.spell
 		
 		private function inputOver():void
 		{
-			TickManager.instance.clearDoTime( inputOver );
+			clear();
 			dispatchEvent( new SpellEvent( SpellEvent.INPUT_OVER ));
 		}
 		

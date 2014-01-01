@@ -35,6 +35,10 @@ package
 			
 			// 初始化并启动应用
 			new AppContext( this );
+			
+			this.graphics.beginBitmapFill(new ui_Skin_PreloaderBG());
+			this.graphics.drawRect( 0, 0, appStage.stageWidth, appStage.stageHeight );
+			this.graphics.endFill();
 		}
 		
 		

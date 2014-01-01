@@ -40,6 +40,7 @@ package app.modules.fight.model
 		private var _inputNumberLettle:int = 0;
 		private var _totalWordsNum:int = 10;
 		private var _cacheInviteList:Vector.<FightInviteVo> = new Vector.<FightInviteVo>();
+		private var _isEnded:Boolean = false;
 		
 		public function FightModel()
 		{
@@ -484,6 +485,22 @@ package app.modules.fight.model
 		public function get cacheInviteList():Vector.<FightInviteVo>
 		{
 			return _cacheInviteList;
+		}
+
+		/**
+		 * 是否结束
+		 */
+		public function get isEnded():Boolean
+		{
+			return _isEnded;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isEnded(value:Boolean):void
+		{
+			_isEnded = value;
 		}
 
 

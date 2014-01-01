@@ -164,6 +164,7 @@ package app.modules.fight.service
 			fightModel.roundId = data.round_id;
 			fightModel.totalWordsNum = spellList.length;
 			mapModel.currentMapVo.mapId = data.round_type;
+			fightModel.isEnded = false;
 
 			// 清零
 			fightModel.currentSelfIndex = 0;
@@ -190,6 +191,7 @@ package app.modules.fight.service
 			var data:end_round_ret_t = resp.data as end_round_ret_t;
 			var endVo:FightEndVo = getBattleEndVo( data );
 			fightModel.fightEndVo = endVo;
+			fightModel.isEnded = true;
 			
 			SoundManager.playEffectMusic( endVo.isWin ? SoundType.SUCCESS : SoundType.FAILED );
 			
@@ -221,6 +223,7 @@ package app.modules.fight.service
 
 			if ( isSelf )
 			{
+				var isDelay:Boolean = false;
 				// 不是使用道具完成一个单词时
 				if ( !fightModel.isUsePorped ) {
 					if ( data.answer_flag ) {
@@ -229,6 +232,7 @@ package app.modules.fight.service
 						if (　!fightModel.isPractice || ( fightModel.isPractice && fightModel.isShowAnswer == false )) {
 							Tips.showCenter( "请牢记，下次就不会再错了。" );
 						}
+						isDelay = true;
 					}
 				}
 				fightModel.isUsePorped = false;
@@ -239,17 +243,15 @@ package app.modules.fight.service
 				}
 				
 				// 设置下一个单词信息
-//				if ( fightModel.isFinish == false )
-//				{
-					fightModel.currentSelfIndex++;
-					updateSelfWordList();
-					
-					var time:int = fightModel.isErrorLastAnswerForPractice ? 2000 : 500;
-					//
-					TickManager.doTimeout( function abc( result:Boolean ):void {
-					dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD, result ));
-					}, time, data.answer_flag );
-//				}
+				fightModel.currentSelfIndex++;
+				updateSelfWordList();
+				
+				var time:int = fightModel.isErrorLastAnswerForPractice || isDelay ? 2000 : 500;
+				TickManager.doTimeout( function abc( result:Boolean ):void {
+					if ( !fightModel.isEnded ) {
+						dispatch( new FightAloneEvent( FightAloneEvent.NOTIFY_NEXT_WORD, result ));
+					}
+				}, time, data.answer_flag );
 			}
 			else
 			{

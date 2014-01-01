@@ -16,6 +16,12 @@ package app.modules.fight.view.practice
 			super();
 		}
 		
+		override protected function afterRender():void
+		{
+			super.afterRender();
+			selfBar.visible = false;
+		}
+		
 		override public function setBg(mapId:int):void
 		{
 			this.mapId = mapId;

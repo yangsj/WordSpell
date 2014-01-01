@@ -79,7 +79,7 @@ package app.modules.chat.model
 			}
 			var msg:String = channelName[ ch ] + playerName + ":";
 			if ( ch == ChatChannelType.SYSTEM ) {
-				return "<font color=\"#ff0000\">" + msg;
+				return "<font color=\"#ffff00\">" + msg;
 			}
 			return msg;
 		}

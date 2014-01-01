@@ -31,13 +31,6 @@ package app.modules.login.preloader
 		public function PreloaderView()
 		{
 			super();
-
-			// 引用资源
-			ui_Skin_Preloader;
-			
-			this.graphics.beginBitmapFill(new ui_Skin_PreloaderBG());
-			this.graphics.drawRect( 0, 0, appStage.stageWidth, appStage.stageHeight );
-			this.graphics.endFill();
 		}
 
 		override protected function onceInit():void
@@ -108,6 +101,8 @@ package app.modules.login.preloader
 
 		override protected function get skinName():String
 		{
+			// 引用资源
+			ui_Skin_Preloader;
 			return "ui_Skin_Preloader";
 		}
 

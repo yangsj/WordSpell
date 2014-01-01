@@ -52,9 +52,10 @@ package app.startup
 			else GameConfig.key = "";
 			
 			// test 是否使用md5加密密码
-			if ( parameters.hasOwnProperty( "md5" ))
-				GameConfig.IS_MD5 = parameters[ "md5" ];
-			else GameConfig.IS_MD5 = false;
+//			if ( parameters.hasOwnProperty( "md5" ))
+//				GameConfig.IS_MD5 = parameters[ "md5" ];
+//			else GameConfig.IS_MD5 = false;
+			
 			
 			setDebug();
 			

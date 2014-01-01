@@ -17,7 +17,6 @@ package app.modules.login.login
 	import victor.utils.appStage;
 	
 	import victor.framework.core.BasePanel;
-	import victor.framework.core.ViewStruct;
 	
 	
 	/**
@@ -46,11 +45,12 @@ package app.modules.login.login
 		override protected function transitionIn():void
 		{
 			appStage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler );
+			openComplete();
 		}
 		
 		override public function hide():void
 		{
-			super.hide();
+			transitionOut( 0 );
 			appStage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler );
 		}
 		
@@ -75,8 +75,6 @@ package app.modules.login.login
 		override protected function onceInit():void
 		{
 			super.onceInit();
-			
-			this.addChildAt( getObj( "ui_Skin_LoginBackground" ) as DisplayObject, 0 );
 			
 			txtAccountNumber.tabEnabled = true;
 			txtPassword.tabEnabled = true;

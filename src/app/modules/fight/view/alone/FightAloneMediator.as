@@ -77,6 +77,7 @@ package app.modules.fight.view.alone
 			} else {
 				view.setRoundName( mapModel.currentMapVo.mapName + "<br>" + HtmlText.color("第" + ( fightModel.roundId + 1 ) + "关", 0xffffff ) );
 			}
+			view.selfBar.visible = !fightModel.isPractice;
 			
 			letterIndex = 0;
 			view.initialize( fightModel.isPractice );

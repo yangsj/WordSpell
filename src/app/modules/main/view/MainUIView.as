@@ -47,7 +47,7 @@ package app.modules.main.view
 		// 经验值显示内容
 		private var expNumString:String = "0/0";
 		// 经验值百分比显示内容
-		private var expPercent:String = "0.00%";
+		private var expPercent:String = "0%";
 		// 点击对战按钮弹出的菜单
 		private var fightMenu:FightButtonMenu;
 		
@@ -87,12 +87,12 @@ package app.modules.main.view
 				if ( !MathUtil.isRange( exp, curExp, nextExp ))
 				{
 					percent = 100;
-					expPercent = "100.00%";
+					expPercent = "100%";
 				}
 				else
 				{
 					percent = (c/t) * 100;
-					expPercent = percent.toFixed( 2 ) + "%";
+					expPercent = percent.toFixed( 0 ) + "%";
 				}
 				expBar.gotoAndStop( int(percent) );
 				txtExp.text = expPercent;

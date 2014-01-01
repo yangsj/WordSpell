@@ -90,6 +90,7 @@ package app.modules.model.vo
 		
 		public function get hotKey():String
 		{
+			return "";
 			return "【收集快捷键：数字键" + type + "】";
 		}
 		
