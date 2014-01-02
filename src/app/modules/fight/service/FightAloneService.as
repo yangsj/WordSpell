@@ -165,6 +165,8 @@ package app.modules.fight.service
 			fightModel.totalWordsNum = spellList.length;
 			mapModel.currentMapVo.mapId = data.round_type;
 			fightModel.isEnded = false;
+			fightModel.answerRightNumSelf = 0;
+			fightModel.answerRightNumDest = 0;
 
 			// 清零
 			fightModel.currentSelfIndex = 0;
@@ -220,7 +222,12 @@ package app.modules.fight.service
 		{
 			var data:next_word_t = resp.data as next_word_t;
 			var isSelf:Boolean = data.uid == GameData.instance.selfVo.uid;
-
+			
+			if ( data.answer_flag ) {
+				if ( isSelf ) fightModel.answerRightNumSelf++;
+				else fightModel.answerRightNumDest++;
+			}
+			
 			if ( isSelf )
 			{
 				var isDelay:Boolean = false;
@@ -236,11 +243,6 @@ package app.modules.fight.service
 					}
 				}
 				fightModel.isUsePorped = false;
-				
-				if ( data.inc_coin > 0 ) {
-					GameData.instance.updateAddMoney( data.inc_coin );
-					dispatch( new FightAloneEvent(FightAloneEvent.ADD_MONEY_EFFECT, [ false, data.inc_coin] ));
-				}
 				
 				// 设置下一个单词信息
 				fightModel.currentSelfIndex++;

@@ -86,6 +86,15 @@ package app.modules.fight.view.prop
 			}
 		}
 		
+		public function getItemCanUse( type:int ):Boolean
+		{
+			if ( type > 0 && type <= vecItemSkin.length ) {
+				var item:PropItem = vecItemSkin[type-1];
+				return item.enabled;
+			}
+			return false;
+		}
+		
 		public function setData( itemList:Vector.<ItemVo> ):void
 		{
 			var leng:int = itemList.length;
@@ -99,11 +108,11 @@ package app.modules.fight.view.prop
 				item.setData( itemVo.clone() );
 				if ( isPracticeMode ) 
 				{
-					item.enabled( itemVo.type == ItemType.SKIP );
+					item.enabled = itemVo.type == ItemType.SKIP;
 				}
 				else 
 				{
-					item.enabled( true );
+					item.enabled = true;
 				}
 			}
 			recordItempoints( posType );

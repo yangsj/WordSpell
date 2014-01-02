@@ -94,6 +94,8 @@ package app.modules.fight.view.online
 		
 		private function setOtherLetters():void
 		{
+			setRightAnswerNumber();
+			
 			if ( fightModel.spellCopyVo )
 			{
 				var spellVo:SpellVo = fightModel.spellCopyVo;

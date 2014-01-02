@@ -94,7 +94,12 @@ package app.modules.fight.view.prop.item
 		
 		///////////////////////////////////
 		
-		public function enabled( value:Boolean ):void
+		public function get enabled():Boolean
+		{
+			return _enabled;
+		}
+		
+		public function set enabled( value:Boolean ):void
 		{
 			this.filters = value ? [] : [ UtilsFilter.COLOR_GREW ];
 			_enabled = value;

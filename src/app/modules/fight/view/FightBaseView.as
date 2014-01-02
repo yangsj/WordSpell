@@ -17,6 +17,7 @@ package app.modules.fight.view
 	import app.core.ButtonSkin;
 	import app.core.Tips;
 	import app.data.GameData;
+	import app.events.PackEvent;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.LetterBubbleVo;
 	import app.modules.fight.view.item.LetterBubble;
@@ -56,6 +57,8 @@ package app.modules.fight.view
 		public var txtEnglish:TextField;//英文显示
 		public var selfBar:MovieClip;
 		public var destBar:MovieClip;
+		public var txtRightSelf:TextField;//自己剩余单词显示
+		public var txtRightDest:TextField;//对手剩余单词显示
 		
 		public var isAlone:Boolean = true;
 		public var mapId:int = 0;
@@ -101,6 +104,9 @@ package app.modules.fight.view
 			btnClose.addEventListener(MouseEvent.CLICK, onClickBtnCloseHandler );
 			
 			mouseEnabled = false;
+			
+			txtRightSelf ||= new TextField();
+			txtRightDest ||= new TextField();
 		}
 		
 		protected function onClickBtnCloseHandler(event:MouseEvent):void
@@ -285,12 +291,19 @@ package app.modules.fight.view
 					var ary:Array = dictLetterSelf[ key ];
 					bubble = ary && ary.length > 0 ? ary[ 0 ] : null;
 				} else {
-					bubble = dictProps[ key ];
+//					bubble = dictProps[ key ];
+					propList.dispatchEvent( new PackEvent( PackEvent.USE_ITEM, key ));
 				}
 				
 				if ( bubble ) bubble.selected( true );
 				else if ( isKeyboard ) Tips.showCenter( "按键无效" );
 			}
+		}
+		
+		public function setRightAnswerNum( num:int, isSelf:Boolean = true ):void
+		{
+			if ( isSelf ) txtRightSelf.text = num.toString();
+			else txtRightDest.text = num.toString();
 		}
 		
 		public function updateMoneyDisplay():void

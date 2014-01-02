@@ -98,7 +98,8 @@ package app.modules.fight.view
 			addViewListener( FightAloneEvent.EXIT_PRACTICE, exitPracticeHandler, FightAloneEvent );
 			//
 			addViewListener( FightAloneEvent.CLEAR_DISTURB_SELF, clearSelfDisturbHandler, FightAloneEvent );
-			
+			//
+			addViewListener( PackEvent.USE_ITEM, useItemPorpHandler, PackEvent );
 			//
 			addContextListener( FightAloneEvent.USE_SKIP_INPUT_AUTO, useSkipInputAutoHandler, FightAloneEvent );
 			
@@ -128,6 +129,11 @@ package app.modules.fight.view
 			fightModel.isUsePorped = false;
 			
 			SoundManager.playFightSoundBg();
+		}
+		
+		private function useItemPorpHandler( event:PackEvent ):void
+		{
+			trace( event.data );
 		}
 		
 		private function useSkipInputAutoHandler( event:FightAloneEvent ):void
@@ -205,6 +211,7 @@ package app.modules.fight.view
 			baseView.isValidOperate = true;
 			letterIndex = 0;
 			setLetters();
+			setRightAnswerNumber();
 		}
 		
 		// 物品使用成功
@@ -278,6 +285,8 @@ package app.modules.fight.view
 		
 		protected function setLetters():void
 		{
+			setRightAnswerNumber();
+			
 			if ( fightModel.spellVo )
 			{
 				var modeType:int = fightModel.modeType;
@@ -339,6 +348,11 @@ package app.modules.fight.view
 			return 1;
 		}
 		
+		protected function setRightAnswerNumber():void
+		{
+			baseView.setRightAnswerNum( fightModel.answerRightNumSelf, true );
+			baseView.setRightAnswerNum( fightModel.answerRightNumDest, false );
+		}
 		
 	}
 }

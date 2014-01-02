@@ -41,6 +41,8 @@ package app.modules.fight.model
 		private var _totalWordsNum:int = 10;
 		private var _cacheInviteList:Vector.<FightInviteVo> = new Vector.<FightInviteVo>();
 		private var _isEnded:Boolean = false;
+		private var _answerRightNumSelf:int = 0;
+		private var _answerRightNumDest:int = 0;
 		
 		public function FightModel()
 		{
@@ -474,11 +476,13 @@ package app.modules.fight.model
 		
 		public function get progressWordsForSelf():String
 		{
+			return (currentSelfIndex + 1) +"/"+_totalWordsNum;
 			return (_totalWordsNum - currentSelfIndex - 1) +"/"+_totalWordsNum;
 		}
 		
 		public function get progressWordsForDest():String
 		{
+			return (currentDestIndex + 1) +"/"+_totalWordsNum;
 			return (_totalWordsNum - currentDestIndex - 1) +"/"+_totalWordsNum;
 		}
 
@@ -501,6 +505,26 @@ package app.modules.fight.model
 		public function set isEnded(value:Boolean):void
 		{
 			_isEnded = value;
+		}
+
+		public function get answerRightNumDest():int
+		{
+			return _answerRightNumDest;
+		}
+
+		public function set answerRightNumDest(value:int):void
+		{
+			_answerRightNumDest = value;
+		}
+
+		public function get answerRightNumSelf():int
+		{
+			return _answerRightNumSelf;
+		}
+
+		public function set answerRightNumSelf(value:int):void
+		{
+			_answerRightNumSelf = value;
 		}
 
 

@@ -43,6 +43,8 @@ package app.modules.fight.view.prop
 			
 			// 使用道具
 			addViewListener( PackEvent.USE_ITEM, useItemHandler, PackEvent );
+			// 快捷键使用道具
+			addContextListener( PackEvent.USE_ITEM, useItemHandler, PackEvent );
 			
 			// 物品使用成功
 			addContextListener( PackEvent.USE_SUCCESS, useItemSuccessHandler, PackEvent );
@@ -77,7 +79,18 @@ package app.modules.fight.view.prop
 		// 物品使用
 		private function useItemHandler( event:PackEvent ):void
 		{
-			var itemVo:ItemVo = event.data as ItemVo;
+			var itemVo:ItemVo;
+			if ( isNaN(Number(event.data))){
+				itemVo = event.data as ItemVo;
+			}
+			else{
+				var type:int = int(event.data);
+				if ( !view.getItemCanUse( type )) {
+					return ;
+				}
+				itemVo = packModel.getItemByType( type );
+			}
+			
 			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )
 			{
 				switch ( itemVo.type )
