@@ -109,14 +109,18 @@ package victor.framework.core
 		protected function transitionIn():void
 		{
 			mouseChildren = true;
-			this.scaleX = 0.1;
-			this.scaleY = 0.1;
+//			this.scaleX = 0.1;
+//			this.scaleY = 0.1;
 			changePosAtOpen();
+			this.z = 2000;
+			this.alpha = 0;
 			TweenLite.killTweensOf( this );
-			TweenLite.to( this, 0.3, { 	scaleX: 1, 
-				scaleY: 1, 
+			TweenLite.to( this, 0.3, { 	
+//				scaleX: 1, 
+//				scaleY: 1, 
 				alpha: 1, 
-				onUpdate: changePosAtOpen, 
+//				onUpdate: changePosAtOpen, 
+				z:0,
 				ease: Back.easeOut, 
 				onComplete:openComplete 
 			});
@@ -130,11 +134,13 @@ package victor.framework.core
 				hideX = x;
 				hideY = y;
 				TweenLite.killTweensOf( this );
-				TweenLite.to( this, delay, { scaleX: 0.2, 
-					scaleY: 0.2, 
+				TweenLite.to( this, delay, { 
+//					scaleX: 0.2, 
+//					scaleY: 0.2, 
 					alpha: 0, 
 					ease: Back.easeIn, 
-					onUpdate: changePosAtHide,
+//					onUpdate: changePosAtHide,
+					z:-500,
 					onComplete:closeComplete
 				});
 			}
