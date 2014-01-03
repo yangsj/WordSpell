@@ -5,6 +5,7 @@ package app
 	import app.events.GameEvent;
 	import app.modules.login.command.FirstLoadCommand;
 	import app.modules.login.command.MainLoadCommand;
+	import app.startup.BackgroundSoundActivateCommand;
 	import app.startup.EnterGameCommand;
 	import app.startup.FlashVarsCommand;
 	import app.startup.InitCommand;
@@ -42,6 +43,9 @@ package app
 		{
 			// 解析传flash的参数值
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, FlashVarsCommand, ContextEvent, true);
+			
+			// 应用程序背景音乐控制
+			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, BackgroundSoundActivateCommand, ContextEvent, true);
 			
 			// 初始化网络
 			commandMap.mapEvent(GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE, InitServiceCommand, GameEvent, true);

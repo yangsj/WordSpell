@@ -7,10 +7,9 @@ package app.sound
 	import flash.media.SoundTransform;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-
-	import victor.framework.manager.LoaderManager;
-
+	
 	import victor.framework.debug.Debug;
+	import victor.framework.manager.LoaderManager;
 
 
 	public class SoundManager
@@ -24,6 +23,7 @@ package app.sound
 		private static var _sndTransformEffect:SoundTransform = new SoundTransform( 0.04 );
 		private static var _isOpenBg:Boolean = true;
 		private static var _isOpenEffect:Boolean = true;
+		private static var _pausePosition:Number = 0;
 
 		public function SoundManager()
 		{
@@ -69,11 +69,26 @@ package app.sound
 				}
 			}
 		}
+		
+		public static function start():void
+		{
+			if ( currSound )
+			{
+				stopSound();
+				currSoundChannel = currSound.play( _pausePosition, int.MAX_VALUE, sndTransformBg );
+			}
+		}
+		
+		public static function pause():void
+		{
+			stopSound();
+		}
 
 		public static function stopSound():void
 		{
 			if ( currSoundChannel )
 			{
+				_pausePosition = currSoundChannel.position;
 				currSoundChannel.stop();
 			}
 		}
