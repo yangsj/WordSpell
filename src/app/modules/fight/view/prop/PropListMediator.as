@@ -6,6 +6,7 @@ package app.modules.fight.view.prop
 	import app.modules.fight.FightType;
 	import app.modules.fight.events.FightAloneEvent;
 	import app.modules.fight.model.FightModel;
+	import app.modules.fight.view.spell.SpellEvent;
 	import app.modules.model.PackModel;
 	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
@@ -89,6 +90,12 @@ package app.modules.fight.view.prop
 					return ;
 				}
 				itemVo = packModel.getItemByType( type );
+			}
+			
+			if ( view.isPracticeMode && itemVo.type == ItemType.SKIP ) {
+				fightModel.isUsePorped = true;
+				dispatch( new SpellEvent( SpellEvent.SHOW_ANSWER ));
+				return ;
 			}
 			
 			if ( itemVo.num > 0 || itemVo.contMoney <= GameData.instance.selfVo.money )

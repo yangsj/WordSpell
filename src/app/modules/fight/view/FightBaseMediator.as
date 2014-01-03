@@ -314,9 +314,9 @@ package app.modules.fight.view
 				if ( modeType > 1 )
 				{
 					var array:Array = fightModel.dictPropPos[ fightModel.currentSelfIndex ] as Array;
+//					var array:Array = testProp();// fightModel.dictPropPos[ fightModel.currentSelfIndex ] as Array;
 					if ( array ) {
-						var letterVo:LetterBubbleVo;
-						for each ( letterVo in array )
+						for each ( var letterVo:LetterBubbleVo in array )
 							baseView.addPropItem( letterVo );
 					}
 					baseView.displayPropItem();
@@ -328,6 +328,18 @@ package app.modules.fight.view
 				DisplayUtil.removedAll( baseView.container );
 				Tips.showCenter( "你已拼完所有单词，请等待对方拼完再结算！" );
 			}
+		}
+		
+		private function testProp():Array
+		{
+			var ary:Array = [];
+			for ( var i:int = 1; i < 5; i++)
+			{
+				var vo:LetterBubbleVo = new LetterBubbleVo();
+				vo.itemType = i;
+				ary.push( vo );
+			}
+			return ary;
 		}
 		
 		protected function getOnlineAddCaseNumber( wordLength:int ):int

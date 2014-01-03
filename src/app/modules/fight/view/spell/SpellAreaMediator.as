@@ -45,6 +45,9 @@ package app.modules.fight.view.spell
 			//
 			addContextListener( FightAloneEvent.USE_SKIP_INPUT_AUTO, useSkipInputAutoHandler, FightAloneEvent );
 			
+			// 练习中使用跳过道具
+			addContextListener( SpellEvent.SHOW_ANSWER, showAnswerByPropHandler, SpellEvent );
+			
 			// start
 			addContextListener( FightAloneEvent.NOTIFY_START_ROUND, nextWordNotify, FightAloneEvent );
 			// 更新数据
@@ -131,6 +134,11 @@ package app.modules.fight.view.spell
 		
 		private function removedLetterHandler( evnt:FightAloneEvent ):void
 		{
+		}
+		
+		private function showAnswerByPropHandler( event:SpellEvent ):void
+		{
+			view.showAnswerResult();
 		}
 		
 	}

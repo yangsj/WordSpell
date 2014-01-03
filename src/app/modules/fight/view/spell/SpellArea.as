@@ -62,7 +62,7 @@ package app.modules.fight.view.spell
 			showAnswerResult();
 		}
 		
-		private function showAnswerResult():void
+		public function showAnswerResult():void
 		{
 			btnShowAnswer.mouseEnabled = false;
 			showAnswer();
@@ -138,7 +138,7 @@ package app.modules.fight.view.spell
 			TickManager.instance.clearDoTime( inputOver );
 		}
 		
-		public function showAnswer():void
+		private function showAnswer():void
 		{
 			var item:SpellItem;
 			var leng:int = Math.min(_spellVo.items.length, MAX );

@@ -23,7 +23,7 @@ package app.core
 		public static function get buttonExit():InteractiveObject
 		{
 			var skin:InteractiveObject = LoaderManager.getObj( "ui_Skin_ButtonExit" ) as InteractiveObject;
-			skin.x = 883.25;
+			skin.x = 885.25;
 			skin.y = 6.85;
 			return skin;
 		}

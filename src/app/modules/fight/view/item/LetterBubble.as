@@ -53,6 +53,8 @@ package app.modules.fight.view.item
 		private var _speedX:Number = 1;
 		private var _speedY:Number = 1;
 		
+		private var _propSkinIcon:MovieClip;
+		
 		public static function get itemInstance():LetterBubble
 		{
 			if ( itemPools && itemPools.length > 0 )
@@ -67,6 +69,13 @@ package app.modules.fight.view.item
 			mouseChildren = false;
 			buttonMode = true;
 			setSkinWithName( "ui_Skin_FightItemBubble" );
+			
+			_propSkinIcon = getObj( "ui_Skin_PropIcon" ) as MovieClip;
+			_propSkinIcon.width = DIAMETER;
+			_propSkinIcon.height = DIAMETER;
+			_propSkinIcon.stop();
+			_propSkinIcon.visible = false;
+			addChild( _propSkinIcon );
 		}
 		
 		private function addListeners():void
@@ -110,6 +119,7 @@ package app.modules.fight.view.item
 			else _scale = Number((0.65 + Math.random() * 0.3).toFixed(2));
 			
 			_skin.scaleX = _skin.scaleY = _scale;
+			_propSkinIcon.width = _propSkinIcon.height = _scale * DIAMETER;
 			moveArea.x = RADIUS * scale;
 			moveArea.y = RADIUS * scale;
 			moveArea.width = moveArea.width - moveArea.x * 2;
@@ -207,6 +217,12 @@ package app.modules.fight.view.item
 				_bitmapLetter.y = -35;
 				_skin.addChild( _bitmapLetter );
 			}
+			else
+			{
+				_propSkinIcon.gotoAndStop( vo.itemType );
+			}
+			_skin.visible = vo.isLetter;
+			_propSkinIcon.visible = !vo.isLetter;
 			// 设置skin帧
 			(_skin as MovieClip ).gotoAndStop( frame );
 			_skin.cacheAsBitmap = true;
