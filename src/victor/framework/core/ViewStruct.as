@@ -4,6 +4,7 @@ package victor.framework.core
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	
+	import victor.framework.interfaces.IBasePanel;
 	import victor.utils.DisplayUtil;
 	import victor.utils.appStage;
 
@@ -65,12 +66,12 @@ package victor.framework.core
 		 * 添加到面板图层显示列表
 		 * @param panel
 		 */
-		public static function addPanel( panel:BasePanel, isPenetrate:Boolean = false ):void
+		public static function addPanel( panel:IBasePanel, isPenetrate:Boolean = false ):void
 		{
 			var con:Sprite = getContainer( PANEL ) as Sprite;
 			con.mouseEnabled = !isPenetrate;
 			if ( con != panel.parent )
-				con.addChild( panel );
+				con.addChild( panel as DisplayObject );
 			if ( con.numChildren == 1 )
 			{
 				con.graphics.clear();
@@ -80,12 +81,12 @@ package victor.framework.core
 			}
 		}
 		
-		public static function removePanel( panel:BasePanel ):void
+		public static function removePanel( panel:IBasePanel ):void
 		{
 			if ( panel && panel.parent )
 			{
 				var con:Sprite = getContainer( PANEL ) as Sprite;
-				con.removeChild( panel );
+				con.removeChild( panel as DisplayObject );
 				if ( con.numChildren == 0 )
 					con.graphics.clear();
 			}
@@ -103,7 +104,7 @@ package victor.framework.core
 			{
 				if ( containerType == PANEL )
 				{
-					addPanel( child as BasePanel );
+					addPanel( child as IBasePanel );
 				}
 				else
 				{
@@ -133,7 +134,7 @@ package victor.framework.core
 			if ( child )
 			{
 				if ( child.parent == getContainer( PANEL ) )
-					removePanel( child as BasePanel );
+					removePanel( child as IBasePanel );
 				else DisplayUtil.removedFromParent( child );
 			}
 		}

@@ -2,6 +2,7 @@ package app
 {
 	import app.modules.login.login.vo.LoginVo;
 	
+	import victor.framework.manager.LoaderManager;
 	import victor.utils.appStage;
 	
 	/**
@@ -11,7 +12,6 @@ package app
 	 */
 	public class GameConfig
 	{
-		public static var VERSION:String = "null";
 		/**
 		 * 密码是否使用md5加密
 		 */
@@ -62,6 +62,8 @@ package app
 				_deployPath = appStage.loaderInfo.url;
 				_deployPath = _deployPath.replace(/\\/g, "/");
 				_deployPath = _deployPath.substring(0, _deployPath.lastIndexOf("/") + 1);
+				
+				LoaderManager.deployPath = _deployPath;
 			}
 			return _deployPath;
 		}
@@ -69,6 +71,7 @@ package app
 		public static function set deployPath( value:String ):void
 		{
 			_deployPath = value;
+			LoaderManager.deployPath = _deployPath;
 		}
 		
 		/////////// static vars
@@ -80,14 +83,20 @@ package app
 		{
 			return Boolean( uid ) && Boolean( key );
 		}
+
+		public static function get VERSION():String
+		{
+			return LoaderManager.VERSION;
+		}
 		
 		public static function get immediateLoginVo():LoginVo
 		{
 			var loginVo:LoginVo = new LoginVo();
-			loginVo.accountName = uid;
-			loginVo.password = key;
+			loginVo.accountName = GameConfig.uid;
+			loginVo.password = GameConfig.key;
 			return loginVo;
 		}
+
 		
 	}
 }

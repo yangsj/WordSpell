@@ -16,7 +16,7 @@ package app.modules.login.login
 	import app.modules.login.login.vo.LoginVo;
 	import victor.utils.appStage;
 	
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	
 	
 	/**

@@ -6,10 +6,10 @@ package app.modules.panel.personal.view
 	
 	import app.data.GameData;
 	import app.data.PlayerSelfVo;
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import app.modules.ViewName;
 	
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	
 	/**
 	 * ……

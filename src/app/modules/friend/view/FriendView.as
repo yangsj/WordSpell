@@ -5,12 +5,12 @@ package app.modules.friend.view
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
 	
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.friend.model.FriendVo;
 	
 	import victor.core.scroll.GameScrollPanel;
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
 	
 	

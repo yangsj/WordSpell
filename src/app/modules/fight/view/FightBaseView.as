@@ -27,7 +27,7 @@ package app.modules.fight.view
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
-	import victor.framework.core.BaseLoadView;
+	import app.base.BaseLoadView;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;

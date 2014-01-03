@@ -5,7 +5,7 @@ package app.modules.fight.panel.ready
 	import app.core.ButtonSkin;
 	import app.modules.fight.model.FightMatchingVo;
 	
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
 	
 	

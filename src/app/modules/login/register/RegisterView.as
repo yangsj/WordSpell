@@ -12,7 +12,7 @@ package app.modules.login.register
 	import app.modules.model.GenderType;
 	
 	import victor.core.TabButtonControl;
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.framework.debug.Debug;
 	import victor.utils.StringUitl;
 	import victor.utils.appStage;

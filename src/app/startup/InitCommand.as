@@ -3,7 +3,7 @@ package app.startup
 	import flash.events.Event;
 	
 	import app.data.GameData;
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import app.modules.chat.command.ChatInitCommand;
 	import app.modules.fight.command.FightInitCommand;
 	import app.modules.friend.command.FriendInitComand;

@@ -1,4 +1,4 @@
-package app.events
+package victor.framework.events
 {
 	import flash.events.Event;
 	

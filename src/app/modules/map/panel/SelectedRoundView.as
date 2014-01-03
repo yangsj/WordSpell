@@ -11,7 +11,7 @@ package app.modules.map.panel
 	import app.modules.map.panel.item.GroupItem;
 	
 	import victor.core.Reflection;
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
 	
 	/**

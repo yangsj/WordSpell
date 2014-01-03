@@ -13,7 +13,7 @@ package app.modules.panel.test
 	
 	import victor.core.TabButtonControl;
 	import victor.core.scroll.GameScrollPanel;
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.framework.debug.Debug;
 	import victor.utils.HtmlText;
 	

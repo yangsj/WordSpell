@@ -1,9 +1,10 @@
-package victor.framework.core
+package app.base
 {
 	import app.modules.panel.PanelLoading;
 	
 	import victor.framework.events.PanelEvent;
 	import victor.framework.manager.LoaderManager;
+	import victor.framework.core.BaseView;
 	
 	/**
 	 * ……

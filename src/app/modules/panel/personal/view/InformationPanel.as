@@ -15,7 +15,7 @@ package app.modules.panel.personal.view
 	import app.modules.panel.personal.events.PersonalEvent;
 	
 	import victor.core.TabButtonControl;
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.framework.debug.Debug;
 	import victor.utils.StringUitl;
 	

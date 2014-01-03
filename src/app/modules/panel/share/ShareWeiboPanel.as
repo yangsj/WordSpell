@@ -3,7 +3,7 @@ package app.modules.panel.share
 	import flash.display.InteractiveObject;
 	import flash.events.MouseEvent;
 	
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	
 	
 	/**

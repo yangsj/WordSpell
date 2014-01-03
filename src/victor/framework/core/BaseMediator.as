@@ -1,6 +1,6 @@
 package victor.framework.core
 {
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	
 	import org.robotlegs.mvcs.Mediator;
 	

@@ -8,7 +8,7 @@ package app.modules.fight.panel.matching
 	import app.data.GameData;
 	import app.modules.model.GenderType;
 	
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
 	import victor.utils.HtmlText;

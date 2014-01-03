@@ -10,7 +10,7 @@ package app.modules.fight.view.panel
 	import app.modules.fight.model.FightEndVo;
 	import app.modules.util.Num;
 
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
 
 

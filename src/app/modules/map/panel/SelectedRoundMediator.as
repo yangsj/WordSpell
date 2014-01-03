@@ -1,7 +1,7 @@
 package app.modules.map.panel
 {
 	import app.core.Alert;
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.map.model.MapModel;
 	import app.modules.map.model.RoundVo;

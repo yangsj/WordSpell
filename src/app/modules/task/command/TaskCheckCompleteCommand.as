@@ -1,7 +1,7 @@
 package app.modules.task.command
 {
 	import app.core.Tips;
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import app.modules.ViewName;
 	import app.modules.task.model.TaskModel;
 	import app.modules.task.model.TaskVo;

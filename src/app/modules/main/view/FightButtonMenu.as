@@ -5,7 +5,7 @@ package app.modules.main.view
 	
 	import flash.events.MouseEvent;
 	
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import victor.framework.core.BaseSprite;
 	import app.modules.ViewName;
 	import app.sound.SoundManager;

@@ -11,7 +11,7 @@ package app.modules.fight.panel.search
 	import app.modules.friend.model.FriendVo;
 	
 	import victor.core.scroll.GameScrollPanel;
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
 	
 	

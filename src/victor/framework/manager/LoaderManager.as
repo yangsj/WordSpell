@@ -10,8 +10,6 @@ package victor.framework.manager
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
-	import app.GameConfig;
-	
 	import victor.framework.debug.Debug;
 	import victor.utils.ArrayUtil;
 	import victor.utils.safetyCall;
@@ -71,6 +69,9 @@ package victor.framework.manager
 
 		private static var loader:Loader;
 		
+		private static var _VERSION:String = "0.0.1";
+		private static var _deployPath:String = "";
+		
 		///////////////////////////////////////////////////////
 
 		public function LoaderManager()
@@ -79,7 +80,7 @@ package victor.framework.manager
 
 		public function setApplicationConfig( applicationXml:XML ):void
 		{
-			GameConfig.VERSION = applicationXml.app[0].@version;
+			_VERSION = applicationXml.app[0].@version;
 			var xmllist:XMLList = applicationXml.asset;
 			for each ( var xml:XML in xmllist )
 			{
@@ -87,7 +88,7 @@ package victor.framework.manager
 				var url:String = String( xml.@src );
 				var version:String = String( xml.@version );
 				var first:int = int( xml.@first );
-				var path:String = GameConfig.deployPath + url;// + "?t=" + (new Date()).time;
+				var path:String = _deployPath + url;// + "?t=" + (new Date()).time;
 				
 				dictResList[ name ] = path;
 				if ( first > 0 )
@@ -249,6 +250,17 @@ package victor.framework.manager
 		{
 			return dictResList[ name ];
 		}
+
+		public static function get VERSION():String
+		{
+			return _VERSION;
+		}
+
+		public static function set deployPath(value:String):void
+		{
+			_deployPath = value;
+		}
+
 
 	}
 }

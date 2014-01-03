@@ -3,8 +3,6 @@ package app.modules.panel
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 	
-	import app.core.Text;
-	
 	import victor.framework.core.BaseView;
 	import victor.framework.core.ViewStruct;
 	import victor.utils.appStage;

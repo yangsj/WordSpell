@@ -8,7 +8,7 @@ package app.modules.friend.view
 	
 	import app.modules.friend.event.FriendEvent;
 	
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	
 	
 	/**

@@ -2,7 +2,7 @@ package app.modules.main.view
 {
 	import app.core.Tips;
 	import app.data.GameData;
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.main.FunctionBtnConfig;
 	import app.modules.main.event.MainUIEvent;

@@ -3,7 +3,7 @@ package app.startup
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import app.modules.ViewName;
 	
 	import victor.framework.core.BaseCommand;

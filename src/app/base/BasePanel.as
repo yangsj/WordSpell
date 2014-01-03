@@ -1,4 +1,4 @@
-package victor.framework.core
+package app.base
 {
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
@@ -12,7 +12,9 @@ package victor.framework.core
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
+	import victor.framework.core.ViewStruct;
 	import victor.framework.events.PanelEvent;
+	import victor.framework.interfaces.IBasePanel;
 	import victor.utils.appStage;
 	
 	/**
@@ -20,7 +22,7 @@ package victor.framework.core
 	 * @author 	yangsj
 	 * 			2013-8-5
 	 */
-	public class BasePanel extends BaseLoadView
+	public class BasePanel extends BaseLoadView implements IBasePanel
 	{
 		
 		/**

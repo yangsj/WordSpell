@@ -12,7 +12,7 @@ package app.modules.task.view
 	import app.modules.task.model.TaskVo;
 	import app.modules.util.Num;
 	
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
 	import victor.utils.UtilsFilter;
 	

@@ -8,7 +8,7 @@ package app.modules.panel.rank.view
 	
 	import victor.core.TabButtonControl;
 	import victor.core.scroll.GameScrollPanel;
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
 	
 	/**

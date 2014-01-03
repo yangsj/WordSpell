@@ -9,7 +9,7 @@ package app.modules.main.view
 	
 	import app.data.BaseConfig;
 	import app.data.vo.LevelExpItemVo;
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	import app.modules.main.FunctionBtnConfig;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;

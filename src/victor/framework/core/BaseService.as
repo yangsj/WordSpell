@@ -1,15 +1,9 @@
 package victor.framework.core {
 
-	import app.core.Alert;
-	import app.core.Tips;
-	import app.events.ViewEvent;
+	import victor.framework.events.ViewEvent;
 	
-	import ff.msg_defConstants;
-	
-	import org.apache.thrift.TBase;
 	import org.robotlegs.mvcs.Actor;
 	
-	import victor.framework.debug.Debug;
 	import victor.framework.socket.IService;
 	import victor.framework.socket.ISocketManager;
 	import victor.framework.socket.SocketReq;
@@ -40,7 +34,7 @@ package victor.framework.core {
          * @param model 数据模型
          * 
          */
-		protected function call(cmd : uint, msg : TBase, callBack : Function = null, noTimeAllow : Boolean = true) : void {
+		protected function call(cmd : uint, msg : *, callBack : Function = null, noTimeAllow : Boolean = true) : void {
             var req : SocketReq =SocketReq.creatReq();
             req.cmd = cmd;
             req.obj = msg;
@@ -66,26 +60,6 @@ package victor.framework.core {
 		protected function regist(cmd : uint, dataCallBack : Function, respProc : Class) : void {
 			socket.registerDataCallback( cmd, dataCallBack, respProc);
         }
-		
-		/**
-		 * 错误处理 
-		 * @param errorCode
-		 * 
-		 */		
-		protected function errorHandler(errorCode:int,isShowTips:Boolean=false):Boolean
-		{
-			if ( errorCode > 0 )
-			{
-				var msg:String = msg_defConstants.error_code_desc[errorCode];
-				if ( Debug.isDebug )
-					msg += "[错误代码：" + errorCode + "]";
-				if ( isShowTips )
-					Tips.showCenter( msg );
-				else Alert.show( msg );
-				return false;
-			}
-			return true;
-		}
 		
 		protected function openView( viewName:String, data:Object = null ):void
 		{

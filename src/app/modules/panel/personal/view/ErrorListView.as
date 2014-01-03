@@ -16,7 +16,7 @@ package app.modules.panel.personal.view
 	import app.modules.panel.personal.model.ErrorListVo;
 	
 	import victor.core.scroll.GameScrollPanel;
-	import victor.framework.core.BasePanel;
+	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
 	
 	
