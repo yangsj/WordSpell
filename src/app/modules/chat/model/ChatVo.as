@@ -77,7 +77,7 @@ package app.modules.chat.model
 			if ( isLocal && channel == ChatChannelType.PRIVATE ) {
 				ch = ChatChannelType.SYSTEM;
 			}
-			var msg:String = channelName[ ch ] + playerName + ":";
+			var msg:String = channelName[ ch ] + playerName + "：";
 			if ( ch == ChatChannelType.SYSTEM ) {
 				return "<font color=\"#ffff00\">" + msg;
 			}

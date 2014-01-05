@@ -13,6 +13,14 @@ package app.managers
 		{
 		}
 		
+		public static function addCallback( funName:String, fun:Function ):void
+		{
+			if ( ExternalInterface.available )
+			{
+				ExternalInterface.addCallback( funName, fun );
+			}
+		}
+		
 		public static function reload():void
 		{
 			callJs( "reload" );

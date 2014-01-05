@@ -12,6 +12,7 @@ package app
 	import app.startup.InitDataCommand;
 	import app.startup.InitFontCommand;
 	import app.startup.InitServiceCommand;
+	import app.startup.JsCallbackCommand;
 	import app.startup.SetPlayerMenuCommand;
 	import app.startup.ShowLoginCommand;
 	
@@ -46,6 +47,9 @@ package app
 			
 			// 应用程序背景音乐控制
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, BackgroundSoundActivateCommand, ContextEvent, true);
+			
+			// 应用程序背景音乐控制
+			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, JsCallbackCommand, ContextEvent, true);
 			
 			// 初始化网络
 			commandMap.mapEvent(GameEvent.ANALYTIC_WEB_PARAMS_COMMPLETE, InitServiceCommand, GameEvent, true);

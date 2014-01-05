@@ -7,9 +7,11 @@ package app.modules.serivce
 	import app.modules.main.event.MainUIEvent;
 	import app.modules.model.PackModel;
 	
+	import ff.client_cmd_e;
 	import ff.error_code_ret_t;
 	import ff.msg_defConstants;
 	import ff.server_cmd_e;
+	import ff.share_weibo_ok_req_t;
 	import ff.update_property_ret_t;
 	
 	import victor.framework.core.BaseService;
@@ -80,6 +82,12 @@ package app.modules.serivce
 					msg += "[错误代码：" + errorCode + "]";
 				Alert.show( msg, null, Alert.YES_NAME, "" );
 			}
+		}
+		
+		public function shareWeiboSuccessSendToServer():void
+		{
+			var msg:share_weibo_ok_req_t = new share_weibo_ok_req_t();
+			call( client_cmd_e.SHARE_WEIBO_OK_REQ, msg );
 		}
 
 	}

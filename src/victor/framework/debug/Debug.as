@@ -76,8 +76,15 @@ package victor.framework.debug
 		{
 			var msg:String = JSON.stringify( args );
 			trace( msg );
-			if ( ExternalInterface.available ){
-				ExternalInterface.call("console.log", msg );
+			try
+			{
+				if ( ExternalInterface.available ){
+					ExternalInterface.call("console.log", msg );
+				}
+			}
+			catch(e:Error)
+			{
+				trace( "console.log:" + e.message );
 			}
 		}
 		

@@ -1,8 +1,12 @@
 package app.modules.main.view
 {
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
+	
 	import app.core.Tips;
 	import app.data.GameData;
-	import victor.framework.events.ViewEvent;
+	import app.managers.ExternalManager;
+	import app.modules.fight.model.FightModel;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.main.FunctionBtnConfig;
 	import app.modules.main.event.MainUIEvent;
@@ -11,6 +15,7 @@ package app.modules.main.view
 	import victor.framework.core.BaseMediator;
 	import victor.framework.debug.Debug;
 	import victor.framework.events.PanelEvent;
+	import victor.framework.events.ViewEvent;
 	import victor.framework.manager.TickManager;
 	
 	/**
@@ -22,6 +27,8 @@ package app.modules.main.view
 	{
 		[Inject]
 		public var view:MainUIView;
+		[Inject]
+		public var fightModel:FightModel;
 		
 		public function MainUIMediator()
 		{
@@ -51,6 +58,21 @@ package app.modules.main.view
 				// 检查好友邀请对战
 				dispatch( new PanelEvent( PanelEvent.LOAD_END ));
 			}, 1000 );
+			
+			if ( Debug.isDebug ) {
+				view.stage.addEventListener(KeyboardEvent.KEY_UP, keyboardHandler );
+			}
+		}
+		
+		protected function keyboardHandler(event:KeyboardEvent):void
+		{
+			if ( !fightModel.isBattle )
+			{
+				Debug.debug(event.ctrlKey, event.shiftKey , Keyboard.A == event.keyCode)
+				if ( event.ctrlKey && event.shiftKey && Keyboard.A == event.keyCode ) {
+					ExternalManager.shareWeibo();
+				}
+			}
 		}
 		
 		private function initData():void

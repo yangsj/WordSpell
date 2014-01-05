@@ -36,7 +36,7 @@ package app.modules.map.model
 
 		public function get mapName():String
 		{
-			return ["巨鲸群岛","黄金沙漠","沉睡森林","赤色火山","远古冰川","天空"][mapId];
+			return ["巨鲸群岛","赤色火山","沉睡森林","黄金沙漠","远古冰川","天空"][mapId];
 		}
 		
 	}
