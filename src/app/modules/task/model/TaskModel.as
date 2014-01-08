@@ -1,7 +1,7 @@
 package app.modules.task.model
 {
 	import app.modules.model.vo.ItemVo;
-
+	
 	import org.robotlegs.mvcs.Actor;
 
 
@@ -89,6 +89,19 @@ package app.modules.task.model
 				}
 			}
 			return -1;
+		}
+		
+		public function get isHasNew():Boolean
+		{
+			var taskVo:TaskVo;
+			for ( var key:String in taskList )
+			{
+				taskVo = taskList[ key ];
+				if ( taskVo && taskVo.isEd ) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		/**

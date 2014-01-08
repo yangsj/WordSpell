@@ -69,7 +69,7 @@ package app.modules.task.model
 		 */
 		public function get isHide():Boolean
 		{
-			return status == STATUS_HIDE;
+			return status == STATUS_HIDE || !describe;
 		}
 		
 		/**
@@ -93,6 +93,7 @@ package app.modules.task.model
 		 */
 		public function get fullDescribe():String
 		{
+			describe ||= "完整的任务描述";
 			return describe + ( isEd ? "（已完成）" : ( isHide ? "（已领取）" : "" ) );
 		}
 		

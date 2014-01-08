@@ -11,6 +11,7 @@ package app.modules.main.view
 	import app.modules.main.FunctionBtnConfig;
 	import app.modules.main.event.MainUIEvent;
 	import app.modules.task.event.TaskEvent;
+	import app.modules.task.service.TaskService;
 	
 	import victor.framework.core.BaseMediator;
 	import victor.framework.debug.Debug;
@@ -29,6 +30,8 @@ package app.modules.main.view
 		public var view:MainUIView;
 		[Inject]
 		public var fightModel:FightModel;
+		[Inject]
+		public var taskService:TaskService;
 		
 		public function MainUIMediator()
 		{
@@ -45,8 +48,12 @@ package app.modules.main.view
 			addContextListener( MainUIEvent.UPDATE_MONEY, updateMoneyHandler, MainUIEvent );
 			// 经验条进度更新
 			addContextListener( MainUIEvent.UPDATE_PROPERTY, updatePropertyHandler, MainUIEvent );
+			// 有可领取任务
+			addContextListener( TaskEvent.HAS_NEW_TASK, hasNewTaskHandler, TaskEvent );
 			
 			initData();
+			
+			taskService.pullTaskList();
 
 			// 检查是否有完成的任务
 			TickManager.doTimeout( function abc():void
@@ -61,6 +68,18 @@ package app.modules.main.view
 			
 			if ( Debug.isDebug ) {
 				view.stage.addEventListener(KeyboardEvent.KEY_UP, keyboardHandler );
+			}
+		}
+		
+		private function hasNewTaskHandler( event:TaskEvent ):void
+		{
+			if (　event.data ) 
+			{
+				view.displayTaskMark();
+			}
+			else 
+			{
+				view.hideTaskMark();
 			}
 		}
 		

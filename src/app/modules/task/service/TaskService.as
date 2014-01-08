@@ -68,6 +68,8 @@ package app.modules.task.service
 			taskModel.hasTaskList = false;
 			taskModel.taskList.length = 0;
 			
+			var hasNew:Boolean = false;
+			
 			for each ( var task:task_t in list )
 			{
 				taskVo = new TaskVo();
@@ -78,6 +80,7 @@ package app.modules.task.service
 				taskVo.rewardExp = task.exp_award;
 				taskVo.rewardMoney = task.coin_award;
 				taskVo.propList = getRewardList( task.item_award );
+				if ( taskVo.isEd && !hasNew ) hasNew = true;
 				
 				taskModel.updateTask( taskVo );
 			}
@@ -85,6 +88,8 @@ package app.modules.task.service
 			taskModel.hasTaskList = true;
 			// 更新列表通知
 			dispatch( new TaskEvent( TaskEvent.UPDATE_LIST ));
+			
+			dispatch( new TaskEvent( TaskEvent.HAS_NEW_TASK, hasNew ));
 		}
 		
 		// 任务完成通知
@@ -96,6 +101,7 @@ package app.modules.task.service
 			taskVo.status = TaskVo.STATUS_ED;
 			taskVo.rewardMoney = data.coin_award;
 			taskVo.rewardExp = data.exp_award;
+			taskVo.describe = data.desc;
 			taskVo.propList = getRewardList( data.item_award );
 			// 更新当前任务状态
 			taskModel.updateTask( taskVo );
@@ -104,6 +110,8 @@ package app.modules.task.service
 			taskModel.cacheCompleteTask.push( taskVo );
 			if ( !fightModel.isFighting && mainModel.hasEnterGame )
 				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
+			
+			dispatch( new TaskEvent( TaskEvent.HAS_NEW_TASK, true ));
 			
 		}
 		
@@ -116,6 +124,7 @@ package app.modules.task.service
 			taskVo.status = TaskVo.STATUS_HIDE;
 			taskVo.rewardMoney = data.coin_award;
 			taskVo.rewardExp = data.exp_award;
+			taskVo.describe = data.desc;
 			taskVo.propList = getRewardList( data.item_award, true );
 			// 更新当前任务状态
 			taskModel.updateTask( taskVo );
@@ -161,6 +170,7 @@ package app.modules.task.service
 			if ( taskModel.hasTaskList ) {
 				// 更新列表通知
 				dispatch( new TaskEvent( TaskEvent.UPDATE_LIST ));
+				dispatch( new TaskEvent( TaskEvent.HAS_NEW_TASK, taskModel.isHasNew ));
 			} else {
 				var req:task_info_req_t = new task_info_req_t();
 				call( client_cmd_e.TASK_INFO_REQ, req );

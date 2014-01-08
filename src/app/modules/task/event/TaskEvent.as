@@ -35,5 +35,10 @@ package app.modules.task.event
 		 */
 		public static const OPEN_REWARD:String = "open_reward";
 		
+		/**
+		 * 是否有可领取任务
+		 */
+		public static const HAS_NEW_TASK:String = "has_new_task";
+		
 	}
 }

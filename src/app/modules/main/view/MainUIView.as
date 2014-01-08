@@ -9,7 +9,6 @@ package app.modules.main.view
 	
 	import app.data.BaseConfig;
 	import app.data.vo.LevelExpItemVo;
-	import victor.framework.events.ViewEvent;
 	import app.modules.main.FunctionBtnConfig;
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
@@ -17,6 +16,7 @@ package app.modules.main.view
 	import victor.core.Numeric;
 	import victor.framework.core.BaseView;
 	import victor.framework.core.ViewStruct;
+	import victor.framework.events.ViewEvent;
 	import victor.framework.manager.LoaderManager;
 	import victor.utils.DisplayUtil;
 	import victor.utils.MathUtil;
@@ -51,6 +51,8 @@ package app.modules.main.view
 		// 点击对战按钮弹出的菜单
 		private var fightMenu:FightButtonMenu;
 		
+		public var markTaskClip:ExclamatoryMarkEffect;
+		
 		public function MainUIView()
 		{
 			addedToStageHandler( null );
@@ -63,6 +65,23 @@ package app.modules.main.view
 		protected function expBarMouseHandler(event:MouseEvent):void
 		{
 			txtExp.text = event.type == MouseEvent.ROLL_OUT ? expPercent : expNumString;
+		}
+		
+		public function displayTaskMark():void
+		{
+			markTaskClip ||= new ExclamatoryMarkEffect();
+			addChild( markTaskClip );
+			markTaskClip.visible = true;
+			markTaskClip.start();
+		}
+		
+		public function hideTaskMark():void
+		{
+			if ( markTaskClip )
+			{
+				markTaskClip.stop();
+				markTaskClip.visible = false;
+			}
 		}
 		
 		public function displayFightMenu():void

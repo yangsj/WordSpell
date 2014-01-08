@@ -1,5 +1,6 @@
 package victor.framework.manager
 {
+	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -43,6 +44,24 @@ package victor.framework.manager
 		public static function getUrl( name:String ):String
 		{
 			return instance.getUrl( name );
+		}
+		
+		/**
+		 * 按文件名称获取加载的xml文件数据
+		 * @param fileName 配置中的文件名
+		 */
+		public static function getXml( fileName:String ):XML
+		{
+			return instance.getXml( fileName );
+		}
+		
+		/**
+		 * 按文件名称获取加载的图片资源
+		 * @param fileName 图片名称
+		 */
+		public static function getBitmap( fileName:String ):Bitmap
+		{
+			return instance.getBitmap( fileName );
 		}
 
 		///////////////////////////////////////////////////////
@@ -140,18 +159,7 @@ package victor.framework.manager
 			var ary:Array = ArrayUtil.cloneArray( resNameAry );
 			var totalNum:int = ary.length;
 			var loadNum:int = 0;
-			if ( loader == null )
-			{
-				loader = new Loader();
-				urlLoad = new URLLoader();
-			}
-			loader.contentLoaderInfo.addEventListener( Event.COMPLETE, completeHandler );
-			loader.contentLoaderInfo.addEventListener( ProgressEvent.PROGRESS, progressHandler );
-			loader.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR, errorHandler );
-			
-			urlLoad.addEventListener( Event.COMPLETE, completeHandler );
-			urlLoad.addEventListener( ProgressEvent.PROGRESS, progressHandler );
-			urlLoad.addEventListener( IOErrorEvent.IO_ERROR, errorHandler );
+			var loaderName:String = "";
 
 			loadItem();
 
@@ -161,19 +169,27 @@ package victor.framework.manager
 				{
 					try
 					{
-						var name:String = ary.shift();
-						if ( dictResLoaded[ name ])
+						loaderName = ary.shift();
+						if ( dictResLoaded[ loaderName ])
 						{
 							loadItem();
 						}
 						else
 						{
-							var url:String = dictResList[ name ];
-							Debug.debug( "加载[" + name + "]url=" + url );
-							dictResLoaded[ name ] = url;
+							var url:String = dictResList[ loaderName ];
+							Debug.debug( "加载[" + loaderName + "]url=" + url );
+							dictResLoaded[ loaderName ] = url;
 							if ( isLoader( url )) {
+								loader ||= new Loader();
+								loader.contentLoaderInfo.addEventListener( Event.COMPLETE, completeHandler );
+								loader.contentLoaderInfo.addEventListener( ProgressEvent.PROGRESS, progressHandler );
+								loader.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR, errorHandler );
 								loader.load( new URLRequest( url ), getLoaderContext( domainName ));
 							} else {
+								urlLoad ||= new URLLoader();
+								urlLoad.addEventListener( Event.COMPLETE, completeHandler );
+								urlLoad.addEventListener( ProgressEvent.PROGRESS, progressHandler );
+								urlLoad.addEventListener( IOErrorEvent.IO_ERROR, errorHandler );
 								urlLoad.load( new URLRequest( url ) );
 							}
 						}
@@ -186,14 +202,34 @@ package victor.framework.manager
 				else
 				{
 					safetyCall( completeCallBack );
-					loader.contentLoaderInfo.removeEventListener( Event.COMPLETE, completeHandler );
-					loader.contentLoaderInfo.removeEventListener( ProgressEvent.PROGRESS, progressHandler );
-					loader.contentLoaderInfo.removeEventListener( IOErrorEvent.IO_ERROR, errorHandler );
+					if ( loader ) {
+						loader.contentLoaderInfo.removeEventListener( Event.COMPLETE, completeHandler );
+						loader.contentLoaderInfo.removeEventListener( ProgressEvent.PROGRESS, progressHandler );
+						loader.contentLoaderInfo.removeEventListener( IOErrorEvent.IO_ERROR, errorHandler );
+					}
+					if ( urlLoad ) {
+						urlLoad.removeEventListener( Event.COMPLETE, completeHandler );
+						urlLoad.removeEventListener( ProgressEvent.PROGRESS, progressHandler );
+						urlLoad.removeEventListener( IOErrorEvent.IO_ERROR, errorHandler );
+					}
 				}
 			}
 
 			function completeHandler( event:Event ):void
 			{
+				if ( event.currentTarget == urlLoad )
+				{
+					if ( urlLoad ) {
+						urlLoad.removeEventListener( Event.COMPLETE, completeHandler );
+						urlLoad.removeEventListener( ProgressEvent.PROGRESS, progressHandler );
+						urlLoad.removeEventListener( IOErrorEvent.IO_ERROR, errorHandler );
+					}
+					dictXmlList[loaderName] = urlLoad.data;
+				}
+				else if ( loaderName && isBitmap( dictResList[ loaderName ] ))
+				{
+					dictPngList[loaderName] = loader.content as Bitmap;
+				}
 				loadNum++;
 				loadItem();
 			}
@@ -212,14 +248,29 @@ package victor.framework.manager
 			}
 		}
 		
-		private function isLoader( url:String ):Boolean
+		/**
+		 * 按文件名称获取加载的xml文件数据
+		 * @param fileName 配置中的文件名
+		 */
+		public function getXml( fileName:String ):XML
 		{
-			if ( url.indexOf("xml") || url.indexOf("txt") ) {
-				return false;
-			}
-			return true;
+			return new XML(dictXmlList[fileName]);
+		}
+		
+		/**
+		 * 按文件名称获取加载的图片资源
+		 * @param fileName 图片名称
+		 */
+		public function getBitmap( fileName:String ):Bitmap
+		{
+			return dictPngList[fileName] as Bitmap;
 		}
 
+		/**
+		 * 获取实例对象
+		 * @param linkName 连接名称
+		 * @param domainName 加载指定的域名
+		 */
 		public function getObj( linkName:String, domainName:String = "" ):Object
 		{
 			try
@@ -233,6 +284,11 @@ package victor.framework.manager
 			return null;
 		}
 
+		/**
+		 * 获取指定的类
+		 * @param linkName 连接名称
+		 * @param domainName 加载指定的域名
+		 */
 		public function getClass( linkName:String, domainName:String = "" ):Class
 		{
 			try
@@ -266,17 +322,53 @@ package victor.framework.manager
 			}
 			return context;
 		}
+		
+		/**
+		 * 加载的资源是否是loader加载
+		 * @param url
+		 * @return 
+		 * 
+		 */
+		private function isLoader( url:String ):Boolean
+		{
+			if ( url.indexOf(".xml") != -1 || url.indexOf(".txt") != -1 ) {
+				return false;
+			}
+			return true;
+		}
+		
+		/**
+		 * 当前加载的资源是否是图片
+		 * @param url
+		 * @return 
+		 * 
+		 */
+		private function isBitmap( url:String ):Boolean
+		{
+			return isLoader(url) && url.indexOf(".swf") == -1;
+		}
+		
 
+		/**
+		 * 按名称获取资源加载路径
+		 * @param name 配置的名称
+		 */
 		public function getUrl( name:String ):String
 		{
 			return dictResList[ name ];
 		}
 
+		/**
+		 * 获取当前更新的版本号
+		 */
 		public static function get VERSION():String
 		{
 			return _VERSION;
 		}
 
+		/**
+		 * 设置加载资源的根路径
+		 */
 		public static function set deployPath(value:String):void
 		{
 			_deployPath = value;

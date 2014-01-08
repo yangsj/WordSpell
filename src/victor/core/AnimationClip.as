@@ -33,7 +33,7 @@ package victor.core
 		private var _isLoop:Boolean = true;
 		private var _bitmapDataList:Vector.<BitmapData>;
 
-		public function AnimationClip( linkage:String, loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 )
+		public function AnimationClip( linkage:String = "", loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 )
 		{
 			mouseChildren = false;
 			setLinkage( linkage, loopNum, onComplete, frameRate );
@@ -46,6 +46,14 @@ package victor.core
 			stop();
 			clear();
 			_onComplete = null;
+		}
+		
+		public function setBitmapDataList(value:Vector.<BitmapData>, frameRate:int = 24 ):void
+		{
+			_bitmapDataList = value;
+			_frameRate = frameRate;
+			_totalFrames = value.length;
+			refreshFrameRate( frameRate );
 		}
 
 		public function setLinkage( linkage:String, loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 ):void
@@ -67,6 +75,7 @@ package victor.core
 			{
 				drawBitmap( clip );
 				refreshFrameRate( _frameRate );
+				start();
 			}
 		}
 
@@ -76,7 +85,6 @@ package victor.core
 			_frameRate = frameRate;
 			_bitmap = new Bitmap();
 			addChild( _bitmap );
-			start();
 		}
 
 		public function start():void
@@ -128,6 +136,10 @@ package victor.core
 
 		private function loop():void
 		{
+			if ( ( !_frameList && !_bitmapDataList ) || ( _frameList && _frameList.length == 0 ) || (_bitmapDataList && _bitmapDataList.length == 0 ) ) 
+			{
+				return ;
+			}
 			if ( _frameList )
 			{
 				var frameVo:FrameVo = _frameList[ _frameIndex % _totalFrames ];
@@ -183,11 +195,6 @@ package victor.core
 		public function set linkage(value:String):void
 		{
 			_linkage = value;
-		}
-
-		public function set bitmapDataList(value:Vector.<BitmapData>):void
-		{
-			_bitmapDataList = value;
 		}
 
 

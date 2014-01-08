@@ -22,6 +22,7 @@ import org.apache.thrift.protocol.*;
     private static const EXP_AWARD_FIELD_DESC:TField = new TField("exp_award", TType.I32, 3);
     private static const ITEM_AWARD_FIELD_DESC:TField = new TField("item_award", TType.MAP, 4);
     private static const STATUS_FIELD_DESC:TField = new TField("status", TType.I32, 5);
+    private static const DESC_FIELD_DESC:TField = new TField("desc", TType.STRING, 6);
 
     private var _task_id:int;
     public static const TASK_ID:int = 1;
@@ -33,6 +34,8 @@ import org.apache.thrift.protocol.*;
     public static const ITEM_AWARD:int = 4;
     private var _status:int;
     public static const STATUS:int = 5;
+    private var _desc:String;
+    public static const DESC:int = 6;
 
     private var __isset_task_id:Boolean = false;
     private var __isset_coin_award:Boolean = false;
@@ -53,6 +56,8 @@ import org.apache.thrift.protocol.*;
               new FieldValueMetaData(TType.I32)));
       metaDataMap[STATUS] = new FieldMetaData("status", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I32));
+      metaDataMap[DESC] = new FieldMetaData("desc", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.STRING));
     }
     {
       FieldMetaData.addStructMetaDataMap(task_completed_ret_t, metaDataMap);
@@ -154,6 +159,23 @@ import org.apache.thrift.protocol.*;
       return this.__isset_status;
     }
 
+    public function get desc():String {
+      return this._desc;
+    }
+
+    public function set desc(desc:String):void {
+      this._desc = desc;
+    }
+
+    public function unsetDesc():void {
+      this.desc = null;
+    }
+
+    // Returns true if field desc is set (has been assigned a value) and false otherwise
+    public function isSetDesc():Boolean {
+      return this.desc != null;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case TASK_ID:
@@ -196,6 +218,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case DESC:
+        if (value == null) {
+          unsetDesc();
+        } else {
+          this.desc = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -213,6 +243,8 @@ import org.apache.thrift.protocol.*;
         return this.item_award;
       case STATUS:
         return this.status;
+      case DESC:
+        return this.desc;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -231,6 +263,8 @@ import org.apache.thrift.protocol.*;
         return isSetItem_award();
       case STATUS:
         return isSetStatus();
+      case DESC:
+        return isSetDesc();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -274,15 +308,15 @@ import org.apache.thrift.protocol.*;
           case ITEM_AWARD:
             if (field.type == TType.MAP) {
               {
-                var _map104:TMap = iprot.readMapBegin();
+                var _map105:TMap = iprot.readMapBegin();
                 this.item_award = new Dictionary();
-                for (var _i105:int = 0; _i105 < _map104.size; ++_i105)
+                for (var _i106:int = 0; _i106 < _map105.size; ++_i106)
                 {
-                  var _key106:int;
-                  var _val107:int;
-                  _key106 = iprot.readI32();
-                  _val107 = iprot.readI32();
-                  this.item_award[_key106] = _val107;
+                  var _key107:int;
+                  var _val108:int;
+                  _key107 = iprot.readI32();
+                  _val108 = iprot.readI32();
+                  this.item_award[_key107] = _val108;
                 }
                 iprot.readMapEnd();
               }
@@ -294,6 +328,13 @@ import org.apache.thrift.protocol.*;
             if (field.type == TType.I32) {
               this.status = iprot.readI32();
               this.__isset_status = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case DESC:
+            if (field.type == TType.STRING) {
+              this.desc = iprot.readString();
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -327,14 +368,14 @@ import org.apache.thrift.protocol.*;
       if (this.item_award != null) {
         oprot.writeFieldBegin(ITEM_AWARD_FIELD_DESC);
         {
-          var _sizeCounter109:int = 0;
-          for (var _key108:* in this.item_award) {
-            _sizeCounter109++;
+          var _sizeCounter110:int = 0;
+          for (var _key109:* in this.item_award) {
+            _sizeCounter110++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter109));
-          for (var elem110:* in this.item_award)          {
-            oprot.writeI32(elem110);
-            oprot.writeI32(this.item_award[elem110]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter110));
+          for (var elem111:* in this.item_award)          {
+            oprot.writeI32(elem111);
+            oprot.writeI32(this.item_award[elem111]);
           }
           oprot.writeMapEnd();
         }
@@ -343,6 +384,11 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(STATUS_FIELD_DESC);
       oprot.writeI32(this.status);
       oprot.writeFieldEnd();
+      if (this.desc != null) {
+        oprot.writeFieldBegin(DESC_FIELD_DESC);
+        oprot.writeString(this.desc);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -373,6 +419,14 @@ import org.apache.thrift.protocol.*;
       if (!first) ret +=  ", ";
       ret += "status:";
       ret += this.status;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "desc:";
+      if (this.desc == null) {
+        ret += "null";
+      } else {
+        ret += this.desc;
+      }
       first = false;
       ret += ")";
       return ret;

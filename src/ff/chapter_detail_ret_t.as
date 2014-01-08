@@ -146,14 +146,14 @@ import org.apache.thrift.protocol.*;
           case ROUND_GROUP_INFO:
             if (field.type == TType.LIST) {
               {
-                var _list146:TList = iprot.readListBegin();
+                var _list148:TList = iprot.readListBegin();
                 this.round_group_info = new Array();
-                for (var _i147:int = 0; _i147 < _list146.size; ++_i147)
+                for (var _i149:int = 0; _i149 < _list148.size; ++_i149)
                 {
-                  var _elem148:round_group_info_t;
-                  _elem148 = new round_group_info_t();
-                  _elem148.read(iprot);
-                  this.round_group_info.push(_elem148);
+                  var _elem150:round_group_info_t;
+                  _elem150 = new round_group_info_t();
+                  _elem150.read(iprot);
+                  this.round_group_info.push(_elem150);
                 }
                 iprot.readListEnd();
               }
@@ -185,8 +185,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(ROUND_GROUP_INFO_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRUCT, this.round_group_info.length));
-          for each (var elem149:* in this.round_group_info)          {
-            elem149.write(oprot);
+          for each (var elem151:* in this.round_group_info)          {
+            elem151.write(oprot);
           }
           oprot.writeListEnd();
         }

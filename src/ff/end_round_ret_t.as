@@ -391,15 +391,15 @@ import org.apache.thrift.protocol.*;
           case INC_ITEMS:
             if (field.type == TType.MAP) {
               {
-                var _map222:TMap = iprot.readMapBegin();
+                var _map224:TMap = iprot.readMapBegin();
                 this.inc_items = new Dictionary();
-                for (var _i223:int = 0; _i223 < _map222.size; ++_i223)
+                for (var _i225:int = 0; _i225 < _map224.size; ++_i225)
                 {
-                  var _key224:int;
-                  var _val225:int;
-                  _key224 = iprot.readI32();
-                  _val225 = iprot.readI32();
-                  this.inc_items[_key224] = _val225;
+                  var _key226:int;
+                  var _val227:int;
+                  _key226 = iprot.readI32();
+                  _val227 = iprot.readI32();
+                  this.inc_items[_key226] = _val227;
                 }
                 iprot.readMapEnd();
               }
@@ -418,13 +418,13 @@ import org.apache.thrift.protocol.*;
           case WRONG_WORDS:
             if (field.type == TType.LIST) {
               {
-                var _list226:TList = iprot.readListBegin();
+                var _list228:TList = iprot.readListBegin();
                 this.wrong_words = new Array();
-                for (var _i227:int = 0; _i227 < _list226.size; ++_i227)
+                for (var _i229:int = 0; _i229 < _list228.size; ++_i229)
                 {
-                  var _elem228:String;
-                  _elem228 = iprot.readString();
-                  this.wrong_words.push(_elem228);
+                  var _elem230:String;
+                  _elem230 = iprot.readString();
+                  this.wrong_words.push(_elem230);
                 }
                 iprot.readListEnd();
               }
@@ -472,14 +472,14 @@ import org.apache.thrift.protocol.*;
       if (this.inc_items != null) {
         oprot.writeFieldBegin(INC_ITEMS_FIELD_DESC);
         {
-          var _sizeCounter230:int = 0;
-          for (var _key229:* in this.inc_items) {
-            _sizeCounter230++;
+          var _sizeCounter232:int = 0;
+          for (var _key231:* in this.inc_items) {
+            _sizeCounter232++;
           }
-          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter230));
-          for (var elem231:* in this.inc_items)          {
-            oprot.writeI32(elem231);
-            oprot.writeI32(this.inc_items[elem231]);
+          oprot.writeMapBegin(new TMap(TType.I32, TType.I32, _sizeCounter232));
+          for (var elem233:* in this.inc_items)          {
+            oprot.writeI32(elem233);
+            oprot.writeI32(this.inc_items[elem233]);
           }
           oprot.writeMapEnd();
         }
@@ -492,8 +492,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(WRONG_WORDS_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRING, this.wrong_words.length));
-          for each (var elem232:* in this.wrong_words)          {
-            oprot.writeString(elem232);
+          for each (var elem234:* in this.wrong_words)          {
+            oprot.writeString(elem234);
           }
           oprot.writeListEnd();
         }
