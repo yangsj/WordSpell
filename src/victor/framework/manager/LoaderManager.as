@@ -4,6 +4,7 @@ package victor.framework.manager
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
@@ -50,6 +51,8 @@ package victor.framework.manager
 		private static const dictResList:Dictionary = new Dictionary();
 		private static const dictContext:Dictionary = new Dictionary();
 		private static const dictLoaderContext:Dictionary = new Dictionary();
+		private static const dictPngList:Dictionary = new Dictionary();
+		private static const dictXmlList:Dictionary = new Dictionary();
 		/**
 		 * 若已经加载firstLoad资源则加载该配置
 		 * 第二阶段资源加载1
@@ -68,6 +71,7 @@ package victor.framework.manager
 		private static const context:LoaderContext = new LoaderContext( false, ApplicationDomain.currentDomain );
 
 		private static var loader:Loader;
+		private static var urlLoad:URLLoader;
 		
 		private static var _VERSION:String = "0.0.1";
 		private static var _deployPath:String = "";
@@ -139,10 +143,15 @@ package victor.framework.manager
 			if ( loader == null )
 			{
 				loader = new Loader();
+				urlLoad = new URLLoader();
 			}
 			loader.contentLoaderInfo.addEventListener( Event.COMPLETE, completeHandler );
 			loader.contentLoaderInfo.addEventListener( ProgressEvent.PROGRESS, progressHandler );
 			loader.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR, errorHandler );
+			
+			urlLoad.addEventListener( Event.COMPLETE, completeHandler );
+			urlLoad.addEventListener( ProgressEvent.PROGRESS, progressHandler );
+			urlLoad.addEventListener( IOErrorEvent.IO_ERROR, errorHandler );
 
 			loadItem();
 
@@ -162,7 +171,11 @@ package victor.framework.manager
 							var url:String = dictResList[ name ];
 							Debug.debug( "加载[" + name + "]url=" + url );
 							dictResLoaded[ name ] = url;
-							loader.load( new URLRequest( url ), getLoaderContext( domainName ));
+							if ( isLoader( url )) {
+								loader.load( new URLRequest( url ), getLoaderContext( domainName ));
+							} else {
+								urlLoad.load( new URLRequest( url ) );
+							}
 						}
 					}
 					catch ( e:* )
@@ -197,6 +210,14 @@ package victor.framework.manager
 				Debug.error( event.text );
 				completeHandler( null );
 			}
+		}
+		
+		private function isLoader( url:String ):Boolean
+		{
+			if ( url.indexOf("xml") || url.indexOf("txt") ) {
+				return false;
+			}
+			return true;
 		}
 
 		public function getObj( linkName:String, domainName:String = "" ):Object

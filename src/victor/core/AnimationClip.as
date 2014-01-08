@@ -8,12 +8,11 @@ package victor.core
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import victor.framework.manager.LoaderManager;
-	import victor.utils.safetyCall;
-	
 	import victor.framework.interfaces.IDisposable;
+	import victor.framework.manager.LoaderManager;
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
+	import victor.utils.safetyCall;
 
 
 	/**
@@ -24,7 +23,7 @@ package victor.core
 	public class AnimationClip extends Sprite implements IDisposable
 	{
 		private var _frameRate:int = 24;
-		private var _bitmapList:Vector.<FrameVo>;
+		private var _frameList:Vector.<FrameVo>;
 		private var _bitmap:Bitmap;
 		private var _frameIndex:int;
 		private var _totalFrames:int;
@@ -32,6 +31,7 @@ package victor.core
 		private var _loopNum:int = 0;
 		private var _onComplete:Function;
 		private var _isLoop:Boolean = true;
+		private var _bitmapDataList:Vector.<BitmapData>;
 
 		public function AnimationClip( linkage:String, loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 )
 		{
@@ -50,13 +50,12 @@ package victor.core
 
 		public function setLinkage( linkage:String, loopNum:int = 0, onComplete:Function = null, frameRate:int = 24 ):void
 		{
+			_frameRate = frameRate;
+			_loopNum = loopNum;
+			_onComplete = onComplete;
+			_isLoop = loopNum == 0;
 			if ( linkage )
 			{
-				_frameRate = frameRate;
-				_loopNum = loopNum;
-				_onComplete = onComplete;
-				_isLoop = loopNum == 0;
-				
 				this.linkage = linkage;
 				setClip( LoaderManager.getObj( linkage ) as MovieClip );
 			}
@@ -111,7 +110,7 @@ package victor.core
 			var matrix:Matrix = new Matrix();
 			_frameIndex = 1;
 			_totalFrames = clip.totalFrames;
-			_bitmapList = new Vector.<FrameVo>( _totalFrames );
+			_frameList = new Vector.<FrameVo>( _totalFrames );
 			for ( var i:int = 1; i <= _totalFrames; i++ )
 			{
 				clip.gotoAndStop( i );
@@ -123,16 +122,25 @@ package victor.core
 				bmd.draw( clip, matrix );
 				frameVo.point = new Point( rec.x, rec.y );
 				frameVo.bitmapData = bmd;
-				_bitmapList[ i - 1 ] = frameVo;
+				_frameList[ i - 1 ] = frameVo;
 			}
 		}
 
 		private function loop():void
 		{
-			var frameVo:FrameVo = _bitmapList[ _frameIndex % _totalFrames ];
-			_bitmap.x = frameVo.x;
-			_bitmap.y = frameVo.y;
-			_bitmap.bitmapData = frameVo.bitmapData;
+			if ( _frameList )
+			{
+				var frameVo:FrameVo = _frameList[ _frameIndex % _totalFrames ];
+				_bitmap.x = frameVo.x;
+				_bitmap.y = frameVo.y;
+				_bitmap.bitmapData = frameVo.bitmapData;
+			}
+			else if ( _bitmapDataList )
+			{
+				_bitmap.x = 0;
+				_bitmap.y = 0;
+				_bitmap.bitmapData = _bitmapDataList[ _frameIndex % _totalFrames ];
+			}
 			
 			if ( _isLoop == false )
 			{
@@ -150,16 +158,16 @@ package victor.core
 		
 		private function clear():void
 		{
-			if ( _bitmapList )
+			if ( _frameList )
 			{
-				while ( _bitmapList.length > 0 )
+				while ( _frameList.length > 0 )
 				{
-					var frameVo:FrameVo = _bitmapList.pop();
+					var frameVo:FrameVo = _frameList.pop();
 					if ( frameVo )
 						frameVo.dispose();
 					frameVo = null;
 				}
-				_bitmapList = null;
+				_frameList = null;
 			}
 			DisplayUtil.removedFromParent( _bitmap );
 			_bitmap = null;
@@ -176,6 +184,12 @@ package victor.core
 		{
 			_linkage = value;
 		}
+
+		public function set bitmapDataList(value:Vector.<BitmapData>):void
+		{
+			_bitmapDataList = value;
+		}
+
 
 	}
 }
