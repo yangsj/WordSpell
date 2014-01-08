@@ -58,10 +58,10 @@
 	echo "<br />--------------------------------------";echo "<br />";
 
 	system("xcopy /S/Y ".$releaseFloader."assets\\*.swf ".$fullversionPath."assets\\");
-	system("xcopy /S/Y ".$releaseFloader."sound\\*.mp3 ".$fullversionPath."sound\\");
-	system("xcopy /S/Y ".$releaseFloader."png\\*.png ".$fullversionPath."png\\");
-	system("xcopy /S/Y ".$releaseFloader."png\\*.jpg ".$fullversionPath."png\\");
-	system("xcopy /S/Y ".$releaseFloader."xml\\*.xml ".$fullversionPath."xml\\");
+	system("xcopy /S/Y ".$releaseFloader."sound\\*.mp3 ".$fullversionPath."assets\\");
+	system("xcopy /S/Y ".$releaseFloader."png\\*.png ".$fullversionPath."assets\\");
+	system("xcopy /S/Y ".$releaseFloader."png\\*.jpg ".$fullversionPath."assets\\");
+	system("xcopy /S/Y ".$releaseFloader."xml\\*.xml ".$fullversionPath."assets\\");
 
 	echo "</div>";
 	echo "<br>";
@@ -94,13 +94,7 @@
 	$newArray = changeApplicationXmlVersions($filename5, $fullversionPath, $verStr);
 
 	// 刪除版本目錄下未使用的資源
-	$fileArray1 = glob( $fullversionPath."assets\\*.*" );
-	$fileArray2 = glob( $fullversionPath."sound\\*.*" );
-	$fileArray3 = glob( $fullversionPath."png\\*.*" );
-	$fileArray4 = glob( $fullversionPath."xml\\*.*" );
-	$fileArray5 = array_merge( $fileArray1, $fileArray2 );
-	$fileArray6 = array_merge( $fileArray3, $fileArray4 );
-	$fileArray = array_merge( $fileArray5, $fileArray6 );
+	$fileArray = glob( $fullversionPath."assets\\*.*" );
 	if ( $fileArray )
 	{
 		foreach ( $fileArray as $fileUrl )

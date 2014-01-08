@@ -25,6 +25,7 @@
 		{
 			$src = $ai->getAttribute("src");
 			$id = $ai->getAttribute("id");
+			$src = "assets".substr($src, strrpos($src, "/" ));
 			$file_url = $url.$src;
 			if ( file_exists($file_url))
 			{
