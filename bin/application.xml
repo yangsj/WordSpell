@@ -2,7 +2,7 @@
 <data>
 
 	<!-- 版本号 -->
-	<app version="2014-01-09 01:55:59 v6.20"/>
+	<app version="2014-01-10 10:58:36 v6.23"/>
 	
 	<!-- id:用于获取资源src的名称(和文件名称保持一致) -->
 	<!-- src:资源路径 -->
@@ -66,7 +66,7 @@
 	<asset id="fight_bg_1" src="sound/fight_bg_1.mp3" version="1_59" first="0"/>
 	
 	<!-- png 配置 -->
-	<asset id="exclamatory_xml" src="xml/exclamatory_xml.xml" version="1_59" first="2"/>
+	<asset id="exclamatory_xml" src="png/exclamatory_xml.xml" version="1_59" first="2"/>
 	<asset id="exclamatory_png" src="png/exclamatory_png.png" version="1_59" first="2"/>
 	
 </data>

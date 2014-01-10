@@ -61,7 +61,8 @@
 	system("xcopy /S/Y ".$releaseFloader."sound\\*.mp3 ".$fullversionPath."assets\\");
 	system("xcopy /S/Y ".$releaseFloader."png\\*.png ".$fullversionPath."assets\\");
 	system("xcopy /S/Y ".$releaseFloader."png\\*.jpg ".$fullversionPath."assets\\");
-	system("xcopy /S/Y ".$releaseFloader."xml\\*.xml ".$fullversionPath."assets\\");
+	system("xcopy /S/Y ".$releaseFloader."png\\*.jpeg ".$fullversionPath."assets\\");
+	system("xcopy /S/Y ".$releaseFloader."png\\*.xml ".$fullversionPath."assets\\");
 
 	echo "</div>";
 	echo "<br>";
