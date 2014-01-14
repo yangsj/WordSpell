@@ -290,13 +290,13 @@ package app.modules.fight.view
 				if ( isNaN( Number(key) )) {
 					var ary:Array = dictLetterSelf[ key ];
 					bubble = ary && ary.length > 0 ? ary[ 0 ] : null;
+					
+					if ( bubble ) bubble.selected( true );
+					else if ( isKeyboard ) Tips.showCenter( "按键无效" );
 				} else {
 //					bubble = dictProps[ key ];
 					propList.dispatchEvent( new PackEvent( PackEvent.USE_ITEM, key ));
 				}
-				
-				if ( bubble ) bubble.selected( true );
-				else if ( isKeyboard ) Tips.showCenter( "按键无效" );
 			}
 		}
 		

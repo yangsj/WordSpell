@@ -83,13 +83,10 @@ package app.modules.fight.view.prop
 			var itemVo:ItemVo;
 			if ( isNaN(Number(event.data))){
 				itemVo = event.data as ItemVo;
-			}
-			else{
+			} else {
 				var type:int = int(event.data);
-				if ( !view.getItemCanUse( type )) {
-					return ;
-				}
-				itemVo = packModel.getItemByType( type );
+				view.keydownUseProp( type );
+				return ;
 			}
 			
 			if ( view.isPracticeMode && itemVo.type == ItemType.SKIP ) {

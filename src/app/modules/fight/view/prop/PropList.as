@@ -1,8 +1,10 @@
 package app.modules.fight.view.prop
 {
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
+	import app.core.Tips;
 	import app.modules.fight.view.prop.item.PropItem;
 	import app.modules.model.vo.ItemType;
 	import app.modules.model.vo.ItemVo;
@@ -86,13 +88,14 @@ package app.modules.fight.view.prop
 			}
 		}
 		
-		public function getItemCanUse( type:int ):Boolean
+		public function keydownUseProp(type:int):void
 		{
 			if ( type > 0 && type <= vecItemSkin.length ) {
 				var item:PropItem = vecItemSkin[type-1];
-				return item.enabled;
+				if ( item ) item.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
+			} else {
+				Tips.showCenter( "" );
 			}
-			return false;
 		}
 		
 		public function setData( itemList:Vector.<ItemVo> ):void
@@ -105,15 +108,9 @@ package app.modules.fight.view.prop
 				itemVo = itemList[ i ];
 				item = vecItemSkin[ _propIndex[itemVo.type] ];
 				item.y = i * 81;
+				item.isPracticeMode = isPracticeMode;
+				item.enabled = isPracticeMode ? itemVo.type == ItemType.SKIP : true;
 				item.setData( itemVo.clone() );
-				if ( isPracticeMode ) 
-				{
-					item.enabled = itemVo.type == ItemType.SKIP;
-				}
-				else 
-				{
-					item.enabled = true;
-				}
 			}
 			recordItempoints( posType );
 		}

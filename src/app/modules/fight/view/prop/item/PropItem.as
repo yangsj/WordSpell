@@ -14,8 +14,6 @@ package app.modules.fight.view.prop.item
 	import victor.framework.manager.LoaderManager;
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
-	import victor.utils.UtilsFilter;
-	
 	
 	/**
 	 * ……
@@ -44,10 +42,13 @@ package app.modules.fight.view.prop.item
 		public var tips:MovieClip;
 		//
 		public var bgArea:DisplayObject;
+		//
+		public var mcGray:DisplayObject;
 		
 		private var itemTips:PropItemTips;
 		
 		private var _enabled:Boolean = true;
+		private var _isPracticeMode:Boolean = false;
 		
 		public function PropItem()
 		{
@@ -62,7 +63,9 @@ package app.modules.fight.view.prop.item
 			{
 				if ( _isCanClick )
 					dispatchEvent( new PackEvent( PackEvent.USE_ITEM, data, true ));
-				else Tips.showMouse( "您的节奏有点太快了" );
+				else Tips.showMouse( "您的节奏有点太快了！" );
+			} else {
+				Tips.showCenter( "不能使用当前道具！" );
 			}
 		}
 		
@@ -74,8 +77,17 @@ package app.modules.fight.view.prop.item
 			txtCost.visible = _data.num == 0;
 			txtNum.visible = _data.num != 0;
 			
-			txtCost.text = _data.contMoney.toString();
-			txtNum.text = "x" + _data.num.toString();
+			if ( isPracticeMode ) {
+				txtCost.text = "禁用";
+				txtNum.text = "禁用";
+				if ( enabled ) {
+					txtCost.text = "无限";
+					txtNum.text = "无限";
+				}
+			} else {
+				txtCost.text = _data.contMoney.toString();
+				txtNum.text = "x" + _data.num.toString();
+			}
 		}
 		
 		private function doInterval():void
@@ -101,7 +113,6 @@ package app.modules.fight.view.prop.item
 		
 		public function set enabled( value:Boolean ):void
 		{
-			this.filters = value ? [] : [ UtilsFilter.COLOR_GREW ];
 			_enabled = value;
 		}
 		
@@ -153,6 +164,9 @@ package app.modules.fight.view.prop.item
 			clearTimeout();
 			setText();
 			
+			mcGray.visible = !enabled;
+			bgArea.visible =  enabled;
+			
 			itemTips.setVo( itemVo );
 		}
 		
@@ -191,6 +205,16 @@ package app.modules.fight.view.prop.item
 		public function get data():ItemVo
 		{
 			return _data;
+		}
+		
+		public function get isPracticeMode():Boolean
+		{
+			return _isPracticeMode;
+		}
+
+		public function set isPracticeMode(value:Boolean):void
+		{
+			_isPracticeMode = value;
 		}
 		
 		
