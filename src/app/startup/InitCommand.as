@@ -3,7 +3,6 @@ package app.startup
 	import flash.events.Event;
 	
 	import app.data.GameData;
-	import victor.framework.events.ViewEvent;
 	import app.modules.chat.command.ChatInitCommand;
 	import app.modules.fight.command.FightInitCommand;
 	import app.modules.friend.command.FriendInitComand;
@@ -17,6 +16,7 @@ package app.startup
 	import app.modules.panel.personal.command.PersonalInitCommand;
 	import app.modules.panel.rank.command.RankInitCommand;
 	import app.modules.panel.share.ShareWeiboInitCommand;
+	import app.modules.panel.test.TestInitCommand;
 	import app.modules.serivce.CommonService;
 	import app.modules.serivce.PackService;
 	import app.modules.task.command.TaskInitCommand;
@@ -24,6 +24,7 @@ package app.startup
 	import victor.framework.core.BaseCommand;
 	import victor.framework.drag.DragManager;
 	import victor.framework.events.PanelEvent;
+	import victor.framework.events.ViewEvent;
 	
 	
 	/**
@@ -48,6 +49,7 @@ package app.startup
 				, PersonalInitCommand	// 个人信息
 				, RankInitCommand		// 排行系统
 				, ShareWeiboInitCommand // 分享到微博
+				, TestInitCommand
 			];
 		
 		public function InitCommand()

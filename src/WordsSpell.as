@@ -34,7 +34,7 @@ package
 			appStage.color = 0;
 			
 			// 初始化并启动应用
-			new AppContext( this );
+			new AppContext( this );//ui_Skin_YScrollBar
 			
 			this.graphics.beginBitmapFill(new ui_Skin_PreloaderBG());
 			this.graphics.drawRect( 0, 0, appStage.stageWidth, appStage.stageHeight );

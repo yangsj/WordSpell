@@ -91,7 +91,7 @@ package app.modules.fight.view.prop
 		public function keydownUseProp(type:int):void
 		{
 			if ( type > 0 && type <= vecItemSkin.length ) {
-				var item:PropItem = vecItemSkin[type-1];
+				var item:PropItem = vecItemSkin[_propIndex[type]];
 				if ( item ) item.dispatchEvent( new MouseEvent( MouseEvent.CLICK ));
 			} else {
 				Tips.showCenter( "" );
@@ -138,7 +138,7 @@ package app.modules.fight.view.prop
 			{
 				var item:PropItem = getItemByType( itemVo.type );
 				if ( item )
-					item.update( itemVo );
+					item.update( itemVo.clone() );
 			}
 		}
 		

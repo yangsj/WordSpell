@@ -7,7 +7,7 @@ package victor.core.scroll
 	import flash.display.Stage;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
-
+	
 	import victor.framework.interfaces.IDisposable;
 	import victor.utils.DisplayUtil;
 	import victor.utils.MathUtil;
@@ -41,6 +41,8 @@ package victor.core.scroll
 		// 发生值更改
 		public var onChange:Function;
 		private var _isLock:Boolean;
+		
+		private var barSprite:Sprite;
 
 		/**
 		 * Construct a <code>FyBaseScrollBar</code>.
@@ -56,6 +58,9 @@ package victor.core.scroll
 			_ScrollMc.stop();
 			_ScrollMc.visible = false;
 			addChild( _skin );
+			
+			_ScrollMc.buttonMode = true;
+			_skin.mouseEnabled = false;
 		}
 
 		public function init( value:int ):void
@@ -75,8 +80,17 @@ package victor.core.scroll
 			_ListBack.height = _scrollLen + 6;
 			_ScrollMc.y = _upPos;
 			_ScrollMc.height = _scrollLen;
+			
+			if ( !barSprite )
+			{
+				barSprite = new Sprite();
+				barSprite.x = _ScrollMc.x;
+				barSprite.y = _ScrollMc.y;
+				barSprite.mouseChildren = false;
+				barSprite.mouseEnabled = false;
+			}
 		}
-
+		
 		/**
 		 * 滚动条大小
 		 */
@@ -179,6 +193,7 @@ package victor.core.scroll
 			{
 				cPos = ( _ScrollMc.y - _upPos ) / _emptyLen;
 			}
+			trace(cPos);
 			changeValue( cPos );
 		}
 
@@ -273,14 +288,21 @@ package victor.core.scroll
 			{
 				_stage = stage;
 			}
+			
 			_stage.addEventListener( MouseEvent.MOUSE_UP, onScrollUp, false, 0, true );
 			_stage.addEventListener( MouseEvent.MOUSE_MOVE, onScrollMove, false, 0, true );
 			_ScrollMc.startDrag( false, new Rectangle( _ScrollMc.x, _upPos, 0, _emptyLen ));
 			_isMove = true;
+			
+			barSprite.x = _ScrollMc.x;
+			barSprite.y = _ScrollMc.y;
+			barSprite.startDrag( false, new Rectangle( _ScrollMc.x, _upPos, 0, _emptyLen ));
 		}
 
 		private function onScrollMove( event:MouseEvent ):void
 		{
+			_ScrollMc.x = barSprite.x;
+			_ScrollMc.y = barSprite.y;
 			scrollMove();
 		}
 
@@ -295,6 +317,14 @@ package victor.core.scroll
 		 */
 		private function scrollUpClear():void
 		{
+			if ( barSprite )
+			{
+				if ( barSprite.parent )
+				{
+					barSprite.parent.removeChild( barSprite );
+				}
+				barSprite.stopDrag();
+			}
 			this._ScrollMc.stopDrag();
 			if ( _stage == null )
 			{

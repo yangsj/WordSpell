@@ -327,6 +327,8 @@ package app.modules.fight.view
 			else if ( fightModel.isBattle ) {
 				DisplayUtil.removedAll( baseView.container );
 				Tips.showCenter( "你已拼完所有单词，请等待对方拼完再结算！" );
+				baseView.txtChinese.text = "请先等等对手吧。";
+				baseView.txtEnglish.text = "";
 			}
 		}
 		

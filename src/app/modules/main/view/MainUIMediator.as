@@ -6,6 +6,7 @@ package app.modules.main.view
 	import app.core.Tips;
 	import app.data.GameData;
 	import app.managers.ExternalManager;
+	import app.modules.ViewName;
 	import app.modules.fight.model.FightModel;
 	import app.modules.friend.event.FriendEvent;
 	import app.modules.main.FunctionBtnConfig;
@@ -90,6 +91,10 @@ package app.modules.main.view
 				Debug.debug(event.ctrlKey, event.shiftKey , Keyboard.A == event.keyCode)
 				if ( event.ctrlKey && event.shiftKey && Keyboard.A == event.keyCode ) {
 					ExternalManager.shareWeibo();
+				}
+				
+				if ( event.keyCode == Keyboard.D ) {
+					dispatch( new ViewEvent( ViewEvent.SHOW_VIEW, ViewName.Test ));
 				}
 			}
 		}

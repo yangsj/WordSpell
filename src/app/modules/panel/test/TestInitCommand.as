@@ -3,6 +3,7 @@ package app.modules.panel.test
 	import app.modules.ViewName;
 	
 	import victor.framework.core.BaseCommand;
+	import victor.framework.debug.Debug;
 	
 	
 	/**
@@ -19,9 +20,10 @@ package app.modules.panel.test
 		
 		override public function execute():void
 		{
-			
-			// 测试面板
-			addView( ViewName.Test, TestView, TestMediator );
+			if ( Debug.isDebug ) {
+				// 测试面板
+				addView( ViewName.Test, TestView, TestMediator );
+			}
 			
 		}
 		

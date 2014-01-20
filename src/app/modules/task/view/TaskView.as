@@ -51,7 +51,7 @@ package app.modules.task.view
 			super.onceInit();
 			
 			listContainer = new Sprite();
-			listContainer.graphics.beginFill(0, 0.1 );
+			listContainer.graphics.beginFill(0, 0 );
 			listContainer.graphics.drawRect(0,0,260,288);
 			listContainer.graphics.endFill();
 			listContainer.x = 23;
