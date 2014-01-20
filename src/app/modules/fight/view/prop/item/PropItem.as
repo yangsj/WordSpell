@@ -65,7 +65,7 @@ package app.modules.fight.view.prop.item
 					dispatchEvent( new PackEvent( PackEvent.USE_ITEM, data, true ));
 				else Tips.showMouse( "您的节奏有点太快了！" );
 			} else {
-				Tips.showCenter( "不能使用当前道具！" );
+				Tips.showCenter( "当前模式下不能使用该道具！" );
 			}
 		}
 		
@@ -78,8 +78,8 @@ package app.modules.fight.view.prop.item
 			txtNum.visible = _data.num != 0;
 			
 			if ( isPracticeMode ) {
-				txtCost.text = "禁用";
-				txtNum.text = "禁用";
+				txtCost.text = "";
+				txtNum.text = "";
 				if ( enabled ) {
 					txtCost.text = "无限";
 					txtNum.text = "无限";

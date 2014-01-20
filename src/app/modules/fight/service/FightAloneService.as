@@ -65,6 +65,8 @@ package app.modules.fight.service
 		// 闯关练习开始
 		private function startRoundNotify( resp:SocketResp ):void
 		{
+			Tips.isFighting = true;
+			
 			fightModel.isFighting = true;
 			fightModel.isSelfExit = false;
 			fightModel.isHasDisturbForSelf = false;
@@ -167,6 +169,8 @@ package app.modules.fight.service
 			fightModel.isEnded = false;
 			fightModel.answerRightNumSelf = 0;
 			fightModel.answerRightNumDest = 0;
+			
+			Tips.isBattle = fightModel.isBattle;
 
 			// 清零
 			fightModel.currentSelfIndex = 0;
@@ -215,6 +219,9 @@ package app.modules.fight.service
 				
 				dispatch( new TaskEvent( TaskEvent.TASK_CHECK_COMPLETED ));
 			}
+			
+			Tips.isFighting = false;
+			Tips.isBattle = false;
 		}
 
 		// 下一个单词

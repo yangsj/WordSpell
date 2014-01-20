@@ -113,7 +113,10 @@ package app.modules.fight.view.prop
 				}
 				useProp(itemVo);
 			}
-			else Tips.showMouse( "钻石不足！" );
+			else
+			{
+				Tips.showMouse( "钻石不足！" );
+			}
 		}
 		
 		private function useProp( itemVo:ItemVo ):void

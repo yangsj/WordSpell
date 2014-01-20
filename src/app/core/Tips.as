@@ -27,6 +27,9 @@ package app.core
         private static var line : TimelineLite;
 		private static var _instance:Tips;
 		private static const DEFAULT_SIZE:int = 25;
+		
+		public static var isFighting:Boolean = false;//是否是闯关、练习、对战中
+		public static var isBattle:Boolean = false; // 是否是对战
 
 		public function Tips()
 		{
@@ -45,7 +48,8 @@ package app.core
 		 */
 		public static function showMouse( msg:String, size:int = 18, borderColor:uint = 0 ):void
 		{
-			show( msg, appStage.mouseX, appStage.mouseY, size, borderColor );
+//			show( msg, appStage.mouseX, appStage.mouseY, size, borderColor );
+			showCenter( msg, size, 0,0,borderColor );
 		}
 
 		/**
@@ -55,10 +59,17 @@ package app.core
 		 * @param offsetY
 		 * @param borderColor
 		 */
-		public static function showCenter( msg:String, size:int = 18, offsetY:int = 0, borderColor:uint = 0, removeOld : Boolean = true):void
+		public static function showCenter( msg:String, size:int = 18, offsetX:int = 0, offsetY:int = 0, borderColor:uint = 0, removeOld : Boolean = true):void
 		{
             if (removeOld && line) line.complete();
-			instance.showCenter( msg, size, offsetY, borderColor );
+			if ( isFighting ) {
+				offsetY = appStage.stageHeight * 0.15;
+				offsetX = 10;
+				if ( isBattle ) {
+					offsetX = -appStage.stageWidth * 0.25;
+				}
+			} 
+			instance.showCenter( msg, size, offsetX, offsetY, borderColor );
 		}
 
 		/**
@@ -102,11 +113,11 @@ package app.core
 			return _tf;
 		}
 
-		public function showCenter( msg:String, size:int = 18, offsetY:int = 0, borderColor:uint = 0 ):void
+		public function showCenter( msg:String, size:int = 18, offsetX:int = 0, offsetY:int = 0, borderColor:uint = 0 ):void
 		{
 			if ( _container && _container.stage )
 			{
-				var x:Number = appStage.stageWidth / 2;
+				var x:Number = appStage.stageWidth / 2 + offsetX;
 				var y:int = appStage.stageHeight / 2 + offsetY;
 				show( msg, x, y, size, borderColor );
 			}
