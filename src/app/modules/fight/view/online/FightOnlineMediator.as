@@ -124,7 +124,7 @@ package app.modules.fight.view.online
 				view.displayPropItem( false );
 				
 				// 设置自己还剩余单词数量
-				view.setTxtLeftWordsSelf( fightModel.progressWordsForDest );
+				view.setTxtLeftWordsDest( fightModel.progressWordsForDest );
 			}
 			else
 			{

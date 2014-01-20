@@ -1,5 +1,6 @@
 package app.modules.fight.panel.matching
 {
+	import app.core.Tips;
 	import app.modules.fight.service.FightOnlineService;
 	
 	import victor.framework.core.BaseMediator;
@@ -29,6 +30,8 @@ package app.modules.fight.panel.matching
 			addViewListener( PanelEvent.CLOSE, closeQuitHandler, PanelEvent );
 			
 			onlineService.matching();
+			
+			Tips.showCenter( "自动匹配等级相差不超过3级的玩家" );
 		}
 		
 		private function closeQuitHandler( event:PanelEvent ):void

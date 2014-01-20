@@ -6,6 +6,8 @@ package app.modules.fight.model
 	
 	import org.robotlegs.mvcs.Actor;
 	
+	import victor.utils.MathUtil;
+	
 	/**
 	 * ……
 	 * @author 	yangsj 
@@ -146,7 +148,7 @@ package app.modules.fight.model
 		
 		public function set currentSelfIndex(value:int):void
 		{
-			_currentSelfIndex = value;
+			_currentSelfIndex = MathUtil.range(value, 0, totalWordsNum - 1 );
 		}
 		
 		public function get currentDestIndex():int
@@ -156,7 +158,7 @@ package app.modules.fight.model
 		
 		public function set currentDestIndex(value:int):void
 		{
-			_currentDestIndex = value;
+			_currentDestIndex = MathUtil.range(value, 0, totalWordsNum - 1 );
 		}
 
 		public function get dictPropPos():Dictionary
