@@ -14,6 +14,7 @@ package app.modules.fight.view
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
+	import app.base.BaseLoadView;
 	import app.core.ButtonSkin;
 	import app.core.Tips;
 	import app.data.GameData;
@@ -27,7 +28,6 @@ package app.modules.fight.view
 	import app.sound.SoundManager;
 	import app.sound.SoundType;
 	
-	import app.base.BaseLoadView;
 	import victor.framework.core.ViewStruct;
 	import victor.framework.manager.TickManager;
 	import victor.utils.DisplayUtil;
@@ -378,11 +378,25 @@ package app.modules.fight.view
 			}
 		}
 		
+		public function setOverStatusForText( msg:String ):void
+		{
+			if ( txtEnglish.text )
+			{
+				txtChinese.text = msg;
+				txtEnglish.text = "";
+			}
+		}
+		
 		protected function getShowTipsPoint( isSelft:Boolean ):Point
 		{
-			var point:Point = new Point(container.x + 207, container.y + 207 );
-			if ( !isSelft ){
-				point.x = container2.x + 207;
+			var point:Point = new Point(container2.x + 207, container2.y + 207 + 80 );
+			if ( isSelft ){
+				point.x = container.x + 207;
+			}
+			if ( isAlone )
+			{
+				point.x = appStage.stageWidth >> 1;
+				point.y = appStage.stageHeight * 0.7;
 			}
 			return point;
 		}
@@ -402,11 +416,7 @@ package app.modules.fight.view
 			
 			function getTimeString( seconds:int ):String
 			{
-//				if ( isAlone == false )
-//					return HtmlText.color( seconds + "", seconds <= 10 ? 0xff0000 : 0xffffff );
-				
 				if ( seconds <= 0 ) return HtmlText.color( "00:00", 0xff0000 );
-					
 				var min:int = int(seconds/60);
 				var sec:int = seconds%60;
 				return HtmlText.color( (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), seconds <= 10 ? 0xff0000 : 0xffffff );
@@ -423,6 +433,26 @@ package app.modules.fight.view
 		
 		protected function timerHandler():void
 		{
+			selfCurrentTime--;
+			setTimeText( txtTime, selfCurrentTime, selfBar );
+			
+			if ( selfCurrentTime <= 0 ) 
+			{
+				var msg:String = "时间到，请先等等对手吧";
+				if ( isValidOperate ) {
+					isValidOperate = false;
+					if ( isAlone )
+					{
+						Tips.showCenter( msg, 28 );
+					}
+					else
+					{
+						var point:Point = getShowTipsPoint(true);
+						Tips.show( msg, point.x, point.y, 28 );
+					}
+					setOverStatusForText( msg );
+				}
+			}
 		}
 		
 		protected function keyDownHandler( event:KeyboardEvent ):void

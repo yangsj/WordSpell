@@ -152,11 +152,10 @@ package app.modules.fight.view.online
 		
 		override protected function timerHandler():void
 		{
-			selfCurrentTime--;
-			setTimeText( txtTime, selfCurrentTime, selfBar );
-			
 			destCurrentTime--;
 			setTimeText( txtTime2, destCurrentTime, destBar );
+			
+			super.timerHandler();
 		}
 		
 		/**

@@ -105,12 +105,6 @@ package app.modules.fight.view.alone
 				Tips.showCenter( "时间 +5s" );
 			}
 		}
-		
-		override protected function timerHandler():void
-		{
-			selfCurrentTime--;
-			setTimeText( txtTime, selfCurrentTime, selfBar );
-		}
 
 		override public function setRoundName( roundName:String ):void
 		{
