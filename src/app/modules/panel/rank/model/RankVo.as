@@ -37,6 +37,15 @@ package app.modules.panel.rank.model
 		 * 荣誉
 		 */
 		public var honor:String;
+		/**
+		 * 用户id
+		 */
+		public var uid:int = 0;
+		
+		/**
+		 * 是否是自己
+		 */
+		public var isSelf:Boolean = false;
 		
 	}
 }

@@ -3,12 +3,14 @@ package app.modules.panel.rank.view
 	import flash.events.Event;
 	import flash.text.TextField;
 	
-	import victor.framework.core.BaseSprite;
 	import app.modules.panel.rank.model.RankVo;
+	
+	import victor.framework.core.BaseSprite;
+	import victor.utils.HtmlText;
 	
 	
 	/**
-	 * ……
+	 * ……0xFF8B31
 	 * @author 	yangsj 
 	 * 			2013-11-25
 	 */
@@ -47,11 +49,16 @@ package app.modules.panel.rank.view
 		{
 			addEventListener( Event.REMOVED, removedFromParentHandler );
 			
-			txtRank.text = data.rank.toString();
-			txtName.text = data.name;
-			txtLevel.text = "Lv." + data.level;
-			txtValidity.text = data.validity;
-			txtHonor.text = data.honor.toString();
+			txtRank.htmlText = getTextColorResult(data.rank.toString(), data.isSelf);
+			txtName.htmlText = getTextColorResult(data.name, data.isSelf);
+			txtLevel.htmlText = getTextColorResult("Lv." + data.level, data.isSelf);
+			txtValidity.htmlText = getTextColorResult(data.validity, data.isSelf);
+			txtHonor.htmlText = getTextColorResult(data.honor.toString(), data.isSelf);
+		}
+		
+		private function getTextColorResult(msg:String, isSelf:Boolean ):String
+		{
+			return isSelf ? HtmlText.color(msg, 0xFF8B31) : msg;
 		}
 		
 	}

@@ -3,16 +3,18 @@ package app.modules.map.panel
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	
+	import app.base.BasePanel;
 	import app.core.ButtonSkin;
 	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapVo;
 	import app.modules.map.panel.item.GroupItem;
 	
 	import victor.core.Reflection;
-	import app.base.BasePanel;
 	import victor.utils.DisplayUtil;
+	import victor.utils.HtmlText;
 	
 	/**
 	 * ……
@@ -27,6 +29,7 @@ package app.modules.map.panel
 		
 		public var mapVo:MapVo;
 		public var mcTitleName:MovieClip;
+		public var tipsTxt:TextField;
 		
 		public function SelectedRoundView()
 		{
@@ -112,7 +115,7 @@ package app.modules.map.panel
 			}
 		}
 		
-		public function setData( list:Vector.<ChapterVo> ):void
+		private function setListData(list:Vector.<ChapterVo> ):void
 		{
 			mapVo.chapterList = list;
 			var groupItem:GroupItem;
@@ -121,6 +124,28 @@ package app.modules.map.panel
 				groupItem = vecList[ i ];
 				groupItem.setData( list[ i ] );
 			}
+		}
+		
+		private function setTipsText(curNum:int, totalNum:int ):void
+		{
+			if ( tipsTxt )
+			{
+				tipsTxt.visible = curNum == totalNum && totalNum == 0;
+				if ( curNum > totalNum ) 
+				{
+					tipsTxt.htmlText = HtmlText.color( "当前已获得 "+curNum+" 颗星, 还需 "+(totalNum - curNum)+" 颗星开启下一章节", HtmlText.Red);
+				} 
+				else 
+				{
+					tipsTxt.htmlText = HtmlText.color( "当前已获得 "+curNum+" 颗星", HtmlText.Green);
+				}
+			}
+		}
+		
+		public function setData( mapvo:MapVo ):void
+		{
+			setListData( mapvo.chapterList );
+			setTipsText( mapvo.currentStarNum, mapvo.totalStarNum );
 		}
 		
 		override public function set data(value:Object):void

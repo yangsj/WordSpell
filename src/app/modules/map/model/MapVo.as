@@ -20,6 +20,14 @@ package app.modules.map.model
 		 * 开启状态（0未开启，1已开启）
 		 */
 		public var status:int;
+		/**
+		 * 当前已获得的星星数量
+		 */
+		public var currentStarNum:int;
+		/**
+		 * 开启下一章节的总星星数量
+		 */
+		public var totalStarNum:int;
 		
 		/**
 		 * 章节列表

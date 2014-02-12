@@ -54,7 +54,7 @@ package app.modules.map.panel
 		
 		private function chapterDetailNotify( event:SelectedRoundEvent ):void
 		{
-			view.setData( mapModel.currentMapVo.chapterList );
+			view.setData( mapModel.currentMapVo );
 		}
 		
 		private function selectedRoundhandler( event:SelectedRoundEvent ):void
