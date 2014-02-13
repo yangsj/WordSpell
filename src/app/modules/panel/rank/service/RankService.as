@@ -1,5 +1,6 @@
 package app.modules.panel.rank.service
 {
+	import app.data.GameData;
 	import app.modules.panel.rank.events.RankEvent;
 	import app.modules.panel.rank.model.RankModel;
 	import app.modules.panel.rank.model.RankVo;
@@ -50,6 +51,8 @@ package app.modules.panel.rank.service
 				rankVo.level = rank.level;
 				rankVo.validity = rank.valid_time;
 				rankVo.honor = rank.honour;
+				rankVo.uid = rank.uid;
+				rankVo.isSelf = rank.uid == GameData.instance.selfVo.uid;
 				list.push( rankVo );
 			}
 			rankModel.setListByType( type, list );

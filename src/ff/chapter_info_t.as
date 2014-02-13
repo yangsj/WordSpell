@@ -18,16 +18,28 @@ import org.apache.thrift.protocol.*;
   public class chapter_info_t implements TBase   {
     private static const STRUCT_DESC:TStruct = new TStruct("chapter_info_t");
     private static const STATUS_FIELD_DESC:TField = new TField("status", TType.I16, 1);
+    private static const WIN_STAR_NUM_FIELD_DESC:TField = new TField("win_star_num", TType.I32, 2);
+    private static const PASS_NEED_STAR_NUUM_FIELD_DESC:TField = new TField("pass_need_star_nuum", TType.I32, 3);
 
     private var _status:int;
     public static const STATUS:int = 1;
+    private var _win_star_num:int;
+    public static const WIN_STAR_NUM:int = 2;
+    private var _pass_need_star_nuum:int;
+    public static const PASS_NEED_STAR_NUUM:int = 3;
 
     private var __isset_status:Boolean = false;
+    private var __isset_win_star_num:Boolean = false;
+    private var __isset_pass_need_star_nuum:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
       metaDataMap[STATUS] = new FieldMetaData("status", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.I16));
+      metaDataMap[WIN_STAR_NUM] = new FieldMetaData("win_star_num", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
+      metaDataMap[PASS_NEED_STAR_NUUM] = new FieldMetaData("pass_need_star_nuum", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(chapter_info_t, metaDataMap);
@@ -35,6 +47,8 @@ import org.apache.thrift.protocol.*;
 
     public function chapter_info_t() {
       this._status = 0;
+      this._win_star_num = 0;
+      this._pass_need_star_nuum = 0;
     }
 
     public function get status():int {
@@ -55,6 +69,42 @@ import org.apache.thrift.protocol.*;
       return this.__isset_status;
     }
 
+    public function get win_star_num():int {
+      return this._win_star_num;
+    }
+
+    public function set win_star_num(win_star_num:int):void {
+      this._win_star_num = win_star_num;
+      this.__isset_win_star_num = true;
+    }
+
+    public function unsetWin_star_num():void {
+      this.__isset_win_star_num = false;
+    }
+
+    // Returns true if field win_star_num is set (has been assigned a value) and false otherwise
+    public function isSetWin_star_num():Boolean {
+      return this.__isset_win_star_num;
+    }
+
+    public function get pass_need_star_nuum():int {
+      return this._pass_need_star_nuum;
+    }
+
+    public function set pass_need_star_nuum(pass_need_star_nuum:int):void {
+      this._pass_need_star_nuum = pass_need_star_nuum;
+      this.__isset_pass_need_star_nuum = true;
+    }
+
+    public function unsetPass_need_star_nuum():void {
+      this.__isset_pass_need_star_nuum = false;
+    }
+
+    // Returns true if field pass_need_star_nuum is set (has been assigned a value) and false otherwise
+    public function isSetPass_need_star_nuum():Boolean {
+      return this.__isset_pass_need_star_nuum;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case STATUS:
@@ -62,6 +112,22 @@ import org.apache.thrift.protocol.*;
           unsetStatus();
         } else {
           this.status = value;
+        }
+        break;
+
+      case WIN_STAR_NUM:
+        if (value == null) {
+          unsetWin_star_num();
+        } else {
+          this.win_star_num = value;
+        }
+        break;
+
+      case PASS_NEED_STAR_NUUM:
+        if (value == null) {
+          unsetPass_need_star_nuum();
+        } else {
+          this.pass_need_star_nuum = value;
         }
         break;
 
@@ -74,6 +140,10 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case STATUS:
         return this.status;
+      case WIN_STAR_NUM:
+        return this.win_star_num;
+      case PASS_NEED_STAR_NUUM:
+        return this.pass_need_star_nuum;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -84,6 +154,10 @@ import org.apache.thrift.protocol.*;
       switch (fieldID) {
       case STATUS:
         return isSetStatus();
+      case WIN_STAR_NUM:
+        return isSetWin_star_num();
+      case PASS_NEED_STAR_NUUM:
+        return isSetPass_need_star_nuum();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -108,6 +182,22 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case WIN_STAR_NUM:
+            if (field.type == TType.I32) {
+              this.win_star_num = iprot.readI32();
+              this.__isset_win_star_num = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case PASS_NEED_STAR_NUUM:
+            if (field.type == TType.I32) {
+              this.pass_need_star_nuum = iprot.readI32();
+              this.__isset_pass_need_star_nuum = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -128,6 +218,12 @@ import org.apache.thrift.protocol.*;
       oprot.writeFieldBegin(STATUS_FIELD_DESC);
       oprot.writeI16(this.status);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(WIN_STAR_NUM_FIELD_DESC);
+      oprot.writeI32(this.win_star_num);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(PASS_NEED_STAR_NUUM_FIELD_DESC);
+      oprot.writeI32(this.pass_need_star_nuum);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -138,6 +234,14 @@ import org.apache.thrift.protocol.*;
 
       ret += "status:";
       ret += this.status;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "win_star_num:";
+      ret += this.win_star_num;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "pass_need_star_nuum:";
+      ret += this.pass_need_star_nuum;
       first = false;
       ret += ")";
       return ret;

@@ -130,8 +130,8 @@ package app.modules.map.panel
 		{
 			if ( tipsTxt )
 			{
-				tipsTxt.visible = curNum == totalNum && totalNum == 0;
-				if ( curNum > totalNum ) 
+				tipsTxt.visible = totalNum != 0;
+				if ( curNum < totalNum ) 
 				{
 					tipsTxt.htmlText = HtmlText.color( "当前已获得 "+curNum+" 颗星, 还需 "+(totalNum - curNum)+" 颗星开启下一章节", HtmlText.Red);
 				} 

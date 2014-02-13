@@ -19,13 +19,21 @@ import org.apache.thrift.protocol.*;
     private static const STRUCT_DESC:TStruct = new TStruct("chapter_detail_ret_t");
     private static const CHAPTER_TYPE_FIELD_DESC:TField = new TField("chapter_type", TType.I32, 1);
     private static const ROUND_GROUP_INFO_FIELD_DESC:TField = new TField("round_group_info", TType.LIST, 2);
+    private static const WIN_STAR_NUM_FIELD_DESC:TField = new TField("win_star_num", TType.I32, 3);
+    private static const PASS_NEED_STAR_NUUM_FIELD_DESC:TField = new TField("pass_need_star_nuum", TType.I32, 4);
 
     private var _chapter_type:int;
     public static const CHAPTER_TYPE:int = 1;
     private var _round_group_info:Array;
     public static const ROUND_GROUP_INFO:int = 2;
+    private var _win_star_num:int;
+    public static const WIN_STAR_NUM:int = 3;
+    private var _pass_need_star_nuum:int;
+    public static const PASS_NEED_STAR_NUUM:int = 4;
 
     private var __isset_chapter_type:Boolean = false;
+    private var __isset_win_star_num:Boolean = false;
+    private var __isset_pass_need_star_nuum:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -34,6 +42,10 @@ import org.apache.thrift.protocol.*;
       metaDataMap[ROUND_GROUP_INFO] = new FieldMetaData("round_group_info", TFieldRequirementType.DEFAULT, 
           new ListMetaData(TType.LIST, 
               new StructMetaData(TType.STRUCT, round_group_info_t)));
+      metaDataMap[WIN_STAR_NUM] = new FieldMetaData("win_star_num", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
+      metaDataMap[PASS_NEED_STAR_NUUM] = new FieldMetaData("pass_need_star_nuum", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(chapter_detail_ret_t, metaDataMap);
@@ -41,6 +53,8 @@ import org.apache.thrift.protocol.*;
 
     public function chapter_detail_ret_t() {
       this._chapter_type = 0;
+      this._win_star_num = 0;
+      this._pass_need_star_nuum = 0;
     }
 
     public function get chapter_type():int {
@@ -78,6 +92,42 @@ import org.apache.thrift.protocol.*;
       return this.round_group_info != null;
     }
 
+    public function get win_star_num():int {
+      return this._win_star_num;
+    }
+
+    public function set win_star_num(win_star_num:int):void {
+      this._win_star_num = win_star_num;
+      this.__isset_win_star_num = true;
+    }
+
+    public function unsetWin_star_num():void {
+      this.__isset_win_star_num = false;
+    }
+
+    // Returns true if field win_star_num is set (has been assigned a value) and false otherwise
+    public function isSetWin_star_num():Boolean {
+      return this.__isset_win_star_num;
+    }
+
+    public function get pass_need_star_nuum():int {
+      return this._pass_need_star_nuum;
+    }
+
+    public function set pass_need_star_nuum(pass_need_star_nuum:int):void {
+      this._pass_need_star_nuum = pass_need_star_nuum;
+      this.__isset_pass_need_star_nuum = true;
+    }
+
+    public function unsetPass_need_star_nuum():void {
+      this.__isset_pass_need_star_nuum = false;
+    }
+
+    // Returns true if field pass_need_star_nuum is set (has been assigned a value) and false otherwise
+    public function isSetPass_need_star_nuum():Boolean {
+      return this.__isset_pass_need_star_nuum;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case CHAPTER_TYPE:
@@ -96,6 +146,22 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case WIN_STAR_NUM:
+        if (value == null) {
+          unsetWin_star_num();
+        } else {
+          this.win_star_num = value;
+        }
+        break;
+
+      case PASS_NEED_STAR_NUUM:
+        if (value == null) {
+          unsetPass_need_star_nuum();
+        } else {
+          this.pass_need_star_nuum = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -107,6 +173,10 @@ import org.apache.thrift.protocol.*;
         return this.chapter_type;
       case ROUND_GROUP_INFO:
         return this.round_group_info;
+      case WIN_STAR_NUM:
+        return this.win_star_num;
+      case PASS_NEED_STAR_NUUM:
+        return this.pass_need_star_nuum;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -119,6 +189,10 @@ import org.apache.thrift.protocol.*;
         return isSetChapter_type();
       case ROUND_GROUP_INFO:
         return isSetRound_group_info();
+      case WIN_STAR_NUM:
+        return isSetWin_star_num();
+      case PASS_NEED_STAR_NUUM:
+        return isSetPass_need_star_nuum();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -146,17 +220,33 @@ import org.apache.thrift.protocol.*;
           case ROUND_GROUP_INFO:
             if (field.type == TType.LIST) {
               {
-                var _list148:TList = iprot.readListBegin();
+                var _list152:TList = iprot.readListBegin();
                 this.round_group_info = new Array();
-                for (var _i149:int = 0; _i149 < _list148.size; ++_i149)
+                for (var _i153:int = 0; _i153 < _list152.size; ++_i153)
                 {
-                  var _elem150:round_group_info_t;
-                  _elem150 = new round_group_info_t();
-                  _elem150.read(iprot);
-                  this.round_group_info.push(_elem150);
+                  var _elem154:round_group_info_t;
+                  _elem154 = new round_group_info_t();
+                  _elem154.read(iprot);
+                  this.round_group_info.push(_elem154);
                 }
                 iprot.readListEnd();
               }
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case WIN_STAR_NUM:
+            if (field.type == TType.I32) {
+              this.win_star_num = iprot.readI32();
+              this.__isset_win_star_num = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case PASS_NEED_STAR_NUUM:
+            if (field.type == TType.I32) {
+              this.pass_need_star_nuum = iprot.readI32();
+              this.__isset_pass_need_star_nuum = true;
             } else { 
               TProtocolUtil.skip(iprot, field.type);
             }
@@ -185,13 +275,19 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(ROUND_GROUP_INFO_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRUCT, this.round_group_info.length));
-          for each (var elem151:* in this.round_group_info)          {
-            elem151.write(oprot);
+          for each (var elem155:* in this.round_group_info)          {
+            elem155.write(oprot);
           }
           oprot.writeListEnd();
         }
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(WIN_STAR_NUM_FIELD_DESC);
+      oprot.writeI32(this.win_star_num);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(PASS_NEED_STAR_NUUM_FIELD_DESC);
+      oprot.writeI32(this.pass_need_star_nuum);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -210,6 +306,14 @@ import org.apache.thrift.protocol.*;
       } else {
         ret += this.round_group_info;
       }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "win_star_num:";
+      ret += this.win_star_num;
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "pass_need_star_nuum:";
+      ret += this.pass_need_star_nuum;
       first = false;
       ret += ")";
       return ret;

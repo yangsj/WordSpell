@@ -103,6 +103,8 @@ package app.modules.map.service
 					groupList.push( roundVo );
 				}
 			}
+			mapVo.currentStarNum = data.win_star_num;
+			mapVo.totalStarNum = data.pass_need_star_nuum + data.win_star_num;
 			mapVo.chapterList = chapterList;
 			mapModel.currentMapVo = mapVo;
 			

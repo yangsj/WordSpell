@@ -136,13 +136,13 @@ import org.apache.thrift.protocol.*;
           case WRONG_WORDS:
             if (field.type == TType.LIST) {
               {
-                var _list291:TList = iprot.readListBegin();
+                var _list296:TList = iprot.readListBegin();
                 this.wrong_words = new Array();
-                for (var _i292:int = 0; _i292 < _list291.size; ++_i292)
+                for (var _i297:int = 0; _i297 < _list296.size; ++_i297)
                 {
-                  var _elem293:String;
-                  _elem293 = iprot.readString();
-                  this.wrong_words.push(_elem293);
+                  var _elem298:String;
+                  _elem298 = iprot.readString();
+                  this.wrong_words.push(_elem298);
                 }
                 iprot.readListEnd();
               }
@@ -153,13 +153,13 @@ import org.apache.thrift.protocol.*;
           case CHINESE:
             if (field.type == TType.LIST) {
               {
-                var _list294:TList = iprot.readListBegin();
+                var _list299:TList = iprot.readListBegin();
                 this.chinese = new Array();
-                for (var _i295:int = 0; _i295 < _list294.size; ++_i295)
+                for (var _i300:int = 0; _i300 < _list299.size; ++_i300)
                 {
-                  var _elem296:String;
-                  _elem296 = iprot.readString();
-                  this.chinese.push(_elem296);
+                  var _elem301:String;
+                  _elem301 = iprot.readString();
+                  this.chinese.push(_elem301);
                 }
                 iprot.readListEnd();
               }
@@ -188,8 +188,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(WRONG_WORDS_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRING, this.wrong_words.length));
-          for each (var elem297:* in this.wrong_words)          {
-            oprot.writeString(elem297);
+          for each (var elem302:* in this.wrong_words)          {
+            oprot.writeString(elem302);
           }
           oprot.writeListEnd();
         }
@@ -199,8 +199,8 @@ import org.apache.thrift.protocol.*;
         oprot.writeFieldBegin(CHINESE_FIELD_DESC);
         {
           oprot.writeListBegin(new TList(TType.STRING, this.chinese.length));
-          for each (var elem298:* in this.chinese)          {
-            oprot.writeString(elem298);
+          for each (var elem303:* in this.chinese)          {
+            oprot.writeString(elem303);
           }
           oprot.writeListEnd();
         }

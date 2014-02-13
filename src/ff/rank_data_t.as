@@ -22,6 +22,7 @@ import org.apache.thrift.protocol.*;
     private static const LEVEL_FIELD_DESC:TField = new TField("level", TType.I16, 3);
     private static const VALID_TIME_FIELD_DESC:TField = new TField("valid_time", TType.STRING, 4);
     private static const HONOUR_FIELD_DESC:TField = new TField("honour", TType.STRING, 5);
+    private static const UID_FIELD_DESC:TField = new TField("uid", TType.I32, 6);
 
     private var _rank_num:int;
     public static const RANK_NUM:int = 1;
@@ -33,9 +34,12 @@ import org.apache.thrift.protocol.*;
     public static const VALID_TIME:int = 4;
     private var _honour:String;
     public static const HONOUR:int = 5;
+    private var _uid:int;
+    public static const UID:int = 6;
 
     private var __isset_rank_num:Boolean = false;
     private var __isset_level:Boolean = false;
+    private var __isset_uid:Boolean = false;
 
     public static const metaDataMap:Dictionary = new Dictionary();
     {
@@ -49,6 +53,8 @@ import org.apache.thrift.protocol.*;
           new FieldValueMetaData(TType.STRING));
       metaDataMap[HONOUR] = new FieldMetaData("honour", TFieldRequirementType.DEFAULT, 
           new FieldValueMetaData(TType.STRING));
+      metaDataMap[UID] = new FieldMetaData("uid", TFieldRequirementType.DEFAULT, 
+          new FieldValueMetaData(TType.I32));
     }
     {
       FieldMetaData.addStructMetaDataMap(rank_data_t, metaDataMap);
@@ -57,6 +63,7 @@ import org.apache.thrift.protocol.*;
     public function rank_data_t() {
       this._rank_num = 1;
       this._level = 0;
+      this._uid = 0;
     }
 
     public function get rank_num():int {
@@ -146,6 +153,24 @@ import org.apache.thrift.protocol.*;
       return this.honour != null;
     }
 
+    public function get uid():int {
+      return this._uid;
+    }
+
+    public function set uid(uid:int):void {
+      this._uid = uid;
+      this.__isset_uid = true;
+    }
+
+    public function unsetUid():void {
+      this.__isset_uid = false;
+    }
+
+    // Returns true if field uid is set (has been assigned a value) and false otherwise
+    public function isSetUid():Boolean {
+      return this.__isset_uid;
+    }
+
     public function setFieldValue(fieldID:int, value:*):void {
       switch (fieldID) {
       case RANK_NUM:
@@ -188,6 +213,14 @@ import org.apache.thrift.protocol.*;
         }
         break;
 
+      case UID:
+        if (value == null) {
+          unsetUid();
+        } else {
+          this.uid = value;
+        }
+        break;
+
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -205,6 +238,8 @@ import org.apache.thrift.protocol.*;
         return this.valid_time;
       case HONOUR:
         return this.honour;
+      case UID:
+        return this.uid;
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -223,6 +258,8 @@ import org.apache.thrift.protocol.*;
         return isSetValid_time();
       case HONOUR:
         return isSetHonour();
+      case UID:
+        return isSetUid();
       default:
         throw new ArgumentError("Field " + fieldID + " doesn't exist!");
       }
@@ -276,6 +313,14 @@ import org.apache.thrift.protocol.*;
               TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case UID:
+            if (field.type == TType.I32) {
+              this.uid = iprot.readI32();
+              this.__isset_uid = true;
+            } else { 
+              TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             TProtocolUtil.skip(iprot, field.type);
             break;
@@ -314,6 +359,9 @@ import org.apache.thrift.protocol.*;
         oprot.writeString(this.honour);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(UID_FIELD_DESC);
+      oprot.writeI32(this.uid);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -352,6 +400,10 @@ import org.apache.thrift.protocol.*;
       } else {
         ret += this.honour;
       }
+      first = false;
+      if (!first) ret +=  ", ";
+      ret += "uid:";
+      ret += this.uid;
       first = false;
       ret += ")";
       return ret;
