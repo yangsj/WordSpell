@@ -6,6 +6,7 @@ package
 	import flash.events.Event;
 	
 	import app.AppContext;
+	import app.GameConfig;
 	
 	import victor.utils.appStage;
 	
@@ -37,7 +38,7 @@ package
 			new AppContext( this );//ui_Skin_YScrollBar
 			
 			this.graphics.beginBitmapFill(new ui_Skin_PreloaderBG());
-			this.graphics.drawRect( 0, 0, appStage.stageWidth, appStage.stageHeight );
+			this.graphics.drawRect( 0, 0, GameConfig.stageWidth, GameConfig.stageHeight );
 			this.graphics.endFill();
 		}
 		

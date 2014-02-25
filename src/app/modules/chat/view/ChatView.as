@@ -14,6 +14,7 @@ package app.modules.chat.view
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
 	
+	import app.GameConfig;
 	import app.Language;
 	import app.core.Tips;
 	import app.data.GameData;
@@ -229,7 +230,7 @@ package app.modules.chat.view
 			if ( _skin )
 			{
 				_skin.x = 0;
-				_skin.y = appStage.stageHeight;
+				_skin.y = GameConfig.stageHeight;
 			}
 		}
 

@@ -41,6 +41,9 @@ package app
 		 */
 		public static var key:String;
 		
+		public static const stageWidth:Number = 960;
+		public static const stageHeight:Number = 560;
+		
 		
 		public function GameConfig()
 		{
