@@ -130,15 +130,19 @@ package app.modules.map.panel
 		{
 			if ( tipsTxt )
 			{
+				var tipsStr:String = "";
 				tipsTxt.visible = totalNum != 0;
 				if ( curNum < totalNum ) 
 				{
-					tipsTxt.htmlText = HtmlText.color( "当前已获得 "+curNum+" 颗星, 还需 "+(totalNum - curNum)+" 颗星开启下一章节", HtmlText.Red);
+					tipsStr = "当前已获得 "+curNum+" 颗星, 还需 "+(totalNum - curNum)+" 颗星开启下一章节";
+					//tipsTxt.htmlText = HtmlText.color( "当前已获得 "+curNum+" 颗星, 还需 "+(totalNum - curNum)+" 颗星开启下一章节", HtmlText.Red);
 				} 
 				else 
 				{
-					tipsTxt.htmlText = HtmlText.color( "当前已获得 "+curNum+" 颗星", HtmlText.Green);
+					tipsStr = "当前已获得 "+curNum+" 颗星";
+					//tipsTxt.htmlText = HtmlText.color( "当前已获得 "+curNum+" 颗星", HtmlText.Green);
 				}
+				tipsTxt.text = tipsStr;
 			}
 		}
 		
