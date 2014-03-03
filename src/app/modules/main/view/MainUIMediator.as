@@ -86,7 +86,7 @@ package app.modules.main.view
 		
 		protected function keyboardHandler(event:KeyboardEvent):void
 		{
-			if ( !fightModel.isBattle )
+			if ( !fightModel.isFighting )
 			{
 				Debug.debug(event.ctrlKey, event.shiftKey , Keyboard.A == event.keyCode)
 				if ( event.ctrlKey && event.shiftKey && Keyboard.A == event.keyCode ) {

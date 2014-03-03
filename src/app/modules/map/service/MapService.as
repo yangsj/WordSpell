@@ -3,6 +3,7 @@ package app.modules.map.service
 	import flash.utils.Dictionary;
 	
 	import app.events.GameEvent;
+	import app.modules.map.event.MapEvent;
 	import app.modules.map.model.ChapterVo;
 	import app.modules.map.model.MapModel;
 	import app.modules.map.model.MapVo;
@@ -67,6 +68,10 @@ package app.modules.map.service
 			{
 				mapModel.hasMapList = true;
 				dispatch( new GameEvent( GameEvent.ACQUIRE_MAP_DATA ));
+			}
+			else
+			{
+				dispatch( new MapEvent( MapEvent.UPDATE_MAP_DATA ));
 			}
 		}
 		
