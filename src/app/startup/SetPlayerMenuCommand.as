@@ -35,7 +35,7 @@ package app.startup
 			var vec:Vector.<Array> = new Vector.<Array>();
 			vec.push( ["重载游戏", ExternalManager.reload, true] );
 			vec.push( ["当前版本：" + GameConfig.VERSION, null, false] );
-			new ContextMenuDefine( contextView, vec, true );
+			new ContextMenuDefine( contextView, vec, false );
 		}
 		
 		
