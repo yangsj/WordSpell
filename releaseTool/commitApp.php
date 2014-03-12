@@ -87,6 +87,11 @@
 
 	$verStr = "v".$versionNum .".". $subver;
 
+	if ( $versionNum == "_release" )
+	{
+		$verStr = "v". ".". $subver;
+	}
+
 	// 本地配置app版本时间更改
 	$filename5 = $releaseFloader."\\application.xml";
 	$newArray = changeLocalVersionTime($filename5, $verStr);

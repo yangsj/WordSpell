@@ -23,33 +23,34 @@ package app.startup
 		{
 			var parameters:Object = contextView.stage.loaderInfo.parameters;
 			
-			// 环境部署地址
-			if ( parameters.hasOwnProperty( "deployPath" ))
-				GameConfig.deployPath = parameters.deployPath;
-			
-			// debug
-			if ( parameters.hasOwnProperty( "debug" ))
-				Debug.isDebug = parameters.debug;
-			
-			// 主机地址
+			// 主机地址  (必须指定)【string】
 			if ( parameters.hasOwnProperty( "ip" ))
 				GameConfig.serverHost = parameters["ip"];
 			else GameConfig.serverHost = "112.124.57.159";
 			
-			// 主机端口号
+			// 主机端口号(必须指定)【int】
 			if ( parameters.hasOwnProperty( "port" ))
 				GameConfig.serverPort = parameters["port"];
 			else GameConfig.serverPort = 10242;
 			
-			// 玩家登录帐号
+			// 玩家登录帐号(必须指定，若不指定则会跳转Flash注册页)【string】
 			if ( parameters.hasOwnProperty( "uid" ))
 				GameConfig.uid = parameters[ "uid" ];
 			else GameConfig.uid = "";
 			
-			// 玩家帐号密码
+			// 玩家帐号密码(必须指定，若不指定则会跳转Flash注册页)【string】
 			if ( parameters.hasOwnProperty( "key" ))
 				GameConfig.key = parameters[ "key" ];
 			else GameConfig.key = "";
+			
+			
+			// 环境部署地址(可选指定，默认读取主程序目录加载资源)【string】
+			if ( parameters.hasOwnProperty( "deployPath" ))
+				GameConfig.deployPath = parameters.deployPath;
+			
+			// 是否是调试状态（默认非调试，预留可以方便维护中查看数据）【Boolean】
+			if ( parameters.hasOwnProperty( "debug" ))
+				Debug.isDebug = parameters.debug;
 			
 			// test 是否使用md5加密密码
 //			if ( parameters.hasOwnProperty( "md5" ))
