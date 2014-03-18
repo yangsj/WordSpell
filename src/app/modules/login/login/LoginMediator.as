@@ -1,5 +1,6 @@
 package app.modules.login.login
 {
+	import app.managers.ExternalManager;
 	import app.modules.ViewName;
 	import app.modules.login.login.event.LoginEvent;
 	import app.modules.login.service.LoginService;
@@ -35,7 +36,8 @@ package app.modules.login.login
 		
 		private function actionRegisterHandler( event:LoginEvent ):void
 		{
-			openView( ViewName.Register );
+//			openView( ViewName.Register );
+			ExternalManager.gotoHtmlRegister();
 		}
 		
 		private function actionLoginHandler( event:LoginEvent ):void
